@@ -1,0 +1,3 @@
+wybe_front_end_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: WybeFrontEndBundle:Default:index }
