@@ -1,0 +1,33 @@
+{
+  "name": "unavent",
+  "version": "1.0.0",
+  "description": "Unavent description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://frostiesmilk@github.com/frostiesmilk/unavent.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frostiesmilk/unavent/issues"
+  },
+  "homepage": "https://github.com/frostiesmilk/unavent#readme",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "load-grunt-tasks": "^0.6.0",
+    "grunt-contrib-compass": "^1.0.1",
+	"grunt-contrib-less": "~0.11.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-copy": "^0.6.0",
+    "grunt-typescript": "^0.3.8"
+  },
+  "devDependencies": {
+	"grunt": "^0.4.5"
+  }
+}

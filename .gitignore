@@ -10,3 +10,13 @@
 /vendor/
 /web/bundles/
 /nbproject/private/
+
+!nodejs & grunt & bower START
+/.tmp
+/.sass-cache
+/node_modules/
+/bower_components/
+/app/Resources/lib
+/web/built
+/web/fonts
+!nodejs & grunt END
