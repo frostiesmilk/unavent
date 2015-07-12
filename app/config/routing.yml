@@ -1,5 +1,5 @@
-wybe_front_end:
-    resource: "@WybeFrontEndBundle/Resources/config/routing.yml"
+wybe_front_office:
+    resource: "@WybeFrontOfficeBundle/Resources/config/routing.yml"
     prefix:   /
 
 app:

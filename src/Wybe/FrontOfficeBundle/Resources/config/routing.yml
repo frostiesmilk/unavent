@@ -1,0 +1,7 @@
+wybe_front_office_homepage:
+    path:     /
+    defaults: { _controller: WybeFrontOfficeBundle:Default:index }
+
+wybe_front_office_gettest:
+    path:     /hello/{name}
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getTest }

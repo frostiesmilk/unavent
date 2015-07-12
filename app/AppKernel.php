@@ -17,7 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            new Wybe\FrontEndBundle\WybeFrontEndBundle(),
+            new Wybe\FrontOfficeBundle\WybeFrontOfficeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wybe\FrontEndBundle\Tests\Controller;
+namespace Wybe\FrontOfficeBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

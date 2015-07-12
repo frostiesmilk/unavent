@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %}Titre de page dans base_frontoffice{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+        
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="{{ asset('assets/js/jquery.js') }}"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+    </body>
+</html>
