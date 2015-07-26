@@ -19,22 +19,227 @@ and open the template in the editor.
 @red: #E74C3C;
 @red-alt: #BF493D;
 
+@font-face {
+    font-family: erasMediumItc;
+    src: url(../fonts/ERASMD.TTF);
+}
+
+/* Create a medium height at 40px */
+.navbar-md {min-height:40px}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
+.navbar-md .navbar-brand {height: 40px}  
+.navbar-md .navbar-toggle {margin: 6px 12px 6px 0px; padding: 6px 7px 6px 7px;}
+.navbar-md .navbar-toggle .icon-bar {width: 19px;}
+
+
+/* Create a small height at 30px */
+.navbar-sm {min-height:40px}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
+.navbar-sm .navbar-brand {height: 40px}
+.navbar-sm .navbar-toggle {margin: 3px 9px 3px 0px; padding: 4px 4px 4px 4px;}
+.navbar-sm .navbar-toggle .icon-bar {width: 16px;}
+
 .navbar-main{
-    background-color: @dark-blue;
-    .a {color: white;}
-    .dropdown-menu{
-        min-width: 500px;
-        .dropbown-menu-col{
-            float: left;
-            position: relative;
-            width: 50%;
-            li{
-                list-style-type: none;                    
+    margin-bottom: initial;
+    border: initial;
+    border-radius: initial;
+    .navbar-header{
+        .navbar-brand{
+            span{
+                float: left;
+                font-family: erasMediumItc;
+                color: white;
+            }
+            img{
+                height: 40px;
+                margin-top: -10px;
             }
         }
+    }
+    
+    background-color: @dark-blue;
+    
+    .container{        
+        .navbar-collapse{
+            .navbar-nav{                
+                .menu-icon{
+                    font-size: 15px;
+                }
+                .badge{                    
+                    background-color: red;
+                    padding: 2px 4px;
+                    top: -10px;
+                    position: relative;
+                    left: -5px;
+                    border: solid 1px;
+                    font-size: 10px;
+                    margin-right: -5px;
+                }
+                li{
+                    a {
+                        color: white;
+                    }
+                    a:hover{
+                        background-color: @dark-blue-alt;
+                    }
+                }
+                
+                .active{
+                    a{
+                        background-color: @dark-blue-alt;
+                        color: grey;
+                    }                    
+                }
+                
+                .open{
+                    a{
+                        background-color: @dark-blue-alt;
+                    } 
+                }
+                
+                .dropdown-menu{
+                    min-width: 500px;
+                    .dropbown-menu-col{
+                        float: left;
+                        position: relative;
+                        width: 50%;
+                        li{
+                            list-style-type: none;   
+                            a{
+                                color: darkgrey;
+                                background-color: inherit;
+                            }
+                        }
+                    }
+                }
+                
+                .menu-search{
+                    .icon-search{
+                        color: #FFF;
+                        font-size: 16px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        cursor: pointer;
+                    }
+                    
+                    .form-group{
+                        .form-control{
+                            height: 22px;
+                            padding: 0px 12px;
+                        }
+                    }
+                }
+                
+                .menu-link-icon{               
+                    width: 25px;
+                    margin: -5px 0px;
+                }
+            }            
+        }        
     }
 }
 
 .navbar-second{
     background-color: @red;
+    border: initial;
+    border-radius: initial;
+    margin-bottom: initial;
+    
+.navbar-collapse{
+        .navbar-nav{                
+            .menu-icon{
+                font-size: 15px;
+            }
+            .badge{                    
+                background-color: red;
+                padding: 2px 4px;
+                top: -10px;
+                position: relative;
+                left: -5px;
+                border: solid 1px;
+                font-size: 10px;
+                margin-right: -5px;
+            }
+            li{
+                a {
+                    color: white;
+                }
+                a:hover{
+                    background-color: @red-alt;
+                }
+            }
+
+            .active{
+                a{
+                    background-color: @red-alt;
+                    color: grey;
+                }                    
+            }
+
+            .open{
+                a{
+                    background-color: @red-alt;
+                } 
+            }
+
+            .dropdown-menu{
+                min-width: 500px;
+                .dropbown-menu-col{
+                    float: left;
+                    position: relative;
+                    width: 50%;
+                    li{
+                        list-style-type: none;   
+                        a{
+                            color: darkgrey;
+                            background-color: inherit;
+                        }
+                    }
+                }
+            }
+
+            .menu-search{
+                .icon-search{
+                    color: #FFF;
+                    font-size: 16px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    cursor: pointer;
+                }
+
+                .form-group{
+                    .form-control{
+                        height: 22px;
+                        padding: 0px 12px;
+                    }
+                }
+            }
+
+            .menu-link-icon{               
+                width: 25px;
+                margin: -5px 0px;
+            }
+        }            
+    } 
+}
+
+.user-cover{    
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: initial;
+}
+
+.user-profile{
+    .user-profile-picture{
+        height: 200px;
+        width: 200px;
+        border-radius: 150px;
+        box-shadow: 0 0 10px grey;
+        background-position: center;
+        background-size: cover;
+    }
 }

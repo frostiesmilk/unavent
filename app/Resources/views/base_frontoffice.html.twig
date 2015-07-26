@@ -14,6 +14,11 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
-        <script src="{{ asset('js/main-stick-men.js') }}"></script>
+        <script src="{{ asset('js/main-sticky-menu.js') }}"></script>
+        <script>
+            $(window).load(function(){
+                $("#nav-stick").sticky({ topSpacing: 0 });
+            });
+        </script>
     </body>
 </html>

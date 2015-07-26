@@ -9,7 +9,8 @@ module.exports = function (grunt) {
             scripts: {
                 files: {
                     'js/jquery.js': 'jquery/dist/jquery.js',
-                    'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js'
+                    'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
+                    'fonts': 'bootstrap/dist/fonts/**',
                 }
             },
             stylesheets: {

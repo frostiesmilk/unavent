@@ -3,58 +3,93 @@
 
 {% block body %}
 
-    <nav class="navbar navbar-default navbar-main">
+    <!-- Main menu -->
+    <nav class="navbar navbar-default navbar-main navbar-sm">
         <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">
-                  <img alt="Unavent" src="{{asset('images/unavent/logos/unavent-logo-50.png')}}">
-              </a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse main-index-main-navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" href="#">                  
+                    <span><img alt="Unavent Logo" src="{{asset('images/unavent/logos/unavent-logo-50-white.png')}}"></span>
+                    <span>UNAVENT</span>
+                </a>
+          </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">UNAVENT</a></li>
-                    <li><a href="#">Profil</a></li>
-                    <li class="dropdown">  
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="false">
-                            Listes <b class="caret"></b>
-                        </a>
+                    <li class="active"><a href="#"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Listes<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <ul class="dropbown-menu-col">
-                                <li><a tabindex="-1" href="#">My Account</a></li>
-                                <li class="divider"></li>
-                                <li><a tabindex="-1" href="#">Change Email</a></li>
-                                <li><a tabindex="-1" href="#">Change Password</a></li>
-                                <li class="divider"></li>
-                                <li><a tabindex="-1" href="#">Logout</a></li>
-                            </ul>
-                            <ul class="dropbown-menu-col">
-                                <li><a tabindex="-1" href="#">My Account</a></li>
-                                <li class="divider"></li>
-                                <li><a tabindex="-1" href="#">Change Email</a></li>
-                                <li><a tabindex="-1" href="#">Change Password</a></li>
-                                <li class="divider"></li>
-                                <li><a tabindex="-1" href="#">Logout</a></li>
-                            </ul>
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
                         </ul>
-                    </li> 
-                    <li><a href="#contact">Evenements</a></li>
+                    </li>
+                    <li class="dropdown">  
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="false">
+                        <span class="glyphicon glyphicon-apple menu-icon" aria-hidden="true"></span><span class="badge">4</span> <span>Evènements</span> <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <ul class="dropbown-menu-col">
+                            <li><a tabindex="-1" href="#">My Account</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="#">Change Email</a></li>
+                            <li><a tabindex="-1" href="#">Change Password</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="#">Logout</a></li>
+                        </ul>
+                        <ul class="dropbown-menu-col">
+                            <li><a tabindex="-1" href="#">My Account</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="#">Change Email</a></li>
+                            <li><a tabindex="-1" href="#">Change Password</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="#">Logout</a></li>
+                        </ul>
+                    </ul>
+                    </li>
                 </ul>
-            </div><!--/.nav-collapse -->
-        </div>
+                <!---->
+                <ul class="nav navbar-nav navbar-right">
+                    <form class="navbar-form navbar-left menu-search" role="search">
+                        <span class="glyphicon glyphicon-search icon-search" aria-hidden="true"></span>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Rechercher">
+                        </div>                        
+                    </form>
+                    <li><a href="#"><img class="menu-link-icon" src="{{asset('icons/40099-200-cogs.png')}}"/> </a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img class="menu-link-icon" src="{{asset('icons/white-bell.png')}}"/>
+                            <span class="caret"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
-    <div class="container-fluid">
-        <div class="row">
+    
+                            
+    <!-- User Banner -->  
+    <div class="jumbotron user-cover" style="background-image: url({{asset('images/frontoffice/user/cover/KLTowers.jpg')}})">    
+        <div class="container-fluid" >
             
         </div>
     </div>
     
-    <nav id="nav-stick" class="navbar navbar-default navbar-second">
+    <!-- Second menu -->
+    <nav id="nav-stick" class="navbar navbar-default navbar-second navbar-sm">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-stick" aria-expanded="false" aria-controls="nav-stick">
@@ -66,11 +101,57 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Evènement</a></li>
-                    <li><a href="#details">Détails</a></li>
-                    <li><a href="#participation">Participation</a></li>
+                    <li><a href="#">Fiche</a></li>
+                    <li><a href="#lists">Listes</a></li>
+                    <li><a href="#events">Evènements</a></li>
+                    <li><a href="#friends">Amis</a></li>
+                    <li><a href="#photos">Photos</a></li>
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('icons/wink.png')}}"/> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('icons/bubble-chat.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('icons/add-user.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="fa fa-caret-up"></span>
+                        </a>
+                    </li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+
+    <!-- Fiche -->
+    <div class="container">
+        <div class="row user-profile">
+            <div class="col-md-4">
+                <p>Marie Boivent</p>
+                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="user-profile-picture" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div> 
+            </div>
+            <div class="col-md-4">
+                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
