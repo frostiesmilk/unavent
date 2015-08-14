@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 
-
+/**
+ * Menu dropdown
+ * @param {type} $
+ * @param {type} window
+ * @param {type} undefined
+ * @returns {undefined}
+ */
 ;(function ($, window, undefined) {
     // outside the scope of the jQuery plugin to
     // keep track of all dropdowns

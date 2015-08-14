@@ -101,6 +101,7 @@ and open the template in the editor.
                 
                 .dropdown-menu{
                     min-width: 500px;
+                    border: initial;
                     .dropbown-menu-col{
                         float: left;
                         position: relative;
@@ -146,8 +147,9 @@ and open the template in the editor.
     border: initial;
     border-radius: initial;
     margin-bottom: initial;
+    z-index: 9999;
     
-.navbar-collapse{
+    .navbar-collapse{
         .navbar-nav{                
             .menu-icon{
                 font-size: 15px;
@@ -226,15 +228,14 @@ and open the template in the editor.
 }
 
 .user-cover{    
-    height: 400px;
+    height: 255px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: initial;
-}
-
-.user-profile{
-    .user-profile-picture{
+    .user-cover-profile-picture{
+        display: inline-block;
+        vertical-align: middle;
         height: 200px;
         width: 200px;
         border-radius: 150px;
@@ -242,4 +243,104 @@ and open the template in the editor.
         background-position: center;
         background-size: cover;
     }
+    .user-cover-title{
+        color: white;
+        padding-left: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        .user-cover-title-name{
+            text-shadow: 0.2em 0.2em 0.2em black;
+        }
+        .user-cover-title-description{
+            text-shadow: 0.2em 0.2em 0.2em black;
+        }
+    }
+}
+
+.main-container{
+
+    .col-bg-blue{
+        background-color: @light-blue;
+    }
+    .col-bg-white{
+        background-color: white;
+    }
+    
+}
+
+.user-profile{
+    
+    .user-profile-half-col{
+        padding-bottom: 50px;
+    }
+    
+    .user-profile-introduction-text-block{
+        padding-top: 50px;
+        margin: 0 auto;
+        width: 50%;
+        .name{
+            margin-top: 0px;
+        }
+    }
+    
+    .user-profile-separator{
+        background-color: black;
+        height: 2px;
+    }
+    
+    .user-profile-separator-title{
+        position: relative;
+        background-color: white;
+        border: 2px solid black;
+        font-size: 24px;
+        top: -0.7em;
+        padding: 15px 40px;
+    }
+    
+    .user-profile-description{
+        padding: 50px 50px 20px 115px;
+    }
+    
+    .user-profile-custom-icon{
+        margin-left: -90px;
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        border: 2px solid @light-blue;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: white;
+        float: left;
+        margin-top: 26px;
+        margin-bottom: -23px;
+    }
+    
+    .user-profile-interest-inline{
+        margin: 0px auto;
+        width: 70%;
+        padding-top: 20px;
+        .user-profile-interest-inline-category{
+            padding: 30px;
+            display: inline-flex;
+            color: white;
+            background-color: @dark-blue;
+            border-radius: 10px;
+            box-shadow: 0.2em 0.2em 0.2em black;
+            width: 25%;
+        }
+        
+        .user-profile-interest-inline-content{
+            padding: 30px;
+            display: inline-flex;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0.2em 0.2em 0.2em black;
+            margin-left: 10px;
+            width: 60%;
+        }
+        
+        
+    }
+    
 }

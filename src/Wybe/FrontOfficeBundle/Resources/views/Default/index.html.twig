@@ -8,24 +8,27 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#content-navbar-main" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="#">                  
                     <span><img alt="Unavent Logo" src="{{asset('images/unavent/logos/unavent-logo-50-white.png')}}"></span>
                     <span>UNAVENT</span>
                 </a>
-          </div>
+            </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="content-navbar-main">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Listes<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                            <span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Listes
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Action</a></li>
                             <li><a href="#">Another action</a></li>
@@ -37,27 +40,27 @@
                         </ul>
                     </li>
                     <li class="dropdown">  
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="false">
-                        <span class="glyphicon glyphicon-apple menu-icon" aria-hidden="true"></span><span class="badge">4</span> <span>Evènements</span> <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="#">My Account</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Change Email</a></li>
-                            <li><a tabindex="-1" href="#">Change Password</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Logout</a></li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                            <span class="glyphicon glyphicon-apple menu-icon" aria-hidden="true"></span><span class="badge">4</span> <span>Evènements</span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <ul class="dropbown-menu-col">
+                                <li><a tabindex="-1" href="#">My Account</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#">Change Email</a></li>
+                                <li><a tabindex="-1" href="#">Change Password</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#">Logout</a></li>
+                            </ul>
+                            <ul class="dropbown-menu-col">
+                                <li><a tabindex="-1" href="#">My Account</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#">Change Email</a></li>
+                                <li><a tabindex="-1" href="#">Change Password</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#">Logout</a></li>
+                            </ul>
                         </ul>
-                        <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="#">My Account</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Change Email</a></li>
-                            <li><a tabindex="-1" href="#">Change Password</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Logout</a></li>
-                        </ul>
-                    </ul>
                     </li>
                 </ul>
                 <!---->
@@ -83,8 +86,14 @@
                             
     <!-- User Banner -->  
     <div class="jumbotron user-cover" style="background-image: url({{asset('images/frontoffice/user/cover/KLTowers.jpg')}})">    
-        <div class="container-fluid" >
-            
+        <div class="container" >
+            <div class="row-fluid">       
+                <div class="user-cover-profile-picture" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div> 
+                <div class="user-cover-title">
+                    <h1 class="user-cover-title-name">Marie Boivent</h1>
+                    <p class="user-cover-title-description">Chasseuse de taupes</p>
+                </div>                
+            </div>
         </div>
     </div>
     
@@ -92,14 +101,14 @@
     <nav id="nav-stick" class="navbar navbar-default navbar-second navbar-sm">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-stick" aria-expanded="false" aria-controls="nav-stick">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#second-navbar" aria-expanded="false" aria-controls="second-navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>                
             </div>
-            <div id="navbar" class="collapse navbar-collapse">
+            <div id="second-navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="#">Fiche</a></li>
                     <li><a href="#lists">Listes</a></li>
@@ -130,27 +139,94 @@
                         </a>
                     </li>
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </nav>
 
     <!-- Fiche -->
-    <div class="container">
-        <div class="row user-profile">
-            <div class="col-md-4">
-                <p>Marie Boivent</p>
-                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
-                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
-                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
-                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
-                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
-                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+    <div class="container-fluid main-container user-profile">
+        <div class="row">
+            <div class="col-md-6 col-bg-blue user-profile-half-col">
+                <div class="user-profile-introduction-text-block">
+                    <h2 class="name">Marie Boivent</h2>
+                    <p>18 Mai 1992 (23 ans)</p>
+                    <p>Gardienne de prairies</p>
+                </div>
+                
             </div>
-            <div class="col-md-4">
-                <div class="user-profile-picture" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div> 
+            
+            <div class="col-md-6 col-bg-white user-profile-half-col">
+                <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
+                </div>
+                <div class="user-profile-description">
+                    <p>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis. quo conperto Montius tunc quaestor acer quidem sed ad lenitatem propensior, consulens in commune advocato</p>
+                </div>
             </div>
-            <div class="col-md-4">
-                <p>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-bg-blue user-profile-half-col">
+                <div class="user-profile-interest-inline">
+                    <div class="user-profile-interest-inline-category">
+                        <span>Musique</span>
+                        <span>Jauge</span>
+                    </div>
+                    <div class="user-profile-interest-inline-content">
+                        <span>Chicago</span>, <span>Marie</span>
+                    </div>
+                </div>
+                <div class="user-profile-interest-inline">
+                    <div class="user-profile-interest-inline-category">
+                        <span>Musique</span>
+                        <span>Jauge</span>
+                    </div>
+                    <div class="user-profile-interest-inline-content">
+                        <span>Chicago</span>, <span>Marie</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-md-6 col-bg-white user-profile-half-col">
+                d
+            </div>
+        </div>
+              
+        <div class="row text-center">
+            <div class="user-profile-separator">
+                <span class="user-profile-separator-title">Mes listes</span>
+            </div>
+        </div>
+        
+        <div class="container user-profile-groups">
+            <div class="row">
+                <div class="col-md-4">
+                    <table class="group-frame">
+                        <tbody>
+                            <tr>
+                                <td colspan="1" rowspan="2"><img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/></td>
+                                <td colspan="2" rowspan="1">
+                                    <span class="group-name">Canoë Club</span>
+                                    <span class="group-description">Au Canoë Club, ramer c'est positif!</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="group-actions">
+                                    <a class="group-action" href="#">Rejoindre le groupe</a>
+                                </td>
+                                <td class="group-join">
+                                    <button class="">Rejoindre</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>    
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
             </div>
         </div>
     </div>
