@@ -150,6 +150,7 @@
                 <div class="user-profile-introduction-text-block">
                     <h2 class="name">Marie Boivent</h2>
                     <p>18 Mai 1992 (23 ans)</p>
+                    <p>Saint-Maur-des-Fossés</p>
                     <p>Gardienne de prairies</p>
                 </div>
                 
@@ -199,85 +200,98 @@
                 </div>
             </div>
         </div>
+    </div>
+                
 
-              
-        <div class="row text-center">
-            <div class="user-profile-separator">
-                <span class="user-profile-separator-title">Mes listes</span>
+                
+    <!-- My groups -->
+    <div class="user-profile-groups background-dark-blue">
+        <div class="container-fluid main-container user-profile">
+            <div class="row user-profile-category-row  text-center">
+                <span class="user-profile-category-title white">Mes groupes</span>
             </div>
-        </div>
-        
-        <div class="container user-profile-groups">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="group-frame-v">
-                        <div class="group-frame-text">
-                            <span class="group-name">Canoë Club</span><br/>
-                            <span class="group-date">Le Mardi 12 Mars 2015</span><br/>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="thumbnail group-list-thumbnail ">
+                            <div class="caption">
+                                <h3 class="group-name font-white">Canoë Club</h3>
+                            </div>
+                            <div class="group-image-frame">
+                                <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
                         </div>
-                    <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
-                    
-                    <div class="group-frame-text">
-                        <p class="group-description">Au Canoë Club, ramer c'est positif!</p>
                     </div>
-                    <table>
-                        <tr>
-                            <td class="group-actions">                 
-                                <a class="group-action" href="#">Liste des membres</a><br/>
-                                <a class="group-action" href="#">Voir les actualités</a>
-                            </td>
-                            <td class="group-join">
-                                <button class="btn btn-primary" type="button">Rejoindre</button>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="col-md-3">
+                        <div class="thumbnail group-list-thumbnail ">
+                            <div class="caption">
+                                <h3 class="group-name font-white">Canoë Club</h3>
+                            </div>
+                            <div class="group-image-frame">
+                                <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <table class="group-frame">
-                        <tbody>
-                            <tr>
-                                <td colspan="1" rowspan="2"><img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/></td>
-                                <td class="group-frame-text" colspan="2" rowspan="1">
-                                    <span class="group-name">Canoë Club</span><br/>
-                                    <span class="group-description">Au Canoë Club, ramer c'est positif!</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="group-actions">
-                                    <a class="group-action" href="#">Liste des membres</a><br/>
-                                    <a class="group-action" href="#">Voir les actualités</a>
-                                </td>
-                                <td class="group-join">
-                                    <button class="btn btn-primary" type="button">Rejoindre</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4">
-                    <table class="group-frame">
-                        <tbody>
-                            <tr>
-                                <td colspan="1" rowspan="2"><img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/></td>
-                                <td class="group-frame-text" colspan="2" rowspan="1">
-                                    <span class="group-name">Canoë Club</span><br/>
-                                    <p class="group-description">Au Canoë Club, ramer c'est positif! HAHAHA!! HAHAHA! HAHAHA! HAHAHA</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="group-actions">
-                                    <a class="group-action" href="#">Liste des membres</a><br/>
-                                    <a class="group-action" href="#">Voir les actualités</a>
-                                </td>
-                                <td class="group-join">
-                                    <button class="btn btn-primary" type="button">Rejoindre</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="col-md-3">
+                        <div class="thumbnail group-list-thumbnail ">
+                            <div class="caption">
+                                <h3 class="group-name font-white">Canoë Club</h3>
+                            </div>
+                            <div class="group-image-frame">
+                                <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail group-list-thumbnail ">
+                            <div class="caption">
+                                <h3 class="group-name font-white">Canoë Club azer azer azer</h3>
+                            </div>
+                            <div class="group-image-frame">
+                                <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}
