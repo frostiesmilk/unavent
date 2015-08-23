@@ -5,20 +5,29 @@
         <title>{% block title %}Titre de page dans base_frontoffice{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}">        
+        <link rel="stylesheet" href="{{ asset('css/frontoffice-common.css') }}">   
+        <link rel="stylesheet" href="{{ asset('css/signin.css') }}">        
+        <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-image-gallery.css') }}">    
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">   
     </head>
     <body>
-        {% block body %}{% endblock %}
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="{{ asset('assets/js/jquery.js') }}"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
-        <script src="{{ asset('js/main.js') }}"></script>
-        <script src="{{ asset('js/main-sticky-menu.js') }}"></script>
-        <script>
-            $(window).load(function(){
-                $("#nav-stick").sticky({ topSpacing: 0 });
-            });
-        </script>
-    </body>
+        
+    {% block body %}{% endblock %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>        
+    <script src="{{ asset('js/main-sticky-menu.js') }}"></script>
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="{{ asset('js/bootstrap-image-gallery.js') }}"></script>
+    <script src="{{ asset('js/blueimp-gallery.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <!-- Customizable Affix navbar -->
+    <script>
+        $(window).load(function(){
+            $("#nav-stick").sticky({ topSpacing: 40 });
+        });
+    </script>
+</body>
 </html>

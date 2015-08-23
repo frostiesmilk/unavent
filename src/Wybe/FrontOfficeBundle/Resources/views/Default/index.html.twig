@@ -4,7 +4,7 @@
 {% block body %}
 
     <!-- Main menu -->
-    <nav class="navbar navbar-default navbar-main navbar-sm">
+    <nav class="navbar navbar-default navbar-main navbar-sm navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -134,7 +134,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a id="back-top" href="#">
                             <span class="fa fa-caret-up"></span>
                         </a>
                     </li>
@@ -149,41 +149,46 @@
             <div class="col-md-6 col-bg-blue user-profile-half-col">
                 <div class="user-profile-introduction-text-block">
                     <h2 class="name">Marie Boivent</h2>
-                    <p>18 Mai 1992 (23 ans)</p>
-                    <p>Saint-Maur-des-Fossés</p>
-                    <p>Gardienne de prairies</p>
+                    <p class="user-job">Gardienne de prairies</p>
+                    <p>18 Mai 1992 (23 ans)<br/>
+                    Saint-Maur-des-Fossés (94210)<br/>
+                    </p>
                 </div>
                 
                 
                 <div class="container">
-                <table class="user-profile-interest">
-                    <tr>
-                        <td class="user-profile-interest-subject text-center">
-                            <span>Musique</span><br/>
-                            <div class="progress category-jauge">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                  <span class="sr-only">45</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td class="user-profile-interest-content">
-                            <ul>
-                                <li>Céline Dion</li><li>Taylor Swift</li>
-                            </ul>                        
-                        </td>
-                    </tr>
-                </table>
-                
-                </div>
-                
-                <div class="user-profile-interest-inline">
-                    <div class="user-profile-interest-inline-category">
-                        <span>Musique</span>
-                        <span>Jauge</span>
-                    </div>
-                    <div class="user-profile-interest-inline-content">
-                        <span>Chicago</span>, <span>Marie</span>
-                    </div>
+                    <table class="user-profile-interest">
+                        <tr>
+                            <td class="user-profile-interest-subject text-center">
+                                <span>Musique</span><br/>
+                                <div class="progress category-jauge">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                      <span class="sr-only">45</span>
+                                    </div>
+                                </div> 
+                            </td>
+                            <td class="user-profile-interest-content">
+                                <ul>
+                                    <li>Céline Dion</li><li>Taylor Swift</li>
+                                </ul>                        
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="user-profile-interest-subject text-center">
+                                <span>Musique</span><br/>
+                                <div class="progress category-jauge">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                      <span class="sr-only">45</span>
+                                    </div>
+                                </div> 
+                            </td>
+                            <td class="user-profile-interest-content">
+                                <ul>
+                                    <li>Céline Dion</li><li>Taylor Swift</li>
+                                </ul>                        
+                            </td>
+                        </tr>
+                    </table>                
                 </div>
             </div>
             
@@ -202,87 +207,96 @@
         </div>
     </div>
                 
-
-                
     <!-- My groups -->
     <div class="user-profile-groups background-dark-blue">
         <div class="container-fluid main-container user-profile">
             <div class="row user-profile-category-row  text-center">
-                <span class="user-profile-category-title white">Mes groupes</span>
+                <span class="user-profile-category-title font-white">Mes groupes</span>
             </div>
 
-            <div class="container">
+            <div class="container user-profile-groups-container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="thumbnail group-list-thumbnail ">
-                            <div class="caption">
+                            <div class="caption group-name-frame">
                                 <h3 class="group-name font-white">Canoë Club</h3>
                             </div>
                             <div class="group-image-frame">
-                                <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
-                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+                                <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>                                
                             </div>
                             
                             <div class="caption text-center ">
-                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p class="font-white group-description">238 membres. 2 amis</p>
                                 <p>
                                     <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="thumbnail group-list-thumbnail ">
-                            <div class="caption">
+                            <div class="caption group-name-frame">
                                 <h3 class="group-name font-white">Canoë Club</h3>
                             </div>
                             <div class="group-image-frame">
                                 <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
-                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
                             </div>
                             
                             <div class="caption text-center ">
-                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p class="font-white group-description">238 membres. 2 amis</p>
                                 <p>
                                     <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="thumbnail group-list-thumbnail ">
-                            <div class="caption">
+                            <div class="caption group-name-frame">
                                 <h3 class="group-name font-white">Canoë Club</h3>
                             </div>
                             <div class="group-image-frame">
                                 <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
-                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
                             </div>
                             
                             <div class="caption text-center ">
-                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p class="font-white group-description">238 membres. 2 amis</p>
                                 <p>
                                     <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="thumbnail group-list-thumbnail ">
-                            <div class="caption">
+                            <div class="caption group-name-frame">
                                 <h3 class="group-name font-white">Canoë Club azer azer azer</h3>
                             </div>
                             <div class="group-image-frame">
                                 <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
-                                <button class="group-action-hover group-action-hover-search img-circle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                <button class="group-action-hover group-action-hover-link img-circle"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
                             </div>
                             
                             <div class="caption text-center ">
-                                <p class="font-white">238 membres dont 2 amis</p>
+                                <p class="font-white group-description">238 membres &middot; 2 amis &middot; 24 évènements</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="thumbnail group-list-thumbnail ">
+                            <div class="caption group-name-frame">
+                                <h3 class="group-name font-white">Canoë Club</h3>
+                            </div>
+                            <div class="group-image-frame">
+                                <img class="group-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>                                
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="font-white group-description">238 membres. 2 amis</p>
                                 <p>
                                     <a href="#" class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
                                 </p>
@@ -293,5 +307,149 @@
             </div>
         </div>
     </div>
+                                
+    <!-- My events-->                            
+    <div class="user-profile-events">
+        <div class="container-fluid main-container user-profile">
+            <div class="row user-profile-category-row text-center">
+                <span class="user-profile-category-title">Mes évènements</span>
+            </div>
+
+            <div class="container user-profile-events-container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="thumbnail event-list-thumbnail ">
+                            <div class="caption event-name-frame">
+                                <h3 class="event-name">Canoë Club</h3>
+                            </div>
+                            <div class="event-image-frame">
+                                <img class="event-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <p class="event-image-frame-date">
+                                    <span class="event-image-frame-date-day">Dimanche 15 Décembre</span><br/>                                                      
+                                    <span class="event-image-frame-date-day">18h30</span>                                                       
+                                </p>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="event-description">238 participants &middot; 3 amis &middot; Levallois-Perret</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white event-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-3 col-xs-6">
+                        <div class="thumbnail event-list-thumbnail ">
+                            <div class="caption event-name-frame">
+                                <h3 class="event-name">Canoë Club</h3>
+                            </div>
+                            <div class="event-image-frame">
+                                <img class="event-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <p class="event-image-frame-date">
+                                    <span class="event-image-frame-date-day">Dimanche 15 Décembre</span><br/>                                                      
+                                    <span class="event-image-frame-date-day">18h30</span>                                                       
+                                </p>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="event-description">238 participants &middot; 3 amis &middot; Levallois-Perret</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white event-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-3 col-xs-6">
+                        <div class="thumbnail event-list-thumbnail ">
+                            <div class="caption event-name-frame">
+                                <h3 class="event-name">Canoë Club</h3>
+                            </div>
+                            <div class="event-image-frame">
+                                <img class="event-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <p class="event-image-frame-date">
+                                    <span class="event-image-frame-date-day">Dimanche 15 Décembre</span><br/>                                                      
+                                    <span class="event-image-frame-date-day">18h30</span>                                                       
+                                </p>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="event-description">238 participants &middot; 3 amis &middot; Levallois-Perret</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white event-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-3 col-xs-6">
+                        <div class="thumbnail event-list-thumbnail ">
+                            <div class="caption event-name-frame">
+                                <h3 class="event-name">Canoë Club</h3>
+                            </div>
+                            <div class="event-image-frame">
+                                <img class="event-image" src="{{asset('images/frontoffice/group/canoe-club.jpg')}}" alt=""/>
+                                <p class="event-image-frame-date">
+                                    <span class="event-image-frame-date-day">Dimanche 15 Décembre</span><br/>                                                      
+                                    <span class="event-image-frame-date-day">18h30</span>                                                       
+                                </p>
+                            </div>
+                            
+                            <div class="caption text-center ">
+                                <p class="event-description">238 participants &middot; 3 amis &middot; Levallois-Perret</p>
+                                <p>
+                                    <a href="#" class="btn btn-default font-white event-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+                                
+    <!-- My gallery -->
+    <div class="user-profile-gallery background-dark-blue">
+        <div class="container-fluid main-container user-profile">
+            <div class="row user-profile-category-row  text-center">
+                <span class="user-profile-category-title font-white">Mes galeries</span>
+            </div>
+            <div class="container user-profile-gallery-container">
+                <div id="links"></div>
+            </div>            
+        </div>
+    </div>
+    
+    <!-- My gallery modal-->
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary next">
+                            Next
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

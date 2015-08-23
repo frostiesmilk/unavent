@@ -1,0 +1,129 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 août 2015, 09:46:00
+    Author     : Equina
+*/
+@import "frontoffice-common";
+
+.signin-cover{    
+    height: 512px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: initial;
+}
+
+.navbar-home{
+    padding-top: 50px;
+    margin-bottom: initial;
+    border: initial;
+    border-radius: initial;
+    .navbar-header{
+        .navbar-brand{
+            span{
+                float: left;
+                font-family: erasMediumItc;
+                color: white;
+            }
+            img{
+                height: 40px;
+                margin-top: -10px;
+            }
+        }
+    }
+    
+    background-color: @dark-blue;
+    
+    .container{        
+        .navbar-collapse{
+            .navbar-nav{                
+                .menu-icon{
+                    font-size: 15px;
+                }
+                .badge{                    
+                    background-color: red;
+                    padding: 2px 4px;
+                    top: -10px;
+                    position: relative;
+                    left: -5px;
+                    border: solid 1px;
+                    font-size: 10px;
+                    margin-right: -5px;
+                }
+                li{
+                    a {
+                        color: white;
+                    }
+                    a:hover{
+                        background-color: @dark-blue-alt;
+                    }
+                }
+                
+                .active{
+                    a{
+                        background-color: @dark-blue-alt;
+                        color: grey;
+                    }                    
+                }
+                
+                .open{
+                    a{
+                        background-color: @dark-blue-alt;
+                    } 
+                }
+                
+                .dropdown-menu{
+                    min-width: 500px;
+                    border: initial;
+                    .dropbown-menu-col{
+                        float: left;
+                        position: relative;
+                        width: 50%;
+                        li{
+                            list-style-type: none;   
+                            a{
+                                color: darkgrey;
+                                background-color: inherit;
+                            }
+                        }
+                    }
+                }
+                
+                .menu-search{
+                    .icon-search{
+                        color: #FFF;
+                        font-size: 16px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        cursor: pointer;
+                    }
+                    
+                    .form-group{
+                        .form-control{
+                            height: 22px;
+                            padding: 0px 12px;
+                        }
+                    }
+                }
+                
+                .menu-link-icon{               
+                    width: 25px;
+                    margin: -5px 0px;
+                }
+            }            
+        }        
+    }
+}
+
+.navbar-background-text{
+    font-size: 40px;
+    color: rgb(27, 36, 43);
+    font-style: italic;
+    position: absolute;
+    top: 0px;
+    right: 15%;
+}

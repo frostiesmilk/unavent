@@ -8,48 +8,7 @@ and open the template in the editor.
     Author     : Equina
 */
 
-@dark-blue: #293540;
-@dark-blue-alt: #1B242B;
-@blue: #79BDE0;
-@blue-alt: #66A0BE;
-@light-blue: #E1EBF5;
-@light-blue-alt: #CED8E1;
-@white: #FFFFFF;
-@white-alt: #F0EFEF;
-@red: #E74C3C;
-@red-alt: #BF493D;
-
-@font-face {
-    font-family: erasMediumItc;
-    src: url(../fonts/ERASMD.TTF);
-}
-
-/* Colored backgrounds */
-.background-dark-blue{
-    background-color: @dark-blue;
-}
-
-/* Colored fonts */
-.font-white{
-    color: white;
-}
-
-/* Create a medium height at 40px */
-.navbar-md {min-height:40px}
-.navbar-md .navbar-brand,
-.navbar-md .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
-.navbar-md .navbar-brand {height: 40px}  
-.navbar-md .navbar-toggle {margin: 6px 12px 6px 0px; padding: 6px 7px 6px 7px;}
-.navbar-md .navbar-toggle .icon-bar {width: 19px;}
-
-
-/* Create a small height at 30px */
-.navbar-sm {min-height:40px}
-.navbar-sm .navbar-brand,
-.navbar-sm .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
-.navbar-sm .navbar-brand {height: 40px}
-.navbar-sm .navbar-toggle {margin: 3px 9px 3px 0px; padding: 4px 4px 4px 4px;}
-.navbar-sm .navbar-toggle .icon-bar {width: 16px;}
+@import "frontoffice-common";
 
 .navbar-main{
     margin-bottom: initial;
@@ -112,6 +71,10 @@ and open the template in the editor.
                 .dropdown-menu{
                     min-width: 500px;
                     border: initial;
+                    a{
+                        color: darkgrey;
+                        background-color: inherit;
+                    }
                     .dropbown-menu-col{
                         float: left;
                         position: relative;
@@ -157,7 +120,7 @@ and open the template in the editor.
     border: initial;
     border-radius: initial;
     margin-bottom: initial;
-    z-index: 9999;
+    z-index: 100;
     
     .navbar-collapse{
         .navbar-nav{                
@@ -238,6 +201,7 @@ and open the template in the editor.
 }
 
 .user-cover{    
+    margin-top: 40px;
     height: 255px;
     background-size: cover;
     background-position: center;
@@ -279,6 +243,16 @@ and open the template in the editor.
 
 .user-profile{
     
+    .user-profile-category-row{
+        padding-top: 27px;
+        padding-bottom: 20px;
+        .user-profile-category-title{          
+            font-size: 25px;
+            border-bottom: 1px solid;
+            padding-bottom: 15px;
+        }
+    }
+    
     .user-profile-half-col{
         padding-bottom: 50px;
         
@@ -288,9 +262,16 @@ and open the template in the editor.
         padding-top: 50px;
         margin: 0 auto;
         width: 50%;
-        padding-bottom: 50px;
+        padding-bottom: 26px;
         .name{
             margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .user-job{
+            font-size: 18px;
+        }
+        p{
+            margin-bottom: 0px;
         }
     }
     
@@ -307,6 +288,10 @@ and open the template in the editor.
     }
     
     .user-profile-custom-icon{
+        @media(max-width: 768px){
+            display:none;
+        }
+        
         margin-left: -90px;
         width: 150px;
         height: 150px;
@@ -401,75 +386,151 @@ and open the template in the editor.
 }
 
 .user-profile-groups{
-    .user-profile-category-row{
-        padding-top: 20px;
-        padding-bottom: 20px;
-        .user-profile-category-title{
-            color: white;
-            font-size: 25px;
-            border-bottom: 1px solid;
-            padding-bottom: 15px;
-        }
+    
+    .user-profile-groups-container{
+        padding-bottom: 27px;
     }
+    
     .group-list-thumbnail{
         border : none;
         padding: initial;
         background: none;
-        .group-image{
+        margin-bottom: initial;
+        .group-image{            
             width: 100%;
-            height: 180px;
+            height: 140px;
             object-fit: cover;
+            box-shadow: #000 0em 0em 0em;
         }
         
         .group-image:hover{
-            opacity: 0.5;
-        }
-
-        .group-image-frame button{
-            position:absolute;
-            display: none;
-            opacity: 0.5;
-        }
-        .group-image-frame:hover button{
-            display: inline-block;
-            top: 40%;
+            opacity: 0.6;
         }
         
-        .group-action-hover-link{
-            left: 66%;
-        }
-        .group-action-hover-search{
-            left: 33%;
+        .group-name-frame{
+            height: 5em;
+            display: table-cell;
+            vertical-align: bottom;
+            padding: initial;
+            .group-name{
+                text-transform: uppercase;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: justify;
+            }
         }
         
-        .group-name{
-            font-size: 20px;
-            margin-bottom: 0px;
-            text-transform: uppercase;
-        }
         .group-description{
-            width: 10em;
-            margin: 0 0 2em 0;
-
-            /**
-             * Required properties to achieve text-overflow
-             */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
+            font-size: 11px;
+            color: @light-blue;
         }    
 
         .group-join-button{
             background-color: @red;
             border: none;
+            padding: 4px 0px;
+            width: 100%
+        }
+        .group-join-button:hover{
+            font-weight: bold;
+            color: white;
         }
     }
+}
 
-    .group-list-thumbnail:hover{
-        
-    }
-
+.user-profile-events{
     
+    .user-profile-events-container{
+        padding-bottom: 27px;
+    }
+    
+    .event-list-thumbnail{
+        border : none;
+        padding: initial;
+        background: none;
+        margin-bottom: initial;
+        .event-image{            
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            box-shadow: #000 0em 0em 0em;
+        }
+        
+        .event-image:hover{
+            opacity: 0.6;
+        }
 
+        .event-image-frame{
+            .event-image-frame-date{
+                top: 25%;
+                position: absolute;
+                left: 30px;
+                font-weight: bold;  
+                color: white;
+                text-shadow: 1px 1px 12px black;
+            }
+            
+        }
+        
+        .event-image-frame button{
+            position:absolute;
+            display: none;
+            opacity: 0.5;
+        }
+        .event-image-frame:hover button{
+            display: inline-block;
+            top: 40%;
+        }
+        
+        .event-action-hover-link{
+            left: 66%;
+        }
+        .event-action-hover-search{
+            left: 33%;
+        }
+        
+        .event-name-frame{
+            height: 5em;
+            display: table-cell;
+            vertical-align: bottom;
+            padding: initial;
+            .event-name{
+                text-transform: uppercase;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: justify;
+            }
+        }
+        
+        .event-description{
+            font-size: 11px;
+            color: grey;
+        }    
+
+        .event-join-button{
+            background-color: @red;
+            border: none;
+            padding: 4px 0px;
+            width: 100%
+        }
+        .event-join-button:hover{
+            font-weight: bold;
+            color: white;
+        }
+    }
+}
+
+.user-profile-gallery{
+    .user-profile-gallery-container{
+        padding: 27px 0px ;
+    }
+}
+
+.modal {
+	overflow: auto;
+	color: #333;
 }

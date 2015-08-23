@@ -16,9 +16,10 @@ module.exports = function (grunt) {
             stylesheets: {
                 files: {
                     'css/bootstrap.css': 'bootstrap/dist/css/bootstrap.css',
+                    'css/bootstrap.css.map': 'bootstrap/dist/css/bootstrap.css.map',
                     'css/font-awesome.css': 'fontawesome/css/font-awesome.css'
                 }
-            },
+            },            
             fonts: {
                 files: {
                     'fonts': 'fontawesome/fonts'
@@ -35,7 +36,13 @@ module.exports = function (grunt) {
                 files: {
                     "web/css/main.css": [
                         "src/Wybe/FrontOfficeBundle/Resources/public/less/main.less"
-                    ]
+                    ],
+                    "web/css/signin.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/signin.less"
+                    ],
+                    "web/css/frontoffice-common.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/frontoffice-common.less"
+                    ],
                 }
             },
             production: {
@@ -48,7 +55,13 @@ module.exports = function (grunt) {
                 files: {
                     "web/css/main.css": [
                         "src/Wybe/FrontOfficeBundle/Resources/public/less/main.less"
-                    ]
+                    ],
+                    "web/css/signin.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/signin.less"
+                    ],
+                    "web/css/frontoffice-common.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/frontoffice-common.less"
+                    ],
                 }
             }
         },

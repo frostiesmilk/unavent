@@ -1,0 +1,54 @@
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block body %}
+<!-- Main menu -->
+<nav class="navbar navbar-default navbar-home">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#content-navbar-main" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">                  
+                <span><img alt="Unavent Logo" src="{{asset('images/unavent/logos/unavent-logo-50-white.png')}}"></span>
+                <span>UNAVENT</span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="content-navbar-main">
+            <ul class="nav navbar-nav ">
+                <li>
+                    
+                </li>
+            </ul>
+            <form class="form-inline navbar-right navbar-form">
+                <div class="form-group">
+                    <label class="sr-only" for="connection-email">Email address</label>
+                    <input type="email" class="form-control" id="connection-email" placeholder="Adresse e-mail">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="connection-password">Password</label>
+                    <input type="password" class="form-control" id="connection-password" placeholder="Mot de passe">
+                </div>
+                
+                <button type="submit" class="btn btn-default">Connexion</button>
+            </form>
+        </div><!-- /.navbar-collapse -->
+        <p class="navbar-background-text">Connexion</p>
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<!-- User Banner -->  
+<div class="jumbotron signin-cover" style="background-image: url({{asset('images/frontoffice/user/cover/KLTowers.jpg')}})">    
+    <div class="container" >
+        <div class="row-fluid">       
+                 
+        </div>
+    </div>
+</div>    
+{% endblock %}
