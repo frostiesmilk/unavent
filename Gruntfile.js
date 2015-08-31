@@ -43,6 +43,12 @@ module.exports = function (grunt) {
                     "web/css/frontoffice-common.css": [
                         "src/Wybe/FrontOfficeBundle/Resources/public/less/frontoffice-common.less"
                     ],
+                    "web/css/footer.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/footer.less"
+                    ],
+                    "web/css/signup-details.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/signup-details.less"
+                    ],
                 }
             },
             production: {
@@ -61,6 +67,12 @@ module.exports = function (grunt) {
                     ],
                     "web/css/frontoffice-common.css": [
                         "src/Wybe/FrontOfficeBundle/Resources/public/less/frontoffice-common.less"
+                    ],
+                    "web/css/footer.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/footer.less"
+                    ],
+                    "web/css/signup-details.css": [
+                        "src/Wybe/FrontOfficeBundle/Resources/public/less/signup-details.less"
                     ],
                 }
             }

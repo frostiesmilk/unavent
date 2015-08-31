@@ -16,6 +16,11 @@ class DefaultController extends Controller
         return $this->render('WybeFrontOfficeBundle:Default:signin.html.twig');
     }
     
+    public function signUpDetailsAction()
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:signup-details-form.html.twig');
+    }
+    
     public function getTestAction($name)
     {
         return $this->render('WybeFrontOfficeBundle:Default:index.html.twig', array('name' => $name));

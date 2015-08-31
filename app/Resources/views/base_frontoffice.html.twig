@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-image-gallery.css') }}">    
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">   
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">   
+        <link rel="stylesheet" href="{{ asset('css/signup-details.css') }}">   
     </head>
     <body>
         
@@ -22,12 +24,14 @@
     <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <script src="{{ asset('js/bootstrap-image-gallery.js') }}"></script>
     <script src="{{ asset('js/blueimp-gallery.js') }}"></script>
+    <script src="{{ asset('js/jquery-birthday-picker.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <!-- Customizable Affix navbar -->
     <script>
         $(window).load(function(){
             $("#nav-stick").sticky({ topSpacing: 40 });
         });
+        $("#birthday-datepicker").birthdayPicker();
     </script>
 </body>
 </html>

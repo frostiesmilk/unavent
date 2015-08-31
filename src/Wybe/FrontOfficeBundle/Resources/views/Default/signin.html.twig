@@ -20,35 +20,109 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="content-navbar-main">
-            <ul class="nav navbar-nav ">
-                <li>
-                    
-                </li>
-            </ul>
-            <form class="form-inline navbar-right navbar-form">
-                <div class="form-group">
-                    <label class="sr-only" for="connection-email">Email address</label>
-                    <input type="email" class="form-control" id="connection-email" placeholder="Adresse e-mail">
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" for="connection-password">Password</label>
-                    <input type="password" class="form-control" id="connection-password" placeholder="Mot de passe">
-                </div>
-                
-                <button type="submit" class="btn btn-default">Connexion</button>
+            <form class="navbar-right navbar-form navbar-connection-form">
+                <table>                    
+                    <tr>
+                        <td>
+                            <label class="sr-only" for="connection-email">Email address</label>
+                            <input type="email" class="form-control navbar-connection-form-input" id="connection-email" placeholder="Adresse e-mail">
+                        </td>
+                        <td>
+                            <label class="sr-only" for="connection-password">Password</label>
+                            <input type="password" class="form-control navbar-connection-form-input" id="connection-password" placeholder="Mot de passe">                 
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-default navbar-connection-form-submit">Connexion</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="checkbox navbar-connection-form-keep">
+                                <label>
+                                    <input type="checkbox"> Maintenir la connexion
+                                </label>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="navbar-connection-form-passforgotten">
+                                <a href="#">Mot de passe oublié</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div><!-- /.navbar-collapse -->
-        <p class="navbar-background-text">Connexion</p>
+        <p class="navbar-background-text">Connectez-vous !</p>
     </div><!-- /.container-fluid -->
 </nav>
 
 
 <!-- User Banner -->  
-<div class="jumbotron signin-cover" style="background-image: url({{asset('images/frontoffice/user/cover/KLTowers.jpg')}})">    
+<div class="jumbotron signin-cover" style="background-image: url({{asset('images/frontoffice/pages/homepage-signup/cover-streetsheeps.jpg')}})">    
     <div class="container" >
-        <div class="row-fluid">       
-                 
+        <div class="row">       
+            <div class="col-md-5 col-md-offset-7 signup-form-col">
+                <!-- Signup form -->
+                <!--
+                <h2>Inscrivez-vous !</h2>
+                <form>                    
+                    <div class="form-group form-inline">                      
+                      <input type="text" class="form-control form-inline-half" id="signup-firstname" placeholder="Prénom">
+                      <input type="text" class="form-control form-inline-half" id="signup-lastname" placeholder="Nom">
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="signup-gender" id="signup-gender-female" value="female">Femme
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="signup-gender" id="signup-gender-male" value="male">Homme
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="signup-gender" id="signup-gender-other" value="other">Autre
+                        </label>
+                    </div>
+                    <div class="form-group form-inline">
+                        <div id="birthday-datepicker" class="birthday-datepicker"></div> <span>Date de naissance</span>
+                    </div>
+                    <div class="form-group">              
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <input type="email" class="form-control form-inline-input" id="signup-email" placeholder="Adresse Email">
+                    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><img src="{{asset('images/frontoffice/icons/password-lock.png')}}"/></span>
+                            <input type="password" class="form-control form-inline-input" id="signup-password1" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><img src="{{asset('images/frontoffice/icons/password-lock.png')}}"/></span>
+                            <input type="password" class="form-control form-inline-input" id="signup-password1" placeholder="Re-confirmer le Mot de passe">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default form-inline-button form-validation">Inscription</button>
+                </form>
+                -->
+                <!-- Email confirmation -->
+                <h2>On y est presque ! Confirmez votre adresse e-mail</h2>
+                <p class="email-confirmation-text">
+                    Un e-mail a été envoyé à votre adresse <span class="email-confirmation-email">example@abc.com</span>. Cliquez sur le lien de confirmation dans l'e-mail, ou entrez ci-dessous le code de confirmation.
+                </p>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="integer" length="4" class="form-control" id="signup-confirmation-code" placeholder="Code à 4 chiffres"/>
+                        </div>
+                        <button type="submit" class="btn btn-default footer-newsletter-submit">Valider</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>    
+</div> 
+                            
+{% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
 {% endblock %}

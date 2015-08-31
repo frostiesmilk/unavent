@@ -10,11 +10,64 @@ and open the template in the editor.
 @import "frontoffice-common";
 
 .signin-cover{    
-    height: 512px;
+    height: 580px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: initial;
+    
+    .signup-form-col{
+        margin-top: 50px;
+        border-radius: 2px;
+        background-color: rgba(155, 155, 155, 0.3);
+        padding: 0px 25px 25px 25px;
+        color: white;
+        form{
+            h2{
+                color: white;
+                font-weight: bold;
+            }            
+            .form-inline-half{
+                width: 49.5%;
+                height: 33px;
+                display: inline-block;
+            }            
+            .form-inline-input{
+                height: 33px;
+            }
+            .form-inline-button{
+                width: 100%;
+            }
+            .form-group{
+                margin-bottom: 10px;
+            }
+            .form-validation{
+                background-color: @red;
+                color: white;
+                border-color: @red-alt;
+                font-weight: bold;
+            }
+            .form-validation:hover{
+                background-color: @red-alt;
+            }
+            .input-group-addon{
+                img{
+                    height: 14px;
+                }
+            }
+            .birthday-datepicker{
+                color: grey;
+                display: inline-block;
+                vertical-align: middle;
+                select{
+                    height: 33px;
+                }
+            }
+        }
+        .email-confirmation-email{
+            font-weight: bold;
+        }
+    }
 }
 
 .navbar-home{
@@ -28,10 +81,11 @@ and open the template in the editor.
                 float: left;
                 font-family: erasMediumItc;
                 color: white;
+                font-size: 25px;
             }
             img{
-                height: 40px;
-                margin-top: -10px;
+                height: 80px;
+                margin-top: -50px;
             }
         }
     }
@@ -117,9 +171,44 @@ and open the template in the editor.
             }            
         }        
     }
+    
+    .navbar-connection-form{
+        margin: initial;
+        table{
+            border-collapse: initial;
+            border-spacing: 4px;
+            .navbar-connection-form-input{
+                height: 30px;
+            }
+            .navbar-connection-form-submit{
+                height: 30px;
+                background-color: @red;
+                color: white;
+                border-color: @red-alt;
+                font-weight: bold;
+            }
+            .navbar-connection-form-submit:hover{
+                background-color: @red-alt;
+            }
+            .navbar-connection-form-keep{
+                margin-top: -2px;
+                color: white;
+            }
+            .navbar-connection-form-passforgotten{
+                a{
+                    color: white;
+                    text-decoration: underline;
+                }
+            }
+        }
+        
+    }
 }
 
 .navbar-background-text{
+    @media(max-width: 768px){
+        top: 44px;
+    }
     font-size: 40px;
     color: rgb(27, 36, 43);
     font-style: italic;
