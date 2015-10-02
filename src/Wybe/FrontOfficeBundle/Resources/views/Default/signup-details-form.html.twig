@@ -43,7 +43,7 @@
                         <label for="signupCity">Ville</label>
                         <input type="text" class="form-control" id="signupCity" placeholder="">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group form-inline">
                         <!--<table>
                             <tr>
                                 <td><label for="signupCityCode">Code postal</label></td>
@@ -54,19 +54,18 @@
                                 <td><input type="text" class="form-control form-inline-half" id="signupCountry" placeholder=""></td>
                             </tr>
                         </table>-->
-                        <div class="col-md-6">
-                            <label for="signupCityCode">Code postal</label><br/>
-                            <input type="text" class="form-control form-inline-half" id="signupCityCode" placeholder=""/>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="signupCountry">Pays</label><br/>
-                            <input type="text" class="form-control form-inline-half" id="signupCountry" placeholder=""/>
-                        </div>
+                        <label for="signupCityCode">Code postal</label><br/>
+                        <input type="text" class="form-control " id="signupCityCode" placeholder=""/>
+                    </div>
+                    <div class="form-group form-inline">                        
+                        <label for="signupCountry">Pays</label><br/>
+                        <input type="text" class="form-control " id="signupCountry" placeholder=""/>
                     </div>
                 </form>
                 
             </div>
         </div>
     </div>
-    
+
+{% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}                
 {% endblock %}
