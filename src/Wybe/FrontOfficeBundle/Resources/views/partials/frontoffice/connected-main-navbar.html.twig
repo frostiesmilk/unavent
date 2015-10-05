@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">                  
+            <a class="navbar-brand" href="{{ path('wybe_front_office_profile') }}">                  
                 <span><img alt="Unavent Logo" src="{{asset('images/unavent/logos/unavent-logo-50-white.png')}}"></span>
                 <span>UNAVENT</span>
             </a>
@@ -20,7 +20,7 @@
                 <li class="active"><a href="#"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="1000" data-close-others="true">
-                        <span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Listes
+                        <span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Groupes
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -65,7 +65,15 @@
                         <input type="text" class="form-control" placeholder="Rechercher">
                     </div>                        
                 </form>
-                <li><a href="#"><img class="menu-link-icon" src="{{asset('icons/40099-200-cogs.png')}}"/> </a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                        <img class="menu-link-icon" src="{{asset('icons/40099-200-cogs.png')}}"/>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Paramètres</a></li>
+                        <li><a href="{{ path('wybe_front_office_signin') }}">Se déconnecter</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <img class="menu-link-icon" src="{{asset('icons/white-bell.png')}}"/>

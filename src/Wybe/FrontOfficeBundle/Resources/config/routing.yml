@@ -1,4 +1,4 @@
-wybe_front_office_homepage:
+wybe_front_office_profile:
     path:     /profile
     defaults: { _controller: WybeFrontOfficeBundle:Default:index }
 
@@ -8,8 +8,12 @@ wybe_front_office_gettest:
     
 wybe_front_office_signin:
     path: /
-    defaults: { _controller: WybeFrontOfficeBundle:Default:signIn }
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getSignIn }
 
 wybe_front_office_signup_details:
     path: /signup-details/
-    defaults: { _controller: WybeFrontOfficeBundle:Default:signUpDetails }
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getSignUpDetails }
+    
+wybe_front_office_signup_events:
+    path: /event/{eventNameSlug}
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getEvent }
