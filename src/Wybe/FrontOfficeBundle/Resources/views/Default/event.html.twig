@@ -1,0 +1,10 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+{% trans_default_domain "index" %}
+
+{% block body %}
+
+    <!-- Main menu -->
+    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
+{% endblock %}
