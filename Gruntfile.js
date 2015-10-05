@@ -11,13 +11,15 @@ module.exports = function (grunt) {
                     'js/jquery.js': 'jquery/dist/jquery.js',
                     'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
                     'fonts': 'bootstrap/dist/fonts/**',
+                    'js/angular.js': 'angular/angular.js',
                 }
             },
             stylesheets: {
                 files: {
                     'css/bootstrap.css': 'bootstrap/dist/css/bootstrap.css',
                     'css/bootstrap.css.map': 'bootstrap/dist/css/bootstrap.css.map',
-                    'css/font-awesome.css': 'fontawesome/css/font-awesome.css'
+                    'css/font-awesome.css': 'fontawesome/css/font-awesome.css',
+                    'css/angular-csp.css': 'angular/angular-csp.css',
                 }
             },            
             fonts: {
