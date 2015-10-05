@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8"/>
         <title>{% block title %}Titre de page dans base_frontoffice{% endblock %}</title>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="{{ asset('assets/js/jquery.js') }}"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/frontoffice-common.css') }}">   
@@ -16,18 +20,17 @@
     <body>
         
     {% block body %}{% endblock %}
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>        
-    <script src="{{ asset('js/main-sticky-menu.js') }}"></script>    
-    <script src="{{ asset('js/jquery-birthday-picker.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+            
+    <script src="{{ asset('bundles/wybefrontoffice/js/main-sticky-menu.js') }}"></script>    
+    <script src="{{ asset('bundles/wybefrontoffice/js/jquery-birthday-picker.min.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/main.js') }}"></script>
     <!-- Customizable Affix navbar -->
     <script>
         $(window).load(function(){
             $("#nav-stick").sticky({ topSpacing: 40 });
         });
+    </script>
+    <script>
         $("#birthday-datepicker").birthdayPicker();
     </script>
 </body>
