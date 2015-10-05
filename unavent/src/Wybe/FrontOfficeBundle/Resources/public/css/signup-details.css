@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 29 août 2015, 22:47:32
+    Created on : 30 août 2015, 19:02:21
     Author     : Equina
 */
 /*
@@ -66,48 +66,36 @@ and open the template in the editor.
 .navbar-sm .navbar-toggle .icon-bar {
   width: 16px;
 }
-.homepage-footer {
-  background-color: #293540;
+.signup-details-cover {
+  height: 255px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: initial;
+}
+.signup-details-cover .signup-details-cover-title {
   color: white;
+  text-shadow: 3px 3px 3px black;
+  margin-top: 60px;
+  font-size: 50px;
 }
-.homepage-footer .footer-followus .footer-followus-title {
-  font-size: 22px;
+.signup-details-informations {
+  margin-top: 50px;
 }
-.homepage-footer .footer-followus .footer-social-logo-list {
-  padding: 0px;
+.signup-details-informations .signup-details-informations-image {
+  width: 65%;
 }
-.homepage-footer .footer-followus .footer-social-logo-list .footer-social-logo-list-element {
-  display: inline-block;
+.signup-details-form {
+  width: 77%;
+  margin: auto;
+  margin-top: 50px;
+  background-color: #ECECEC;
+  padding: 33px;
 }
-.homepage-footer .footer-followus .footer-social-logo-list .footer-social-logo-list-element img {
-  height: 48px;
+.signup-details-form .form-group {
+  margin-bottom: 6px;
 }
-.homepage-footer .footer-newsletter .footer-newsletter-title {
-  font-size: 22px;
+.signup-details-form .form-group td {
+  width: 49.5%;
 }
-.homepage-footer .footer-newsletter .input-group-addon {
-  padding: 0px 10px;
-  font-size: 12px;
-}
-.homepage-footer .footer-newsletter input {
-  height: 30px;
-}
-.homepage-footer .footer-newsletter .footer-newsletter-submit {
-  height: 30px;
-  color: white;
-  background-color: #E74C3C;
-  border-color: #BF493D;
-}
-.homepage-footer .footer-newsletter .footer-newsletter-submit:hover {
-  background-color: #BF493D;
-}
-.homepage-footer .footer-links {
-  padding: 0;
-}
-.homepage-footer .footer-links .footer-links-element {
-  display: inline-block;
-}
-.homepage-footer .footer-links .footer-links-element a {
-  color: white;
-}
-/*# sourceMappingURL=footer.css.map */
+/*# sourceMappingURL=signup-details.css.map */
