@@ -17,42 +17,43 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="content-navbar-main">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{ path('wybe_front_office_profile') }}"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true">
                         <span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Groupes
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <ul class="dropbown-menu-col">
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_groups', {'groupNameSlug': 'group1'}) }}">Groupe 1</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_groups', {'groupNameSlug': 'group2'}) }}">Groupe 2</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_groups', {'groupNameSlug': 'group3'}) }}">Groupe 4</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_groups', {'groupNameSlug': 'group4'}) }}">Groupe 5</a></li>
+                        </ul>
+                        <ul class="dropbown-menu-col">
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_create_group') }}">Créer un groupe</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_look_for_group') }}">Chercher un groupe</a></li>
+                        </ul>
                     </ul>
                 </li>
                 <li class="dropdown">  
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="500" data-close-others="true">
                         <span class="glyphicon glyphicon-apple menu-icon" aria-hidden="true"></span><span class="badge">4</span> <span>Evènements</span> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="#">My Account</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Change Email</a></li>
-                            <li><a tabindex="-1" href="#">Change Password</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Logout</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_events', {'eventNameSlug': 'event1'}) }}">Evenement 1</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_events', {'eventNameSlug': 'event2'}) }}">Evenement 2</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_events', {'eventNameSlug': 'event3'}) }}">Evenement 4</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_events', {'eventNameSlug': 'event4'}) }}">Evenement 5</a></li>
                         </ul>
                         <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="#">My Account</a></li>
                             <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Change Email</a></li>
-                            <li><a tabindex="-1" href="#">Change Password</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_create_event') }}">Créer un evenement</a></li>
                             <li class="divider"></li>
-                            <li><a tabindex="-1" href="#">Logout</a></li>
+                            <li><a tabindex="-1" href="{{ path('wybe_front_office_look_for_event') }}">Chercher un evenement</a></li>
                         </ul>
                     </ul>
                 </li>
@@ -66,20 +67,26 @@
                     </div>                        
                 </form>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="1000" data-close-others="true">
-                        <img class="menu-link-icon" src="{{asset('icons/40099-200-cogs.png')}}"/>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true">
+                        <img class="menu-link-icon" src="{{asset('icons/white-bell.png')}}"/>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Paramètres</a></li>
-                        <li><a href="{{ path('wybe_front_office_signin') }}">Se déconnecter</a></li>
+                        <li><a href="{{ path('wybe_front_office_notif', {'notifNameSlug': 'toutes'}) }}">Toutes les notification</a></li>
+                        <li><a href="{{ path('wybe_front_office_notif', {'notifNameSlug': 'notif1'}) }}">notif 1</a></li>
+                        <li><a href="{{ path('wybe_front_office_notif', {'notifNameSlug': 'notif2'}) }}">notif 2</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img class="menu-link-icon" src="{{asset('icons/white-bell.png')}}"/>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true">
+                        <img class="menu-link-icon" src="{{asset('icons/40099-200-cogs.png')}}"/>
                         <span class="caret"></span>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('wybe_front_office_parameters') }}">Paramètres</a></li>
+                        <li><a href="{{ path('wybe_front_office_signin') }}">Se déconnecter</a></li>
+                    </ul>
                 </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -14,6 +14,34 @@ wybe_front_office_signup_details:
     path: /signup-details/
     defaults: { _controller: WybeFrontOfficeBundle:Default:getSignUpDetails }
     
-wybe_front_office_signup_events:
-    path: /event/{eventNameSlug}
+wybe_front_office_parameters:
+    path: /parametres
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getParameters }
+    
+wybe_front_office_events:
+    path: /evenements/{eventNameSlug}
     defaults: { _controller: WybeFrontOfficeBundle:Default:getEvent }
+
+wybe_front_office_create_event:
+    path: /creation_evenement
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getCreateEvent }
+    
+wybe_front_office_look_for_event:
+    path: /chercher_evenement
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getLookForEvent }    
+    
+wybe_front_office_groups:
+    path: /groupes/{groupNameSlug}
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getGroup }
+
+wybe_front_office_create_group:
+    path: /creation_groupe
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getCreateGroup }
+    
+wybe_front_office_look_for_group:
+    path: /chercher_groupe
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getLookForGroup }      
+
+wybe_front_office_notif:
+    path: /notification/{notifNameSlug}
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getNotif }    
