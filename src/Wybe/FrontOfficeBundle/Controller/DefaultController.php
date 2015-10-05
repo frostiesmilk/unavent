@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('WybeFrontOfficeBundle:Default:index.html.twig');
+        return $this->render('WybeFrontOfficeBundle:Default:profile.html.twig');
     }
     
     public function signInAction()

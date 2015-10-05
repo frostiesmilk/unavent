@@ -1,5 +1,5 @@
 wybe_front_office_homepage:
-    path:     /
+    path:     /profile
     defaults: { _controller: WybeFrontOfficeBundle:Default:index }
 
 wybe_front_office_gettest:
@@ -7,7 +7,7 @@ wybe_front_office_gettest:
     defaults: { _controller: WybeFrontOfficeBundle:Default:getTest }
     
 wybe_front_office_signin:
-    path: /signin/
+    path: /
     defaults: { _controller: WybeFrontOfficeBundle:Default:signIn }
 
 wybe_front_office_signup_details:
