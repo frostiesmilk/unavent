@@ -33,10 +33,11 @@
             <div id="second-navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="#">Fiche</a></li>
-                    <li><a href="#lists">Listes</a></li>
+                    <li><a href="#groups">Groupes</a></li>
                     <li><a href="#events">Evènements</a></li>
-                    <li><a href="#friends">Amis</a></li>
                     <li><a href="#photos">Photos</a></li>
+
+                    <li><a href="#friends">Amis</a></li>
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
@@ -66,7 +67,7 @@
     </nav>
 
     <!-- Fiche -->
-    <div class="container-fluid main-container user-profile">
+    <div id="fiches" class="container-fluid main-container user-profile">
         <div class="row">
             <div class="col-md-6 col-bg-blue user-profile-half-col">
                 <div class="user-profile-introduction-text-block">
@@ -130,7 +131,7 @@
     </div>
                 
     <!-- My groups -->
-    <div class="user-profile-groups background-dark-blue">
+    <div id="groups" class="user-profile-groups background-dark-blue">
         <div class="container-fluid main-container user-profile">
             <div class="row user-profile-category-row  text-center">
                 <span class="user-profile-category-title font-white">Mes groupes</span>
@@ -231,7 +232,7 @@
     </div>
                                 
     <!-- My events-->                            
-    <div class="user-profile-events">
+    <div id="events" class="user-profile-events">
         <div class="container-fluid main-container user-profile">
             <div class="row user-profile-category-row text-center">
                 <span class="user-profile-category-title">Mes évènements</span>
@@ -329,13 +330,16 @@
     </div>
                                 
     <!-- My gallery -->
-    <div class="user-profile-gallery background-dark-blue">
+    <div id="photos" class="user-profile-gallery background-dark-blue">
         <div class="container-fluid main-container user-profile">
             <div class="row user-profile-category-row  text-center">
                 <span class="user-profile-category-title font-white">Mes galeries</span>
             </div>
+            
             <div class="container user-profile-gallery-container">
+                <span class="font-white"> Gallerie une</span>
                 <div id="links"></div>
+                <a href="#friends" class="font-white"> voir plus </a>
             </div>            
         </div>
     </div>
@@ -375,7 +379,26 @@
         </div>
     </div>
     
+ <!-- My friends-->                            
+    <div id="friends" class="user-profile-events">
+        <div class="container-fluid main-container user-profile">
+            <div class="row user-profile-category-row text-center">
+                <span class="user-profile-category-title">Mes amis</span>
+            </div>
 
+            <div class="container user-profile-events-container">
+                <div class="row">
+                    <ul>
+                        <li> Ami </li>
+                        <li> Ami </li>
+                        <li> Ami </li>
+                        <li> Ami </li>
+                        <li> Ami </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
 
 <div ng-app="app">

@@ -14,6 +14,6 @@ app.config(function($interpolateProvider){
 
 app.controller("exempleCtrl", function($scope) {
 
-    $scope.name = "Flanelle"
+    $scope.name = 1
 
 });
