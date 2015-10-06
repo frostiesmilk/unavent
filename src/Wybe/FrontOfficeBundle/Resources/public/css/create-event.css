@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 30 août 2015, 19:02:21
+    Created on : 6 oct. 2015, 19:11:08
     Author     : Equina
 */
 /*
@@ -66,42 +66,44 @@ and open the template in the editor.
 .navbar-sm .navbar-toggle .icon-bar {
   width: 16px;
 }
-.signup-details-cover {
+.create-event-cover {
   height: 255px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: initial;
+  background-position: 0px -530px;
 }
-.signup-details-cover .signup-details-cover-title {
+.create-event-cover .create-event-cover-title {
   color: white;
   text-shadow: 3px 3px 3px black;
   margin-top: 60px;
   font-size: 50px;
 }
-.signup-details-informations {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-.signup-details-informations .signup-details-informations-image {
-  width: 65%;
-}
-.signup-details-form {
-  width: 77%;
-  margin: auto;
-  margin-top: 50px;
+.create-event-form {
+  width: 50%;
+  margin: 50px auto 50px auto;
   background-color: #ECECEC;
   padding: 33px;
 }
-.signup-details-form .form-group {
+.create-event-form h1 {
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  .create-event-form {
+    width: initial;
+  }
+}
+.create-event-form .form-group {
   margin-bottom: 6px;
 }
-.signup-details-form .form-signup-details-half-left {
-  padding-left: initial;
-  padding-right: 2px;
+.create-event-form .event-submit {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
 }
-.signup-details-form .form-signup-details-half-right {
-  padding-left: 2px;
-  padding-right: initial;
+.create-event-form .event-submit:hover {
+  background-color: #BF493D;
 }
-/*# sourceMappingURL=signup-details.css.map */
+/*# sourceMappingURL=create-event.css.map */

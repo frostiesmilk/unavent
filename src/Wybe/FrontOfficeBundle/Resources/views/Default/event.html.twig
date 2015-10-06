@@ -1,10 +1,111 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
-{% trans_default_domain "index" %}
 
 {% block body %}
 
     <!-- Main menu -->
     {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
+    
+    <!-- Second menu -->
+    <nav id="nav-stick" class="navbar navbar-default navbar-second navbar-sm">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#second-navbar" aria-expanded="false" aria-controls="second-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>                
+            </div>
+            <div id="second-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Fiche</a></li>
+                    <li><a href="#groups">Groupes</a></li>
+                    <li><a href="#events">Evènements</a></li>
+                    <li><a href="#photos">Photos</a></li>
+
+                    <li><a href="#friends">Amis</a></li>
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/wink.png')}}"/> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/add-user.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="back-top" href="#">
+                            <span class="fa fa-caret-up"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="event-details">
+                    <h2>Football</h2>
+                    <table>
+                        <tr>
+                            <td><img src="" alt=""/></td>
+                            <td>créé par <span class="event-details-host">Aurélien BONAZZI</span></td>
+                        </tr>
+                        <tr>
+                            <td><img src="" alt=""/></td>
+                            <td>le 01 Septembre 2015 à 15h00</td>
+                        </tr>
+                        <tr>
+                            <td><img src="" alt=""/></td>
+                            <td>Au Parc du Tremble<br/>12 avenue des Lilas<br/>94100 Saint-Maur-des-Fossés</td>
+                        </tr>
+                        <tr>
+                            <td><img src="" alt=""/></td>
+                            <td>
+                                8 participants dont 1 ami<br/>
+                                <span class="event-details-participant">Marie BOIVENT</span>, <span class="event-details-participant">Equina YOU</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="" alt=""/></td>
+                            <td>Bla bla bla</td>
+                        </tr>
+                        <tr>
+                            <td><img src="" alt=""/></td>
+                            <td>
+                                Envoyer un e-mail à l'organisateur<br/>
+                                <form>
+                                    <textarea name="mail-to-host" textholder="Votre message"></textarea>
+                                    <button class="btn btn-default" type="submit" value="Envoyer"></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="event-blog">
+                    <div class="event-blog-new-post">
+                        <div class="event-blog-new-post-navbar">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                        
     {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
 {% endblock %}
