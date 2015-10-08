@@ -2,7 +2,66 @@
 {% extends '::base_frontoffice.html.twig' %}
 
 {% block body %}
-
+    
+        <!-- User Banner -->  
+    <div class="jumbotron user-cover" style="background-image: url({{asset('images/frontoffice/user/cover/KLTowers.jpg')}})">    
+        <div class="container" >
+            <div class="row-fluid">       
+                <div class="user-cover-profile-picture img-circle" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div> 
+                <div class="user-cover-title">
+                    <h1 class="user-cover-title-name">Je suis un groupe</h1>
+                    <p class="user-cover-title-description">groupes pour petit equina chat</p>
+                </div>                
+            </div>
+        </div>
+    </div>
+                
+                
+    <!-- Second menu -->
+    <nav id="nav-stick" class="navbar navbar-default navbar-second navbar-sm">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#second-navbar" aria-expanded="false" aria-controls="second-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>                
+            </div>
+            <div id="second-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#news">Actualités</a></li>
+                    <li><a href="#participants">Membres</a></li>
+                    <li><a href="#event">Evènements</a></li>
+                    <li><a href="#photos">Photos</a></li>
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/wink.png')}}"/> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/check-white.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="back-top" href="#">
+                            <span class="fa fa-caret-up"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
     <!-- Main menu -->
     {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
     {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}

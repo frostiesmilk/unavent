@@ -57,4 +57,13 @@ and open the template in the editor.
 .navbar-sm .navbar-toggle .icon-bar {
   width: 16px;
 }
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+}
 /*# sourceMappingURL=frontoffice-common.css.map */
