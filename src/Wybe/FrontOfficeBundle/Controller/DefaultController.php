@@ -37,6 +37,15 @@ class DefaultController extends Controller
         return $this->render('WybeFrontOfficeBundle:Default:event.html.twig', array('name' => $eventNameSlug));
     }
     
+    public function getEventMemberAction($eventNameSlug, Request $oRequest)
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:event-member.html.twig', array('name' => $eventNameSlug));
+    }
+    
+    public function getEventGalleryAction($eventNameSlug, Request $oRequest)
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:event-gallery.html.twig', array('name' => $eventNameSlug));
+    }    
     public function getCreateEventAction()
     {
         return $this->render('WybeFrontOfficeBundle:Default:create-event.html.twig');
@@ -51,6 +60,21 @@ class DefaultController extends Controller
     {
         return $this->render('WybeFrontOfficeBundle:Default:group.html.twig', array('name' => $groupNameSlug));
     }
+    
+    public function getGroupMemberAction($groupNameSlug, Request $oRequest)
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:group-member.html.twig', array('name' => $groupNameSlug));
+    }    
+    
+    public function getGroupEventAction($groupNameSlug, Request $oRequest)
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:group-event.html.twig', array('name' => $groupNameSlug));
+    }    
+    
+    public function getGroupGalleryAction($groupNameSlug, Request $oRequest)
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:group-gallery.html.twig', array('name' => $groupNameSlug));
+    }    
     
     public function getCreateGroupAction()
     {

@@ -10,15 +10,12 @@
     {% include 'WybeFrontOfficeBundle::partials/frontoffice/head.html.twig' %}
 
     <!-- Second navbar -->
-     {% include 'WybeFrontOfficeBundle::partials/navbar/navbar-event.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/navbar/navbar-group.html.twig' %}
    
     <!-- page -->
-     {% include 'WybeFrontOfficeBundle::partials/pages/event.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/pages/group-event.html.twig' %}
    
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
-
-    <script src="{{ asset('assets/js/angular.js') }}"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
-    
+                           
 {% endblock %}

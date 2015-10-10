@@ -22,6 +22,14 @@ wybe_front_office_events:
     path: /evenements/{eventNameSlug}
     defaults: { _controller: WybeFrontOfficeBundle:Default:getEvent }
 
+wybe_front_office_events_gallery:
+    path: /evenements/{eventNameSlug}/galleries
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getEventGallery }
+
+wybe_front_office_events_member:
+    path: /evenements/{eventNameSlug}/participants
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getEventMember }
+
 wybe_front_office_create_event:
     path: /creation_evenement
     defaults: { _controller: WybeFrontOfficeBundle:Default:getCreateEvent }
@@ -33,6 +41,18 @@ wybe_front_office_look_for_event:
 wybe_front_office_groups:
     path: /groupes/{groupNameSlug}
     defaults: { _controller: WybeFrontOfficeBundle:Default:getGroup }
+    
+wybe_front_office_groups_member:
+    path: /groupes/{groupNameSlug}/membres
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getGroupMember }
+    
+wybe_front_office_groups_event:
+    path: /groupes/{groupNameSlug}/evenements
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getGroupEvent }
+    
+wybe_front_office_groups_gallery:
+    path: /groupes/{groupNameSlug}/gallery
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getGroupGallery }
 
 wybe_front_office_create_group:
     path: /creation_groupe
