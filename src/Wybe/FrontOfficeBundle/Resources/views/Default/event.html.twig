@@ -214,9 +214,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>                
     </div>
-                        
+                    
     {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
     <script type="text/javascript">
         $('#eventNavbar a').click(function (e) {
@@ -230,4 +230,7 @@
             };
         });
     </script>
+    
+    <script src="{{ asset('assets/js/angular.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
 {% endblock %}
