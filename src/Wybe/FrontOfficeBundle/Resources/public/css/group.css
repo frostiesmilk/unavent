@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 7 oct. 2015, 12:19:30
+    Created on : 10 oct. 2015, 15:40:41
     Author     : Equina
 */
 /*
@@ -75,35 +75,35 @@ and open the template in the editor.
 .btn-red:hover {
   background-color: #BF493D;
 }
-.event-container {
+.group-container {
   padding-top: 50px;
   padding-bottom: 50px;
 }
-.event-container .event-blog-new-post {
+.group-container .group-blog-new-post {
   border: solid 1px lightgrey;
   margin-bottom: 20px;
 }
-.event-container .event-blog-new-post .event-blog-new-post-navbar {
+.group-container .group-blog-new-post .group-blog-new-post-navbar {
   background-color: #79BDE0;
 }
-.event-container .event-blog-new-post .event-blog-new-post-navbar .event-blog-new-post-navbar-option a {
+.group-container .group-blog-new-post .group-blog-new-post-navbar .group-blog-new-post-navbar-option a {
   background-color: #293540;
   border-radius: initial;
   border: initial;
   color: white;
 }
-.event-container .event-blog-new-post .event-blog-new-post-navbar .event-blog-new-post-navbar-option a:hover {
+.group-container .group-blog-new-post .group-blog-new-post-navbar .group-blog-new-post-navbar-option a:hover {
   background-color: #1B242B;
   border: initial;
 }
-.event-container .event-blog-new-post .event-blog-new-post-navbar .event-blog-new-post-navbar-option .event-blog-new-post-navbar-option-icon {
+.group-container .group-blog-new-post .group-blog-new-post-navbar .group-blog-new-post-navbar-option .group-blog-new-post-navbar-option-icon {
   height: 30px;
   width: 30px;
 }
-.event-container .event-blog-new-post .event-blog-new-post-navbar .active a {
+.group-container .group-blog-new-post .group-blog-new-post-navbar .active a {
   background-color: #66A0BE !important;
 }
-.event-container .event-blog-new-post .event-blog-new-post-content textarea {
+.group-container .group-blog-new-post .group-blog-new-post-content textarea {
   width: 100%;
   resize: none;
   border-left: none;
@@ -111,22 +111,22 @@ and open the template in the editor.
   border-top: none;
   padding: 10px;
 }
-.event-container .event-blog-new-post .event-blog-new-post-footer {
+.group-container .group-blog-new-post .group-blog-new-post-footer {
   padding: 5px;
 }
-.event-container .event-blog-new-post .event-blog-new-post-footer .event-blog-new-post-footer-confirm button:hover {
+.group-container .group-blog-new-post .group-blog-new-post-footer .group-blog-new-post-footer-confirm button:hover {
   color: white;
 }
-.event-container .event-blog-post {
+.group-container .group-blog-post {
   border: 1px solid lightgrey;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.event-container .event-blog-post .event-blog-post-header {
+.group-container .group-blog-post .group-blog-post-header {
   padding-left: 20px;
   padding-right: 20px;
 }
-.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-avatar {
+.group-container .group-blog-post .group-blog-post-header .group-blog-post-header-avatar {
   background-position: center center;
   background-repeat: no repeat;
   background-size: cover;
@@ -134,92 +134,92 @@ and open the template in the editor.
   height: 50px;
   width: 50px;
 }
-.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-rating img {
+.group-container .group-blog-post .group-blog-post-header .group-blog-post-header-rating img {
   height: 20px;
 }
-.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-rating .event-blog-post-header-rating-count {
+.group-container .group-blog-post .group-blog-post-header .group-blog-post-header-rating .group-blog-post-header-rating-count {
   color: grey;
   font-size: 0.85em;
 }
-.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-info-time {
+.group-container .group-blog-post .group-blog-post-header .group-blog-post-header-info-time {
   color: grey;
   font-size: 0.8em;
 }
-.event-container .event-blog-post .event-blog-post-content {
+.group-container .group-blog-post .group-blog-post-content {
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid lightgrey;
 }
-.event-container .event-blog-post .event-blog-post-comments {
+.group-container .group-blog-post .group-blog-post-comments {
   padding-top: 5px;
   background-color: #F6F6F6;
 }
-.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment {
+.group-container .group-blog-post .group-blog-post-comments .group-blog-post-comment {
   padding-top: 5px;
 }
-.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment .event-blog-post-comment-avatar {
+.group-container .group-blog-post .group-blog-post-comments .group-blog-post-comment .group-blog-post-comment-avatar {
   border-radius: 50%;
   background-position: center center;
   background-size: cover;
   height: 50px;
   width: 50px;
 }
-.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment .event-blog-post-comment-poster {
+.group-container .group-blog-post .group-blog-post-comments .group-blog-post-comment .group-blog-post-comment-poster {
   display: inline;
 }
-.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment .event-blog-post-comment-time {
+.group-container .group-blog-post .group-blog-post-comments .group-blog-post-comment .group-blog-post-comment-time {
   display: inline;
   padding-left: 1em;
   color: grey;
   font-size: 0.8em;
 }
-.event-container .event-blog-post .event-blog-post-comments hr {
+.group-container .group-blog-post .group-blog-post-comments hr {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.event-container .event-blog-post .event-blog-post-new-comment {
+.group-container .group-blog-post .group-blog-post-new-comment {
   padding-top: 5px;
   padding-left: 20px;
   padding-right: 20px;
 }
-.event-container .event-blog-post .event-blog-post-new-comment .event-blog-post-new-comment-avatar {
+.group-container .group-blog-post .group-blog-post-new-comment .group-blog-post-new-comment-avatar {
   border-radius: 50%;
   background-position: center center;
   background-size: cover;
   height: 50px;
   width: 50px;
 }
-.event-container .event-blog-post .event-blog-post-new-comment .event-blog-post-new-comment-field textarea {
+.group-container .group-blog-post .group-blog-post-new-comment .group-blog-post-new-comment-field textarea {
   width: 100%;
   resize: none;
 }
-.event-container .event-details {
+.group-container .group-details {
   border: 1px solid lightgrey;
   padding: 15px;
 }
-.event-container .event-details table {
+.group-container .group-details table {
   border-collapse: separate;
   border-spacing: 1em;
   color: grey;
   width: 100%;
 }
-.event-container .event-details table tr {
+.group-container .group-details table tr {
   padding-bottom: 10px;
 }
-.event-container .event-details table tr td.icon {
+.group-container .group-details table tr td.icon {
   padding-right: 5px;
   text-align: right;
   vertical-align: top;
 }
-.event-container .event-details table tr td.icon img {
+.group-container .group-details table tr td.icon img {
   height: 20px;
   width: 20px;
 }
-.event-container .event-details textarea.event-mail {
+.group-container .group-details textarea.group-mail {
   resize: none;
   width: 100%;
   padding: 5px;
 }
-/*# sourceMappingURL=event.css.map */
+/*# sourceMappingURL=group.css.map */

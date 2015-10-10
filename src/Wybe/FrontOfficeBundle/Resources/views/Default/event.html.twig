@@ -5,7 +5,7 @@
 
     <!-- Main menu -->
     {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
-            <!-- User Banner -->  
+    <!-- User Banner -->  
     <div class="jumbotron user-cover" style="background-image: url({{asset('images/frontoffice/user/cover/KLTowers.jpg')}})">    
         <div class="container" >
             <div class="row-fluid">       
@@ -73,7 +73,7 @@
                     <h2>Football</h2>
                     <table>
                         <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/event-host.png')}}" alt="Organisateur"/></td>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
                             <td>créé par <span class="event-details-host">Aurélien BONAZZI</span></td>
                         </tr>
                         <tr>
@@ -81,26 +81,26 @@
                             <td>golf, cinema, poterie</td>
                         </tr>                        
                         <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/event-time.png')}}" alt="Date et horaire"/></td>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
                             <td>le 01 Septembre 2015 à 15h00</td>
                         </tr>
                         <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/event-location.png')}}" alt="Lieu"/></td>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
                             <td>Au Parc du Tremble<br/>12 avenue des Lilas<br/>94100 Saint-Maur-des-Fossés</td>
                         </tr>
                         <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/event-participants.png')}}" alt="Participants"/></td>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
                             <td>
                                 8 participants dont 1 ami<br/>
                                 <span class="event-details-participant">Marie BOIVENT</span>, <span class="event-details-participant">Equina YOU</span>
                             </td>
                         </tr>
                         <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/event-description.png')}}" alt="Description de l'évènement"/></td>
-                            <td>Bla bla bla</td>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
+                            <td><p class="event-details-description">Bla bla bla</p></td>
                         </tr>
                         <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/event-mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                             <td>
                                 Envoyer un e-mail à l'organisateur<br/>
                                 <form>
@@ -165,6 +165,52 @@
                         <div class="event-blog-post-content">
                             <p>Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi?</p>
                         </div>
+                        <div class="event-blog-post-comments">
+                            <div class="row event-blog-post-comment">
+                                <div class="col-xs-1 col-xs-offset-1 text-center">
+                                    <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
+                                </div>
+                                <div class="col-xs-10">
+                                    <div class="event-blog-post-comment-poster">
+                                        <a href="#">Marie Boivent</a>
+                                    </div>
+                                    <div class="event-blog-post-comment-time">
+                                        <span>Le 21 Juillet à 15h21</span>
+                                    </div>
+                                    <div class="event-blog-post-comment-content">
+                                        <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row event-blog-post-comment">
+                                <div class="col-xs-1 col-xs-offset-1 text-center">
+                                    <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
+                                </div>
+                                <div class="col-xs-10">
+                                    <div class="event-blog-post-comment-poster">
+                                        <a href="#">Marie Boivent</a>
+                                    </div>
+                                    <div class="event-blog-post-comment-time">
+                                        <span>Le 21 Juillet à 15h21</span>
+                                    </div>
+                                    <div class="event-blog-post-comment-content">
+                                        <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                            <div class="row event-blog-post-new-comment">
+                                <div class="col-xs-1 text-center">
+                                    <div class="event-blog-post-new-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
+                                </div>
+                                <div class="col-xs-11 event-blog-post-new-comment-field">
+                                    <textarea type="text" name="event-blog-new-post-new-comment"></textarea>
+                                    <button class="btn btn-default btn-red" type="submit">Valider</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

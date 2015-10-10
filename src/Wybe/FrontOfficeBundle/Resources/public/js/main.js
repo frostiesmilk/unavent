@@ -135,4 +135,21 @@ $('#back-top').each(function(){
     });
 });
 
+/**
+ * Smooth scroll to anchor
+ */
+$(document).ready(function(){
+    $('a[href^="#"]').on('click',function (e) {
+        e.preventDefault();
 
+        var target = this.hash;
+        var $target_tmp = $(target);
+        var $target_px = $target_tmp.offset().top - 50;
+        console.log("target: "+ target+" $target: "+$target_px);
+        $('html, body').stop().animate({
+            'scrollTop': $target_px//.offset().top 
+        }, 300, 'swing', function () {
+            window.location.hash = target;
+        });
+    });
+});
