@@ -18,4 +18,20 @@
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
                            
+    <script type="text/javascript">
+        $('#groupNavbar a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+
+        /**
+         * Automaticaly Expanding textarea
+         * @param {type} param
+         */
+        $("#newPostTextArea, #newMailToHost").keyup(function(e) {
+            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+                $(this).height($(this).height()+1);
+            };
+        });
+    </script>    
 {% endblock %}

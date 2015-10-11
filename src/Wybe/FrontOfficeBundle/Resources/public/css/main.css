@@ -66,6 +66,15 @@ and open the template in the editor.
 .navbar-sm .navbar-toggle .icon-bar {
   width: 16px;
 }
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+}
 .navbar-main {
   margin-bottom: initial;
   border: initial;
@@ -473,54 +482,25 @@ and open the template in the editor.
 .user-profile-gallery .user-profile-gallery-container {
   padding: 27px 0px ;
 }
+.user-profile-gallery .user-profile-gallery-container #links img {
+  height: 75px;
+  width: 75px;
+}
+.user-profile-friends .user-profile-friends-container ul {
+  list-style: none;
+}
+.user-profile-friends .user-profile-friends-container ul .user-profile-friends-friend {
+  display: inline;
+}
+.user-profile-friends .user-profile-friends-container ul .user-profile-friends-friend .user-profile-friends-friend-avatar {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no repeat;
+  height: 200px;
+  width: 200px;
+}
 .modal {
   overflow: auto;
   color: #333;
 }
 /*# sourceMappingURL=main.css.map */
-
-#map {
-    height: 300px;
-    width: 100%;
-}
-.controls {
-    margin-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 300px;
-}
-
-#pac-input:focus {
-    border-color: #4d90fe;
-}
-
-.pac-container {
-    font-family: Roboto;
-}
-
-#type-selector {
-    color: #fff;
-    background-color: #4d90fe;
-    padding: 5px 11px 0px 11px;
-}
-
-#type-selector label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
-}

@@ -69,15 +69,14 @@ function initMap() {
       
       codepostal = [
         (place.address_components[4] && place.address_components[4].short_name || ''),
-      ].join(' ');
+      ].join(' '); 
       
       longueur=codepostal.length;
       if (longueur != 5)
-          codepostal ='';
-          
+          codepostal ='';     
     }
 
-      document.getElementById("event-address").value = addressbis;
+    document.getElementById("event-address").value = addressbis;
     document.getElementById("event-city").value = addresscity;
     document.getElementById("event-zipcode").value = codepostal;
     document.getElementById("event-place-name").value = place.name;
