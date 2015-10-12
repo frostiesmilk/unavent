@@ -47,7 +47,11 @@
             </div>
             <div class="col-md-7">
                 <div class="group-blog">
-                    <div class="group-blog-new-post">
+                    <div class="group-blog-new-post" ng-app="app" ng-controller="BillCtrl">
+                        
+                        
+                        
+                        
                         <ul id="groupNavbar" class="nav nav-tabs nav-justified group-blog-new-post-navbar">
                             <li role="presentation" class="group-blog-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
                                 <a href="#newpost"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/new-post.png')}}" alt=""/> Message</a>
@@ -55,8 +59,8 @@
                             <li role="presentation" class="group-blog-new-post-navbar-option" aria-controls="newphoto" role="tab" data-toggle="tab">
                                 <a href="#newphoto"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/photo.png')}}" alt=""/> Photo</a>
                             </li>
-                            <li role="presentation" class="group-blog-new-post-navbar-option" aria-controls="tagpeople" role="tab" data-toggle="tab">
-                                <a href="#tagpeople"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-white.png')}}" alt=""/> Tagger</a>
+                            <li role="presentation" class="group-blog-new-post-navbar-option">
+                                <a href="#tagpeople" ng-click="toggle()"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-white.png')}}" alt=""/> Tagger</a>
                             </li>
                         </ul>
                          <!-- Tab panes -->
@@ -67,10 +71,106 @@
                             <div role="tabpanel" class="tab-pane" id="newphoto">
                                 Uploader une photo
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="tagpeople">
-                                Tagger une personne
+                            <div role="tabpanel" ng-show="myVar">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="event-title" class="col-sm-2 control-label">Titre</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="event-title" placeholder="Exemple : Football">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-tease" class="col-sm-2 control-label">Phrase d'accroche</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="event-category" placeholder="Choisir une phrase d'accroche">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-category" class="col-sm-2 control-label">Catégories</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="event-category" placeholder="Choisir une catégorie">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-description" class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea id="event-description" class="form-control" textholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-location" class="col-sm-2 control-label">Lieu</label>
+                                        <div class="col-sm-10">
+                                            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                                           <div id="map"></div>           
+                                       </div> 
+                                    </div> 
+                                     <div class="form-group">
+                                        <label for="event-place-name" class="col-sm-2 control-label">Nom</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="event-place-name" placeholder="">
+                                        </div>
+                                    </div>                     
+                                    <div class="form-group">
+                                        <label for="event-address" class="col-sm-2 control-label">Adresse</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="event-address" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-city" class="col-sm-2 control-label">Ville</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="event-city" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-zipcode" class="col-sm-2 control-label">Code postal</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" id="event-zipcode" placeholder="">
+                                        </div>
+                                        <label for="event-country" class="col-sm-2 control-label">Pays</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="event-country" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-date" class="col-sm-2 control-label">Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" id="event-date" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-time" class="col-sm-2 control-label">Heure</label>
+                                        <div class="col-sm-10">
+                                            <input type="time" class="form-control" id="event-time" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Visibilité</label>
+                                        <div class="col-sm-10">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="event-permission" id="event-permission-public" value="public"> Public
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="event-permission" id="event-permission-private" value="private"> Privé
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">                
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <label>
+                                                <input type="checkbox" name="event-invite-permission"> Autoriser les invités à inviter des personnes
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">                
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-default event-submit">Continuer</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                         
                         <div class="group-blog-new-post-footer">
                             <div class="group-blog-new-post-footer-details">
                                 
@@ -149,3 +249,4 @@
             </div>
         </div>
     </div>
+                                

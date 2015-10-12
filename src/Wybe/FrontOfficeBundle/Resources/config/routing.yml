@@ -1,5 +1,5 @@
 wybe_front_office_profile:
-    path:     /profile
+    path:     /profil
     defaults: { _controller: WybeFrontOfficeBundle:Default:index }
 
 wybe_front_office_gettest:
@@ -11,7 +11,7 @@ wybe_front_office_signin:
     defaults: { _controller: WybeFrontOfficeBundle:Default:getSignIn }
 
 wybe_front_office_signup_details:
-    path: /signup-details/
+    path: /connexion/
     defaults: { _controller: WybeFrontOfficeBundle:Default:getSignUpDetails }
     
 wybe_front_office_parameters:

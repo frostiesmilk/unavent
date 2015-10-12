@@ -4,6 +4,18 @@
  * and open the template in the editor.
  */
 
+   var app = angular.module("app", []);
+    app.controller("BillCtrl", function($scope){
+        $scope.myVar = false;  
+
+        $scope.toggle = function (){
+            $scope.myVar = !$scope.myVar;
+            google.maps.event.trigger(map,'resize');
+
+        };
+        
+    });
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -33.8688, lng: 151.2195},
@@ -24,7 +36,7 @@ function initMap() {
     map: map,
     anchorPoint: new google.maps.Point(0, -29)
   });
-
+  
   autocomplete.addListener('place_changed', function() {
     infowindow.close();
     marker.setVisible(false);
@@ -74,7 +86,8 @@ function initMap() {
       longueur=codepostal.length;
       if (longueur != 5)
           codepostal ='';
-          
+      
+
     }
 
       document.getElementById("event-address").value = addressbis;
@@ -88,17 +101,4 @@ function initMap() {
     infowindow.open(map, marker);
   });
 
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
-    radioButton.addEventListener('click', function() {
-      autocomplete.setTypes(types);
-    });
-  }
-
-  setupClickListener('changetype-all', []);
-  setupClickListener('changetype-address', ['address']);
-  setupClickListener('changetype-establishment', ['establishment']);
-  setupClickListener('changetype-geocode', ['geocode']);
 }

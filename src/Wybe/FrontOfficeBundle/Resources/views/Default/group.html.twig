@@ -17,5 +17,33 @@
    
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
-                           
+      <script src="{{ asset('assets/js/angular.js') }}"></script>
+<script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
+    async defer></script>    
+    
+   <!-- <script type="text/javascript">
+        $('#groupNavbar a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+        
+        $("#newPostTextArea, #newMailToHost").keyup(function(e) {
+            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+                $(this).height($(this).height()+1);
+            };
+        }); 
+    </script>-->
+   <script type="text/javascript">
+   
+
+    </script>
+    
+        <script src="{{ asset('assets/js/angular.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
+    async defer></script>  
+    
 {% endblock %}

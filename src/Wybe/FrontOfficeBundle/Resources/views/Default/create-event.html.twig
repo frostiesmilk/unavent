@@ -48,19 +48,6 @@
                 <div class="col-sm-10">
                     <input id="pac-input" class="controls" type="text"
                         placeholder="Enter a location">
-                    <div id="type-selector" class="controls">
-                        <input type="radio" name="type" id="changetype-all" checked="checked">
-                        <label for="changetype-all">All</label>
-
-                        <input type="radio" name="type" id="changetype-establishment">
-                        <label for="changetype-establishment">Establishments</label>
-
-                        <input type="radio" name="type" id="changetype-address">
-                        <label for="changetype-address">Addresses</label>
-
-                        <input type="radio" name="type" id="changetype-geocode">
-                        <label for="changetype-geocode">Geocodes</label>
-                   </div>
                    <div id="map"></div>           
                </div> 
             </div> 
@@ -133,7 +120,7 @@
 
     {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
     <script src="{{ asset('assets/js/angular.js') }}"></script>
-<script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
     async defer></script>    
