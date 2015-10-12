@@ -1,9 +1,14 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
 
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+{% endblock %}
+
 {% block body %}
 
     <!-- Main menu -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
-    {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
 {% endblock %}

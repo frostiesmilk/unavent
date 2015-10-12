@@ -66,12 +66,12 @@
                          <!-- Tab panes -->
                         <div class="tab-content group-blog-new-post-content">
                             <div role="tabpanel" class="tab-pane active" id="newpost">
-                                <textarea id="newPostTextArea" placeholder="Ecrire un message"></textarea>
+                                <textarea class="group-blog-new-post-content-text" id="newPostTextArea" placeholder="Ecrire un message"></textarea>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="newphoto">
                                 Uploader une photo
                             </div>
-                            <div role="tabpanel" ng-show="myVar">
+                            <div role="tabpanel" ng-show="myVar" class="group-blog-new-post-event">
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="event-title" class="col-sm-2 control-label">Titre</label>
@@ -100,7 +100,7 @@
                                     <div class="form-group">
                                         <label for="event-location" class="col-sm-2 control-label">Lieu</label>
                                         <div class="col-sm-10">
-                                            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                                            <input id="pac-input" class="autocomplete-map-controls" type="text" placeholder="Enter a location">
                                            <div id="map"></div>           
                                        </div> 
                                     </div> 

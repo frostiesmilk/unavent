@@ -7,19 +7,19 @@
         <script src="{{ asset('assets/js/jquery.js') }}"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/js/angular.js') }}"></script>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/frontoffice-common.css') }}">   
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/signin.css') }}">        
+        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/frontoffice-common.css') }}">     
         <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
         <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/bootstrap-image-gallery.css') }}">    
         <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/main.css') }}">   
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/footer.css') }}">   
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/signup-details.css') }}">   
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/create-event.css') }}">   
+        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/footer.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/event.css') }}">   
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/group.css') }}">   
+           
+        {% endblock %}
     </head>
     <body>
         

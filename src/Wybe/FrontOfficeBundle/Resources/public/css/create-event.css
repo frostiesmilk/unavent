@@ -66,6 +66,15 @@ and open the template in the editor.
 .navbar-sm .navbar-toggle .icon-bar {
   width: 16px;
 }
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+}
 .create-event-cover {
   height: 255px;
   background-size: cover;
@@ -105,5 +114,45 @@ and open the template in the editor.
 }
 .create-event-form .event-submit:hover {
   background-color: #BF493D;
+}
+.create-event-form #map {
+  height: 300px;
+  width: 100%;
+}
+.create-event-form .autocomplete-map-controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.create-event-form #pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+.create-event-form #pac-input:focus {
+  border-color: #4d90fe;
+}
+.create-event-form .pac-container {
+  font-family: Roboto;
+}
+.create-event-form #type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+.create-event-form #type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
 }
 /*# sourceMappingURL=create-event.css.map */

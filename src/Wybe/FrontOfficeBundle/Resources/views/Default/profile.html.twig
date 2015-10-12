@@ -1,26 +1,21 @@
 {% extends '::base_frontoffice.html.twig' %}
 {% trans_default_domain "index" %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/profile.css') }}"/> 
+{% endblock %}
+
 {% block body %}
 
     <!-- Main menu -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
                             
-    <!-- User Banner -->  
-    <div class="jumbotron user-cover" style="background-image: url({{asset('images/frontoffice/user/cover/KLTowers.jpg')}})">    
-        <div class="container" >
-            <div class="row-fluid">       
-                <div class="user-cover-profile-picture img-circle" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div> 
-                <div class="user-cover-title">
-                    <h1 class="user-cover-title-name">Marie Boivent</h1>
-                    <p class="user-cover-title-description">Chasseuse de taupes</p>
-                </div>                
-            </div>
-        </div>
-    </div>
+    <!-- User Cover -->  
+    {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
     
     <!-- Second menu -->
-         {% include 'WybeFrontOfficeBundle::partials/navbar/navbar-profile.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/profile/profile-navbar.html.twig' %}
 
 
     <!-- Fiche -->
@@ -355,11 +350,11 @@
             </div>
         </div>
     </div>
-{% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
-
-
-
-<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-<script src="{{ asset('bundles/wybefrontoffice/js/gallery/bootstrap-image-gallery.js') }}"></script>
-<script src="{{ asset('bundles/wybefrontoffice/js/gallery/blueimp-gallery.js') }}"></script>
+ 
+ 
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/gallery/bootstrap-image-gallery.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/gallery/blueimp-gallery.js') }}"></script>
 {% endblock %}

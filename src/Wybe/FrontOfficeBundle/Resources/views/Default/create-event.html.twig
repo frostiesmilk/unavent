@@ -1,10 +1,16 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
 
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/create-event.css') }}"/> 
+{% endblock %}
+
 {% block body %}
 
     <!-- Main menu -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- Cover -->
     <div class="jumbotron create-event-cover" style="background-image: url({{asset('bundles/wybefrontoffice/images/pages/homepage-signup/cover-streetsheeps.jpg')}})">    
@@ -46,7 +52,7 @@
             <div class="form-group">
                 <label for="event-location" class="col-sm-2 control-label">Lieu</label>
                 <div class="col-sm-10">
-                    <input id="pac-input" class="controls" type="text"
+                    <input id="pac-input" class="autocomplete-map-controls" type="text"
                         placeholder="Enter a location">
                    <div id="map"></div>           
                </div> 
@@ -118,8 +124,7 @@
     </div>       
     
 
-    {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
-    <script src="{{ asset('assets/js/angular.js') }}"></script>
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
     <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"

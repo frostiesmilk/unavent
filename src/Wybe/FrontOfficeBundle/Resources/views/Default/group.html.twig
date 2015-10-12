@@ -1,29 +1,34 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/group.css') }}"/>
+{% endblock %}
+
 {% block body %}
 
     <!-- navbar top -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
-    <!-- User Banner -->  
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/head.html.twig' %}
+    <!-- Group Cover -->  
+    {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
 
     <!-- Second navbar -->
-     {% include 'WybeFrontOfficeBundle::partials/navbar/navbar-group.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/group/group-navbar.html.twig' %}
    
     <!-- page -->
-     {% include 'WybeFrontOfficeBundle::partials/pages/group.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/group/group-content.html.twig' %}
    
     <!-- footer -->                  
-    {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
-      <script src="{{ asset('assets/js/angular.js') }}"></script>
-<script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
     async defer></script>    
     
-   <!-- <script type="text/javascript">
+   <script type="text/javascript">
         $('#groupNavbar a').click(function (e) {
             e.preventDefault()
             $(this).tab('show')
@@ -34,16 +39,8 @@
                 $(this).height($(this).height()+1);
             };
         }); 
-    </script>-->
-   <script type="text/javascript">
-   
-
     </script>
-    
-        <script src="{{ asset('assets/js/angular.js') }}"></script>
     <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
-    async defer></script>  
     
 {% endblock %}

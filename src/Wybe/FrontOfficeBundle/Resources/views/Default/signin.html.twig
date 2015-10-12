@@ -1,8 +1,15 @@
 {% extends '::base_frontoffice.html.twig' %}
 
 {% block body %}
+    
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/signin.css') }}"/> 
+{% endblock %}
+    
 <!-- Main menu -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/signin-main-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/signin/signin-main-navbar.html.twig' %}
 
 <!-- User Banner -->  
 <div class="jumbotron signin-cover" style="background-image: url({{asset('bundles/wybefrontoffice/images/pages/homepage-signup/cover-streetsheeps.jpg')}})">    
@@ -71,5 +78,5 @@
     </div>
 </div> 
                             
-{% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
+{% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
 {% endblock %}
