@@ -47,11 +47,7 @@
             </div>
             <div class="col-md-7">
                 <div class="group-blog">
-                    <div class="group-blog-new-post" ng-app="app" ng-controller="BillCtrl">
-                        
-                        
-                        
-                        
+                    <div class="group-blog-new-post">
                         <ul id="groupNavbar" class="nav nav-tabs nav-justified group-blog-new-post-navbar">
                             <li role="presentation" class="group-blog-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
                                 <a href="#newpost"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/new-post.png')}}" alt=""/> Message</a>
@@ -59,8 +55,8 @@
                             <li role="presentation" class="group-blog-new-post-navbar-option" aria-controls="newphoto" role="tab" data-toggle="tab">
                                 <a href="#newphoto"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/photo.png')}}" alt=""/> Photo</a>
                             </li>
-                            <li role="presentation" class="group-blog-new-post-navbar-option">
-                                <a href="#tagpeople" ng-click="toggle()"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-white.png')}}" alt=""/> Tagger</a>
+                            <li role="presentation" class="group-blog-new-post-navbar-option" aria-controls="newevent" role="tab" data-toggle="tab" onclick="reloadMap();">
+                                <a href="#newevent"><img class="group-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-white.png')}}" alt=""/> Tagger</a>
                             </li>
                         </ul>
                          <!-- Tab panes -->
@@ -71,7 +67,7 @@
                             <div role="tabpanel" class="tab-pane" id="newphoto">
                                 Uploader une photo
                             </div>
-                            <div role="tabpanel" ng-show="myVar" class="group-blog-new-post-event">
+                            <div role="tabpanel" class="tab-pane group-blog-new-post-event" id="newevent">
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="event-title" class="col-sm-2 control-label">Titre</label>
@@ -100,7 +96,7 @@
                                     <div class="form-group">
                                         <label for="event-location" class="col-sm-2 control-label">Lieu</label>
                                         <div class="col-sm-10">
-                                            <input id="pac-input" class="autocomplete-map-controls" type="text" placeholder="Enter a location">
+                                            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
                                            <div id="map"></div>           
                                        </div> 
                                     </div> 

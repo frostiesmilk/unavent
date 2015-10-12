@@ -115,7 +115,7 @@ and open the template in the editor.
   height: 300px;
   width: 100%;
 }
-.group-container .group-blog-new-post .group-blog-new-post-content .group-blog-new-post-event .autocomplete-map-controls {
+.group-container .group-blog-new-post .group-blog-new-post-content .group-blog-new-post-event .controls {
   margin-top: 10px;
   border: 1px solid transparent;
   border-radius: 2px 0 0 2px;
@@ -134,6 +134,7 @@ and open the template in the editor.
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 300px;
+  z-index: 9999;
 }
 .group-container .group-blog-new-post .group-blog-new-post-content .group-blog-new-post-event #pac-input:focus {
   border-color: #4d90fe;

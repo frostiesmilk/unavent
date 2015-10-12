@@ -4,18 +4,18 @@
 {% block body %}
 
     <!-- navbar top -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- User Banner -->  
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/head.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
 
     <!-- Second navbar -->
-     {% include 'WybeFrontOfficeBundle::partials/navbar/navbar-group.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/group/group-navbar.html.twig' %}
    
     <!-- page -->
-     {% include 'WybeFrontOfficeBundle::partials/pages/gallery.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/common/galleries.html.twig' %}
    
     <!-- footer -->                  
-    {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
                            
 {% endblock %}

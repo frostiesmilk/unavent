@@ -6,15 +6,19 @@
 
    var app = angular.module("app", []);
     app.controller("BillCtrl", function($scope){
-        $scope.myVar = false;  
+        $scope.myVar = true;  
 
         $scope.toggle = function (){
             $scope.myVar = !$scope.myVar;
-            google.maps.event.trigger(map,'resize');
-
         };
         
     });
+
+function reloadMap(){
+    setTimeout(function() {
+        google.maps.event.trigger(map, 'resize');
+    }, 300);  
+}
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
