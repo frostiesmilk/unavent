@@ -1,9 +1,37 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/group.css') }}"/>
+{% endblock %}
+
 {% block body %}
 
-    <!-- Main menu -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
-    {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
+    <!-- navbar top -->
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    <br><br><br>
+    Changer de mot de passe <br>
+    Ancien mot de passe : <input type="text" name="fname"><br>
+    Nouveau mot de passe : <input type="text" name="fname"><br>
+    Confirmer le nouveau mot de passe : <input type="text" name="fname"><br><br><br>
+    
+    Changer d'adresse <br>
+    Votre adresse principale : boiventmarie@gmail.com  <br>
+    Adresses secondaire : Boouuuuu@gmail.com <button type="button">Adresse principale</button> <button type="button">Supprimer</button> <br>
+    Ajouter une adresse : <input type="text" name="fname"><br><br><br>
+    
+    Envoie de mails <br>
+    Je souhaite recevoir un mail :<br>
+     <input type="checkbox" name="option1" value="Milk"> Lors d'un nouveau message dans un de mes groupes<br>
+     <input type="checkbox" name="option1" value="Milk"> Lors d'un nouveau message dans un de mes events<br>
+     <input type="checkbox" name="option1" value="Milk"> Lors d'un commentaire sur un poste que je suis<br>
+     <input type="checkbox" name="option1" value="Milk"> Avec les nouveautés Flowber<br><br><br>
+
+    <button type="button">Je souhaite me désinscrire de Flowber</button> <br><br>
+
+   
+    <!-- footer -->                  
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
 {% endblock %}

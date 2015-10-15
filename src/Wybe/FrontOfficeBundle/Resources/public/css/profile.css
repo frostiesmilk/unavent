@@ -314,6 +314,41 @@ and open the template in the editor.
 .user-profile-gallery .user-profile-gallery-container {
   padding: 27px 0px ;
 }
+.user-profile-friends .user-profile-friends-list {
+  list-style: none;
+  padding-left: initial;
+}
+.user-profile-friends .user-profile-friends-list .user-profile-friends-list-element {
+  display: inline-block;
+  border-radius: 3%;
+  border: 1px solid lightgrey;
+  padding: 10px;
+}
+.user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-avatar {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details {
+  display: inline-block;
+  vertical-align: middle;
+}
+.user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details .user-profile-friends-list-element-details-name {
+  font-size: 14px;
+}
+.user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details .user-profile-friends-list-element-details-events {
+  font-size: 12px;
+  color: grey;
+}
+.user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details .user-profile-friends-list-element-details-friends {
+  font-size: 12px;
+  color: grey;
+}
 .modal {
   overflow: auto;
   color: #333;
