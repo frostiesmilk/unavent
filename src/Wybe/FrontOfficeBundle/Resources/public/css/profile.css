@@ -75,12 +75,6 @@ and open the template in the editor.
 .btn-red:hover {
   background-color: #BF493D;
 }
-.main-container .col-bg-blue {
-  background-color: #E1EBF5;
-}
-.main-container .col-bg-white {
-  background-color: white;
-}
 .user-profile .user-profile-category-row {
   padding-top: 27px;
   padding-bottom: 20px;
@@ -90,34 +84,30 @@ and open the template in the editor.
   border-bottom: 1px solid;
   padding-bottom: 15px;
 }
-.user-profile .user-profile-half-col {
+.user-profile .user-profile-resume {
+  background: linear-gradient(to right, #E1EBF5 0%, #E1EBF5 50%, #fff 50%, #fff 100%);
+  padding-top: 50px;
+}
+.user-profile .user-profile-resume .user-profile-half-col {
   padding-bottom: 50px;
 }
-.user-profile .user-profile-introduction-text-block {
-  padding-top: 50px;
-  margin: 0 auto;
-  width: 50%;
+.user-profile .user-profile-resume .user-profile-introduction-text-block {
+  /*        
+            margin: 0 auto;
+            width: 50%;*/
   padding-bottom: 26px;
 }
-.user-profile .user-profile-introduction-text-block .name {
+.user-profile .user-profile-resume .user-profile-introduction-text-block .name {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.user-profile .user-profile-introduction-text-block .user-job {
+.user-profile .user-profile-resume .user-profile-introduction-text-block .user-job {
   font-size: 18px;
 }
-.user-profile .user-profile-introduction-text-block p {
+.user-profile .user-profile-resume .user-profile-introduction-text-block p {
   margin-bottom: 0px;
 }
-.user-profile .user-profile-description {
-  padding: 50px 50px 0px 115px;
-}
-@media (max-width: 768px) {
-  .user-profile .user-profile-description {
-    padding: 50px 20px 0px 20px;
-  }
-}
-.user-profile .user-profile-custom-icon {
+.user-profile .user-profile-resume .user-profile-custom-icon {
   margin-left: -90px;
   width: 150px;
   height: 150px;
@@ -132,16 +122,14 @@ and open the template in the editor.
   margin-bottom: -23px;
 }
 @media (max-width: 768px) {
-  .user-profile .user-profile-custom-icon {
+  .user-profile .user-profile-resume .user-profile-custom-icon {
     display: none;
   }
 }
-.user-profile .user-profile-interest-inline {
-  margin: 0px auto;
-  width: 70%;
+.user-profile .user-profile-resume .user-profile-interest-inline {
   padding-top: 20px;
 }
-.user-profile .user-profile-interest-inline .user-profile-interest-inline-category {
+.user-profile .user-profile-resume .user-profile-interest-inline .user-profile-interest-inline-category {
   padding: 30px;
   display: inline-flex;
   color: white;
@@ -150,7 +138,7 @@ and open the template in the editor.
   box-shadow: 0.2em 0.2em 0.2em black;
   width: 25%;
 }
-.user-profile .user-profile-interest-inline .user-profile-interest-inline-content {
+.user-profile .user-profile-resume .user-profile-interest-inline .user-profile-interest-inline-content {
   padding: 30px;
   display: inline-flex;
   border-radius: 10px;
@@ -159,17 +147,17 @@ and open the template in the editor.
   margin-left: 10px;
   width: 60%;
 }
-.user-profile .user-profile-interest {
-  width: 50%;
+.user-profile .user-profile-resume .user-profile-interest {
+  width: 100%;
   border-collapse: initial;
   border-spacing: 10px;
 }
 @media (max-width: 768px) {
-  .user-profile .user-profile-interest {
+  .user-profile .user-profile-resume .user-profile-interest {
     width: 100%;
   }
 }
-.user-profile .user-profile-interest .user-profile-interest-subject {
+.user-profile .user-profile-resume .user-profile-interest .user-profile-interest-subject {
   color: white;
   font-weight: bold;
   background-color: #293540;
@@ -177,29 +165,35 @@ and open the template in the editor.
   padding: 15px;
   width: 25%;
 }
-.user-profile .user-profile-interest .user-profile-interest-subject span {
+.user-profile .user-profile-resume .user-profile-interest .user-profile-interest-subject span {
   padding-bottom: 5px;
 }
-.user-profile .user-profile-interest .user-profile-interest-subject .category-jauge {
+.user-profile .user-profile-resume .user-profile-interest .user-profile-interest-subject .category-jauge {
   margin-bottom: initial;
   margin-top: 10px;
 }
-.user-profile .user-profile-interest .user-profile-interest-content {
+.user-profile .user-profile-resume .user-profile-interest .user-profile-interest-content {
   padding: 15px;
   background-color: white;
   border-radius: 10px;
   width: 75%;
 }
-.user-profile .user-profile-interest .user-profile-interest-content ul {
+.user-profile .user-profile-resume .user-profile-interest .user-profile-interest-content ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-.user-profile .user-profile-interest .user-profile-interest-content ul li + li:before {
+.user-profile .user-profile-resume .user-profile-interest .user-profile-interest-content ul li + li:before {
   content: ", ";
 }
-.user-profile .user-profile-interest .user-profile-interest-content ul li {
+.user-profile .user-profile-resume .user-profile-interest .user-profile-interest-content ul li {
   display: inline;
+}
+.user-profile .user-profile-description {
+  /*        padding: 50px 50px 0px 115px;
+        @media(max-width: 768px){ // tablet portrait
+            padding: 50px 20px 0px 20px;
+        }*/
 }
 .user-profile-groups .user-profile-groups-container {
   padding-bottom: 27px;

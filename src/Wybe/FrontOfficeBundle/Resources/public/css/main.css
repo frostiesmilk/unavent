@@ -81,6 +81,17 @@ and open the template in the editor.
   border-radius: initial;
   background-color: #293540;
 }
+@media (max-width: 768px) {
+  .navbar-main .navbar-header .navbar-brand {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-main .navbar-header .navbar-brand .site-name {
+    display: none;
+  }
+}
 .navbar-main .navbar-header .navbar-brand span {
   float: left;
   font-family: erasMediumItc;
@@ -146,6 +157,11 @@ and open the template in the editor.
 .navbar-main .container .navbar-collapse .navbar-nav .menu-search .form-group .form-control {
   height: 22px;
   padding: 0px 12px;
+}
+@media (max-width: 768px) {
+  .navbar-main .container .navbar-collapse .navbar-nav .menu-search .form-group .menu-search-input {
+    width: 125px;
+  }
 }
 .navbar-main .container .navbar-collapse .navbar-nav .menu-link-icon {
   width: 25px;
@@ -225,11 +241,17 @@ and open the template in the editor.
 .generic-cover .generic-cover-profile-picture {
   display: inline-block;
   vertical-align: middle;
-  height: 200px;
-  width: 200px;
   box-shadow: 0 0 10px grey;
   background-position: center;
   background-size: cover;
+  height: 200px;
+  width: 200px;
+}
+@media (max-width: 768px) {
+  .generic-cover .generic-cover-profile-picture {
+    height: 180px;
+    width: 180px;
+  }
 }
 .generic-cover .generic-cover-title {
   color: white;
@@ -239,6 +261,11 @@ and open the template in the editor.
 }
 .generic-cover .generic-cover-title .generic-cover-title-name {
   text-shadow: 0.2em 0.2em 0.2em black;
+}
+@media (max-width: 768px) {
+  .generic-cover .generic-cover-title .generic-cover-title-name {
+    font-size: 41px;
+  }
 }
 .generic-cover .generic-cover-title .generic-cover-title-description {
   text-shadow: 0.2em 0.2em 0.2em black;

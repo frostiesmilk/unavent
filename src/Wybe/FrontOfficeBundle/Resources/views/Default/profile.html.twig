@@ -19,59 +19,59 @@
 
 
     <!-- Fiche -->
-    <div id="fiche" class="container-fluid main-container user-profile">
-        <div class="row">
-            <div class="col-md-6 col-sm-8 col-bg-blue user-profile-half-col">
-                <div class="user-profile-introduction-text-block">
-                    <h2 class="name">Marie Boivent</h2>
-                    <p class="user-job">Gardienne de prairies</p>
-                    <p>18 Mai 1992 (23 ans)<br/>
-                    Saint-Maur-des-Fossés (94210)<br/>
-                    </p>
-                </div>
-                
-                
-           
-                <table class="user-profile-interest">
-                    <tr>
-                        <td class="user-profile-interest-subject text-center">
-                            <span>Musique</span><br/>
-                            <div class="progress category-jauge">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                  <span class="sr-only">45</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td class="user-profile-interest-content">
-                            <ul>
-                                <li>Céline Dion</li><li>Taylor Swift</li>
-                            </ul>                        
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="user-profile-interest-subject text-center">
-                            <span>Musique</span><br/>
-                            <div class="progress category-jauge">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                  <span class="sr-only">45</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td class="user-profile-interest-content">
-                            <ul>
-                                <li>Céline Dion</li><li>Taylor Swift</li>
-                            </ul>                        
-                        </td>
-                    </tr>
-                </table>                
-         
-            </div>
-            
-            <div class="col-md-6 col-sm-4 col-bg-white user-profile-half-col">
-                <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
-                </div>
-                <div class="user-profile-description">
-                    <p>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis. quo conperto Montius tunc quaestor acer quidem sed ad lenitatem propensior, consulens in commune advocato</p>
+    <div id="fiche" class="user-profile">
+        <div class="container-fluid  user-profile-resume">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 user-profile-half-col">
+                        <div class="user-profile-introduction-text-block">
+                            <h2 class="name">Marie Boivent</h2>
+                            <p class="user-job">Gardienne de prairies</p>
+                            <p>18 Mai 1992 (23 ans)<br/>
+                            Saint-Maur-des-Fossés (94210)<br/>
+                            </p>
+                        </div>
+
+                        <table class="user-profile-interest">
+                            <tr>
+                                <td class="user-profile-interest-subject text-center">
+                                    <span>Musique</span><br/>
+                                    <div class="progress category-jauge">
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                          <span class="sr-only">45</span>
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="user-profile-interest-content">
+                                    <ul>
+                                        <li>Céline Dion</li><li>Taylor Swift</li>
+                                    </ul>                        
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="user-profile-interest-subject text-center">
+                                    <span>Musique</span><br/>
+                                    <div class="progress category-jauge">
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                          <span class="sr-only">45</span>
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="user-profile-interest-content">
+                                    <ul>
+                                        <li>Céline Dion</li><li>Taylor Swift</li>
+                                    </ul>                        
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-bg-white user-profile-half-col">
+                        <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
+                        </div>
+                        <div class="user-profile-description">
+                            <p>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis. quo conperto Montius tunc quaestor acer quidem sed ad lenitatem propensior, consulens in commune advocato</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 
     <!-- My groups -->
     <div id="groups" class="user-profile-groups background-dark-blue">
-        <div class="container-fluid main-container user-profile">
+        <div class="container-fluid  user-profile">
             <div class="row user-profile-category-row  text-center">
                 <span class="user-profile-category-title font-white">Mes groupes</span>
             </div>
@@ -213,7 +213,7 @@
                                 
     <!-- My events-->                            
     <div id="events" class="user-profile-events">
-        <div class="container-fluid main-container user-profile">
+        <div class="container-fluid  user-profile">
             <div class="row user-profile-category-row text-center">
                 <span class="user-profile-category-title">Mes évènements</span>
             </div>
@@ -341,7 +341,7 @@
                                 
     <!-- My gallery -->
     <div id="photos" class="user-profile-gallery background-dark-blue">
-        <div class="container-fluid main-container user-profile">
+        <div class="container-fluid  user-profile">
             <div class="row user-profile-category-row  text-center">
                 <span class="user-profile-category-title font-white">Mes galeries</span>
             </div>
@@ -390,7 +390,7 @@
     
  <!-- My friends-->                            
     <div id="friends" class="user-profile-friends">
-        <div class="container-fluid main-container user-profile">
+        <div class="container-fluid  user-profile">
             <div class="row user-profile-category-row text-center">
                 <span class="user-profile-category-title">Mes amis</span>
             </div>
