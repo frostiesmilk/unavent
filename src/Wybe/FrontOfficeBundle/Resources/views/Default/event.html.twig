@@ -1,22 +1,27 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/event.css') }}"/>
+{% endblock %}
+
 {% block body %}
 
     <!-- navbar top -->
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/connected-main-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- User Banner -->  
-    {% include 'WybeFrontOfficeBundle::partials/frontoffice/head.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
 
     <!-- Second navbar -->
-     {% include 'WybeFrontOfficeBundle::partials/navbar/navbar-event.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/event/event-navbar.html.twig' %}
    
     <!-- page -->
-     {% include 'WybeFrontOfficeBundle::partials/pages/event.html.twig' %}
+     {% include 'WybeFrontOfficeBundle::partials/event/event-content.html.twig' %}
    
     <!-- footer -->                  
-    {% include 'WybeFrontOfficeBundle::Default/footer.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
 
     <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
     
