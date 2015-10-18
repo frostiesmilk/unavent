@@ -3,34 +3,133 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/group.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/settings.css') }}"/>
 {% endblock %}
 
 {% block body %}
 
-    <!-- navbar top -->
+    <!-- Navbar top -->
     {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
-    <br><br><br>
-    Changer de mot de passe <br>
-    Ancien mot de passe : <input type="text" name="fname"><br>
-    Nouveau mot de passe : <input type="text" name="fname"><br>
-    Confirmer le nouveau mot de passe : <input type="text" name="fname"><br><br><br>
-    
-    Changer d'adresse <br>
-    Votre adresse principale : boiventmarie@gmail.com  <br>
-    Adresses secondaire : Boouuuuu@gmail.com <button type="button">Adresse principale</button> <button type="button">Supprimer</button> <br>
-    Ajouter une adresse : <input type="text" name="fname"><br><br><br>
-    
-    Envoie de mails <br>
-    Je souhaite recevoir un mail :<br>
-     <input type="checkbox" name="option1" value="Milk"> Lors d'un nouveau message dans un de mes groupes<br>
-     <input type="checkbox" name="option1" value="Milk"> Lors d'un nouveau message dans un de mes events<br>
-     <input type="checkbox" name="option1" value="Milk"> Lors d'un commentaire sur un poste que je suis<br>
-     <input type="checkbox" name="option1" value="Milk"> Avec les nouveautés Flowber<br><br><br>
-
-    <button type="button">Je souhaite me désinscrire de Flowber</button> <br><br>
-
-   
+    <div class="container settings-container">
+        <div class="row">
+            <h1>Paramètres</h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="settings-password">
+                    <h2>Changer de mot de passe</h2>    
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="oldPassword" class="col-sm-4 control-label">Ancien mot de passe</label>
+                            <div class="col-sm-8">
+                              <input type="password" class="form-control " id="oldPassword" placeholder="Tapez votre ancien mot de passe"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword1" class="col-sm-4 control-label">Nouveau mot de passe</label>
+                            <div class="col-sm-8">
+                              <input type="password" class="form-control " id="newPassword1" placeholder="Tapez votre nouveau mot de passe"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword2" class="col-sm-4 control-label">Confirmer le mot de passe</label>
+                            <div class="col-sm-8">
+                              <input type="password" class="form-control " id="newPassword2" placeholder="Confirmez votre nouveau mot de passe"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button class="btn btn-default btn-primary" type="submit">Confirmer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="settings-mailaddress">
+                    <h2>Changer d'adresse e-mail</h2>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="mainAddress" class="col-sm-4 control-label">Adresse principale</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">jeanjacques.decompostel@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="secondaryAddress" class="col-sm-4 control-label">Adresse secondaire</label>
+                            <div class="col-sm-8">
+                                <span class="form-control-static">jeanjacques.decompostel2@gmail.com</span> <button class="btn btn-default">Définir en adresse principale</button> <button class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addAddress" class="col-sm-4 control-label">Ajouter une adresse</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="addAddress" placeholder="nom@exemple.fr">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="settings-mailing">
+                    <h2>Envois d'e-mails</h2>
+                    <h3>Je souhaite recevoir un e-mail :</h3>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name=""> Lors d'un nouveau message dans un de mes groupes
+                                    </label>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name=""> Lors d'un nouveau message dans un de mes évènements
+                                    </label>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name=""> Lors d'un commentaire sur un poste que je suis
+                                    </label>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name=""> Avec les nouveautés Flowber
+                                    </label>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <button type="submit" class="btn btn-default">Je souhaite me désinscrire de Flowber</button>
+        </div>
+    </div>
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
     
