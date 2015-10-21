@@ -90,5 +90,11 @@ class DefaultController extends Controller
     {
         return $this->render('WybeFrontOfficeBundle:Default:notif.html.twig', array('name' => $notifNameSlug));
     }   
+    
+    
+    public function getMessagesAction(Request $oRequest)
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:messages.html.twig');
+    }   
 }
 

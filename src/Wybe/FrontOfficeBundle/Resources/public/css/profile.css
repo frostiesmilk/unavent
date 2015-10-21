@@ -118,7 +118,6 @@ and open the template in the editor.
   background-size: cover;
   background-color: white;
   float: left;
-  margin-top: 26px;
   margin-bottom: -23px;
 }
 @media (max-width: 768px) {
@@ -151,11 +150,7 @@ and open the template in the editor.
   width: 100%;
   border-collapse: initial;
   border-spacing: 10px;
-}
-@media (max-width: 768px) {
-  .user-profile .user-profile-resume .user-profile-interest {
-    width: 100%;
-  }
+  margin-left: -10px;
 }
 .user-profile .user-profile-resume .user-profile-interest .user-profile-interest-subject {
   color: white;
@@ -352,7 +347,7 @@ and open the template in the editor.
   color: grey;
 }
 .user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details .user-profile-friends-list-element-details-sendpm {
-  padding: 4px 12px;
+  padding: 2px 3px;
 }
 .modal {
   overflow: auto;

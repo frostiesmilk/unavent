@@ -1,0 +1,52 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/messages.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+    <!-- navbar top -->
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <div class="messages-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 messages-menu">
+                    <ul class="well well-sm messages-menu-list">
+                        <li><a href="">Tous les messages</a></li>
+                        <li><a href="">Messages par contact</a></li>
+                        <li><a href="">Corbeille</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-9 messages-content">
+                    <table class="table table-hover messages-stream">
+                        <tr class="messages-stream-element">
+                            <td><input type="checkbox" class="checkbox messages-stream-element-selector"/></td>
+                            <td><span class="messages-stream-element-author">Jean-Pierre de Sitges</span></td>
+                            <td><span class="messages-stream-element-subject">Manger</span> <span class="messages-stream-element-preview">Yo! Tu viens manger demain midi?</span></td>
+                            <td><span class="messages-stream-element-date">10:07</span></td>
+                        </tr>
+                        <tr class="messages-stream-element">
+                            <td><input type="checkbox" class="checkbox messages-stream-element-selector"/></td>
+                            <td><span class="messages-stream-element-author">Jean-Pierre de Sitges</span></td>
+                            <td><span class="messages-stream-element-subject">Manger</span> <span class="messages-stream-element-preview">Yo! Tu viens manger demain midi?</span></td>
+                            <td><span class="messages-stream-element-date">10:07</span></td>
+                        </tr>
+                        <tr class="messages-stream-element">
+                            <td><input type="checkbox" class="checkbox messages-stream-element-selector"/></td>
+                            <td><span class="messages-stream-element-author">Jean-Pierre de Sitges</span></td>
+                            <td><span class="messages-stream-element-subject">Manger</span> <span class="messages-stream-element-preview">Yo! Tu viens manger demain midi?</span></td>
+                            <td><span class="messages-stream-element-date">10:07</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>        
+        </div>
+    </div>
+   
+    <!-- footer -->                  
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}    
+{% endblock %}
