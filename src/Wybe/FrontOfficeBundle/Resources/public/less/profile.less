@@ -10,17 +10,6 @@ and open the template in the editor.
 
 @import "frontoffice-common";
 
-.main-container{
-
-    .col-bg-blue{
-        background-color: @light-blue;
-    }
-    .col-bg-white{
-        background-color: white;
-    }
-    
-}
-
 .user-profile{
     
     .user-profile-category-row{
@@ -33,27 +22,127 @@ and open the template in the editor.
         }
     }
     
-    .user-profile-half-col{
-        padding-bottom: 50px;
+    .user-profile-resume{
+        background: linear-gradient(to right, @light-blue 0%, @light-blue 50%, #fff 50%, #fff 100%);
+        @media(max-width: 768px){
+            background: linear-gradient(to right, @light-blue 0%, @light-blue 100%);
+        }
+        
+        .user-profile-element{
+            padding-top: 50px;
+            padding-bottom: 50px;
+
+        }
+    
+        .user-profile-introduction-text-block{
+    /*        
+            margin: 0 auto;
+            width: 50%;*/
+            padding-bottom: 26px;
+            .name{
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+            .user-job{
+                font-size: 18px;
+            }
+            p{
+                margin-bottom: 0px;
+            }
+        }
+        
+        .user-profile-custom-icon{
+            @media(max-width: 768px){
+                display:none;
+            }
+
+            margin-left: -90px;
+            width: 150px;
+            height: 150px;
+            border-radius: 75px;
+            border: 2px solid @light-blue;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: white;
+            float: left;
+            margin-bottom: -23px;
+        }
+
+        .user-profile-interest-inline{
+            //margin: 0px auto;
+            //width: 70%;
+            padding-top: 20px;
+            .user-profile-interest-inline-category{
+                padding: 30px;
+                display: inline-flex;
+                color: white;
+                background-color: @dark-blue;
+                border-radius: 10px;
+                box-shadow: 0.2em 0.2em 0.2em black;
+                width: 25%;
+            }
+
+            .user-profile-interest-inline-content{
+                padding: 30px;
+                display: inline-flex;
+                border-radius: 10px;
+                background-color: white;
+                box-shadow: 0.2em 0.2em 0.2em black;
+                margin-left: 10px;
+                width: 60%;
+            }
+
+
+        }
+
+        .user-profile-interest{
+                width: 100%;
+                border-collapse: initial;
+                border-spacing: 10px;
+                margin-left: -10px;
+
+            .user-profile-interest-subject{
+                color: white;
+                font-weight: bold;
+                background-color: @dark-blue;
+                border-radius: 10px;
+                padding: 15px;
+                width: 25%;
+                span{
+                    padding-bottom: 5px;
+                }
+                .category-jauge{
+                    margin-bottom: initial;
+                    margin-top: 10px;
+                }
+            }
+            .user-profile-interest-content{
+                padding: 15px;
+                background-color: white;
+                border-radius: 10px;
+                width: 75%;
+                ul{
+                    list-style-type: none;
+                    padding:0;
+                    margin:0;
+                    li + li:before {
+
+                        content: ", ";
+                    }
+                    li{
+                        display: inline;
+                    }
+                }
+
+            }
+
+        }
         
     }
     
-    .user-profile-introduction-text-block{
-        padding-top: 50px;
-        margin: 0 auto;
-        width: 50%;
-        padding-bottom: 26px;
-        .name{
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-        .user-job{
-            font-size: 18px;
-        }
-        p{
-            margin-bottom: 0px;
-        }
-    }
+
+    
     
     .user-profile-category-row{
         
@@ -64,105 +153,13 @@ and open the template in the editor.
     
     
     .user-profile-description{
-        padding: 50px 50px 0px 115px;
+/*        padding: 50px 50px 0px 115px;
         @media(max-width: 768px){ // tablet portrait
             padding: 50px 20px 0px 20px;
-        }
+        }*/
     }
     
-    .user-profile-custom-icon{
-        @media(max-width: 768px){
-            display:none;
-        }
-        
-        margin-left: -90px;
-        width: 150px;
-        height: 150px;
-        border-radius: 75px;
-        border: 2px solid @light-blue;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-color: white;
-        float: left;
-        margin-top: 26px;
-        margin-bottom: -23px;
-    }
     
-    .user-profile-interest-inline{
-        margin: 0px auto;
-        width: 70%;
-        padding-top: 20px;
-        .user-profile-interest-inline-category{
-            padding: 30px;
-            display: inline-flex;
-            color: white;
-            background-color: @dark-blue;
-            border-radius: 10px;
-            box-shadow: 0.2em 0.2em 0.2em black;
-            width: 25%;
-        }
-        
-        .user-profile-interest-inline-content{
-            padding: 30px;
-            display: inline-flex;
-            border-radius: 10px;
-            background-color: white;
-            box-shadow: 0.2em 0.2em 0.2em black;
-            margin-left: 10px;
-            width: 60%;
-        }
-        
-        
-    }
-    
-    .user-profile-interest{
-        
-
-            @media(max-width: 768px){
-                width:100%;
-            }
-            width: 50%;
-            
-            border-collapse: initial;
-            border-spacing: 10px;
-            
-        .user-profile-interest-subject{
-            color: white;
-            font-weight: bold;
-            background-color: @dark-blue;
-            border-radius: 10px;
-            padding: 15px;
-            width: 25%;
-            span{
-                padding-bottom: 5px;
-            }
-            .category-jauge{
-                margin-bottom: initial;
-                margin-top: 10px;
-            }
-        }
-        .user-profile-interest-content{
-            padding: 15px;
-            background-color: white;
-            border-radius: 10px;
-            width: 75%;
-            ul{
-                list-style-type: none;
-                padding:0;
-                margin:0;
-                li + li:before {
-                    
-                    content: ", ";
-                }
-                li{
-                    display: inline;
-                }
-            }
-            
-        }
-        
-    }
     
     
     
@@ -309,7 +306,8 @@ and open the template in the editor.
 
 .user-profile-gallery{
     .user-profile-gallery-container{
-        padding: 27px 0px ;
+        padding-top: 27px;
+        padding-bottom: 27px;
     }
 }
 
@@ -337,7 +335,7 @@ and open the template in the editor.
             .user-profile-friends-list-element-details{
                 display: inline-block;
                 vertical-align: middle;
-                padding-left: 20px;
+                padding-left: 10px;
                 .user-profile-friends-list-element-details-name{
                     font-size: 14px;
                 }
@@ -350,7 +348,7 @@ and open the template in the editor.
                     color: grey;
                 }
                 .user-profile-friends-list-element-details-sendpm{
-                    padding: 4px 12px;
+                    padding: 2px 3px;
                 }
             }
         }
@@ -358,6 +356,6 @@ and open the template in the editor.
 }
 
 .modal {
-	overflow: auto;
-	color: #333;
+    overflow: auto;
+    color: #333;
 }

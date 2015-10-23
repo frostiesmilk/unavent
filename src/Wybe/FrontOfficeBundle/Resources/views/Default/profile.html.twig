@@ -19,68 +19,68 @@
 
 
     <!-- Fiche -->
-    <div id="fiche" class="container-fluid main-container user-profile">
-        <div class="row">
-            <div class="col-md-6 col-sm-8 col-bg-blue user-profile-half-col">
-                <div class="user-profile-introduction-text-block">
-                    <h2 class="name">Marie Boivent</h2>
-                    <p class="user-job">Gardienne de prairies</p>
-                    <p>18 Mai 1992 (23 ans)<br/>
-                    Saint-Maur-des-Fossés (94210)<br/>
-                    </p>
-                </div>
-                
-                
-           
-                <table class="user-profile-interest">
-                    <tr>
-                        <td class="user-profile-interest-subject text-center">
-                            <span>Musique</span><br/>
-                            <div class="progress category-jauge">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                  <span class="sr-only">45</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td class="user-profile-interest-content">
-                            <ul>
-                                <li>Céline Dion</li><li>Taylor Swift</li>
-                            </ul>                        
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="user-profile-interest-subject text-center">
-                            <span>Musique</span><br/>
-                            <div class="progress category-jauge">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                  <span class="sr-only">45</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td class="user-profile-interest-content">
-                            <ul>
-                                <li>Céline Dion</li><li>Taylor Swift</li>
-                            </ul>                        
-                        </td>
-                    </tr>
-                </table>                
-         
-            </div>
-            
-            <div class="col-md-6 col-sm-4 col-bg-white user-profile-half-col">
-                <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
-                </div>
-                <div class="user-profile-description">
-                    <p>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis. quo conperto Montius tunc quaestor acer quidem sed ad lenitatem propensior, consulens in commune advocato</p>
+    <div id="fiche" class="user-profile">
+        <div class="user-profile-resume">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12 user-profile-element">
+                        <div class="user-profile-introduction-text-block">
+                            <h2 class="name">Marie Boivent</h2>
+                            <p class="user-job">Gardienne de prairies</p>
+                            <p>18 Mai 1992 (23 ans)<br/>
+                            Saint-Maur-des-Fossés (94210)<br/>
+                            </p>
+                        </div>
+
+                        <table class="user-profile-interest">
+                            <tr>
+                                <td class="user-profile-interest-subject text-center">
+                                    <span>Musique</span><br/>
+                                    <div class="progress category-jauge">
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                          <span class="sr-only">45</span>
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="user-profile-interest-content">
+                                    <ul>
+                                        <li>Céline Dion</li><li>Taylor Swift</li>
+                                    </ul>                        
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="user-profile-interest-subject text-center">
+                                    <span>Musique</span><br/>
+                                    <div class="progress category-jauge">
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                          <span class="sr-only">45</span>
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="user-profile-interest-content">
+                                    <ul>
+                                        <li>Céline Dion</li><li>Taylor Swift</li>
+                                    </ul>                        
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-bg-white user-profile-element bg-white">
+                        <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
+                        </div>
+                        <div class="user-profile-description">
+                            <p>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis. quo conperto Montius tunc quaestor acer quidem sed ad lenitatem propensior, consulens in commune advocato</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
                 
     <!-- My groups -->
-    <div id="groups" class="user-profile-groups background-dark-blue">
-        <div class="container-fluid main-container user-profile">
-            <div class="row user-profile-category-row  text-center">
+    <div id="groups" class="user-profile-groups user-profile background-dark-blue">
+ 
+            <div class="user-profile-category-row  text-center">
                 <span class="user-profile-category-title font-white">Mes groupes</span>
             </div>
 
@@ -205,16 +205,15 @@
                                 <button class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</button>
                             </div>
                         </div>
-                    </div>                    
-                </div>
+                    </div>  
+                </div>  
             </div>
-        </div>
     </div>
                                 
     <!-- My events-->                            
-    <div id="events" class="user-profile-events">
-        <div class="container-fluid main-container user-profile">
-            <div class="row user-profile-category-row text-center">
+    <div id="events" class="user-profile-events user-profile">
+        
+            <div class="user-profile-category-row text-center">
                 <span class="user-profile-category-title">Mes évènements</span>
             </div>
 
@@ -336,20 +335,18 @@
                     </div>                   
                 </div>
             </div>
-        </div>
+        
     </div>
                                 
-    <!-- My gallery -->
-    <div id="photos" class="user-profile-gallery background-dark-blue">
-        <div class="container-fluid main-container user-profile">
-            <div class="row user-profile-category-row  text-center">
-                <span class="user-profile-category-title font-white">Mes galeries</span>
-            </div>
-            
-            <div class="container user-profile-gallery-container">
-                <span class="font-white"> Gallerie une</span>
-                <div id="links"></div>
-            </div>            
+    <!-- My gallery -->   
+    <div id="photos" class="user-profile-gallery background-dark-blue user-profile">
+        <div class="user-profile-category-row  text-center">
+            <span class="user-profile-category-title font-white">Mes galeries</span>
+        </div>
+
+        <div class="container user-profile-gallery-container">
+            <span class="font-white"> Gallerie une</span>
+            <div id="links"></div>
         </div>
     </div>
     
@@ -388,18 +385,20 @@
         </div>
     </div>
     
- <!-- My friends-->                            
-    <div id="friends" class="user-profile-friends">
-        <div class="container-fluid main-container user-profile">
-            <div class="row user-profile-category-row text-center">
-                <span class="user-profile-category-title">Mes amis</span>
-            </div>
+    <!-- My friends-->                            
+    <div id="friends" class="user-profile-friends user-profile">
+        <div class="user-profile-category-row text-center">
+            <span class="user-profile-category-title">Mes amis</span>
+        </div>
 
-            <div class="container">
-                <div class="row user-profile-friends-list">
-                    <div class="col-md-4">
-                        <div class="user-profile-friends-list-element">
+        <div class="container">
+            <div class="row user-profile-friends-list">                
+                <div class=" col-md-4 col-sm-6 col-xs-12">
+                    <div class="media user-profile-friends-list-element">
+                        <div class="media-left">
                             <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset('images/frontoffice/group/canoe-club.jpg')}}')"></div>
+                        </div>
+                        <div class="media-body">
                             <div class="user-profile-friends-list-element-details">
                                 <a class="user-profile-friends-list-element-details-name" href="#">Jean-Jacques de Compostel</a>
                                 <br/><span class="user-profile-friends-list-element-details-friends">23 amis</span> &middot; <span class="user-profile-friends-list-element-details-events">12 évènements</span>
@@ -407,9 +406,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="user-profile-friends-list-element">
+                </div>
+                <div class=" col-md-4 col-sm-6 col-xs-12">
+                    <div class="media user-profile-friends-list-element">
+                        <div class="media-left">
                             <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset('images/frontoffice/group/canoe-club.jpg')}}')"></div>
+                        </div>
+                        <div class="media-body">
                             <div class="user-profile-friends-list-element-details">
                                 <a class="user-profile-friends-list-element-details-name" href="#">Jean-Jacques de Compostel</a>
                                 <br/><span class="user-profile-friends-list-element-details-friends">23 amis</span> &middot; <span class="user-profile-friends-list-element-details-events">12 évènements</span>
@@ -417,9 +420,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="user-profile-friends-list-element">
+                </div>
+                <div class=" col-md-4 col-sm-6 col-xs-12">
+                    <div class="media user-profile-friends-list-element">
+                        <div class="media-left">
                             <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset('images/frontoffice/group/canoe-club.jpg')}}')"></div>
+                        </div>
+                        <div class="media-body">
                             <div class="user-profile-friends-list-element-details">
                                 <a class="user-profile-friends-list-element-details-name" href="#">Jean-Jacques de Compostel</a>
                                 <br/><span class="user-profile-friends-list-element-details-friends">23 amis</span> &middot; <span class="user-profile-friends-list-element-details-events">12 évènements</span>
@@ -427,9 +434,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="user-profile-friends-list-element">
+                </div>
+                <div class=" col-md-4 col-sm-6 col-xs-12">
+                    <div class="media user-profile-friends-list-element">
+                        <div class="media-left">
                             <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset('images/frontoffice/group/canoe-club.jpg')}}')"></div>
+                        </div>
+                        <div class="media-body">
                             <div class="user-profile-friends-list-element-details">
                                 <a class="user-profile-friends-list-element-details-name" href="#">Jean-Jacques de Compostel</a>
                                 <br/><span class="user-profile-friends-list-element-details-friends">23 amis</span> &middot; <span class="user-profile-friends-list-element-details-events">12 évènements</span>
@@ -437,9 +448,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="user-profile-friends-list-element">
+                </div>
+                <div class=" col-md-4 col-sm-6 col-xs-12">
+                    <div class="media user-profile-friends-list-element">
+                        <div class="media-left">
                             <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset('images/frontoffice/group/canoe-club.jpg')}}')"></div>
+                        </div>
+                        <div class="media-body">
+                            <div class="user-profile-friends-list-element-details">
+                                <a class="user-profile-friends-list-element-details-name" href="#">Jean-Jacques de Compostel</a>
+                                <br/><span class="user-profile-friends-list-element-details-friends">23 amis</span> &middot; <span class="user-profile-friends-list-element-details-events">12 évènements</span>
+                                <br/><button class="btn btn-default user-profile-friends-list-element-details-sendpm">Envoyer un message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-sm-6 col-xs-12">
+                    <div class="media user-profile-friends-list-element">
+                        <div class="media-left">
+                            <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset('images/frontoffice/group/canoe-club.jpg')}}')"></div>
+                        </div>
+                        <div class="media-body">
                             <div class="user-profile-friends-list-element-details">
                                 <a class="user-profile-friends-list-element-details-name" href="#">Jean-Jacques de Compostel</a>
                                 <br/><span class="user-profile-friends-list-element-details-friends">23 amis</span> &middot; <span class="user-profile-friends-list-element-details-events">12 évènements</span>

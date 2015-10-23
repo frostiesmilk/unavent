@@ -153,3 +153,10 @@ $(document).ready(function(){
         });
     });
 });
+
+/**
+ * Enable generic Bootstrap tooltips
+ */
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

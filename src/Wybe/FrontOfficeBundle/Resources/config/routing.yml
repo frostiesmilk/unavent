@@ -64,4 +64,12 @@ wybe_front_office_look_for_group:
 
 wybe_front_office_notif:
     path: /notification/{notifNameSlug}
-    defaults: { _controller: WybeFrontOfficeBundle:Default:getNotif }    
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getNotif }
+    
+wybe_front_office_messages:
+    path: /messages/
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getAllMessages }    
+    
+wybe_front_office_get_message:
+    path: /message/{messageId}
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getMessage }    

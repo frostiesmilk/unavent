@@ -16,6 +16,15 @@ and open the template in the editor.
     border-radius: initial;
     .navbar-header{
         .navbar-brand{
+            @media(max-width: 768px){
+                padding-left:0px;
+                padding-right:0px;
+            }
+            .site-name{
+                @media(max-width: 768px){
+                    display: none;
+                }
+            }
             span{
                 float: left;
                 font-family: erasMediumItc;
@@ -102,6 +111,11 @@ and open the template in the editor.
                         .form-control{
                             height: 22px;
                             padding: 0px 12px;
+                        }
+                        .menu-search-input{
+                            @media(max-width: 768px){
+                                width: 125px;
+                            }
                         }
                     }
                 }
@@ -209,12 +223,19 @@ and open the template in the editor.
     margin-bottom: initial;
     .generic-cover-profile-picture{
         display: inline-block;
-        vertical-align: middle;
-        height: 200px;
-        width: 200px;
+        vertical-align: middle;        
         box-shadow: 0 0 10px grey;
         background-position: center;
         background-size: cover;
+        height: 200px;
+        width: 200px;
+        @media(max-width: 768px){
+            height: 180px;
+            width: 180px;
+        }
+        @media(max-width: 640px){
+            display: none;
+        }
     }
     .generic-cover-title{
         color: white;
@@ -223,6 +244,10 @@ and open the template in the editor.
         vertical-align: middle;
         .generic-cover-title-name{
             text-shadow: 0.2em 0.2em 0.2em black;
+            font-size: 41px;
+            @media(max-width: 768px){
+                margin-top: 0px;
+            }
         }
         .generic-cover-title-description{
             text-shadow: 0.2em 0.2em 0.2em black;

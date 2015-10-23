@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20 oct. 2015, 16:44:48
+    Author     : Equina
+*/
+
+@import "frontoffice-common";
+
+.messages-container{
+    padding-top: 80px;
+    
+    .messages-menu{
+        .messages-menu-list{
+            
+        }
+    }
+    
+    .messages-content{
+        .messages-stream{
+            list-style: none;
+            .messages-stream-element{
+                border-bottom: 1px solid lightgrey;
+                padding: 10px;
+                .messages-stream-element-clickable{                    
+                    cursor: pointer;
+                }
+                .messages-stream-element-content-preview{
+                    color: grey;
+                }
+            }
+        }
+    }   
+}
+
+.message-show{
+    .message-options-bar{
+        margin-bottom: initial;
+    }
+    
+    .message-show-subject{
+        border-bottom: 1px solid lightgrey;
+    }
+    
+    .message-show-details{
+        padding: 10px;
+        border-bottom: 1px solid lightgrey;
+        .message-show-details-correspondents{
+            .message-show-details-correspondents-label{
+                padding-right: 5px;
+            }
+        }
+    }
+    
+    .message-show-content{
+        padding: 10px;
+        border-bottom: 1px solid lightgrey;
+    }
+    
+    .message-show-reply{
+        padding: 10px 10px 20px 10px;
+        .message-show-reply-thumbnail{
+            @media (max-width: 768px) { 
+                display: none;
+            }             
+            background-repeat: no repeat;
+            background-position: center center;
+            background-size: cover;
+            height: 50px;
+            width: 50px;
+        }
+        .message-show-reply-textarea{
+            width: 100%;
+            resize: none;
+            padding: 10px;
+            color: grey;
+        }
+    }
+}
