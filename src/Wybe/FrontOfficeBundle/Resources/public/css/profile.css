@@ -28,6 +28,10 @@ and open the template in the editor.
 .font-white {
   color: white;
 }
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
 /* Create a medium height at 40px */
 .navbar-md {
   min-height: 40px;
@@ -86,9 +90,14 @@ and open the template in the editor.
 }
 .user-profile .user-profile-resume {
   background: linear-gradient(to right, #E1EBF5 0%, #E1EBF5 50%, #fff 50%, #fff 100%);
-  padding-top: 50px;
 }
-.user-profile .user-profile-resume .user-profile-half-col {
+@media (max-width: 768px) {
+  .user-profile .user-profile-resume {
+    background: linear-gradient(to right, #E1EBF5 0%, #E1EBF5 100%);
+  }
+}
+.user-profile .user-profile-resume .user-profile-element {
+  padding-top: 50px;
   padding-bottom: 50px;
 }
 .user-profile .user-profile-resume .user-profile-introduction-text-block {
@@ -306,7 +315,8 @@ and open the template in the editor.
   color: white;
 }
 .user-profile-gallery .user-profile-gallery-container {
-  padding: 27px 0px ;
+  padding-top: 27px;
+  padding-bottom: 27px;
 }
 .user-profile-friends .user-profile-friends-list {
   list-style: none;
@@ -333,7 +343,7 @@ and open the template in the editor.
 .user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details {
   display: inline-block;
   vertical-align: middle;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 .user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details .user-profile-friends-list-element-details-name {
   font-size: 14px;

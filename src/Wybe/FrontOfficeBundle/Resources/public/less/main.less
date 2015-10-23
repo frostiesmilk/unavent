@@ -233,6 +233,9 @@ and open the template in the editor.
             height: 180px;
             width: 180px;
         }
+        @media(max-width: 640px){
+            display: none;
+        }
     }
     .generic-cover-title{
         color: white;
@@ -241,8 +244,9 @@ and open the template in the editor.
         vertical-align: middle;
         .generic-cover-title-name{
             text-shadow: 0.2em 0.2em 0.2em black;
+            font-size: 41px;
             @media(max-width: 768px){
-                font-size: 41px;
+                margin-top: 0px;
             }
         }
         .generic-cover-title-description{

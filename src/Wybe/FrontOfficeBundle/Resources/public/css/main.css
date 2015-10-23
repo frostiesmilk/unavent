@@ -253,6 +253,11 @@ and open the template in the editor.
     width: 180px;
   }
 }
+@media (max-width: 640px) {
+  .generic-cover .generic-cover-profile-picture {
+    display: none;
+  }
+}
 .generic-cover .generic-cover-title {
   color: white;
   padding-left: 20px;
@@ -261,10 +266,11 @@ and open the template in the editor.
 }
 .generic-cover .generic-cover-title .generic-cover-title-name {
   text-shadow: 0.2em 0.2em 0.2em black;
+  font-size: 41px;
 }
 @media (max-width: 768px) {
   .generic-cover .generic-cover-title .generic-cover-title-name {
-    font-size: 41px;
+    margin-top: 0px;
   }
 }
 .generic-cover .generic-cover-title .generic-cover-title-description {

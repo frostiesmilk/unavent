@@ -68,4 +68,8 @@ wybe_front_office_notif:
     
 wybe_front_office_messages:
     path: /messages/
-    defaults: { _controller: WybeFrontOfficeBundle:Default:getMessages }    
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getAllMessages }    
+    
+wybe_front_office_get_message:
+    path: /message/{messageId}
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getMessage }    

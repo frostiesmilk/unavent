@@ -92,9 +92,14 @@ class DefaultController extends Controller
     }   
     
     
-    public function getMessagesAction(Request $oRequest)
+    public function getAllMessagesAction(Request $oRequest)
     {
-        return $this->render('WybeFrontOfficeBundle:Default:messages.html.twig');
+        return $this->render('WybeFrontOfficeBundle:Default:messages-all.html.twig');
+    }   
+    
+    public function getMessageAction(Request $oRequest, $messageId)
+    {
+        return $this->render('WybeFrontOfficeBundle:Default:messages-single.html.twig');
     }   
 }
 

@@ -78,9 +78,6 @@ and open the template in the editor.
 .messages-container {
   padding-top: 80px;
 }
-.messages-container .messages-menu .messages-menu-list {
-  list-style: none;
-}
 .messages-container .messages-content .messages-stream {
   list-style: none;
 }
@@ -88,7 +85,48 @@ and open the template in the editor.
   border-bottom: 1px solid lightgrey;
   padding: 10px;
 }
-.messages-container .messages-content .messages-stream .messages-stream-element .messages-stream-element-preview {
+.messages-container .messages-content .messages-stream .messages-stream-element .messages-stream-element-clickable {
+  cursor: pointer;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element .messages-stream-element-content-preview {
+  color: grey;
+}
+.message-show .message-options-bar {
+  margin-bottom: initial;
+}
+.message-show .message-show-subject {
+  border-bottom: 1px solid lightgrey;
+}
+.message-show .message-show-details {
+  padding: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+.message-show .message-show-details .message-show-details-correspondents .message-show-details-correspondents-label {
+  padding-right: 5px;
+}
+.message-show .message-show-content {
+  padding: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+.message-show .message-show-reply {
+  padding: 10px 10px 20px 10px;
+}
+.message-show .message-show-reply .message-show-reply-thumbnail {
+  background-repeat: no repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+@media (max-width: 768px) {
+  .message-show .message-show-reply .message-show-reply-thumbnail {
+    display: none;
+  }
+}
+.message-show .message-show-reply .message-show-reply-textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
   color: grey;
 }
 /*# sourceMappingURL=messages.css.map */
