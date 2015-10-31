@@ -1,48 +1,41 @@
 {# empty Twig template #}
 <div class="container group-container">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="group-details">
-                <h2>L'équipe de Football des Pruniers</h2>
-                <table>
-                    <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
-                        <td>créé par <span class="group-details-host">Aurélien BONAZZI</span></td>
-                    </tr>
-                    <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
-                        <td>golf, cinema, poterie</td>
-                    </tr>                        
-                    <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
-                        <td>le 01 Septembre 2015 à 15h00</td>
-                    </tr>
-                    <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
-                        <td>Au Parc du Tremble<br/>12 avenue des Lilas<br/>94100 Saint-Maur-des-Fossés</td>
-                    </tr>
-                    <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
-                        <td>
-                            8 participants dont 1 ami<br/>
-                            <span class="group-details-participant">Marie BOIVENT</span>, <span class="group-details-participant">Equina YOU</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
-                        <td>Bla bla bla</td>
-                    </tr>
-                    <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
-                        <td>
-                            Envoyer un e-mail à l'organisateur<br/>
-                            <form>
-                                <textarea id="newMailToHost" class="group-mail" name="mail-to-host" textholder="Votre message"></textarea>
-                                <button class="btn btn-default" type="submit">Envoyer</button>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="group-details">
+                    <h2>L'équipe de Football des Pruniers</h2>
+                    <table>
+                        <tr>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
+                            <td>créé par <span class="group-details-host">Aurélien BONAZZI</span> le 01 Septembre 2015 à 15h00</td>
+                        </tr>
+                        <tr>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
+                            <td>golf, cinema, poterie</td>
+                        </tr>                        
+                        <tr>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
+                            <td>
+                                8 membres dont 1 ami<br/>
+                                <span class="group-details-participant">Marie BOIVENT</span>, <span class="group-details-participant">Equina YOU</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
+                            <td>Bla bla bla</td>
+                        </tr>
+                        <tr>
+                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
+                            <td>
+                                Envoyer un e-mail au responsable du groupe<br/>
+                                <form>
+                                    <textarea id="newMailToHost" class="group-mail" name="mail-to-host" textholder="Votre message"></textarea>
+                                    <button class="btn btn-default" type="submit">Envoyer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="col-md-7">
@@ -65,11 +58,7 @@
                             <textarea class="group-blog-new-post-content-text" id="newPostTextArea" placeholder="Ecrire un message"></textarea>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="newphoto">
-                            <form action="/file-upload" class="dropzone">
-  <div class="fallback">
-    <input name="file" type="file" multiple />
-  </div>
-</form>
+                            Uploader une photo
                         </div>
                         <div role="tabpanel" class="tab-pane group-blog-new-post-event" id="newevent">
                             <form class="form-horizontal">
@@ -190,13 +179,13 @@
                                     </div>
                                     <div class="media-body">
                                         <a class="group-blog-header-post-info-poster" href="#">Marie BOIVENT</a><br/>
-                                        <span class="group-blog-post-header-info-time">Le 20 Août à 15h59</span><br/>
-                                        <span class="group-blog-post-header-info-rating">4 personnes aiment</span>
+                                        <span class="group-blog-post-header-info-time">Le 20 Août à 15h59</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-3 group-blog-post-header-rating text-center">
+                            <div class="col-xs-3 group-blog-post-header-rating">
                                 <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
+                                <span class="group-blog-post-header-rating-count">4 personnes aiment</span>
                             </div>
                         </div>
                         <div class="group-blog-post-content">

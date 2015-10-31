@@ -4,12 +4,69 @@ namespace Wybe\FrontOfficeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Wybe\FrontOfficeBundle\Entity\User;
+use Wybe\FrontOfficeBundle\Entity\PostalAddress;
+use Wybe\FrontOfficeBundle\Entity\MailAddress;
+use Wybe\FrontOfficeBundle\Entity\Phone;
+use Wybe\FrontOfficeBundle\Entity\Subtitle;
+use Wybe\FrontOfficeBundle\Entity\Description;
+use Wybe\FrontOfficeBundle\Entity\Job;
+use Wybe\FrontOfficeBundle\Entity\Hobby;
+use Wybe\FrontOfficeBundle\Entity\Groups;
+use Wybe\FrontOfficeBundle\Entity\Event;
 
 class DefaultController extends Controller
 {
     public function indexAction()
-    {
-        return $this->render('WybeFrontOfficeBundle:Default:profile.html.twig');
+    {  
+        //$addd = new Description;
+        //$phone = new Phone;
+        //$phone->setNumber('0655555555');
+        //$phone->setMain(TRUE);
+        
+       // $addd->setText('deeeessscccc');
+        //$sub = new Subtitle;
+//        //$sub->setText('subtitle test avec equina');
+//        $job = new Job;
+//        $job->setDateBegin(new \DateTime("26-10-2015"));
+//        $job->setDateEnd(new \DateTime("27-10-2015"));
+//        $job->setJob('this is a new job');
+//        
+//        $hobby = new Hobby;
+//        $hobby->setCategory('cat');
+//        $hobby->setDescription('jaime ça et ça et ça');
+//        $hobby->setPercent(80);
+        
+           // $gr = new Groups;
+            //$gr->setTitle('gorup title');
+            //$gr->setSubtitle('gorup subtitle');
+            //$ev = new Event;
+           // $ev->setTitle('hahatitle');
+        
+//               // On récupère l'EntityManager
+        $em = $this->getDoctrine()->getManager()->getRepository('WybeFrontOfficeBundle:User');
+        
+             $user = $em->find(7);
+             //$user->addGroup($gr);
+//           $user->addJob($job);
+           // $user->addEvent($ev);
+        
+        //$user->addPhone($phone);
+          
+        //$addd->setUser($user);
+
+       //$em = $this->getDoctrine()->getManager();
+        // Étape 1 : On « persiste » l'entité
+//         $em->persist($job);
+       // $em->persist($ev);
+
+
+        // Étape 2 : On « flush » tout ce qui a été persisté avant
+       // $em->flush();
+        
+        return $this->render('WybeFrontOfficeBundle:Default:profile.html.twig', array(
+            'user' => $user
+            ));
     }
     
     public function getSignInAction()

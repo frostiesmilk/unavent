@@ -69,7 +69,42 @@
                         <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
                         </div>
                         <div class="user-profile-description">
-                            <p>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis. quo conperto Montius tunc quaestor acer quidem sed ad lenitatem propensior, consulens in commune advocato</p>
+                            <p>{{ user.getFirstname() }} {{ user.surname }}</p>
+                                {% for addr in user.PostalAddress %}
+                                    {{ addr.address }} {{ addr.zipcode|number_format(0, '', '')}}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.MailAddress %}
+                                    {{ addr.mail }}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.phone %}
+                                    {{ addr.number }}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.subtitle %}
+                                   {{ addr.text }}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.description %}
+                                    {{ addr.text }}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.job %}
+                                    {{ addr.job }}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.hobbies %}
+                                    {{ addr.category }} : {{ addr.description }}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.groups %}
+                                    {{ addr.title }} : {{ addr.subtitle }}
+                                {% endfor %}
+                                <br>
+                                {% for addr in user.events %}
+                                    {{ addr.title }} 
+                                {% endfor %}
                         </div>
                     </div>
                 </div>
