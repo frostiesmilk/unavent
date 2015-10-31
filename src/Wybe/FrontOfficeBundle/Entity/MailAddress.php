@@ -50,12 +50,20 @@ class MailAddress
     private $newsletter;
     
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="user", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="mailAddress")
      */
     private $user;
-
+    
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *

@@ -27,18 +27,23 @@ class Job
      * @ORM\Column(name="job", type="string", length=255)
      */
     private $job;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="job")
+     */
+    private $user;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateBegin", type="datetime")
+     * @ORM\Column(name="dateBegin", type="datetime", nullable=true)
      */
     private $dateBegin;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateEnd", type="datetime")
+     * @ORM\Column(name="dateEnd", type="datetime", nullable=true)
      */
     private $dateEnd;
 
@@ -49,7 +54,14 @@ class Job
      */
     private $dateC;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *
@@ -150,5 +162,28 @@ class Job
     public function getDateC()
     {
         return $this->dateC;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\User $user
+     * @return Job
+     */
+    public function setUser(\Wybe\FrontOfficeBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Wybe\FrontOfficeBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

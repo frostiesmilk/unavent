@@ -22,9 +22,7 @@ class Friendship
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="user", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="postalAddress")
      */
     private $user;
 
@@ -35,7 +33,14 @@ class Friendship
      */
     private $dateC;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *

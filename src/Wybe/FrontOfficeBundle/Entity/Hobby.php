@@ -38,10 +38,15 @@ class Hobby
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
-
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="hobby")
+     */
+    private $user;
+    
     /**
      * @var \DateTime
      *
@@ -49,7 +54,14 @@ class Hobby
      */
     private $dateC;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *
@@ -150,5 +162,28 @@ class Hobby
     public function getDateC()
     {
         return $this->dateC;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\User $user
+     * @return Hobby
+     */
+    public function setUser(\Wybe\FrontOfficeBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Wybe\FrontOfficeBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

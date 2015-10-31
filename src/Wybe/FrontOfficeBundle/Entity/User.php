@@ -50,23 +50,17 @@ class User
     private $birthdate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="mailAddress", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\MailAddress", mappedBy="user")
      */
     private $mailAddress;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="postalAddress", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\PostalAddress", mappedBy="user")
      */
     private $postalAddress;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Phone", mappedBy="user")
      */
     private $phone;
 
@@ -85,51 +79,37 @@ class User
     private $image;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="subtitle", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Subtitle", cascade={"persist"})
      */
     private $subtitle;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text")
+     *@ORM\ManyToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Description", cascade={"persist"})
      */
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="job", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Job", mappedBy="user")
      */
     private $job;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="hobbies", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Hobby", mappedBy="user")
      */
     private $hobbies;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="groups", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Groups", cascade={"persist"})
      */
     private $groups;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="events", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Event", cascade={"persist"})
      */
     private $events;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="friendship", type="string", length=255)
+     *@ORM\ManyToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Friendship", cascade={"persist"})
      */
     private $friendship;
 
@@ -140,10 +120,8 @@ class User
      */
     private $parameters;
     
-        /**
-     * @var string
-     *
-     * @ORM\Column(name="$galleries", type="string", length=255)
+    /**
+     * @ORM\ManyToMany(targetEntity="Wybe\FrontOfficeBundle\Entity\Gallery", cascade={"persist"})
      */
     private $galleries;
 
@@ -153,8 +131,8 @@ class User
      * @ORM\Column(name="dateC", type="datetime")
      */
     private $dateC;
-    
-    /**
+
+     /**
      * Get id
      *
      * @return integer 
@@ -272,7 +250,7 @@ class User
     /**
      * Get mailAddress
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getMailAddress()
     {
@@ -295,7 +273,7 @@ class User
     /**
      * Get postalAddress
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection 
      */
     public function getPostalAddress()
     {
@@ -318,7 +296,7 @@ class User
     /**
      * Get phone
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection 
      */
     public function getPhone()
     {
@@ -387,7 +365,7 @@ class User
     /**
      * Get subtitle
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection 
      */
     public function getSubtitle()
     {
@@ -410,7 +388,7 @@ class User
     /**
      * Get description
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getDescription()
     {
@@ -433,7 +411,7 @@ class User
     /**
      * Get job
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getJob()
     {
@@ -456,7 +434,7 @@ class User
     /**
      * Get hobbies
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getHobbies()
     {
@@ -479,7 +457,7 @@ class User
     /**
      * Get groups
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getGroups()
     {
@@ -502,7 +480,7 @@ class User
     /**
      * Get events
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection 
      */
     public function getEvents()
     {
@@ -525,7 +503,7 @@ class User
     /**
      * Get friendship
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection 
      */
     public function getFriendship()
     {
@@ -594,10 +572,291 @@ class User
     /**
      * Get galleries
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getGalleries()
     {
         return $this->galleries;
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->mailAddress = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->postalAddress = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->phone = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->subtitle = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->description = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->job = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->hobbies = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->friendship = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->galleries = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        $this->dateC = new \Datetime();
+        $this->image = 'image';
+        $this->parameters = 'parameters';
+        $this->password = 'password';
+    }
+
+    /**
+     * Add mailAddress
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\MailAddress $mailAddress
+     */
+    public function addMailAddress(\Wybe\FrontOfficeBundle\Entity\MailAddress $mailAddress)
+    {
+        $mailAddress->setUser($this);
+        $this->mailAddress[] = $mailAddress;
+
+        return $this;
+    }
+
+    /**
+     * Remove mailAddress
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\MailAddress $mailAddress
+     */
+    public function removeMailAddress(\Wybe\FrontOfficeBundle\Entity\MailAddress $mailAddress)
+    {
+        $this->mailAddress->removeElement($mailAddress);
+    }
+
+    /**
+     * Add postalAddress
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\PostalAddress $postalAddress
+     */
+    public function addPostalAddress(\Wybe\FrontOfficeBundle\Entity\PostalAddress $postalAddress)
+    {
+        $postalAddress->setUser($this);
+        $this->postalAddress[] = $postalAddress;
+
+        return $this;
+    }
+
+    /**
+     * Remove postalAddress
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\PostalAddress $postalAddress
+     */
+    public function removePostalAddress(\Wybe\FrontOfficeBundle\Entity\PostalAddress $postalAddress)
+    {
+        $this->postalAddress->removeElement($postalAddress);
+    }
+
+    /**
+     * Add phone
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Phone $phone
+     */
+    public function addPhone(\Wybe\FrontOfficeBundle\Entity\Phone $phone)
+    {
+        $phone->setUser($this);
+        $this->phone[] = $phone;
+        
+
+        return $this;
+    }
+
+    /**
+     * Remove phone
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Phone $phone
+     */
+    public function removePhone(\Wybe\FrontOfficeBundle\Entity\Phone $phone)
+    {
+        $this->phone->removeElement($phone);
+    }
+
+    /**
+     * Add subtitle
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Subtitle $subtitle
+     * @return User
+     */
+    public function addSubtitle(\Wybe\FrontOfficeBundle\Entity\Subtitle $subtitle)
+    {
+        $this->subtitle[] = $subtitle;
+
+        return $this;
+    }
+
+    /**
+     * Remove subtitle
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Subtitle $subtitle
+     */
+    public function removeSubtitle(\Wybe\FrontOfficeBundle\Entity\Subtitle $subtitle)
+    {
+        $this->subtitle->removeElement($subtitle);
+    }
+
+    /**
+     * Add description
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Description $description
+     * @return User
+     */
+    public function addDescription(\Wybe\FrontOfficeBundle\Entity\Description $description)
+    {
+        $this->description[] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Remove description
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Description $description
+     */
+    public function removeDescription(\Wybe\FrontOfficeBundle\Entity\Description $description)
+    {
+        $this->description->removeElement($description);
+    }
+
+    /**
+     * Add job
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Job $job
+     * @return User
+     */
+    public function addJob(\Wybe\FrontOfficeBundle\Entity\Job $job)
+    {
+        $job->setUser($this);
+        $this->job[] = $job;
+
+        return $this;
+    }
+
+    /**
+     * Remove job
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Job $job
+     */
+    public function removeJob(\Wybe\FrontOfficeBundle\Entity\Job $job)
+    {
+        $this->job->removeElement($job);
+    }
+
+    /**
+     * Add hobbies
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Hobby $hobbies
+     * @return User
+     */
+    public function addHobby(\Wybe\FrontOfficeBundle\Entity\Hobby $hobbies)
+    {
+        $hobbies->setUser($this);
+        $this->hobbies[] = $hobbies;
+
+        return $this;
+    }
+
+    /**
+     * Remove hobbies
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Hobby $hobbies
+     */
+    public function removeHobby(\Wybe\FrontOfficeBundle\Entity\Hobby $hobbies)
+    {
+        $this->hobbies->removeElement($hobbies);
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Groups $groups
+     * @return User
+     */
+    public function addGroup(\Wybe\FrontOfficeBundle\Entity\Groups $groups)
+    {
+        $groups->setAdmin($this);
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Groups $groups
+     */
+    public function removeGroup(\Wybe\FrontOfficeBundle\Entity\Groups $groups)
+    {
+        $this->groups->removeElement($groups);
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Event $events
+     * @return User
+     */
+    public function addEvent(\Wybe\FrontOfficeBundle\Entity\Event $events)
+    {
+        $events->setAdmin($this);
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Event $events
+     */
+    public function removeEvent(\Wybe\FrontOfficeBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Add friendship
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Friendship $friendship
+     * @return User
+     */
+    public function addFriendship(\Wybe\FrontOfficeBundle\Entity\Friendship $friendship)
+    {
+        $this->friendship[] = $friendship;
+
+        return $this;
+    }
+
+    /**
+     * Remove friendship
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Friendship $friendship
+     */
+    public function removeFriendship(\Wybe\FrontOfficeBundle\Entity\Friendship $friendship)
+    {
+        $this->friendship->removeElement($friendship);
+    }
+
+    /**
+     * Add galleries
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Gallery $galleries
+     * @return User
+     */
+    public function addGallery(\Wybe\FrontOfficeBundle\Entity\Gallery $galleries)
+    {
+        $this->galleries[] = $galleries;
+
+        return $this;
+    }
+
+    /**
+     * Remove galleries
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\Gallery $galleries
+     */
+    public function removeGallery(\Wybe\FrontOfficeBundle\Entity\Gallery $galleries)
+    {
+        $this->galleries->removeElement($galleries);
     }
 }

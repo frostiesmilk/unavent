@@ -31,7 +31,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="subtitle", type="string", length=255)
+     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
     private $subtitle;
 
@@ -45,59 +45,64 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\Column(name="category", type="string", length=255, nullable=true)
      */
     private $category;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="participants", type="string", length=255)
+     * @ORM\Column(name="participants", type="string", length=255, nullable=true)
      */
     private $participants;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="posts", type="string", length=255)
+     * @ORM\Column(name="posts", type="string", length=255, nullable=true)
      */
     private $posts;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="galleries", type="string", length=255)
+     * @ORM\Column(name="galleries", type="string", length=255, nullable=true)
      */
     private $galleries;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="postalAddress", type="string", length=255)
+     * @ORM\Column(name="postalAddress", type="string", length=255, nullable=true)
      */
     private $postalAddress;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateEvent", type="datetime")
+     * @ORM\Column(name="dateEvent", type="datetime", nullable=true)
      */
     private $dateEvent;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="admin", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User")
      */
     private $admin;
-
+   
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    } 
 
     /**
      * Get id

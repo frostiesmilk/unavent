@@ -35,6 +35,13 @@ class Description
      */
     private $dateC;
 
+     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
 
     /**
      * Get id

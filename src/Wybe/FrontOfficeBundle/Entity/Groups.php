@@ -31,60 +31,66 @@ class Groups
     /**
      * @var string
      *
-     * @ORM\Column(name="subtitle", type="string", length=255)
+     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
     private $subtitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="dateC", type="string", length=255)
+     * @ORM\Column(name="dateC", type="datetime")
      */
     private $dateC;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\Column(name="category", type="string", length=255, nullable=true)
      */
     private $category;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="members", type="string", length=255)
+     * @ORM\Column(name="members", type="string", length=255, nullable=true)
      */
     private $members;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="posts", type="string", length=255)
+     * @ORM\Column(name="posts", type="string", length=255, nullable=true)
      */
     private $posts;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="galleries", type="string", length=255)
+     * @ORM\Column(name="galleries", type="string", length=255, nullable=true)
      */
     private $galleries;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="admin", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User")
      */
     private $admin;
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *

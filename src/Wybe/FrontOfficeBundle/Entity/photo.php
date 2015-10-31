@@ -55,7 +55,15 @@ class photo
      * @ORM\Column(name="gallery", type="string", length=255)
      */
     private $gallery;
-
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
 
     /**
      * Get id

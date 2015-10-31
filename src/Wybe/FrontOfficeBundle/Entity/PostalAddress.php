@@ -31,7 +31,7 @@ class PostalAddress
     /**
      * @var string
      *
-     * @ORM\Column(name="addressComplement", type="string", length=255)
+     * @ORM\Column(name="addressComplement", type="string", length=255, nullable=true)
      */
     private $addressComplement;
 
@@ -52,30 +52,35 @@ class PostalAddress
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
     private $country;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal")
+     * @ORM\Column(name="longitude", type="decimal", nullable=true)
      */
     private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lattitude", type="decimal")
+     * @ORM\Column(name="lattitude", type="decimal", nullable=true)
      */
     private $lattitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="$name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="postalAddress")
+     */
+    private $user;
     
     /**
      * @var \DateTime
@@ -84,7 +89,14 @@ class PostalAddress
      */
     private $dateC;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *
@@ -282,7 +294,7 @@ class PostalAddress
     /**
      * Set name
      *
-     * @param string $name
+     * @param string name
      * @return PostalAddress
      */
     public function setName($name)
@@ -300,5 +312,28 @@ class PostalAddress
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Wybe\FrontOfficeBundle\Entity\User $user
+     * @return PostalAddress
+     */
+    public function setUser(\Wybe\FrontOfficeBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Wybe\FrontOfficeBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

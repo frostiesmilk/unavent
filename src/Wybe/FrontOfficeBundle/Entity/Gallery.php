@@ -56,7 +56,14 @@ class Gallery
      */
     private $photos;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *

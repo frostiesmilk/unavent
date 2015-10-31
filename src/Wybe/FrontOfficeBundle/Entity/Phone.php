@@ -22,9 +22,7 @@ class Phone
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="user", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="phone")
      */
     private $user;
     
@@ -49,7 +47,14 @@ class Phone
      */
     private $dateC;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateC = new \Datetime();
+    }
+    
     /**
      * Get id
      *
@@ -135,7 +140,7 @@ class Phone
      * @param string $user
      * @return Phone
      */
-    public function setUser($user)
+    public function setUser(\Wybe\FrontOfficeBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
