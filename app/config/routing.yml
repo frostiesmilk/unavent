@@ -1,6 +1,10 @@
+flowber_user:
+    resource: "@FlowberUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 wybe_front_office:
     resource: "@WybeFrontOfficeBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /wybe
 
 app:
     resource: "@AppBundle/Controller/"
