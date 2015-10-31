@@ -28,6 +28,10 @@ and open the template in the editor.
 .font-white {
   color: white;
 }
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
 /* Create a medium height at 40px */
 .navbar-md {
   min-height: 40px;
@@ -94,6 +98,11 @@ and open the template in the editor.
 .message-show .message-options-bar {
   margin-bottom: initial;
 }
+@media (max-width: 768px) {
+  .message-show .message-options-bar .message-options-bar-text {
+    display: none;
+  }
+}
 .message-show .message-show-subject {
   border-bottom: 1px solid lightgrey;
 }
@@ -103,6 +112,11 @@ and open the template in the editor.
 }
 .message-show .message-show-details .message-show-details-correspondents .message-show-details-correspondents-label {
   padding-right: 5px;
+  font-weight: bold;
+  font-size: 11px;
+}
+.message-show .message-show-details .message-show-details-actions .message-show-details-actions-reply {
+  transform: scaleX(-1);
 }
 .message-show .message-show-content {
   padding: 10px;
@@ -128,5 +142,8 @@ and open the template in the editor.
   resize: none;
   padding: 10px;
   color: grey;
+}
+.message-show .message-show-reply .message-show-reply-submit {
+  margin-bottom: 1px;
 }
 /*# sourceMappingURL=messages.css.map */

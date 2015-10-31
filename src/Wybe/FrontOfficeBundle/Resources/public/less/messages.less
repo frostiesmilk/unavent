@@ -39,6 +39,11 @@ and open the template in the editor.
 .message-show{
     .message-options-bar{
         margin-bottom: initial;
+        .message-options-bar-text{
+            @media(max-width: 768px){
+                display: none;
+            }
+        }
     }
     
     .message-show-subject{
@@ -51,6 +56,13 @@ and open the template in the editor.
         .message-show-details-correspondents{
             .message-show-details-correspondents-label{
                 padding-right: 5px;
+                font-weight: bold;
+                font-size: 11px;
+            }
+        }
+        .message-show-details-actions{
+            .message-show-details-actions-reply{
+                transform: scaleX(-1);
             }
         }
     }
@@ -77,6 +89,9 @@ and open the template in the editor.
             resize: none;
             padding: 10px;
             color: grey;
+        }
+        .message-show-reply-submit{
+            margin-bottom: 1px;
         }
     }
 }
