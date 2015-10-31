@@ -9,7 +9,7 @@
 {% block body %}
 
     <!-- Main menu -->
-    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
                             
     <!-- User Cover -->  
     {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
@@ -483,6 +483,11 @@
  
  
     {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+    <script>
+        //$(".navmenu").offcanvas({ placement: 'right' })
+    </script>
+    
     
     <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <script src="{{ asset('bundles/wybefrontoffice/js/gallery/bootstrap-image-gallery.js') }}"></script>

@@ -7,14 +7,14 @@
             <tr>
                 <th><a type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Retourner à tous les messages" href="{{path('wybe_front_office_messages')}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a></th>
                 <th colspan="2">
-                    <button type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Supprimer les messages sélectionnés"> 
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
+                    <button type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                        <span class="glyphicon glyphicon-trash message-options-bar-icon" aria-hidden="true"></span> <span class="message-options-bar-text">Supprimer</span>
                     </button>
-                    <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu les messages sélectionnés"> 
-                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Marquer comme Lu/Non Lu
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu / Non Lu"> 
+                        <span class="glyphicon glyphicon-eye-close message-options-bar-icon" aria-hidden="true"></span> <span class="message-options-bar-text">Marquer comme Lu/Non Lu</span>
                     </button>
                 </th>
-                <th>
+                <th class="text-right">
                     <div class="btn-group" role="group" aria-label="messages-pagination">
                         <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Message plus récent"><span class="glyphicon glyphicon-menu-left"></span></button>
                         <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Message plus ancien"><span class="glyphicon glyphicon-menu-right"></span></button>
@@ -48,7 +48,7 @@
                         </table>
                     </div>
                     <div class="col-xs-3 message-show-details-actions text-right">
-                        <button class="btn btn-default">Répondre</button>
+                        <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Répondre au message"><span class="glyphicon glyphicon-share-alt message-show-details-actions-reply" ></span></button>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="media-body">
                     <textarea class="message-show-reply-textarea" textholder="Ecrire une réponse"></textarea>
-                    <button type="submit" class="btn btn-default text-right">Répondre</button>
+                    <button type="submit" class="btn btn-default text-right message-show-reply-submit">Répondre</button>
                 </div>
             </div>             
         </div>

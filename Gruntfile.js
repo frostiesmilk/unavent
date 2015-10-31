@@ -10,6 +10,7 @@ module.exports = function (grunt) {
                 files: {
                     'js/jquery.js': 'jquery/dist/jquery.js',
                     'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
+                    'js/jasny-bootstrap.js': 'jasny-bootstrap/dist/js/jasny-bootstrap.js',
                     'fonts': 'bootstrap/dist/fonts/**',
                     'js/angular.js': 'angular/angular.js',
                 }
@@ -17,7 +18,7 @@ module.exports = function (grunt) {
             stylesheets: {
                 files: {
                     'css/bootstrap.css': 'bootstrap/dist/css/bootstrap.css',
-                    'css/bootstrap.css.map': 'bootstrap/dist/css/bootstrap.css.map',
+                    'css/jasny-bootstrap.css': 'jasny-bootstrap/dist/css/jasny-bootstrap.css',
                     'css/font-awesome.css': 'fontawesome/css/font-awesome.css',
                     'css/angular-csp.css': 'angular/angular-csp.css',
                 }

@@ -28,6 +28,10 @@ and open the template in the editor.
 .font-white {
   color: white;
 }
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
 /* Create a medium height at 40px */
 .navbar-md {
   min-height: 40px;
@@ -75,11 +79,56 @@ and open the template in the editor.
 .btn-red:hover {
   background-color: #BF493D;
 }
+.navmenu-main {
+  padding-top: 50px;
+}
+@media (min-width: 992px) {
+  .navmenu-main {
+    display: none;
+  }
+}
+.navbar-left-push {
+  display: block;
+  text-align: center;
+}
+.navbar-brand-push {
+  display: inline-block;
+  float: none;
+}
+.navbar-toggle-push {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
+  background-color: #293540;
+}
+.navbar-toggle-push:hover,
+.navbar-toggle-push:focus {
+  background-color: #1B242B !important;
+}
+@media (min-width: 1px) {
+  .navbar-toggle-push {
+    display: block !important;
+  }
+}
+@media (min-width: 992px) {
+  .navbar-left-push {
+    display: none !important;
+    /* IE8 fix */
+  }
+}
+.navbar-left-push {
+  min-height: 0px;
+}
 .navbar-main {
   margin-bottom: initial;
   border: initial;
   border-radius: initial;
   background-color: #293540;
+}
+@media (max-width: 992px) {
+  .navbar-main {
+    display: none;
+  }
 }
 @media (max-width: 768px) {
   .navbar-main .navbar-header .navbar-brand {
@@ -237,6 +286,11 @@ and open the template in the editor.
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: initial;
+}
+@media (max-width: 992px) {
+  .generic-cover {
+    margin-top: 0px;
+  }
 }
 .generic-cover .generic-cover-profile-picture {
   display: inline-block;

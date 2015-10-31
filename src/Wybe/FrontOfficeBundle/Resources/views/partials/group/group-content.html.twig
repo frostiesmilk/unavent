@@ -65,7 +65,11 @@
                             <textarea class="group-blog-new-post-content-text" id="newPostTextArea" placeholder="Ecrire un message"></textarea>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="newphoto">
-                            Uploader une photo
+                            <form action="/file-upload" class="dropzone">
+  <div class="fallback">
+    <input name="file" type="file" multiple />
+  </div>
+</form>
                         </div>
                         <div role="tabpanel" class="tab-pane group-blog-new-post-event" id="newevent">
                             <form class="form-horizontal">
@@ -186,13 +190,13 @@
                                     </div>
                                     <div class="media-body">
                                         <a class="group-blog-header-post-info-poster" href="#">Marie BOIVENT</a><br/>
-                                        <span class="group-blog-post-header-info-time">Le 20 Août à 15h59</span>
+                                        <span class="group-blog-post-header-info-time">Le 20 Août à 15h59</span><br/>
+                                        <span class="group-blog-post-header-info-rating">4 personnes aiment</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-3 group-blog-post-header-rating">
+                            <div class="col-xs-3 group-blog-post-header-rating text-center">
                                 <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
-                                <span class="group-blog-post-header-rating-count">4 personnes aiment</span>
                             </div>
                         </div>
                         <div class="group-blog-post-content">

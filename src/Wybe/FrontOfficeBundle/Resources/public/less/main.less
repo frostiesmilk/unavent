@@ -10,7 +10,51 @@ and open the template in the editor.
 
 @import "frontoffice-common";
 
+.navmenu-main {
+    @media(min-width: 992px){
+        display: none;
+    }
+  padding-top: 50px;
+}
+
+.navbar-left-push {
+  display: block;
+  text-align: center;
+}
+.navbar-brand-push {
+  display: inline-block;
+  float: none;
+}
+.navbar-toggle-push {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
+  background-color: @dark-blue;  
+}
+.navbar-toggle-push:hover, .navbar-toggle-push:focus{
+    background-color: @dark-blue-alt!important;  
+}
+
+@media (min-width: 1px) {
+  .navbar-toggle-push {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-left-push {
+    display: none !important; /* IE8 fix */
+  }
+}
+
+.navbar-left-push {
+    min-height: 0px;
+}
+
 .navbar-main{
+    @media(max-width: 992px){
+        display: none;
+    }
     margin-bottom: initial;
     border: initial;
     border-radius: initial;
@@ -215,6 +259,9 @@ and open the template in the editor.
 }
 
 .generic-cover{    
+    @media(max-width: @switching-width){ // no margin-top with push menu
+        margin-top: 0px;
+    }
     margin-top: 40px;
     height: 255px;
     background-size: cover;
