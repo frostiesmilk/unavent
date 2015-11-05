@@ -1,0 +1,362 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11 juil. 2015, 19:41:01
+    Author     : Equina
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 août 2015, 19:30:41
+    Author     : Equina
+*/
+/* Colors */
+@font-face {
+  font-family: erasMediumItc;
+  src: url(../fonts/ERASMD.TTF);
+}
+/* Colored backgrounds */
+.background-dark-blue {
+  background-color: #293540;
+}
+/* Colored fonts */
+.font-white {
+  color: white;
+}
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
+/* Create a medium height at 40px */
+.navbar-md {
+  min-height: 40px;
+}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-md .navbar-brand {
+  height: 40px;
+}
+.navbar-md .navbar-toggle {
+  margin: 6px 12px 6px 0px;
+  padding: 6px 7px 6px 7px;
+}
+.navbar-md .navbar-toggle .icon-bar {
+  width: 19px;
+}
+/* Create a small height at 30px */
+.navbar-sm {
+  min-height: 40px;
+}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-sm .navbar-brand {
+  height: 40px;
+}
+.navbar-sm .navbar-toggle {
+  margin: 3px 9px 3px 0px;
+  padding: 4px 4px 4px 4px;
+}
+.navbar-sm .navbar-toggle .icon-bar {
+  width: 16px;
+}
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+}
+/* Small menus for small screens */
+.navmenu-main {
+  padding-top: 50px;
+}
+@media (min-width: 992px) {
+  .navmenu-main {
+    display: none;
+  }
+}
+.navbar-push {
+  display: block;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+}
+.navbar-brand-push {
+  display: inline-block;
+  float: none;
+}
+.navbar-toggle .icon-bar {
+  background-color: white!important;
+}
+.navbar-toggle-push {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
+  background-color: #293540;
+  border: none;
+}
+.navbar-toggle-push-right {
+  position: initial;
+  float: right;
+  margin-left: 15px;
+  background-color: #E74C3C;
+  border: none;
+}
+.navbar-toggle-push:hover,
+.navbar-toggle-push:focus {
+  background-color: #1B242B !important;
+}
+.navbar-toggle-push-right:hover,
+.navbar-toggle-push-right:focus {
+  background-color: #BF493D !important;
+}
+@media (min-width: 1px) {
+  .navbar-toggle-push {
+    display: block !important;
+  }
+}
+@media (min-width: 992px) {
+  .navbar-push {
+    display: none !important;
+    /* IE8 fix */
+  }
+}
+/*.navbar-left-push {
+    min-height: 0px;
+}*/
+/* END Small menus for small screens */
+.navbar-main {
+  margin-bottom: initial;
+  border: initial;
+  border-radius: initial;
+  background-color: #293540;
+}
+@media (max-width: 992px) {
+  .navbar-main {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-main .navbar-header .navbar-brand {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-main .navbar-header .navbar-brand .site-name {
+    display: none;
+  }
+}
+.navbar-main .navbar-header .navbar-brand span {
+  float: left;
+  font-family: erasMediumItc;
+  color: white;
+}
+.navbar-main .navbar-header .navbar-brand img {
+  height: 40px;
+  margin-top: -10px;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .menu-icon {
+  font-size: 15px;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .badge {
+  background-color: red;
+  padding: 2px 4px;
+  top: -10px;
+  position: relative;
+  left: -5px;
+  border: solid 1px;
+  font-size: 10px;
+  margin-right: -5px;
+}
+.navbar-main .container .navbar-collapse .navbar-nav li a {
+  color: white;
+}
+.navbar-main .container .navbar-collapse .navbar-nav li a:hover {
+  background-color: #1B242B;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .active a {
+  background-color: #1B242B;
+  color: grey;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .open a {
+  background-color: #1B242B;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .dropdown-menu {
+  min-width: 500px;
+  border: initial;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .dropdown-menu a {
+  color: darkgrey;
+  background-color: inherit;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .dropdown-menu .dropbown-menu-col {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .dropdown-menu .dropbown-menu-col li {
+  list-style-type: none;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .dropdown-menu .dropbown-menu-col li a {
+  color: darkgrey;
+  background-color: inherit;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .menu-search .icon-search {
+  color: #FFF;
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.navbar-main .container .navbar-collapse .navbar-nav .menu-search .form-group .form-control {
+  height: 22px;
+  padding: 0px 12px;
+}
+@media (max-width: 768px) {
+  .navbar-main .container .navbar-collapse .navbar-nav .menu-search .form-group .menu-search-input {
+    width: 125px;
+  }
+}
+.navbar-main .container .navbar-collapse .navbar-nav .menu-link-icon {
+  width: 25px;
+  margin: -5px 0px;
+}
+/* Second navbar */
+.sticky-wrapper {
+  margin-bottom: -40px;
+}
+.navbar-second {
+  background-color: #E74C3C;
+  border: initial;
+  border-radius: initial;
+  margin-bottom: initial;
+  z-index: 100;
+}
+@media (max-width: 992px) {
+  .navbar-second {
+    display: none;
+  }
+}
+.navbar-second .navbar-collapse .navbar-nav .menu-icon {
+  font-size: 15px;
+}
+.navbar-second .navbar-collapse .navbar-nav .badge {
+  background-color: red;
+  padding: 2px 4px;
+  top: -10px;
+  position: relative;
+  left: -5px;
+  border: solid 1px;
+  font-size: 10px;
+  margin-right: -5px;
+}
+.navbar-second .navbar-collapse .navbar-nav li a {
+  color: white;
+}
+.navbar-second .navbar-collapse .navbar-nav li a:hover {
+  background-color: #BF493D;
+}
+.navbar-second .navbar-collapse .navbar-nav .active a {
+  background-color: #BF493D;
+  color: grey;
+}
+.navbar-second .navbar-collapse .navbar-nav .open a {
+  background-color: #BF493D;
+}
+.navbar-second .navbar-collapse .navbar-nav .dropdown-menu {
+  min-width: 500px;
+}
+.navbar-second .navbar-collapse .navbar-nav .dropdown-menu .dropbown-menu-col {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+.navbar-second .navbar-collapse .navbar-nav .dropdown-menu .dropbown-menu-col li {
+  list-style-type: none;
+}
+.navbar-second .navbar-collapse .navbar-nav .dropdown-menu .dropbown-menu-col li a {
+  color: darkgrey;
+  background-color: inherit;
+}
+.navbar-second .navbar-collapse .navbar-nav .menu-search .icon-search {
+  color: #FFF;
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.navbar-second .navbar-collapse .navbar-nav .menu-search .form-group .form-control {
+  height: 22px;
+  padding: 0px 12px;
+}
+.navbar-second .navbar-collapse .navbar-nav .menu-link-icon {
+  width: 25px;
+  margin: -5px 0px;
+}
+.generic-cover {
+  margin-top: 40px;
+  height: 255px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: initial;
+}
+@media (max-width: 992px) {
+  .generic-cover {
+    margin-top: 0px;
+  }
+}
+.generic-cover .generic-cover-profile-picture {
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 0 0 10px grey;
+  background-position: center;
+  background-size: cover;
+  height: 200px;
+  width: 200px;
+}
+@media (max-width: 768px) {
+  .generic-cover .generic-cover-profile-picture {
+    height: 180px;
+    width: 180px;
+  }
+}
+@media (max-width: 640px) {
+  .generic-cover .generic-cover-profile-picture {
+    display: none;
+  }
+}
+.generic-cover .generic-cover-title {
+  color: white;
+  padding-left: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.generic-cover .generic-cover-title .generic-cover-title-name {
+  text-shadow: 0.2em 0.2em 0.2em black;
+  font-size: 41px;
+}
+@media (max-width: 768px) {
+  .generic-cover .generic-cover-title .generic-cover-title-name {
+    margin-top: 0px;
+  }
+}
+.generic-cover .generic-cover-title .generic-cover-title-description {
+  text-shadow: 0.2em 0.2em 0.2em black;
+}
+/*# sourceMappingURL=main.css.map */

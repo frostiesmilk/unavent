@@ -1,3 +1,7 @@
+wybe_front_office_templatetest:
+    path: /testwidget
+    defaults: { _controller: WybeFrontOfficeBundle:Default:getPageTest }
+
 wybe_front_office_profile:
     path:     /profil
     defaults: { _controller: WybeFrontOfficeBundle:Default:index }

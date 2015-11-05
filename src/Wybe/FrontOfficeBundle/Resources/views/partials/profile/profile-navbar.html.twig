@@ -1,4 +1,6 @@
 {# empty Twig template #}
+{#% extends 'FlowberFrontOfficeBundle:partials:common:main-connected-navbar.html.twig' %#}
+
 <nav id="nav-stick" class="navbar navbar-default navbar-second navbar-sm">
     <div class="container">
         <div class="navbar-header">
@@ -43,9 +45,10 @@
         </div>
     </div>
 </nav>
-<!--           
-<div class="navmenu-profile navmenu-default navmenu-fixed-right navmenu-main offcanvas-sm">
-    <a class="navmenu-brand visible-md visible-lg" href="#">Project name</a>
+
+<!-- Small screen menu -->
+<div class="navmenu-second navmenu-default navmenu-fixed-right navmenu-main offcanvas-sm">
+    <a class="navmenu-brand visible-md visible-lg" href="#">Project name right</a>
     <ul class="nav navmenu-nav">
         <li class="active"><a href="./">Slide in</a></li>
         <li><a href="../navmenu-push/">Push</a></li>
@@ -70,14 +73,10 @@
         </li>
     </ul>
 </div>
+<!-- Toggle is implemented in parent view -->
 
-<div class="navbar navbar-right navbar-default navbar-fixed-top hidden-md hidden-lg">
-    <button type="button" class="navbar-toggle navbar-toggle-push" data-toggle="offcanvas" data-target=".navmenu-profile">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-</div>-->
+
+<!-- END small screen menu -->
 
 <!-- Modal -->
 <div class="modal fade" id="modal-wink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

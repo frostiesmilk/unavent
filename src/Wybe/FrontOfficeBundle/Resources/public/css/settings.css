@@ -28,6 +28,10 @@ and open the template in the editor.
 .font-white {
   color: white;
 }
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
 /* Create a medium height at 40px */
 .navbar-md {
   min-height: 40px;

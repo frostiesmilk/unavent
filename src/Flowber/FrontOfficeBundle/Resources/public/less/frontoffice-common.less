@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 août 2015, 19:30:41
+    Author     : Equina
+*/
+
+/* Colors */
+@dark-blue: #293540;
+@dark-blue-alt: #1B242B;
+@blue: #79BDE0;
+@blue-alt: #66A0BE;
+@light-blue: #E1EBF5;
+@light-blue-alt: #CED8E1;
+@white: #FFFFFF;
+@white-alt: #F0EFEF;
+@red: #E74C3C;
+@red-alt: #BF493D;
+@light-grey-background: #F5F5F5;
+@light-grey: #E3E3E3;
+
+@switching-width: 992px; // determinated width for switching between menu types
+
+@font-face {
+    font-family: erasMediumItc;
+    src: url(../fonts/ERASMD.TTF);
+}
+
+/* Colored backgrounds */
+.background-dark-blue{
+    background-color: @dark-blue;
+}
+
+/* Colored fonts */
+.font-white{
+    color: white;
+}
+
+/* Colored background */
+.bg-white{
+    background-color: white;
+}
+
+/* Create a medium height at 40px */
+.navbar-md {min-height:40px}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
+.navbar-md .navbar-brand {height: 40px}  
+.navbar-md .navbar-toggle {margin: 6px 12px 6px 0px; padding: 6px 7px 6px 7px;}
+.navbar-md .navbar-toggle .icon-bar {width: 19px;}
+
+
+/* Create a small height at 30px */
+.navbar-sm {min-height:40px}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
+.navbar-sm .navbar-brand {height: 40px}
+.navbar-sm .navbar-toggle {margin: 3px 9px 3px 0px; padding: 4px 4px 4px 4px;}
+.navbar-sm .navbar-toggle .icon-bar {width: 16px;}
+
+.btn-red{
+    background-color: @red;
+    color: white;
+    border-color: @red-alt;
+    font-weight: bold;
+}
+.btn-red:hover{
+    background-color: @red-alt;
+}

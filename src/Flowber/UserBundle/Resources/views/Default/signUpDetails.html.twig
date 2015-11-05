@@ -1,0 +1,61 @@
+{# Flowber\UserBundle\Resources\views\Default\signUpDetails.html.twig #}
+
+<!-- Sign up details jumbo -->
+<div class="jumbotron signup-details-cover" style="background-image: url({{asset('bundles/flowberuser/images/signUp/cover-signup-details.jpg')}})">    
+    <div class="container" >
+        <div class="row-fluid text-center">       
+            <h1 class="signup-details-cover-title ">Prêt à enchaîner les aventures !</h1>
+        </div>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 signup-details-informations text-center">
+            <h2>FlowBer</h2>
+            <p class="signup-details-informations-text">Toute aventure est bonne à prendre</p>
+            <img class="signup-details-informations-image" src="{{asset('bundles/flowberuser/images/signUp/signup-desktop.png')}}" alt=""/>
+            <p class="signup-details-informations-text">Vivre votre vie plus intensément,<br/>
+                Faites des rencontres inoubliables,<br/>
+                Tout devient possible.
+            </p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <form class="signup-details-form">
+                <div class="form-group">
+                    <label for="signupPhone">Numéro de téléphone mobile</label>
+                    <input type="tel" class="form-control" id="signupPhone" placeholder="Exemple: 0612345678">
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label for="signupPostalAdress">Adresse postale</label>
+                    <input type="text" class="form-control" id="signupPostalAddress" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="signupPostalAdress">Complément d'adresse</label>
+                    <input type="text" class="form-control" id="signupPostalAddressComplement" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="signupCity">Ville</label>
+                    <input type="text" class="form-control" id="signupCity" placeholder="">
+                </div>
+                <div class="col-md-6 form-signup-details-half-left">
+                    <div class="form-group">
+                        <label for="signupCityCode">Code postal</label>
+                        <input type="text" class="form-control" id="signupCityCode" placeholder=""/>
+                    </div>
+                </div>
+                <div class="col-md-6 form-signup-details-half-right">
+                    <div class="form-group">
+                        <label for="signupCountry">Pays</label>
+                        <input type="text" class="form-control" id="signupCountry" placeholder=""/>
+                    </div>                        
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default form-inline-button form-validation">Inscription</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

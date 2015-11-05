@@ -1,0 +1,54 @@
+{# empty Twig template #}
+<nav class="navbar navbar-default navbar-home">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#content-navbar-main" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('flowber_front_office_signin_homepage') }}">                  
+                <span><img alt="Unavent Logo" src="{{asset('images/unavent/logos/unavent-logo-50-white.png')}}"></span>
+                <span>UNAVENT</span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="content-navbar-main">
+            <form method="post" action="{{ path('wybe_front_office_profile') }}" class="navbar-right navbar-form navbar-connection-form">
+                <table>                    
+                    <tr>
+                        <td>
+                            <label class="sr-only" for="connection-email">Email address</label>
+                            <input type="email" class="form-control navbar-connection-form-input" id="connection-email" placeholder="Adresse e-mail">
+                        </td>
+                        <td>
+                            <label class="sr-only" for="connection-password">Password</label>
+                            <input type="password" class="form-control navbar-connection-form-input" id="connection-password" placeholder="Mot de passe">                 
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-default navbar-connection-form-submit">Connexion</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="checkbox navbar-connection-form-keep">
+                                <label>
+                                    <input type="checkbox"> Maintenir la connexion
+                                </label>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="navbar-connection-form-passforgotten">
+                                <a href="#">Mot de passe oublié</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div><!-- /.navbar-collapse -->
+        <p class="navbar-background-text">Connectez-vous !</p>
+    </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,11 @@
+flowber_front_office_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FlowberFrontOfficeBundle:Default:index }
+    
+flowber_front_office_signin_homepage:
+    path: /
+    defaults: { _controller: FlowberFrontOfficeBundle:UserFront:getHomeConnectionPage }
+    
+flowber_front_office_signup_details:
+    path: /inscription/
+    defaults: { _controller: FlowberFrontOfficeBundle:UserFront:getSignUpDetailsPage }
