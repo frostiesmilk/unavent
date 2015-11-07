@@ -1,16 +1,16 @@
 <?php
 
-namespace Wybe\FrontOfficeBundle\Entity;
+namespace Flowber\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Subtitle
+ * Phone
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Subtitle
+class Phone
 {
     /**
      * @var integer
@@ -24,9 +24,16 @@ class Subtitle
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text")
+     * @ORM\Column(name="number", type="string", length=255)
      */
-    private $text;
+    private $number;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="main", type="boolean")
+     */
+    private $main;
 
     /**
      * @var \DateTime
@@ -42,7 +49,7 @@ class Subtitle
     {
         $this->dateC = new \Datetime();
     }
-    
+
     /**
      * Get id
      *
@@ -54,33 +61,56 @@ class Subtitle
     }
 
     /**
-     * Set text
+     * Set number
      *
-     * @param string $text
-     * @return Subtitle
+     * @param string $number
+     * @return Phone
      */
-    public function setText($text)
+    public function setNumber($number)
     {
-        $this->text = $text;
+        $this->number = $number;
 
         return $this;
     }
 
     /**
-     * Get text
+     * Get number
      *
      * @return string 
      */
-    public function getText()
+    public function getNumber()
     {
-        return $this->text;
+        return $this->number;
+    }
+
+    /**
+     * Set main
+     *
+     * @param boolean $main
+     * @return Phone
+     */
+    public function setMain($main)
+    {
+        $this->main = $main;
+
+        return $this;
+    }
+
+    /**
+     * Get main
+     *
+     * @return boolean 
+     */
+    public function getMain()
+    {
+        return $this->main;
     }
 
     /**
      * Set dateC
      *
      * @param \DateTime $dateC
-     * @return Subtitle
+     * @return Phone
      */
     public function setDateC($dateC)
     {

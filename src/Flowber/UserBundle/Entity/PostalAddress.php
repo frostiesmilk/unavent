@@ -1,6 +1,6 @@
 <?php
 
-namespace Wybe\FrontOfficeBundle\Entity;
+namespace Flowber\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,6 +20,13 @@ class PostalAddress
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
 
     /**
      * @var string
@@ -71,18 +78,6 @@ class PostalAddress
     private $lattitude;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
-     */
-    private $name;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="postalAddress")
-     */
-    private $user;
-    
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateC", type="datetime")
@@ -105,6 +100,29 @@ class PostalAddress
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return PostalAddress
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -289,51 +307,5 @@ class PostalAddress
     public function getDateC()
     {
         return $this->dateC;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string name
-     * @return PostalAddress
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Wybe\FrontOfficeBundle\Entity\User $user
-     * @return PostalAddress
-     */
-    public function setUser(\Wybe\FrontOfficeBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Wybe\FrontOfficeBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }

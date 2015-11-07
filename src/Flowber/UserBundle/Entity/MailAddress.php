@@ -1,16 +1,16 @@
 <?php
 
-namespace Wybe\FrontOfficeBundle\Entity;
+namespace Flowber\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Friendship
+ * MailAddress
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Friendship
+class MailAddress
 {
     /**
      * @var integer
@@ -22,9 +22,18 @@ class Friendship
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wybe\FrontOfficeBundle\Entity\User", inversedBy="postalAddress")
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255)
      */
-    private $user;
+    private $mail;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="main", type="boolean")
+     */
+    private $main;
 
     /**
      * @var \DateTime
@@ -32,7 +41,7 @@ class Friendship
      * @ORM\Column(name="dateC", type="datetime")
      */
     private $dateC;
-
+    
     /**
      * Constructor
      */
@@ -40,7 +49,7 @@ class Friendship
     {
         $this->dateC = new \Datetime();
     }
-    
+
     /**
      * Get id
      *
@@ -52,33 +61,56 @@ class Friendship
     }
 
     /**
-     * Set user
+     * Set mail
      *
-     * @param string $user
-     * @return Friendship
+     * @param string $mail
+     * @return MailAddress
      */
-    public function setUser($user)
+    public function setMail($mail)
     {
-        $this->user = $user;
+        $this->mail = $mail;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get mail
      *
      * @return string 
      */
-    public function getUser()
+    public function getMail()
     {
-        return $this->user;
+        return $this->mail;
+    }
+
+    /**
+     * Set main
+     *
+     * @param boolean $main
+     * @return MailAddress
+     */
+    public function setMain($main)
+    {
+        $this->main = $main;
+
+        return $this;
+    }
+
+    /**
+     * Get main
+     *
+     * @return boolean 
+     */
+    public function getMain()
+    {
+        return $this->main;
     }
 
     /**
      * Set dateC
      *
      * @param \DateTime $dateC
-     * @return Friendship
+     * @return MailAddress
      */
     public function setDateC($dateC)
     {
