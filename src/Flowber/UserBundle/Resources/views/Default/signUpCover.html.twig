@@ -1,0 +1,66 @@
+{# Sign Up cover #}
+<div class="jumbotron signin-cover" style="background-image: url({{asset('bundles/flowberuser/images/signIn/cover-streetsheeps.jpg')}})">    
+    <div class="container" >
+        <div class="row">       
+            <div class="col-md-5 col-md-offset-7 signup-form-col">
+                <!-- Signup form -->
+                
+                <h2>Inscrivez-vous !</h2>
+                <form method="post" action="{{ path('flowber_front_office_signup_details') }}">                    
+                    <div class="form-group form-inline">                      
+                      <input type="text" class="form-control form-inline-half" id="signup-firstname" placeholder="Prénom">
+                      <input type="text" class="form-control form-inline-half" id="signup-lastname" placeholder="Nom">
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="signup-gender" id="signup-gender-female" value="female">Femme
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="signup-gender" id="signup-gender-male" value="male">Homme
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="signup-gender" id="signup-gender-other" value="other">Autre
+                        </label>
+                    </div>
+                    <div class="form-group form-inline">
+                        <div id="birthday-datepicker" class="birthday-datepicker"></div> <span>Date de naissance</span>
+                    </div>
+                    <div class="form-group">              
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <input type="email" class="form-control form-inline-input" id="signup-email" placeholder="Adresse Email">
+                    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><img src="{{asset('bundles/flowberfrontoffice/images/icons/password-lock.png')}}"/></span>
+                            <input type="password" class="form-control form-inline-input" id="signup-password1" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><img src="{{asset('bundles/flowberfrontoffice/images/icons/password-lock.png')}}"/></span>
+                            <input type="password" class="form-control form-inline-input" id="signup-password1" placeholder="Re-confirmer le Mot de passe">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default form-inline-button form-validation">Inscription</button>
+                </form>
+                
+                <!-- Email confirmation 
+                <h2>On y est presque ! Confirmez votre adresse e-mail</h2>
+                <p class="email-confirmation-text">
+                    Un e-mail a été envoyé à votre adresse <span class="email-confirmation-email">example@abc.com</span>. Cliquez sur le lien de confirmation dans l'e-mail, ou entrez ci-dessous le code de confirmation.
+                </p>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="integer" length="4" class="form-control" id="signup-confirmation-code" placeholder="Code à 4 chiffres"/>
+                        </div>
+                        <button type="submit" class="btn btn-default footer-newsletter-submit">Valider</button>
+                    </div>
+                </form>-->
+            </div>
+        </div>
+    </div>
+</div>

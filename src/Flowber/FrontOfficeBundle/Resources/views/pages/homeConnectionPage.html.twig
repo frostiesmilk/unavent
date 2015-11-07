@@ -1,0 +1,23 @@
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/signin.css') }}"/> 
+{% endblock %}
+
+{% block body %}   
+    <!-- Sign In menu -->
+    {% include 'FlowberUserBundle::partials/signin-main-navbar.html.twig' %}
+
+    <!-- Sign Up Cover -->  
+    {% include 'FlowberUserBundle::Default/signUpCover.html.twig' %}
+
+    <!-- Footer -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}
+{% endblock %}

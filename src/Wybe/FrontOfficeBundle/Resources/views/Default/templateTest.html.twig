@@ -1,0 +1,37 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/profile.css') }}"/> 
+{% endblock %}
+
+{% block navbarToggles %}
+    {{parent()}}
+    <button type="button" class="navbar-toggle navbar-toggle-push" data-toggle="offcanvas" data-target=".navmenu" date-placement="right">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+{% endblock %}
+
+{% block body %}
+
+    <!-- Main menu -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
+    <div class="container">
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Widget 1</h1>
+                {{ include(data.widgetView, { 'data': data }) }}
+            </div>
+            <div class="col-md-6">
+                <h1>Widget 2</h1>
+                {{ include(data.widgetView, { 'data': data }) }}
+            </div>
+        </div>
+        
+    </div>
+    
+{% endblock %}

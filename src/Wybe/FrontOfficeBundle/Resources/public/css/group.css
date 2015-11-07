@@ -127,7 +127,7 @@ and open the template in the editor.
   padding: 10px;
 }
 .group-container .group-blog-new-post .group-blog-new-post-content .group-blog-new-post-event {
-  padding-top: 20px;
+  padding: 20px;
 }
 .group-container .group-blog-new-post .group-blog-new-post-content .group-blog-new-post-event #map {
   height: 300px;

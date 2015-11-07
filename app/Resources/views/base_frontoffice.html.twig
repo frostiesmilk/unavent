@@ -5,18 +5,23 @@
         <title>{% block title %}Titre de page dans base_frontoffice{% endblock %}</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/jasny-bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/frontoffice-common.css') }}">     
-        <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/bootstrap-image-gallery.css') }}">    
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/main.css') }}">   
-        <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/footer.css') }}">
-           
+            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/jasny-bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/flowberfrontoffice/css/frontoffice-common.css') }}">     
+            <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+            <link rel="stylesheet" href="{{ asset('bundles/flowberfrontoffice/css/bootstrap-image-gallery.css') }}">    
+            <link rel="stylesheet" href="{{ asset('bundles/flowberfrontoffice/css/main.css') }}">   
+            <link rel="stylesheet" href="{{ asset('bundles/flowberfrontoffice/css/footer.css') }}">           
         {% endblock %}
     </head>
     <body>
+        
+    <div class="navbar navbar-push navbar-default navbar-fixed-top hidden-md hidden-lg">
+    {% block navbarToggles %}
+        <!-- Menu toggles -->
+    {% endblock %}
+    </div>
         
     {% block body %}{% endblock %}
             
@@ -28,15 +33,10 @@
         <script src="{{ asset('assets/js/jasny-bootstrap.js') }}"></script>
         <script src="{{ asset('assets/js/angular.js') }}"></script>        
         
-        <script src="{{ asset('bundles/wybefrontoffice/js/main-sticky-menu.js') }}"></script>    
-        <script src="{{ asset('bundles/wybefrontoffice/js/jquery-birthday-picker.min.js') }}"></script>
-        <script src="{{ asset('bundles/wybefrontoffice/js/main.js') }}"></script>
-        <!-- Customizable Affix navbar -->
-        <script>
-            $(window).load(function(){
-                $("#nav-stick").sticky({ topSpacing: 40 });
-            });
-        </script>
+        <script src="{{ asset('bundles/flowberfrontoffice/js/main-sticky-menu.js') }}"></script>    
+        <script src="{{ asset('bundles/flowberfrontoffice/js/jquery-birthday-picker.min.js') }}"></script>
+        <script src="{{ asset('bundles/flowberfrontoffice/js/main.js') }}"></script>
+        
         <script>
             $("#birthday-datepicker").birthdayPicker();
         </script>

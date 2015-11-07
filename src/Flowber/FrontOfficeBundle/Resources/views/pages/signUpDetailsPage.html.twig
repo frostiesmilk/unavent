@@ -1,0 +1,27 @@
+{# Flowber\FrontOfficeBundle\Resources\views\pages\signUpDetailsPage.html.twig #}
+
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+    <!-- For connection navbar -->
+    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/signin.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/signup-details.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    <!-- Main menu -->
+    {% include 'FlowberUserBundle::partials/signin-main-navbar.html.twig' %}
+    
+    <!-- Sign Up details content -->
+    {% include 'FlowberUserBundle::Default/signUpDetails.html.twig' %}   
+
+    <!-- Footer-->
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}                
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}
+{% endblock %}

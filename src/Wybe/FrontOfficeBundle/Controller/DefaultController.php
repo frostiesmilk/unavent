@@ -14,9 +14,21 @@ use Wybe\FrontOfficeBundle\Entity\Job;
 use Wybe\FrontOfficeBundle\Entity\Hobby;
 use Wybe\FrontOfficeBundle\Entity\Groups;
 use Wybe\FrontOfficeBundle\Entity\Event;
+use Twig_Extension_StringLoader;
 
 class DefaultController extends Controller
 {
+    public function getPageTestAction(){
+        $twig = $this->get('twig');
+        $twig->addExtension(new Twig_Extension_StringLoader());
+        
+        $widgetView = 'WybeFrontOfficeBundle:Default:widgetTest.html.twig';
+        $name = "marie";
+        $data = array("widgetView"=>$widgetView, "name"=>$name);
+        
+        return $this->render('WybeFrontOfficeBundle:Default:templateTest.html.twig', array("data"=>$data));
+    }
+    
     public function indexAction()
     {  
         //$addd = new Description;
