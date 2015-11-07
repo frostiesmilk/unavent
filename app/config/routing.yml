@@ -1,3 +1,7 @@
+flowber_page_manager:
+    resource: "@FlowberPageManagerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 flowber_front_office:
     resource: "@FlowberFrontOfficeBundle/Resources/config/routing.yml"
     prefix:   /

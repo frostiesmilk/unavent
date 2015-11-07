@@ -1,0 +1,3 @@
+flowber_page_manager_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FlowberPageManagerBundle:Default:index }

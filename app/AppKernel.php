@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Wybe\FrontOfficeBundle\WybeFrontOfficeBundle(),
             new Flowber\UserBundle\FlowberUserBundle(),
             new Flowber\FrontOfficeBundle\FlowberFrontOfficeBundle(),
+            new Flowber\PageManagerBundle\FlowberPageManagerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
