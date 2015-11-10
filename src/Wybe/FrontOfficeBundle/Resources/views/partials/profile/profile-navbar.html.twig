@@ -1,6 +1,7 @@
 {# empty Twig template #}
 {#% extends 'FlowberFrontOfficeBundle:partials:common:main-connected-navbar.html.twig' %#}
 
+<!-- Secondary menu for >= md-screens-->
 <nav id="nav-stick" class="navbar navbar-default navbar-second navbar-sm">
     <div class="container">
         <div class="navbar-header">
@@ -37,7 +38,7 @@
                     </a>
                 </li>
                 <li>
-                    <a id="back-top" href="#">
+                    <a class="back-top" href="#">
                         <span class="fa fa-caret-up"></span>
                     </a>
                 </li>
@@ -45,38 +46,6 @@
         </div>
     </div>
 </nav>
-
-<!-- Small screen menu -->
-<div class="navmenu-second navmenu-default navmenu-fixed-right navmenu-main offcanvas-sm">
-    <a class="navmenu-brand visible-md visible-lg" href="#">Project name right</a>
-    <ul class="nav navmenu-nav">
-        <li class="active"><a href="./">Slide in</a></li>
-        <li><a href="../navmenu-push/">Push</a></li>
-        <li><a href="../navmenu-reveal/">Reveal</a></li>
-        <li><a href="../navbar-offcanvas/">Off canvas navbar</a></li>
-    </ul>
-    <ul class="nav navmenu-nav">
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu navmenu-nav">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<!-- Toggle is implemented in parent view -->
-
-
-<!-- END small screen menu -->
 
 <!-- Modal -->
 <div class="modal fade" id="modal-wink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

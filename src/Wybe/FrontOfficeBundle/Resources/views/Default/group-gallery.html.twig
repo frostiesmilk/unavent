@@ -1,10 +1,17 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
 
+{% block smallMenu %}
+    {{parent()}}
+    <!-- BEGIN small screen menu -->
+    {% include 'WybeFrontOfficeBundle::partials/group/group-navbar-small.html.twig' %}
+    <!-- END small screen menu -->
+{% endblock %}
+
 {% block body %}
 
     <!-- navbar top -->
-    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- User Banner -->  
     {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
