@@ -21,6 +21,10 @@ and open the template in the editor.
   font-family: erasMediumItc;
   src: url(../fonts/ERASMD.TTF);
 }
+@font-face {
+  font-family: amaranthRegular;
+  src: url(../fonts/Amaranth-Regular.ttf);
+}
 /* Colored backgrounds */
 .background-dark-blue {
   background-color: #293540;
@@ -124,13 +128,11 @@ and open the template in the editor.
 .signin-cover .signup-form-col form .input-group-addon img {
   height: 14px;
 }
-.signin-cover .signup-form-col form .birthday-datepicker {
+.signin-cover .signup-form-col form .birthday-datepicker select {
+  height: 33px;
   color: grey;
   display: inline-block;
   vertical-align: middle;
-}
-.signin-cover .signup-form-col form .birthday-datepicker select {
-  height: 33px;
 }
 .signin-cover .signup-form-col .email-confirmation-email {
   font-weight: bold;

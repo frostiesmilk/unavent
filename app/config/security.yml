@@ -2,6 +2,7 @@ security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
         Flowber\UserBundle\Entity\User: plaintext
+        FOS\UserBundle\Model\UserInterface: bcrypt
         
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -28,6 +29,7 @@ security:
             form_login:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
+                csrf_provider: security.csrf.token_manager
             logout:
                 path:   fos_user_security_logout
                 target: flowber_front_office_signin_homepage

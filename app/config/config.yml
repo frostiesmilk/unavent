@@ -84,6 +84,8 @@ fos_user:
     firewall_name: main                              # Le nom du firewall derrière lequel on utilisera ces utilisateurs
     user_class:    Flowber\UserBundle\Entity\User    # La classe de l'entité User que nous utilisons
     registration:
+        form:
+            type: flowber_user_registration
         confirmation:
             enabled: true
             from_email:
