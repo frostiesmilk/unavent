@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Flowber\FrontOfficeBundle\FlowberFrontOfficeBundle(),
             new Flowber\PageManagerBundle\FlowberPageManagerBundle(),
             new \FOS\UserBundle\FOSUserBundle,
+            new Flowber\ProfileBundle\FlowberProfileBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

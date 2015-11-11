@@ -1,0 +1,4 @@
+services:
+#    flowber_profile.example:
+#        class: Flowber\ProfileBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

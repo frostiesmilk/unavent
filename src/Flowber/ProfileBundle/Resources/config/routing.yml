@@ -1,0 +1,3 @@
+flowber_profile_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FlowberProfileBundle:Default:index }

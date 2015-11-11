@@ -57,11 +57,6 @@ class User extends BaseUser
     private $postalAddress;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\MailAddress", cascade={"persist"})
-     */
-    private $mailAddress;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\Phone", cascade={"persist"})
      */
     private $phone;
@@ -79,7 +74,6 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->mailAddress = new \Doctrine\Common\Collections\ArrayCollection();
         $this->postalAddress = new \Doctrine\Common\Collections\ArrayCollection();
         $this->phone = new \Doctrine\Common\Collections\ArrayCollection();
         
@@ -209,52 +203,6 @@ class User extends BaseUser
     public function removePostalAddress(\Flowber\UserBundle\Entity\PostalAddress $postalAddress)
     {
         $this->postalAddress->removeElement($postalAddress);
-    }
-
-    /**
-     * Set mailAddress
-     *
-     * @param string $mailAddress
-     * @return User
-     */
-    public function setMailAddress($mailAddress)
-    {
-        $this->mailAddress = $mailAddress;
-
-        return $this;
-    }
-
-    /**
-     * Get mailAddress
-     *
-     * @return string 
-     */
-    public function getMailAddress()
-    {
-        return $this->mailAddress;
-    }
-    
-    /**
-     * Add mailAddress
-     *
-     * @param \Flowber\UserBundle\Entity\MailAddress $mailAddress
-     * @return User
-     */
-    public function addMailAddress(\Flowber\UserBundle\Entity\MailAddress $mailAddress)
-    {
-        $this->mailAddress[] = $mailAddress;
-
-        return $this;
-    }
-
-    /**
-     * Remove mailAddress
-     *
-     * @param \Flowber\UserBundle\Entity\MailAddress $mailAddress
-     */
-    public function removeMailAddress(\Flowber\UserBundle\Entity\MailAddress $mailAddress)
-    {
-        $this->mailAddress->removeElement($mailAddress);
     }
 
     /**
