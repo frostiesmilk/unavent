@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @author Equina
  */
 class RegistrationController extends BaseController{
-    /*public function registerAction(Request $request) {
-        
-    }
-*/}
+//    public function registerAction(Request $request) {
+//        
+//    }
+}

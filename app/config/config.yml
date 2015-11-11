@@ -74,7 +74,9 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
+    auth_mode: "%mailer_auth_mode%"  # added
     host:      "%mailer_host%"
+    port:      "%mailer_port%"       # added 
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
@@ -83,3 +85,15 @@ fos_user:
     db_driver:     orm                               # Le type de BDD à utiliser
     firewall_name: main                              # Le nom du firewall derrière lequel on utilisera ces utilisateurs
     user_class:    Flowber\UserBundle\Entity\User    # La classe de l'entité User que nous utilisons
+    service:
+        mailer: fos_user.mailer.twig_swift
+    registration:
+        form:
+            type: flowber_user_registration
+        confirmation:
+            enabled: true
+            from_email:
+                address:            info@wybe-site.com
+                sender_name:        Flowber            
+            template: FlowberUserBundle:email:registration_confirmation.html.twig
+    
