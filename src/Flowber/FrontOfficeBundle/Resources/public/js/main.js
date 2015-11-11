@@ -128,9 +128,10 @@
 /**
  * Back to top animation
  */
-$('#back-top').each(function(){
+$('.back-top').each(function(){
     $(this).click(function(){ 
         $('html,body').animate({ scrollTop: 0 }, 'fast');
+        console.log("yo");
         return false; 
     });
 });

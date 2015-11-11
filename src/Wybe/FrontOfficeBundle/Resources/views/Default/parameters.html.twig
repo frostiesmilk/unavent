@@ -9,7 +9,9 @@
 {% block body %}
 
     <!-- Navbar top -->
-    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <!-- parameters content -->
     <div class="container settings-container">
         <div class="row">
             <div class="col-md-12">
@@ -137,4 +139,9 @@
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
     
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #} 
 {% endblock %}

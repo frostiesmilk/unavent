@@ -18,8 +18,19 @@
     <body>
         
     <div class="navbar navbar-push navbar-default navbar-fixed-top hidden-md hidden-lg">
-    {% block navbarToggles %}
+    {% block smallMenu %}
         <!-- Menu toggles -->
+        <button type="button" class="navbar-toggle navbar-toggle-push" data-toggle="offcanvas" data-target=".navmenu" data-disable-scrolling="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="input-group navbar-search">
+            <input type="text" class="form-control" placeholder="Rechercher">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
     {% endblock %}
     </div>
         
@@ -39,6 +50,13 @@
         
         <script>
             $("#birthday-datepicker").birthdayPicker();
+        </script>
+        
+        <!-- Customizable Affix navbar -->
+        <script>
+            $(window).load(function(){
+                $("#nav-stick").sticky({ topSpacing: 40 });
+            });
         </script>
     {% endblock %}
     

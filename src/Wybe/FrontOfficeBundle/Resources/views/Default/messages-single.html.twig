@@ -9,7 +9,7 @@
 {% block body %}
 
     <!-- navbar top -->
-    {% include 'WybeFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <div class="messages-container">
         <div class="container">
@@ -30,8 +30,12 @@
     </div>
    
     <!-- footer -->                  
-    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}    
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
     
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}    
     <script src="{{ asset('bundles/wybefrontoffice/js/messages.js') }}"></script>
-    
 {% endblock %}
