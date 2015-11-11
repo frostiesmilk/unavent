@@ -15,8 +15,13 @@ class PhoneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number',     'text')
-            ->add('main',       'checkbox')
+            ->add('number',     'text', array(
+                'label' => 'Numéro de téléphone',
+                'attr' => array(
+                    'placeholder' => 'Exemple : 0612345678',
+                    'class' => 'form-control'
+                ))
+            )
         ;
     }
     

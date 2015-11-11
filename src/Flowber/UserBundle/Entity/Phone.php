@@ -48,6 +48,7 @@ class Phone
     public function __construct()
     {
         $this->dateC = new \Datetime();
+        $this->main = true;
     }
 
     /**

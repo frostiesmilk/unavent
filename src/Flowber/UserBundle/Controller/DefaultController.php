@@ -15,7 +15,37 @@ use Flowber\UserBundle\Form\PhoneType;
 class DefaultController extends Controller
 {
     public function indexAction()
-    {      
-        return $this->render('FlowberUserBundle:Default:index.html.twig');
+    {   
+        $phone = new Phone;
+        $formPhone = $this->createForm(new PhoneType, $phone);
+        $postal = new PostalAddress;
+        $formPostal = $this->createForm(new PostalAddressType, $postal);
+
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') {
+            $formPhone->bind($request);
+            $formPostal->bind($request);
+
+            if ($formPhone->isValid() && $formPostal->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($phone);
+                $em->persist($postal);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('flowber_user_homepage_bis'));
+            }
+        }
+        
+        return $this->render('FlowberUserBundle:Default:index.html.twig', 
+                array(
+                    'formPhone' => $formPhone->createView(), 
+                    'formPostal' => $formPostal->createView()
+                ));
+    }
+    
+    public function index2Action()
+    {   
+
+        return $this->render('FlowberUserBundle:Default:test2.html.twig');
     }
 }
