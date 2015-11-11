@@ -1,7 +1,11 @@
 flowber_user_homepage:
     path:     /test
     defaults: { _controller: FlowberUserBundle:Default:index }
-        
+
+flowber_user_homepage_bis:
+    path:     /test2
+    defaults: { _controller: FlowberUserBundle:Default:index2 }
+     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

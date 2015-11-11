@@ -15,10 +15,27 @@ class PostalAddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('address',        'text')
-            ->add('zipcode',        'text')
-            ->add('city',           'text')
-            ->add('country',        'text')
+            ->add('address',        'text', array(
+                'label' => 'Adresse postale',
+                'attr' => array(
+                    'class' => 'form-control'
+                )))
+            ->add('zipcode',        'text', array(
+                'label' => 'Code postal',
+                'attr' => array(
+                    'class' => 'form-control'
+                )))
+            ->add('city',           'text', array(
+                'label' => 'Ville',
+                'attr' => array(
+                    'class' => 'form-control'
+                )))
+            ->add('country',        'text', array(
+                'label' => 'Pays',
+                'attr' => array(
+                    'value' => 'France',
+                    'class' => 'form-control'
+                )))
         ;
     }
     
