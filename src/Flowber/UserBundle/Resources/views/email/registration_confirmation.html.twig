@@ -1,0 +1,19 @@
+{# Flowber/UserBundle/Resources/views/email/password_resetting.email.twig #}
+
+{% block subject %}FlowBer - Confirmation d'inscription{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    <p>Bienvenue sur FlowBer, {{user.surname}} !</p>
+
+    <p>Pour confirmer la création de votre compte, cliquez sur le lien ci-dessous:</p>
+    <a href="{{confirmationUrl}}">{{confirmationUrl}}</a>
+
+    <p>Vous pourrez vous connecter grâce à votre adresse e-mail utilisée lors de l'inscription, ainsi que du mot de passe.</p>
+
+    <p>A très bientôt pour de nouvelles aventures sur FlowBer!</p>
+{% endblock %}
