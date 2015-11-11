@@ -10,6 +10,6 @@ class HomeController extends Controller
 {
     public function homePageAction(Request $request)
     {
-        return $this->render('FlowberUserBundle:Default:homePage.html.twig');
+        return $this->render('FlowberUserBundle:Default:index.html.twig');
     }
 }

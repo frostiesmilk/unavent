@@ -3,14 +3,14 @@
 namespace Flowber\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use FOS\UserBundle\Model\User as BaseUser;
 /**
  * User
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var integer
@@ -19,7 +19,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -34,14 +34,21 @@ class User
      * @ORM\Column(name="surname", type="string", length=255)
      */
     private $surname;
-
+    
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthdate", type="datetime")
      */
     private $birthdate;
-
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="sex", type="string", length=255)
+     */
+    private $sex;
+    
     /**
      * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\PostalAddress", cascade={"persist"})
      */
@@ -56,14 +63,7 @@ class User
      * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\Phone", cascade={"persist"})
      */
     private $phone;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
-
+    
     /**
      * @var \DateTime
      *
@@ -76,6 +76,7 @@ class User
      */
     public function __construct()
     {
+        parent::__construct();
         $this->mailAddress = new \Doctrine\Common\Collections\ArrayCollection();
         $this->postalAddress = new \Doctrine\Common\Collections\ArrayCollection();
         $this->phone = new \Doctrine\Common\Collections\ArrayCollection();
@@ -344,5 +345,54 @@ class User
     public function getDateC()
     {
         return $this->dateC;
+    }   
+
+    /**
+     * Set sex
+     *
+     * @param string $sex
+     * @return User
+     */
+    public function setSex($sex)
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * Get sex
+     *
+     * @return string 
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+    
+    /**
+     * Sets the email.
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->setUsername($email);
+
+        return parent::setEmail($email);
+    }
+    
+    /**
+     * Set the canonical email.
+     *
+     * @param string $emailCanonical
+     * @return User
+     */
+    public function setEmailCanonical($emailCanonical)
+    {
+        $this->setUsernameCanonical($emailCanonical);
+
+        return parent::setEmailCanonical($emailCanonical);
     }
 }

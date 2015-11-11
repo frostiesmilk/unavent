@@ -56,9 +56,9 @@ class DefaultController extends Controller
            // $ev->setTitle('hahatitle');
         
 //               // On récupère l'EntityManager
-        $em = $this->getDoctrine()->getManager()->getRepository('WybeFrontOfficeBundle:User');
+      //  $em = $this->getDoctrine()->getManager()->getRepository('WybeFrontOfficeBundle:User');
         
-             $user = $em->find(7);
+            // $user = $em->find(7);
              //$user->addGroup($gr);
 //           $user->addJob($job);
            // $user->addEvent($ev);
@@ -76,9 +76,7 @@ class DefaultController extends Controller
         // Étape 2 : On « flush » tout ce qui a été persisté avant
        // $em->flush();
         
-        return $this->render('WybeFrontOfficeBundle:Default:profile.html.twig', array(
-            'user' => $user
-            ));
+        return $this->render('WybeFrontOfficeBundle:Default:profile.html.twig');
     }
     
     public function getSignInAction()

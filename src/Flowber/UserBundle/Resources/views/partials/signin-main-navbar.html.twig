@@ -1,4 +1,3 @@
-{# empty Twig template #}
 <nav class="navbar navbar-default navbar-home">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -14,29 +13,33 @@
                 <span>UNAVENT</span>
             </a>
         </div>
-
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="content-navbar-main">
-            <form method="post" action="{{ path('wybe_front_office_profile') }}" class="navbar-right navbar-form navbar-connection-form">
+            <form method="post" action="{{ path("fos_user_security_check") }}" class="navbar-right navbar-form navbar-connection-form">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                 <table>                    
                     <tr>
                         <td>
                             <label class="sr-only" for="connection-email">Email address</label>
-                            <input type="email" class="form-control navbar-connection-form-input" id="connection-email" placeholder="Adresse e-mail">
+                            <input class="form-control navbar-connection-form-input" type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Adresse e-mail" />
                         </td>
                         <td>
                             <label class="sr-only" for="connection-password">Password</label>
-                            <input type="password" class="form-control navbar-connection-form-input" id="connection-password" placeholder="Mot de passe">                 
+                            <input type="password" class="form-control navbar-connection-form-input" id="password" name="_password" required="required" placeholder="Mot de passe"/>
                         </td>
                         <td>
-                            <button type="submit" class="btn btn-default navbar-connection-form-submit">Connexion</button>
+                            <input type="submit" class="btn btn-default navbar-connection-form-submit" id="_submit" name="_submit" value="Connexion" />
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="checkbox navbar-connection-form-keep">
                                 <label>
-                                    <input type="checkbox"> Maintenir la connexion
+                                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                        Maintenir la connexion
                                 </label>
                             </div>
                         </td>

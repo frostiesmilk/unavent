@@ -4,7 +4,7 @@ flowber_front_office:
 
 flowber_user:
     resource: "@FlowberUserBundle/Resources/config/routing.yml"
-    prefix:   /flowber-user
+    prefix:   /user
 
 wybe_front_office:
     resource: "@WybeFrontOfficeBundle/Resources/config/routing.yml"

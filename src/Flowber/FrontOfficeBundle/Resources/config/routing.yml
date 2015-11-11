@@ -6,6 +6,10 @@ flowber_front_office_signin_homepage:
     path: /
     defaults: { _controller: FlowberFrontOfficeBundle:UserFront:getHomeConnectionPage }
     
+flowber_front_office_connected_homepage:
+    path: /home
+    defaults: { _controller: FlowberFrontOfficeBundle:UserFront:getHomeConnectedPage }  
+    
 flowber_front_office_signup_details:
     path: /inscription/
     defaults: { _controller: FlowberFrontOfficeBundle:UserFront:getSignUpDetailsPage }

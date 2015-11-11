@@ -78,3 +78,16 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_user:
+    db_driver:     orm                               # Le type de BDD à utiliser
+    firewall_name: main                              # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:    Flowber\UserBundle\Entity\User    # La classe de l'entité User que nous utilisons
+    registration:
+        confirmation:
+            enabled: true
+            from_email:
+                address:            boiventmarie@gmail.com
+                sender_name:        Flowber
+    service:
+        mailer: fos_user.mailer.twig_swift
