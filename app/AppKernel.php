@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Wybe\FrontOfficeBundle\WybeFrontOfficeBundle(),
             new Flowber\UserBundle\FlowberUserBundle(),
             new Flowber\FrontOfficeBundle\FlowberFrontOfficeBundle(),
+            new Flowber\PageManagerBundle\FlowberPageManagerBundle(),
             new \FOS\UserBundle\FOSUserBundle,
         );
 
