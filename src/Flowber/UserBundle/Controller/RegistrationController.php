@@ -6,35 +6,18 @@
  * and open the template in the editor.
  */
 
+namespace Flowber\UserBundle\Controller;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
- * Description of RegistrationController
  *
- * @author Marie
+ * @author Equina
  */
-class RegistrationController {
-
-    /**
-     * Tell the user to check his email provider
-     */
-    public function checkEmailAction()
-    {
-
+class RegistrationController extends BaseController{
+    public function registerAction(Request $request) {
+        
     }
-
-    /**
-     * Receive the confirmation token from user email provider, login the user
-     */
-    public function confirmAction(Request $request, $token)
-    {
-
-    }
-    
-     /**
-     * Receive the confirmation token from user email provider, login the user
-     */   
-    public function confirmedAction()
-    {
-
-    }
-
 }
