@@ -108,7 +108,7 @@ class DefaultController extends Controller
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
-            'form' => $form->createView(),
+            'registration_form' => $form->createView(),
         )));
     }
     

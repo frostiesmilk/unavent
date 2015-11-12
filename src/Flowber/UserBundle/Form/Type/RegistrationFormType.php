@@ -38,6 +38,7 @@ class RegistrationFormType extends AbstractType{
                      'expanded' => true,
                      'multiple' => false
              ))
+            ->add('save', 'submit')
         ;
     }
     
