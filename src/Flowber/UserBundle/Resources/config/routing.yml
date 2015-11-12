@@ -1,5 +1,5 @@
 flowber_user_homepage:
-    path:     /test
+    path:     /inscription
     defaults: { _controller: FlowberUserBundle:Default:index }
 
 flowber_user_homepage_bis:

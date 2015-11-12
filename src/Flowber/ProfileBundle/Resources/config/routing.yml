@@ -1,3 +1,7 @@
 flowber_profile_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: FlowberProfileBundle:Default:index }
+    path:     /profil
+    defaults: { _controller: FlowberProfileBundle:Default:getProfile }
+
+flowber_profile_modif_homepage:
+    path:     /profil/modifier
+    defaults: { _controller: FlowberProfileBundle:Default:getProfileModifier }

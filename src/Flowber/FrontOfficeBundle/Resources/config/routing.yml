@@ -1,7 +1,7 @@
 flowber_front_office_signin_homepage:
     path: /
     defaults: { _controller: FlowberUserBundle:Default:getHomeConnectionPage }
-    
+       
 flowber_front_office_connected_homepage:
     path: /modificationlogin
     defaults: { _controller: FlowberProfileBundle:Default:getModifProfilePage }  

@@ -50,8 +50,19 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
                             
     <!-- User Cover -->  
-    {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
-    
+    <div class="jumbotron generic-cover" style="background-image: url({{asset('bundles/flowberprofile/images/Default/coverPictureDefault.png')}})">    
+        <div class="container" >
+            <div class="row-fluid">       
+                <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset('bundles/flowberprofile/images/Default/profilePictureDefault.png')}}')"></div> 
+                <div class="generic-cover-title">
+                    <h1 class="generic-cover-title-name">{{ user.getFirstname }} {{ user.getSurname }}</h1>
+                    <p class="generic-cover-title-description">Sous-titre de la bannière</p>
+                </div>                
+            </div>
+        </div>
+    </div>    
+                
+                
     <!-- Second menu -->
     {% include 'WybeFrontOfficeBundle::partials/profile/profile-navbar.html.twig' %}
 
@@ -63,10 +74,14 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12 user-profile-element">
                         <div class="user-profile-introduction-text-block">
-                            <h2 class="name">Marie Boivent</h2>
+                            <h2 class="name">{{ user.getFirstname }} {{ user.getSurname }}</h2>
                             <p class="user-job">Gardienne de prairies</p>
-                            <p>18 Mai 1992 (23 ans)<br/>
-                            Saint-Maur-des-Fossés (94210)<br/>
+                            <p>{{ user.getBirthdate|date("d/m/Y") }} (23 ans)<br/>
+                            {% if user.getPostalAddress.count > 0 %}
+                                {% for add in user.getPostalAddress %}
+                                    {{ add.city }} - {{ add.zipcode|number_format(0, '', '') }}
+                                {% endfor %}
+                            {% endif %}
                             </p>
                         </div>
 
@@ -534,4 +549,4 @@
     <!--<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <script src="{{ asset('bundles/wybefrontoffice/js/gallery/bootstrap-image-gallery.js') }}"></script>
     <script src="{{ asset('bundles/wybefrontoffice/js/gallery/blueimp-gallery.js') }}"></script>-->
-{% endblock %}
+{% endblock %}{# empty Twig template #}

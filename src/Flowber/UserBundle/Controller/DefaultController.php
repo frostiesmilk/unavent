@@ -13,10 +13,12 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Flowber\UserBundle\Entity\PostalAddress;
 use Flowber\UserBundle\Form\PostalAddressType;
 use Flowber\UserBundle\Entity\Phone;
+use Flowber\UserBundle\Entity\User;
 use Flowber\UserBundle\Form\PhoneType;
 
 
@@ -114,6 +116,12 @@ class DefaultController extends Controller
     
     public function indexAction()
     {   
+        $user = $this->getUser();
+        
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        
         $phone = new Phone;
         $formPhone = $this->createForm(new PhoneType, $phone);
         $postal = new PostalAddress;
@@ -125,12 +133,15 @@ class DefaultController extends Controller
             $formPostal->bind($request);
 
             if ($formPhone->isValid() && $formPostal->isValid()) {
+                $user->addPostalAddress($postal);
+                $user->addPhone($phone);
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($phone);
                 $em->persist($postal);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('flowber_user_homepage_bis'));
+                return $this->redirect($this->generateUrl('flowber_profile_homepage'));
             }
         }
         
@@ -142,8 +153,13 @@ class DefaultController extends Controller
     }
     
     public function index2Action()
-    {   
-
+    {  
+        
+        $re = $this->getDoctrine()
+                   ->getManager()
+                   ->getRepository('FlowberUserBundle:Phone');
+        $myUser = $re->find(54);
+       
         return $this->render('FlowberUserBundle:Default:test2.html.twig');
     }
 }
