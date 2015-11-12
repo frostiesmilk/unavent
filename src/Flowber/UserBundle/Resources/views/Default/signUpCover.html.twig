@@ -1,12 +1,60 @@
+{% form_theme registration_form 'bootstrap_3_layout.html.twig' %}
+{% form_theme registration_form.firstname 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme registration_form.surname 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme registration_form.sex 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme registration_form.birthdate 'bootstrap_3_horizontal_layout.html.twig' %}
+
 {# Sign Up cover #}
 <div class="jumbotron signin-cover" style="background-image: url({{asset('bundles/flowberuser/images/signIn/cover-streetsheeps.jpg')}})">    
     <div class="container" >
         <div class="row">       
             <div class="col-md-5 col-md-offset-7 signup-form-col">
-                <!-- Signup form -->
-                
+                <!-- Signup form -->                
                 <h2>Inscrivez-vous !</h2>
-                <form name="fos_user_registration_form" method="post" action="{{ path('fos_user_registration_register') }}">
+                {{form_start(registration_form)}}
+                <div class="form_errors">
+                    {{form_errors(registration_form)}}
+                </div>
+                
+                <div class="form-group form-inline"> 
+                    {{form_widget(registration_form.firstname)}}
+                    {{form_widget(registration_form.surname)}}
+                </div> 
+                
+                <div class="form-group">
+                    {{form_widget(registration_form.sex, {'label_attr':{'class':'radio-inline'}})}}
+                </div>
+                
+                <div class="form-group form-inline">
+                    {{form_widget(registration_form.birthdate, {'attr':{'class':'birthday-datepicker'}})}}
+                    <span>Date de naissance</span>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">@</span>
+                    {{form_widget(registration_form.email, {'attr':{'placeholder':'Adresse e-mail', 'class':'form-inline-input'}})}}
+                    </div>
+                </div>
+                    {{form_errors(registration_form.plainPassword.first)}}
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><img src="{{asset('bundles/flowberfrontoffice/images/icons/password-lock.png')}}"/></span>
+                        {{form_widget(registration_form.plainPassword.first, { 'attr':{'placeholder': 'Mot de passe', 'class':'form-inline-input'} })}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><img src="{{asset('bundles/flowberfrontoffice/images/icons/password-lock.png')}}"/></span>
+                        {{form_widget(registration_form.plainPassword.second, { 'attr':{'placeholder': 'Confirmation du mot de passe', 'class':'form-inline-input'} })}}
+                    </div>
+                </div>
+                    {{ form_row(registration_form.save, { 'label': 'Inscription', 'attr':{'class':'form-inline-button form-validation'} }) }}
+                    {{ form_rest(registration_form) }}
+                {{form_end(registration_form)}}    
+                <!-- Sign up form END -->
+                
+                
+                <!--<form name="fos_user_registration_form" method="post" action="{{ path('fos_user_registration_register') }}">
                     <div id="fos_user_registration_form">
                         <div class="form-group form-inline"> 
                             <input type="text" id="fos_user_registration_form_firstname" name="fos_user_registration_form[firstname]" required="required" class="form-control form-inline-half" placeholder="Prénom" />
@@ -55,7 +103,7 @@
                     <div>
                     <button type="submit" class="btn btn-default form-inline-button form-validation">Inscription</button>
                     </div>
-                </form>
+                </form>-->
 
                 <!-- Email confirmation 
                 <h2>On y est presque ! Confirmez votre adresse e-mail</h2>
