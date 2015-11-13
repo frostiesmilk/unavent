@@ -145,7 +145,7 @@ class DefaultController extends Controller
             }
         }
         
-        return $this->render('FlowberUserBundle:Default:index.html.twig', 
+        return $this->render('FlowberUserBundle:Default:signUpDetails.html.twig', 
                 array(
                     'formPhone' => $formPhone->createView(), 
                     'formPostal' => $formPostal->createView()
