@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/profile.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('bundles/flowberprofile/css/profile.css') }}"/> 
 {% endblock %}
 
 {% block smallMenu %}
@@ -57,7 +57,10 @@
                 <div class="generic-cover-title">
                     <h1 class="generic-cover-title-name">{{ user.getFirstname }} {{ user.getSurname }}</h1>
                     <p class="generic-cover-title-description">Sous-titre de la bannière</p>
-                </div>                
+                </div>
+                <div class="generic-cover-edit-button">
+                    <a href="{{ path('flowber_profile_edit') }}" class="btn btn-default">Modifier le profil</a>
+                </div>
             </div>
         </div>
     </div>    

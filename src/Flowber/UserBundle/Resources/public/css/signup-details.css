@@ -21,6 +21,10 @@ and open the template in the editor.
   font-family: erasMediumItc;
   src: url(../fonts/ERASMD.TTF);
 }
+@font-face {
+  font-family: amaranthRegular;
+  src: url(../fonts/Amaranth-Regular.ttf);
+}
 /* Colored backgrounds */
 .background-dark-blue {
   background-color: #293540;

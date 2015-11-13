@@ -1,7 +1,7 @@
-flowber_profile_homepage:
+flowber_profile:
     path:     /profil
     defaults: { _controller: FlowberProfileBundle:Default:getProfile }
 
-flowber_profile_modif_homepage:
+flowber_profile_edit:
     path:     /profil/modifier
     defaults: { _controller: FlowberProfileBundle:Default:getProfileModifier }

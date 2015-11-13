@@ -424,4 +424,11 @@ and open the template in the editor.
 .generic-cover .generic-cover-title .generic-cover-title-description {
   text-shadow: 0.2em 0.2em 0.2em black;
 }
+.generic-cover .generic-cover-edit-button {
+  display: inline-block;
+  float: right;
+}
+.generic-cover .generic-cover-edit-button .btn {
+  background-color: rgba(255, 255, 255, 0.3);
+}
 /*# sourceMappingURL=main.css.map */
