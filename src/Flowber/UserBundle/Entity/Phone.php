@@ -38,16 +38,16 @@ class Phone
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateC", type="datetime")
+     * @ORM\Column(name="creationDate", type="datetime")
      */
-    private $dateC;
+    private $creationDate;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->dateC = new \Datetime();
+        $this->creationDate = new \Datetime();
         $this->main = true;
     }
 
@@ -108,25 +108,25 @@ class Phone
     }
 
     /**
-     * Set dateC
+     * Set creationDate
      *
-     * @param \DateTime $dateC
+     * @param \DateTime $creationDate
      * @return Phone
      */
-    public function setDateC($dateC)
+    public function setCreationDate($creationDate)
     {
-        $this->dateC = $dateC;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
 
     /**
-     * Get dateC
+     * Get creationDate
      *
      * @return \DateTime 
      */
-    public function getDateC()
+    public function getCreationDate()
     {
-        return $this->dateC;
+        return $this->creationDate;
     }
 }

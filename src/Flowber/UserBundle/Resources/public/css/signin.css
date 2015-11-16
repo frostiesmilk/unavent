@@ -92,7 +92,6 @@ and open the template in the editor.
   margin-bottom: initial;
 }
 .signin-cover .signup-form-col {
-  margin-top: 50px;
   border-radius: 2px;
   background-color: rgba(155, 155, 155, 0.3);
   padding: 0px 25px 25px 25px;
@@ -137,6 +136,17 @@ and open the template in the editor.
   display: inline-block;
   vertical-align: middle;
 }
+.signin-cover .signup-form-col form .form-error-custom {
+  color: #A94442;
+  background-color: #F2DEDE;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+}
+.signin-cover .signup-form-col form .form-error-custom span {
+  color: #A94442;
+}
 .signin-cover .signup-form-col .email-confirmation-email {
   font-weight: bold;
 }
@@ -149,7 +159,7 @@ and open the template in the editor.
 }
 .navbar-home .navbar-header .navbar-brand span {
   float: left;
-  font-family: erasMediumItc;
+  font-family: amaranthRegular;
   color: white;
   font-size: 25px;
 }

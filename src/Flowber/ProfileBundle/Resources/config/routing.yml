@@ -1,7 +1,7 @@
-flowber_profile:
-    path:     /profil
-    defaults: { _controller: FlowberProfileBundle:Default:getProfile }
+flowber_current_user_profile:
+    path:     /mon-profil
+    defaults: { _controller: FlowberProfileBundle:Default:getCurrentUserProfile }
 
 flowber_profile_edit:
-    path:     /profil/modifier
+    path:     /mon-profil/modifier
     defaults: { _controller: FlowberProfileBundle:Default:getProfileModifier }

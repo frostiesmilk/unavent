@@ -1,6 +1,6 @@
 flowber_profile:
     resource: "@FlowberProfileBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /profil
 
 flowber_front_office:
     resource: "@FlowberFrontOfficeBundle/Resources/config/routing.yml"

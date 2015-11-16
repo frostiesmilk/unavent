@@ -4,6 +4,7 @@ namespace Flowber\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -32,7 +33,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="surname", type="string", length=255)
      */
     private $surname;
@@ -64,9 +65,9 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateC", type="datetime")
+     * @ORM\Column(name="creationDate", type="datetime")
      */
-    private $dateC;
+    private $creationDate;
 
     /**
      * Constructor
@@ -77,7 +78,24 @@ class User extends BaseUser
         $this->postalAddress = new \Doctrine\Common\Collections\ArrayCollection();
         $this->phone = new \Doctrine\Common\Collections\ArrayCollection();
         
-        $this->dateC = new \Datetime();
+        $this->creationDate = new \Datetime();
+    }
+    
+    /**
+     * Custom Validator
+     * @param ClassMetadata $metadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('plainPassword', new Assert\Length(array(
+            'min'        => 6,
+            //'max'        => 50,
+            'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+            //'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
+        )))
+        ->addPropertyConstraint('birthdate', new Assert\Date(array(
+            'message' => "La date de naissance n'est pas valide."
+        )));
     }
     
     /**
@@ -275,29 +293,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set dateC
-     *
-     * @param \DateTime $dateC
-     * @return User
-     */
-    public function setDateC($dateC)
-    {
-        $this->dateC = $dateC;
-
-        return $this;
-    }
-
-    /**
-     * Get dateC
-     *
-     * @return \DateTime 
-     */
-    public function getDateC()
-    {
-        return $this->dateC;
-    }   
-
-    /**
      * Set sex
      *
      * @param string $sex
@@ -344,5 +339,28 @@ class User extends BaseUser
         $this->setUsernameCanonical($emailCanonical);
 
         return parent::setEmailCanonical($emailCanonical);
+    }
+    
+    /**
+     * Set creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return User
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
     }
 }
