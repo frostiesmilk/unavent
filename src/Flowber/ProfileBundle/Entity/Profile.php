@@ -24,51 +24,57 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="subtitle", type="string", length=255)
+     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
     private $subtitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="job", type="string", length=255)
+     * @ORM\Column(name="job", type="string", length=255, nullable=true)
      */
     private $job;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="hobbies", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Hobby", cascade={"persist"})
+     * @ORM\JoinTable(name="users_hobbies",
+     *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="hobby_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $hobbies;
-
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="profilePicture", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="Flowber\UserBundle\Entity\User", cascade={"persist"})
+     */
+    private $user;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
      */
     private $profilePicture;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist"})
+     */
+    private $profileGallery;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="coverPicture", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
      */
     private $coverPicture;
-
+     
     /**
-     * @var string
-     *
-     * @ORM\Column(name="galleries", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist"})
      */
-    private $galleries;
+    private $coverGallery;
 
     /**
      * @var \DateTime
@@ -161,10 +167,11 @@ class Profile
      * Set hobbies
      *
      * @param string $hobbies
-     * @return Profile
+     * @return Flowber\ProfileBundle\Entity\Hobby
      */
-    public function setHobbies($hobbies)
+    public function setHobbies(\Flowber\ProfileBundle\Entity\Hobby $hobbies)
     {
+        $hobbies->setProfile($this);
         $this->hobbies = $hobbies;
 
         return $this;
@@ -173,7 +180,7 @@ class Profile
     /**
      * Get hobbies
      *
-     * @return string 
+     * @return Flowber\ProfileBundle\Entity\Hobby 
      */
     public function getHobbies()
     {
@@ -184,9 +191,9 @@ class Profile
      * Set profilePicture
      *
      * @param string $profilePicture
-     * @return Profile
+     * @return Flowber\GalleryBundle\Entity\Photo
      */
-    public function setProfilePicture($profilePicture)
+    public function setProfilePicture(\Flowber\GalleryBundle\Entity\Photo $profilePicture = null)
     {
         $this->profilePicture = $profilePicture;
 
@@ -196,7 +203,7 @@ class Profile
     /**
      * Get profilePicture
      *
-     * @return string 
+     * @return Flowber\GalleryBundle\Entity\Photo 
      */
     public function getProfilePicture()
     {
@@ -207,9 +214,9 @@ class Profile
      * Set coverPicture
      *
      * @param string $coverPicture
-     * @return Profile
+     * @return Flowber\GalleryBundle\Entity\Photo
      */
-    public function setCoverPicture($coverPicture)
+    public function setCoverPicture(\Flowber\GalleryBundle\Entity\Photo $coverPicture = null)
     {
         $this->coverPicture = $coverPicture;
 
@@ -219,34 +226,11 @@ class Profile
     /**
      * Get coverPicture
      *
-     * @return string 
+     * @return Flowber\GalleryBundle\Entity\Photo 
      */
     public function getCoverPicture()
     {
         return $this->coverPicture;
-    }
-
-    /**
-     * Set galleries
-     *
-     * @param string $galleries
-     * @return Profile
-     */
-    public function setGalleries($galleries)
-    {
-        $this->galleries = $galleries;
-
-        return $this;
-    }
-
-    /**
-     * Get galleries
-     *
-     * @return string 
-     */
-    public function getGalleries()
-    {
-        return $this->galleries;
     }
 
     /**
@@ -270,5 +254,108 @@ class Profile
     public function getDateC()
     {
         return $this->dateC;
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hobbies = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $this->dateC = new \Datetime();
+    }
+
+    /**
+     * Add hobbies
+     *
+     * @param \Flowber\ProfileBundle\Entity\Hobby $hobbies
+     * @return Profile
+     */
+    public function addHobby(\Flowber\ProfileBundle\Entity\Hobby $hobbies)
+    {
+        $hobbies->setProfile($this);
+        $this->hobbies[] = $hobbies;
+
+        return $this;
+    }
+
+    /**
+     * Remove hobbies
+     *
+     * @param \Flowber\ProfileBundle\Entity\Hobby $hobbies
+     */
+    public function removeHobby(\Flowber\ProfileBundle\Entity\Hobby $hobbies)
+    {
+        $this->hobbies->removeElement($hobbies);
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Flowber\UserBundle\Entity\User $user
+     * @return Profile
+     */
+    public function setUser(\Flowber\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Flowber\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set profileGallery
+     *
+     * @param \Flowber\GalleryBundle\Entity\Gallery $profileGallery
+     * @return Profile
+     */
+    public function setProfileGallery(\Flowber\GalleryBundle\Entity\Gallery $profileGallery = null)
+    {
+        $this->profileGallery = $profileGallery;
+
+        return $this;
+    }
+
+    /**
+     * Get profileGallery
+     *
+     * @return \Flowber\GalleryBundle\Entity\Gallery 
+     */
+    public function getProfileGallery()
+    {
+        return $this->profileGallery;
+    }
+
+    /**
+     * Set coverGallery
+     *
+     * @param \Flowber\GalleryBundle\Entity\Gallery $coverGallery
+     * @return Profile
+     */
+    public function setCoverGallery(\Flowber\GalleryBundle\Entity\Gallery $coverGallery = null)
+    {
+        $this->coverGallery = $coverGallery;
+
+        return $this;
+    }
+
+    /**
+     * Get coverGallery
+     *
+     * @return \Flowber\GalleryBundle\Entity\Gallery 
+     */
+    public function getCoverGallery()
+    {
+        return $this->coverGallery;
     }
 }

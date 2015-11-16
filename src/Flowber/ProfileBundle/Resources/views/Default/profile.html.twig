@@ -50,13 +50,16 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
                             
     <!-- User Cover -->  
-    <div class="jumbotron generic-cover" style="background-image: url({{asset('bundles/flowberprofile/images/Default/coverPictureDefault.png')}})">    
-        <div class="container" >
+    <div class="jumbotron generic-cover" style="background-image: url({{ asset(profile.coverPicture.webPath) }})">    
+    
+
+
+    <div class="container" >
             <div class="row-fluid">       
                 <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset('bundles/flowberprofile/images/Default/profilePictureDefault.png')}}')"></div> 
                 <div class="generic-cover-title">
                     <h1 class="generic-cover-title-name">{{ user.getFirstname }} {{ user.getSurname }}</h1>
-                    <p class="generic-cover-title-description">Sous-titre de la bannière</p>
+                    <p class="generic-cover-title-description">{{ profile.getSubtitle }}</p>
                 </div>
                 <div class="generic-cover-edit-button">
                     <a href="{{ path('flowber_profile_edit') }}" class="btn btn-default">Modifier le profil</a>
@@ -78,7 +81,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 user-profile-element">
                         <div class="user-profile-introduction-text-block">
                             <h2 class="name">{{ user.getFirstname }} {{ user.getSurname }}</h2>
-                            <p class="user-job">Gardienne de prairies</p>
+                            <p class="user-job">{{ profile.getSubtitle }}</p>
                             <p>{{ user.getBirthdate|date("d/m/Y") }} (23 ans)<br/>
                             {% if user.getPostalAddress.count > 0 %}
                                 {% for add in user.getPostalAddress %}
@@ -88,45 +91,34 @@
                             </p>
                         </div>
 
-                        <table class="user-profile-interest">
-                            <tr>
-                                <td class="user-profile-interest-subject text-center">
-                                    <span>Musique</span><br/>
-                                    <div class="progress category-jauge">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                          <span class="sr-only">45</span>
-                                        </div>
-                                    </div> 
-                                </td>
-                                <td class="user-profile-interest-content">
-                                    <ul>
-                                        <li>Céline Dion</li><li>Taylor Swift</li>
-                                    </ul>                        
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="user-profile-interest-subject text-center">
-                                    <span>Musique</span><br/>
-                                    <div class="progress category-jauge">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                          <span class="sr-only">45</span>
-                                        </div>
-                                    </div> 
-                                </td>
-                                <td class="user-profile-interest-content">
-                                    <ul>
-                                        <li>Céline Dion</li><li>Taylor Swift</li>
-                                    </ul>                        
-                                </td>
-                            </tr>
-                        </table>
+                        {% if profile.hobbies.count > 0 %}
+                            <table class="user-profile-interest">
+                                
+                                {% for hobby in profile.hobbies %}
+                                    <tr>
+                                        <td class="user-profile-interest-subject text-center">
+                                            <span> {{ hobby.category }}</span><br/>
+                                            <div class="progress category-jauge">
+                                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{ hobby.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ hobby.percent }}%">
+                                                  <span class="sr-only">{{ hobby.percent }}</span>
+                                                </div>
+                                            </div> 
+                                        </td>
+                                        <td class="user-profile-interest-content">
+                                            {{ hobby.description }}                      
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            
+                            </table>
+                        {% endif %}
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 col-bg-white user-profile-element bg-white">
                         <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
                         </div>
                         <div class="user-profile-description">
-                            <p></p>
-                               
+                            <p> {{ profile.getDescription }} </p>
+                            <img src="{{ asset(profile.coverPicture.webPath) }}"  alt="{{ profile.coverPicture.alt }}" />
                         </div>
                     </div>
                 </div>
@@ -136,6 +128,10 @@
                 
     <!-- My groups -->
     <div id="groups" class="user-profile-groups user-profile background-dark-blue">
+        
+        
+        
+        
  
             <div class="user-profile-category-row  text-center">
                 <span class="user-profile-category-title font-white">Mes groupes</span>
@@ -264,7 +260,7 @@
                         </div>
                     </div>  
                 </div>  
-            </div>
+            </div>  
     </div>
                                 
     <!-- My events-->                            

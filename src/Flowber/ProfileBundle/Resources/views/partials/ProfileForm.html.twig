@@ -1,4 +1,5 @@
 {# Flowber\ProfileBundle\Resources\views\partials\ProfileForm.html.twig #}
+{% form_theme profileForm 'bootstrap_3_layout.html.twig' %}
 
 <!-- Sign up details jumbo -->
   
@@ -13,66 +14,83 @@
     
     <!-- Form -->
     <div class="create-event-form">
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="event-title" class="col-sm-2 control-label">Titre</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="event-title" placeholder="Exemple : Football">
-                </div>
+            <div class="well">
+                amrie
+                {{form_start(profileForm)}}
+                    {{form_widget(profileForm)}}
+                    <input type="submit" class="btn btn-primary" />
+                {{form_end(profileForm)}}    
             </div>
-            <div class="form-group">
-                <label for="event-tease" class="col-sm-2 control-label">Phrase d'accroche</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="event-category" placeholder="Choisir une phrase d'accroche">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-category" class="col-sm-2 control-label">Catégories</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="event-category" placeholder="Choisir une catégorie">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-description" class="col-sm-2 control-label">Description</label>
-                <div class="col-sm-10">
-                    <textarea id="event-description" class="form-control" textholder="Description"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-date" class="col-sm-2 control-label">Date</label>
-                <div class="col-sm-10">
-                    <input type="date" class="form-control" id="event-date" placeholder="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-time" class="col-sm-2 control-label">Heure</label>
-                <div class="col-sm-10">
-                    <input type="time" class="form-control" id="event-time" placeholder="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Visibilité</label>
-                <div class="col-sm-10">
-                    <label class="radio-inline">
-                        <input type="radio" name="event-permission" id="event-permission-public" value="public"> Public
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="event-permission" id="event-permission-private" value="private"> Privé
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">                
-                <div class="col-sm-offset-2 col-sm-10">
-                    <label>
-                        <input type="checkbox" name="event-invite-permission"> Autoriser les invités à inviter des personnes
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">                
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default event-submit">Continuer</button>
-                </div>
-            </div>
-        </form>
     </div>       
-    
+    {# Le formulaire reste inchangé #}
+
+
+{# On charge la bibliothèque jQuery. Ici, je la prends depuis le site jquery.com,
+   mais si vous l'avez en local, changez simplement l'adresse. #}
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+{# Voici le script en question : #}
+<script type="text/javascript">
+$(document).ready(function() {
+  // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+  var $container = $('div#flowber_profilebundle_profile_hobbies');
+
+  // On ajoute un lien pour ajouter une nouvelle catégorie
+  var $lienAjout = $('<a href="#" id="ajout_hobby" class="btn">Ajouter un hobby</a>');
+  $container.append($lienAjout);
+
+  // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+  $lienAjout.click(function(e) {
+    ajouterCategorie($container);
+    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+    return false;
+  });
+
+  // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+  var index = $container.find(':input').length;
+
+  // On ajoute un premier champ directement s'il n'en existe pas déjà un (cas d'un nouvel article par exemple).
+  if (index == 0) {
+    ajouterCategorie($container);
+  } else {
+    // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+    $container.children('div').each(function() {
+      ajouterLienSuppression($(this));
+    });
+  }
+
+  // La fonction qui ajoute un formulaire Categorie
+  function ajouterCategorie($container) {
+    // Dans le contenu de l'attribut « data-prototype », on remplace :
+    // - le texte "__name__label__" qu'il contient par le label du champ
+    // - le texte "__name__" qu'il contient par le numéro du champ
+    var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Hobby n°' + (index+1))
+                                                        .replace(/__name__/g, index));
+
+    // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+    ajouterLienSuppression($prototype);
+
+    // On ajoute le prototype modifié à la fin de la balise <div>
+    $container.append($prototype);
+
+    // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+    index++;
+  }
+
+  // La fonction qui ajoute un lien de suppression d'une catégorie
+  function ajouterLienSuppression($prototype) {
+    // Création du lien
+    $lienSuppression = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+    // Ajout du lien
+    $prototype.append($lienSuppression);
+
+    // Ajout du listener sur le clic du lien
+    $lienSuppression.click(function(e) {
+      $prototype.remove();
+      e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+      return false;
+    });
+  }
+});
+</script>
