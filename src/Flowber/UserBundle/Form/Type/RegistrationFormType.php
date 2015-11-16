@@ -32,7 +32,9 @@ class RegistrationFormType extends AbstractType{
                     'placeholder' => 'Nom',
                 ))
             )
-            ->add('birthdate',      'birthday')
+            ->add('birthdate',      'birthday', array(
+                'invalid_message' => 'Date de naissance invalide',
+            ))
             ->add('sex',          'choice', array(
                      'choices' => array('m' => 'Homme', 'f' => 'Femme', 'a' => 'Autre'),
                      'expanded' => true,

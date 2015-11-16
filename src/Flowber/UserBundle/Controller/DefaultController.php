@@ -110,48 +110,10 @@ class DefaultController extends Controller
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
-            'registration_form' => $form->createView(),
+            'registrationForm' => $form->createView(),
         )));
     }
-    
-    public function indexAction()
-    {   
-        $user = $this->getUser();
         
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        
-        $phone = new Phone;
-        $formPhone = $this->createForm(new PhoneType, $phone);
-        $postal = new PostalAddress;
-        $formPostal = $this->createForm(new PostalAddressType, $postal);
-
-        $request = $this->get('request');
-        if ($request->getMethod() == 'POST') {
-            $formPhone->bind($request);
-            $formPostal->bind($request);
-
-            if ($formPhone->isValid() && $formPostal->isValid()) {
-                $user->addPostalAddress($postal);
-                $user->addPhone($phone);
-                
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($phone);
-                $em->persist($postal);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('flowber_profile_homepage'));
-            }
-        }
-        
-        return $this->render('FlowberUserBundle:Default:signUpDetails.html.twig', 
-                array(
-                    'formPhone' => $formPhone->createView(), 
-                    'formPostal' => $formPostal->createView()
-                ));
-    }
-    
     public function index2Action()
     {  
         

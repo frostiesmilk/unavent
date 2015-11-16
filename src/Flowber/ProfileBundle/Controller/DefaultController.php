@@ -39,7 +39,7 @@ class DefaultController extends Controller
         return $this->render('FlowberProfileBundle:Default:ModifProfile.html.twig', array('profileForm' => $profileForm->createView()));
     }
     
-    public function getProfileAction()
+    public function getCurrentUserProfileAction()
     {
         $user = $this->getUser();
       

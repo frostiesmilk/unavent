@@ -1,15 +1,13 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        Flowber\UserBundle\Entity\User: plaintext
-#        FOS\UserBundle\Model\UserInterface: bcrypt
+        FOS\UserBundle\Model\UserInterface: sha512
         
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        main:
+        fos_userbundle: # main:
             id: fos_user.user_provider.username
         in_memory:
             memory:
@@ -25,11 +23,14 @@ security:
         main:
             pattern:   ^/
             anonymous: true
-            provider:  main
+#            provider:  main
             form_login:
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager # was commented before
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
-#                csrf_provider: security.csrf.token_manager
+                always_use_default_target_path: true  
+                default_target_path: flowber_current_user_profile
             logout:
                 path:   fos_user_security_logout
                 target: flowber_front_office_signin_homepage

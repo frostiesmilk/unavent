@@ -4,11 +4,7 @@ flowber_gallery:
 
 flowber_profile:
     resource: "@FlowberProfileBundle/Resources/config/routing.yml"
-    prefix:   /
-
-flowber_page_manager:
-    resource: "@FlowberPageManagerBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /profil
 
 flowber_front_office:
     resource: "@FlowberFrontOfficeBundle/Resources/config/routing.yml"

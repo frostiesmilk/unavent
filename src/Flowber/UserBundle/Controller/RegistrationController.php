@@ -37,7 +37,7 @@ class RegistrationController extends BaseController{
     /**
      * Tell the user his account is now confirmed
      */
-        public function registerAction(Request $request)
+    public function registerAction(Request $request)
     {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -65,7 +65,7 @@ class RegistrationController extends BaseController{
             $error = null; // The value does not come from the security component.
         }
         
-                // last username entered by the user
+        // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get($lastUsernameKey);
 
         if ($this->has('security.csrf.token_manager')) {
@@ -122,7 +122,8 @@ class RegistrationController extends BaseController{
             'form' => $form->createView(),
         )));
     }
-        /**
+    
+    /**
      * Receive the confirmation token from user email provider, login the user
      */
     public function confirmAction(Request $request, $token)
@@ -148,7 +149,7 @@ class RegistrationController extends BaseController{
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->generateUrl('flowber_user_homepage');
+            $url = $this->generateUrl('fos_user_registration_confirmed');
             $response = new RedirectResponse($url);
         }
 
@@ -157,19 +158,51 @@ class RegistrationController extends BaseController{
         return $response;
     }
     
+    /**
+     * Registration confirmation done. Next and final step of registration.
+     * @return type
+     * @throws AccessDeniedException
+     */
     public function confirmedAction()
     {
-        $user = $this->getUser();
-        
+        $user = $this->getUser();        
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         
+        // THE REGISTRATION IS NOW CONFIRMED
+        
+        // To final step
+//        $response = $this->forward('FlowberUserBundle:Registration:registrationFinalStep', array(
+//            'user' => $user,
+//            //'targetUrl' => $this->getTargetUrlFromSession(),
+//        ));
+        $response = $this->redirectToRoute('flowber_registration_finishing');
+        
+        return $response;
+    }
+    
+    /**
+     * 
+     * @param type $parameters
+     * @return type
+     */
+    public function registrationFinalStepAction(){
+        
+        // user is logged after registration is confirmed
+        $user = $this->getUser();
+        
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        
+        // preparing the form for last step of registration
         $phone = new Phone;
         $formPhone = $this->createForm(new PhoneType, $phone);
         $postal = new PostalAddress;
         $formPostal = $this->createForm(new PostalAddressType, $postal);
 
+        // form processing
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
             $formPhone->bind($request);
@@ -184,11 +217,13 @@ class RegistrationController extends BaseController{
                 $em->persist($user);
 
                 $em->flush();
-
-                return $this->redirect($this->generateUrl('flowber_profile_homepage'));
+                
+                // all set, redirecting to user profile!
+                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
             }
         }
 
+        // show last step of registration
         return $this->render('FlowberUserBundle:Default:signUpDetails.html.twig', array(
             'formPhone' => $formPhone->createView(), 
             'formPostal' => $formPostal->createView()

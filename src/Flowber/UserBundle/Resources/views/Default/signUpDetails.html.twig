@@ -10,7 +10,7 @@
 {% block stylesheets %}
     {{parent()}}
     {# Put specific CSS below #}
-    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/signup-details.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/signup-details.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -41,48 +41,47 @@
             <div class="col-md-6 col-sm-12">
                 
                     <div class="form-group">
-                        <div class="signup-details-form-header">
-                            <h4><span class="signup-details-form-header-title">Etape 2</span><a type="submit" class="btn btn-default form-inline-button form-validation">Passer</a></h4>
-                        </div>                               
+                        <div class="signup-details-form">
+                            <div class="signup-details-form-header">
+                                <h4><span class="signup-details-form-header-title">Etape 2</span><a type="submit" href="{{path("flowber_current_user_profile")}}" class="btn btn-default form-inline-button form-validation">Passer</a></h4>
+                            </div>                   
                             
-                        <form class="signup-details-form" method="post" {{ form_enctype(formPhone) }}>
-                            ETAPE 2  2                              
-                            <a type="submit" class="btn btn-default form-inline-button form-validation">Passer</a>
-
-                            <div class="form-group">
-                                {{ form_widget(formPhone) }}
-                            </div>
-                            <div class="form-group" style="margin-top : 25px;">
-                                {{ form_label(formPostal.address) }}
-                                {{ form_widget(formPostal.address) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(formPostal.zipcode) }}
-                                {{ form_widget(formPostal.zipcode) }}
-                            </div>
-                            <div class="col-md-6 form-signup-details-half-left">
+                            <form class="" method="post" {{ form_enctype(formPhone) }}>
                                 <div class="form-group">
-                                    {{ form_label(formPostal.city) }}
-                                    {{ form_widget(formPostal.city) }}
+                                    {{ form_widget(formPhone) }}
                                 </div>
-                            </div>
-                            <div class="col-md-6 form-signup-details-half-right">
+                                <div class="form-group" style="margin-top : 25px;">
+                                    {{ form_label(formPostal.address) }}
+                                    {{ form_widget(formPostal.address) }}
+                                </div>
                                 <div class="form-group">
-                                    {{ form_label(formPostal.country) }}
-                                    {{ form_widget(formPostal.country) }}
+                                    {{ form_label(formPostal.zipcode) }}
+                                    {{ form_widget(formPostal.zipcode) }}
                                 </div>
-                            </div>     
-                            
-                            {{ form_rest(formPostal) }}
+                                <div class="col-md-6 form-signup-details-half-left">
+                                    <div class="form-group">
+                                        {{ form_label(formPostal.city) }}
+                                        {{ form_widget(formPostal.city) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-signup-details-half-right">
+                                    <div class="form-group">
+                                        {{ form_label(formPostal.country) }}
+                                        {{ form_widget(formPostal.country) }}
+                                    </div>
+                                </div>     
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-default form-inline-button form-validation">Inscription</button>
-                            </div>
-                            
-                            <div style="margin-top : 20px;"> 
-                                * Ces informations nous sont utiles pour vous proposer des sorties proches de chez vous.
-                            </div>
-                        </form>                    
+                                {{ form_rest(formPostal) }}
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default form-inline-button form-validation">Inscription</button>
+                                </div>
+
+                                <div style="margin-top : 20px;"> 
+                                    * Ces informations nous sont utiles pour vous proposer des sorties proches de chez vous.
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <br />
                     
@@ -93,5 +92,5 @@
         </div>
     </div>
 
-{% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}                
+{% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}                
 {% endblock %}
