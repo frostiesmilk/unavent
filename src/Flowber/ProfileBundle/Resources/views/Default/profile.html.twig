@@ -43,6 +43,15 @@
     <!-- END small screen menu -->
 {% endblock %}
 
+{# Preparing variables #}
+{% set userCoverPath = 'bundles/flowberprofile/images/Default/coverPictureDefault.png' %} {# default User Cover #}
+{% if profile.coverPicture.webPath is defined %}
+    {% set userCoverPath = profile.coverPicture.webPath %}
+{% endif %}
+{% set userCoverAlt = 'Photo de couverture' %} {# default User Cover Alt #}
+{% if profile.coverPicture.alt is defined %}
+    {% set userCoverAlt = profile.coverPicture.alt %}
+{% endif %}
 
 {% block body %}
 
@@ -50,11 +59,9 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
                             
     <!-- User Cover -->  
-    <div class="jumbotron generic-cover" style="background-image: url({{ asset(profile.coverPicture.webPath) }})">    
-    
+    <div class="jumbotron generic-cover" style="background-image: url('{{asset(userCoverPath)}}')"> 
 
-
-    <div class="container" >
+        <div class="container" >
             <div class="row-fluid">       
                 <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset('bundles/flowberprofile/images/Default/profilePictureDefault.png')}}')"></div> 
                 <div class="generic-cover-title">
@@ -118,7 +125,6 @@
                         </div>
                         <div class="user-profile-description">
                             <p> {{ profile.getDescription }} </p>
-                            <img src="{{ asset(profile.coverPicture.webPath) }}"  alt="{{ profile.coverPicture.alt }}" />
                         </div>
                     </div>
                 </div>

@@ -31,12 +31,12 @@ class Gallery
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", mappedBy="galleries", cascade={"persist"})
      */
     private $photos;
 

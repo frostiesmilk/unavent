@@ -10,7 +10,7 @@ use Flowber\ProfileBundle\Form\ProfileType;
 
 class DefaultController extends Controller
 {
-    public function getProfileModifierAction()
+    public function getEditProfileAction()
     {
         $user = $this->getUser();
         $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
@@ -27,16 +27,24 @@ class DefaultController extends Controller
             $profileForm->bind($request);
             
             if ($profileForm->isValid()) {
-                $profile->getCoverPicture()->upload();
+                
+                // processing cover picture
+                $uploadedCoverPicture = $request->get('coverPicture');
+                if(isset($uploadedCoverPicture)){
+                    $profile->getCoverPicture()->upload();
+                    $profile->getCoverPicture()->addGallery($profile->getCoverGallery());
+                }
+                
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($profile);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('flowber_profile'));
+                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
           }
         }
   
-        return $this->render('FlowberProfileBundle:Default:ModifProfile.html.twig', array('profileForm' => $profileForm->createView()));
+        return $this->render('FlowberProfileBundle:Default:profileEdit.html.twig', array('profileForm' => $profileForm->createView()));
     }
     
     public function getCurrentUserProfileAction()

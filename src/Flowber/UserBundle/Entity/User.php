@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use Flowber\ProfileBundle\Entity\Profile as Profile;
 
 /**
  * User
@@ -63,6 +64,11 @@ class User extends BaseUser
     private $phone;
     
     /**
+     * @ORM\OneToOne(targetEntity="Flowber\ProfileBundle\Entity\Profile", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $profile;
+    
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
@@ -77,6 +83,10 @@ class User extends BaseUser
         parent::__construct();
         $this->postalAddress = new \Doctrine\Common\Collections\ArrayCollection();
         $this->phone = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        // for user profile
+        $this->profile = new Profile();
+        $this->getProfile()->setUser($this);
         
         $this->creationDate = new \Datetime();
     }
@@ -362,5 +372,28 @@ class User extends BaseUser
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * Set profile
+     *
+     * @param \Flowber\UserBundle\Entity\Profile $profile
+     * @return User
+     */
+    public function setProfile(\Flowber\UserBundle\Entity\Profile $profile = null)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \Flowber\UserBundle\Entity\Profile 
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }

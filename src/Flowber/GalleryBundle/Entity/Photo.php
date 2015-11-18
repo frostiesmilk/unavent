@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Photo
 {
@@ -40,7 +41,7 @@ class Photo
     /**
      * @var string
      *
-     * @ORM\Column(name="file", type="string", length=255)
+     * @ORM\Column(name="file", type="string", length=255, nullable=true)
      */
     private $file;
 
@@ -61,19 +62,25 @@ class Photo
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateC", type="datetime")
+     * @ORM\Column(name="creationDate", type="datetime")
      */
-    private $dateC;
+    private $creationDate;
     
     // On ajoute cet attribut pour y stocker le nom du fichier temporairement
     private $tempFilename;
+    
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", inversedBy="photos",  cascade={"persist"})
+     */
+    private $galleries;
     
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->dateC = new \Datetime();
+        $this->creationDate = new \Datetime();
     }
     
     /**
@@ -210,29 +217,6 @@ class Photo
     }
 
     /**
-     * Set dateC
-     *
-     * @param \DateTime $dateC
-     * @return Photo
-     */
-    public function setDateC($dateC)
-    {
-        $this->dateC = $dateC;
-
-        return $this;
-    }
-
-    /**
-     * Get dateC
-     *
-     * @return \DateTime 
-     */
-    public function getDateC()
-    {
-        return $this->dateC;
-    }
-    
-    /**
     * @ORM\PrePersist()
     * @ORM\PreUpdate()
     */
@@ -313,5 +297,62 @@ class Photo
     public function getWebPath()
     {
         return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+    }
+
+    /**
+     * Set creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return Photo
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * Add galleries
+     *
+     * @param \Flowber\GalleryBundle\Entity\Gallery $galleries
+     * @return Photo
+     */
+    public function addGallery(\Flowber\GalleryBundle\Entity\Gallery $galleries)
+    {
+        $this->galleries[] = $galleries;
+        $galleries->addPhoto($this);
+        return $this;
+    }
+
+    /**
+     * Remove galleries
+     *
+     * @param \Flowber\GalleryBundle\Entity\Gallery $galleries
+     */
+    public function removeGallery(\Flowber\GalleryBundle\Entity\Gallery $galleries)
+    {
+        $this->galleries->removeElement($galleries);
+        $galleries->removePhoto($this);
+    }
+
+    /**
+     * Get galleries
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGalleries()
+    {
+        return $this->galleries;
     }
 }

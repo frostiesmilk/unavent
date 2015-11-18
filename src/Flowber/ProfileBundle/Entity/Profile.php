@@ -3,6 +3,9 @@
 namespace Flowber\ProfileBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Flowber\UserBundle\Entity\User as User;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Flowber\GalleryBundle\Entity\Gallery as Gallery;
 
 /**
  * Profile
@@ -52,7 +55,8 @@ class Profile
     private $hobbies;
     
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\UserBundle\Entity\User", cascade={"persist"})
+     *@ORM\OneToOne(targetEntity="Flowber\UserBundle\Entity\User", inversedBy="profile")
+     *@ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
     
@@ -79,9 +83,21 @@ class Profile
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateC", type="date")
+     * @ORM\Column(name="creationDate", type="date")
      */
-    private $dateC;
+    private $creationDate;
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hobbies = new ArrayCollection();
+        $this->coverGallery = new Gallery();
+        $this->getCoverGallery()->setTitle("Cover Pictures");
+        $this->creationDate = new \Datetime();
+    }
 
 
     /**
@@ -234,39 +250,6 @@ class Profile
     }
 
     /**
-     * Set dateC
-     *
-     * @param \DateTime $dateC
-     * @return Profile
-     */
-    public function setDateC($dateC)
-    {
-        $this->dateC = $dateC;
-
-        return $this;
-    }
-
-    /**
-     * Get dateC
-     *
-     * @return \DateTime 
-     */
-    public function getDateC()
-    {
-        return $this->dateC;
-    }
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->hobbies = new \Doctrine\Common\Collections\ArrayCollection();
-
-        $this->dateC = new \Datetime();
-    }
-
-    /**
      * Add hobbies
      *
      * @param \Flowber\ProfileBundle\Entity\Hobby $hobbies
@@ -357,5 +340,28 @@ class Profile
     public function getCoverGallery()
     {
         return $this->coverGallery;
+    }
+
+    /**
+     * Set creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return Profile
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
     }
 }

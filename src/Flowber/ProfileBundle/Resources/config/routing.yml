@@ -4,4 +4,4 @@ flowber_current_user_profile:
 
 flowber_profile_edit:
     path:     /mon-profil/modifier
-    defaults: { _controller: FlowberProfileBundle:Default:getProfileModifier }
+    defaults: { _controller: FlowberProfileBundle:Default:getEditProfile }
