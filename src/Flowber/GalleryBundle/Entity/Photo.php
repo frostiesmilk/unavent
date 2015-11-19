@@ -3,7 +3,7 @@
 namespace Flowber\GalleryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -72,6 +72,7 @@ class Photo
     /**
      *
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", inversedBy="photos",  cascade={"persist"})
+     * @ORM\JoinTable(name="photos_galleries")
      */
     private $galleries;
     
@@ -80,6 +81,7 @@ class Photo
      */
     public function __construct()
     {
+        $this->galleries = new ArrayCollection();
         $this->creationDate = new \Datetime();
     }
     
@@ -330,8 +332,7 @@ class Photo
      */
     public function addGallery(\Flowber\GalleryBundle\Entity\Gallery $galleries)
     {
-        $this->galleries[] = $galleries;
-        $galleries->addPhoto($this);
+        $this->galleries[] = $galleries;        
         return $this;
     }
 
@@ -342,8 +343,7 @@ class Photo
      */
     public function removeGallery(\Flowber\GalleryBundle\Entity\Gallery $galleries)
     {
-        $this->galleries->removeElement($galleries);
-        $galleries->removePhoto($this);
+        $this->galleries->removeElement($galleries);        
     }
 
     /**

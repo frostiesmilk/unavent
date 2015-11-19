@@ -16,14 +16,15 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('subtitle',           'text')
-            ->add('description',        'textarea')
-            ->add('job',                'text')
-            ->add('hobbies', 'collection', array('type'         => new HobbyType(),
-                                             'allow_add'    => true,
-                                             'allow_delete' => true))           
+            ->add('subtitle',           'text', array('required' => false))
+            ->add('description',        'textarea', array('required' => false))
+            ->add('job',                'text', array('required' => false))
+            ->add('hobbies', 'collection', array(   'type'         => new HobbyType(),
+                                                    'allow_add'    => true,
+                                                    'allow_delete' => true,
+                                                    'required' => false))           
 //          ->add('profilePicture')
-            ->add('coverPicture',       new PhotoType(), array('required' => false))
+            //->add('coverPicture',       new PhotoType(), array('required' => false))
         ;
     }
     

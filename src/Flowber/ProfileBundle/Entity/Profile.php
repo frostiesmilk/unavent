@@ -61,7 +61,8 @@ class Profile
     private $user;
     
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
+     * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
      */
     private $profilePicture;
     
@@ -71,12 +72,14 @@ class Profile
     private $profileGallery;
 
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
+     * @ORM\JoinColumn(name="cover_picture_id", referencedColumnName="id", nullable=true)
      */
     private $coverPicture;
      
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery")
+     * @ORM\JoinColumn(name="cover_gallery_id", referencedColumnName="id")
      */
     private $coverGallery;
 
@@ -94,9 +97,12 @@ class Profile
     public function __construct()
     {
         $this->hobbies = new ArrayCollection();
+        $this->creationDate = new \Datetime();
+        
         $this->coverGallery = new Gallery();
         $this->getCoverGallery()->setTitle("Cover Pictures");
-        $this->creationDate = new \Datetime();
+        $this->profileGallery = new Gallery();
+        $this->getProfileGallery()->setTitle("Profile Pictures");        
     }
 
 

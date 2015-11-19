@@ -3,6 +3,7 @@
 namespace Flowber\GalleryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
 /**
  * Gallery
@@ -52,8 +53,7 @@ class Gallery
      */
     public function __construct()
     {
-        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
-
+        $this->photos = new ArrayCollection();
         $this->creationDate = new \Datetime();
     }
 
@@ -168,7 +168,7 @@ class Gallery
     public function addPhoto(\Flowber\GalleryBundle\Entity\Photo $photos)
     {
         $this->photos[] = $photos;
-
+        
         return $this;
     }
 
