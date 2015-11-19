@@ -22,28 +22,28 @@ class DefaultController extends Controller
         
         $profileForm = $this->createForm(new ProfileType, $profile);
         
-        $coverGalleryForm = $this->createFormBuilder($profile->getCoverGallery())
-                ->add("photos", new PhotoType(), array("required"=>false))
-                ->getForm();
-        
-        
         $request = $this->get('request');
         // if form has been submitted
-        if ($request->getMethod() == 'POST') { die("no picture to be uploaded");
-            $profileForm->bind($request);
+        if ($request->getMethod() == 'POST') { 
+            $profileForm->handleRequest($request);
             
             if ($profileForm->isValid()) {
                 
                 // processing cover picture
-//                $uploadedCoverPicture = $request->get('coverPicture');
-//                if(isset($uploadedCoverPicture)){
-//                    die("no picture to be uploaded");
+                $coverPictureData = $request->files;//->get('flowber_gallerybundle_photo');
+                die(var_dump($coverPictureData));
+            $uploadedCoverPicture = $coverPictureData['file'];//$request->get('coverPicture');
+                if(!is_file($uploadedCoverPicture)){
+                    die("no picture to be uploaded");
+                }else{
+                    $profile->getCoverPicture()->addGallery($profile->getCoverGallery());
+                }
 //                    $profile->getCoverPicture()->upload();
 //                    $profile->getCoverPicture()->addGallery($profile->getCoverGallery());
 //                }
                 
-                
                 $em = $this->getDoctrine()->getManager();
+                
                 $em->persist($profile);
                 $em->flush();
 
@@ -51,7 +51,7 @@ class DefaultController extends Controller
           }
         }
   
-        return $this->render('FlowberProfileBundle:Default:profileEdit.html.twig', array('profileForm' => $profileForm->createView(), 'coverGalleryForm' => $coverGalleryForm->createView()));
+        return $this->render('FlowberProfileBundle:Default:profileEdit.html.twig', array('profileForm' => $profileForm->createView()));
     }
     
     public function getCurrentUserProfileAction()

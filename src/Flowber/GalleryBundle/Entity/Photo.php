@@ -4,7 +4,7 @@ namespace Flowber\GalleryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile as UploadedFile;
 
 /**
  * Photo
@@ -147,7 +147,7 @@ class Photo
      * @param UploadedFile $file
      * @return Photo
      */
-    public function setFile(UploadedFile $file)
+    public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
 
@@ -261,6 +261,7 @@ class Photo
         $this->getUploadRootDir(), // Le répertoire de destination
         $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
       );
+      $this->setFile(null);
     }
 
     /**

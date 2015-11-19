@@ -61,24 +61,25 @@ class Profile
     private $user;
     
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
      * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
      */
     private $profilePicture;
     
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="profile_gallery_id", referencedColumnName="id")
      */
     private $profileGallery;
 
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
      * @ORM\JoinColumn(name="cover_picture_id", referencedColumnName="id", nullable=true)
      */
     private $coverPicture;
      
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery")
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="cover_gallery_id", referencedColumnName="id")
      */
     private $coverGallery;
