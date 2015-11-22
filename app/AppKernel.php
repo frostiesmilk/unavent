@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new \FOS\UserBundle\FOSUserBundle,
             new Flowber\ProfileBundle\FlowberProfileBundle(),
             new Flowber\GalleryBundle\FlowberGalleryBundle(),
+            new Flowber\PrivateMessageBundle\FlowberPrivateMessageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
