@@ -24,7 +24,7 @@ class ProfileType extends AbstractType
                                                     'allow_delete' => true,
                                                     'required' => false))           
 //          ->add('profilePicture')
-            ->add('coverPicture',       new PhotoType(), array('required' => false))
+            //->add('coverPicture',       new PhotoType(), array('required' => false))
         ;
     }
     

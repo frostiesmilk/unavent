@@ -61,7 +61,7 @@ class Profile
     private $user;
     
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
      * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
      */
     private $profilePicture;
@@ -73,7 +73,7 @@ class Profile
     private $profileGallery;
 
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
      * @ORM\JoinColumn(name="cover_picture_id", referencedColumnName="id", nullable=true)
      */
     private $coverPicture;
