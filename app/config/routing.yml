@@ -1,3 +1,7 @@
+flowber_private_message:
+    resource: "@FlowberPrivateMessageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 flowber_gallery:
     resource: "@FlowberGalleryBundle/Resources/config/routing.yml"
     prefix:   /gallerie

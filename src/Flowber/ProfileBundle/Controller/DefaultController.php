@@ -8,6 +8,8 @@ use Flowber\ProfileBundle\Entity\Profile;
 use Flowber\ProfileBundle\Form\ProfileType;
 use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\GalleryBundle\Form\PhotoType;
+use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
+use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 
 class DefaultController extends Controller
 {
@@ -102,6 +104,49 @@ class DefaultController extends Controller
             throw new NotFoundHttpException("Le profil de l'utilisateur".$profile->getUser()->getFirstname()." n'existe pas.");
         }            
 
-        return $this->render('FlowberProfileBundle:Default:profile.html.twig', array('user' => $user, "profile" => $profile));
+        return $this->render('FlowberProfileBundle:Default:myProfile.html.twig', array('user' => $user, "profile" => $profile));
+    }
+    
+    public function getUserProfileAction($id)
+    {
+
+        $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
+
+      
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }   
+
+        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
+        
+        if (empty($profile)) {
+            throw new NotFoundHttpException("Le profil de l'utilisateur".$profile->getUser()->getFirstname()." n'existe pas.");
+        }            
+        
+        $privateMessage = new PrivateMessage;
+        $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
+
+        $request = $this->get('request');
+        // if form has been submitted
+        if ($request->getMethod() == 'POST') { 
+            $privateMessageForm->handleRequest($request);
+            
+            if ($privateMessageForm->isValid()) {
+                
+                $em = $this->getDoctrine()->getManager();
+                $privateMessage->setUserFrom($this->getUser());
+                $em->persist($privateMessage);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+            }
+        }
+          
+        return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
+                array(
+                    'user' => $user, 
+                    'profile' => $profile,
+                    'messageForm' => $privateMessageForm->createView()
+                ));
     }
 }

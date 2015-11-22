@@ -7,6 +7,8 @@
 
 {% block smallMenu %}
     {{parent()}}
+    
+
     <!-- END small screen menu -->
 {% endblock %}
 
@@ -26,10 +28,10 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
                             
     <!-- User Cover -->  
-    {% include 'FlowberProfileBundle::partials/cover.html.twig' %}           
+    {% include 'FlowberProfileBundle::partials/myCover.html.twig' %}           
                 
     <!-- Second menu -->
-    {% include 'FlowberFrontOfficeBundle::partials/common/submenu.html.twig' %} 
+    {% include 'FlowberFrontOfficeBundle::partials/common/mySubmenu.html.twig' %} 
 
     <!-- Fiche -->
     {% include 'FlowberProfileBundle::partials/presentationSheet.html.twig' %}           

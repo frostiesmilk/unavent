@@ -1,6 +1,10 @@
 flowber_current_user_profile:
     path:     /mon-profil
     defaults: { _controller: FlowberProfileBundle:Default:getCurrentUserProfile }
+    
+flowber_user_profile:
+    path:     /membre/{id}
+    defaults: { _controller: FlowberProfileBundle:Default:getUserProfile }
 
 flowber_profile_edit:
     path:     /mon-profil/modifier
