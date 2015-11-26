@@ -12,7 +12,7 @@ use Flowber\ProfileBundle\Entity\Profile as Profile;
  * User
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Flowber\UserBundle\Entity\UserRepository")
  */
 class User extends BaseUser
 {

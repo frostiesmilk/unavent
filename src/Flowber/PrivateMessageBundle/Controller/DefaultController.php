@@ -11,9 +11,12 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('UserRepository');
-        $userReposit->getReceivedMessages($user);
+        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $userMessages = $userReposit->getReceivedMessages($user);
         
-        return $this->render('FlowberPrivateMessageBundle:Default:privateMessage.html.twig');
+        // affiche ce qu'il y a dans l'objet $userMessages
+        //die(var_dump($userMessages));
+        
+        return $this->render('FlowberPrivateMessageBundle:Default:privateMessage.html.twig', array("userMessages"=>$userMessages));
     }
 }
