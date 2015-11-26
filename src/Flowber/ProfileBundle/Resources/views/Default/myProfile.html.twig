@@ -5,10 +5,28 @@
     <link rel="stylesheet" href="{{ asset('bundles/flowberprofile/css/profile.css') }}"/> 
 {% endblock %}
 
+{# Menus for small screens #}
 {% block smallMenu %}
+    {# Parent is main menu #}
     {{parent()}}
-    
-
+    {# Following is second menu for small screen as well #}
+    <ul class="nav nav-pills nav-justified menu-secondary">
+        <li><a class="scroll-anchor" href="#fiche"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+        <li><a class="scroll-anchor" href="#groups"><span class="glyphicon glyphicon-list"></span></a></li>
+        <li><a class="scroll-anchor" href="#events"><span class="glyphicon glyphicon-apple"></span></a></li>
+        <li><a class="scroll-anchor" href="#photos"><span class="glyphicon glyphicon-picture"></span></a></li>
+        <li><a class="scroll-anchor" href="#friends"><i class="fa fa-users"></i></a></li>
+        <li>
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a class="back-top" href="#">
+                        <span class="fa fa-caret-up"></span> Remonter la page
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
     <!-- END small screen menu -->
 {% endblock %}
 
@@ -21,6 +39,14 @@
 {% if profile.coverPicture.alt is defined %}
     {% set userCoverAlt = profile.coverPicture.alt %}
 {% endif %}
+{% set profilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default Profile picture #}
+{% if profile.profilePicture.webPath is defined %}
+    {% set profilePicturePath = profile.profilePicture.webPath %}
+{% endif %}
+{% set profilePictureAlt = 'Photo de profil' %} {# default Profile picture Alt #}
+{% if profile.profilePicture.alt is defined %}
+    {% set profilePictureAlt = profile.profilePicture.alt %}
+{% endif %}
 
 {% block body %}
 
@@ -31,8 +57,8 @@
     {% include 'FlowberProfileBundle::partials/myCover.html.twig' %}           
                 
     <!-- Second menu -->
-    {% include 'FlowberFrontOfficeBundle::partials/common/mySubmenu.html.twig' %} 
-
+    {% include 'FlowberProfileBundle::partials/myProfileMenu.html.twig' %}
+    
     <!-- Fiche -->
     {% include 'FlowberProfileBundle::partials/presentationSheet.html.twig' %}           
     
@@ -40,26 +66,22 @@
     {% include 'FlowberProfileBundle::partials/groups.html.twig' %}           
                                 
     <!-- My events-->                            
-     {% include 'FlowberProfileBundle::partials/events.html.twig' %}           
-
+    {% include 'FlowberProfileBundle::partials/events.html.twig' %}
     
     <!-- My gallery modal-->
-     {% include 'FlowberGalleryBundle::partials/galleries.html.twig' %}           
-
+    {% include 'FlowberGalleryBundle::partials/galleries.html.twig' %}
     
     <!-- My friends-->                            
-     {% include 'FlowberProfileBundle::partials/friends.html.twig' %}           
+    {% include 'FlowberProfileBundle::partials/friends.html.twig' %}           
 
- 
-    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
-    
+    <!-- Footer -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
     
 {% endblock %}
 
 {% block javascripts %}
     {{parent()}}
     {# Put specific JS below #}    
-    
         
     <!--<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <script src="{{ asset('bundles/wybefrontoffice/js/gallery/bootstrap-image-gallery.js') }}"></script>

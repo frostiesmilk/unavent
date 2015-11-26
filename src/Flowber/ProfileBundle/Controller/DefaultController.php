@@ -20,28 +20,19 @@ class DefaultController extends Controller
      */
     public function getEditProfileAction()
     {
-        $user = $this->getUser();
-        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
+        $user = $this->getUser();        
 
         if (!is_object($user)) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
         
+        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
         $profileForm = $this->createForm(new ProfileType, $profile);
-        
-        $coverPicture = new Photo();
-        $coverPictureForm = $this->createFormBuilder($coverPicture)
-            ->add('file',           'file', array(
-                    'required' => false,
-                    'data_class' => null))
-            //->add('save', 'submit', array('label' => 'Changer de photo de couverture'))
-            ->getForm();
         
         $request = $this->get('request');
         // if form has been submitted
         if ($request->getMethod() == 'POST') { 
             $profileForm->handleRequest($request);
-            $coverPictureForm->handleRequest($request);
             
             if ($profileForm->isValid()) {
                 
@@ -68,6 +59,43 @@ class DefaultController extends Controller
                 
             }
             
+            
+            
+            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+        }
+  
+        return $this->render('FlowberProfileBundle:Default:profileEditMain.html.twig', array('profileForm' => $profileForm->createView()));
+    }
+    
+    /**
+     * Profile Cover Picture form
+     * @return type
+     * @throws AccessDeniedException
+     */
+    public function editProfileCoverPictureAction(){
+        // retrieve user
+        $user = $this->getUser();        
+
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        
+        // retrieve user profile
+        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
+        
+        //preparing new cover picture
+        $coverPicture = new Photo();
+        $coverPictureForm = $this->createFormBuilder($coverPicture)
+            ->add('file',           'file', array(
+                    'required' => false,
+                    'data_class' => null))
+            //->add('save', 'submit', array('label' => 'Changer de photo de couverture'))
+            ->getForm();
+        
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') { 
+            $coverPictureForm->handleRequest($request);
+        
             if($coverPictureForm->isValid()){
                 $em = $this->getDoctrine()->getManager();
                 $coverPicture->addGallery($profile->getCoverGallery());
@@ -78,10 +106,54 @@ class DefaultController extends Controller
                 $em->flush();
             }
             
+            // back to profile page
             return $this->redirect($this->generateUrl('flowber_current_user_profile'));
         }
-  
-        return $this->render('FlowberProfileBundle:Default:profileEditMain.html.twig', array('profileForm' => $profileForm->createView(), 'coverPictureForm' => $coverPictureForm->createView()));
+        
+        // render form
+        return $this->render('FlowberProfileBundle:Default:profileEditCoverPicture.html.twig', array('coverPictureForm' => $coverPictureForm->createView()));
+    }
+    
+    public function editProfilePictureAction(){
+        // retrieve user
+        $user = $this->getUser();        
+
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        
+        // retrieve user profile
+        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
+        
+        //preparing new cover picture
+        $profilePicture = new Photo();
+        $profilePictureForm = $this->createFormBuilder($profilePicture)
+            ->add('file',           'file', array(
+                    'required' => false,
+                    'data_class' => null))
+            //->add('save', 'submit', array('label' => 'Changer de photo de couverture'))
+            ->getForm();
+        
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') { 
+            $profilePictureForm->handleRequest($request);
+        
+            if($profilePictureForm->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                $profilePicture->addGallery($profile->getProfileGallery());
+                $profile->setProfilePicture($profilePicture);
+
+                $em->persist($profilePicture);
+                $em->persist($profile);
+                $em->flush();
+            }
+            
+            // back to profile page
+            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+        }
+        
+        // render form
+        return $this->render('FlowberProfileBundle:Default:profileEditProfilePicture.html.twig', array('profilePictureForm' => $profilePictureForm->createView()));
     }
     
     /**
@@ -101,7 +173,7 @@ class DefaultController extends Controller
         $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
         
         if (empty($profile)) {
-            throw new NotFoundHttpException("Le profil de l'utilisateur".$profile->getUser()->getFirstname()." n'existe pas.");
+            throw new NotFoundHttpException("Le profil de l'utilisateur ".$profile->getUser()->getFirstname()." n'existe pas.");
         }            
 
         return $this->render('FlowberProfileBundle:Default:myProfile.html.twig', array('user' => $user, "profile" => $profile));
