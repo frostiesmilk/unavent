@@ -24,16 +24,13 @@ class PrivateMessage
 
 
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
      */
     private $userFrom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\JoinTable(name="users_messages",
-     *      joinColumns={@ORM\JoinColumn(name="message_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
-     *      )
+     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User")
+     * @ORM\JoinTable(name="messages_to_user")
      */
     private $userTo;
 

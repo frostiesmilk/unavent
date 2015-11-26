@@ -132,9 +132,9 @@ class DefaultController extends Controller
             $privateMessageForm->handleRequest($request);
             
             if ($privateMessageForm->isValid()) {
-                
                 $em = $this->getDoctrine()->getManager();
                 $privateMessage->setUserFrom($this->getUser());
+                $privateMessage->addUserTo($user);
                 $em->persist($privateMessage);
                 $em->flush();
 
