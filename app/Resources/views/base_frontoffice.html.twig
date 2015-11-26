@@ -19,6 +19,7 @@
         
     <div class="navbar navbar-push navbar-default navbar-fixed-top hidden-md hidden-lg">
     {% block smallMenu %}
+        {# For small screens, menus are merged into one = smallMenu #}
         <!-- Menu toggles -->
         <button type="button" class="navbar-toggle navbar-toggle-push" data-toggle="offcanvas" data-target=".navmenu" data-disable-scrolling="false">
             <span class="icon-bar"></span>
@@ -35,6 +36,8 @@
     </div>
         
     {% block body %}{% endblock %}
+    
+    {% block modals %}{% endblock %}
             
     {% block javascripts %}
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

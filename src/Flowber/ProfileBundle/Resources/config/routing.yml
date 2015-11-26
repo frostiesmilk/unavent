@@ -9,3 +9,11 @@ flowber_user_profile:
 flowber_profile_edit:
     path:     /mon-profil/modifier
     defaults: { _controller: FlowberProfileBundle:Default:getEditProfile }
+    
+flowber_profile_edit_profile_picture:
+    path:     /mon-profil/modifier/photo-profil
+    defaults: { _controller: FlowberProfileBundle:Default:editProfilePicture }
+    
+flowber_profile_edit_cover_picture:    
+    path:     /mon-profil/modifier/photo-couverture
+    defaults: { _controller: FlowberProfileBundle:Default:editProfileCoverPicture }

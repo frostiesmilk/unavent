@@ -1,0 +1,12 @@
+{# Flowber\ProfileBundle\Resources\views\partials\profileEditFormMain.html.twig #}
+{% form_theme profilePictureForm 'bootstrap_3_layout.html.twig' %}
+
+<!-- Form -->
+<div class="create-event-form">
+    <div class="well">
+        {{form_start(profilePictureForm)}}
+        {{form_widget(profilePictureForm)}}
+        <input type="submit" class="btn btn-primary" />
+        {{form_end(profilePictureForm)}}
+    </div>
+</div>

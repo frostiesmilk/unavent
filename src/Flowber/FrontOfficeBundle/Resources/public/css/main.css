@@ -304,9 +304,6 @@ and open the template in the editor.
   margin: -5px 0px;
 }
 /* Second navbar */
-.sticky-wrapper {
-  margin-bottom: -40px;
-}
 .navbar-second {
   background-color: #E74C3C;
   border: initial;
