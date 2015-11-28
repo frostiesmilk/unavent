@@ -1,0 +1,48 @@
+{# empty Twig template #}
+<nav id="nav-stick" class="navbar navbar-default navbar-second navbar-sm">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#second-navbar" aria-expanded="false" aria-controls="second-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>                
+            </div>
+            <div id="second-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('wybe_front_office_events', {'eventNameSlug': 'event1'}) }}">Actualités</a></li>
+                    <li><a href="{{ path('wybe_front_office_events_member', {'eventNameSlug': 'event1'}) }}">Participants</a></li>
+                    <li><a href="{{ path('wybe_front_office_events_gallery', {'eventNameSlug': 'event1'}) }}">Photos</a></li>
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/wink.png')}}"/> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-person.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/plus-white2.png')}}"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="back-top" href="#">
+                            <span class="fa fa-caret-up"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>

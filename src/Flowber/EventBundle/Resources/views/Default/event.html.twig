@@ -1,0 +1,35 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/event.css') }}"/>
+{% endblock %}
+
+{% block smallMenu %}
+    {{parent()}}
+    <!-- BEGIN small screen menu -->
+    {% include 'WybeFrontOfficeBundle::partials/event/event-navbar-small.html.twig' %}
+    <!-- END small screen menu -->
+{% endblock %}
+
+{% block body %}
+
+    <!-- navbar top -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <!-- User Banner -->  
+    {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
+
+    <!-- Second navbar -->
+     {% include 'WybeFrontOfficeBundle::partials/event/event-navbar.html.twig' %}
+   
+    <!-- page -->
+     {% include 'WybeFrontOfficeBundle::partials/event/event-content.html.twig' %}
+   
+    <!-- footer -->                  
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
+
+    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+    
+{% endblock %}

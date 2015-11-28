@@ -66,16 +66,9 @@ class PostalAddress
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal", nullable=true)
+     * @ORM\Column(name="coordinate", type="string", length=255, nullable=true)
      */
-    private $longitude;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lattitude", type="decimal", nullable=true)
-     */
-    private $lattitude;
+    private $coordinate;
 
     /**
      * @var \DateTime
@@ -239,51 +232,28 @@ class PostalAddress
     {
         return $this->country;
     }
-
+    
     /**
-     * Set longitude
+     * Set coordinate
      *
-     * @param string $longitude
+     * @param string $coordinate
      * @return PostalAddress
      */
-    public function setLongitude($longitude)
+    public function setCoordinate($coordinate)
     {
-        $this->longitude = $longitude;
+        $this->coordinate = $coordinate;
 
         return $this;
     }
 
     /**
-     * Get longitude
+     * Get coordinate
      *
      * @return string 
      */
-    public function getLongitude()
+    public function getCoordinate()
     {
-        return $this->longitude;
-    }
-
-    /**
-     * Set lattitude
-     *
-     * @param string $lattitude
-     * @return PostalAddress
-     */
-    public function setLattitude($lattitude)
-    {
-        $this->lattitude = $lattitude;
-
-        return $this;
-    }
-
-    /**
-     * Get lattitude
-     *
-     * @return string 
-     */
-    public function getLattitude()
-    {
-        return $this->lattitude;
+        return $this->coordinate;
     }
 
     /**

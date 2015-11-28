@@ -5,7 +5,6 @@ namespace Flowber\ProfileBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Flowber\GalleryBundle\Form\PhotoType;
 
 class ProfileType extends AbstractType
 {

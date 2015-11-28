@@ -22,8 +22,8 @@ function reloadMap(){
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13
+    center: {lat: 48.8534100, lng: 2.3488000},
+    zoom: 12
   });
   var input = /** @type {!HTMLInputElement} */(
       document.getElementById('pac-input'));
@@ -55,7 +55,7 @@ function initMap() {
       map.fitBounds(place.geometry.viewport);
     } else {
       map.setCenter(place.geometry.location);
-      map.setZoom(17);  // Why 17? Because it looks good.
+      map.setZoom(15);  // Why 17? Because it looks good.
     }
     marker.setIcon(/** @type {google.maps.Icon} */({
       url: place.icon,
@@ -87,19 +87,26 @@ function initMap() {
         (place.address_components[4] && place.address_components[4].short_name || ''),
       ].join(' ');
       
-      longueur=codepostal.length;
-      if (longueur != 5)
-          codepostal ='';
+      country = [
+        (place.address_components[5] && place.address_components[5].short_name || ''),
+      ].join(' ');
       
+      longueur=codepostal.length;
+      if (longueur != 5){
+        codepostal ='';
+      }
+      if (country=='FR'){
+          country='France';
+      }
 
     }
 
-      document.getElementById("event-address").value = addressbis;
-    document.getElementById("event-city").value = addresscity;
-    document.getElementById("event-zipcode").value = codepostal;
-    document.getElementById("event-place-name").value = place.name;
-;
-    
+    document.getElementById("flowber_eventbundle_event_postalAddress_name").value = place.name;
+    document.getElementById("flowber_eventbundle_event_postalAddress_address").value = addressbis;
+    document.getElementById("flowber_eventbundle_event_postalAddress_city").value = addresscity;
+    document.getElementById("flowber_eventbundle_event_postalAddress_zipcode").value = codepostal;
+    document.getElementById("flowber_eventbundle_event_postalAddress_country").value = country;
+    document.getElementById("flowber_eventbundle_event_postalAddress_coordinate").value = place.geometry.location;
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
     infowindow.open(map, marker);

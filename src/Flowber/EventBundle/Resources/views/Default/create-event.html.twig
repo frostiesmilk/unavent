@@ -1,0 +1,146 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+{% form_theme eventForm 'bootstrap_3_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/create-event.css') }}"/> 
+{% endblock %}
+
+{% block body %}
+
+    <!-- Main menu -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <!-- Cover -->
+    <div class="jumbotron create-event-cover" style="background-image: url({{asset('bundles/wybefrontoffice/images/pages/homepage-signup/cover-streetsheeps.jpg')}})">    
+        <div class="container" >
+            <div class="row-fluid text-center">       
+                <h1 class="create-event-cover-title ">Lancez-vous dans une nouvelle aventure !</h1>
+            </div>
+        </div>
+    </div>
+
+        
+
+        
+        
+    <!-- Form -->
+    <div class="create-event-form form-horizontal" >
+        <h1>Créer un évènement</h1>
+            {{form_start(eventForm)}}
+            <div class="form-group">
+                <label for="event-title" class="col-sm-2 control-label">Titre</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.title)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-tease" class="col-sm-2 control-label">Phrase d'accroche</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.subtitle)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-category" class="col-sm-2 control-label">Catégories</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.category)}}
+                </div>
+            </div>
+                
+            <div class="form-group">
+                <label for="event-category" class="col-sm-2 control-label">Photo de profil</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.profilePicture)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-category" class="col-sm-2 control-label">Photo de couverture</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.coverPicture)}}
+                </div>
+            </div>
+                
+            <div class="form-group">
+                <label for="event-description" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.description)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-location" class="col-sm-2 control-label">Lieu</label>
+                <div class="col-sm-10">
+                    <input id="pac-input" class="autocomplete-map-controls" type="text"
+                        placeholder="Enter a location">
+                   <div id="map"></div>           
+               </div> 
+            </div> 
+             <div class="form-group">
+                <label for="event-place-name" class="col-sm-2 control-label">Nom</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.postalAddress.name)}}
+                </div>
+            </div>                     
+            <div class="form-group">
+                <label for="event-address" class="col-sm-2 control-label">Adresse</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.postalAddress.address)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-city" class="col-sm-2 control-label">Ville</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.postalAddress.city)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-zipcode" class="col-sm-2 control-label">Code postal</label>
+                <div class="col-sm-3">
+                    {{form_widget(eventForm.postalAddress.zipcode)}}
+                </div>
+                <label for="event-country" class="col-sm-2 control-label">Pays</label>
+                <div class="col-sm-5">
+                    {{form_widget(eventForm.postalAddress.country)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-date" class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.eventDate)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Visibilité</label>
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
+                    </label>
+                </div>
+            </div>
+            {{form_widget(eventForm.postalAddress.coordinate)}}
+            <div class="form-group">                
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default event-submit">Continuer</button>
+                </div>
+            </div>
+                {{ form_rest(eventForm) }}
+            {{form_end(eventForm)}}
+        </form>
+    </div>       
+    
+    <!-- footer -->                  
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}    
+    <script src="{{ asset('bundles/wybefrontoffice/js/messages.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
+    async defer></script>    
+
+{% endblock %}
