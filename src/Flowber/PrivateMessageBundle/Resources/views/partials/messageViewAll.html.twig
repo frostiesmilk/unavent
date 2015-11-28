@@ -26,7 +26,12 @@
             <td class="messages-stream-element-clickable"><span class="messages-stream-element-author">Jean-Pierre de Sitges</span></td>
             <td class="messages-stream-element-clickable"><span class="messages-stream-element-subject">Manger</span> - <span class="messages-stream-element-content-preview">Yo! Tu viens manger demain midi?</span></td>
             <td class="messages-stream-element-clickable"><span class="messages-stream-element-date">10:07</span></td>
-        </tr>         
+        </tr>     
+        {#
+            {% for userMessage in userMessages %}
+            {{ userMessage.subject }}
+            {% endfor %}
+        #}
     </tbody>
 
 </table>
