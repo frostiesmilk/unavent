@@ -4,15 +4,20 @@ namespace Flowber\EventBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Flowber\EventBundle\Entity\Event;
+use Flowber\EventBundle\Entity\EventRepository;
 use Flowber\EventBundle\Form\EventType;
 
 class DefaultController extends Controller
 {
     public function eventAction($id)
     {
-        $event = $this->getDoctrine()->getManager()->getRepository('FlowberEventBundle:Event')->find($id);
-
-        return $this->render('FlowberEventBundle:Default:event.html.twig', array('id' => $id));
+        
+        $repository = $this->getDoctrine()
+                   ->getManager()
+                   ->getRepository('FlowberEventBundle:Event');
+        $result = $repository->getInfosEvent($id);
+        die(var_dump($result));        
+        return $this->render('FlowberEventBundle:Default:event.html.twig', array('result' => $result));
     }
     
     public function createEventAction()

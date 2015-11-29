@@ -10,7 +10,7 @@ use Flowber\GalleryBundle\Entity\Photo;
  * Event
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity (repositoryClass="Flowber\EventBundle\Entity\EventRepository")
  */
 class Event 
 {
