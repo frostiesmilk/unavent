@@ -224,8 +224,13 @@ and open the template in the editor.
   width: 25px;
   margin: -5px 0px;
 }
+.navbar-home .navbar-connection-error {
+  display: inline-block;
+}
 .navbar-home .navbar-connection-form {
   margin: initial;
+  display: inline-block;
+  vertical-align: middle;
 }
 .navbar-home .navbar-connection-form table {
   border-collapse: initial;

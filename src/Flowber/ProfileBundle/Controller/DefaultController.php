@@ -10,6 +10,8 @@ use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\GalleryBundle\Form\PhotoType;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
+use Flowber\GalleryBundle\Form\CoverPictureType;
+use Flowber\GalleryBundle\Form\ProfilePictureType;
 
 class DefaultController extends Controller
 {
@@ -21,50 +23,93 @@ class DefaultController extends Controller
     public function getEditProfileAction()
     {
         $user = $this->getUser();        
-
+        $error = false; // detect error while processing forms
+        
         if (!is_object($user)) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
         
+        // preparing profile to be edited
         $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
         $profileForm = $this->createForm(new ProfileType, $profile);
+        
+        //preparing eventual new profile picture
+        $profilePicture = new Photo();
+//        $profilePictureForm = $this->createFormBuilder($profilePicture)
+//            ->add('file',           'file', array(
+//                    'label' => 'Photo de profil',
+//                    'required' => false,
+//                    'attr' => array("name"=>"wesh")
+//                    //'data_class' => null
+//                ))
+//            //->add('save', 'submit', array('label' => 'Changer de photo de couverture'))
+//            ->getForm();
+        $profilePictureForm = $this->createForm(new ProfilePictureType, $profilePicture);
+        
+        //preparing new cover picture
+        $coverPicture = new Photo();
+        $coverPictureForm = $this->createForm(new CoverPictureType, $coverPicture);
         
         $request = $this->get('request');
         // if form has been submitted
         if ($request->getMethod() == 'POST') { 
             $profileForm->handleRequest($request);
+            $profilePictureForm->handleRequest($request);
+            $coverPictureForm->handleRequest($request);
             
-            if ($profileForm->isValid()) {
-                
-                // processing cover picture
-//                $uploadedFiles = $request->files->get('flowber_profilebundle_profile');//->get('flowber_gallerybundle_photo');
-//            
-//                
-//                $uploadedCoverPicture = $uploadedFiles['coverPicture'];
-//                $uploadedCoverPicture = $uploadedCoverPicture['file'];
-//  
-//                if(!isset($uploadedCoverPicture)){
-//                    die("no picture to be uploaded");
-//                }else{
-//                    if()
-//                    $profile->getCoverPicture()->addGallery($profile->getCoverGallery());
-//                }
-                
-                
+            // processing profile edit
+            if ($profileForm->isValid()) {   
                 $em = $this->getDoctrine()->getManager();
                 
                 $em->persist($profile);
                 $em->flush();
-
-                
+            }else{
+                $error = true;
             }
+                        
+            if($profilePictureForm->isValid()){
+                // profile picture was submitted
+                if($profilePicture->getFile() !== null){
+                    $em = $this->getDoctrine()->getManager();
+                    $profilePicture->addGallery($profile->getProfileGallery());
+                    $profile->setProfilePicture($profilePicture);
+                    $em->persist($profile);
+                    $em->persist($profilePicture);
+                    $em->flush();
+                }
+            }else{
+                $error = true;
+            }   
             
+            if($coverPictureForm->isValid()){
+                // cover picture was submitted
+                if($coverPicture->getFile() !== null){
+                    $em = $this->getDoctrine()->getManager();
+                    $coverPicture->addGallery($profile->getCoverGallery());
+                    $profile->setCoverPicture($coverPicture);
+
+                    $em->persist($coverPicture);
+                    $em->persist($profile);
+                    $em->flush();
+                }
+            }else{
+                $error = true;
+            }   
             
-            
-            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+            // no error
+            if(!$error){         
+//                
+//                $em->persist($profile);
+//                $em->flush();
+                // all good, back to profile page
+                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+            }
         }
   
-        return $this->render('FlowberProfileBundle:Default:profileEditMain.html.twig', array('profileForm' => $profileForm->createView()));
+        return $this->render('FlowberProfileBundle:Default:profileEditMain.html.twig', 
+                array('profileForm' => $profileForm->createView(),
+                    'profilePictureForm'=>$profilePictureForm->createView(),
+                    'coverPictureForm'=>$coverPictureForm->createView()));
     }
     
     /**
@@ -105,55 +150,12 @@ class DefaultController extends Controller
                 $em->persist($profile);
                 $em->flush();
             }
-            
             // back to profile page
             return $this->redirect($this->generateUrl('flowber_current_user_profile'));
         }
         
         // render form
         return $this->render('FlowberProfileBundle:Default:profileEditCoverPicture.html.twig', array('coverPictureForm' => $coverPictureForm->createView()));
-    }
-    
-    public function editProfilePictureAction(){
-        // retrieve user
-        $user = $this->getUser();        
-
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        
-        // retrieve user profile
-        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
-        
-        //preparing new cover picture
-        $profilePicture = new Photo();
-        $profilePictureForm = $this->createFormBuilder($profilePicture)
-            ->add('file',           'file', array(
-                    'required' => false,
-                    'data_class' => null))
-            //->add('save', 'submit', array('label' => 'Changer de photo de couverture'))
-            ->getForm();
-        
-        $request = $this->get('request');
-        if ($request->getMethod() == 'POST') { 
-            $profilePictureForm->handleRequest($request);
-        
-            if($profilePictureForm->isValid()){
-                $em = $this->getDoctrine()->getManager();
-                $profilePicture->addGallery($profile->getProfileGallery());
-                $profile->setProfilePicture($profilePicture);
-
-                $em->persist($profilePicture);
-                $em->persist($profile);
-                $em->flush();
-            }
-            
-            // back to profile page
-            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
-        }
-        
-        // render form
-        return $this->render('FlowberProfileBundle:Default:profileEditProfilePicture.html.twig', array('profilePictureForm' => $profilePictureForm->createView()));
     }
     
     /**

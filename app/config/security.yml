@@ -27,7 +27,7 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager # was commented before
-                login_path: fos_user_security_login
+                login_path: flowber_front_office_signin_homepage # fos_user_security_login
                 check_path: fos_user_security_check
                 always_use_default_target_path: true  
                 default_target_path: flowber_current_user_profile
