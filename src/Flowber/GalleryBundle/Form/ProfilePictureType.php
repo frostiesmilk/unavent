@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PhotoType extends AbstractType
+class ProfilePictureType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,10 +15,9 @@ class PhotoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file',           'file', array(
-                    'data_class' => null))
-            ->add('title',          'text')
-            ->add('description',    'textarea')
+            ->add('file',           'file',  array(
+                    "label"=>"Photo de profil",
+                    "required"=>false))
         ;
     }
     
@@ -37,6 +36,6 @@ class PhotoType extends AbstractType
      */
     public function getName()
     {
-        return 'flowber_gallerybundle_photo';
+        return 'flowber_gallerybundle_profile_picture';
     }
 }

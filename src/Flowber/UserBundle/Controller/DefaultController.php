@@ -24,7 +24,7 @@ use Flowber\UserBundle\Form\PhoneType;
 
 class DefaultController extends Controller
 {
-        /**
+    /**
      * Show SignIn homepage
      * @return type
      */
@@ -112,16 +112,5 @@ class DefaultController extends Controller
             'csrf_token' => $csrfToken,
             'registrationForm' => $form->createView(),
         )));
-    }
-        
-    public function index2Action()
-    {  
-        
-        $re = $this->getDoctrine()
-                   ->getManager()
-                   ->getRepository('FlowberUserBundle:Phone');
-        $myUser = $re->find(54);
-       
-        return $this->render('FlowberUserBundle:Default:test2.html.twig');
     }
 }

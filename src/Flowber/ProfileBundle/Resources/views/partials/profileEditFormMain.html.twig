@@ -1,13 +1,20 @@
 {# Flowber\ProfileBundle\Resources\views\partials\profileEditFormMain.html.twig #}
 {% form_theme profileForm 'bootstrap_3_layout.html.twig' %}
+{% form_theme profilePictureForm 'bootstrap_3_layout.html.twig' %}
+{% form_theme coverPictureForm 'bootstrap_3_layout.html.twig' %}
 
 <!-- Form -->
 <div class="create-event-form">
-    <div class="well">
-    {{form_start(profileForm)}}
+    <form method="post" enctype="multipart/form-data">
         {{form_widget(profileForm)}}
-        <input type="submit" class="btn btn-primary" />
-    {{form_end(profileForm)}}
-    </div>
+        <hr/>
+        {{form_widget(profilePictureForm)}}
+        <hr/>
+        {{form_widget(coverPictureForm)}}
+        <hr/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Confirmer</button>
+        </div>
+    </form>
 </div>
 {# Le formulaire reste inchangé #}

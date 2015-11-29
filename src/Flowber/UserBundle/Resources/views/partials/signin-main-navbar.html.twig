@@ -12,13 +12,15 @@
                 <span class="site-name">FlowBer</span>
             </a>
         </div>
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+        
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="content-navbar-main">
-            <form method="post" action="{{ path("fos_user_security_check") }}" class="navbar-right navbar-form navbar-connection-form">
+        <div class="collapse navbar-collapse navbar-right " id="content-navbar-main">      
+            {% if error %}
+            <div class="alert alert-danger navbar-connection-error" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <form method="post" action="{{ path("fos_user_security_check") }}" class="navbar-form navbar-connection-form">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                
                 <table>                    
                     <tr>
                         <td>
