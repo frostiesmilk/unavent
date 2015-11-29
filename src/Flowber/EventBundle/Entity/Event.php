@@ -103,12 +103,14 @@ class Event
     private $galleries;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
+     * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
      */
     private $profilePicture;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
+     * @ORM\JoinColumn(name="cover_picture_id", referencedColumnName="id", nullable=true)
      */
     private $coverPicture;
 

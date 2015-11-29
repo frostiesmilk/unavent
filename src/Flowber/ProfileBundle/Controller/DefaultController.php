@@ -35,15 +35,6 @@ class DefaultController extends Controller
         
         //preparing eventual new profile picture
         $profilePicture = new Photo();
-//        $profilePictureForm = $this->createFormBuilder($profilePicture)
-//            ->add('file',           'file', array(
-//                    'label' => 'Photo de profil',
-//                    'required' => false,
-//                    'attr' => array("name"=>"wesh")
-//                    //'data_class' => null
-//                ))
-//            //->add('save', 'submit', array('label' => 'Changer de photo de couverture'))
-//            ->getForm();
         $profilePictureForm = $this->createForm(new ProfilePictureType, $profilePicture);
         
         //preparing new cover picture
@@ -53,6 +44,7 @@ class DefaultController extends Controller
         $request = $this->get('request');
         // if form has been submitted
         if ($request->getMethod() == 'POST') { 
+            // retrieving all forms
             $profileForm->handleRequest($request);
             $profilePictureForm->handleRequest($request);
             $coverPictureForm->handleRequest($request);
@@ -66,7 +58,8 @@ class DefaultController extends Controller
             }else{
                 $error = true;
             }
-                        
+                     
+            // processing profile picture form
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
                 if($profilePicture->getFile() !== null){
@@ -81,6 +74,7 @@ class DefaultController extends Controller
                 $error = true;
             }   
             
+            // processing cover picture form
             if($coverPictureForm->isValid()){
                 // cover picture was submitted
                 if($coverPicture->getFile() !== null){

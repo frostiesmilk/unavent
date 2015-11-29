@@ -16,7 +16,7 @@ class CoverPictureType extends AbstractType
     {
         $builder
             ->add('file',           'file',  array(
-                    "label"=>"Photo de profil",
+                    "label"=>false,
                     "required"=>false))
         ;
     }

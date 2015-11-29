@@ -3,23 +3,24 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="event-details">
-                    <h2>Football</h2>
+                    <h2>{{ result.title}}</h2>   
                     <table>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
-                            <td>créé par <span class="event-details-host">Aurélien BONAZZI</span></td>
+                            <td>créé par <span class="event-details-host">{{ result.firstname }} {{ result.surname }}</span></td>
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
-                            <td>golf, cinema, poterie</td>
+                            <td>{{ result.category }}</td>
                         </tr>                        
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
-                            <td>le 01 Septembre 2015 à 15h00</td>
+                            <td>{{ result.eventDate|date("\\l\\e d/m/Y  \\à g:i", "Europe/Paris") }}</td>
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
-                            <td>Au Parc du Tremble<br/>12 avenue des Lilas<br/>94100 Saint-Maur-des-Fossés</td>
+                            <td>{{ result.name }}<br/>{{ result.address }}<br/>{{ result.zipcode }} {{ result.city }}</td>
+
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
@@ -30,7 +31,7 @@
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
-                            <td><p class="event-details-description">Bla bla bla</p></td>
+                            <td><p class="event-details-description">{{ result.description }}</p></td>
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
@@ -150,15 +151,4 @@
         </div>                
     </div>
                                 
-<script type="text/javascript">
-        $('#eventNavbar a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-        
-        $("#newPostTextArea, #newMailToHost").keyup(function(e) {
-            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
-                $(this).height($(this).height()+1);
-            };
-        });
-    </script>
+

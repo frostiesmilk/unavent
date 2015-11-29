@@ -377,10 +377,10 @@ class User extends BaseUser
     /**
      * Set profile
      *
-     * @param \Flowber\UserBundle\Entity\Profile $profile
+     * @param \Flowber\ProfileBundle\Entity\Profile $profile
      * @return User
      */
-    public function setProfile(\Flowber\UserBundle\Entity\Profile $profile = null)
+    public function setProfile(\Flowber\ProfileBundle\Entity\Profile $profile = null)
     {
         $this->profile = $profile;
 

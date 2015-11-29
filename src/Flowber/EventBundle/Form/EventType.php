@@ -34,12 +34,6 @@ class EventType extends AbstractType
                      'required' => false
              ))
             ->add('postalAddress',  new PostalAddressWithNameType())
-            ->add('profilePicture',  new PhotoOnlyType(), array(
-                     'required' => false
-             ))
-            ->add('coverPicture',  new PhotoOnlyType(), array(
-                     'required' => false
-             ))
         ;
     }
     

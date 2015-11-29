@@ -14,22 +14,42 @@
 {% endblock %}
 
 {% block body %}
-
+    
     <!-- navbar top -->
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- User Banner -->  
-    {% include 'WybeFrontOfficeBundle::partials/common/cover.html.twig' %}
+    {% include 'FlowberEventBundle::partials/eventCover.html.twig' %}
 
     <!-- Second navbar -->
-     {% include 'WybeFrontOfficeBundle::partials/event/event-navbar.html.twig' %}
    
     <!-- page -->
-     {% include 'WybeFrontOfficeBundle::partials/event/event-content.html.twig' %}
+     {% include 'FlowberEventBundle::partials/eventContent.html.twig' %}
    
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
 
+   
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+        
     <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
+    async defer></script>    
     
+    <script type="text/javascript">
+        $('#eventNavbar a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+
+        $("#newPostTextArea, #newMailToHost").keyup(function(e) {
+            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+                $(this).height($(this).height()+1);
+            };
+        });
+    </script>
+
 {% endblock %}

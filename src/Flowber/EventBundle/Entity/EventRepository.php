@@ -16,17 +16,19 @@ class EventRepository extends EntityRepository
     public function getInfosEvent($id){
         
         $query = $this->_em->createQuery(''
-                . 'SELECT a.title, a.subtitle, a.eventDate, a.description, '
-                . 'c.name, c.address, c.city, c.zipcode, c.coordinate, b.firstname, b.surname,'
-                . 'd.file as profilePic, e.file as coverPic '
-                . 'FROM FlowberEventBundle:Event a '
-                . 'LEFT JOIN FlowberUserBundle:PostalAddress c  WITH a.postalAddress = c '
-                . 'LEFT JOIN FlowberUserBundle:User b WITH a.createdBy = b '
-                . 'LEFT JOIN FlowberGalleryBundle:Photo d WITH a.profilePicture = d '
-                . 'LEFT JOIN FlowberGalleryBundle:Photo e WITH a.coverPicture = e '
-                . 'WHERE a.id = :id');
+                . 'SELECT event.title, event.subtitle, event.eventDate, event.description, event.category, '
+                . 'address.name, address.address, address.city, address.zipcode, address.coordinate, '
+                . 'user.firstname, user.surname, '
+                . 'photoC.id as coverPicture, photoP.id as profilePicture '
+                . 'FROM FlowberEventBundle:Event event '
+                . 'LEFT JOIN FlowberUserBundle:PostalAddress address  WITH event.postalAddress = address '
+                . 'LEFT JOIN FlowberUserBundle:User user WITH event.createdBy = user '
+                . 'LEFT JOIN FlowberGalleryBundle:Photo photoC WITH event.coverPicture = photoC '
+                . 'LEFT JOIN FlowberGalleryBundle:Photo photoP WITH event.profilePicture = photoP '
+                . 'WHERE event.id = :id');
         $query->setParameter('id', $id);
         
         return $query->getSingleResult();
     }
+
 }
