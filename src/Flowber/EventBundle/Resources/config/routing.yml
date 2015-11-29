@@ -1,0 +1,7 @@
+flowber_event_homepage:
+    path:     /sortie/{id}
+    defaults: { _controller: FlowberEventBundle:Default:event }
+
+flowber_create_event_homepage:
+    path:     /nouvelle_sortie
+    defaults: { _controller: FlowberEventBundle:Default:createEvent }

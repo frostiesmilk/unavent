@@ -1,0 +1,4 @@
+services:
+#    flowber_event.example:
+#        class: Flowber\EventBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
