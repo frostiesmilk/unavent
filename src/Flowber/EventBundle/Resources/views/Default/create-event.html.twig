@@ -25,7 +25,7 @@
     <!-- Form -->
     <div class="create-event-form form-horizontal" >
         <h1>Créer un évènement</h1>
-            <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="event-title" class="col-sm-2 control-label">Titre</label>
                 <div class="col-sm-10">
@@ -120,7 +120,9 @@
                     <button type="submit" class="btn btn-default event-submit">Continuer</button>
                 </div>
             </div>
-                {{ form_rest(eventForm) }}
+            {{ form_rest(eventForm) }}
+            {{ form_rest(profilePictureForm) }}
+            {{ form_rest(coverPictureForm) }}
         </form>
     </div>       
     

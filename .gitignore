@@ -10,6 +10,7 @@
 /vendor/
 /web/bundles/
 /nbproject/private/
+/web/uploads/
 
 !nodejs & grunt & bower START
 /.tmp

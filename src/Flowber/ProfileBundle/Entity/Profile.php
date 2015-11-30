@@ -61,7 +61,7 @@ class Profile
     private $user;
     
     /**
-     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
+     * @ORM\ManyToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
      * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
      */
     private $profilePicture;

@@ -54,20 +54,18 @@ class DefaultController extends Controller
         $coverPictureForm = $this->createForm(new CoverPictureType, $coverPicture);
         
         $request = $this->get('request');
-        
-
             
         // if form has been submitted
         if ($request->getMethod() == 'POST') { 
             $eventForm->handleRequest($request);
             $profilePictureForm->handleRequest($request);
             $coverPictureForm->handleRequest($request);  
+            $em = $this->getDoctrine()->getManager();
             
-             if ($eventForm->isValid()) {             
-                $em = $this->getDoctrine()->getManager();
-                $event->setCreatedBy($user);
+            if ($eventForm->isValid()) {
+                $event->setCreatedBy($user); 
                 $em->persist($event);
-                $em->flush();              
+                $em->flush();
             }  else{
                 $error = true;
             }
@@ -76,9 +74,8 @@ class DefaultController extends Controller
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
                 if($profilePicture->getFile() !== null){
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($profilePicture);
                     $event->setProfilePicture($profilePicture);
+                    $em->persist($profilePicture);
                     $em->flush();
                 }
             }else{
@@ -89,20 +86,18 @@ class DefaultController extends Controller
             if($coverPictureForm->isValid()){
                 // cover picture was submitted
                 if($coverPicture->getFile() !== null){
-                    $em = $this->getDoctrine()->getManager();
+                    $event->setCoverPicture($coverPicture); 
                     $em->persist($coverPicture);
-                    $event->setCoverPicture($coverPicture);                    
                     $em->flush();
                 }
             }else{
                 $error = true;
-            }  
-
-                   
+            }
+            
             // no error
             if(!$error){         
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_event_homepage'), array('id' => $event->getId()));
+                return $this->redirect($this->generateUrl('flowber_event_homepage', array('id' => $event->getId()) ));
             }
         }
   

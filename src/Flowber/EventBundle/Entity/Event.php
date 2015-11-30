@@ -143,8 +143,8 @@ class Event
         $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organizer = new \Doctrine\Common\Collections\ArrayCollection();
         $this->postalAddress = new PostalAddress();
-        $this->coverPicture = new Photo();
-        $this->profilePicture = new Photo();
+//        $this->coverPicture = new Photo();
+//        $this->profilePicture = new Photo();
         
         $this->creationDate = new \Datetime();
     }
@@ -441,7 +441,7 @@ class Event
      * @param string $profilePicture
      * @return Event
      */
-    public function setProfilePicture($profilePicture)
+    public function setProfilePicture(\Flowber\GalleryBundle\Entity\Photo $profilePicture = null)
     {
         $this->profilePicture = $profilePicture;
 
@@ -464,7 +464,7 @@ class Event
      * @param string $coverPicture
      * @return Event
      */
-    public function setCoverPicture($coverPicture)
+    public function setCoverPicture(\Flowber\GalleryBundle\Entity\Photo $coverPicture = null)
     {
         $this->coverPicture = $coverPicture;
 
