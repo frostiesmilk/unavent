@@ -102,7 +102,7 @@ class DefaultController extends Controller
             // no error
             if(!$error){         
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_event_homepage'), array('id' => $event->getId()));
+                return $this->redirect($this->generateUrl('flowber_event_homepage',array('id' => $event->getId())));
             }
         }
   
@@ -110,6 +110,17 @@ class DefaultController extends Controller
             'eventForm' => $eventForm->createView(),
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
-                ));
+        ));
+    }
+    
+    public function AllEventAction()
+    {
+        $user = $this->getUser();        
+
+        $allEvent = $this->getDoctrine()->getManager()->getRepository('FlowberEventBundle:Event')->findByCreatedBy($user);
+        
+        return $this->render('FlowberEventBundle:Default:allEvent.html.twig', array(
+            'allEvent' => $allEvent,
+        ));
     }
 }

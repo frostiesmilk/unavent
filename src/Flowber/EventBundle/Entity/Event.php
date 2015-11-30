@@ -143,8 +143,6 @@ class Event
         $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organizer = new \Doctrine\Common\Collections\ArrayCollection();
         $this->postalAddress = new PostalAddress();
-        $this->coverPicture = new Photo();
-        $this->profilePicture = new Photo();
         
         $this->creationDate = new \Datetime();
     }

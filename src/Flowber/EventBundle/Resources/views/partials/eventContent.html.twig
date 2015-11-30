@@ -1,9 +1,12 @@
 {# empty Twig template #}
+
+
 <div class="container event-container">
         <div class="row">
             <div class="col-md-5">
                 <div class="event-details">
-                    <h2>{{ result.title}}</h2>   
+                    <h2>{{ result.title}}</h2>  
+                    <div id="map"></div>
                     <table>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
@@ -17,10 +20,10 @@
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
                             <td>{{ result.eventDate|date("\\l\\e d/m/Y  \\à g:i", "Europe/Paris") }}</td>
                         </tr>
+                         
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
                             <td>{{ result.name }}<br/>{{ result.address }}<br/>{{ result.zipcode }} {{ result.city }}</td>
-
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>

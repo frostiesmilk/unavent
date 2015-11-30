@@ -5,3 +5,7 @@ flowber_event_homepage:
 flowber_create_event_homepage:
     path:     /nouvelle_sortie
     defaults: { _controller: FlowberEventBundle:Default:createEvent }
+
+flowber_all_event_homepage:
+    path:     /toutes_mes_sorties
+    defaults: { _controller: FlowberEventBundle:Default:AllEvent }
