@@ -13,8 +13,7 @@ use Flowber\GalleryBundle\Entity\Photo;
 class DefaultController extends Controller
 {
     public function eventAction($id)
-    {
-   
+    {  
         $repository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('FlowberEventBundle:Event');

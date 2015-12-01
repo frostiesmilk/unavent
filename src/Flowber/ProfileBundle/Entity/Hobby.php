@@ -22,9 +22,7 @@ class Hobby
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Flowber\FrontOfficeBundle\Entity\Category")
      */
     private $category;
 

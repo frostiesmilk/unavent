@@ -1,0 +1,11 @@
+flowber_group_homepage:
+    path:     /groupe/{id}
+    defaults: { _controller: FlowberGroupBundle:Default:group }
+
+flowber_create_group_homepage:
+    path:     /nouveau_groupe
+    defaults: { _controller: FlowberGroupBundle:Default:createGroup }
+
+flowber_all_group_homepage:
+    path:     /tous_mes_groupes
+    defaults: { _controller: FlowberGroupBundle:Default:AllGroups }

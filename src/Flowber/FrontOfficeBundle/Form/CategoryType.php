@@ -1,12 +1,12 @@
 <?php
 
-namespace Flowber\GalleryBundle\Form;
+namespace Flowber\FrontOfficeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CoverPictureType extends AbstractType
+class CategoryType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,9 +15,7 @@ class CoverPictureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file',           'file',  array(
-                    "label"=>"cover",
-                    "required"=>false))
+            ->add('title')
         ;
     }
     
@@ -27,7 +25,7 @@ class CoverPictureType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Flowber\GalleryBundle\Entity\Photo'
+            'data_class' => 'Flowber\FrontOfficeBundle\Entity\Category'
         ));
     }
 
@@ -36,6 +34,6 @@ class CoverPictureType extends AbstractType
      */
     public function getName()
     {
-        return 'flowber_gallerybundle_cover_picture';
+        return 'flowber_frontofficebundle_category';
     }
 }

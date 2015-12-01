@@ -16,7 +16,7 @@ class ProfilePictureType extends AbstractType
     {
         $builder
             ->add('file',           'file',  array(
-                    "label"=>false,
+                    "label"=>"profile",
                     "required"=>false))
         ;
     }
