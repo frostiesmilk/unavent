@@ -1,0 +1,21 @@
+{% set groupCoverPicturePath = 'bundles/flowberprofile/images/Default/coverPictureDefault.png' %} {# default User Cover #}
+{% if coverPicture is not null %}
+    {% set groupCoverPicturePath = coverPicture %}
+{% endif %}
+
+{% set groupProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+{% if profilePicture is not null %}
+    {% set groupProfilePicturePath = profilePicture %}
+{% endif %}
+
+<div class="jumbotron generic-cover" style="background-image: url('{{asset(groupCoverPicturePath)}}')"> 
+    <div class="container" >
+        <div class="row-fluid">       
+            <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset(groupProfilePicturePath)}}')"></div>
+            <div class="generic-cover-title">
+                    <h1 class="generic-cover-title-name">{{ title }}</h1>
+                    <p class="generic-cover-title-description">{{ subtitle }}</p>
+            </div>
+        </div>
+    </div>
+</div>    

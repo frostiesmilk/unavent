@@ -22,7 +22,7 @@
                             {% for hobby in profile.hobbies %}
                                 <tr>
                                     <td class="user-profile-interest-subject text-center">
-                                        <span> {{ hobby.category }}</span><br/>
+                                        <span> {{ hobby.category.title }}</span><br/>
                                         <div class="progress category-jauge">
                                             <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{ hobby.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ hobby.percent }}%">
                                               <span class="sr-only">{{ hobby.percent }}</span>

@@ -49,12 +49,11 @@ class DefaultController extends Controller
             $profilePictureForm->handleRequest($request);
             $coverPictureForm->handleRequest($request);
             
+            $em = $this->getDoctrine()->getManager();
+            
             // processing profile edit
-            if ($profileForm->isValid()) {   
-                $em = $this->getDoctrine()->getManager();
-                
+            if ($profileForm->isValid()) {        
                 $em->persist($profile);
-                $em->flush();
             }else{
                 $error = true;
             }
@@ -62,13 +61,11 @@ class DefaultController extends Controller
             // processing profile picture form
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
-                if($profilePicture->getFile() !== null){
-                    $em = $this->getDoctrine()->getManager();
+                if($profilePicture->getFile() !== null){                    
                     $profilePicture->addGallery($profile->getProfileGallery());
                     $profile->setProfilePicture($profilePicture);
                     $em->persist($profile);
                     $em->persist($profilePicture);
-                    $em->flush();
                 }
             }else{
                 $error = true;
@@ -78,13 +75,10 @@ class DefaultController extends Controller
             if($coverPictureForm->isValid()){
                 // cover picture was submitted
                 if($coverPicture->getFile() !== null){
-                    $em = $this->getDoctrine()->getManager();
                     $coverPicture->addGallery($profile->getCoverGallery());
                     $profile->setCoverPicture($coverPicture);
-
                     $em->persist($coverPicture);
                     $em->persist($profile);
-                    $em->flush();
                 }
             }else{
                 $error = true;
@@ -92,7 +86,7 @@ class DefaultController extends Controller
             
             // no error
             if(!$error){         
-//                
+                $em->flush();
 //                $em->persist($profile);
 //                $em->flush();
                 // all good, back to profile page

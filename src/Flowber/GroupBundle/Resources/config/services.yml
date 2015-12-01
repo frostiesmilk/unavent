@@ -1,0 +1,4 @@
+services:
+#    flowber_group.example:
+#        class: Flowber\GroupBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
