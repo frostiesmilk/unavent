@@ -11,8 +11,10 @@ module.exports = function (grunt) {
                     'js/jquery.js': 'jquery/dist/jquery.js',
                     'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
                     'js/jasny-bootstrap.js': 'jasny-bootstrap/dist/js/jasny-bootstrap.js',
-                    'fonts': 'bootstrap/dist/fonts/**',
+                    //'fonts': 'bootstrap/dist/fonts/**',
                     'js/angular.js': 'angular/angular.js',
+                    'js/moment-with-locales.min.js': 'moment/min/moment-with-locales.min.js',
+                    'js/bootstrap-datetimepicker.min.js': 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                 }
             },
             stylesheets: {
@@ -21,11 +23,12 @@ module.exports = function (grunt) {
                     'css/jasny-bootstrap.css': 'jasny-bootstrap/dist/css/jasny-bootstrap.css',
                     'css/font-awesome.css': 'fontawesome/css/font-awesome.css',
                     'css/angular-csp.css': 'angular/angular-csp.css',
+                    'css/bootstrap-datetimepicker.css': 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
                 }
             },            
             fonts: {
                 files: {
-                    'fonts': 'fontawesome/fonts'
+                    'fonts': ['fontawesome/fonts','bootstrap/dist/fonts/'],
                 }
             }
         },

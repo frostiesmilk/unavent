@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Flowber\UserBundle\Form\PostalAddressWithNameType;
 use Flowber\GalleryBundle\Form\PhotoOnlyType;
+use Flowber\EventBundle\Form\DataTransformer\DateTimeTransformer;
 
 class EventType extends AbstractType
 {
@@ -24,7 +25,16 @@ class EventType extends AbstractType
             ->add('description',    'textarea', array(
                      'required' => false
              ))
-            ->add('eventDate',      'datetime')
+            ->add('eventStartDate',      'date', array(
+                                                    'widget' => 'single_text',
+                                                    'input' => 'datetime',
+            ))
+            ->add('eventStartTime',      'time', array(
+                                                    'widget' => 'single_text',
+                                                    'input' => 'datetime',
+            ))
+            ->add('eventEndDate',      'date')
+            ->add('eventEndTime',      'time')
             ->add('privacy',          'choice', array(
                      'choices' => array('Publique' => 'public', 'Privée' => 'private'),
                      'expanded' => true,
@@ -35,6 +45,9 @@ class EventType extends AbstractType
              ))
             ->add('postalAddress',  new PostalAddressWithNameType())
         ;
+        
+        $builder->get('eventStartDate')
+            ->addModelTransformer(new DateTimeTransformer());
     }
     
     /**
