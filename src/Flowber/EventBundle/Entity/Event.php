@@ -5,12 +5,14 @@ namespace Flowber\EventBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Flowber\UserBundle\Entity\PostalAddress;
 use Flowber\GalleryBundle\Entity\Photo;
+use Flowber\EventBundle\Validator\Constraints as FormAssert;
 
 /**
  * Event
  *
  * @ORM\Table()
  * @ORM\Entity (repositoryClass="Flowber\EventBundle\Entity\EventRepository")
+ * @FormAssert\DateRange()
  */
 class Event 
 {
@@ -47,30 +49,30 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="eventStartDate", type="date")
+     * @ORM\Column(name="startDate", type="date")
      */
-    private $eventStartDate;
+    private $startDate;
     
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="eventStartTime", type="time")
+     * @ORM\Column(name="startTime", type="time")
      */
-    private $eventStartTime;
+    private $startTime;
     
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="eventEndDate", type="date", nullable=true)
+     * @ORM\Column(name="endDate", type="date", nullable=true)
      */
-    private $eventEndDate;
+    private $endDate;
     
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="eventEndTime", type="time", nullable=true)
+     * @ORM\Column(name="endTime", type="time", nullable=true)
      */
-    private $eventEndTime;
+    private $endTime;
     
     /**
      * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
@@ -98,6 +100,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\PostalAddress",cascade={"persist"})
+     * @ORM\JoinColumn(name="postal_address_id", referencedColumnName="id", nullable=true)
      */
     private $postalAddress;
 
@@ -162,7 +165,7 @@ class Event
     {
         $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organizer = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->postalAddress = new PostalAddress();
+        //$this->postalAddress = new PostalAddress();
 //        $this->coverPicture = new Photo();
 //        $this->profilePicture = new Photo();
         
@@ -594,98 +597,6 @@ class Event
     }
 
     /**
-     * Set eventStartDate
-     *
-     * @param \DateTime $eventStartDate
-     * @return Event
-     */
-    public function setEventStartDate($eventStartDate)
-    {
-        $this->eventStartDate = $eventStartDate;
-
-        return $this;
-    }
-
-    /**
-     * Get eventStartDate
-     *
-     * @return \DateTime 
-     */
-    public function getEventStartDate()
-    {
-        return $this->eventStartDate;
-    }
-
-    /**
-     * Set eventStartTime
-     *
-     * @param \DateTime $eventStartTime
-     * @return Event
-     */
-    public function setEventStartTime($eventStartTime)
-    {
-        $this->eventStartTime = $eventStartTime;
-
-        return $this;
-    }
-
-    /**
-     * Get eventStartTime
-     *
-     * @return \DateTime 
-     */
-    public function getEventStartTime()
-    {
-        return $this->eventStartTime;
-    }
-
-    /**
-     * Set eventEndDate
-     *
-     * @param \DateTime $eventEndDate
-     * @return Event
-     */
-    public function setEventEndDate($eventEndDate)
-    {
-        $this->eventEndDate = $eventEndDate;
-
-        return $this;
-    }
-
-    /**
-     * Get eventEndDate
-     *
-     * @return \DateTime 
-     */
-    public function getEventEndDate()
-    {
-        return $this->eventEndDate;
-    }
-
-    /**
-     * Set eventEndTime
-     *
-     * @param \DateTime $eventEndTime
-     * @return Event
-     */
-    public function setEventEndTime($eventEndTime)
-    {
-        $this->eventEndTime = $eventEndTime;
-
-        return $this;
-    }
-
-    /**
-     * Get eventEndTime
-     *
-     * @return \DateTime 
-     */
-    public function getEventEndTime()
-    {
-        return $this->eventEndTime;
-    }
-
-    /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
@@ -706,5 +617,97 @@ class Event
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * Set startDate
+     *
+     * @param \DateTime $startDate
+     * @return Event
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * Get startDate
+     *
+     * @return \DateTime 
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set startTime
+     *
+     * @param \DateTime $startTime
+     * @return Event
+     */
+    public function setStartTime($startTime)
+    {
+        $this->startTime = $startTime;
+
+        return $this;
+    }
+
+    /**
+     * Get startTime
+     *
+     * @return \DateTime 
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     * @return Event
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime 
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * Set endTime
+     *
+     * @param \DateTime $endTime
+     * @return Event
+     */
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    /**
+     * Get endTime
+     *
+     * @return \DateTime 
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
     }
 }

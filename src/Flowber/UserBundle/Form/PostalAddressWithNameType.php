@@ -20,7 +20,7 @@ class PostalAddressWithNameType extends AbstractType
             ->add('city',           'text')
             ->add('zipcode',        'text')
             ->add('country',        'text')
-            ->add('coordinate',     'hidden')
+            ->add('coordinates',     'hidden')
         ;
     }
     

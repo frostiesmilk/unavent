@@ -66,9 +66,9 @@ class PostalAddress
     /**
      * @var string
      *
-     * @ORM\Column(name="coordinate", type="string", length=255, nullable=true)
+     * @ORM\Column(name="coordinates", type="string", length=255, nullable=true)
      */
-    private $coordinate;
+    private $coordinates;
 
     /**
      * @var \DateTime
@@ -234,29 +234,6 @@ class PostalAddress
     }
     
     /**
-     * Set coordinate
-     *
-     * @param string $coordinate
-     * @return PostalAddress
-     */
-    public function setCoordinate($coordinate)
-    {
-        $this->coordinate = $coordinate;
-
-        return $this;
-    }
-
-    /**
-     * Get coordinate
-     *
-     * @return string 
-     */
-    public function getCoordinate()
-    {
-        return $this->coordinate;
-    }
-
-    /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
@@ -277,5 +254,28 @@ class PostalAddress
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * Set coordinates
+     *
+     * @param string $coordinates
+     * @return PostalAddress
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
+
+        return $this;
+    }
+
+    /**
+     * Get coordinates
+     *
+     * @return string 
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
     }
 }

@@ -49,7 +49,7 @@
         
     <script>
 function initMap() {
-  var chicago = new google.maps.LatLng{{result.coordinate}};
+  var chicago = new google.maps.LatLng{{result.coordinates}};
 
   var map = new google.maps.Map(document.getElementById('map'), {
     center: chicago,
@@ -85,7 +85,7 @@ function createInfoWindowContent(latLng, zoom) {
   return [
     '{{result.title}}',
     '{{result.name}}, ',
-    '{{ result.eventDate|date("\\l\\e d/m/Y  \\à g:i", "Europe/Paris") }}, ',
+    '{{ result.startDate|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.startTime|date("\\à H:i", "Europe/Paris") }}, ',
   ].join('<br>');
 }
 

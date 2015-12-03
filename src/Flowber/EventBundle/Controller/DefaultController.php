@@ -62,9 +62,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             if ($eventForm->isValid()) {
-                $event->setCreatedBy($user); 
-                $em->persist($event);
-                $em->flush();
+                $event->setCreatedBy($user);                
             }  else{
                 $error = true;
             }
@@ -75,7 +73,6 @@ class DefaultController extends Controller
                 if($profilePicture->getFile() !== null){
                     $event->setProfilePicture($profilePicture);
                     $em->persist($profilePicture);
-                    $em->flush();
                 }
             }else{
                 $error = true;
@@ -87,14 +84,16 @@ class DefaultController extends Controller
                 if($coverPicture->getFile() !== null){
                     $event->setCoverPicture($coverPicture); 
                     $em->persist($coverPicture);
-                    $em->flush();
                 }
             }else{
                 $error = true;
             }
             
             // no error
-            if(!$error){         
+            if(!$error){
+                // DB update
+                $em->persist($event);
+                $em->flush();
                 // all good, back to profile page
                 return $this->redirect($this->generateUrl('flowber_event_homepage',array('id' => $event->getId())));
             }
