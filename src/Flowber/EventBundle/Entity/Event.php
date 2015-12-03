@@ -47,10 +47,30 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="eventDate", type="datetime")
+     * @ORM\Column(name="eventStartDate", type="date")
      */
-    private $eventDate;
-
+    private $eventStartDate;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="eventStartTime", type="time")
+     */
+    private $eventStartTime;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="eventEndDate", type="date", nullable=true)
+     */
+    private $eventEndDate;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="eventEndTime", type="time", nullable=true)
+     */
+    private $eventEndTime;
     
     /**
      * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
@@ -526,29 +546,6 @@ class Event
     {
         return $this->tagUsers;
     }
-    
-    /**
-     * Set creationDate
-     *
-     * @param \DateTime $creationDate
-     * @return User
-     */
-    public function setCreationDate($creationDate)
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    /**
-     * Get creationDate
-     *
-     * @return \DateTime 
-     */
-    public function getCreationDate()
-    {
-        return $this->creationDate;
-    }
 
     /**
      * Add organizer
@@ -594,5 +591,120 @@ class Event
     public function removeParticipant(\Flowber\UserBundle\Entity\User $participants)
     {
         $this->participants->removeElement($participants);
+    }
+
+    /**
+     * Set eventStartDate
+     *
+     * @param \DateTime $eventStartDate
+     * @return Event
+     */
+    public function setEventStartDate($eventStartDate)
+    {
+        $this->eventStartDate = $eventStartDate;
+
+        return $this;
+    }
+
+    /**
+     * Get eventStartDate
+     *
+     * @return \DateTime 
+     */
+    public function getEventStartDate()
+    {
+        return $this->eventStartDate;
+    }
+
+    /**
+     * Set eventStartTime
+     *
+     * @param \DateTime $eventStartTime
+     * @return Event
+     */
+    public function setEventStartTime($eventStartTime)
+    {
+        $this->eventStartTime = $eventStartTime;
+
+        return $this;
+    }
+
+    /**
+     * Get eventStartTime
+     *
+     * @return \DateTime 
+     */
+    public function getEventStartTime()
+    {
+        return $this->eventStartTime;
+    }
+
+    /**
+     * Set eventEndDate
+     *
+     * @param \DateTime $eventEndDate
+     * @return Event
+     */
+    public function setEventEndDate($eventEndDate)
+    {
+        $this->eventEndDate = $eventEndDate;
+
+        return $this;
+    }
+
+    /**
+     * Get eventEndDate
+     *
+     * @return \DateTime 
+     */
+    public function getEventEndDate()
+    {
+        return $this->eventEndDate;
+    }
+
+    /**
+     * Set eventEndTime
+     *
+     * @param \DateTime $eventEndTime
+     * @return Event
+     */
+    public function setEventEndTime($eventEndTime)
+    {
+        $this->eventEndTime = $eventEndTime;
+
+        return $this;
+    }
+
+    /**
+     * Get eventEndTime
+     *
+     * @return \DateTime 
+     */
+    public function getEventEndTime()
+    {
+        return $this->eventEndTime;
+    }
+
+    /**
+     * Set creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return Event
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
     }
 }
