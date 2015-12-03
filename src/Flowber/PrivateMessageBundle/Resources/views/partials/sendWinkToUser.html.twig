@@ -1,0 +1,21 @@
+<!-- Modal -->
+<div class="modal fade" id="modal-wink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Voulez-vous envoyer un clin d'oeil à Marie BOIVENT ?</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ path('flowber_send_wink', {'id': id}) }}"> 
+                    <button type="button" class="btn btn-default">
+                        Envoyer
+                    </button>
+                </a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Ne pas envoyer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

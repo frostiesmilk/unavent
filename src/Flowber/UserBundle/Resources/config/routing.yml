@@ -20,3 +20,4 @@ fos_user_change_password:
 flowber_registration_finishing:
     path:   /inscription-details
     defaults: { _controller: FlowberUserBundle:Registration:registrationFinalStep }
+
