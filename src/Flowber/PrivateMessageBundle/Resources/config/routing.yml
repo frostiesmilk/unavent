@@ -1,3 +1,23 @@
-flowber_private_message_homepage:
-    path:     /mes-messages
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:index }
+flowber_private_message_received_homepage:
+    path:     /messages_recus
+    defaults: { _controller: FlowberPrivateMessageBundle:Default:messageReceived }
+
+flowber_private_message_send_homepage:
+    path:     /mesages_envoyes
+    defaults: { _controller: FlowberPrivateMessageBundle:Default:messageSend }
+
+flowber_private_message_deleted_homepage:
+    path:     /mesages_supprimes
+    defaults: { _controller: FlowberPrivateMessageBundle:Default:messageDeleted }
+
+flowber_private_message_one_homepage:
+    path:     /mesage/{id}
+    defaults: { _controller: FlowberPrivateMessageBundle:Default:getMessage }
+
+flowber_delete_message:
+    path:     /supprimer_message/{id}/{type}
+    defaults: { _controller: FlowberPrivateMessageBundle:Default:deleteMessage }
+
+flowber_read_message:
+    path:     /lu_non_lu_message/{id}
+    defaults: { _controller: FlowberPrivateMessageBundle:Default:readMessage }

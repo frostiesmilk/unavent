@@ -22,18 +22,6 @@ class PrivateMessage
      */
     private $id;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
-     */
-    private $userFrom;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User")
-     * @ORM\JoinTable(name="messages_to_user")
-     */
-    private $userTo;
-
     /**
      * @var string
      *
@@ -48,12 +36,6 @@ class PrivateMessage
      */
     private $message;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=255)
-     */
-    private $status;
 
     /**
      * @var \DateTime
@@ -61,6 +43,33 @@ class PrivateMessage
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
+    
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="statut", type="string", length=255)
+     */
+    private $statut;
+    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+     */
+    private $userFrom;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+     */
+    private $userTo;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->creationDate = new \Datetime();
+        $this->statut = '2';
+    }
     
     /**
      * Get id
@@ -70,52 +79,6 @@ class PrivateMessage
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userFrom
-     *
-     * @param string $userFrom
-     * @return PrivateMessage
-     */
-    public function setUserFrom($userFrom)
-    {
-        $this->userFrom = $userFrom;
-
-        return $this;
-    }
-
-    /**
-     * Get userFrom
-     *
-     * @return string 
-     */
-    public function getUserFrom()
-    {
-        return $this->userFrom;
-    }
-
-    /**
-     * Set userTo
-     *
-     * @param string $userTo
-     * @return PrivateMessage
-     */
-    public function setUserTo($userTo)
-    {
-        $this->userTo = $userTo;
-
-        return $this;
-    }
-
-    /**
-     * Get userTo
-     *
-     * @return string 
-     */
-    public function getUserTo()
-    {
-        return $this->userTo;
     }
 
     /**
@@ -165,29 +128,6 @@ class PrivateMessage
     }
 
     /**
-     * Set status
-     *
-     * @param string $status
-     * @return PrivateMessage
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return string 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-    
-    /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
@@ -209,37 +149,78 @@ class PrivateMessage
     {
         return $this->creationDate;
     }
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->creationDate = new \Datetime();
-        $this->status = 0;
-        $this->userTo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add userTo
+     * Set statut
      *
-     * @param \Flowber\UserBundle\Entity\User $userTo
+     * @param string $statut
      * @return PrivateMessage
      */
-    public function addUserTo(\Flowber\UserBundle\Entity\User $userTo)
+    public function setStatut($statut)
     {
-        $this->userTo[] = $userTo;
+        $this->statut = $statut;
 
         return $this;
     }
 
     /**
-     * Remove userTo
+     * Get statut
+     *
+     * @return string 
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * Set userFrom
+     *
+     * @param \Flowber\UserBundle\Entity\User $userFrom
+     * @return PrivateMessage
+     */
+    public function setUserFrom(\Flowber\UserBundle\Entity\User $userFrom = null)
+    {
+        $this->userFrom = $userFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get userFrom
+     *
+     * @return \Flowber\UserBundle\Entity\User 
+     */
+    public function getUserFrom()
+    {
+        return $this->userFrom;
+    }
+
+    /**
+     * Set userTo
      *
      * @param \Flowber\UserBundle\Entity\User $userTo
+     * @return PrivateMessage
      */
-    public function removeUserTo(\Flowber\UserBundle\Entity\User $userTo)
+    public function setUserTo(\Flowber\UserBundle\Entity\User $userTo = null)
     {
-        $this->userTo->removeElement($userTo);
+        $this->userTo = $userTo;
+
+        return $this;
+    }
+
+    /**
+     * Get userTo
+     *
+     * @return \Flowber\UserBundle\Entity\User 
+     */
+    public function getUserTo()
+    {
+        return $this->userTo;
+    }
+    
+    public function deleteMessage(\Flowber\PrivateMessageBundle\Entity\PrivateMessage $message)
+    {
+        $message.setStatut(0);
     }
 }

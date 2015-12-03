@@ -91,7 +91,6 @@ class Profile
      */
     private $creationDate;
     
-    
     /**
      * Constructor
      */
@@ -103,7 +102,8 @@ class Profile
         $this->coverGallery = new Gallery();
         $this->getCoverGallery()->setTitle("Cover Pictures");
         $this->profileGallery = new Gallery();
-        $this->getProfileGallery()->setTitle("Profile Pictures");        
+        $this->getProfileGallery()->setTitle("Profile Pictures");      
+
     }
 
 

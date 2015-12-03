@@ -113,4 +113,6 @@ class DefaultController extends Controller
             'registrationForm' => $form->createView(),
         )));
     }
+    
+
 }

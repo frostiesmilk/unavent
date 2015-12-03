@@ -17,3 +17,11 @@ flowber_profile_edit_profile_picture:
 flowber_profile_edit_cover_picture:    
     path:     /mon-profil/modifier/photo-couverture
     defaults: { _controller: FlowberProfileBundle:Default:editProfileCoverPicture }
+    
+flowber_add_friend:
+    path:   /ajouter_un_ami/{id}
+    defaults: { _controller: FlowberProfileBundle:Default:addFriend }
+
+flowber_send_wink:
+    path:   /envoyer_clin_oeil/{id}
+    defaults: { _controller: FlowberProfileBundle:Default:sendWink }

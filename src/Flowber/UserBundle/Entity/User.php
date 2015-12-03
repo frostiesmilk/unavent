@@ -74,7 +74,7 @@ class User extends BaseUser
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
-
+    
     /**
      * Constructor
      */
@@ -89,6 +89,8 @@ class User extends BaseUser
         $this->getProfile()->setUser($this);
         
         $this->creationDate = new \Datetime();
+                
+        $this->myFriends = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -395,5 +397,117 @@ class User extends BaseUser
     public function getProfile()
     {
         return $this->profile;
+    }
+
+    /**
+     * Add myFriends
+     *
+     * @param \Flowber\UserBundle\Entity\User $myFriends
+     * @return User
+     */
+    public function addFriend(\Flowber\UserBundle\Entity\User $myFriends)
+    {
+        $this->myFriends[] = $myFriends;
+
+        return $this;
+    }
+
+    /**
+     * Remove myFriends
+     *
+     * @param \Flowber\UserBundle\Entity\User $myFriends
+     */
+    public function removeFriend(\Flowber\UserBundle\Entity\User $myFriends)
+    {
+        $this->myFriends->removeElement($myFriends);
+    }
+
+    /**
+     * Get myFriends
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFriends()
+    {
+        return $this->myFriends;
+    }
+
+    /**
+     * Add myFriends
+     *
+     * @param \Flowber\UserBundle\Entity\User $myFriends
+     * @return User
+     */
+    public function addMyFriend(\Flowber\UserBundle\Entity\User $myFriends)
+    {
+        $this->myFriends[] = $myFriends;
+
+        return $this;
+    }
+
+    /**
+     * Remove myFriends
+     *
+     * @param \Flowber\UserBundle\Entity\User $myFriends
+     */
+    public function removeMyFriend(\Flowber\UserBundle\Entity\User $myFriends)
+    {
+        $this->myFriends->removeElement($myFriends);
+    }
+
+    /**
+     * Get myFriends
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyFriends()
+    {
+        return $this->myFriends;
+    }
+
+    /**
+     * Add friendsWithMe
+     *
+     * @param \Flowber\UserBundle\Entity\User $friendsWithMe
+     * @return User
+     */
+    public function addFriendsWithMe(\Flowber\UserBundle\Entity\User $friendsWithMe)
+    {
+        $this->friendsWithMe[] = $friendsWithMe;
+
+        return $this;
+    }
+
+    /**
+     * Remove friendsWithMe
+     *
+     * @param \Flowber\UserBundle\Entity\User $friendsWithMe
+     */
+    public function removeFriendsWithMe(\Flowber\UserBundle\Entity\User $friendsWithMe)
+    {
+        $this->friendsWithMe->removeElement($friendsWithMe);
+    }
+
+    /**
+     * Get friendsWithMe
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFriendsWithMe()
+    {
+        return $this->friendsWithMe;
+    }
+
+    /**
+     * Set myFriends
+     *
+     * @param \Flowber\UserBundle\Entity\User $myFriends
+     * @return User
+     */
+    public function setMyFriends(\Flowber\UserBundle\Entity\User $myFriends = null)
+    {
+        $this->myFriends = $myFriends;
+
+        return $this;
     }
 }

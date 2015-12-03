@@ -13,32 +13,27 @@
         </div>
         <div id="second-navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a class="scroll-anchor" href="#fiche">Fiche</a></li>
-                <li><a class="scroll-anchor" href="#groups">Groupes</a></li>
-                <li><a class="scroll-anchor" href="#events">Sorties</a></li>
-                <li><a class="scroll-anchor" href="#photos">Photos</a></li>
-                <li><a class="scroll-anchor" href="#friends">Amis</a></li>
+                <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ user.getFirstname }} {{ user.getSurname }}">Fiche</a></li>
+                <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ user.getFirstname }} {{ user.getSurname }}">Groupes</a></li>
+                <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ user.getFirstname }} {{ user.getSurname }}">Sorties</a></li>
+                <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ user.getFirstname }} {{ user.getSurname }}">Photos</a></li>
+                <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ user.getFirstname }} {{ user.getSurname }}">Amis</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à Marie BOIVENT">
+                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ user.getFirstname }} {{ user.getSurname }}">
                         <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/wink.png')}}"/> 
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à Marie BOIVENT">
+                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ user.getFirstname }} {{ user.getSurname }}">
                         <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}"/>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.getFirstname }} {{ user.getSurname }} comme ami">
                         <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/add-user.png')}}"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="menu-link-icon" src="/unavent/web/bundles/wybefrontoffice/images/icons/bubble-chat.png" title='Envoyez un mail au responsable du groupe'/>
                     </a>
                 </li>
                 <li>
@@ -56,20 +51,9 @@
     </div>
 </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="modal-wink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Voulez-vous envoyer un clin d'oeil à Marie BOIVENT ?</h4>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Envoyer</button>
-        <button type="button" class="btn btn-primary">Ne pas envoyer</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 
 {% include 'FlowberPrivateMessageBundle::partials/sendMessageToUser.html.twig' %} 
+{% include 'FlowberPrivateMessageBundle::partials/sendWinkToUser.html.twig' %} 
+{% include 'FlowberUserBundle::partials/modalAddFriend.html.twig' %} 
