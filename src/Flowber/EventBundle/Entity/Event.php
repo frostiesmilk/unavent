@@ -4,7 +4,6 @@ namespace Flowber\EventBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Flowber\UserBundle\Entity\PostalAddress;
-use Flowber\GalleryBundle\Entity\Photo;
 
 /**
  * Event
