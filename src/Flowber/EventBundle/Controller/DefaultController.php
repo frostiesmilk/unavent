@@ -17,21 +17,30 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('FlowberEventBundle:Event');
-        $event = $repository->getInfosEvent($id);
+        $event = $repository->find($id);
         
-        $profilePicture = null;
-        $coverPicture = null;
-
-        if (isset($event['profilePicture'])){
-            $profilePicture = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Photo')->find($event['profilePicture'])->getWebPath();
+        $profilePicture = $event->getProfilePicture();
+        $coverPicture = $event->getCoverPicture();
+        if(isset($profilePicture)){
+            $profilePicture = $profilePicture->getWebPath();
         }
-        if (isset($event['coverPicture'])){ 
-            $coverPicture = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Photo')->find($event['coverPicture'])->getWebPath();
+        if(isset($coverPicture)){
+            $coverPicture = $coverPicture->getWebPath();
         }
+        
+        //die(var_dump($event->getPostalAddress()));
+//        if (isset($event['profilePicture'])){
+//            $profilePicture = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Photo')->find($event['profilePicture'])->getWebPath();
+//        }
+//        if (isset($event['coverPicture'])){ 
+//            $coverPicture = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Photo')->find($event['coverPicture'])->getWebPath();
+//        }
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
-                array('result' => $event, 
-                    'profilePicture' => $profilePicture, 
-                    'coverPicture' => $coverPicture));
+            array('result' => $event, 
+                'profilePicture' => $profilePicture, 
+                'coverPicture' => $coverPicture
+            )
+        );
     }
     
     public function createEventAction()
@@ -62,7 +71,8 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             if ($eventForm->isValid()) {
-                $event->setCreatedBy($user);                
+                $event->setCreatedBy($user);  
+                $event->addParticipant($user);
             }  else{
                 $error = true;
             }

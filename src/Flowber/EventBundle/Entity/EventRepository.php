@@ -16,7 +16,7 @@ class EventRepository extends EntityRepository
     public function getInfosEvent($id){
         
         $query = $this->_em->createQuery(''
-                . 'SELECT event.title, event.subtitle, event.startDate, event.startTime, event.endDate, event.endTime, event.description, event.category, '
+                . 'SELECT event.title, event.subtitle, event.startDate, event.startTime, event.endDate, event.endTime, event.description,  '
                 . 'address.name, address.address, address.city, address.zipcode, address.coordinates, '
                 . 'user.firstname, user.surname, '
                 . 'photoC.id as coverPicture, photoP.id as profilePicture '
@@ -25,6 +25,7 @@ class EventRepository extends EntityRepository
                 . 'LEFT JOIN FlowberUserBundle:User user WITH event.createdBy = user '
                 . 'LEFT JOIN FlowberGalleryBundle:Photo photoC WITH event.coverPicture = photoC '
                 . 'LEFT JOIN FlowberGalleryBundle:Photo photoP WITH event.profilePicture = photoP '
+                . 'LEFT JOIN FlowberFrontOfficeBundle:Category cat WITH event.categories = cat '
                 . 'WHERE event.id = :id');
         $query->setParameter('id', $id);
         

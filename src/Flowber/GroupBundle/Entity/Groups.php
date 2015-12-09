@@ -84,9 +84,8 @@ class Groups
      */
     private $creationDate;
 
-    /*
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User")
-     * @ORM\JoinTable(name="group_members")
+    /**
+     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User", mappedBy="groups")
      */
     private $members;
 
@@ -124,6 +123,7 @@ class Groups
         $this->creationDate = new \Datetime();
         $this->galleries = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
 
         $this->coverGallery = new Gallery();
         $this->getCoverGallery()->setTitle("Cover Pictures");
@@ -530,5 +530,28 @@ class Groups
     public function removeCategory(\Flowber\FrontOfficeBundle\Entity\Category $categories)
     {
         $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Add members
+     *
+     * @param \Flowber\UserBundle\Entity\User $members
+     * @return Groups
+     */
+    public function addMember(\Flowber\UserBundle\Entity\User $members)
+    {
+        $this->members[] = $members;
+
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param \Flowber\UserBundle\Entity\User $members
+     */
+    public function removeMember(\Flowber\UserBundle\Entity\User $members)
+    {
+        $this->members->removeElement($members);
     }
 }

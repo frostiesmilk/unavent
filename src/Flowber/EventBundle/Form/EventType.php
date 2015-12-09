@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Flowber\UserBundle\Form\PostalAddressWithNameType;
 use Flowber\GalleryBundle\Form\PhotoOnlyType;
 use Flowber\EventBundle\Form\DataTransformer\DateTimeTransformer;
+use Doctrine\ORM\EntityRepository;
 
 class EventType extends AbstractType
 {
@@ -23,6 +24,11 @@ class EventType extends AbstractType
                      'required' => false
              ))
             ->add('description',    'textarea', array(
+                     'required' => false
+             ))
+            ->add('maxParticipants',    'integer', array(
+                     'label' => "Participants maximum",
+                     'attr' => array("min"=>1),
                      'required' => false
              ))
             ->add('startDate',      'date', array(
@@ -54,9 +60,17 @@ class EventType extends AbstractType
                      'expanded' => true,
                      'multiple' => false
              ))            
-            ->add('category',       'text', array(
-                     'required' => false
-             ))
+            ->add('categories', 'entity', array(
+                    'class'    => 'FlowberFrontOfficeBundle:Category',
+                    'property' => 'title',
+                    'multiple' => true,
+                    'required' => false,
+                    'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('u')
+                            ->orderBy('u.title', 'ASC');
+                    },
+                )
+             )
             ->add('postalAddress',  new PostalAddressWithNameType(), array('required'=>false))
         ;
     }

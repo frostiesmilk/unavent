@@ -28,10 +28,15 @@
         <h1>Créer un évènement</h1>
         <form method="post" enctype="multipart/form-data">
             {% if form_errors(eventForm) %}
-            <div class="form-error">
-                {{form_errors(eventForm)}}
+            <div class="form-error-custom">
+                {{form_errors(eventForm)}}                
             </div>
             {% endif %}
+            {% if form_errors(eventForm.maxParticipants) %}
+                <div class="form-error-custom">
+                {{form_errors(eventForm.maxParticipants)}}
+                </div>
+                {% endif %}
             <div class="form-group">
                 <label for="event-title" class="col-sm-2 control-label">Titre *</label>
                 <div class="col-sm-10">
@@ -47,7 +52,7 @@
             <div class="form-group">
                 <label for="event-category" class="col-sm-2 control-label">Catégories</label>
                 <div class="col-sm-10">
-                    {{form_widget(eventForm.category)}}
+                    {{form_widget(eventForm.categories)}}
                 </div>
             </div>
                 
@@ -62,12 +67,17 @@
                 <div class="col-sm-10"  style="margin-top:10px;">
                     {{form_widget(coverPictureForm)}}
                 </div>
-            </div>
-                
+            </div>                
             <div class="form-group">
                 <label for="event-description" class="col-sm-2 control-label">Description</label>
                 <div class="col-sm-10">
                     {{form_widget(eventForm.description)}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="event-description" class="col-sm-2 control-label">{{form_label(eventForm.maxParticipants)}}</label>
+                <div class="col-sm-10">
+                    {{form_widget(eventForm.maxParticipants)}}
                 </div>
             </div>
             <div class="form-group">
@@ -172,7 +182,7 @@
     {# Put specific JS below #}
     <script type="text/javascript" src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-        <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
 
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"

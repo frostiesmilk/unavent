@@ -2,7 +2,7 @@
 
         <div class="container" >
             <div class="row-fluid">       
-                <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset('bundles/flowberprofile/images/Default/profilePictureDefault.png')}}')"></div> 
+                <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset(profilePicturePath)}}')"></div> 
                 <div class="generic-cover-title">
                     <h1 class="generic-cover-title-name">{{ user.getFirstname }} {{ user.getSurname }}</h1>
                     <p class="generic-cover-title-description">{{ profile.getSubtitle }}</p>

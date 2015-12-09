@@ -106,7 +106,7 @@ function initMap() {
     document.getElementById("flowber_eventbundle_event_postalAddress_city").value = addresscity;
     document.getElementById("flowber_eventbundle_event_postalAddress_zipcode").value = codepostal;
     document.getElementById("flowber_eventbundle_event_postalAddress_country").value = country;
-    document.getElementById("flowber_eventbundle_event_postalAddress_coordinate").value = place.geometry.location;
+    document.getElementById("flowber_eventbundle_event_postalAddress_coordinates").value = place.geometry.location;
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
     infowindow.open(map, marker);

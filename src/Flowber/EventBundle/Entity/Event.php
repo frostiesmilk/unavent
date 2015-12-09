@@ -5,14 +5,15 @@ namespace Flowber\EventBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Flowber\UserBundle\Entity\PostalAddress;
 use Flowber\GalleryBundle\Entity\Photo;
-use Flowber\EventBundle\Validator\Constraints as FormAssert;
+use Flowber\EventBundle\Validator\Constraints as EventAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
  *
  * @ORM\Table()
  * @ORM\Entity (repositoryClass="Flowber\EventBundle\Entity\EventRepository")
- * @FormAssert\DateRange()
+ * @EventAssert\DateRange()
  */
 class Event 
 {
@@ -85,12 +86,30 @@ class Event
      */
     private $organizer;
 
-     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User")
+    /**
+     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User", inversedBy="attended_events")
      * @ORM\JoinTable(name="event_participants")
      */
     private $participants;
 
+    /**
+     *
+     * @var integer
+     * @Assert\Range(
+     *      min = 1,
+     *      minMessage = "Il faut au moins {{ limit }} participant pour l'évènement.")
+     * @ORM\Column(name="max_participants", type="integer", nullable=true)
+     */
+    private $maxParticipants;
+    
+    /**
+     *
+     * @var integer
+     * 
+     * @ORM\Column(name="number_participants", type="integer")
+     */
+    private $number_participants;
+    
     /**
      * @var string
      *
@@ -105,11 +124,10 @@ class Event
     private $postalAddress;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="category", type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity="Flowber\FrontOfficeBundle\Entity\Category")
      */
-    private $category;
+    private $categories;
 
     /**
      * @var string
@@ -165,10 +183,11 @@ class Event
     {
         $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organizer = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         //$this->postalAddress = new PostalAddress();
 //        $this->coverPicture = new Photo();
 //        $this->profilePicture = new Photo();
-        
+        $this->number_participants = 1; // first participant is creator
         $this->creationDate = new \Datetime();
     }
     
@@ -709,5 +728,84 @@ class Event
     public function getEndTime()
     {
         return $this->endTime;
+    }
+
+    /**
+     * Set maxParticipants
+     *
+     * @param integer $maxParticipants
+     * @return Event
+     */
+    public function setMaxParticipants($maxParticipants)
+    {
+        $this->maxParticipants = $maxParticipants;
+
+        return $this;
+    }
+
+    /**
+     * Get maxParticipants
+     *
+     * @return integer 
+     */
+    public function getMaxParticipants()
+    {
+        return $this->maxParticipants;
+    }
+
+    /**
+     * Set number_participants
+     *
+     * @param integer $numberParticipants
+     * @return Event
+     */
+    public function setNumberParticipants($numberParticipants)
+    {
+        $this->number_participants = $numberParticipants;
+
+        return $this;
+    }
+
+    /**
+     * Get number_participants
+     *
+     * @return integer 
+     */
+    public function getNumberParticipants()
+    {
+        return $this->number_participants;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \Flowber\FrontOfficeBundle\Entity\Category $categories
+     * @return Event
+     */
+    public function addCategory(\Flowber\FrontOfficeBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Flowber\FrontOfficeBundle\Entity\Category $categories
+     */
+    public function removeCategory(\Flowber\FrontOfficeBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

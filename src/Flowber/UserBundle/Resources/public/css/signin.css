@@ -136,17 +136,6 @@ and open the template in the editor.
   display: inline-block;
   vertical-align: middle;
 }
-.signin-cover .signup-form-col form .form-error-custom {
-  color: #A94442;
-  background-color: #F2DEDE;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  padding: 10px 15px;
-}
-.signin-cover .signup-form-col form .form-error-custom span {
-  color: #A94442;
-}
 .signin-cover .signup-form-col .email-confirmation-email {
   font-weight: bold;
 }

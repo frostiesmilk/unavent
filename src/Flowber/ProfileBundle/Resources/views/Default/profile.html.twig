@@ -55,6 +55,14 @@
 {% if profile.coverPicture.alt is defined %}
     {% set userCoverAlt = profile.coverPicture.alt %}
 {% endif %}
+{% set profilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default Profile picture #}
+{% if profile.profilePicture.webPath is defined %}
+    {% set profilePicturePath = profile.profilePicture.webPath %}
+{% endif %}
+{% set profilePictureAlt = 'Photo de profil' %} {# default Profile picture Alt #}
+{% if profile.profilePicture.alt is defined %}
+    {% set profilePictureAlt = profile.profilePicture.alt %}
+{% endif %}
 
 {% block body %}
 

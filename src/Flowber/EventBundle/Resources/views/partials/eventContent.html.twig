@@ -5,27 +5,32 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="event-details">
-                    <h2>{{ result.title}}</h2>
-                    {% if result.postalAddress is defined %}
+                    <h2>{{ result.getTitle()}}</h2>
+                    {% if result.getPostalAddress().getCoordinates() %}
                     <div id="map"></div>
                     {% endif %}                    
                     <table>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
-                            <td>créé par <span class="event-details-host">{{ result.firstname }} {{ result.surname }}</span></td>
+                            <td>créé par <span class="event-details-host">{{ result.getCreatedBy().getFirstname() }} {{ result.getCreatedBy().getSurname() }}</span></td>
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
-                            <td>{{ result.category }}</td>
+                            <td>
+                                {% for category in result.getCategories() %}
+                                {{ category.getTitle() }}      
+                                {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            </td>
                         </tr>                        
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
-                            <td>{{ (result.startDate)|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.startTime|date("\\à H:i", "Europe/Paris") }}</td>
+                            <td>{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}</td>
                         </tr>
                          
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
-                            <td>{{ result.name }}<br/>{{ result.address }}<br/>{{ result.zipcode }} {{ result.city }}</td>
+                            <td>{% if result.getPostalAddress() %}{{ result.getPostalAddress().getName() }}<br/>{{ result.getPostalAddress().getAddress() }}<br/>{{ result.getPostalAddress().getZipcode() }} {{ result.getPostalAddress().getCity() }}{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
@@ -36,7 +41,7 @@
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
-                            <td><p class="event-details-description">{{ result.description }}</p></td>
+                            <td><p class="event-details-description">{{ result.getDescription() }}</p></td>
                         </tr>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
