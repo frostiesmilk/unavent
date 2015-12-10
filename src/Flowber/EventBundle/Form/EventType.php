@@ -25,29 +25,40 @@ class EventType extends AbstractType
             ->add('description',    'textarea', array(
                      'required' => false
              ))
-            ->add('eventStartDate',      'date', array(
+            ->add('startDate',      'date', array(
                                                     'widget' => 'single_text',
                                                     'input' => 'datetime',
+                                                    'format' => 'dd/MM/yyyy',
+                                                    'attr' => array('class' => 'flowber_datepicker'),
             ))
-            ->add('eventStartTime',      'time', array(
+            ->add('startTime',      'time', array(
                                                     'widget' => 'single_text',
                                                     'input' => 'datetime',
+                                                    'attr' => array('class' => 'flowber_timepicker'),
             ))
-            ->add('eventEndDate',      'date')
-            ->add('eventEndTime',      'time')
+            ->add('endDate',      'date', array(
+                                                    'widget' => 'single_text',
+                                                    'input' => 'datetime',
+                                                    'format' => 'dd/MM/yyyy',
+                                                    'attr' => array('class' => 'flowber_datepicker'),
+                                                    'required' => false
+            ))
+            ->add('endTime',      'time', array(
+                                                    'widget' => 'single_text',
+                                                    'input' => 'datetime',
+                                                    'attr' => array('class' => 'flowber_timepicker'),
+                                                    'required' => false
+            ))
             ->add('privacy',          'choice', array(
-                     'choices' => array('Publique' => 'public', 'Privée' => 'private'),
+                     'choices' => array('public' => 'Publique', 'private' => 'Privée'),
                      'expanded' => true,
                      'multiple' => false
              ))            
             ->add('category',       'text', array(
                      'required' => false
              ))
-            ->add('postalAddress',  new PostalAddressWithNameType())
+            ->add('postalAddress',  new PostalAddressWithNameType(), array('required'=>false))
         ;
-        
-        $builder->get('eventStartDate')
-            ->addModelTransformer(new DateTimeTransformer());
     }
     
     /**

@@ -5,8 +5,10 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="event-details">
-                    <h2>{{ result.title}}</h2>  
+                    <h2>{{ result.title}}</h2>
+                    {% if result.postalAddress is defined %}
                     <div id="map"></div>
+                    {% endif %}                    
                     <table>
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
@@ -18,7 +20,7 @@
                         </tr>                        
                         <tr>
                             <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
-                            <td>{{ result.eventDate|date("\\l\\e d/m/Y  \\à g:i", "Europe/Paris") }}</td>
+                            <td>{{ (result.startDate)|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.startTime|date("\\à H:i", "Europe/Paris") }}</td>
                         </tr>
                          
                         <tr>

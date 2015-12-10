@@ -27,8 +27,13 @@
     <div class="create-event-form form-horizontal" >
         <h1>Créer un évènement</h1>
         <form method="post" enctype="multipart/form-data">
+            {% if form_errors(eventForm) %}
+            <div class="form-error">
+                {{form_errors(eventForm)}}
+            </div>
+            {% endif %}
             <div class="form-group">
-                <label for="event-title" class="col-sm-2 control-label">Titre</label>
+                <label for="event-title" class="col-sm-2 control-label">Titre *</label>
                 <div class="col-sm-10">
                     {{form_widget(eventForm.title)}}
                 </div>
@@ -102,40 +107,50 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="event-date" class="col-sm-2 control-label">Début</label>
+                <label for="event-date" class="col-sm-2 control-label">Début *</label>
                 <div class="col-sm-10 form-inline">
                     <div class="form-inline">
                         <div class="input-group">
-                            {{form_widget(eventForm.eventStartDate, {'attr': {'placeholder': 'Date de début'}})}} 
+                            {{form_widget(eventForm.startDate, {'attr': {'placeholder': 'Date de début'}})}} 
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
                         </div>
                         <div class="input-group">
-                            {{form_widget(eventForm.eventStartTime, {'attr': {'placeholder': 'Heure de début'}})}}
+                            {{form_widget(eventForm.startTime, {'attr': {'placeholder': 'Heure de début'}})}}
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <div class="form-group">
                 <label for="event-date" class="col-sm-2 control-label">Fin</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.eventEndDate, {'attr': {'placeholder': 'Date'}})}} {{form_widget(eventForm.eventEndTime)}}
+                <div class="col-sm-10 form-inline">
+                    <div class="form-inline">
+                        <div class="input-group">
+                            {{form_widget(eventForm.endDate, {'attr': {'placeholder': 'Date de fin'}})}} 
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                        <div class="input-group">                            
+                            {{form_widget(eventForm.endTime, {'attr': {'placeholder': 'Heure de fin'}})}}
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>                        
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Visibilité</label>
+                <label class="col-sm-2 control-label">Visibilité *</label>
                 <div class="col-sm-10">
-                    <label class="radio-inline">
-                        {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
-                    </label>
+                    {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
                 </div>
             </div>
-            {{form_widget(eventForm.postalAddress.coordinate)}}
+            {{form_widget(eventForm.postalAddress.coordinates)}}
             <div class="form-group">                
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default event-submit">Continuer</button>
@@ -165,11 +180,11 @@
     
     <script type="text/javascript">
         $(function () {
-            $('#flowber_eventbundle_event_eventStartDate').datetimepicker({
+            $('.flowber_datepicker').datetimepicker({
                 locale: 'fr',
                 format: 'L',
             });
-            $('#flowber_eventbundle_event_eventStartTime').datetimepicker({
+            $('.flowber_timepicker').datetimepicker({
                 locale: 'fr',
                 format: 'LT',
             });

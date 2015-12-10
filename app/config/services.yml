@@ -11,3 +11,8 @@ services:
         class: Flowber\UserBundle\Form\Type\RegistrationFormType
         tags:
             - { name: form.type, alias: flowber_user_registration }
+            
+    daterange.validator:
+        class: Flowber\EventBundle\Validator\Constraints\DateRangeValidator
+        tags:
+            - { name: validator.constraint_validator, alias: daterange_validator }

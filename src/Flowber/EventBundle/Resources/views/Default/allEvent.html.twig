@@ -46,13 +46,13 @@
                                     <img class="event-image" src="{{asset(eventProfilePicturePath)}}" alt=""/>
                                 </a>
                                 <p class="event-image-frame-date">
-                                    <span class="event-image-frame-date-day">{{ event.eventDate|date("\\l\\e d/m/Y") }}</span><br/>                                                      
-                                    <span class="event-image-frame-date-day">{{ event.eventDate|date("\\à g:i") }}</span>                                                       
+                                    <span class="event-image-frame-date-day">{{ event.startDate|date("\\l\\e d/m/Y") }}</span><br/>                                                      
+                                    <span class="event-image-frame-date-day">{{ event.startTime|date("\\à g:i") }}</span>                                                       
                                 </p>
                             </div>
 
                             <div class="caption text-center ">
-                                <p class="event-description">238 participants &middot; 3 amis &middot; {{ event.postalAddress.city }}</p>
+                                <p class="event-description">238 participants &middot; 3 amis {% if event.postalAddress.city is defined %}&middot; {{ event.postalAddress.city }}{% endif%}</p>
                                 <button class="btn btn-default font-white event-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</button>
                             </div>
                         </div>
