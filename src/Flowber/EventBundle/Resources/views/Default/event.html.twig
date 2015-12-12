@@ -52,7 +52,7 @@
         
     <script>
 function initMap() {
-  var chicago = new google.maps.LatLng{% if result.getPostalAddress().getCoordinates() is defined %}{{result.getPostalAddress().getCoordinates()}} {% else %}(){% endif %};
+  var chicago = new google.maps.LatLng{% if (result.getPostalAddress().getCoordinates() is defined) and (result.getPostalAddress().getCoordinates() is not null) %}{{result.getPostalAddress().getCoordinates()}} {% else %}(){% endif %};
 
   var map = new google.maps.Map(document.getElementById('map'), {
     center: chicago,
@@ -86,9 +86,9 @@ function createInfoWindowContent(latLng, zoom) {
       Math.floor(worldCoordinate.y * scale / TILE_SIZE));
 
   return [
-    '{{result.getTitle()}}',
-    {% if result.getPostalAddress() %}'{{result.getPostalAddress().getName()}}, ', {% endif %}
-    '{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}, ',
+    '<strong>{{result.getTitle()}}</strong>',
+    {% if (result.getPostalAddress() is not null) and (result.getPostalAddress().getName() is not null) %}'{{result.getPostalAddress().getName()}}, ', {% endif %}
+    '{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}',
   ].join('<br>');
 }
 

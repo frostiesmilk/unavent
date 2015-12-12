@@ -12,7 +12,8 @@ class DefaultController extends Controller
 {
     public function addCommentAction($post_id)
     {
-        $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($post_id);       
+        $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($post_id);
+
         $comment = new Comment;
         $commentForm = $this->createForm(new CommentType, $comment);
 
