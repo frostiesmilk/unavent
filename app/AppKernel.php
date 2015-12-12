@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Flowber\PrivateMessageBundle\FlowberPrivateMessageBundle(),
             new Flowber\EventBundle\FlowberEventBundle(),
             new Flowber\GroupBundle\FlowberGroupBundle(),
+            new Flowber\PostBundle\FlowberPostBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,6 +1,5 @@
 {# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
-{% form_theme messageForm 'bootstrap_3_layout.html.twig' %}
 
 {% block stylesheets %}
     {{parent()}}
@@ -17,8 +16,8 @@
             <div class="row">
                 <div class="col-md-3 messages-menu">
                     <div class="list-group messages-menu-list">
-                        <a href="{{path('flowber_private_message_received_homepage')}}" class="list-group-item active"><span class="badge">{{ numberReceiveddMessages|number_format }}</span>Messages reçus </a>
-                        <a href="{{path('flowber_private_message_send_homepage')}}" class="list-group-item"><span class="badge">{{ numberSendMessages|number_format }}</span>Messages envoyés</a>
+                        <a href="{{path('flowber_private_message_received_homepage')}}" class="list-group-item"><span class="badge">{{ numberReceiveddMessages|number_format }}</span>Messages reçus </a>
+                        <a href="{{path('flowber_private_message_send_homepage')}}" class="list-group-item active"><span class="badge">{{ numberSendMessages|number_format }}</span>Messages envoyés</a>
                         <a href="{{path('flowber_private_message_deleted_homepage')}}" class="list-group-item"><span class="badge">{{ numberDeletedMessages|number_format }}</span>Corbeille</a>
                     </div>
                 </div>
@@ -82,17 +81,6 @@
                                 <div class="message-show-content col-md-12">
                                     <p> {{ message.message }} </p>
                                 </div>
-                            </div>
-                            <div class="row" style="margin-top:20px">
-                                <div class="col-md-1" > Répondre </div>
-                                <div class="media message-show-reply col-md-10 ">
-                                    {{form_start(messageForm)}}
-                                        {{form_widget(messageForm)}}
-                                        <div class="modal-footer">
-                                          <button type="submit" class="btn btn-primary">Envoyer</button>
-                                        </div>        
-                                    {{form_end(messageForm)}}
-                                </div>             
                             </div>
                         </div>
                     </div>
