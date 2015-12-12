@@ -5,7 +5,7 @@
         <div class="col-md-5">
             <div class="event-details">
                 <h2>{{ result.getTitle()}}</h2>
-                {% if result.getPostalAddress().getCoordinates() is defined %}
+                {% if (result.getPostalAddress() is not null) and (result.getPostalAddress().getCoordinates() is not null) %}
                 <div id="map"></div>
                 {% endif %}                    
                 <table>

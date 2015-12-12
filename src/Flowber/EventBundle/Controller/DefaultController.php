@@ -45,7 +45,7 @@ class DefaultController extends Controller
                 $userTo = $event->getCreatedBy();
                 
                 // setting subject, sender and destination
-                $subject = $event->getTitle()." : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
+                $subject = "[".$event->getTitle()."] : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
                 $mailToCreator->setSubject($subject);
                 $mailToCreator->setUserFrom($user);
                 $mailToCreator->setUserTo($userTo);
