@@ -9,6 +9,8 @@ use Flowber\EventBundle\Form\EventType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
+use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
+use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 
 class DefaultController extends Controller
 {
@@ -28,17 +30,51 @@ class DefaultController extends Controller
             $coverPicture = $coverPicture->getWebPath();
         }
         
-        //die(var_dump($event->getPostalAddress()));
-//        if (isset($event['profilePicture'])){
-//            $profilePicture = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Photo')->find($event['profilePicture'])->getWebPath();
-//        }
-//        if (isset($event['coverPicture'])){ 
-//            $coverPicture = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Photo')->find($event['coverPicture'])->getWebPath();
-//        }
+        $mailToCreator = new PrivateMessage();
+        $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
+        
+        $request = $this->get('request');
+        // if form has been submitted
+        if ($request->getMethod() == 'POST') {
+            $em = $this->getDoctrine()->getManager();
+            $mailToCreatorForm->handleRequest($request);
+            
+            // mail to creator has been submitted
+            if ($mailToCreatorForm->isValid()) {
+                $user = $this->getUser();  
+                $userTo = $event->getCreatedBy();
+                
+                // setting subject, sender and destination
+                $subject = $event->getTitle()." : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
+                $mailToCreator->setSubject($subject);
+                $mailToCreator->setUserFrom($user);
+                $mailToCreator->setUserTo($userTo);
+                
+                $em->persist($mailToCreator);
+                $em->flush();
+               
+                // message bag
+                $this->addFlash(
+                    'success',
+                    "Votre message a bien été envoyé à l'organisateur."
+                );
+                
+                // to prevent reposting
+                return $this->redirectToRoute('flowber_event_homepage', array('id'=>$event->getId()));
+            }else{
+                // message bag
+                $this->addFlash(
+                    'error',
+                    "Une erreur est survenue lors de l'envoi du message."
+                );
+            }
+        }      
+
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array('result' => $event, 
                 'profilePicture' => $profilePicture, 
-                'coverPicture' => $coverPicture
+                'coverPicture' => $coverPicture,
+                'mailToCreatorForm' => $mailToCreatorForm->createView()
             )
         );
     }

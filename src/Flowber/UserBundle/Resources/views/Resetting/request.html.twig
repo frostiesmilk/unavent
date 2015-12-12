@@ -1,0 +1,25 @@
+{# Flowber:UserBundle:Resources:Default:resetPasswordPage.html.twig #}
+
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/resetPassword.css') }}"/> 
+{% endblock %}
+
+{% block body %}   
+    <!-- Sign In menu -->
+    {#% include 'FlowberUserBundle::partials/signin-main-navbar.html.twig' %#}
+
+    <!-- Reset password Form -->  
+    {% include 'FlowberUserBundle::Resetting/request_content.html.twig' %}
+
+    <!-- Footer -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}
+{% endblock %}

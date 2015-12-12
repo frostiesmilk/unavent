@@ -1,164 +1,168 @@
 {# empty Twig template #}
 
-
 <div class="container event-container">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="event-details">
-                    <h2>{{ result.getTitle()}}</h2>
-                    {% if result.getPostalAddress().getCoordinates() %}
-                    <div id="map"></div>
-                    {% endif %}                    
-                    <table>
-                        <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
-                            <td>créé par <span class="event-details-host">{{ result.getCreatedBy().getFirstname() }} {{ result.getCreatedBy().getSurname() }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
-                            <td>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="event-details">
+                <h2>{{ result.getTitle()}}</h2>
+                {% if result.getPostalAddress().getCoordinates() is defined %}
+                <div id="map"></div>
+                {% endif %}                    
+                <table>
+                    <tr>
+                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
+                        <td>créée par <span class="event-details-host">{{ result.getCreatedBy().getFirstname() }} {{ result.getCreatedBy().getSurname() }}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
+                        <td>
+                            {% if result.getCategories() | length %}{# if categories are specified #}
                                 {% for category in result.getCategories() %}
-                                {{ category.getTitle() }}      
-                                {% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                            </td>
-                        </tr>                        
-                        <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
-                            <td>{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}</td>
-                        </tr>
-                         
-                        <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
-                            <td>{% if result.getPostalAddress() %}{{ result.getPostalAddress().getName() }}<br/>{{ result.getPostalAddress().getAddress() }}<br/>{{ result.getPostalAddress().getZipcode() }} {{ result.getPostalAddress().getCity() }}{% endif %}</td>
-                        </tr>
-                        <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
-                            <td>
-                                8 participants dont 1 ami<br/>
-                                <span class="event-details-participant">Marie BOIVENT</span>, <span class="event-details-participant">Equina YOU</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
-                            <td><p class="event-details-description">{{ result.getDescription() }}</p></td>
-                        </tr>
-                        <tr>
-                            <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
-                            <td>
-                                Envoyer un e-mail à l'organisateur<br/>
-                                <form>
-                                    <textarea id="newMailToHost" class="event-mail" name="mail-to-host" textholder="Votre message"></textarea>
-                                    <button class="btn btn-default" type="submit">Envoyer</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                                    <span>{{ category.getTitle() }}</span>      
+                                    {% if not loop.last %}<span>,</span> {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <span>Catégorie non spécifiée</span>
+                            {% endif %}
+                        </td>
+                    </tr>                        
+                    <tr>
+                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
+                        <td>{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
+                        <td>{% if result.getPostalAddress() is not null %}{{ result.getPostalAddress().getName() }}<br/>{{ result.getPostalAddress().getAddress() }}<br/>{{ result.getPostalAddress().getZipcode() }} {{ result.getPostalAddress().getCity() }}{% else %}<span>Emplacement non défini</span>{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
+                        <td>
+                            8 participants dont 1 ami<br/>
+                            <span class="event-details-participant">Marie BOIVENT</span>, <span class="event-details-participant">Equina YOU</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
+                        <td><p class="event-details-description">{% if result.getDescription() is not null %}{{ result.getDescription() }}{% else %}Aucune description{% endif %}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
+                        <td>
+                            Envoyer un e-mail à l'organisateur<br/>
+                            <form method="post">
+                                {{ form_widget(mailToCreatorForm.message, {'attr': {'class': 'event-mail', 'placeholder':'Votre message'}})}} 
+                                {{ form_rest(mailToCreatorForm) }}
+                                <button class="btn btn-default" type="submit">Envoyer</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div class="col-md-7">
-                <div class="event-blog">
-                    <div class="event-blog-new-post">
-                        <ul id="eventNavbar" class="nav nav-tabs nav-justified event-blog-new-post-navbar">
-                            <li role="presentation" class="event-blog-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
-                                <a href="#newpost"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/new-post.png')}}" alt=""/> Message</a>
-                            </li>
-                            <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="newphoto" role="tab" data-toggle="tab">
-                                <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/photo.png')}}" alt=""/> Photo</a>
-                            </li>
-                            <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="tagpeople" role="tab" data-toggle="tab">
-                                <a href="#tagpeople"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-white.png')}}" alt=""/> Tagger</a>
-                            </li>
-                        </ul>
-                         <!-- Tab panes -->
-                        <div class="tab-content event-blog-new-post-content">
-                            <div role="tabpanel" class="tab-pane active" id="newpost">
-                                <textarea id="newPostTextArea" placeholder="Ecrire un message"></textarea>
+        </div>
+        <div class="col-md-7">
+            <div class="event-blog">
+                <div class="event-blog-new-post">
+                    <ul id="eventNavbar" class="nav nav-tabs nav-justified event-blog-new-post-navbar">
+                        <li role="presentation" class="event-blog-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
+                            <a href="#newpost"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/new-post.png')}}" alt=""/> Message</a>
+                        </li>
+                        <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="newphoto" role="tab" data-toggle="tab">
+                            <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/photo.png')}}" alt=""/> Photo</a>
+                        </li>
+                        <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="tagpeople" role="tab" data-toggle="tab">
+                            <a href="#tagpeople"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-white.png')}}" alt=""/> Tagger</a>
+                        </li>
+                    </ul>
+                     <!-- Tab panes -->
+                    <div class="tab-content event-blog-new-post-content">
+                        <div role="tabpanel" class="tab-pane active" id="newpost">
+                            <textarea id="newPostTextArea" placeholder="Ecrire un message"></textarea>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="newphoto">
+                            Uploader une photo
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tagpeople">
+                            Tagger une personne
+                        </div>
+                    </div>
+                    <div class="event-blog-new-post-footer">
+                        <div class="event-blog-new-post-footer-details">
+
+                        </div>
+                        <div class="event-blog-new-post-footer-confirm text-right">
+                            <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-blog-post">
+                    <div class="row event-blog-post-header">
+                        <div class="col-md-1 text-center">
+                            <div class="event-blog-post-header-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
+                        </div>
+                        <div class="col-md-8 event-blog-post-header-info">
+                            <a class="event-blog-header-post-info-poster" href="#">Marie BOIVENT</a><br/>
+                            <span class="event-blog-post-header-info-time">Le 20 Août à 15h59</span>
+                        </div>
+                        <div class="col-md-3 event-blog-post-header-rating">
+                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
+                            <span class="event-blog-post-header-rating-count">4 personnes aiment</span>
+                        </div>
+                    </div>
+                    <div class="event-blog-post-content">
+                        <p>Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi?</p>
+                    </div>
+                    <div class="event-blog-post-comments">
+                        <div class="row event-blog-post-comment">
+                            <div class="col-xs-1 col-xs-offset-1 text-center">
+                                <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="newphoto">
-                                Uploader une photo
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="tagpeople">
-                                Tagger une personne
+                            <div class="col-xs-10">
+                                <div class="event-blog-post-comment-poster">
+                                    <a href="#">Marie Boivent</a>
+                                </div>
+                                <div class="event-blog-post-comment-time">
+                                    <span>Le 21 Juillet à 15h21</span>
+                                </div>
+                                <div class="event-blog-post-comment-content">
+                                    <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="event-blog-new-post-footer">
-                            <div class="event-blog-new-post-footer-details">
-                                
+                        <hr/>
+                        <div class="row event-blog-post-comment">
+                            <div class="col-xs-1 col-xs-offset-1 text-center">
+                                <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
                             </div>
-                            <div class="event-blog-new-post-footer-confirm text-right">
-                                <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+                            <div class="col-xs-10">
+                                <div class="event-blog-post-comment-poster">
+                                    <a href="#">Marie Boivent</a>
+                                </div>
+                                <div class="event-blog-post-comment-time">
+                                    <span>Le 21 Juillet à 15h21</span>
+                                </div>
+                                <div class="event-blog-post-comment-content">
+                                    <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                            
-                    <div class="event-blog-post">
-                        <div class="row event-blog-post-header">
-                            <div class="col-md-1 text-center">
-                                <div class="event-blog-post-header-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
+
+                        <div class="row event-blog-post-new-comment">
+                            <div class="col-xs-1 text-center">
+                                <div class="event-blog-post-new-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
                             </div>
-                            <div class="col-md-8 event-blog-post-header-info">
-                                <a class="event-blog-header-post-info-poster" href="#">Marie BOIVENT</a><br/>
-                                <span class="event-blog-post-header-info-time">Le 20 Août à 15h59</span>
-                            </div>
-                            <div class="col-md-3 event-blog-post-header-rating">
-                                <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
-                                <span class="event-blog-post-header-rating-count">4 personnes aiment</span>
+                            <div class="col-xs-11 event-blog-post-new-comment-field">
+                                <textarea type="text" name="event-blog-new-post-new-comment"></textarea>
+                                <button class="btn btn-default btn-red" type="submit">Valider</button>
                             </div>
                         </div>
-                        <div class="event-blog-post-content">
-                            <p>Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi?</p>
-                        </div>
-                        <div class="event-blog-post-comments">
-                            <div class="row event-blog-post-comment">
-                                <div class="col-xs-1 col-xs-offset-1 text-center">
-                                    <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                                </div>
-                                <div class="col-xs-10">
-                                    <div class="event-blog-post-comment-poster">
-                                        <a href="#">Marie Boivent</a>
-                                    </div>
-                                    <div class="event-blog-post-comment-time">
-                                        <span>Le 21 Juillet à 15h21</span>
-                                    </div>
-                                    <div class="event-blog-post-comment-content">
-                                        <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row event-blog-post-comment">
-                                <div class="col-xs-1 col-xs-offset-1 text-center">
-                                    <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                                </div>
-                                <div class="col-xs-10">
-                                    <div class="event-blog-post-comment-poster">
-                                        <a href="#">Marie Boivent</a>
-                                    </div>
-                                    <div class="event-blog-post-comment-time">
-                                        <span>Le 21 Juillet à 15h21</span>
-                                    </div>
-                                    <div class="event-blog-post-comment-content">
-                                        <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                            <div class="row event-blog-post-new-comment">
-                                <div class="col-xs-1 text-center">
-                                    <div class="event-blog-post-new-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                                </div>
-                                <div class="col-xs-11 event-blog-post-new-comment-field">
-                                    <textarea type="text" name="event-blog-new-post-new-comment"></textarea>
-                                    <button class="btn btn-default btn-red" type="submit">Valider</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </div>                
-    </div>
-                                
+        </div>
+    </div>                
+</div>
+
 

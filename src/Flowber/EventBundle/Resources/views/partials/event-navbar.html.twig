@@ -11,7 +11,7 @@
             </div>
             <div id="second-navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path('wybe_front_office_events', {'eventNameSlug': 'event1'}) }}">Actualités</a></li>
+                    <li><a href="{{ path('flowber_event_homepage', {'id': result.getId()}) }}">Actualités</a></li>
                     <li><a href="{{ path('wybe_front_office_events_member', {'eventNameSlug': 'event1'}) }}">Participants</a></li>
                     <li><a href="{{ path('wybe_front_office_events_gallery', {'eventNameSlug': 'event1'}) }}">Photos</a></li>
                 </ul>
@@ -34,7 +34,9 @@
                     </li>
                     <li>
                         <a href="#">
-                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/plus-white2.png')}}"/>
+                            <form method="post">
+                                <i class="fa fa-calendar-plus-o attend-event-submit" data-toggle="tooltip" data-placement="top" title="Participer à la sortie"></i>
+                            </form>
                         </a>
                     </li>
                     <li>

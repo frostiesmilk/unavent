@@ -84,6 +84,18 @@ and open the template in the editor.
 .btn-red:hover {
   background-color: #BF493D;
 }
+/* Forms */
+.form-error-custom {
+  color: #A94442;
+  background-color: #F2DEDE;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+}
+.form-error-custom span {
+  color: #A94442;
+}
 /* Small menus for small screens */
 .navmenu-main {
   background-color: #E1EBF5;

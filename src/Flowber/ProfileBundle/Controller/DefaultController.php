@@ -53,9 +53,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             // processing profile edit
-            if ($profileForm->isValid()) {        
-                $em->persist($profile);
-            }else{
+            if (!$profileForm->isValid()) {
                 $error = true;
             }
                      
@@ -65,7 +63,7 @@ class DefaultController extends Controller
                 if($profilePicture->getFile() !== null){                    
                     $profilePicture->addGallery($profile->getProfileGallery());
                     $profile->setProfilePicture($profilePicture);
-                    $em->persist($profile);
+                    
                     $em->persist($profilePicture);
                 }
             }else{
@@ -79,14 +77,14 @@ class DefaultController extends Controller
                     $coverPicture->addGallery($profile->getCoverGallery());
                     $profile->setCoverPicture($coverPicture);
                     $em->persist($coverPicture);
-                    $em->persist($profile);
                 }
             }else{
                 $error = true;
             }   
             
             // no error
-            if(!$error){         
+            if(!$error){ 
+                $em->persist($profile); // very important
                 $em->flush();
 //                $em->persist($profile);
 //                $em->flush();

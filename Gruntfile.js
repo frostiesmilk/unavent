@@ -21,14 +21,14 @@ module.exports = function (grunt) {
                 files: {
                     'css/bootstrap.css': 'bootstrap/dist/css/bootstrap.css',
                     'css/jasny-bootstrap.css': 'jasny-bootstrap/dist/css/jasny-bootstrap.css',
-                    'css/font-awesome.css': 'fontawesome/css/font-awesome.css',
+                    'css/font-awesome.css': 'font-awesome/css/font-awesome.css',
                     'css/angular-csp.css': 'angular/angular-csp.css',
                     'css/bootstrap-datetimepicker.css': 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
                 }
             },            
             fonts: {
                 files: {
-                    'fonts': ['fontawesome/fonts','bootstrap/dist/fonts/'],
+                    'fonts': ['font-awesome/fonts/**','bootstrap/dist/fonts/**'],
                 }
             }
         },

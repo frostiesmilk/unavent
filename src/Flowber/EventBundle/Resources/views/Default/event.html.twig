@@ -3,7 +3,7 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/event.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/flowberevent/css/event.css') }}"/>
     <style>
       html, body {
         height: 100%;
@@ -35,6 +35,9 @@
     <!-- Second navbar -->
     {% include 'FlowberEventBundle::partials/event-navbar.html.twig' %}
 
+    <!-- Top alerts -->
+    {% include 'FlowberEventBundle::partials/eventAlerts.html.twig' %}    
+    
     <!-- page -->
     {% include 'FlowberEventBundle::partials/eventContent.html.twig' %}
    
@@ -49,7 +52,7 @@
         
     <script>
 function initMap() {
-  var chicago = new google.maps.LatLng{% if result.getPostalAddress().getCoordinates() %}{{result.getPostalAddress().getCoordinates()}} {% else %}(){% endif %};
+  var chicago = new google.maps.LatLng{% if result.getPostalAddress().getCoordinates() is defined %}{{result.getPostalAddress().getCoordinates()}} {% else %}(){% endif %};
 
   var map = new google.maps.Map(document.getElementById('map'), {
     center: chicago,
@@ -118,6 +121,11 @@ function project(latLng) {
                 $(this).height($(this).height()+1);
             };
         });
+        
+        // auto closing alerts
+        autoClosingAlert(".alert-autoclosing", 3000);
     </script>
+    
+    
 
 {% endblock %}

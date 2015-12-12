@@ -161,3 +161,11 @@ $(document).ready(function(){
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
+
+/**
+ * Alert auto close
+ */
+function autoClosingAlert(selector, delay) {
+   var alert = $(selector).alert();
+   window.setTimeout(function() { alert.alert('close') }, delay);
+}

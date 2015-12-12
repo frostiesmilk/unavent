@@ -1,0 +1,182 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12 déc. 2015, 17:38:32
+    Author     : Equina
+*/
+
+@import "../../../../FrontOfficeBundle/Resources/public/less/frontoffice-common";
+
+.event-container{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    
+    .event-blog-new-post{
+        border: solid 1px lightgrey;
+        margin-bottom: 20px;
+        .event-blog-new-post-navbar{
+            background-color: @blue;
+            .event-blog-new-post-navbar-option{
+                a{
+                    background-color: @dark-blue;
+                    border-radius: initial;
+                    border: initial;
+                    color: white;
+                }                
+                a:hover{
+                    background-color: @dark-blue-alt;
+                    border: initial;
+                }
+                .event-blog-new-post-navbar-option-icon{
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+            .active{
+                a{
+                    background-color: @blue-alt!important;                    
+                }
+            }
+        }
+        .event-blog-new-post-content{
+            textarea{
+                width: 100%;
+                resize: none;
+                border-left: none;
+                border-right: none;
+                border-top: none;
+                padding: 10px;
+            }
+        }
+        
+        .event-blog-new-post-footer{
+            padding: 5px;
+            .event-blog-new-post-footer-confirm{
+                button:hover{
+                    color: white;
+                }
+            }
+        }        
+    }
+    
+    .event-blog-post{
+        border: 1px solid lightgrey;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        .event-blog-post-header{    
+            padding-left: 20px;
+            padding-right: 20px;
+            .event-blog-post-header-avatar{                
+                background-position: center center;
+                background-repeat: no repeat;
+                background-size: cover;
+                border-radius: 50%;
+                height: 50px;
+                width: 50px;
+            }
+            .event-blog-post-header-rating{
+                img{
+                    height: 20px;
+                }
+                .event-blog-post-header-rating-count{
+                    color: grey;
+                    font-size: 0.85em;
+                }
+            }
+            .event-blog-post-header-info-time{        
+                color: grey;
+                font-size: 0.8em;
+            }
+        }
+        .event-blog-post-content{
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid lightgrey;
+        }
+        
+        .event-blog-post-comments{
+            padding-top: 5px;
+            background-color: @light-grey-background;
+            .event-blog-post-comment{
+                padding-top: 5px;
+                .event-blog-post-comment-avatar{
+                    border-radius: 50%;
+                    background-position: center center;
+                    background-size: cover;
+                    height: 50px;
+                    width: 50px;
+                }
+
+                .event-blog-post-comment-poster{
+                    display: inline;
+                }
+                .event-blog-post-comment-time{
+                    display: inline;
+                    padding-left: 1em;
+                    color: grey;
+                    font-size: 0.8em;
+                }
+            }
+            hr{
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+        }
+        
+        .event-blog-post-new-comment{
+            padding-top: 5px;
+            padding-left: 20px;
+            padding-right: 20px;
+            .event-blog-post-new-comment-avatar{
+                border-radius: 50%;
+                background-position: center center;
+                background-size: cover;
+                height: 50px;
+                width: 50px;
+            }
+            .event-blog-post-new-comment-field{
+                textarea{
+                    width: 100%;
+                    resize: none;
+                }
+            }
+        }
+    }
+    
+    .event-details{        
+        border: 1px solid lightgrey;
+        padding: 15px;        
+        table{
+            border-collapse: separate;
+            border-spacing: 1em;        
+            color: grey;
+            width: 100%;
+            tr{
+                padding-bottom: 10px;
+                td.icon{
+                    padding-right: 5px;
+                    text-align: right;
+                    vertical-align: top;
+                    img{
+                        height: 20px;
+                        width: 20px;                
+                    }
+                }
+            }   
+        }
+        textarea.event-mail{
+            resize: none;
+            width: 100%;
+            padding: 5px;            
+        }
+    }
+}
+
+.alert-event-main{
+    margin-bottom: -50px;
+}
