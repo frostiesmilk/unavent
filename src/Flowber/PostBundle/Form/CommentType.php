@@ -1,12 +1,12 @@
 <?php
 
-namespace Flowber\PrivateMessageBundle\Form;
+namespace Flowber\PostBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PrivateMessageType extends AbstractType
+class CommentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,10 +14,13 @@ class PrivateMessageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('subject',        'text', array('label'=>'Objet'))
-            ->add('message',        'textarea', array('label'=>'Message'))
-        ;
+        $builder ->add('message',    'textarea',           
+                array(
+                'attr' => array(
+                     'placeholder' => 'Ecrire un message',
+                                     'class' => 'group-blog-new-post-new-comment'),
+                    'label' => false,
+                    ));
     }
     
     /**
@@ -26,7 +29,7 @@ class PrivateMessageType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Flowber\PrivateMessageBundle\Entity\PrivateMessage'
+            'data_class' => 'Flowber\PostBundle\Entity\Comment'
         ));
     }
 
@@ -35,6 +38,6 @@ class PrivateMessageType extends AbstractType
      */
     public function getName()
     {
-        return 'flowber_privatemessagebundle_privatemessage';
+        return 'flowber_postbundle_comment';
     }
 }

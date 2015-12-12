@@ -90,13 +90,6 @@ class Groups
     private $members;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="posts", type="string", length=255, nullable=true)
-     */
-    private $posts;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist", "remove"})
      */
     private $galleries;
@@ -392,29 +385,6 @@ class Groups
     public function getMembers()
     {
         return $this->members;
-    }
-
-    /**
-     * Set posts
-     *
-     * @param string $posts
-     * @return Groups
-     */
-    public function setPosts($posts)
-    {
-        $this->posts = $posts;
-
-        return $this;
-    }
-
-    /**
-     * Get posts
-     *
-     * @return string 
-     */
-    public function getPosts()
-    {
-        return $this->posts;
     }
 
     /**

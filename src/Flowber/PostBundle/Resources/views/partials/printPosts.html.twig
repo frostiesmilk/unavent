@@ -1,0 +1,90 @@
+{% set currentProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+{% if app.user.profile.profilePicture is not null %}
+    {% set currentProfilePicturePath = app.user.profile.profilePicture.getWebPath() %}
+{% endif %} 
+{% set counter = 0 %}
+
+<ul class="group-blog-posts" >     
+    {% for post in posts %}
+        {% set postProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+        {% if post.createdBy.profile.profilePicture is not null %}
+            {% set postProfilePicturePath = post.createdBy.profile.profilePicture.getWebPath() %}
+        {% endif %} 
+        <li class="group-blog-post" style="margin-bottom:20px;">
+            <div class="row group-blog-post-header">
+                <div class="col-xs-9 group-blog-post-header-info">
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="group-blog-post-header-avatar" style="background-image: url('{{asset(postProfilePicturePath)}}')"></div>
+                        </div>
+                        <div class="media-body">
+                            <a class="group-blog-header-post-info-poster" href="#">{{post.createdBy.firstname}} {{post.createdBy.surname}}</a><br/>
+                            <span class="group-blog-post-header-info-time">{{ (post.creationDate)|date("\\l\\e d/m/Y \à H:i")}} </span><br/>
+                            <span class="group-blog-post-header-info-rating">0 personnes aiment</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 group-blog-post-header-rating text-center">
+                    {% if (post.createdBy == app.user) %}
+                    <a data-toggle="modal" data-target="#modal-delete-post" href="#">Supprimer</a>
+                    <br><br>
+                    {% endif %}
+                    <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
+
+                </div>
+            </div>
+            <div class="group-blog-post-content">
+                <p>{{post.message}}</p>
+            </div>
+            {% for comment in post.getComments() %}
+                {% set commentProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+                {% if comment.createdBy.profile.profilePicture is not null %}
+                    {% set commentProfilePicturePath = comment.createdBy.profile.profilePicture.getWebPath() %}
+                {% endif %} 
+                <ul class="media-list group-blog-post-comments">
+                    <li class="media group-blog-post-comment">
+                        <div class="media-left">
+                            <div class="group-blog-post-comment-avatar" style="background-image: url('{{asset(commentProfilePicturePath)}}')"></div>
+                        </div>
+                        <div class="media-body">
+                            <div class="group-blog-post-comment-poster">
+                                <a href="#">{{comment.createdBy.firstname}} {{comment.createdBy.surname}}</a>
+                            </div>
+
+                            <div class="group-blog-post-comment-time">
+                                <span>{{ (comment.creationDate)|date("\\l\\e d/m/Y \à H:i")}}</span>
+                            </div>
+                            {% if (comment.createdBy == app.user) %}
+                                <a data-toggle="modal" data-target="#modal-delete-comment" href="#">Supprimer</a>
+                                {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
+                            {% endif %}
+                            <div class="group-blog-post-comment-content">
+                                <p>{{comment.message}}</p>
+                            </div>
+                        </div>
+                        <hr/>
+                    </li>                            
+                </ul>
+            {% endfor %}
+            <form action="{{ path('add_comment_post', { 'post_id' : post.id } ) }}" method="post" {{ form_enctype(commentForm[counter]) }}>                
+                <div class="media group-blog-post-new-comment">
+                    <div class="media-left">
+                        <div class="group-blog-post-new-comment-avatar" style="background-image: url('{{asset(currentProfilePicturePath)}}')"></div>
+                    </div>
+                    <div class="media-body group-blog-post-new-comment-field">
+                    {{form_widget(commentForm[counter])}}
+                        <div class="group-blog-new-post-footer">
+                            <div class="group-blog-new-post-footer-confirm text-right">
+                                <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </li>
+        {% set counter = counter + 1 %}
+    {% include 'FlowberPostBundle::modal/modalDeletePost.html.twig' %}
+
+    {% endfor %}
+</ul>
+

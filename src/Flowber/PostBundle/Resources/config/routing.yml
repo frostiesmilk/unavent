@@ -1,0 +1,25 @@
+add_comment_post:
+    pattern:  /comment/{post_id}
+    defaults: { _controller: FlowberPostBundle:Default:addComment }
+    requirements:
+        _method:  POST
+        post_id: \d+
+
+add_post:
+    pattern:  /post/{group_id}
+    defaults: { _controller: FlowberPostBundle:Default:addPost }
+    requirements:
+        _method:  POST
+        group_id: \d+
+
+delete_post:
+    pattern:  /supprimer_poste/{post_id}
+    defaults: { _controller: FlowberPostBundle:Default:deletePost }
+    requirements:
+        group_id: \d+
+
+delete_comment:
+    pattern:  /supprimer_commentaire/{comment_id}
+    defaults: { _controller: FlowberPostBundle:Default:deleteComment }
+    requirements:
+        group_id: \d+

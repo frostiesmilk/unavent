@@ -30,18 +30,18 @@
                                 <tr>
                                     <th><a type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Retourner à tous les messages" href="{{path('flowber_private_message_received_homepage')}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a></th>
                                     <th colspan="2">
-                                        <button type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
-                                            <span class="glyphicon glyphicon-trash message-options-bar-icon" aria-hidden="true"></span> <span class="message-options-bar-text">Supprimer</span>
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu / Non Lu"> 
-                                            <span class="glyphicon glyphicon-eye-close message-options-bar-icon" aria-hidden="true"></span> <span class="message-options-bar-text">Marquer comme Lu/Non Lu</span>
-                                        </button>
+                                        <a tabindex="-1" href="{{ path('flowber_delete_message', {'id': message.id, 'type':'r'}) }}">
+                                            <button type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                <span class="glyphicon glyphicon-trash message-options-bar-icon" aria-hidden="true"></span> <span class="message-options-bar-text">Supprimer</span>
+                                            </button>
+                                        </a>
+                                        <a tabindex="-1" href="{{ path('flowber_read_message', {'id': message.id}) }}">
+                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme non lu"> 
+                                                <span class="glyphicon glyphicon-eye-close message-options-bar-icon" aria-hidden="true"></span> <span class="message-options-bar-text">Marquer comme Lu/Non Lu</span>
+                                            </button>
+                                        </a>
                                     </th>
-                                    <th class="text-right">
-                                        <div class="btn-group" role="group" aria-label="messages-pagination">
-                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Message plus récent"><span class="glyphicon glyphicon-menu-left"></span></button>
-                                        </div>
-                                    </th>
+
                                 </tr>
                             </thead>
                         </table>
@@ -49,7 +49,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12 message-show-subject">
-                                    <h3 class="message-subject">Manger</h3>
+                                    <h3 class="message-subject">{{ message.subject }}</h3>
                                 </div>
                                 <div class="col-md-12 message-show-details">
                                     <div class="row">
@@ -57,39 +57,30 @@
                                             <table>
                                                 <tr>
                                                     <td class="text-right message-show-details-correspondents-label"><span>A : </span></td>
-                                                    <td><span> Marie Boivent</span></td>
+                                                    <td><span> {{ message.userTo.firstname }} {{ message.userTo.surname }} </span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-right message-show-details-correspondents-label"><span>De : </span></td>
-                                                    <td><span>Jean-Jacques de Sitges</span></td>
+                                                    <td><span>{{ message.userFrom.firstname }} {{ message.userFrom.surname }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-right message-show-details-correspondents-label">Envoyé : </td>
-                                                    <td><span>Jeudi 21/03/14 à 18h20</span></td>
+                                                    <td><span>{{ (message.creationDate)|date("\\l\\e d/m/Y \\à H:i", "Europe/Paris") }} </span></td>
                                                 </tr>
                                             </table>
                                         </div>
                                         <div class="col-xs-3 message-show-details-actions text-right">
-                                            <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Répondre au message"><span class="glyphicon glyphicon-share-alt message-show-details-actions-reply" ></span></button>
+                                            <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Répondre au message">
+                                                <span class="glyphicon glyphicon-share-alt message-show-details-actions-reply" >
+                                                </span></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="message-show-content col-md-12">
-                                    <p>Hey ma jolie, ça te dit de manger un bon kebab aux chandelles? Je suis sûr qu'on va s'y plaire! J'attends ta réponse et j'ai déjà hâte :) Bisous</p>
+                                    <p> {{ message.message }} </p>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="media message-show-reply col-md-12 ">
-                                    <div class="media-left">
-                                      <div class="message-show-reply-thumbnail" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                                    </div>
-                                    <div class="media-body">
-                                        <textarea class="message-show-reply-textarea" textholder="Ecrire une réponse"></textarea>
-                                        <button type="submit" class="btn btn-default text-right message-show-reply-submit">Répondre</button>
-                                    </div>
-                                </div>             
                             </div>
                         </div>
                     </div>

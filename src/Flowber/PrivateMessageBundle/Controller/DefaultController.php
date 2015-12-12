@@ -4,6 +4,7 @@ namespace Flowber\PrivateMessageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
+use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 
 class DefaultController extends Controller
 {
@@ -109,7 +110,7 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('flowber_private_message_received_homepage'));
     }
     
-    public function getMessageAction($id)
+    public function getMessageReceivedAction($id)
     {
         $message = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage')->find($id);
         
@@ -121,11 +122,78 @@ class DefaultController extends Controller
         $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
         $numberSendMessages = $userReposit->getCountSendMessages($user);
         
-        return $this->render('FlowberPrivateMessageBundle:Default:oneMessage.html.twig', array(
+        $message->setStatut('1');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($message);
+        $em->flush();
+                
+        $privateMessage = new PrivateMessage;
+        $privateMessage->setSubject('RE : '.$message->getSubject());
+        $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
+
+        $request = $this->get('request');
+        
+        // if form has been submitted
+        if ($request->getMethod() == 'POST') { 
+            $privateMessageForm->handleRequest($request);
+            
+            if ($privateMessageForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $privateMessage->setUserFrom($this->getUser());
+                $privateMessage->setUserTo($message->getUserFrom());
+                $em->persist($privateMessage);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+            }
+        }
+        
+        return $this->render('FlowberPrivateMessageBundle:Default:oneMessageReceived.html.twig', array(
             "message"=>$message,
             "numberDeletedMessages"=>$numberDeletedMessages,
             "numberReceiveddMessages"=>$numberReceivedMessages,
-            "numberSendMessages"=>$numberSendMessages
+            "numberSendMessages"=>$numberSendMessages,
+            'messageForm' => $privateMessageForm->createView()
+            ));
+    }
+    
+    public function getMessageSendAction($id)
+    {
+        $message = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage')->find($id);
+        
+        $user = $this->getUser();
+        
+        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        
+        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
+        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
+        $numberSendMessages = $userReposit->getCountSendMessages($user);
+                
+        return $this->render('FlowberPrivateMessageBundle:Default:oneMessageSend.html.twig', array(
+            "message"=>$message,
+            "numberDeletedMessages"=>$numberDeletedMessages,
+            "numberReceiveddMessages"=>$numberReceivedMessages,
+            "numberSendMessages"=>$numberSendMessages,
+            ));
+    }
+    
+    public function getMessageDeletedAction($id)
+    {
+        $message = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage')->find($id);
+        
+        $user = $this->getUser();
+        
+        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        
+        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
+        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
+        $numberSendMessages = $userReposit->getCountSendMessages($user);
+        
+        return $this->render('FlowberPrivateMessageBundle:Default:oneMessageDeleted.html.twig', array(
+            "message"=>$message,
+            "numberDeletedMessages"=>$numberDeletedMessages,
+            "numberReceiveddMessages"=>$numberReceivedMessages,
+            "numberSendMessages"=>$numberSendMessages,
             ));
     }
 }

@@ -37,7 +37,7 @@
                         <tbody>
                             {% for userMessage in userMessages %}
 
-                                    <tr class="messages-stream-element" data-href="{{ path('flowber_private_message_one_homepage', {'id': userMessage.id}) }}">
+                                    <tr class="messages-stream-element" data-href="{{ path('flowber_private_message_one_received_homepage', {'id': userMessage.id}) }}">
                                         <td class="messages-stream-element-clickable">
                                             <span class="messages-stream-element-author">
                                                 {% if userMessage.statut == '2' %}  <b> {% endif %}

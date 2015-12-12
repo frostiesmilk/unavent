@@ -1,0 +1,21 @@
+<!-- Modal -->
+<div class="modal fade" id="modal-delete-comment" tabindex="-1" role="dialog" aria-labelledby="deletePost">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Etes vous sur de vouloir supprimer ce commentaire  ?</h4>
+            </div>
+            <div class="modal-footer">
+                <a  href="{{ path('delete_comment', { 'comment_id' : comment.id } ) }}"> 
+                    <button type="button" class="btn btn-default">
+                        Oui
+                    </button>
+                </a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Non
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

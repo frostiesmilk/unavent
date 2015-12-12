@@ -3,18 +3,25 @@
 namespace Flowber\GroupBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Flowber\FrontOfficeBundle\Entity\Category;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GroupBundle\Form\GroupsType;
 use Flowber\GalleryBundle\Entity\Photo;
-use Flowber\GroupBundle\Entity\Groups;
+use Flowber\PostBundle\Form\PostType;
+use Flowber\PostBundle\Entity\Post;
+use Flowber\PostBundle\Form\CommentType;
+use Flowber\PostBundle\Entity\Comment;
 
 class DefaultController extends Controller
 {
     public function groupAction($id)
     {
         $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
+//        $posts = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->findByGroups($group);
+        
+        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
+        $posts = $postRepository->getPostFromGroup($id);   
+        
         $profilePicture = null;
         $coverPicture = null;
 
@@ -24,6 +31,20 @@ class DefaultController extends Controller
         if ($group->getCoverPicture() != null){ 
             $coverPicture = $group->getCoverPicture()->getWebPath();
         }
+        
+        //preparing new form for a post
+        $post = new Post();
+        $postForm = $this->createForm(new PostType, $post);
+        
+        $CommentArray = array();
+
+        foreach ($posts as $post)
+        {
+            $comment = new Comment();
+            $commentForm = $this->createForm(new CommentType, $comment);
+            $CommentArray[] = $commentForm->createView();
+        }
+      
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
                 array('title' => $group->getTitle(), 
                     'subtitle' => $group->getSubtitle(), 
@@ -31,9 +52,13 @@ class DefaultController extends Controller
                     'categories' => $group->getCategories(), 
                     'firstname' => $group->getCreatedBy()->getFirstname(), 
                     'surname' => $group->getCreatedBy()->getSurname(), 
-                    'title' => $group->getTitle(), 
+                    'id' => $group->getId(), 
                     'profilePicture' => $profilePicture, 
-                    'coverPicture' => $coverPicture));
+                    'coverPicture' => $coverPicture,
+                    'postForm' => $postForm->createView(),
+                    'commentForm' => $CommentArray,
+                    'posts' => $posts
+            ));
     }
     
     public function createGroupAction()
