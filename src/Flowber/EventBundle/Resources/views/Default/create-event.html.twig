@@ -6,7 +6,7 @@
     {{parent()}}
     {# Put specific CSS below #}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.css')}}" />
-    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/create-event.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/create-event.css') }}"/> 
 {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- Cover -->
-    <div class="jumbotron create-event-cover" style="background-image: url({{asset('bundles/wybefrontoffice/images/pages/homepage-signup/cover-streetsheeps.jpg')}})">    
+    <div class="jumbotron create-event-cover" style="background-image: url({{asset('assets/images/UserBundle/signIn/cover-streetsheeps.jpg')}})">    
         <div class="container" >
             <div class="row-fluid text-center">       
                 <h1 class="create-event-cover-title ">Lancez-vous dans une nouvelle aventure !</h1>
@@ -180,25 +180,11 @@
 {% block javascripts %}
     {{parent()}}
     {# Put specific JS below #}
-    <script type="text/javascript" src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
-
-    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
     async defer></script> 
-    
-    <script type="text/javascript">
-        $(function () {
-            $('.flowber_datepicker').datetimepicker({
-                locale: 'fr',
-                format: 'L',
-            });
-            $('.flowber_timepicker').datetimepicker({
-                locale: 'fr',
-                format: 'LT',
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/FrontOfficeBundle/datetime/datetime-picker.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/FrontOfficeBundle/maps/gmaps.js') }}"></script>
 
 {% endblock %}
