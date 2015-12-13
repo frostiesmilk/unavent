@@ -3,14 +3,16 @@
 namespace Flowber\EventBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Flowber\EventBundle\Entity\Event;
-use Flowber\EventBundle\Entity\EventRepository;
 use Flowber\EventBundle\Form\EventType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
+use Flowber\PostBundle\Entity\Post;
+use Flowber\PostBundle\Form\PostType;
+use Flowber\PostBundle\Entity\Comment;
+use Flowber\PostBundle\Form\CommentType;
 
 class DefaultController extends Controller
 {
@@ -23,6 +25,7 @@ class DefaultController extends Controller
         
         $profilePicture = $event->getProfilePicture();
         $coverPicture = $event->getCoverPicture();
+        
         if(isset($profilePicture)){
             $profilePicture = $profilePicture->getWebPath();
         }
@@ -68,13 +71,32 @@ class DefaultController extends Controller
                     "Une erreur est survenue lors de l'envoi du message."
                 );
             }
-        }      
+        }   
+        
+        
+        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
+        $posts = $postRepository->getPostFromEvent($id);  
 
+        $post = new Post();
+        $postForm = $this->createForm(new PostType, $post);
+         $CommentArray = array();
+
+        foreach ($posts as $post)
+        {
+            $comment = new Comment();
+            $commentForm = $this->createForm(new CommentType, $comment);
+            $CommentArray[] = $commentForm->createView();
+        }
+        
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array('result' => $event, 
                 'profilePicture' => $profilePicture, 
                 'coverPicture' => $coverPicture,
-                'mailToCreatorForm' => $mailToCreatorForm->createView()
+                'mailToCreatorForm' => $mailToCreatorForm->createView(),
+                'postForm' => $postForm->createView(),
+                'posts' => $posts,
+                'commentForm' => $CommentArray,
+
             )
         );
     }

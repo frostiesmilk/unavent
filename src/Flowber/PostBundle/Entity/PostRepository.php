@@ -46,6 +46,21 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()
                   ->getResult();
     }
+
+    public function getPostFromEvent($eventId){
+        $qb = $this->_em->createQueryBuilder();
+        
+        $qb->select('a')
+            ->from('FlowberPostBundle:Post', 'a')
+            ->where('a.event = :eventId')
+            ->setParameter('eventId', $eventId)          
+            ->andWhere('a.statut != :statut')
+            ->setParameter('statut', '0')
+            ->orderBy('a.creationDate', 'DESC');
+        
+        return $qb->getQuery()
+                  ->getResult();
+    }
     
     public function getCommentFromPost($postId){
         $qb = $this->_em->createQueryBuilder();

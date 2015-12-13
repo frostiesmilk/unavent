@@ -7,6 +7,7 @@ use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
+use Flowber\PostBundle\Form\PostWithEventType;
 
 class DefaultController extends Controller
 {
@@ -31,6 +32,32 @@ class DefaultController extends Controller
                 $em->flush();
                 
                 return $this->redirect($this->generateUrl('flowber_group_homepage', array('id' => $post->getGroups()->getId())));
+            }
+        }
+        return $this->render('FlowberPostBundle:Default:index.html.twig', array('post_id' => $post_id));
+    }
+
+    public function addCommentEventAction($post_id)
+    {
+        $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($post_id);
+
+        $comment = new Comment;
+        $commentForm = $this->createForm(new CommentType, $comment);
+
+        $request = $this->get('request');
+        
+        // if form has been submitted
+        if ($request->getMethod() == 'POST') { 
+            $commentForm->handleRequest($request);
+            
+            if ($commentForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $comment->setPost($post);
+                $comment->setCreatedBy($this->getUser());
+                $em->persist($comment);
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('flowber_event_homepage', array('id' => $post->getEvent()->getId())));
             }
         }
         return $this->render('FlowberPostBundle:Default:index.html.twig', array('post_id' => $post_id));
@@ -60,7 +87,60 @@ class DefaultController extends Controller
             }
         }
         
-        return $this->render('FlowberPostBundle:Default:index.html.twig', array('post_id' => $post_id));
+        return $this->render('FlowberPostBundle:Default:index.html.twig', array('group_id' => $group_id));
+    }
+    
+    public function addPostEventAction($event_id)
+    {
+        $event = $this->getDoctrine()->getManager()->getRepository('FlowberEventBundle:Event')->find($event_id);
+        $post = new Post;
+        $postForm = $this->createForm(new PostType, $post);
+
+        $request = $this->get('request');
+                
+        // if create post form has been submitted
+        if ($request->getMethod() == 'POST') { 
+            $postForm->handleRequest($request);
+            
+            if ($postForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $post->setCreatedBy($this->getUser());
+                $post->setEvent($event);
+                $em->persist($post);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('flowber_event_homepage', array('id' => $event_id)));
+            }
+        }
+        
+        return $this->render('FlowberPostBundle:Default:index.html.twig', array('event_id' => $event_id));
+    }
+    
+    public function addPostWithEventAction($group_id)
+    {
+        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($group_id);
+        
+        $post = new Post;
+        $postForm = $this->createForm(new PostWithEventType, $post);
+
+        $request = $this->get('request');
+                
+        // if create post form has been submitted
+        if ($request->getMethod() == 'POST') { 
+            $postForm->handleRequest($request);
+            
+            if ($postForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $post->setCreatedBy($this->getUser());
+                $post->setGroups($group);
+                $em->persist($post);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('flowber_group_homepage', array('id' => $group_id)));
+            }
+        }
+        
+        return $this->render('FlowberPostBundle:Default:index.html.twig', array('name' => $group_id));
     }
     
     public function deletePostAction($post_id)
