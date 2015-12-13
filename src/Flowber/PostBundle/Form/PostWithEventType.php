@@ -5,6 +5,7 @@ namespace Flowber\PostBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Flowber\EventBundle\Form\EventType;
 
 class PostWithEventType extends AbstractType
 {
@@ -21,7 +22,8 @@ class PostWithEventType extends AbstractType
                      'placeholder' => 'Ecrire un message',
                                      'class' => 'group-blog-new-post-content-text'),
                     'label' => false,
-                 ));  
+                 ))
+            ->add('event',        new EventType());  
     }
     
     /**

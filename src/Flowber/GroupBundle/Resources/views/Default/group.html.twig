@@ -23,6 +23,9 @@
 
     <!-- Second navbar -->
     {% include 'FlowberGroupBundle::partials/groupNavbar.html.twig' %}
+    
+    <!-- Top alerts -->
+    {% include 'FlowberGroupBundle::partials/groupAlerts.html.twig' %}    
    
     <!-- page -->
     {% include 'FlowberGroupBundle::partials/groupContent.html.twig' %}
@@ -38,16 +41,26 @@
 {% block javascripts %}
     {{parent()}}
     {# Put specific JS below #}
+    <script type="text/javascript" src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
-            async defer>
-        
-    </script>    
+    async defer></script> 
     
-    <script src="{{ asset('bundles/wybefrontoffice/js/dropzone/dropzone.js') }}"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/group.js') }}"></script>
-    
-   <script type="text/javascript">
+    <script type="text/javascript">
+        $(function () {
+            $('.flowber_datepicker').datetimepicker({
+                locale: 'fr',
+                format: 'L',
+            });
+            $('.flowber_timepicker').datetimepicker({
+                locale: 'fr',
+                format: 'LT',
+            });
+        });
+
         $('#groupNavbar a').click(function (e) {
             e.preventDefault()
             $(this).tab('show')
@@ -59,4 +72,7 @@
             };
         }); 
     </script>
+    
+    <script src="{{ asset('bundles/wybefrontoffice/js/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('bundles/wybefrontoffice/js/group.js') }}"></script>
 {% endblock %}

@@ -65,101 +65,27 @@
                 <div class="event-blog-new-post">
                     <ul id="eventNavbar" class="nav nav-tabs nav-justified event-blog-new-post-navbar">
                         <li role="presentation" class="event-blog-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
-                            <a href="#newpost"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/new-post.png')}}" alt=""/> Message</a>
+                            <a href="#newpost"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/new-post.png')}}" alt=""/> Ecrire un message</a>
                         </li>
                         <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="newphoto" role="tab" data-toggle="tab">
-                            <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/photo.png')}}" alt=""/> Photo</a>
-                        </li>
-                        <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="tagpeople" role="tab" data-toggle="tab">
-                            <a href="#tagpeople"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/tag-white.png')}}" alt=""/> Tagger</a>
+                            <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/photo.png')}}" alt=""/> Ajouter une gallerie </a>
                         </li>
                     </ul>
                      <!-- Tab panes -->
-                    <div class="tab-content event-blog-new-post-content">
-                        <div role="tabpanel" class="tab-pane active" id="newpost">
-                            <textarea id="newPostTextArea" placeholder="Ecrire un message"></textarea>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="newphoto">
-                            Uploader une photo
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="tagpeople">
-                            Tagger une personne
-                        </div>
-                    </div>
-                    <div class="event-blog-new-post-footer">
-                        <div class="event-blog-new-post-footer-details">
-
-                        </div>
-                        <div class="event-blog-new-post-footer-confirm text-right">
-                            <button type="submit" class="btn btn-default btn-red">Envoyer</button>
-                        </div>
+                    <div role="tabpanel" class="tab-pane active" id="newpost">
+                        <form action="{{ path('add_post_event', { 'event_id' : result.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
+                            {{form_widget(postForm)}}
+                            <div class="event-blog-new-post-footer">
+                                <div class="event-blog-new-post-footer-confirm text-right">
+                                    <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>          
                     </div>
                 </div>
 
-                <div class="event-blog-post">
-                    <div class="row event-blog-post-header">
-                        <div class="col-md-1 text-center">
-                            <div class="event-blog-post-header-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                        </div>
-                        <div class="col-md-8 event-blog-post-header-info">
-                            <a class="event-blog-header-post-info-poster" href="#">Marie BOIVENT</a><br/>
-                            <span class="event-blog-post-header-info-time">Le 20 Août à 15h59</span>
-                        </div>
-                        <div class="col-md-3 event-blog-post-header-rating">
-                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
-                            <span class="event-blog-post-header-rating-count">4 personnes aiment</span>
-                        </div>
-                    </div>
-                    <div class="event-blog-post-content">
-                        <p>Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi? Bonjour ceci est un poste hahaha !!! Quoi?</p>
-                    </div>
-                    <div class="event-blog-post-comments">
-                        <div class="row event-blog-post-comment">
-                            <div class="col-xs-1 col-xs-offset-1 text-center">
-                                <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                            </div>
-                            <div class="col-xs-10">
-                                <div class="event-blog-post-comment-poster">
-                                    <a href="#">Marie Boivent</a>
-                                </div>
-                                <div class="event-blog-post-comment-time">
-                                    <span>Le 21 Juillet à 15h21</span>
-                                </div>
-                                <div class="event-blog-post-comment-content">
-                                    <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr/>
-                        <div class="row event-blog-post-comment">
-                            <div class="col-xs-1 col-xs-offset-1 text-center">
-                                <div class="event-blog-post-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                            </div>
-                            <div class="col-xs-10">
-                                <div class="event-blog-post-comment-poster">
-                                    <a href="#">Marie Boivent</a>
-                                </div>
-                                <div class="event-blog-post-comment-time">
-                                    <span>Le 21 Juillet à 15h21</span>
-                                </div>
-                                <div class="event-blog-post-comment-content">
-                                    <p>Il était un petit navire qui avait beaucoupé navigué ohé ohé ! Ohé ohé matelots! Matelots nagivuent sur les flooooots!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                        <div class="row event-blog-post-new-comment">
-                            <div class="col-xs-1 text-center">
-                                <div class="event-blog-post-new-comment-avatar" style="background-image: url('{{asset('images/frontoffice/user/profile-pictures/marie-brussels-ice-cream.jpg')}}')"></div>
-                            </div>
-                            <div class="col-xs-11 event-blog-post-new-comment-field">
-                                <textarea type="text" name="event-blog-new-post-new-comment"></textarea>
-                                <button class="btn btn-default btn-red" type="submit">Valider</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                {% include 'FlowberPostBundle::partials/showPostsEvent.html.twig' %}
+                
             </div>
         </div>
     </div>                

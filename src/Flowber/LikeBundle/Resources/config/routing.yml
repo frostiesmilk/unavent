@@ -1,0 +1,3 @@
+flowber_like_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FlowberLikeBundle:Default:index }

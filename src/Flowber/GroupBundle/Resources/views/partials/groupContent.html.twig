@@ -32,8 +32,9 @@
                         <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
                             Envoyer un e-mail à l'organisateur<br/>
-                            <form>
-                                <textarea id="newMailToHost" class="group-mail" name="mail-to-host" textholder="Votre message"></textarea>
+                            <form method="post">
+                                {{ form_widget(mailToCreatorForm.message, {'attr': {'class': 'group-mail', 'placeholder':'Votre message'}})}} 
+                                {{ form_rest(mailToCreatorForm) }}
                                 <button class="btn btn-default" type="submit">Envoyer</button>
                             </form>
                         </td>
@@ -45,7 +46,7 @@
             <div class="group-blog">
                 
                 {% include 'FlowberPostBundle::partials/createPost.html.twig' %}
-                {% include 'FlowberPostBundle::partials/printPosts.html.twig' %}
+                {% include 'FlowberPostBundle::partials/showPostsGroup.html.twig' %}
                 
                 
             </div>

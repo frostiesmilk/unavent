@@ -4,14 +4,35 @@ add_comment_post:
     requirements:
         _method:  POST
         post_id: \d+
-
+        
+add_comment_post_event:
+    pattern:  /comment_event/{post_id}
+    defaults: { _controller: FlowberPostBundle:Default:addCommentEvent }
+    requirements:
+        _method:  POST
+        post_id: \d+
+        
 add_post:
     pattern:  /post/{group_id}
     defaults: { _controller: FlowberPostBundle:Default:addPost }
     requirements:
         _method:  POST
         group_id: \d+
-
+        
+add_post_event:
+    pattern:  /post_event/{event_id}
+    defaults: { _controller: FlowberPostBundle:Default:addPostEvent }
+    requirements:
+        _method:  POST
+        group_id: \d+
+        
+add_post_with_event:
+    pattern:  /postWithEvent/{group_id}
+    defaults: { _controller: FlowberPostBundle:Default:addPostWithEvent }
+    requirements:
+        _method:  POST
+        group_id: \d+
+        
 delete_post:
     pattern:  /supprimer_poste/{post_id}
     defaults: { _controller: FlowberPostBundle:Default:deletePost }

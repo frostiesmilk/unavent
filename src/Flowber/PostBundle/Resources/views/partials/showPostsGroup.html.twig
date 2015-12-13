@@ -35,6 +35,9 @@
             </div>
             <div class="group-blog-post-content">
                 <p>{{post.message}}</p>
+                {% if (post.event != null) %}
+                    il y a un event                     
+                {% endif %}
             </div>
             {% for comment in post.getComments() %}
                 {% set commentProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}

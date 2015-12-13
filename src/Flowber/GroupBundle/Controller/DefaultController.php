@@ -11,6 +11,9 @@ use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\CommentType;
 use Flowber\PostBundle\Entity\Comment;
+use Flowber\PostBundle\Form\PostWithEventType;
+use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
+use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 
 class DefaultController extends Controller
 {
@@ -34,7 +37,9 @@ class DefaultController extends Controller
         
         //preparing new form for a post
         $post = new Post();
+        $postwithEvent = new Post();
         $postForm = $this->createForm(new PostType, $post);
+        $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
         
         $CommentArray = array();
 
@@ -44,7 +49,47 @@ class DefaultController extends Controller
             $commentForm = $this->createForm(new CommentType, $comment);
             $CommentArray[] = $commentForm->createView();
         }
-      
+        
+        $mailToCreator = new PrivateMessage();
+        $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
+        
+        $request = $this->get('request');
+        // if form has been submitted
+        if ($request->getMethod() == 'POST') {
+            $em = $this->getDoctrine()->getManager();
+            $mailToCreatorForm->handleRequest($request);
+            
+            // mail to creator has been submitted
+            if ($mailToCreatorForm->isValid()) {
+                $user = $this->getUser();  
+                $userTo = $group->getCreatedBy();
+                
+                // setting subject, sender and destination
+                $subject = "[".$group->getTitle()."] : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
+                $mailToCreator->setSubject($subject);
+                $mailToCreator->setUserFrom($user);
+                $mailToCreator->setUserTo($userTo);
+                
+                $em->persist($mailToCreator);
+                $em->flush();
+               
+                // message bag
+                $this->addFlash(
+                    'success',
+                    "Votre message a bien été envoyé à l'organisateur."
+                );
+                
+                // to prevent reposting
+                return $this->redirectToRoute('flowber_group_homepage', array('id'=>$group->getId()));
+            }else{
+                // message bag
+                $this->addFlash(
+                    'error',
+                    "Une erreur est survenue lors de l'envoi du message."
+                );
+            }
+        }
+        
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
                 array('title' => $group->getTitle(), 
                     'subtitle' => $group->getSubtitle(), 
@@ -57,7 +102,9 @@ class DefaultController extends Controller
                     'coverPicture' => $coverPicture,
                     'postForm' => $postForm->createView(),
                     'commentForm' => $CommentArray,
-                    'posts' => $posts
+                    'postWithEventForm'=> $postWithEventForm->createView(),
+                    'posts' => $posts,
+                    'mailToCreatorForm' => $mailToCreatorForm->createView()
             ));
     }
     
