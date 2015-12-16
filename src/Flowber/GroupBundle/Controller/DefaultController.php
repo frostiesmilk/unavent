@@ -98,6 +98,7 @@ class DefaultController extends Controller
                     'firstname' => $group->getCreatedBy()->getFirstname(), 
                     'surname' => $group->getCreatedBy()->getSurname(), 
                     'id' => $group->getId(), 
+                    'groupId' => $group->getId(), 
                     'profilePicture' => $profilePicture, 
                     'coverPicture' => $coverPicture,
                     'postForm' => $postForm->createView(),
@@ -199,5 +200,71 @@ class DefaultController extends Controller
         return $this->render('FlowberGroupBundle:Default:allGroup.html.twig', array(
             'allGroup' => $allGroup,
         ));
+    }
+    
+    public function groupGalleriesAction($id){
+        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
+        
+        $profilePicture = null;
+        $coverPicture = null;
+
+        if ($group->getProfilePicture() != null){
+            $profilePicture = $group->getProfilePicture()->getWebPath();
+        }
+        if ($group->getCoverPicture() != null){ 
+            $coverPicture = $group->getCoverPicture()->getWebPath();
+        }
+        
+         return $this->render('FlowberGroupBundle:Default:groupGalleries.html.twig', 
+                array(
+                    'groupId' => $group->getId(),
+                    'title' => $group->getTitle(), 
+                    'subtitle' => $group->getSubtitle(), 
+                    'profilePicture' => $profilePicture, 
+                    'coverPicture' => $coverPicture ));
+    }
+    
+    public function groupMembersAction($id){
+        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
+        
+        $profilePicture = null;
+        $coverPicture = null;
+
+        if ($group->getProfilePicture() != null){
+            $profilePicture = $group->getProfilePicture()->getWebPath();
+        }
+        if ($group->getCoverPicture() != null){ 
+            $coverPicture = $group->getCoverPicture()->getWebPath();
+        }
+        
+         return $this->render('FlowberGroupBundle:Default:groupMembers.html.twig', 
+                array(
+                    'groupId' => $group->getId(),
+                    'title' => $group->getTitle(), 
+                    'subtitle' => $group->getSubtitle(), 
+                    'profilePicture' => $profilePicture, 
+                    'coverPicture' => $coverPicture ));
+    }
+    
+    public function groupEventsAction($id){
+        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
+        
+        $profilePicture = null;
+        $coverPicture = null;
+
+        if ($group->getProfilePicture() != null){
+            $profilePicture = $group->getProfilePicture()->getWebPath();
+        }
+        if ($group->getCoverPicture() != null){ 
+            $coverPicture = $group->getCoverPicture()->getWebPath();
+        }
+        
+         return $this->render('FlowberGroupBundle:Default:groupEvents.html.twig', 
+                array(
+                    'groupId' => $group->getId(),
+                    'title' => $group->getTitle(), 
+                    'subtitle' => $group->getSubtitle(), 
+                    'profilePicture' => $profilePicture, 
+                    'coverPicture' => $coverPicture ));
     }
 }

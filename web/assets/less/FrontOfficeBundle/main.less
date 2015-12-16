@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Equina
 */
 
-@import "frontoffice-common";
+@import "../FrontOfficeBundle/frontoffice-common";
 
 /* Small menus for small screens */
 .navmenu-main {
@@ -424,6 +424,25 @@ and open the template in the editor.
         float: right;
         .btn{
             background-color: rgba(255, 255, 255, 0.3);
+        }
+    }
+}
+
+.generic-slim-cover{
+    height: 255px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: initial;
+    background-position: center center;
+    
+    .generic-slim-cover-title{
+        color: white;
+        text-shadow: 3px 3px 3px black;
+        margin-top: 60px;
+        font-size: 50px;
+        @media(max-width: 768px){
+            font-size: 33px;
         }
     }
 }

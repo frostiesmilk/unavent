@@ -8,3 +8,10 @@
 /**
  * Upload images in group page
  */
+
+
+/**
+ * For Google Map
+ * @type String
+ */
+var initMapPrefix = "flowber_postbundle_post_event_";

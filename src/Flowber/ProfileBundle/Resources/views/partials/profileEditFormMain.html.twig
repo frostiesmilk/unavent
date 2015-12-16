@@ -4,17 +4,23 @@
 {% form_theme coverPictureForm 'bootstrap_3_layout.html.twig' %}
 
 <!-- Form -->
-<div class="create-event-form">
-    <form method="post" enctype="multipart/form-data">
-        {{form_widget(profileForm)}}
-        <hr/>
-        {{form_widget(profilePictureForm)}}
-        <hr/>
-        {{form_widget(coverPictureForm)}}
-        <hr/>
-        <div class="form-group">
-            <button type="submit" class="btn btn-default">Confirmer</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+            <div class="profile-edit-form">
+                <form method="post" enctype="multipart/form-data">
+                    {{form_widget(profileForm)}}
+                    <hr/>
+                    {{form_widget(profilePictureForm)}}
+                    <hr/>
+                    {{form_widget(coverPictureForm)}}
+                    <hr/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Confirmer</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
 {# Le formulaire reste inchangé #}

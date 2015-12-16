@@ -6,8 +6,8 @@
     {{parent()}}
     {# Put specific CSS below #}
     <!-- For connection navbar -->
-    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/signin.css') }}"/> 
-    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/signup-details.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/UserBundle/signin.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/UserBundle/signup-details.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -18,7 +18,7 @@
     {% include 'FlowberUserBundle::Default/signUpDetails.html.twig' %}   
 
     <!-- Footer-->
-    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}                
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}              
 {% endblock %}
 
 {% block javascripts %}

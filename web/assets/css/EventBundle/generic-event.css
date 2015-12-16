@@ -1,0 +1,168 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13 déc. 2015, 21:31:37
+    Author     : Equina
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 août 2015, 19:30:41
+    Author     : Equina
+*/
+/* Colors */
+@font-face {
+  font-family: erasMediumItc;
+  src: url(../../fonts/ERASMD.TTF);
+}
+@font-face {
+  font-family: amaranthRegular;
+  src: url(../../fonts/Amaranth-Regular.ttf);
+}
+/* Colored backgrounds */
+.background-dark-blue {
+  background-color: #293540;
+}
+/* Colored fonts */
+.font-white {
+  color: white;
+}
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
+/* Create a medium height at 40px */
+.navbar-md {
+  min-height: 40px;
+}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-md .navbar-brand {
+  height: 40px;
+}
+.navbar-md .navbar-toggle {
+  margin: 6px 12px 6px 0px;
+  padding: 6px 7px 6px 7px;
+}
+.navbar-md .navbar-toggle .icon-bar {
+  width: 19px;
+}
+/* Create a small height at 30px */
+.navbar-sm {
+  min-height: 40px;
+}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-sm .navbar-brand {
+  height: 40px;
+}
+.navbar-sm .navbar-toggle {
+  margin: 3px 9px 3px 0px;
+  padding: 4px 4px 4px 4px;
+}
+.navbar-sm .navbar-toggle .icon-bar {
+  width: 16px;
+}
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+}
+/* Forms */
+.form-error-custom {
+  color: #A94442;
+  background-color: #F2DEDE;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+}
+.form-error-custom span {
+  color: #A94442;
+}
+.event-thumbnail-display-container {
+  padding-bottom: 27px;
+}
+.event-thumbnail-display-container .event-list-thumbnail {
+  border: none;
+  padding: initial;
+  background: none;
+  margin-bottom: initial;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  box-shadow: #000 0em 0em 0em;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-image:hover {
+  opacity: 0.6;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-image-frame .event-image-frame-date {
+  top: 25%;
+  position: absolute;
+  left: 30px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 12px black;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-image-frame button {
+  position: absolute;
+  display: none;
+  opacity: 0.5;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-image-frame:hover button {
+  display: inline-block;
+  top: 40%;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-action-hover-link {
+  left: 66%;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-action-hover-search {
+  left: 33%;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-name-frame {
+  height: 5em;
+  display: table-cell;
+  vertical-align: bottom;
+  padding: initial;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-name-frame .event-name {
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: justify;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-description {
+  font-size: 11px;
+  color: grey;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-join-button {
+  background-color: #E74C3C;
+  border: none;
+  padding: 4px 0px;
+  width: 100%;
+}
+.event-thumbnail-display-container .event-list-thumbnail .event-join-button:hover {
+  font-weight: bold;
+  color: white;
+}
+/*# sourceMappingURL=generic-event.css.map */

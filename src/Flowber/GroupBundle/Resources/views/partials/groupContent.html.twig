@@ -5,11 +5,11 @@
                 <h2>{{title}}</h2>
                 <table>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/host.png')}}" alt="Organisateur"/></td>
                         <td>créé par <span class="group-details-host">{{firstname}} {{surname}}</span></td>
                     </tr>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>
                         <td>
                             {% for category in categories %}
                                 {{ category.title }}      
@@ -18,18 +18,18 @@
                         </td>
                     </tr>                        
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
                             8 membres dont 1 ami<br/>
                             <span class="group-details-participant">Marie BOIVENT</span>, <span class="group-details-participant">Equina YOU</span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td>{{description}}</td>
                     </tr>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
                             Envoyer un e-mail à l'organisateur<br/>
                             <form method="post">
@@ -46,11 +46,9 @@
             <div class="group-blog">
                 
                 {% include 'FlowberPostBundle::partials/createPost.html.twig' %}
-                {% include 'FlowberPostBundle::partials/showPostsGroup.html.twig' %}
-                
+                {% include 'FlowberPostBundle::partials/showPostsGroup.html.twig' %}               
                 
             </div>
         </div>
     </div>
 </div>
-

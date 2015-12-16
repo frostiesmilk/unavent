@@ -19,11 +19,11 @@ and open the template in the editor.
 /* Colors */
 @font-face {
   font-family: erasMediumItc;
-  src: url(../fonts/ERASMD.TTF);
+  src: url(../../fonts/ERASMD.TTF);
 }
 @font-face {
   font-family: amaranthRegular;
-  src: url(../fonts/Amaranth-Regular.ttf);
+  src: url(../../fonts/Amaranth-Regular.ttf);
 }
 /* Colored backgrounds */
 .background-dark-blue {
@@ -439,5 +439,24 @@ and open the template in the editor.
 }
 .generic-cover .generic-cover-edit-button .btn {
   background-color: rgba(255, 255, 255, 0.3);
+}
+.generic-slim-cover {
+  height: 255px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: initial;
+  background-position: center center;
+}
+.generic-slim-cover .generic-slim-cover-title {
+  color: white;
+  text-shadow: 3px 3px 3px black;
+  margin-top: 60px;
+  font-size: 50px;
+}
+@media (max-width: 768px) {
+  .generic-slim-cover .generic-slim-cover-title {
+    font-size: 33px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

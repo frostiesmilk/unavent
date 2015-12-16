@@ -11,21 +11,21 @@
         </div>
         <div id="second-navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ path('wybe_front_office_groups', {'groupNameSlug': 'group1'}) }}">Actualités</a></li>
-                <li><a href="{{ path('wybe_front_office_groups_member', {'groupNameSlug': 'group1'}) }}">Membres</a></li>
-                <li><a href="{{ path('wybe_front_office_groups_event', {'groupNameSlug': 'group1'}) }}">Evènements</a></li>
-                <li><a href="{{ path('wybe_front_office_groups_gallery', {'groupNameSlug': 'group1'}) }}">Photos</a></li>
+                <li><a href="{{ path('flowber_group_homepage', {'id': groupId}) }}">Actualités</a></li>
+                <li><a href="{{ path('flowber_group_members', {'id': groupId}) }}">Membres</a></li>
+                <li><a href="{{ path('flowber_group_events', {'id': groupId}) }}">Evènements</a></li>
+                <li><a href="{{ path('flowber_group_galleries', {'id': groupId}) }}">Galleries</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}" title='Envoyez un mail au responsable du groupe'/>
+                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/icons/bubble-chat.png')}}" title='Envoyez un mail au responsable du groupe'/>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/check-white.png')}}"/>
+                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/icons/check-white.png')}}"/>
                     </a>
                 </li>
                 <li>
