@@ -11,7 +11,7 @@ use Flowber\PostBundle\Form\PostWithEventType;
 
 class DefaultController extends Controller
 {
-    public function addCommentAction($post_id)
+    public function addCommentGroupAction($post_id)
     {
         $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($post_id);
 
@@ -28,6 +28,16 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $comment->setPost($post);
                 $comment->setCreatedBy($this->getUser());
+                
+                $notification = new Notification ();
+                $notification->setCreatedBy($this->getUser());
+                $notification->setUser($post->getCreatedBy());
+                $notification->setPageRoute('flowber_event_homepage');
+                $notification->setPageId($post->getEvent()->getId());
+                $notification->setMessage("a aimé votre post dans ");
+                $notification->setPageName($post->getEvent()->getTitle());
+                $em->persist($notification);
+                
                 $em->persist($comment);
                 $em->flush();
                 
@@ -63,7 +73,7 @@ class DefaultController extends Controller
         return $this->render('FlowberPostBundle:Default:index.html.twig', array('post_id' => $post_id));
     }
     
-    public function addPostAction($group_id)
+    public function addPostGroupAction($group_id)
     {
         $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($group_id);
         

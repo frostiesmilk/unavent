@@ -14,9 +14,9 @@ use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
 
-class DefaultController extends Controller
+class EventController extends Controller
 {
-    public function eventPageAction($id)
+    public function eventAction($id)
     {  
         $repository = $this->getDoctrine()
                    ->getManager()
@@ -89,8 +89,7 @@ class DefaultController extends Controller
         }
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
-            array('eventId' => $event->getId(),
-                'result' => $event, 
+            array('result' => $event, 
                 'profilePicture' => $profilePicture, 
                 'coverPicture' => $coverPicture,
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
@@ -100,52 +99,6 @@ class DefaultController extends Controller
 
             )
         );
-    }
-    
-    public function eventParticipantsPageAction($id){
-        $repository = $this->getDoctrine()
-                   ->getManager()
-                   ->getRepository('FlowberEventBundle:Event');
-        $event = $repository->find($id);
-        
-        $profilePicture = $event->getProfilePicture();
-        $coverPicture = $event->getCoverPicture();
-        
-        if(isset($profilePicture)){
-            $profilePicture = $profilePicture->getWebPath();
-        }
-        if(isset($coverPicture)){
-            $coverPicture = $coverPicture->getWebPath();
-        }
-        
-        return $this->render('FlowberEventBundle:Default:event-member.html.twig', 
-                array('eventId'=>$id, 
-                'result' => $event,
-                'profilePicture' => $profilePicture, 
-                'coverPicture' => $coverPicture));
-    }
-    
-    public function eventGalleryPageAction($id){
-        $repository = $this->getDoctrine()
-                   ->getManager()
-                   ->getRepository('FlowberEventBundle:Event');
-        $event = $repository->find($id);
-        
-        $profilePicture = $event->getProfilePicture();
-        $coverPicture = $event->getCoverPicture();
-        
-        if(isset($profilePicture)){
-            $profilePicture = $profilePicture->getWebPath();
-        }
-        if(isset($coverPicture)){
-            $coverPicture = $coverPicture->getWebPath();
-        }
-        
-        return $this->render('FlowberEventBundle:Default:event-gallery.html.twig', 
-                array('eventId'=>$id, 
-                'result' => $event,
-                'profilePicture' => $profilePicture, 
-                'coverPicture' => $coverPicture));
     }
     
     public function createEventAction()
@@ -221,7 +174,7 @@ class DefaultController extends Controller
         ));
     }
     
-    public function allEventsPageAction()
+    public function AllEventAction()
     {
         $user = $this->getUser();        
 

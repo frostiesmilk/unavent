@@ -12,7 +12,7 @@ flowber_event_gallery:
 
 flowber_create_event_homepage:
     path:     /nouvelle_sortie
-    defaults: { _controller: FlowberEventBundle:Default:createEvent }
+    defaults: { _controller: FlowberEventBundle:Event:createEvent }
 
 flowber_all_event_homepage:
     path:     /toutes_mes_sorties

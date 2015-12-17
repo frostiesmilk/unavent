@@ -1,0 +1,9 @@
+services:
+#    flowber_notification.example:
+#        class: Flowber\NotificationBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+services:
+    flowber_notification.notification:
+        class: Flowber\NotificationBundle\Notification\FlowberNotification
+        arguments: [@doctrine, "@security.context"] 

@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Flowber\GroupBundle\FlowberGroupBundle(),
             new Flowber\PostBundle\FlowberPostBundle(),
             new Flowber\LikeBundle\FlowberLikeBundle(),
+            new Flowber\NotificationBundle\FlowberNotificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

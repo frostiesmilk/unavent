@@ -1,3 +1,27 @@
 flowber_like_homepage:
     path:     /hello/{name}
     defaults: { _controller: FlowberLikeBundle:Default:index }
+
+like_post_group:
+    pattern:  /like_post_group/{post_id}
+    defaults: { _controller: FlowberLikeBundle:Default:likePostGroup }
+    requirements:
+        group_id: \d+
+        
+unlike_post_group:
+    pattern:  /unlike_post_group/{like_id}/{post_id}
+    defaults: { _controller: FlowberLikeBundle:Default:unlikePostGroup }
+    requirements:
+        group_id: \d+
+        
+like_post_event:
+    pattern:  /like_post_event/{post_id}
+    defaults: { _controller: FlowberLikeBundle:Default:likePostEvent }
+    requirements:
+        group_id: \d+
+
+unlike_post_event:
+    pattern:  /unlike_post_event/{like_id}/{post_id}
+    defaults: { _controller: FlowberLikeBundle:Default:unlikePostEvent }
+    requirements:
+        group_id: \d+

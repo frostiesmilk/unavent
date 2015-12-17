@@ -3,7 +3,8 @@
     <div class="user-profile-resume">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12 user-profile-element">
+                
+                <div class="col-md-6 col-sm-6 col-xs-12 col-bg-white user-profile-element">
                     <div class="user-profile-introduction-text-block">
                         <h2 class="name">{{ user.getFirstname }} {{ user.getSurname }}</h2>
                         <p class="user-job">{{ profile.getSubtitle }}</p>
@@ -15,7 +16,16 @@
                         {% endif %}
                         </p>
                     </div>
-
+                    <div class="user-profile-description">
+                        <p> {{ profile.getDescription }} </p>
+                    </div>
+                </div>
+                    
+                <div class="col-md-6 col-sm-6 col-xs-12 user-profile-element">
+                    <!--
+                        <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')"></div>
+                    -->
+                    <h3>Mes inspirations</h3>
                     {% if profile.hobbies.count > 0 %}
                         <table class="user-profile-interest">
 
@@ -37,13 +47,6 @@
 
                         </table>
                     {% endif %}
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12 col-bg-white user-profile-element bg-white">
-                    <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')">
-                    </div>
-                    <div class="user-profile-description">
-                        <p> {{ profile.getDescription }} </p>
-                    </div>
                 </div>
             </div>
         </div>

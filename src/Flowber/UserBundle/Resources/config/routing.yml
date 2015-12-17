@@ -21,3 +21,10 @@ flowber_registration_finishing:
     path:   /inscription-details
     defaults: { _controller: FlowberUserBundle:Registration:registrationFinalStep }
 
+flowber_add_friend:
+    path:   /ajouter_un_ami/{id}
+    defaults: { _controller: FlowberUserBundle:Friend:addFriend }
+
+flowber_send_wink:
+    path:   /envoyer_clin_oeil/{id}
+    defaults: { _controller: FlowberUserBundle:Friend:sendWink }
