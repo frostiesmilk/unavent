@@ -14,7 +14,7 @@ use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
 
-class DefaultController extends Controller
+class EventController extends Controller
 {
     public function eventAction($id)
     {  

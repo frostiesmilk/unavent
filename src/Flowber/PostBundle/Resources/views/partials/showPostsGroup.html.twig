@@ -18,9 +18,19 @@
                             <div class="group-blog-post-header-avatar" style="background-image: url('{{asset(postProfilePicturePath)}}')"></div>
                         </div>
                         <div class="media-body">
-                            <a class="group-blog-header-post-info-poster" href="#">{{post.createdBy.firstname}} {{post.createdBy.surname}}</a><br/>
+                            <a class="group-blog-header-post-info-poster" href="{{ path('flowber_user_profile', { 'id' : post.createdBy.id } ) }}">
+                                {{post.createdBy.firstname}} {{post.createdBy.surname}}
+                            </a>
+                            <br/>
                             <span class="group-blog-post-header-info-time">{{ (post.creationDate)|date("\\l\\e d/m/Y \à H:i")}} </span><br/>
-                            <span class="group-blog-post-header-info-rating">0 personnes aiment</span>
+                            <span class="group-blog-post-header-info-rating">
+                                {% if (post.likes|length <= 1) %} 
+                                    {{(post.likes)|length}} personne aime
+                                {% else %}    
+                                    {{(post.likes)|length}} personnes aiment
+                                {% endif %}
+                                
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -29,8 +39,26 @@
                     <a data-toggle="modal" data-target="#modal-delete-post" href="#">Supprimer</a>
                     <br><br>
                     {% endif %}
-                    <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
-
+                    
+                    {% set userLike = 0 %}
+                    
+                    {% if (post.likes|length >= 1) %}
+                        {% for like in post.likes %}
+                            {% if like.createdBy == app.user %}
+                               {% set userLike = like.id %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% if userLike != 0 %}
+                        <a href="{{ path('unlike_post_group', { 'like_id' : userLike, 'post_id' : post.id} ) }}">
+                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime plus<br/>                                
+                        </a>
+                    {% else %}   
+                        <a href="{{ path('like_post_group', { 'post_id' : post.id } ) }}">
+                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
             <div class="group-blog-post-content">
@@ -51,7 +79,7 @@
                         </div>
                         <div class="media-body">
                             <div class="group-blog-post-comment-poster">
-                                <a href="#">{{comment.createdBy.firstname}} {{comment.createdBy.surname}}</a>
+                                <a href="{{ path('flowber_user_profile', { 'id' : comment.createdBy.id } ) }}">{{comment.createdBy.firstname}} {{comment.createdBy.surname}}</a>
                             </div>
 
                             <div class="group-blog-post-comment-time">

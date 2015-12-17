@@ -1,6 +1,6 @@
 add_comment_post:
     pattern:  /comment/{post_id}
-    defaults: { _controller: FlowberPostBundle:Default:addComment }
+    defaults: { _controller: FlowberPostBundle:Default:addCommentGroup }
     requirements:
         _method:  POST
         post_id: \d+
@@ -14,7 +14,7 @@ add_comment_post_event:
         
 add_post:
     pattern:  /post/{group_id}
-    defaults: { _controller: FlowberPostBundle:Default:addPost }
+    defaults: { _controller: FlowberPostBundle:Default:addPostGroup }
     requirements:
         _method:  POST
         group_id: \d+

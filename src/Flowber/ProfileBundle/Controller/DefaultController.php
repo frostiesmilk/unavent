@@ -4,15 +4,12 @@ namespace Flowber\ProfileBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Flowber\ProfileBundle\Entity\Profile;
 use Flowber\ProfileBundle\Form\ProfileType;
 use Flowber\GalleryBundle\Entity\Photo;
-use Flowber\GalleryBundle\Form\PhotoType;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
-use Flowber\UserBundle\Entity\Friendship;
 
 class DefaultController extends Controller
 {
@@ -202,7 +199,9 @@ class DefaultController extends Controller
                 return $this->redirect($this->generateUrl('flowber_current_user_profile'));
             }
         }
-          
+        
+        $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
+        
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
                     'user' => $user,
@@ -212,47 +211,5 @@ class DefaultController extends Controller
                 ));
     }
     
-    public function addFriendAction($id)
-    {
-        $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-        $iAm = $this->getUser();
-        
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }   
-        
-        $friendship = new Friendship();
-        $friendship->setUser($iAm);
-        $friendship->setFriend($user);
-        $friendship->setStatut('send');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($friendship);
-        $em->flush();        
-        
-        return $this->redirect($this->generateUrl('flowber_user_profile', array(
-            'id' => '4',
-        )));
-    }
-    
-    public function sendWinkAction($id)
-    {
-        $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-        $iAm = $this->getUser();
-        
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }   
-        
-        $friendship = new Friendship();
-        $friendship->setUser($iAm);
-        $friendship->setFriend($user);
-        $friendship->setStatut('send');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($friendship);
-        $em->flush();        
-        
-        return $this->redirect($this->generateUrl('flowber_user_profile', array(
-            'id' => '4',
-        )));
-    }
+
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Likes
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Flowber\LikeBundle\Entity\LikesRepository")
  */
 class Likes
 {

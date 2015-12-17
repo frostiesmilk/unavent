@@ -42,9 +42,7 @@ class Post
     private $message;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="likes", type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity="Flowber\LikeBundle\Entity\Likes", cascade={"persist"})
      */
     private $likes;
 
@@ -368,5 +366,28 @@ class Post
     public function getStatut()
     {
         return $this->statut;
+    }
+
+    /**
+     * Add likes
+     *
+     * @param \Flowber\LikeBundle\Entity\Likes $likes
+     * @return Post
+     */
+    public function addLike(\Flowber\LikeBundle\Entity\Likes $likes)
+    {
+        $this->likes[] = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Remove likes
+     *
+     * @param \Flowber\LikeBundle\Entity\Likes $likes
+     */
+    public function removeLike(\Flowber\LikeBundle\Entity\Likes $likes)
+    {
+        $this->likes->removeElement($likes);
     }
 }

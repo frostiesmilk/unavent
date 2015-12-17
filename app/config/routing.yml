@@ -1,3 +1,7 @@
+flowber_notification:
+    resource: "@FlowberNotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 flowber_like:
     resource: "@FlowberLikeBundle/Resources/config/routing.yml"
     prefix:   /
