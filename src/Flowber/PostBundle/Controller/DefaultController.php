@@ -32,11 +32,11 @@ class DefaultController extends Controller
                 $notification = new Notification ();
                 $notification->setCreatedBy($this->getUser());
                 $notification->setUser($post->getCreatedBy());
-                $notification->setPageRoute('flowber_event_homepage');
+                $notification->setPageRoute('flowber_group_homepage');
                 $notification->setPageId($post->getEvent()->getId());
-                $notification->setMessage("a aimé votre post dans ");
+                $notification->setMessage("a commenté votre post dans ");
                 $notification->setPageName($post->getEvent()->getTitle());
-                $em->persist($notification);
+                $em->persist($notification);                
                 
                 $em->persist($comment);
                 $em->flush();
