@@ -10,7 +10,7 @@
 {% block stylesheets %}
     {{parent()}}
     {# Put specific CSS below #}
-    <link rel="stylesheet" href="{{ asset('bundles/flowberuser/css/signup-details.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/UserBundle/signup-details.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -18,7 +18,7 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- Sign up details jumbo -->
-    <div class="jumbotron signup-details-cover" style="background-image: url({{asset('bundles/wybefrontoffice/images/pages/homepage-signup-details/signup-details-cover.jpg')}})">    
+    <div class="jumbotron signup-details-cover" style="background-image: url({{asset('assets/images/UserBundle/signUp/cover-signup-details.jpg')}})">    
         <div class="container" >
             <div class="row-fluid text-center">       
                 <h1 class="signup-details-cover-title ">Bienvenue sur FlowBer !</h1>
@@ -32,7 +32,7 @@
             <div class="col-md-6 col-sm-12 signup-details-informations text-center">
                 <h2>Sortez, rencontrez, découvrez !</h2>
                 <p class="signup-details-informations-text">Vivez un max d'aventure !</p>
-                <img class="signup-details-informations-image" src="{{asset('bundles/wybefrontoffice/images/pages/homepage-signup-details/signup-desktop.png')}}" alt=""/>
+                <img class="signup-details-informations-image" src="{{asset('assets/images/UserBundle/signUp/signup-desktop.png')}}" alt=""/>
                 <p class="signup-details-informations-text">FlowBer est un site social de rencontre amicale.<br/>
                     Faites des rencontres inoubliables.<br/>
                     Tout devient possible.
@@ -93,4 +93,9 @@
     </div>
 
 {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}                
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}
 {% endblock %}

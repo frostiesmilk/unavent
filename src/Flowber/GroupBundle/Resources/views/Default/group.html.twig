@@ -3,13 +3,14 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/group.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/FrontOfficeBundle/generic-maps.css') }}"/>
 {% endblock %}
 
 {% block smallMenu %}
     {{parent()}}
     <!-- BEGIN small screen menu -->
-    {% include 'WybeFrontOfficeBundle::partials/group/group-navbar-small.html.twig' %}
+    {% include 'FlowberGroupBundle::partials/groupNavbarSmall.html.twig' %}
     <!-- END small screen menu -->
 {% endblock %}
 
@@ -33,9 +34,6 @@
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
     
-    
-
-    
 {% endblock %}
 
 {% block javascripts %}
@@ -43,7 +41,7 @@
     {# Put specific JS below #}
     <script type="text/javascript" src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
+    <script src="{{ asset('assets/js/FrontOfficeBundle/maps/gmaps.js') }}"></script>
 
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
@@ -73,6 +71,6 @@
         }); 
     </script>
     
-    <script src="{{ asset('bundles/wybefrontoffice/js/dropzone/dropzone.js') }}"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/group.js') }}"></script>
+    <script src="{{ asset('assets/js/FrontOfficeBundle/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('assets/js/GroupBundle/group.js') }}"></script>
 {% endblock %}

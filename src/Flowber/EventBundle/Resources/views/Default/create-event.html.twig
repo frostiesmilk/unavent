@@ -6,7 +6,9 @@
     {{parent()}}
     {# Put specific CSS below #}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.css')}}" />
-    <link rel="stylesheet" href="{{ asset('bundles/wybefrontoffice/css/create-event.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/create-event-page.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/FrontOfficeBundle/generic-maps.css') }}"/> 
 {% endblock %}
 
 {% block body %}
@@ -15,7 +17,7 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- Cover -->
-    <div class="jumbotron create-event-cover" style="background-image: url({{asset('bundles/wybefrontoffice/images/pages/homepage-signup/cover-streetsheeps.jpg')}})">    
+    <div class="jumbotron create-event-cover" style="background-image: url({{asset('assets/images/UserBundle/signIn/cover-streetsheeps.jpg')}})">    
         <div class="container" >
             <div class="row-fluid text-center">       
                 <h1 class="create-event-cover-title ">Lancez-vous dans une nouvelle aventure !</h1>
@@ -24,153 +26,159 @@
     </div>
 
     <!-- Form -->
-    <div class="create-event-form form-horizontal" >
-        <h1>Créer un évènement</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% if form_errors(eventForm) %}
-            <div class="form-error-custom">
-                {{form_errors(eventForm)}}                
-            </div>
-            {% endif %}
-            {% if form_errors(eventForm.maxParticipants) %}
-                <div class="form-error-custom">
-                {{form_errors(eventForm.maxParticipants)}}
-                </div>
-                {% endif %}
-            <div class="form-group">
-                <label for="event-title" class="col-sm-2 control-label">Titre *</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.title)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-tease" class="col-sm-2 control-label">Phrase d'accroche</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.subtitle)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-category" class="col-sm-2 control-label">Catégories</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.categories)}}
-                </div>
-            </div>
-                
-            <div class="form-group">
-                <label for="event-category" class="col-sm-2 control-label">Photo de profil</label>
-                <div class="col-sm-10" style="margin-top:15px;">
-                    {{form_widget(profilePictureForm)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-category" class="col-sm-2 control-label">Photo de couverture</label>
-                <div class="col-sm-10"  style="margin-top:10px;">
-                    {{form_widget(coverPictureForm)}}
-                </div>
-            </div>                
-            <div class="form-group">
-                <label for="event-description" class="col-sm-2 control-label">Description</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.description)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-description" class="col-sm-2 control-label">{{form_label(eventForm.maxParticipants)}}</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.maxParticipants)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-location" class="col-sm-2 control-label">Lieu</label>
-                <div class="col-sm-10">
-                    <input id="pac-input" class="autocomplete-map-controls" type="text"
-                        placeholder="Enter a location">
-                   <div id="map"></div>           
-               </div> 
-            </div> 
-             <div class="form-group">
-                <label for="event-place-name" class="col-sm-2 control-label">Nom</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.postalAddress.name)}}
-                </div>
-            </div>                     
-            <div class="form-group">
-                <label for="event-address" class="col-sm-2 control-label">Adresse</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.postalAddress.address)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-city" class="col-sm-2 control-label">Ville</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.postalAddress.city)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-zipcode" class="col-sm-2 control-label">Code postal</label>
-                <div class="col-sm-3">
-                    {{form_widget(eventForm.postalAddress.zipcode)}}
-                </div>
-                <label for="event-country" class="col-sm-2 control-label">Pays</label>
-                <div class="col-sm-5">
-                    {{form_widget(eventForm.postalAddress.country)}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-date" class="col-sm-2 control-label">Début *</label>
-                <div class="col-sm-10 form-inline">
-                    <div class="form-inline">
-                        <div class="input-group">
-                            {{form_widget(eventForm.startDate, {'attr': {'placeholder': 'Date de début'}})}} 
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
-                            </span>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+                <div class="create-event-form form-horizontal" >
+                    <h1 class="create-event-title">Créer un évènement</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        {% if form_errors(eventForm) %}
+                        <div class="form-error-custom">
+                            {{form_errors(eventForm)}}                
                         </div>
-                        <div class="input-group">
-                            {{form_widget(eventForm.startTime, {'attr': {'placeholder': 'Heure de début'}})}}
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
-                            </span>
+                        {% endif %}
+                        {% if form_errors(eventForm.maxParticipants) %}
+                            <div class="form-error-custom">
+                            {{form_errors(eventForm.maxParticipants)}}
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="event-title" class="col-sm-2 control-label">Titre *</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.title)}}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="event-date" class="col-sm-2 control-label">Fin</label>
-                <div class="col-sm-10 form-inline">
-                    <div class="form-inline">
-                        <div class="input-group">
-                            {{form_widget(eventForm.endDate, {'attr': {'placeholder': 'Date de fin'}})}} 
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
-                            </span>
+                        <div class="form-group">
+                            <label for="event-tease" class="col-sm-2 control-label">Phrase d'accroche</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.subtitle)}}
+                            </div>
                         </div>
-                        <div class="input-group">                            
-                            {{form_widget(eventForm.endTime, {'attr': {'placeholder': 'Heure de fin'}})}}
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
-                            </span>
-                        </div>                        
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label for="event-category" class="col-sm-2 control-label">Catégories</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.categories)}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-category" class="col-sm-2 control-label">Photo de profil</label>
+                            <div class="col-sm-10" style="margin-top:15px;">
+                                {{form_widget(profilePictureForm)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-category" class="col-sm-2 control-label">Photo de couverture</label>
+                            <div class="col-sm-10"  style="margin-top:10px;">
+                                {{form_widget(coverPictureForm)}}
+                            </div>
+                        </div>                
+                        <div class="form-group">
+                            <label for="event-description" class="col-sm-2 control-label">Description</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.description)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-description" class="col-sm-2 control-label">{{form_label(eventForm.maxParticipants)}}</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.maxParticipants)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-location" class="col-sm-2 control-label">Lieu</label>
+                            <div class="col-sm-10">
+                                <input id="pac-input" class="autocomplete-map-controls" type="text"
+                                    placeholder="Enter a location">
+                               <div id="map" class="gmap"></div>           
+                           </div> 
+                        </div> 
+                         <div class="form-group">
+                            <label for="event-place-name" class="col-sm-2 control-label">Nom</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.postalAddress.name)}}
+                            </div>
+                        </div>                     
+                        <div class="form-group">
+                            <label for="event-address" class="col-sm-2 control-label">Adresse</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.postalAddress.address)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-city" class="col-sm-2 control-label">Ville</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.postalAddress.city)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-zipcode" class="col-sm-2 control-label">Code postal</label>
+                            <div class="col-sm-3">
+                                {{form_widget(eventForm.postalAddress.zipcode)}}
+                            </div>
+                            <label for="event-country" class="col-sm-2 control-label">Pays</label>
+                            <div class="col-sm-5">
+                                {{form_widget(eventForm.postalAddress.country)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-date" class="col-sm-2 control-label">Début *</label>
+                            <div class="col-sm-10 form-inline">
+                                <div class="form-inline">
+                                    <div class="input-group">
+                                        {{form_widget(eventForm.startDate, {'attr': {'placeholder': 'Date de début'}})}} 
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group">
+                                        {{form_widget(eventForm.startTime, {'attr': {'placeholder': 'Heure de début'}})}}
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-date" class="col-sm-2 control-label">Fin</label>
+                            <div class="col-sm-10 form-inline">
+                                <div class="form-inline">
+                                    <div class="input-group">
+                                        {{form_widget(eventForm.endDate, {'attr': {'placeholder': 'Date de fin'}})}} 
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group">                            
+                                        {{form_widget(eventForm.endTime, {'attr': {'placeholder': 'Heure de fin'}})}}
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Visibilité *</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
+                            </div>
+                        </div>
+                        {{form_widget(eventForm.postalAddress.coordinates)}}
+                        <div class="form-group">                
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default event-submit">Continuer</button>
+                            </div>
+                        </div>
+                        {{ form_rest(eventForm) }}
+                        {{ form_rest(profilePictureForm) }}
+                        {{ form_rest(coverPictureForm) }}
+                    </form>
+                </div>       
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Visibilité *</label>
-                <div class="col-sm-10">
-                    {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
-                </div>
-            </div>
-            {{form_widget(eventForm.postalAddress.coordinates)}}
-            <div class="form-group">                
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default event-submit">Continuer</button>
-                </div>
-            </div>
-            {{ form_rest(eventForm) }}
-            {{ form_rest(profilePictureForm) }}
-            {{ form_rest(coverPictureForm) }}
-        </form>
-    </div>       
+        </div>
+    </div>
     
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
@@ -180,25 +188,12 @@
 {% block javascripts %}
     {{parent()}}
     {# Put specific JS below #}
+    <script type="text/javascript" src="{{ asset('assets/js/EventBundle/event.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/FrontOfficeBundle/maps/gmaps.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
+    async defer></script>
     <script type="text/javascript" src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/testangular.js') }}"></script>
-
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
-    async defer></script> 
-    
-    <script type="text/javascript">
-        $(function () {
-            $('.flowber_datepicker').datetimepicker({
-                locale: 'fr',
-                format: 'L',
-            });
-            $('.flowber_timepicker').datetimepicker({
-                locale: 'fr',
-                format: 'LT',
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{asset('assets/js/FrontOfficeBundle/datetime/datetime-picker.js')}}"></script>
 
 {% endblock %}

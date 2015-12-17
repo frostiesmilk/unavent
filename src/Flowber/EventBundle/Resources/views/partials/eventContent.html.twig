@@ -10,11 +10,11 @@
                 {% endif %}                    
                 <table>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/host.png')}}" alt="Organisateur"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/host.png')}}" alt="Organisateur"/></td>
                         <td>créée par <span class="event-details-host">{{ result.getCreatedBy().getFirstname() }} {{ result.getCreatedBy().getSurname() }}</span></td>
                     </tr>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/category.png')}}" alt="categories"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>
                         <td>
                             {% if result.getCategories() | length %}{# if categories are specified #}
                                 {% for category in result.getCategories() %}
@@ -27,27 +27,27 @@
                         </td>
                     </tr>                        
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/time.png')}}" alt="Date et horaire"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/time.png')}}" alt="Date et horaire"/></td>
                         <td>{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}</td>
                     </tr>
 
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/location.png')}}" alt="Lieu"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
                         <td>{% if result.getPostalAddress() is not null %}{{ result.getPostalAddress().getName() }}<br/>{{ result.getPostalAddress().getAddress() }}<br/>{{ result.getPostalAddress().getZipcode() }} {{ result.getPostalAddress().getCity() }}{% else %}<span>Emplacement non défini</span>{% endif %}</td>
                     </tr>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/participants.png')}}" alt="Participants"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
                             8 participants dont 1 ami<br/>
                             <span class="event-details-participant">Marie BOIVENT</span>, <span class="event-details-participant">Equina YOU</span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/description.png')}}" alt="Description de l'évènement"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td><p class="event-details-description">{% if result.getDescription() is not null %}{{ result.getDescription() }}{% else %}Aucune description{% endif %}</p></td>
                     </tr>
                     <tr>
-                        <td class="icon"><img src="{{asset('bundles/wybefrontoffice/images/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
+                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
                             Envoyer un e-mail à l'organisateur<br/>
                             <form method="post">
@@ -65,10 +65,10 @@
                 <div class="event-blog-new-post">
                     <ul id="eventNavbar" class="nav nav-tabs nav-justified event-blog-new-post-navbar">
                         <li role="presentation" class="event-blog-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
-                            <a href="#newpost"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/new-post.png')}}" alt=""/> Ecrire un message</a>
+                            <a href="#newpost"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/new-post.png')}}" alt=""/> Ecrire un message</a>
                         </li>
                         <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="newphoto" role="tab" data-toggle="tab">
-                            <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('bundles/wybefrontoffice/images/icons/photo.png')}}" alt=""/> Ajouter une gallerie </a>
+                            <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/photo.png')}}" alt=""/> Ajouter une gallerie </a>
                         </li>
                     </ul>
                      <!-- Tab panes -->
@@ -90,5 +90,3 @@
         </div>
     </div>                
 </div>
-
-

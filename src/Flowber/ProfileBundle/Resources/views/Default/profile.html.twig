@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('bundles/flowberprofile/css/profile.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/profile.css') }}"/> 
 {% endblock %}
 
 {# Menus for small screens #}
@@ -22,17 +22,17 @@
             <ul class="dropdown-menu dropdown-menu-right">
                 <li>
                     <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ user.getFirstname }} {{ user.getSurname }}">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/wink.png')}}"/> Envoyer un clin d'oeil
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> Envoyer un clin d'oeil
                     </a>
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ user.getFirstname }} {{ user.getSurname }}">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}"/> Envoyer un message
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/> Envoyer un message
                     </a>
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.getFirstname }} {{ user.getSurname }} comme ami">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/add-user.png')}}"/> Ajouter en ami
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/add-user.png')}}"/> Ajouter en ami
                     </a>
                 </li>
                 <li>
@@ -47,7 +47,7 @@
 {% endblock %}
 
 {# Preparing variables #}
-{% set userCoverPath = 'bundles/flowberprofile/images/Default/coverPictureDefault.png' %} {# default User Cover #}
+{% set userCoverPath = 'assets/images/ProfileBundle/Default/coverPictureDefault.png' %} {# default User Cover #}
 {% if profile.coverPicture.webPath is defined %}
     {% set userCoverPath = profile.coverPicture.webPath %}
 {% endif %}
@@ -55,7 +55,7 @@
 {% if profile.coverPicture.alt is defined %}
     {% set userCoverAlt = profile.coverPicture.alt %}
 {% endif %}
-{% set profilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default Profile picture #}
+{% set profilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default Profile picture #}
 {% if profile.profilePicture.webPath is defined %}
     {% set profilePicturePath = profile.profilePicture.webPath %}
 {% endif %}
@@ -100,6 +100,6 @@
     {# Put specific JS below #}    
         
     <!--<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/gallery/bootstrap-image-gallery.js') }}"></script>
-    <script src="{{ asset('bundles/wybefrontoffice/js/gallery/blueimp-gallery.js') }}"></script>-->
-{% endblock %}{# empty Twig template #}
+    <script src="{{ asset('assets/js/GalleryBundle/bootstrap-image-gallery.js') }}"></script>
+    <script src="{{ asset('assets/js/GalleryBundle/blueimp-gallery.js') }}"></script>-->
+{% endblock %}

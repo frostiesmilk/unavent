@@ -1,0 +1,26 @@
+<ul class="nav nav-pills nav-justified menu-secondary">
+    <li><a href="{{ path('wybe_front_office_groups', {'groupNameSlug': 'group1'}) }}"><i class="fa fa-newspaper-o"></i></a></li>
+            <li><a href="{{ path('wybe_front_office_groups_member', {'groupNameSlug': 'group1'}) }}"><i class="fa fa-users"></i></a></li>
+            <li><a href="{{ path('wybe_front_office_groups_event', {'groupNameSlug': 'group1'}) }}"><span class="glyphicon glyphicon-apple"></span></a></li>
+            <li><a href="{{ path('wybe_front_office_groups_gallery', {'groupNameSlug': 'group1'}) }}"><span class="glyphicon glyphicon-picture"></span></a></li>
+    <li>
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+                <a href="#" data-toggle="modal" data-target="modalMessage" title="Envoyez un message à l'administrateur">
+                    <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/> Envoyer un message à l'administrateur
+                </a>
+            </li>
+            <li>
+                <a href="#" title="Devenir membre du groupe">
+                    <span class="glyphicon glyphicon-log-in"></span> Devenir membre
+                </a>
+            </li>
+            <li>
+                <a class="back-top" href="#">
+                    <span class="fa fa-caret-up"></span> Remonter la page
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,44 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
+{% endblock %}
+
+{% block smallMenu %}
+    {{parent()}}
+    <!-- BEGIN small screen menu -->
+    {% include 'FlowberGroupBundle::partials/groupNavbarSmall.html.twig' %}
+    <!-- END small screen menu -->
+{% endblock %}
+
+{% block body %}
+
+    <!-- navbar top -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <!-- Group Cover -->  
+    {% include 'FlowberGroupBundle::partials/groupCover.html.twig' %}
+
+    <!-- Second navbar -->
+    {% include 'FlowberGroupBundle::partials/groupNavbar.html.twig' %}
+    
+    <!-- Galleries -->  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Membres</h1>
+            </div>
+        </div>
+    </div>    
+   
+    <!-- footer -->                  
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}
+{% endblock %}

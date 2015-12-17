@@ -1,0 +1,249 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12 déc. 2015, 17:38:32
+    Author     : Equina
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 août 2015, 19:30:41
+    Author     : Equina
+*/
+/* Colors */
+@font-face {
+  font-family: erasMediumItc;
+  src: url(../../fonts/ERASMD.TTF);
+}
+@font-face {
+  font-family: amaranthRegular;
+  src: url(../../fonts/Amaranth-Regular.ttf);
+}
+/* Colored backgrounds */
+.background-dark-blue {
+  background-color: #293540;
+}
+/* Colored fonts */
+.font-white {
+  color: white;
+}
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
+/* Create a medium height at 40px */
+.navbar-md {
+  min-height: 40px;
+}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-md .navbar-brand {
+  height: 40px;
+}
+.navbar-md .navbar-toggle {
+  margin: 6px 12px 6px 0px;
+  padding: 6px 7px 6px 7px;
+}
+.navbar-md .navbar-toggle .icon-bar {
+  width: 19px;
+}
+/* Create a small height at 30px */
+.navbar-sm {
+  min-height: 40px;
+}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-sm .navbar-brand {
+  height: 40px;
+}
+.navbar-sm .navbar-toggle {
+  margin: 3px 9px 3px 0px;
+  padding: 4px 4px 4px 4px;
+}
+.navbar-sm .navbar-toggle .icon-bar {
+  width: 16px;
+}
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+}
+/* Forms */
+.form-error-custom {
+  color: #A94442;
+  background-color: #F2DEDE;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+}
+.form-error-custom span {
+  color: #A94442;
+}
+.event-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.event-container .event-blog-new-post {
+  border: solid 1px lightgrey;
+  margin-bottom: 20px;
+}
+.event-container .event-blog-new-post .event-blog-new-post-navbar {
+  background-color: #79BDE0;
+}
+.event-container .event-blog-new-post .event-blog-new-post-navbar .event-blog-new-post-navbar-option a {
+  background-color: #293540;
+  border-radius: initial;
+  border: initial;
+  color: white;
+}
+.event-container .event-blog-new-post .event-blog-new-post-navbar .event-blog-new-post-navbar-option a:hover {
+  background-color: #1B242B;
+  border: initial;
+}
+.event-container .event-blog-new-post .event-blog-new-post-navbar .event-blog-new-post-navbar-option .event-blog-new-post-navbar-option-icon {
+  height: 30px;
+  width: 30px;
+}
+.event-container .event-blog-new-post .event-blog-new-post-navbar .active a {
+  background-color: #66A0BE !important;
+}
+.event-container .event-blog-new-post .event-blog-new-post-content textarea {
+  width: 100%;
+  resize: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding: 10px;
+}
+.event-container .event-blog-new-post .event-blog-new-post-footer {
+  padding: 5px;
+}
+.event-container .event-blog-new-post .event-blog-new-post-footer .event-blog-new-post-footer-confirm button:hover {
+  color: white;
+}
+.event-container .event-blog-post {
+  border: 1px solid lightgrey;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.event-container .event-blog-post .event-blog-post-header {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-avatar {
+  background-position: center center;
+  background-repeat: no repeat;
+  background-size: cover;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-rating img {
+  height: 20px;
+}
+.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-rating .event-blog-post-header-rating-count {
+  color: grey;
+  font-size: 0.85em;
+}
+.event-container .event-blog-post .event-blog-post-header .event-blog-post-header-info-time {
+  color: grey;
+  font-size: 0.8em;
+}
+.event-container .event-blog-post .event-blog-post-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+.event-container .event-blog-post .event-blog-post-comments {
+  padding-top: 5px;
+  background-color: #F5F5F5;
+}
+.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment {
+  padding-top: 5px;
+}
+.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment .event-blog-post-comment-avatar {
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment .event-blog-post-comment-poster {
+  display: inline;
+}
+.event-container .event-blog-post .event-blog-post-comments .event-blog-post-comment .event-blog-post-comment-time {
+  display: inline;
+  padding-left: 1em;
+  color: grey;
+  font-size: 0.8em;
+}
+.event-container .event-blog-post .event-blog-post-comments hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.event-container .event-blog-post .event-blog-post-new-comment {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.event-container .event-blog-post .event-blog-post-new-comment .event-blog-post-new-comment-avatar {
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+.event-container .event-blog-post .event-blog-post-new-comment .event-blog-post-new-comment-field textarea {
+  width: 100%;
+  resize: none;
+}
+.event-container .event-details {
+  border: 1px solid lightgrey;
+  padding: 15px;
+}
+.event-container .event-details table {
+  border-collapse: separate;
+  border-spacing: 1em;
+  color: grey;
+  width: 100%;
+}
+.event-container .event-details table tr {
+  padding-bottom: 10px;
+}
+.event-container .event-details table tr td.icon {
+  padding-right: 5px;
+  text-align: right;
+  vertical-align: top;
+}
+.event-container .event-details table tr td.icon img {
+  height: 20px;
+  width: 20px;
+}
+.event-container .event-details textarea.event-mail {
+  resize: none;
+  width: 100%;
+  padding: 5px;
+}
+.alert-event-main {
+  margin-bottom: -50px;
+}
+/*# sourceMappingURL=event.css.map */

@@ -11,7 +11,6 @@ module.exports = function (grunt) {
                     'js/jquery.js': 'jquery/dist/jquery.js',
                     'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
                     'js/jasny-bootstrap.js': 'jasny-bootstrap/dist/js/jasny-bootstrap.js',
-                    //'fonts': 'bootstrap/dist/fonts/**',
                     'js/angular.js': 'angular/angular.js',
                     'js/moment-with-locales.min.js': 'moment/min/moment-with-locales.min.js',
                     'js/bootstrap-datetimepicker.min.js': 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
@@ -28,7 +27,7 @@ module.exports = function (grunt) {
             },            
             fonts: {
                 files: {
-                    'fonts': ['font-awesome/fonts/**','bootstrap/dist/fonts/**'],
+                    'fonts': ['font-awesome/fonts/','bootstrap/dist/fonts/'],
                 }
             }
         },
