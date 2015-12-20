@@ -31,16 +31,21 @@
                         <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}"/>
                     </a>
                 </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.getFirstname }} {{ user.getSurname }} comme ami">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/add-user.png')}}"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="menu-link-icon" src="/unavent/web/bundles/wybefrontoffice/images/icons/check-white.png"/>
-                    </a>
-                </li>
+                
+                {% if isFriend == 1 %}
+                    <li>
+                        <a href="#">
+                            <img class="menu-link-icon" src="/unavent/web/bundles/wybefrontoffice/images/icons/check-white.png"/>
+                        </a>
+                    </li>
+                {% elseif sendRequest == 0 %}              
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.getFirstname }} {{ user.getSurname }} comme ami">
+                            <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/add-user.png')}}"/>
+                        </a>
+                    </li>
+                {% endif %}
+
                 <li>
                     <a class="back-top" href="#">
                         <span class="fa fa-caret-up"></span>

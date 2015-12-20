@@ -28,3 +28,11 @@ flowber_add_friend:
 flowber_send_wink:
     path:   /envoyer_clin_oeil/{id}
     defaults: { _controller: FlowberUserBundle:Friend:sendWink }
+
+flowber_accept_friend_request:
+    path:   /accepter_demande_ami/{id}
+    defaults: { _controller: FlowberUserBundle:Friend:acceptFriendRequest }
+
+flowber_decline_friend_request:
+    path:   /refuser_demande_ami/{id}
+    defaults: { _controller: FlowberUserBundle:Friend:declineFriendRequest }

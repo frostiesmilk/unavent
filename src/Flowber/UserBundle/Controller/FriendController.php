@@ -66,4 +66,44 @@ class FriendController extends Controller
         )));
     }
 
+    public function acceptFriendRequestAction($id)
+    {
+        $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
+        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $friendship = $userReposit->getFriendship($user, $this->getUser());
+       
+        if($friendship->getStatut() == "send"){
+            $friendship->setStatut("ok");
+            $friendshipReverse = new Friendship();
+            $friendshipReverse->setUser($this->getUser());
+            $friendshipReverse->setFriend($user);
+            $friendshipReverse->setStatut('ok');
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($friendship);
+            $em->persist($friendshipReverse);
+            $em->flush();  
+        }
+      
+        
+        return $this->redirect($this->generateUrl('flowber_user_profile', array(
+            'id' => $user->getId()
+        )));
+    }
+    public function declineFriendRequestAction($id)
+    {
+        $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
+        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $friendship = $userReposit->getFriendship($user, $this->getUser());
+        die(var_dump($friendship));
+        
+        if($friendship->getStatut() == "send"){
+            $friendship->setStatut("cancel");
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($friendship);
+            $em->flush();  
+        }
+        return $this->redirect($this->generateUrl('flowber_user_profile', array(
+            'id' => $user->getId()
+        )));
+    }
 }

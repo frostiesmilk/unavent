@@ -1,20 +1,20 @@
 flowber_current_user_profile:
     path:     /mon-profil
-    defaults: { _controller: FlowberProfileBundle:Default:getCurrentUserProfile }
+    defaults: { _controller: FlowberProfileBundle:Profile:getCurrentUserProfile }
     
 flowber_user_profile:
     path:     /membre/{id}
-    defaults: { _controller: FlowberProfileBundle:Default:getUserProfile }
+    defaults: { _controller: FlowberProfileBundle:Profile:getUserProfile }
 
 flowber_profile_edit:
     path:     /mon-profil/modifier
-    defaults: { _controller: FlowberProfileBundle:Default:getEditProfile }
+    defaults: { _controller: FlowberProfileBundle:Profile:getEditProfile }
     
 flowber_profile_edit_profile_picture:
     path:     /mon-profil/modifier/photo-profil
-    defaults: { _controller: FlowberProfileBundle:Default:editProfilePicture }
+    defaults: { _controller: FlowberProfileBundle:Profile:editProfilePicture }
     
 flowber_profile_edit_cover_picture:    
     path:     /mon-profil/modifier/photo-couverture
-    defaults: { _controller: FlowberProfileBundle:Default:editProfileCoverPicture }
+    defaults: { _controller: FlowberProfileBundle:Profile:editProfileCoverPicture }
     
