@@ -8,6 +8,7 @@ use Flowber\PostBundle\Form\CommentType;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Form\PostWithEventType;
+use Flowber\NotificationBundle\Entity\Notification;
 
 class DefaultController extends Controller
 {
@@ -29,14 +30,18 @@ class DefaultController extends Controller
                 $comment->setPost($post);
                 $comment->setCreatedBy($this->getUser());
                 
-                $notification = new Notification ();
-                $notification->setCreatedBy($this->getUser());
-                $notification->setUser($post->getCreatedBy());
-                $notification->setPageRoute('flowber_event_homepage');
-                $notification->setPageId($post->getEvent()->getId());
-                $notification->setMessage("a aimé votre post dans ");
-                $notification->setPageName($post->getEvent()->getTitle());
-                $em->persist($notification);
+                if ($post->getCreatedBy() != $this->getUser()){
+                    $notification = new Notification ();
+                    $notification->setCreatedBy($this->getUser());
+                    $notification->setUser($post->getCreatedBy());
+                    $notification->setPageRoute('flowber_group_homepage');
+                    $notification->setPageId($post->getGroups()->getId());
+                    $notification->setMessage("a commenté votre post \""
+                            . $post->getMessage()
+                            . "\" dans ");
+                    $notification->setPageName($post->getGroups()->getTitle());
+                    $em->persist($notification);                
+                }
                 
                 $em->persist($comment);
                 $em->flush();
@@ -64,6 +69,23 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $comment->setPost($post);
                 $comment->setCreatedBy($this->getUser());
+                
+                if ($post->getCreatedBy() != $this->getUser()){
+                    $notification = new Notification ();
+                    $notification->setCreatedBy($this->getUser());
+                    $notification->setUser($post->getCreatedBy());
+                    $notification->setPageRoute('flowber_event_homepage');
+                    $notification->setPageId($post->getEvent()->getId());
+                    $notification->setMessage("a commenté votre post \""
+                            . $post->getMessage()
+                            . "\" dans ");
+                    $notification->setPageName($post->getEvent()->getTitle());
+                    $em->persist($notification);                
+                }
+                
+                $em->persist($comment);
+                $em->flush();
+                
                 $em->persist($comment);
                 $em->flush();
                 
@@ -90,6 +112,20 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $post->setCreatedBy($this->getUser());
                 $post->setGroups($group);
+                
+                if ($group->getCreatedBy() != $this->getUser()){
+                    $notification = new Notification ();
+                    $notification->setCreatedBy($this->getUser());
+                    $notification->setUser($group->getCreatedBy());
+                    $notification->setPageRoute('flowber_group_homepage');
+                    $notification->setPageId($group->getId());
+                    $notification->setMessage("a ajouté un post \""
+                            . $post->getMessage()
+                            . "\" dans ");
+                    $notification->setPageName($group->getTitle());
+                    $em->persist($notification);         
+                }
+                
                 $em->persist($post);
                 $em->flush();
 
@@ -116,6 +152,20 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $post->setCreatedBy($this->getUser());
                 $post->setEvent($event);
+                
+                if ($event->getCreatedBy() != $this->getUser()){
+                    $notification = new Notification ();
+                    $notification->setCreatedBy($this->getUser());
+                    $notification->setUser($event->getCreatedBy());
+                    $notification->setPageRoute('flowber_event_homepage');
+                    $notification->setPageId($event->getId());
+                    $notification->setMessage("a ajouté un post \""
+                            . $post->getMessage()
+                            . "\" dans ");
+                    $notification->setPageName($event->getTitle());
+                    $em->persist($notification);                
+                }
+                
                 $em->persist($post);
                 $em->flush();
 
@@ -143,6 +193,20 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $post->setCreatedBy($this->getUser());
                 $post->setGroups($group);
+                
+                if ($post->getCreatedBy() != $this->getUser()){
+                    $notification = new Notification ();
+                    $notification->setCreatedBy($this->getUser());
+                    $notification->setUser($post->getCreatedBy());
+                    $notification->setPageRoute('flowber_group_homepage');
+                    $notification->setPageId($group->getId());
+                    $notification->setMessage("a ajouté une sortie \""
+                            . $post->getMessage()
+                            . "\" dans ");
+                    $notification->setPageName($group->getTitle());
+                    $em->persist($notification);         
+                }
+                
                 $em->persist($post);
                 $em->flush();
 

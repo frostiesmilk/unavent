@@ -11,15 +11,14 @@ use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 
-class DefaultController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Main profile edit form
      * @return type
      * @throws AccessDeniedException
      */
-    public function getEditProfileAction()
-    {
+    public function getEditProfileAction() {
         $user = $this->getUser();        
         $error = false; // detect error while processing forms
         
@@ -148,8 +147,7 @@ class DefaultController extends Controller
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
-    public function getCurrentUserProfileAction()
-    {
+    public function getCurrentUserProfileAction() {
         $user = $this->getUser();
       
         if (!is_object($user)) {
@@ -165,8 +163,8 @@ class DefaultController extends Controller
         return $this->render('FlowberProfileBundle:Default:myProfile.html.twig', array('user' => $user, "profile" => $profile));
     }
     
-    public function getUserProfileAction($id)
-    {
+    
+    public function getUserProfileAction($id) {
 
         $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
 
@@ -202,12 +200,35 @@ class DefaultController extends Controller
         
         $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
         
+
+        
+        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $isFriend = $userReposit->isFriendWithMe($user, $this->getUser());
+        $sendRequest = $userReposit->sendMeAFriendRequest($user, $this->getUser());
+        $iSendRequest = $userReposit->iSendAFriendRequest($user, $this->getUser());
+        if ($sendRequest != 0){
+            // message bag
+            $this->addFlash(
+                'addFriend',
+                $user->getFirstName()." ". $user->getSurName()." a envoyé une demande d'ami."
+            );
+        }
+        if ($iSendRequest != 0){
+            // message bag
+            $this->addFlash(
+                'success',
+                "Votre demande d'ami à ". $user->getFirstName()." ". $user->getSurName()." a bien été envoyée."
+            );
+            $sendRequest=-1;
+        }        
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
                     'user' => $user,
                     'id' => $id,
                     'profile' => $profile,
-                    'messageForm' => $privateMessageForm->createView()
+                    'messageForm' => $privateMessageForm->createView(),
+                    'isFriend' => $isFriend,
+                    'sendRequest' => $sendRequest
                 ));
     }
     

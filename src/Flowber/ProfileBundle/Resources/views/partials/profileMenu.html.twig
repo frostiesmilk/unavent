@@ -23,26 +23,43 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ user.getFirstname }} {{ user.getSurname }}">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/wink.png')}}"/> 
+                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/wink.png')}}"/> 
                     </a>
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ user.getFirstname }} {{ user.getSurname }}">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/bubble-chat.png')}}"/>
+                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/bubble-chat.png')}}"/>
                     </a>
                 </li>
+                
+                {% if isFriend == 1 %}
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true" title="{{ user.getFirstname }} {{ user.getSurname }} est votre ami">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/friend.png')}}"/>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-large">
+                            <li><a tabindex="-1" href="{{ path('flowber_unfriend', {'id': user.id}) }}">Supprimer de mes amis</a></li>
+                        </ul>
+                    </li>
+                {% elseif sendRequest == 0 %}              
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.getFirstname }} {{ user.getSurname }} comme ami">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        </a>
+                    </li>
+                {% elseif sendRequest == -1 %} 
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true" title="La demande d'ami avec {{ user.getFirstname }} {{ user.getSurname }} est en attente de validation">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-large">
+                            <li><a tabindex="-1" href="{{ path('flowber_cancel_friend_request', {'id': user.id}) }}">Annuler la demande</a></li>
+                        </ul>
+                    </li>                    
+                {% endif %}
+
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.getFirstname }} {{ user.getSurname }} comme ami">
-                        <img class="menu-link-icon" src="{{asset('bundles/wybefrontoffice/images/icons/add-user.png')}}"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="menu-link-icon" src="/unavent/web/bundles/wybefrontoffice/images/icons/check-white.png"/>
-                    </a>
-                </li>
-                <li>
-                    <a class="back-top" href="#">
+                    <a class="back-top" href="#" title="Remonter en haut de la page">
                         <span class="fa fa-caret-up"></span>
                     </a>
                 </li>
