@@ -56,7 +56,7 @@ class FriendController extends Controller
         $message = new PrivateMessage();
         $message->setUserFrom($iAm);
         $message->setUserTo($user);
-        $message->setMessage($iAm->getFirstName().$iAm->getSurname()." vous a envoyé un un clin d'oeil");
+        $message->setMessage($iAm->getFirstName()." ".$iAm->getSurname()." vous a envoyé un un clin d'oeil");
         $message->setSubject("Vous avez reçu un clin d'oeil !");
         $em = $this->getDoctrine()->getManager();
         $em->persist($message);
