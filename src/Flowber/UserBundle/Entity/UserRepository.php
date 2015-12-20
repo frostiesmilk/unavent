@@ -157,7 +157,22 @@ class UserRepository extends EntityRepository
             ->andWhere('a.statut = :statut')
             ->setParameter('statut', 'send');
 
-        return count($qb->getQuery()->getSingleResult());
+        return count($qb->getQuery()->getResult());
+    }
+    
+    public function iSendAFriendRequest(User $user,  User $me){
+        $qb = $this->_em->createQueryBuilder();
+        
+        $qb->select('a')
+            ->from('FlowberUserBundle:Friendship', 'a')
+            ->where('a.user = :user')
+            ->setParameter('user', $me)
+            ->andWhere('a.friend = :friend')
+            ->setParameter('friend', $user)
+            ->andWhere('a.statut = :statut')
+            ->setParameter('statut', 'send');
+
+        return count($qb->getQuery()->getResult());
     }
     
     public function getFriendship(User $user,  User $me){

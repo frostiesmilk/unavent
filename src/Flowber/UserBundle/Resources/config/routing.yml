@@ -36,3 +36,11 @@ flowber_accept_friend_request:
 flowber_decline_friend_request:
     path:   /refuser_demande_ami/{id}
     defaults: { _controller: FlowberUserBundle:Friend:declineFriendRequest }
+    
+flowber_cancel_friend_request:
+    path:   /annuler_demande_ami/{id}
+    defaults: { _controller: FlowberUserBundle:Friend:cancelFriendRequest }
+
+flowber_unfriend:
+    path:   /supprimer_ami/{id}
+    defaults: { _controller: FlowberUserBundle:Friend:unfriend }

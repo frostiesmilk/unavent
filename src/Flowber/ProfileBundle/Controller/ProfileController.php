@@ -205,6 +205,7 @@ class ProfileController extends Controller
         $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
         $isFriend = $userReposit->isFriendWithMe($user, $this->getUser());
         $sendRequest = $userReposit->sendMeAFriendRequest($user, $this->getUser());
+        $iSendRequest = $userReposit->iSendAFriendRequest($user, $this->getUser());
         if ($sendRequest != 0){
             // message bag
             $this->addFlash(
@@ -212,6 +213,14 @@ class ProfileController extends Controller
                 $user->getFirstName()." ". $user->getSurName()." a envoyé une demande d'ami."
             );
         }
+        if ($iSendRequest != 0){
+            // message bag
+            $this->addFlash(
+                'success',
+                "Votre demande d'ami à ". $user->getFirstName()." ". $user->getSurName()." a bien été envoyée."
+            );
+            $sendRequest=-1;
+        }        
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
                     'user' => $user,
