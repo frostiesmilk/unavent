@@ -1,0 +1,21 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+
+<div class="container reset-password-container">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            <a href="{{path('flowber_front_office_signin_homepage')}}" class="btn btn-default btn-md back-to-home-button">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour à l'accueil
+            </a>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                {{ form_widget(form) }}
+                <div>
+                    <input type="submit" class="btn btn-default btn-info" value="{{ 'resetting.reset.submit'|trans }}" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

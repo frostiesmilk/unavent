@@ -97,10 +97,9 @@ fos_user:
                 sender_name:        Flowber            
             template: FlowberUserBundle:email:registration_confirmation.html.twig
     resetting:
-        form:
-            type: flowber_user_reset_password
         email:
             from_email:
                 address:            info@wybe-site.com
                 sender_name:        Flowber
-    
+            template: FlowberUserBundle:email:reset_password.html.twig
+                

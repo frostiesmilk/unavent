@@ -1,4 +1,6 @@
-{# Flowber:UserBundle:Resources:Resetting:request.html.twig #}
+{# Flowber:UserBundle:Resources:Resetting:checkEmail.html.twig #}
+
+{% trans_default_domain 'FOSUserBundle' %}
 
 {% extends '::base_frontoffice.html.twig' %}
 
@@ -18,8 +20,19 @@
         </div>
     </div>
 
-    <!-- Reset password Form -->  
-    {% include 'FlowberUserBundle::Resetting/request_content.html.twig' %}
+    <!-- Reset password info -->  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <a href="{{path('flowber_front_office_signin_homepage')}}" class="btn btn-default btn-md back-to-home-button">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour à l'accueil
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
