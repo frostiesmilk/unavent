@@ -76,18 +76,6 @@ class User extends BaseUser
     private $creationDate;
     
     /**
-     *
-     * @ORM\ManyToMany(targetEntity="Flowber\EventBundle\Entity\Event", mappedBy="participants", cascade={"persist"})
-     */
-    private $attended_events;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="Flowber\GroupBundle\Entity\Groups", inversedBy="members")
-     * @ORM\JoinTable(name="group_members")
-     */
-    protected $groups;
-    
-    /**
      * Constructor
      */
     public function __construct()
@@ -95,16 +83,12 @@ class User extends BaseUser
         parent::__construct();
         $this->postalAddress = new \Doctrine\Common\Collections\ArrayCollection();
         $this->phone = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->attended_events = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
         
         // for user profile
         $this->profile = new Profile();
         $this->getProfile()->setUser($this);
         
         $this->creationDate = new \Datetime();
-                
-        $this->myFriends = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -411,150 +395,5 @@ class User extends BaseUser
     public function getProfile()
     {
         return $this->profile;
-    }
-
-    /**
-     * Add myFriends
-     *
-     * @param \Flowber\UserBundle\Entity\User $myFriends
-     * @return User
-     */
-    public function addFriend(\Flowber\UserBundle\Entity\User $myFriends)
-    {
-        $this->myFriends[] = $myFriends;
-
-        return $this;
-    }
-
-    /**
-     * Remove myFriends
-     *
-     * @param \Flowber\UserBundle\Entity\User $myFriends
-     */
-    public function removeFriend(\Flowber\UserBundle\Entity\User $myFriends)
-    {
-        $this->myFriends->removeElement($myFriends);
-    }
-
-    /**
-     * Get myFriends
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFriends()
-    {
-        return $this->myFriends;
-    }
-
-    /**
-     * Add myFriends
-     *
-     * @param \Flowber\UserBundle\Entity\User $myFriends
-     * @return User
-     */
-    public function addMyFriend(\Flowber\UserBundle\Entity\User $myFriends)
-    {
-        $this->myFriends[] = $myFriends;
-
-        return $this;
-    }
-
-    /**
-     * Remove myFriends
-     *
-     * @param \Flowber\UserBundle\Entity\User $myFriends
-     */
-    public function removeMyFriend(\Flowber\UserBundle\Entity\User $myFriends)
-    {
-        $this->myFriends->removeElement($myFriends);
-    }
-
-    /**
-     * Get myFriends
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyFriends()
-    {
-        return $this->myFriends;
-    }
-
-    /**
-     * Add friendsWithMe
-     *
-     * @param \Flowber\UserBundle\Entity\User $friendsWithMe
-     * @return User
-     */
-    public function addFriendsWithMe(\Flowber\UserBundle\Entity\User $friendsWithMe)
-    {
-        $this->friendsWithMe[] = $friendsWithMe;
-
-        return $this;
-    }
-
-    /**
-     * Remove friendsWithMe
-     *
-     * @param \Flowber\UserBundle\Entity\User $friendsWithMe
-     */
-    public function removeFriendsWithMe(\Flowber\UserBundle\Entity\User $friendsWithMe)
-    {
-        $this->friendsWithMe->removeElement($friendsWithMe);
-    }
-
-    /**
-     * Get friendsWithMe
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFriendsWithMe()
-    {
-        return $this->friendsWithMe;
-    }
-
-    /**
-     * Set myFriends
-     *
-     * @param \Flowber\UserBundle\Entity\User $myFriends
-     * @return User
-     */
-    public function setMyFriends(\Flowber\UserBundle\Entity\User $myFriends = null)
-    {
-        $this->myFriends = $myFriends;
-
-        return $this;
-    }
-
-    /**
-     * Add attended_events
-     *
-     * @param \Flowber\EventBundle\Entity\Event $attendedEvents
-     * @return User
-     */
-    public function addAttendedEvent(\Flowber\EventBundle\Entity\Event $attendedEvents)
-    {
-        $this->attended_events[] = $attendedEvents;
-
-        return $this;
-    }
-
-    /**
-     * Remove attended_events
-     *
-     * @param \Flowber\EventBundle\Entity\Event $attendedEvents
-     */
-    public function removeAttendedEvent(\Flowber\EventBundle\Entity\Event $attendedEvents)
-    {
-        $this->attended_events->removeElement($attendedEvents);
-    }
-
-    /**
-     * Get attended_events
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAttendedEvents()
-    {
-        return $this->attended_events;
     }
 }

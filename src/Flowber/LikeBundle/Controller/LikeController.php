@@ -6,13 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Flowber\LikeBundle\Entity\Likes;
 use Flowber\NotificationBundle\Entity\Notification;
 
-class DefaultController extends Controller
+class LikeController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('FlowberLikeBundle:Default:index.html.twig', array('name' => $name));
-    }
-    
     public function likePostGroupAction($post_id)
     {
         $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($post_id);

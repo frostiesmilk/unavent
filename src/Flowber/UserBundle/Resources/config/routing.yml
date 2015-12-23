@@ -44,3 +44,4 @@ flowber_cancel_friend_request:
 flowber_unfriend:
     path:   /supprimer_ami/{id}
     defaults: { _controller: FlowberUserBundle:Friend:unfriend }
+

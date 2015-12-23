@@ -85,21 +85,9 @@ class Groups
     private $creationDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User", mappedBy="groups")
-     */
-    private $members;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist", "remove"})
      */
     private $galleries;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="administrators", type="string", length=255, nullable=true)
-     */
-    private $administrators;
 
     /**
      * @var string

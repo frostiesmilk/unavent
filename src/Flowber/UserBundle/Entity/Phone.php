@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Phone
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Flowber\UserBundle\Entity\PhoneRepository")
  */
 class Phone
 {

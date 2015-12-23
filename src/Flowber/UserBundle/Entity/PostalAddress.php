@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PostalAddress
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Flowber\UserBundle\Entity\PostalAddressRepository")
  */
 class PostalAddress
 {

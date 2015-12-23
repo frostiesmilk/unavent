@@ -81,18 +81,6 @@ class Event
     private $createdBy;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User")
-     * @ORM\JoinTable(name="event_organized")
-     */
-    private $organizer;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Flowber\UserBundle\Entity\User", inversedBy="attended_events")
-     * @ORM\JoinTable(name="event_participants")
-     */
-    private $participants;
-
-    /**
      *
      * @var integer
      * @Assert\Range(
@@ -181,8 +169,6 @@ class Event
      */
     public function __construct()
     {
-        $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->organizer = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         //$this->postalAddress = new PostalAddress();
 //        $this->coverPicture = new Photo();
@@ -314,52 +300,6 @@ class Event
     public function getCreatedBy()
     {
         return $this->createdBy;
-    }
-
-    /**
-     * Set organizer
-     *
-     * @param string $organizer
-     * @return Event
-     */
-    public function setOrganizer($organizer)
-    {
-        $this->organizer = $organizer;
-
-        return $this;
-    }
-
-    /**
-     * Get organizer
-     *
-     * @return string 
-     */
-    public function getOrganizer()
-    {
-        return $this->organizer;
-    }
-
-    /**
-     * Set participants
-     *
-     * @param string $participants
-     * @return Event
-     */
-    public function setParticipants($participants)
-    {
-        $this->participants = $participants;
-
-        return $this;
-    }
-
-    /**
-     * Get participants
-     *
-     * @return string 
-     */
-    public function getParticipants()
-    {
-        return $this->participants;
     }
 
     /**
@@ -567,52 +507,6 @@ class Event
     public function getTagUsers()
     {
         return $this->tagUsers;
-    }
-
-    /**
-     * Add organizer
-     *
-     * @param \Flowber\UserBundle\Entity\User $organizer
-     * @return Event
-     */
-    public function addOrganizer(\Flowber\UserBundle\Entity\User $organizer)
-    {
-        $this->organizer[] = $organizer;
-
-        return $this;
-    }
-
-    /**
-     * Remove organizer
-     *
-     * @param \Flowber\UserBundle\Entity\User $organizer
-     */
-    public function removeOrganizer(\Flowber\UserBundle\Entity\User $organizer)
-    {
-        $this->organizer->removeElement($organizer);
-    }
-
-    /**
-     * Add participants
-     *
-     * @param \Flowber\UserBundle\Entity\User $participants
-     * @return Event
-     */
-    public function addParticipant(\Flowber\UserBundle\Entity\User $participants)
-    {
-        $this->participants[] = $participants;
-
-        return $this;
-    }
-
-    /**
-     * Remove participants
-     *
-     * @param \Flowber\UserBundle\Entity\User $participants
-     */
-    public function removeParticipant(\Flowber\UserBundle\Entity\User $participants)
-    {
-        $this->participants->removeElement($participants);
     }
 
     /**

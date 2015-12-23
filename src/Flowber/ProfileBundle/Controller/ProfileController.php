@@ -158,9 +158,15 @@ class ProfileController extends Controller
         
         if (empty($profile)) {
             throw new NotFoundHttpException("Le profil de l'utilisateur ".$profile->getUser()->getFirstname()." n'existe pas.");
-        }            
+        }    
+        
 
-        return $this->render('FlowberProfileBundle:Default:myProfile.html.twig', array('user' => $user, "profile" => $profile));
+
+        return $this->render('FlowberProfileBundle:Default:myProfile.html.twig', 
+                array(
+                    'user' => $user, 
+                    "profile" => $profile
+                ));
     }
     
     
@@ -200,27 +206,29 @@ class ProfileController extends Controller
         
         $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
         
-
+        $friendshipReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:Friendship');
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
-        $isFriend = $userReposit->isFriendWithMe($user, $this->getUser());
-        $sendRequest = $userReposit->sendMeAFriendRequest($user, $this->getUser());
-        $iSendRequest = $userReposit->iSendAFriendRequest($user, $this->getUser());
-        if ($sendRequest != 0){
+        $isFriend = $friendshipReposit->isFriendWithMe($user, $this->getUser());
+        $requestReceived = $friendshipReposit->hasSentAFriendRequest($user, $this->getUser());
+        $requestSent = $friendshipReposit->hasSentAFriendRequest($this->getUser(), $user);
+        
+        if ($requestReceived != 0){
             // message bag
             $this->addFlash(
                 'addFriend',
                 $user->getFirstName()." ". $user->getSurName()." a envoyé une demande d'ami."
             );
         }
-        if ($iSendRequest != 0){
+        if ($requestSent != 0){
             // message bag
             $this->addFlash(
                 'success',
                 "Votre demande d'ami à ". $user->getFirstName()." ". $user->getSurName()." a bien été envoyée."
             );
-            $sendRequest=-1;
-        }        
+            $requestReceived=-1;
+        }   
+        
+
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
                     'user' => $user,
@@ -228,7 +236,7 @@ class ProfileController extends Controller
                     'profile' => $profile,
                     'messageForm' => $privateMessageForm->createView(),
                     'isFriend' => $isFriend,
-                    'sendRequest' => $sendRequest
+                    'sendRequest' => $requestReceived
                 ));
     }
     

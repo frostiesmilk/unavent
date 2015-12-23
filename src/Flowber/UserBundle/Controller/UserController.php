@@ -15,14 +15,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Flowber\UserBundle\Entity\PostalAddress;
-use Flowber\UserBundle\Form\PostalAddressType;
-use Flowber\UserBundle\Entity\Phone;
-use Flowber\UserBundle\Entity\User;
-use Flowber\UserBundle\Form\PhoneType;
-
-
-class DefaultController extends Controller
+class UserController extends Controller
 {
     /**
      * Show SignIn homepage
