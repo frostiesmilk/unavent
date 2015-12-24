@@ -283,7 +283,7 @@ and open the template in the editor.
 /* Second navbar */
 
 .sticky-wrapper{
-    //margin-bottom: -40px; // compensate auto JS padding
+    margin-bottom: -40px; // compensate auto JS padding
 }
 
 .navbar-second{
@@ -379,7 +379,7 @@ and open the template in the editor.
 
 .generic-cover{    
     @media(max-width: @switching-width){ // no margin-top with push menu
-        margin-top: 80px;
+        margin-top: 88px!important;
     }
     margin-top: 40px;
     height: 255px;
@@ -395,13 +395,13 @@ and open the template in the editor.
         background-size: cover;
         height: 190px;
         width: 190px;
-        @media(max-width: 768px){
-            height: 180px;
-            width: 180px;
+        @media(max-width: 992px){
+            height: 155px;
+            width: 155px;
         }
-        @media(max-width: 640px){
+/*        @media(max-width: 640px){
             display: none;
-        }
+        }*/
     }
     .generic-cover-title{
         color: white;
@@ -412,8 +412,11 @@ and open the template in the editor.
             text-shadow: 0.2em 0.2em 0.2em black;
             font-size: 41px;
             @media(max-width: 768px){
-                margin-top: 0px;
+                font-size: 20px;
             }
+/*            @media(max-width: 768px){
+                margin-top: 0px;
+            }*/
         }
         .generic-cover-title-description{
             text-shadow: 0.2em 0.2em 0.2em black;
@@ -421,7 +424,6 @@ and open the template in the editor.
     }
     .generic-cover-edit-button{
         display: inline-block;
-        float: right;
         .btn{
             background-color: rgba(255, 255, 255, 0.3);
         }

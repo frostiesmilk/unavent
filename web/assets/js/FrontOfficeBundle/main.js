@@ -131,7 +131,6 @@
 $('.back-top').each(function(){
     $(this).click(function(){ 
         $('html,body').animate({ scrollTop: 0 }, 'fast');
-        console.log("yo");
         return false; 
     });
 });
@@ -169,3 +168,6 @@ function autoClosingAlert(selector, delay) {
    var alert = $(selector).alert();
    window.setTimeout(function() { alert.alert('close') }, delay);
 }
+
+// auto closing alerts
+autoClosingAlert(".alert-autoclosing", 3000);

@@ -3,7 +3,22 @@
     <div class="user-profile-resume">
         <div class="container">
             <div class="row">
-                
+                <div class="col-md-6 col-md-offset-3 col-sm-12 profile-alert-box">
+                    {% for flash_message in app.session.flashbag.get('success') %}
+                        <div class="alert alert-success alert-dismissible alert-autoclosing alert-event-main fade in flash-notice" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                    {% for flash_message in app.session.flashbag.get('error') %}
+                        <div class="alert alert-danger alert-dismissible alert-event-main fade in flash-notice" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">                
                 <div class="col-md-6 col-sm-6 col-xs-12 col-bg-white user-profile-element">
                     <div class="user-profile-introduction-text-block">
                         <h2 class="name">{{ user.getFirstname }} {{ user.getSurname }}</h2>
@@ -25,7 +40,7 @@
                     <!--
                         <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')"></div>
                     -->
-                    <h3>Mes inspirations</h3>
+                    <h2 class="user-profile-interest-title">Mes inspirations</h2>
                     {% if profile.hobbies.count > 0 %}
                         <table class="user-profile-interest">
 

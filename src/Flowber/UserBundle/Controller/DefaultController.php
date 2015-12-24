@@ -30,6 +30,11 @@ class DefaultController extends Controller
      */
     public function getHomeConnectionPageAction(Request $request)
     {
+        // if already logged in, go to profile
+        if($this->getUser()){
+            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+        }
+        
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
