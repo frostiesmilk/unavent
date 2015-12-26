@@ -15,7 +15,7 @@ class ProfileRepository extends EntityRepository
 {
     /*
      * Récupère la phrase d'accroche et la description
-     * Return subtitle, job, description, creationDate
+     * Return subtitle, job, description, creationDaten photo de profil, photo de couverture
      */
     public function getUserInfoForProfile($id){
         
@@ -28,5 +28,12 @@ class ProfileRepository extends EntityRepository
     public function getUserHobbies(User $user){
         
     }
-  
+    
+    /*
+     * Récupère la photo de profil de l'utilisateur
+     * Return webpath de photo de profil
+     */
+    public function getUserProfilePic(User $user){
+        
+    }  
 }

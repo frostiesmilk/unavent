@@ -13,7 +13,10 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class PostRepository extends EntityRepository
 {
-    
+    /*
+     * Récupère les posts d'un groupe
+     * Return id, message, statut, event, nom du created by, photo du created by, creationdate
+     */
     public function getPostFromGroup($groupId){
         $qb = $this->_em->createQueryBuilder();
         
@@ -28,7 +31,11 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()
                   ->getResult();
     }
-
+    
+    /*
+     * Récupère les posts d'un event
+     * Return id, message, statut, event, nom du created by, photo du created by, creationdate
+     */
     public function getPostFromEvent($eventId){
         $qb = $this->_em->createQueryBuilder();
         
@@ -44,6 +51,10 @@ class PostRepository extends EntityRepository
                   ->getResult();
     }
     
+    /*
+     * Récupère les commentaire
+     * Return id, message, , nom du created by, photo du created by, creationdate
+     */    
     public function getCommentFromPost($postId){
         $qb = $this->_em->createQueryBuilder();
         
@@ -58,4 +69,5 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()
                   ->getResult();
     }
+    
 }
