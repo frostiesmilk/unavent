@@ -13,5 +13,14 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class LikesRepository extends EntityRepository
 {
-
+    /*
+     * Récupère le nombre de like d'un post
+     * Return nombre de like
+     */    
+    public function getLikePostNumber($postId){
+        $qb = $this->_em->createQueryBuilder();
+        
+        return $qb->getQuery()
+                  ->getResult();
+    }
 }

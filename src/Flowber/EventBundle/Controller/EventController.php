@@ -79,7 +79,7 @@ class EventController extends Controller
 
         $post = new Post();
         $postForm = $this->createForm(new PostType, $post);
-         $CommentArray = array();
+        $CommentArray = array();
 
         foreach ($posts as $post)
         {

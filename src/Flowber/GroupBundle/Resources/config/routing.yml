@@ -1,23 +1,23 @@
 flowber_group_homepage:
     path:     /groupe/{id}
-    defaults: { _controller: FlowberGroupBundle:Default:group }
+    defaults: { _controller: FlowberGroupBundle:Group:group }
     
 flowber_group_galleries:
     path:     /groupe/{id}/galleries
-    defaults: { _controller: FlowberGroupBundle:Default:groupGalleries }
+    defaults: { _controller: FlowberGroupBundle:Group:groupGalleries }
     
 flowber_group_members:
     path:     /groupe/{id}/membres
-    defaults: { _controller: FlowberGroupBundle:Default:groupMembers }
+    defaults: { _controller: FlowberGroupBundle:Group:groupMembers }
     
 flowber_group_events:
     path:     /groupe/{id}/sorties
-    defaults: { _controller: FlowberGroupBundle:Default:groupEvents }
+    defaults: { _controller: FlowberGroupBundle:Group:groupEvents }
 
 flowber_create_group_homepage:
     path:     /nouveau_groupe
-    defaults: { _controller: FlowberGroupBundle:Default:createGroup }
+    defaults: { _controller: FlowberGroupBundle:Group:createGroup }
     
 flowber_all_group_homepage:
     path:     /tous_mes_groupes
-    defaults: { _controller: FlowberGroupBundle:Default:AllGroups }
+    defaults: { _controller: FlowberGroupBundle:Group:AllGroups }

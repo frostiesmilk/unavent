@@ -15,7 +15,7 @@ use Flowber\PostBundle\Form\PostWithEventType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 
-class DefaultController extends Controller
+class GroupController extends Controller
 {
     public function groupAction($id)
     {

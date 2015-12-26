@@ -11,7 +11,7 @@ use Flowber\GalleryBundle\Entity\Gallery as Gallery;
  * Profile
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Flowber\ProfileBundle\Entity\ProfileRepository")
  */
 class Profile
 {

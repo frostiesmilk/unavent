@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
  * Gallery
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity (repositoryClass="Flowber\GalleryBundle\Entity\GalleryRepository")
  */
 class Gallery
 {

@@ -10,7 +10,7 @@ use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Form\PostWithEventType;
 use Flowber\NotificationBundle\Entity\Notification;
 
-class DefaultController extends Controller
+class PostController extends Controller
 {
     public function addCommentGroupAction($post_id)
     {

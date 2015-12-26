@@ -1,22 +1,22 @@
 flowber_notification:
     resource: "@FlowberNotificationBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /notification
 
 flowber_like:
     resource: "@FlowberLikeBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /like
 
 flowber_post:
     resource: "@FlowberPostBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /post
 
 flowber_group:
     resource: "@FlowberGroupBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /groupe
 
 flowber_event:
     resource: "@FlowberEventBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /sortie
 
 flowber_private_message:
     resource: "@FlowberPrivateMessageBundle/Resources/config/routing.yml"

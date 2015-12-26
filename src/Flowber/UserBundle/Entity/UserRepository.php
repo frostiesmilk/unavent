@@ -13,178 +13,27 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class UserRepository extends EntityRepository
 {
-//    public function getReceivedMessages(User $user){
-//        $sql = "SELECT message.subject, message.message, user.firstname, user.surname, user.email, message.creationDate "
-//            . "FROM (SELECT * FROM messages_to_user a, private_message b "
-//                    . "WHERE a.user_id = ".$user->getId()." "
-//                    . "AND a.private_message_id=b.id) "
-//                . "message, user "
-//            . "WHERE message.user_from_id = user.id ";
-//        
-//        $rsm = new ResultSetMapping;
-//        $rsm->addScalarResult('subject', 'subject');
-//        $rsm->addScalarResult('message', 'message');
-//        $rsm->addScalarResult('firstname', 'firstname');
-//        $rsm->addScalarResult('surname', 'surname');
-//        $rsm->addScalarResult('email', 'email');
-//        $rsm->addScalarResult('creationDate', 'creationDate');
-//        
-//        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
-//    }
-    
-    public function getDeletedMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
+    /*
+     * Récupère l'adresse d'un utilisateur
+     * return city and zipcode
+     */
+    public function getUserCityZipcode (User $user){
         
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->setParameter('userTo', $user)            
-            ->orWhere('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut = :statut')
-            ->setParameter('statut', '3')
-            ->orderBy('a.creationDate', 'DESC');
-        
-        return $qb->getQuery()
-                  ->getResult();
-    }
-  
-    public function getCountDeletedMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->setParameter('userTo', $user)            
-            ->orWhere('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut = :statut')
-            ->setParameter('statut', '3');  
-        
-        return count($qb->getQuery()
-                ->getResult());
     }
     
-    public function getSendMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
+    /*
+     * Récupère les informations de base d'un utilisateur
+     * return prénom, nom, date de naissance, adresse mail
+     */
+    public function getUserInfoForProfile (User $user){
         
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->orderBy('a.creationDate', 'DESC');
-        
-        return $qb->getQuery()
-                  ->getResult();
-    }
-  
-    public function getCountSendMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->setParameter('userFrom', $user);
-
-        return count($qb->getQuery()->getResult());
-    }
-
-    public function getReceivedMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->setParameter('userTo', $user)
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->orderBy('a.creationDate', 'DESC');
-        
-        return $qb->getQuery()
-                  ->getResult();
-    }
-  
-    public function getCountReceiveddMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->setParameter('userTo', $user);
-
-        return count($qb->getQuery()->getResult());
     }
     
-    public function isFriendWithMe(User $user, User $me){
-        $qb = $this->_em->createQueryBuilder();
+    /*
+     * Récupère le nom et le prénom de l'utilisateur
+     * return prénom, nom
+     */
+    public function getName (User $user){
         
-        $qb->select('a')
-            ->from('FlowberUserBundle:Friendship', 'a')
-            ->where('a.user = :user')
-            ->setParameter('user', $me)
-            ->andWhere('a.friend = :friend')
-            ->setParameter('friend', $user)
-            ->andWhere('a.statut = :statut')
-            ->setParameter('statut', 'ok');
-
-        return count($qb->getQuery()->getResult());
-    }
-    
-    public function sendMeAFriendRequest(User $user,  User $me){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberUserBundle:Friendship', 'a')
-            ->where('a.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('a.friend = :friend')
-            ->setParameter('friend', $me)
-            ->andWhere('a.statut = :statut')
-            ->setParameter('statut', 'send');
-
-        return count($qb->getQuery()->getResult());
-    }
-    
-    public function iSendAFriendRequest(User $user,  User $me){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberUserBundle:Friendship', 'a')
-            ->where('a.user = :user')
-            ->setParameter('user', $me)
-            ->andWhere('a.friend = :friend')
-            ->setParameter('friend', $user)
-            ->andWhere('a.statut = :statut')
-            ->setParameter('statut', 'send');
-
-        return count($qb->getQuery()->getResult());
-    }
-    
-    public function getFriendship(User $user,  User $me){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberUserBundle:Friendship', 'a')
-            ->where('a.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('a.friend = :friend')
-            ->setParameter('friend', $me);
-
-        return $qb->getQuery()->getSingleResult();
     }
 }

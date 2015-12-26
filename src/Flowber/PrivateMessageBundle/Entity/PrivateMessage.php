@@ -9,7 +9,7 @@ use Flowber\UserBundle\Entity\User as User;
  * PrivateMessage
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Flowber\PrivateMessageBundle\Entity\Repository\PrivateMessageRepository")
+ * @ORM\Entity(repositoryClass="Flowber\PrivateMessageBundle\Entity\PrivateMessageRepository")
  */
 class PrivateMessage
 {

@@ -6,18 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 
-class DefaultController extends Controller
+class PrivateMessageController extends Controller
 {
     public function messageReceivedAction()
     {
         $user = $this->getUser();
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         
-        $messagesReceived = $userReposit->getReceivedMessages($user);
-        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
-        $numberSendMessages = $userReposit->getCountSendMessages($user);
-        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
+        $messagesReceived = $pmReposit->getReceivedMessages($user);
+        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
+        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
         
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessageReceived.html.twig', array(
             "userMessages"=>$messagesReceived,
@@ -32,12 +32,12 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         
-        $messagesSend = $userReposit->getSendMessages($user);
-        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
-        $numberSendMessages = $userReposit->getCountSendMessages($user);
-        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
+        $messagesSend = $pmReposit->getSentMessages($user);
+        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
+        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
 
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessageSend.html.twig', array(
             "userMessages"=>$messagesSend,
@@ -52,12 +52,12 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         
-        $messagesDeleted = $userReposit->getDeletedMessages($user);
-        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
-        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
-        $numberSendMessages = $userReposit->getCountSendMessages($user);
+        $messagesDeleted = $pmReposit->getDeletedMessages($user);
+        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessageDeleted.html.twig', array(
             "userMessages"=>$messagesDeleted,
@@ -116,11 +116,11 @@ class DefaultController extends Controller
         
         $user = $this->getUser();
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         
-        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
-        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
-        $numberSendMessages = $userReposit->getCountSendMessages($user);
+        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         
         $message->setStatut('1');
         $em = $this->getDoctrine()->getManager();
@@ -163,11 +163,11 @@ class DefaultController extends Controller
         
         $user = $this->getUser();
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         
-        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
-        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
-        $numberSendMessages = $userReposit->getCountSendMessages($user);
+        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
                 
         return $this->render('FlowberPrivateMessageBundle:Default:oneMessageSend.html.twig', array(
             "message"=>$message,
@@ -183,11 +183,11 @@ class DefaultController extends Controller
         
         $user = $this->getUser();
         
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
+        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         
-        $numberReceivedMessages = $userReposit->getCountReceiveddMessages($user);
-        $numberDeletedMessages = $userReposit->getCountDeletedMessages($user);
-        $numberSendMessages = $userReposit->getCountSendMessages($user);
+        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         
         return $this->render('FlowberPrivateMessageBundle:Default:oneMessageDeleted.html.twig', array(
             "message"=>$message,

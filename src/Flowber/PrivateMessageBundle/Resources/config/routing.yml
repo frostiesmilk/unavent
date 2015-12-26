@@ -1,31 +1,31 @@
 flowber_private_message_received_homepage:
     path:     /messages_recus
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:messageReceived }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:messageReceived }
 
 flowber_private_message_send_homepage:
     path:     /mesages_envoyes
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:messageSend }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:messageSend }
 
 flowber_private_message_deleted_homepage:
     path:     /mesages_supprimes
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:messageDeleted }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:messageDeleted }
 
 flowber_private_message_one_received_homepage:
     path:     /mesage_recu/{id}
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:getMessageReceived }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageReceived }
 
 flowber_private_message_send_one_homepage:
     path:     /mesage_send/{id}
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:getMessageSend }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageSend }
     
 flowber_private_message_deleted_one_homepage:
     path:     /mesage_deleted/{id}
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:getMessageDeleted }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageDeleted }
     
 flowber_delete_message:
     path:     /supprimer_message/{id}/{type}
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:deleteMessage }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:deleteMessage }
 
 flowber_read_message:
     path:     /lu_non_lu_message/{id}
-    defaults: { _controller: FlowberPrivateMessageBundle:Default:readMessage }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:readMessage }
