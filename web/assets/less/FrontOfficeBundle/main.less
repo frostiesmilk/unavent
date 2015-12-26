@@ -283,7 +283,12 @@ and open the template in the editor.
 /* Second navbar */
 
 .sticky-wrapper{
-    margin-bottom: -40px; // compensate auto JS padding
+    //margin-bottom: -40px; // compensate auto JS padding
+}
+#nav-stick-sticky-wrapper{
+    @media(max-width: @switching-width){
+        display : none;
+    }
 }
 
 .navbar-second{
