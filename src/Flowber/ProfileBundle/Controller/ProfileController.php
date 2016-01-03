@@ -85,7 +85,7 @@ class ProfileController extends Controller
 //                $em->persist($profile);
 //                $em->flush();
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
             }
         }
   
@@ -134,7 +134,7 @@ class ProfileController extends Controller
                 $em->flush();
             }
             // back to profile page
-            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+            return $this->redirect($this->generateUrl('flowber_profile_current_user'));
         }
         
         // render form
@@ -200,7 +200,7 @@ class ProfileController extends Controller
                 $em->persist($privateMessage);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
             }
         }
         

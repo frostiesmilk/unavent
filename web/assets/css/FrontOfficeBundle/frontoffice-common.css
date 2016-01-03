@@ -16,6 +16,10 @@ and open the template in the editor.
   font-family: amaranthRegular;
   src: url(../../fonts/Amaranth-Regular.ttf);
 }
+/* all site */
+body {
+  font-size: 13px;
+}
 /* Colored backgrounds */
 .background-dark-blue {
   background-color: #293540;

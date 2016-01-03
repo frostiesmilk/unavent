@@ -5,6 +5,10 @@ fos_user_security:
 #    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
 #    prefix: /profile
 
+flowber_user_signin_homepage:
+    path: /connexion
+    defaults: { _controller: FlowberUserBundle:User:getHomeConnectionPage }
+
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix: /inscription

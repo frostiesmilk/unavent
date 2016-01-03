@@ -34,10 +34,10 @@ add_post_with_event:
         group_id: \d+
         
 delete_post:
-    pattern:  /supprimer_poste/{post_id}
+    pattern:  /supprimer_poste #/{post_id}
     defaults: { _controller: FlowberPostBundle:Post:deletePost }
-    requirements:
-        group_id: \d+
+#    requirements:
+#        group_id: \d+
 
 delete_comment:
     pattern:  /supprimer_commentaire/{comment_id}

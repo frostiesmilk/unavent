@@ -1,4 +1,4 @@
-flowber_current_user_profile:
+flowber_profile_current_user:
     path:     /mon-profil
     defaults: { _controller: FlowberProfileBundle:Profile:getCurrentUserProfile }
     

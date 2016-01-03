@@ -1,4 +1,4 @@
-{% set currentProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+{% set currentProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
 {% if app.user.profile.profilePicture is not null %}
     {% set currentProfilePicturePath = app.user.profile.profilePicture.getWebPath() %}
 {% endif %} 
@@ -6,16 +6,28 @@
 
 <ul class="group-blog-posts" >     
     {% for post in posts %}
-        {% set postProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+        {% set postProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
         {% if post.createdBy.profile.profilePicture is not null %}
             {% set postProfilePicturePath = post.createdBy.profile.profilePicture.getWebPath() %}
         {% endif %} 
-        <li class="group-blog-post" style="margin-bottom:20px;">
+        <li class="group-blog-post">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    {% if (post.createdBy == app.user) %}
+                    <a name="postDeleteButton" data-toggle="modal" data-target="#modal-delete-post" href="#">
+                        <span class="glyphicon glyphicon-trash generic-post-delete-icon"></span>
+                        <input type="hidden" name="delete-post-id" value="{{post.id}}" />
+                        <input type="hidden" name="delete-post-origin-entity" value="group" />
+                        <input type="hidden" name="delete-post-origin-id" value="{{id}}" />
+                    </a>
+                    {% endif %}
+                </div>                
+            </div>
             <div class="row group-blog-post-header">
-                <div class="col-xs-9 group-blog-post-header-info">
+                <div class="col-xs-10 group-blog-post-header-info">
                     <div class="media">
                         <div class="media-left">
-                            <div class="group-blog-post-header-avatar" style="background-image: url('{{asset(postProfilePicturePath)}}')"></div>
+                            <div class="media-object group-blog-post-header-avatar" style="background-image: url('{{asset(postProfilePicturePath)}}')"></div>
                         </div>
                         <div class="media-body">
                             <a class="group-blog-header-post-info-poster" href="{{ path('flowber_user_profile', { 'id' : post.createdBy.id } ) }}">
@@ -34,11 +46,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-3 group-blog-post-header-rating text-center">
-                    {% if (post.createdBy == app.user) %}
-                    <a data-toggle="modal" data-target="#modal-delete-post" href="#">Supprimer</a>
-                    <br><br>
-                    {% endif %}
+                <div class="col-xs-2 generic-post-header-actions">
+                    
                     
                     {% set userLike = 0 %}
                     
@@ -51,12 +60,12 @@
                     {% endif %}
                     
                     {% if userLike != 0 %}
-                        <a href="{{ path('unlike_post_group', { 'like_id' : userLike, 'post_id' : post.id} ) }}">
-                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime plus<br/>                                
+                        <a onmouseenter="likeSwitchHover({{post.id}})" onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" href="{{ path('unlike_post_group', { 'like_id' : userLike, 'post_id' : post.id} ) }}">
+                            <span id="postLike{{post.id}}" class="glyphicon glyphicon-heart generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> Je n'aime plus</span>                          
                         </a>
                     {% else %}   
-                        <a href="{{ path('like_post_group', { 'post_id' : post.id } ) }}">
-                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
+                        <a onmouseenter="likeSwitchHover({{post.id}})"  onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" href="{{ path('like_post_group', { 'post_id' : post.id } ) }}">
+                            <span id="postLike{{post.id}}"  class="glyphicon glyphicon-heart-empty generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> J'aime</span>
                         </a>
                     {% endif %}
                 </div>
@@ -68,7 +77,7 @@
                 {% endif %}
             </div>
             {% for comment in post.getComments() %}
-                {% set commentProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+                {% set commentProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
                 {% if comment.createdBy.profile.profilePicture is not null %}
                     {% set commentProfilePicturePath = comment.createdBy.profile.profilePicture.getWebPath() %}
                 {% endif %} 
@@ -77,18 +86,24 @@
                         <div class="media-left">
                             <div class="group-blog-post-comment-avatar" style="background-image: url('{{asset(commentProfilePicturePath)}}')"></div>
                         </div>
-                        <div class="media-body">
-                            <div class="group-blog-post-comment-poster">
-                                <a href="{{ path('flowber_user_profile', { 'id' : comment.createdBy.id } ) }}">{{comment.createdBy.firstname}} {{comment.createdBy.surname}}</a>
-                            </div>
+                        <div class="media-body container">
+                            <div class="row">
+                                <div class="col-xs-9 col-md-8">
+                                    <div class="group-blog-post-comment-poster">
+                                        <a href="{{ path('flowber_user_profile', { 'id' : comment.createdBy.id } ) }}">{{comment.createdBy.firstname}} {{comment.createdBy.surname}}</a>
+                                    </div>
 
-                            <div class="group-blog-post-comment-time">
-                                <span>{{ (comment.creationDate)|date("\\l\\e d/m/Y \à H:i")}}</span>
+                                    <div class="group-blog-post-comment-time">
+                                        <span>{{ (comment.creationDate)|date("\\l\\e d/m/Y \à H:i")}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-4 text-right">
+                                {% if (comment.createdBy == app.user) %}
+                                    <a data-toggle="modal" data-target="#modal-delete-comment" href="#"><span class="glyphicon glyphicon-trash generic-comment-action-icon"></span></a>
+                                    {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
+                                {% endif %}
+                                </div>
                             </div>
-                            {% if (comment.createdBy == app.user) %}
-                                <a data-toggle="modal" data-target="#modal-delete-comment" href="#">Supprimer</a>
-                                {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
-                            {% endif %}
                             <div class="group-blog-post-comment-content">
                                 <p>{{comment.message}}</p>
                             </div>

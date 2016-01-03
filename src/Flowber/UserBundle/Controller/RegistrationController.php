@@ -219,7 +219,7 @@ class RegistrationController extends BaseController{
                 $em->flush();
                 
                 // all set, redirecting to user profile!
-                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
             }
         }
 

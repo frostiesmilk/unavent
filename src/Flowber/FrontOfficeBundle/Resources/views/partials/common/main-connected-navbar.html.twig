@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('flowber_current_user_profile') }}">                  
+            <a class="navbar-brand" href="{{ path('flowber_profile_current_user') }}">                  
                 <!--<span><img alt="Unavent Logo" src="{{asset('images/unavent/logos/unavent-logo-50-white.png')}}"></span>-->
                 <span class="site-name">FlowBer</span>
             </a>
@@ -20,7 +20,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="content-navbar-main">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('flowber_current_user_profile') }}"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{ path('flowber_profile_current_user') }}"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true">
                         <span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Groupes
@@ -28,14 +28,14 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-large">
                         <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '7'}) }}">groupe 7</a></li>
-                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '8'}) }}">groupe 8</a></li>
-                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '9'}) }}">groupe 9</a></li>
-                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '10'}) }}">groupe 10</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '1'}) }}">groupe 1</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '2'}) }}">groupe 2</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '3'}) }}">groupe 3</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': '4'}) }}">groupe 4</a></li>
                         </ul>
                         <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="{{ path('flowber_create_group_homepage') }}">Créer un groupe</a></li>
-                            <li><a tabindex="-1" href="{{ path('wybe_front_office_look_for_event') }}">Chercher un groupe</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_group_create') }}">Créer un groupe</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_group_search') }}">Chercher un groupe</a></li>
                             <li><a tabindex="-1" href="{{ path('flowber_all_group_homepage') }}">Voir tous mes groupes </a></li>
                         </ul>
                     </ul>

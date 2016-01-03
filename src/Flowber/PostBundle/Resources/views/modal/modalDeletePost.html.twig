@@ -7,14 +7,19 @@
                 <h4 class="modal-title" id="myModalLabel">Etes vous sur de vouloir supprimer ce post  ?</h4>
             </div>
             <div class="modal-footer">
-                <a  href="{{ path('delete_post', { 'post_id' : post.id } ) }}"> 
-                    <button type="button" class="btn btn-default">
-                        Oui
+                <form method="delete" action="{{path('delete_post')}}">
+                    <input type="hidden" id="delete-post-id"/>
+                    <input type="hidden" id="delete-post-origin-entity" />
+                    <input type="hidden" id="delete-post-origin-id" />
+                    <!--<a  href="{{ path('delete_post', { 'post_id' : post.id } ) }}"> -->
+                        <button type="submit" class="btn btn-default">
+                            Oui
+                        </button>
+                    <!--</a>-->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Non
                     </button>
-                </a>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    Non
-                </button>
+                </form>
             </div>
         </div>
     </div>
