@@ -6,7 +6,7 @@
             <div class="event-details">
                 <h2>{{ result.getTitle()}}</h2>
                 {% if (result.getPostalAddress() is not null) and (result.getPostalAddress().getCoordinates() is not null) %}
-                <div id="map"></div>
+                <div id="map" class="gmap"></div>
                 {% endif %}                    
                 <table>
                     <tr>
@@ -71,16 +71,29 @@
                             <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/photo.png')}}" alt=""/> Ajouter une gallerie </a>
                         </li>
                     </ul>
-                     <!-- Tab panes -->
-                    <div role="tabpanel" class="tab-pane active" id="newpost">
-                        <form action="{{ path('add_post_event', { 'event_id' : result.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
-                            {{form_widget(postForm)}}
-                            <div class="event-blog-new-post-footer">
-                                <div class="event-blog-new-post-footer-confirm text-right">
-                                    <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+                        
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="newpost">
+                            <form action="{{ path('add_post_event', { 'event_id' : result.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
+                                {{form_widget(postForm)}}
+                                <div class="event-blog-new-post-footer">
+                                    <div class="event-blog-new-post-footer-confirm text-right">
+                                        <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>          
+                            </form>          
+                        </div>
+                        <div role="tabpanel" class="tab-pane " id="newphoto">
+                            <form>                
+                                Photo
+                                <div class="event-blog-new-post-footer">
+                                    <div class="event-blog-new-post-footer-confirm text-right">
+                                        <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+                                    </div>
+                                </div>
+                            </form>          
+                        </div>
                     </div>
                 </div>
 

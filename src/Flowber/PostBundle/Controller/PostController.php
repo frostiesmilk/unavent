@@ -217,17 +217,20 @@ class PostController extends Controller
         return $this->render('FlowberPostBundle:Default:index.html.twig', array('name' => $group_id));
     }
     
-    public function deletePostAction($post_id)
+    public function deletePostAction()
     {
-        $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($post_id);
-        $em = $this->getDoctrine()->getManager();
-        
-        if ($post->getCreatedBy = $this->getUser()){
-            $post->setStatut('0');
-            $em->persist($post);
-            $em->flush();
-        }
-        return $this->redirect($this->generateUrl('flowber_group_homepage', array('id' => $post->getGroups()->getId())));
+//        $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($post_id);
+//        $em = $this->getDoctrine()->getManager();
+//        
+//        if ($post->getCreatedBy() = $this->getUser()){
+//            $post->setStatut('0');
+//            $em->persist($post);
+//            $em->flush();
+//        }
+//        return $this->redirect($this->generateUrl('flowber_group_homepage', array('id' => $post->getGroups()->getId())));
+    
+//        $request = $this->get
+//        if($)
     }
     
     
@@ -236,7 +239,7 @@ class PostController extends Controller
         $comment = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Comment')->find($comment_id);
         $em = $this->getDoctrine()->getManager();
         
-        if ($comment->getCreatedBy() == $this->getUser()){
+        if ($comment->getCreatedBy == $this->getUser()){
             $comment->setStatut('0');
             $em->persist($comment);
             $em->flush();

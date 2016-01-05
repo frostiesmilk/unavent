@@ -25,6 +25,10 @@ and open the template in the editor.
   font-family: amaranthRegular;
   src: url(../../fonts/Amaranth-Regular.ttf);
 }
+/* all site */
+body {
+  font-size: 13px;
+}
 /* Colored backgrounds */
 .background-dark-blue {
   background-color: #293540;
@@ -199,12 +203,18 @@ and open the template in the editor.
 }
 .group-container .group-blog-posts .group-blog-post {
   border: 1px solid lightgrey;
-  padding-top: 20px;
   padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.group-container .group-blog-posts .group-blog-post .generic-post-delete-icon {
+  padding: 5px;
+  color: initial;
+  text-decoration: none;
 }
 .group-container .group-blog-posts .group-blog-post .group-blog-post-header {
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 20px;
 }
 .group-container .group-blog-posts .group-blog-post .group-blog-post-header .group-blog-post-header-avatar {
   background-position: center center;
@@ -214,8 +224,10 @@ and open the template in the editor.
   height: 50px;
   width: 50px;
 }
-.group-container .group-blog-posts .group-blog-post .group-blog-post-header .group-blog-post-header-rating img {
-  height: 20px;
+.group-container .group-blog-posts .group-blog-post .group-blog-post-header .generic-post-header-actions .generic-post-header-actions-icon {
+  text-decoration: none;
+  color: initial;
+  font-size: 1.3em;
 }
 .group-container .group-blog-posts .group-blog-post .group-blog-post-header .group-blog-post-header-info-time {
   color: grey;
@@ -233,7 +245,7 @@ and open the template in the editor.
   border-bottom: 1px solid lightgrey;
 }
 .group-container .group-blog-posts .group-blog-post .group-blog-post-comments {
-  padding-top: 5px;
+  padding: 5px;
   background-color: #F5F5F5;
   list-style: none;
   padding-left: 60px;
@@ -266,6 +278,10 @@ and open the template in the editor.
   .group-container .group-blog-posts .group-blog-post .group-blog-post-comments .group-blog-post-comment .group-blog-post-comment-time {
     display: inline;
   }
+}
+.group-container .group-blog-posts .group-blog-post .group-blog-post-comments .group-blog-post-comment .generic-comment-action-icon {
+  color: initial;
+  text-decoration: none;
 }
 .group-container .group-blog-posts .group-blog-post .group-blog-post-comments hr {
   margin-top: 0px;

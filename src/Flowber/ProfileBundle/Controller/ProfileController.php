@@ -85,7 +85,7 @@ class ProfileController extends Controller
 //                $em->persist($profile);
 //                $em->flush();
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
             }
         }
   
@@ -95,6 +95,39 @@ class ProfileController extends Controller
                     'coverPictureForm'=>$coverPictureForm->createView()));
     }
         
+        // retrieve user profile
+        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
+        
+        //preparing new cover picture
+        $coverPicture = new Photo();
+        $coverPictureForm = $this->createFormBuilder($coverPicture)
+            ->add('file',           'file', array(
+                    'required' => false,
+                    'data_class' => null))
+            //->add('save', 'submit', array('label' => 'Changer de photo de couverture'))
+            ->getForm();
+        
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') { 
+            $coverPictureForm->handleRequest($request);
+        
+            if($coverPictureForm->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                $coverPicture->addGallery($profile->getCoverGallery());
+                $profile->setCoverPicture($coverPicture);
+
+                $em->persist($coverPicture);
+                $em->persist($profile);
+                $em->flush();
+            }
+            // back to profile page
+            return $this->redirect($this->generateUrl('flowber_profile_current_user'));
+        }
+        
+        // render form
+        return $this->render('FlowberProfileBundle:Default:profileEditCoverPicture.html.twig', array('coverPictureForm' => $coverPictureForm->createView()));
+    }
+    
     /**
      * Get logged user profile
      * @return type

@@ -131,7 +131,6 @@
 $('.back-top').each(function(){
     $(this).click(function(){ 
         $('html,body').animate({ scrollTop: 0 }, 'fast');
-        console.log("yo");
         return false; 
     });
 });
@@ -168,4 +167,23 @@ $(function () {
 function autoClosingAlert(selector, delay) {
    var alert = $(selector).alert();
    window.setTimeout(function() { alert.alert('close') }, delay);
+}
+// auto closing alerts
+autoClosingAlert(".alert-autoclosing", 3000);
+
+/**
+ * Like button switch on hovering
+ */
+function likeSwitchHover(postId){
+    
+    // get class value of icon
+    var classValue = document.getElementById("postLike"+postId).className;
+    
+    if (classValue.includes("glyphicon-heart-empty")){ // if like empty
+        // fill it
+        document.getElementById("postLike"+postId).className = classValue.replace("glyphicon-heart-empty", "glyphicon-heart");
+    }else{
+        // it's already liked, empty it
+        document.getElementById("postLike"+postId).className = classValue.replace("glyphicon-heart", "glyphicon-heart-empty");
+    }
 }

@@ -1,7 +1,7 @@
 <ul class="nav nav-pills nav-justified menu-secondary">
-    <li><a href="{{ path('wybe_front_office_events', {'eventNameSlug': 'event1'}) }}"><i class="fa fa-newspaper-o"></i></a></li>
-    <li><a href="{{ path('wybe_front_office_events_member', {'eventNameSlug': 'event1'}) }}"><i class="fa fa-users"></i></a></li>
-    <li><a href="{{ path('wybe_front_office_events_gallery', {'eventNameSlug': 'event1'}) }}"><span class="glyphicon glyphicon-picture"></span></a></li>
+    <li><a href="{{ path('flowber_event_homepage', {'id': eventId}) }}"><i class="fa fa-newspaper-o"></i></a></li>
+    <li><a href="{{ path('flowber_event_participants', {'id': eventId}) }}"><i class="fa fa-users"></i></a></li>
+    <li><a href="{{ path('flowber_event_gallery', {'id': eventId}) }}"><span class="glyphicon glyphicon-picture"></span></a></li>
     <li><a href="#"><span class="fa fa-plus-square"></span></a></li>
     <li><a href="#"><i class="fa fa-calendar-plus-o"></i></a></li>
     <li>
@@ -9,10 +9,10 @@
         <ul class="dropdown-menu dropdown-menu-right">
             <li>
                 <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyer un message à l'organisateur">
-                    <img class="menu-link-icon" src="{{asset('bundles/flowberfrontoffice/images/icons/bubble-chat.png')}}"/> Envoyer un message à l'organisateur
+                    <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/> Envoyer un message à l'organisateur
                 </a>
             </li>
-            <li><a href="#"><img class="menu-link-icon" src="{{asset('bundles/flowberfrontoffice/images/icons/tag-person.png')}}"/> Iniviter un ami</a></li>
+            <li><a href="#"><img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/tag-person.png')}}"/> Iniviter un ami</a></li>
             <li>
                 <a class="back-top" href="#">
                     <span class="fa fa-caret-up"></span> Remonter la page

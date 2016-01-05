@@ -1,0 +1,42 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {# Put specific CSS below #}
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/create-event-page.css') }}"/> 
+{% endblock %}
+
+{% block body %}
+
+    <!-- Main menu -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <!-- Cover -->
+    <div class="jumbotron create-event-cover" style="background-image: url({{asset('assets/images/UserBundle/signIn/cover-streetsheeps.jpg')}})">    
+        <div class="container" >
+            <div class="row-fluid text-center">       
+                <h1 class="create-event-cover-title ">Recherchez votre prochaine aventure !</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                Rechercher
+            </div>
+        </div>
+    </div>
+    
+    <!-- footer -->                  
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}    
+    
+{% endblock %}

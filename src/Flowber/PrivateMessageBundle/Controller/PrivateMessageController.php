@@ -144,7 +144,7 @@ class PrivateMessageController extends Controller
                 $em->persist($privateMessage);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
             }
         }
         

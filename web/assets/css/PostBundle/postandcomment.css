@@ -96,4 +96,34 @@ and open the template in the editor.
 .form-error-custom span {
   color: #A94442;
 }
+.generic-new-post-navbar .generic-new-post-navbar-option {
+  width: 1%;
+  display: table-cell;
+}
+.generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable {
+  background-color: #293540;
+  border-radius: initial;
+  border: initial;
+  color: white;
+}
+.generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable:hover {
+  background-color: #1B242B;
+  border: initial;
+}
+.generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-icon {
+  height: 30px;
+  width: 30px;
+}
+@media (max-width: 768px) {
+  .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-label {
+    display: none;
+  }
+}
+.generic-new-post-navbar .active .generic-new-post-navbar-option-clickable {
+  background-color: #66A0BE !important;
+}
+.generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:hover,
+.generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:focus {
+  color: white;
+}
 /*# sourceMappingURL=postandcomment.css.map */

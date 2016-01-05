@@ -117,6 +117,9 @@ and open the template in the editor.
   padding-top: 50px;
   padding-bottom: 50px;
 }
+.user-profile .user-profile-resume .user-profile-interest-title {
+  margin-top: 0px;
+}
 .user-profile .user-profile-resume .user-profile-introduction-text-block {
   /*        
             margin: 0 auto;
@@ -375,6 +378,10 @@ and open the template in the editor.
 }
 .user-profile-friends .user-profile-friends-list .user-profile-friends-list-element .user-profile-friends-list-element-details .user-profile-friends-list-element-details-sendpm {
   padding: 2px 3px;
+}
+.profile-alert-box .alert {
+  margin-top: 20px;
+  margin-bottom: initial;
 }
 .modal {
   overflow: auto;

@@ -5,8 +5,9 @@ namespace Flowber\GroupBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
-use Flowber\GroupBundle\Form\GroupsType;
 use Flowber\GalleryBundle\Entity\Photo;
+use Flowber\GroupBundle\Form\GroupsType;
+use Flowber\GroupBundle\Entity\Groups;
 use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\CommentType;
@@ -119,7 +120,7 @@ class GroupController extends Controller
         }   
         
         // preparing profile to be edited
-        $group = new \Flowber\GroupBundle\Entity\Groups;
+        $group = new Groups();
         //$group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->findOneByUser($user);
         $groupForm = $this->createForm(new GroupsType, $group);
         
@@ -266,5 +267,12 @@ class GroupController extends Controller
                     'subtitle' => $group->getSubtitle(), 
                     'profilePicture' => $profilePicture, 
                     'coverPicture' => $coverPicture ));
+    }
+    
+    public function groupSearchAction(){
+
+        
+         return $this->render('FlowberGroupBundle:Default:groupSearch.html.twig', 
+                array());
     }
 }

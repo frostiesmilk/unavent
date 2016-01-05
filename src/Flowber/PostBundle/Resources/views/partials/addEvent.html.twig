@@ -3,8 +3,8 @@
 <div role="tabpanel" class="tab-pane group-blog-new-post-event" id="newevent">
     <form action="{{ path('add_post_with_event', { 'group_id' : id } ) }}" method="post" {{ form_enctype(postWithEventForm) }}> 
         <div class="form-group row">
-            <label for="event-title" class="col-sm-2 control-label text-right">Ajouter un commentaire</label>
-            <div class="col-sm-10">
+            <label for="event-title" class="col-sm-3 control-label text-right">Ajouter un commentaire</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.message)}}
             </div>
         </div>
@@ -19,74 +19,74 @@
             </div>
             {% endif %}
         <div class="form-group row">
-            <label for="event-title" class="col-sm-2 control-label text-right">Titre *</label>
-            <div class="col-sm-10">
+            <label for="event-title" class="col-sm-3 control-label text-right">Titre *</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.title)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-tease" class="col-sm-2 control-label">Phrase d'accroche</label>
-            <div class="col-sm-10">
+            <label for="event-tease" class="col-sm-3 control-label text-right">Phrase d'accroche</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.subtitle)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-category" class="col-md-2 control-label">Catégories</label>            
-            <div class="col-md-10">
+            <label for="event-category" class="col-sm-3 control-label text-right">Catégories</label>            
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.categories)}}
             </div>
         </div>             
         <div class="form-group row">
-            <label for="event-description" class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-10">
+            <label for="event-description" class="col-sm-3 control-label text-right">Description</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.description)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-description" class="col-sm-2 control-label">{{form_label(postWithEventForm.event.maxParticipants)}}</label>
-            <div class="col-sm-10">
+            <label for="event-description" class="col-sm-3 control-label text-right">{{form_label(postWithEventForm.event.maxParticipants)}}</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.maxParticipants)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-location" class="col-sm-2 control-label">Lieu</label>
-            <div class="col-sm-10">
+            <label for="event-location" class="col-sm-3 control-label text-right">Lieu</label>
+            <div class="col-sm-9">
                 <input id="pac-input" class="autocomplete-map-controls" type="text"
                     placeholder="Enter a location">
                <div id="map" class="gmap"></div>           
            </div> 
         </div> 
          <div class="form-group row">
-            <label for="event-place-name" class="col-sm-2 control-label">Nom</label>
-            <div class="col-sm-10">
+            <label for="event-place-name" class="col-sm-3 control-label text-right">Nom</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.postalAddress.name)}}
             </div>
         </div>                     
         <div class="form-group row">
-            <label for="event-address" class="col-sm-2 control-label">Adresse</label>
-            <div class="col-sm-10">
+            <label for="event-address" class="col-sm-3 control-label text-right">Adresse</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.postalAddress.address)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-city" class="col-sm-2 control-label">Ville</label>
-            <div class="col-sm-10">
+            <label for="event-city" class="col-sm-3 control-label text-right">Ville</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.postalAddress.city)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-zipcode" class="col-sm-2 control-label">Code postal</label>
+            <label for="event-zipcode" class="col-sm-3 control-label  text-right">Code postal</label>
             <div class="col-sm-3">
                 {{form_widget(postWithEventForm.event.postalAddress.zipcode)}}
             </div>
-            <label for="event-country" class="col-sm-2 control-label">Pays</label>
-            <div class="col-sm-5">
+            <label for="event-country" class="col-sm-2 control-label  text-right">Pays</label>
+            <div class="col-sm-4">
                 {{form_widget(postWithEventForm.event.postalAddress.country)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-date" class="col-sm-2 control-label">Début *</label>
-            <div class="col-sm-10 form-inline">
+            <label for="event-date" class="col-sm-3 control-label  text-right">Début *</label>
+            <div class="col-sm-9 form-inline">
                 <div class="form-inline">
                     <div class="input-group">
                         {{form_widget(postWithEventForm.event.startDate, {'attr': {'placeholder': 'Date de début'}})}} 
@@ -104,8 +104,8 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-date" class="col-sm-2 control-label">Fin</label>
-            <div class="col-sm-10 form-inline">
+            <label for="event-date" class="col-sm-3 control-label  text-right">Fin</label>
+            <div class="col-sm-9 form-inline">
                 <div class="form-inline">
                     <div class="input-group">
                         {{form_widget(postWithEventForm.event.endDate, {'attr': {'placeholder': 'Date de fin'}})}} 
@@ -123,14 +123,14 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 control-label">Visibilité *</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label  text-right">Visibilité *</label>
+            <div class="col-sm-9">
                 {{form_widget(postWithEventForm.event.privacy, {'label_attr':{'class':'radio-inline'}})}}
             </div>
         </div>
         {{form_widget(postWithEventForm.event.postalAddress.coordinates)}}
         <div class="form-group row">                
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-3 col-sm-9">
                 <button type="submit" class="btn btn-default event-submit">Continuer</button>
             </div>
         </div>

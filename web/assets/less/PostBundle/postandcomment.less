@@ -9,3 +9,38 @@ and open the template in the editor.
 */
 
 @import "../FrontOfficeBundle/frontoffice-common";
+
+.generic-new-post-navbar{        
+    .generic-new-post-navbar-option{
+        width: 1%; // inline trick
+        display: table-cell; // inline trick
+        .generic-new-post-navbar-option-clickable{
+            background-color: @dark-blue;
+            border-radius: initial;
+            border: initial;
+            color: white;
+        }                
+        .generic-new-post-navbar-option-clickable:hover{
+            background-color: @dark-blue-alt;
+            border: initial;
+        }
+        .generic-new-post-navbar-option-icon{
+            height: 30px;
+            width: 30px;
+        }
+        .generic-new-post-navbar-option-label{
+            @media(max-width: 768px){
+                display: none;
+            }
+        }
+    }
+    .active{
+        .generic-new-post-navbar-option-clickable{
+            background-color: @blue-alt!important;                    
+        }
+        
+        .generic-new-post-navbar-option-clickable:hover, .generic-new-post-navbar-option-clickable:focus{
+            color: white;
+        }
+    }
+}

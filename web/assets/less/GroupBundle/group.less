@@ -124,11 +124,18 @@ and open the template in the editor.
         padding-left: initial;
         .group-blog-post{
             border: 1px solid lightgrey;
-            padding-top: 20px;
             padding-bottom: 20px;
+            margin-bottom:20px;
+            .generic-post-delete-icon{
+                padding: 5px;
+                color: initial;
+                text-decoration: none;
+            }
+            
             .group-blog-post-header{    
                 padding-left: 20px;
                 padding-right: 20px;
+                padding-top: 20px;
                 .group-blog-post-header-avatar{                
                     background-position: center center;
                     background-repeat: no repeat;
@@ -137,11 +144,14 @@ and open the template in the editor.
                     height: 50px;
                     width: 50px;
                 }
-                .group-blog-post-header-rating{
-                    img{
-                        height: 20px;
+                .generic-post-header-actions{
+                    .generic-post-header-actions-icon{
+                        text-decoration: none;
+                        color: initial;
+                        font-size: 1.3em;
                     }
                 }
+                
                 .group-blog-post-header-info-time{        
                     color: grey;
                     font-size: 0.8em;
@@ -160,7 +170,7 @@ and open the template in the editor.
             }
 
             .group-blog-post-comments{
-                padding-top: 5px;
+                padding: 5px;
                 background-color: @light-grey-background;
                 list-style: none;
                 padding-left: 60px;
@@ -188,6 +198,11 @@ and open the template in the editor.
                         }
                         color: grey;
                         font-size: 0.8em;
+                    }
+                    
+                    .generic-comment-action-icon{
+                        color: initial;
+                        text-decoration: none;
                     }
                 }
                 hr{

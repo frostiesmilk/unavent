@@ -316,6 +316,11 @@ and open the template in the editor.
   margin: -5px 0px;
 }
 /* Second navbar */
+@media (max-width: 992px) {
+  #nav-stick-sticky-wrapper {
+    display: none;
+  }
+}
 .navbar-second {
   background-color: #E74C3C;
   border: initial;
@@ -392,7 +397,7 @@ and open the template in the editor.
 }
 @media (max-width: 992px) {
   .generic-cover {
-    margin-top: 80px;
+    margin-top: 88px!important;
   }
 }
 .generic-cover .generic-cover-profile-picture {
@@ -403,16 +408,14 @@ and open the template in the editor.
   background-size: cover;
   height: 190px;
   width: 190px;
+  /*        @media(max-width: 640px){
+            display: none;
+        }*/
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .generic-cover .generic-cover-profile-picture {
-    height: 180px;
-    width: 180px;
-  }
-}
-@media (max-width: 640px) {
-  .generic-cover .generic-cover-profile-picture {
-    display: none;
+    height: 155px;
+    width: 155px;
   }
 }
 .generic-cover .generic-cover-title {
@@ -424,10 +427,13 @@ and open the template in the editor.
 .generic-cover .generic-cover-title .generic-cover-title-name {
   text-shadow: 0.2em 0.2em 0.2em black;
   font-size: 41px;
+  /*            @media(max-width: 768px){
+                margin-top: 0px;
+            }*/
 }
 @media (max-width: 768px) {
   .generic-cover .generic-cover-title .generic-cover-title-name {
-    margin-top: 0px;
+    font-size: 20px;
   }
 }
 .generic-cover .generic-cover-title .generic-cover-title-description {
@@ -435,7 +441,6 @@ and open the template in the editor.
 }
 .generic-cover .generic-cover-edit-button {
   display: inline-block;
-  float: right;
 }
 .generic-cover .generic-cover-edit-button .btn {
   background-color: rgba(255, 255, 255, 0.3);

@@ -50,11 +50,11 @@
                     
                     {% if userLike != 0 %}
                         <a href="{{ path('unlike_post_event', { 'like_id' : userLike, 'post_id' : post.id} ) }}">
-                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime plus<br/>                                
+                            <img class="" src="{{asset('assets/images/FrontOfficeBundle/icons/like-heart.png')}}" alt="J'aime"/> Je n'aime plus<br/>                                
                         </a>
                     {% else %}   
                         <a href="{{ path('like_post_event', { 'post_id' : post.id } ) }}">
-                            <img class="" src="{{asset('bundles/wybefrontoffice/images/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
+                            <img class="" src="{{asset('assets/images/FrontOfficeBundle/icons/like-heart.png')}}" alt="J'aime"/> J'aime<br/>
                         </a>
                     {% endif %}
                 </div>
@@ -63,7 +63,7 @@
                 <p>{{post.message}}</p>
             </div>
             {% for comment in post.getComments() %}
-                {% set commentProfilePicturePath = 'bundles/flowberprofile/images/Default/profilePictureDefault.png' %} {# default User Cover #}
+                {% set commentProfilePicturePath = 'assets/images/ProfileBundle//Default/profilePictureDefault.png' %} {# default User Cover #}
                 {% if comment.createdBy.profile.profilePicture is not null %}
                     {% set commentProfilePicturePath = comment.createdBy.profile.profilePicture.getWebPath() %}
                 {% endif %} 
@@ -81,7 +81,7 @@
                                 <span>{{ (comment.creationDate)|date("\\l\\e d/m/Y \à H:i")}}</span>
                             </div>
                             {% if (comment.createdBy == app.user) %}
-                                <a data-toggle="modal" data-target="#modal-delete-comment" href="#">Supprimer</a>
+                                <a data-toggle="modal" data-target="#modal-delete-comment" href="#"><span class="glyphicon glyphicon-trash"></span>Supprimer</a>
                                 {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
                             {% endif %}
                             <div class="event-blog-post-comment-content">
