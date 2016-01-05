@@ -37,6 +37,12 @@ flowber_front_office:
 flowber_user:
     resource: "@FlowberUserBundle/Resources/config/routing.yml"
     prefix:   /user
+    
+#REST 
+rest : 
+    type : rest 
+    resource : "routing_rest.yml"
+    prefix : /api
 
 wybe_front_office:
     resource: "@WybeFrontOfficeBundle/Resources/config/routing.yml"
