@@ -53,7 +53,7 @@ class PostRepository extends EntityRepository
     
     /*
      * Récupère les commentaire
-     * Return id, message, , nom du created by, photo du created by, creationdate
+     * Return id, message, nom du created by, photo du created by, creationdate
      */    
     public function getCommentFromPost($postId){
         $qb = $this->_em->createQueryBuilder();

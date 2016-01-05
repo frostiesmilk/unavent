@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Phone
  *
- * @ORM\Table()
  * @ORM\Entity(repositoryClass="Flowber\UserBundle\Entity\FriendshipRepository")
+ * @ORM\Table()
  */
 class Friendship
 {

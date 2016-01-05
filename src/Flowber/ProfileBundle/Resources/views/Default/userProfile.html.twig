@@ -1,0 +1,90 @@
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/profile.css') }}"/> 
+{% endblock %}
+
+{# Menus for small screens #}
+{% block smallMenu %}
+    {# Parent is main menu #}
+    {{parent()}}
+    
+    {# Following is second menu for small screen as well #}
+    <ul class="nav nav-pills nav-justified menu-secondary">
+        <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ user.name }}"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+        <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ user.name }}"><span class="glyphicon glyphicon-list"></span></a></li>
+        <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ user.name }}"><span class="glyphicon glyphicon-apple"></span></a></li>
+        <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ user.name }}"> <span class="glyphicon glyphicon-picture"></span></a></li>
+        <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ user.name }}"><i class="fa fa-users"></i></a></li>
+        <li>
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ user.name }}">
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> Envoyer un clin d'oeil
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ user.name }}">
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/> Envoyer un message
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.name }}comme ami">
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/add-user.png')}}"/> Ajouter en ami
+                    </a>
+                </li>
+                <li>
+                    <a class="back-top" href="#">>
+                        <span class="fa fa-caret-up"></span> Remonter la page
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- END small screen menu -->
+{% endblock %}
+
+{% block body %}
+
+    <!-- Main menu -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
+                            
+    <!-- User Cover -->  
+    {% include 'FlowberProfileBundle::partials/userProfile/cover.html.twig' %}           
+                
+    <!-- Second menu -->
+    {% include 'FlowberProfileBundle::partials/userProfile/menu.html.twig' %} 
+    
+    <!-- Top alerts -->
+    {% include 'FlowberProfileBundle::partials/userProfile/profileAlerts.html.twig' %} 
+    
+    <!-- Fiche -->
+    {% include 'FlowberProfileBundle::partials/userProfile/presentationSheet.html.twig' %}           
+    
+    <!-- My groups -->
+    {% include 'FlowberProfileBundle::partials/userProfile/groups.html.twig' %}           
+                                
+    <!-- My events-->                            
+    {% include 'FlowberProfileBundle::partials/userProfile/events.html.twig' %}
+    
+    <!-- My gallery modal-->
+    {% include 'FlowberGalleryBundle::partials/galleries.html.twig' %}
+    
+    <!-- My friends-->                            
+    {% include 'FlowberProfileBundle::partials/userProfile/friends.html.twig' %}           
+
+    <!-- Footer -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}    
+        
+    <!--<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="{{ asset('assets/js/GalleryBundle/bootstrap-image-gallery.js') }}"></script>
+    <script src="{{ asset('assets/js/GalleryBundle/blueimp-gallery.js') }}"></script>-->
+{% endblock %}

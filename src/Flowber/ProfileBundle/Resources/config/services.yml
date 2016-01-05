@@ -1,1 +1,4 @@
 services:
+    flowber_profile.profile:
+        class: Flowber\ProfileBundle\Manager\ProfileManager
+        arguments: [@doctrine.orm.entity_manager] 

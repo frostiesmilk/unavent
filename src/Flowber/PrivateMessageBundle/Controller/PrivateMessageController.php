@@ -8,7 +8,7 @@ use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 
 class PrivateMessageController extends Controller
 {
-    public function messageReceivedAction()
+    public function getAllMessagesReceivedAction()
     {
         $user = $this->getUser();
         
@@ -28,7 +28,7 @@ class PrivateMessageController extends Controller
             ));
     }
     
-    public function messageSendAction()
+    public function getAllMessagesSendAction()
     {
         $user = $this->getUser();
         
@@ -48,7 +48,7 @@ class PrivateMessageController extends Controller
                 ));
     }
     
-    public function messageDeletedAction()
+    public function getAllMessagesDeletedAction()
     {
         $user = $this->getUser();
         

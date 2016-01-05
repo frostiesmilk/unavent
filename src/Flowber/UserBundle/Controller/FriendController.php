@@ -70,8 +70,8 @@ class FriendController extends Controller
     public function acceptFriendRequestAction($id)
     {
         $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
-        $friendship = $userReposit->getFriendship($user, $this->getUser());
+        $friendshipReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:Friendship');
+        $friendship = $friendshipReposit->getFriendship($user, $this->getUser());
         $iAm = $this->getUser();
         
         if($friendship->getStatut() == "send"){

@@ -70,15 +70,39 @@ class FriendshipRepository extends EntityRepository
     
     /*
      * Récupère les amis confirmés d'un utilisateur
-     * Return array[id]
+     * Return name and id of the friends of $user
      */
-    public function getFriendsId(User $user){
+    public function getFriendsForProfile(User $user){
+       
+        $query = $this->_em->createQuery(
+            'SELECT concat(concat(user.firstname, :espace), user.surname) as name, user.id
+            FROM FlowberUserBundle:Friendship fs
+            JOIN FlowberUserBundle:User user
+            WHERE fs.friend = user.id
+            AND fs.statut = :statut
+            WHERE fs.user = :user'
+        )->setParameter('user', $user)
+        ->setParameter('statut', 'ok')
+        ->setParameter('espace', ' ');
+        return $query->getResult();   
+    
+        
     }
     
     /*
      * Récupère le nombre d'ami d'un utilisateur
      * Return entier
      */
-    public function getFriendsNumber(User $user){
+    public function getFriendsNumber($user){
+        
+        $qb = $this->_em->createQueryBuilder();
+        
+        $qb->select('a')
+            ->from('FlowberUserBundle:Friendship', 'a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('a.statut = :statut')
+            ->setParameter('statut', 'ok');            
+        return count($qb->getQuery()->getResult());
     }
 }

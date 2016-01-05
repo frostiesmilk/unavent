@@ -1,19 +1,19 @@
 flowber_event_homepage:
     path:     /sortie/{id}
-    defaults: { _controller: FlowberEventBundle:Event:eventPage }
+    defaults: { _controller: FlowberEventBundle:Event:getEventPage }
     
 flowber_event_participants:
     path:     /sortie/{id}/participants
-    defaults: { _controller: FlowberEventBundle:Event:eventParticipantsPage }
+    defaults: { _controller: FlowberEventBundle:Event:getEventParticipantsPage }
     
 flowber_event_gallery:
     path:     /sortie/{id}/gallerie
-    defaults: { _controller: FlowberEventBundle:Event:eventGalleryPage }
+    defaults: { _controller: FlowberEventBundle:Event:getEventGalleryPage }
 
 flowber_create_event_homepage:
     path:     /nouvelle_sortie
-    defaults: { _controller: FlowberEventBundle:Event:createEvent }
+    defaults: { _controller: FlowberEventBundle:Event:getCreateEvent }
 
 flowber_all_event_homepage:
     path:     /toutes_mes_sorties
-    defaults: { _controller: FlowberEventBundle:Event:allEventsPage }
+    defaults: { _controller: FlowberEventBundle:Event:getAllEventsPage }

@@ -1,4 +1,0 @@
-services:
-#    flowber_gallery.example:
-#        class: Flowber\GalleryBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
