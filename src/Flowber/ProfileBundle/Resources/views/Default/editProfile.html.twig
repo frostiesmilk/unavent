@@ -7,7 +7,7 @@
 
 {% block smallMenu %}
     {{parent()}}
-    {% include 'FlowberProfileBundle::partials/profileEditNavbarSmall.html.twig' %}
+    {% include 'FlowberProfileBundle::partials/editProfile/profileEditNavbarSmall.html.twig' %}
 {% endblock %}
 
 {% block body %}
@@ -15,13 +15,13 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- Profile edit Cover -->  
-    {% include 'FlowberProfileBundle::partials/profileEditCover.html.twig' %}
+    {% include 'FlowberProfileBundle::partials/editProfile/profileEditCover.html.twig' %}
         
     <!-- Second navbar -->
-    {% include 'FlowberProfileBundle::partials/profileEditNavbar.html.twig' %}
+    {% include 'FlowberProfileBundle::partials/editProfile/profileEditNavbar.html.twig' %}
     
     <!-- Formulaire -->
-    {% include 'FlowberProfileBundle::partials/profileEditFormMain.html.twig' %}
+    {% include 'FlowberProfileBundle::partials/editProfile/profileEditFormMain.html.twig' %}
 
     <!-- Footer -->
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}

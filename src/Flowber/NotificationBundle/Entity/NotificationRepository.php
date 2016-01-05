@@ -3,6 +3,7 @@
 namespace Flowber\NotificationBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Flowber\UserBundle\Entity\User;
 
 /**
  * NotificationRepository
@@ -12,4 +13,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class NotificationRepository extends EntityRepository
 {
+    /*
+     * Récupère les notifications d'un utilisateur
+     * Return entities notifications
+     * Order by creationDate desc 
+     * limit 10
+     */    
+    public function getUserNotification(User $user){
+        $qb = $this->_em->createQueryBuilder();
+        
+        return $qb->getQuery()
+                  ->getResult();
+    }
 }

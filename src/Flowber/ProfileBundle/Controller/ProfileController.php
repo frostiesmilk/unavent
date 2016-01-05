@@ -89,24 +89,11 @@ class ProfileController extends Controller
             }
         }
   
-        return $this->render('FlowberProfileBundle:Default:profileEditMain.html.twig', 
+        return $this->render('FlowberProfileBundle:Default:editProfile.html.twig', 
                 array('profileForm' => $profileForm->createView(),
                     'profilePictureForm'=>$profilePictureForm->createView(),
                     'coverPictureForm'=>$coverPictureForm->createView()));
     }
-    
-    /**
-     * Profile Cover Picture form
-     * @return type
-     * @throws AccessDeniedException
-     */
-    public function editProfileCoverPictureAction(){
-        // retrieve user
-        $user = $this->getUser();        
-
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
         
         // retrieve user profile
         $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
@@ -149,46 +136,59 @@ class ProfileController extends Controller
      */
     public function getCurrentUserProfileAction() {
         $user = $this->getUser();
-      
+        
         if (!is_object($user)) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
-
-        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
         
+        $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
+        $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
+
         if (empty($profile)) {
             throw new NotFoundHttpException("Le profil de l'utilisateur ".$profile->getUser()->getFirstname()." n'existe pas.");
         }    
-        
 
-
-        return $this->render('FlowberProfileBundle:Default:myProfile.html.twig', 
+        return $this->render('FlowberProfileBundle:Default:currentUserProfile.html.twig', 
                 array(
-                    'user' => $user, 
-                    "profile" => $profile
+                    'user' => $profile,
+                    'friends' => $friends,
                 ));
     }
     
     
     public function getUserProfileAction($id) {
-
-        $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-
-      
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }   
-
-        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
+        $currentUser = $this->getUser();
+        $user = $this->container->get('flowber_profile.profile')->getUser($id);        
         
-        if (empty($profile)) {
-            throw new NotFoundHttpException("Le profil de l'utilisateur".$profile->getUser()->getFirstname()." n'existe pas.");
-        }            
+        // Si on veut afficher son profil
+        if ($currentUser == $user){
+            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+        }
         
+        $user = $this->container->get('flowber_profile.profile')->getUser($id);        
+        $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
+        $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
+        
+        $friendshipReposit = $this->container->get('flowber_profile.profile')->getFriendshipRepository(); 
+        
+        $isFriend = $friendshipReposit->isFriendWithMe($user, $this->getUser());
+        $requestFriend = $friendshipReposit->hasSentAFriendRequest($user, $this->getUser());
+        
+        if ($requestFriend != 0){
+            $this->addFlash( 'addFriend',$user->getFirstName()." ". $user->getSurName()." a envoyé une demande d'ami.");
+        } 
+        if ($friendshipReposit->hasSentAFriendRequest($this->getUser(), $user) != 0){
+            $this->addFlash('success', "Votre demande d'ami à ". $user->getFirstName()." ". $user->getSurName()." a bien été envoyée.");
+            $requestFriend=-1;
+        }
+//      $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
+        
+        // IF A PRIVATE MESSAGE HAS BEEN SENT
         $privateMessage = new PrivateMessage;
         $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
 
         $request = $this->get('request');
+        
         // if form has been submitted
         if ($request->getMethod() == 'POST') { 
             $privateMessageForm->handleRequest($request);
@@ -199,46 +199,20 @@ class ProfileController extends Controller
                 $privateMessage->setUserTo($user);
                 $em->persist($privateMessage);
                 $em->flush();
+                $this->addFlash( 'success',"Votre message a bien envoyé.");
 
-                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
+                return $this->redirect($this->generateUrl('flowber_user_profile', array('id' => $id)));
             }
         }
-        
-        $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
-        
-        $friendshipReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:Friendship');
-        
-        $isFriend = $friendshipReposit->isFriendWithMe($user, $this->getUser());
-        $requestReceived = $friendshipReposit->hasSentAFriendRequest($user, $this->getUser());
-        $requestSent = $friendshipReposit->hasSentAFriendRequest($this->getUser(), $user);
-        
-        if ($requestReceived != 0){
-            // message bag
-            $this->addFlash(
-                'addFriend',
-                $user->getFirstName()." ". $user->getSurName()." a envoyé une demande d'ami."
-            );
-        }
-        if ($requestSent != 0){
-            // message bag
-            $this->addFlash(
-                'success',
-                "Votre demande d'ami à ". $user->getFirstName()." ". $user->getSurName()." a bien été envoyée."
-            );
-            $requestReceived=-1;
-        }   
-        
+        // END IF A PRIVATE MESSAGE HAS BEEN SENT 
 
-        return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
+        return $this->render('FlowberProfileBundle:Default:userProfile.html.twig', 
                 array(
-                    'user' => $user,
-                    'id' => $id,
-                    'profile' => $profile,
+                    'user' => $profile,
                     'messageForm' => $privateMessageForm->createView(),
                     'isFriend' => $isFriend,
-                    'sendRequest' => $requestReceived
+                    'sendRequest' => $requestFriend,
+                    'friends' => $friends,
                 ));
     }
-    
-
 }

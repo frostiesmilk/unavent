@@ -16,7 +16,7 @@ use Flowber\PostBundle\Form\CommentType;
 
 class EventController extends Controller
 {
-    public function eventPageAction($id)
+    public function getEventPageAction($id)
     {  
         $repository = $this->getDoctrine()
                    ->getManager()
@@ -102,7 +102,7 @@ class EventController extends Controller
         );
     }
     
-    public function eventParticipantsPageAction($id){
+    public function getEventParticipantsPageAction($id){
         $repository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('FlowberEventBundle:Event');
@@ -125,7 +125,7 @@ class EventController extends Controller
                 'coverPicture' => $coverPicture));
     }
     
-    public function eventGalleryPageAction($id){
+    public function getEventGalleryPageAction($id){
         $repository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('FlowberEventBundle:Event');
@@ -148,7 +148,7 @@ class EventController extends Controller
                 'coverPicture' => $coverPicture));
     }
     
-    public function createEventAction()
+    public function getCreateEventAction()
     {
         $user = $this->getUser();        
         $error = FALSE;
@@ -221,7 +221,7 @@ class EventController extends Controller
         ));
     }
     
-    public function allEventsPageAction()
+    public function getAllEventsPageAction()
     {
         $user = $this->getUser();        
 

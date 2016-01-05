@@ -15,12 +15,36 @@ class ProfileRepository extends EntityRepository
 {
     /*
      * Récupère la phrase d'accroche et la description
-     * Return subtitle, job, description, creationDaten photo de profil, photo de couverture
+     * Return subtitle
      */
-    public function getUserInfoForProfile($id){
-        
+    public function getSubtitle($user){
+        $query = $this->_em->createQuery(
+            'SELECT profile.subtitle
+            FROM FlowberProfileBundle:Profile profile
+            WHERE profile.user = :user'
+        )->setParameter('user', $user);
+
+        return $query->getSingleResult();   
     }
     
+    /*
+     * Récupère la phrase d'accroche et la description
+     * Return subtitle, job, description, creationDaten
+     */
+    public function getProfileInfos($user){
+        $query = $this->_em->createQuery(
+            'SELECT profile.subtitle, profile.job, profile.description, profile.creationDate, concat(concat(user.firstname, :espace), user.surname) as name,
+                user.birthdate, user.sex, user.id
+            FROM FlowberProfileBundle:Profile profile
+            JOIN FlowberUserBundle:User user
+            WHERE profile.user = :user
+            WHERE profile.user = user.id'
+        )->setParameter('user', $user)
+        ->setParameter('espace', ' ');
+
+        return $query->getSingleResult();   
+    }
+        
     /*
      * Récupère les hobbies de l'utilisateur
      * Return title, percent, description
@@ -28,12 +52,4 @@ class ProfileRepository extends EntityRepository
     public function getUserHobbies(User $user){
         
     }
-    
-    /*
-     * Récupère la photo de profil de l'utilisateur
-     * Return webpath de photo de profil
-     */
-    public function getUserProfilePic(User $user){
-        
-    }  
 }
