@@ -5,11 +5,19 @@ namespace Flowber\GroupBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Flowber\GalleryBundle\Entity\Gallery;
 
+// REST & JMSserializer
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups as AnnotGroups;
+use JMS\Serializer\Annotation\VirtualProperty;
+
 /**
  * Groups
  *
  * @ORM\Table()
  * @ORM\Entity (repositoryClass="Flowber\GroupBundle\Entity\GroupRepository")
+ * 
+ * @ExclusionPolicy("all")
  */
 class Groups
 {
@@ -19,6 +27,8 @@ class Groups
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @Expose
      */
     private $id;
 
@@ -26,6 +36,8 @@ class Groups
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * 
+     * @Expose
      */
     private $title;
 
@@ -33,6 +45,8 @@ class Groups
      * @var string
      *
      * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
+     * 
+     * @Expose
      */
     private $subtitle;
 
@@ -40,6 +54,8 @@ class Groups
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * 
+     * @Expose
      */
     private $description;
 
@@ -214,6 +230,23 @@ class Groups
         return $this->categories;
     }
 
+    /**
+     * Get Group categories titles
+     * @return string array
+     * 
+     * @VirtualProperty
+     */
+    public function getCategoriesTitle(){
+        $categories_titles = array();
+        $categories = $this->getCategories();
+        
+        foreach($categories AS $category){
+            $categories_titles[] = $category->getTitle();
+        }
+        
+        return $categories_titles;
+    }
+    
     /**
      * Set createdBy
      *
