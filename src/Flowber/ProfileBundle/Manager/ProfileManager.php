@@ -87,8 +87,13 @@ class ProfileManager extends BaseManager {
         $profileInfos = $this->getProfileRepository()->getProfileInfos($user);      
         $profileInfos['coverPicture'] = $this->getCoverPicture($user);
         $profileInfos['profilePicture'] = $this->getProfilePicture($user);
-        $profileInfos['city'] = $postalAdress->getCity();
-        $profileInfos['zipcode'] = $postalAdress->getZipcode();
+        if (!is_object($postalAdress)){
+            $profileInfos['city'] = '';
+            $profileInfos['zipcode'] = '';           
+        } else {
+            $profileInfos['city'] = $postalAdress->getCity();
+            $profileInfos['zipcode'] = $postalAdress->getZipcode();
+        }
         $profileInfos['hobbies'] = $user->getProfile($user)->getHobbies();
 
         return $profileInfos;

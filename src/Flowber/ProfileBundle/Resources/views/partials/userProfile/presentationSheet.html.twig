@@ -9,7 +9,10 @@
                         <h3 class="name">{{ user.name }} </h3>
                         <p class="user-job">{{ user.job }}</p>
                         <p> {{ user.birthdate|date("d/m/Y") }} (23 ans)<br/>
-                            {{ user.city }} ( {{ user.zipcode|number_format(0, '', '') }} )
+                            {{ user.city }} 
+                            {% if user.zipcode != '' %}
+                                ( {{ user.zipcode|number_format(0, '', '') }} )
+                            {% endif %}                               
                         </p>
                     </div>
                     <div class="user-profile-description">
