@@ -10,7 +10,7 @@
         {% if post.createdBy.profile.profilePicture is not null %}
             {% set postProfilePicturePath = post.createdBy.profile.profilePicture.getWebPath() %}
         {% endif %} 
-        <li class="group-blog-post">
+        <li id="post-{{post.id}}" class="group-blog-post">
             <div class="row">
                 <div class="col-xs-12 text-right">
                     {% if (post.createdBy == app.user) %}

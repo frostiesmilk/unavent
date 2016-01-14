@@ -1,0 +1,15 @@
+#src/Flowber/PostBundle/Resources/config/routing_rest.yml
+post : 
+    type: rest
+    resource:     "FlowberPostBundle:PostRest"
+    name_prefix:  api_
+    options:
+        expose: true
+        
+#api_flowber_post_delete:
+#    pattern:  /posts/{postId}
+#    defaults: { _controller: FlowberPostBundle:PostRest:deletePostCustom, _format: ~ }
+#    options:
+#        expose: true
+#    requirements:
+#        _method: DELETE
