@@ -6,9 +6,49 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Util\Codes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use Flowber\PostBundle\Entity\Post;
+use Flowber\PostBundle\Form\PostType;
 
 class PostRestController extends Controller
 {
+    
+    /**
+     * Create new post
+     * @param Request $request
+     * @return View
+     */
+    public function postPostAction(Request $request){
+        $post = new Post();
+        $form = $this->createForm(new PostType(), $post);
+        $form->bind($request);
+        
+        $view = new ResponseView();// preparing response
+        
+        if($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            
+            try{
+                $em->persist($post);
+                $em->flush();
+                
+            } catch (Exception $ex) {
+                $repsData = array("message" => "Post flush failed");
+                $view->setData($repsData)->setStatusCode(400); // ok
+                return $view;
+            }
+            
+            $repsData = array("postId" => $post->getId(), "datetimeCreated"=> $post->getCreationDate());
+            $view->setData($repsData)->setStatusCode(200); // ok
+            
+            return $view;
+        }
+        
+        $repsData = array('form' => $form);
+        
+        return $view->setDate($repsData)->setStatusCode(400); // ok
+    }
+    
     /**
      * 
      * @param type $postId

@@ -5,6 +5,13 @@ post :
     name_prefix:  api_
     options:
         expose: true
+ 
+comment : 
+    type: rest
+    resource:     "FlowberPostBundle:CommentRest"
+    name_prefix:  api_
+    options:
+        expose: true
         
 #api_flowber_post_delete:
 #    pattern:  /posts/{postId}

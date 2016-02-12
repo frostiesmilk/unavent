@@ -62,8 +62,8 @@ class PostRepository extends EntityRepository
             ->from('FlowberPostBundle:Comment', 'a')
             ->where('a.post = :postId')
             ->setParameter('postId', $postId)          
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '0')
+            ->andWhere('a.status != :status')
+            ->setParameter('status', '0')
             ->orderBy('a.creationDate', 'DESC');
         
         return $qb->getQuery()

@@ -95,7 +95,9 @@ class Post
         $this->status = 1;
     }
 
- 
+    /**
+     * Pseudo-delete post
+     */
     public function setDeleted(){
         $this->setStatus(false);
         $this->setDeleteDate(new \Datetime());
@@ -237,7 +239,7 @@ class Post
         $commentsNotDeleted = array();
         
         foreach($this->comments as $comment){
-            if($comment->getStatut() != '0'){
+            if($comment->getStatus() != '0'){
                 $commentsNotDeleted[] = $comment;
             }        
         }
