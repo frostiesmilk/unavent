@@ -80,6 +80,7 @@ class ProfileManager extends BaseManager {
      
         return $coverInfos;
     }   
+    
 
     public function getProfileInfos($user)
     {
@@ -108,12 +109,18 @@ class ProfileManager extends BaseManager {
             $friends[$count]['friendNumber']=$friendsRepository->getFriendsNumber($friends[$count]['id']); 
             $friends[$count]['profilePicture']=$this->getProfilePicture($friends[$count]['id']); 
             $count++;
-//            $friendsRepository->getFriendsNumber($this->getUser($friend['id']));
-            
+//            $friendsRepository->getFriendsNumber($this->getUser($friend['id']));         
         }
         
         return $friends;
     } 
+    
+    public function getFriendsName($user)
+    {
+        $friendsRepository = $this->getFriendshipRepository();
+        $friends = $friendsRepository->getFriendsForProfile($user);
+        return $friends;
+    }    
     
     public function getFriendshipRepository()
     {

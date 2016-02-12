@@ -43,20 +43,20 @@
    
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
-
-   
+  {{event.address}} 
 {% endblock %}
 
 {% block javascripts %}
     {{parent()}}
     
     <script type="text/javascript" >
-        {% if result.getPostalAddress() is not null and result.getPostalAddress().getCoordinates() is not null %}
-        
-        var pLocation  = "{{result.getPostalAddress().getCoordinates() | replace({'(': '', ')': ''})}}";
-        var pLocationDescription  = '<strong>{{result.getTitle()}}</strong><br/>'+
-        {% if (result.getPostalAddress() is not null) and (result.getPostalAddress().getName() is not null) %}'{{result.getPostalAddress().getName()}},<br/>'+ {% endif %}
-        '{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}';
+        {% if event.address is not null and event.coordinates is not null %}      
+            var pLocation  = "{{event.coordinates | replace({'(': '', ')': ''})}}";
+            var pLocationDescription  = ';<strong>{{event.title}}</strong><br/>'+
+            {% if (event.address is not null) and (event.name is not null) %}
+                '{{event.name}},<br/>'+ 
+            {% endif %}
+            '{{ event.startDate|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ event.startTime|date("\\à H:i", "Europe/Paris") }}';
         {% endif %}
     </script>
     

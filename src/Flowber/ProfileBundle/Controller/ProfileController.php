@@ -129,10 +129,9 @@ class ProfileController extends Controller
         
         // Si on veut afficher son profil
         if ($currentUser == $user){
-            return $this->redirect($this->generateUrl('flowber_current_user_profile'));
+            return $this->redirect($this->generateUrl('flowber_profile_current_user'));
         }
         
-        $user = $this->container->get('flowber_profile.profile')->getUser($id);        
         $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
         $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
         

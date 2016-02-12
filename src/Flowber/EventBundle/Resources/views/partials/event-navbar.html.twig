@@ -11,9 +11,9 @@
             </div>
             <div id="second-navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path('flowber_event_homepage', {'id': eventId}) }}">Actualités</a></li>
-                    <li><a href="{{ path('flowber_event_participants', {'id': eventId}) }}">Participants</a></li>
-                    <li><a href="{{ path('flowber_event_gallery', {'id': eventId}) }}">Photos</a></li>
+                    <li><a href="{{ path('flowber_event_homepage', {'id': event.id}) }}">Actualités</a></li>
+                    <li><a href="{{ path('flowber_event_participants', {'id': event.id}) }}">Participants</a></li>
+                    <li><a href="{{ path('flowber_event_gallery', {'id': event.id}) }}">Photos</a></li>
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
