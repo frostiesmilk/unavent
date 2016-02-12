@@ -1,20 +1,10 @@
-{% set eventCoverPath = 'assets/images/ProfileBundle/Default/coverPictureDefault.png' %} {# default User Cover #}
-{% if coverPicture is not null %}
-    {% set eventCoverPath = coverPicture %}
-{% endif %}
-
-{% set eventProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
-{% if profilePicture is not null %}
-    {% set eventProfilePicturePath = profilePicture %}
-{% endif %}
-
-<div class="jumbotron generic-cover" style="background-image: url('{{asset(eventCoverPath)}}')"> 
+<div class="jumbotron generic-cover" style="background-image: url('{{asset(coverInfo.coverPicture)}}')"> 
     <div class="container" >
         <div class="row-fluid">       
-            <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset(eventProfilePicturePath)}}')"></div>
+            <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset(coverInfo.profilePicture)}}')"></div>
             <div class="generic-cover-title">
-                    <h1 class="generic-cover-title-name">{{ result.title }}</h1>
-                    <p class="generic-cover-title-description">{{ result.subtitle }}</p>
+                    <h1 class="generic-cover-title-name">{{ coverInfo.title }}</h1>
+                    <p class="generic-cover-title-description">{{ coverInfo.subtitle }}</p>
             </div>
         </div>
     </div>

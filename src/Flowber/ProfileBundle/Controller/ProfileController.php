@@ -132,7 +132,6 @@ class ProfileController extends Controller
             return $this->redirect($this->generateUrl('flowber_profile_current_user'));
         }
         
-        $user = $this->container->get('flowber_profile.profile')->getUser($id);        
         $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
         $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
         

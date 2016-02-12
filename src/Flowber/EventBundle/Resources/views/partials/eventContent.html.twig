@@ -4,21 +4,25 @@
     <div class="row">
         <div class="col-md-5">
             <div class="event-details">
-                <h2>{{ result.getTitle()}}</h2>
-                {% if (result.getPostalAddress() is not null) and (result.getPostalAddress().getCoordinates() is not null) %}
-                <div id="map" class="gmap"></div>
+                <h2>{{ event.title}}</h2>
+                {% if (event.address is not null) and (event.coordinates is not null) %}
+                    <div id="map" class="gmap"></div>
                 {% endif %}                    
                 <table>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/host.png')}}" alt="Organisateur"/></td>
-                        <td>créée par <span class="event-details-host">{{ result.getCreatedBy().getFirstname() }} {{ result.getCreatedBy().getSurname() }}</span></td>
+                        <td>créée par 
+                            <span class="event-details-host">
+                                <a href="{{ path('flowber_user_profile', {'id': event.idCreatedBy}) }}"> {{ event.createdBy }} </a>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>
                         <td>
-                            {% if result.getCategories() | length %}{# if categories are specified #}
-                                {% for category in result.getCategories() %}
-                                    <span>{{ category.getTitle() }}</span>      
+                            {% if event.categories | length %}{# if categories are specified #}
+                                {% for category in event.categories %}
+                                    <span>{{ category }}</span>      
                                     {% if not loop.last %}<span>,</span> {% endif %}
                                 {% endfor %}
                             {% else %}
@@ -28,23 +32,29 @@
                     </tr>                        
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/time.png')}}" alt="Date et horaire"/></td>
-                        <td>{{ result.getStartDate()|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ result.getStartTime()|date("\\à H:i", "Europe/Paris") }}</td>
+                        <td>{{ event.startDate|date("\\d\\u d/m/Y", "Europe/Paris") }} {{ event.startTime|date("\\à H:i", "Europe/Paris") }}</td>
+                        
+                        <td>{{ event.endDate|date("\\a\\u d/m/Y", "Europe/Paris") }} {{ event.endTime|date("\\à H:i", "Europe/Paris") }}</td>
                     </tr>
 
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
-                        <td>{% if result.getPostalAddress() is not null %}{{ result.getPostalAddress().getName() }}<br/>{{ result.getPostalAddress().getAddress() }}<br/>{{ result.getPostalAddress().getZipcode() }} {{ result.getPostalAddress().getCity() }}{% else %}<span>Emplacement non défini</span>{% endif %}</td>
+                        <td>{% if event.address is not null %}
+                                {{event.name}} <br/>{{event.address}}<br/>{{event.zipcode}} {{event.city}}                          
+                            {% else %}
+                                <span>Emplacement non défini</span>
+                            {% endif %}
+                        </td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
-                            8 participants dont 1 ami<br/>
-                            <span class="event-details-participant">Marie BOIVENT</span>, <span class="event-details-participant">Equina YOU</span>
+                            {{event.participantsNumber}} {% if event.participantsNumber <= 1 %} participant {% else %} participants {% endif %}<br/>
                         </td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
-                        <td><p class="event-details-description">{% if result.getDescription() is not null %}{{ result.getDescription() }}{% else %}Aucune description{% endif %}</p></td>
+                        <td><p class="event-details-description">{% if event.description is not null %}{{ event.description }}{% else %}Aucune description{% endif %}</p></td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
@@ -75,7 +85,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="newpost">
-                            <form action="{{ path('add_post_event', { 'event_id' : result.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
+                            <form action="{{ path('add_post_event', { 'event_id' : event.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
                                 {{form_widget(postForm)}}
                                 <div class="event-blog-new-post-footer">
                                     <div class="event-blog-new-post-footer-confirm text-right">
