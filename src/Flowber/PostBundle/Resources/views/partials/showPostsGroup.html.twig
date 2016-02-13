@@ -4,13 +4,13 @@
 {% endif %} 
 {% set counter = 0 %}
 
-<ul class="group-blog-posts" >     
+<ul class="generic-blog-posts" >     
     {% for post in posts %}
         {% set postProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
         {% if post.createdBy.profile.profilePicture is not null %}
             {% set postProfilePicturePath = post.createdBy.profile.profilePicture.getWebPath() %}
         {% endif %} 
-        <li id="post-{{post.id}}" class="group-blog-post">
+        <li id="post-{{post.id}}" class="generic-blog-post">
             <div class="row">
                 <div class="col-xs-12 text-right">
                     {% if (post.createdBy == app.user) %}
@@ -23,7 +23,7 @@
                     {% endif %}
                 </div>                
             </div>
-            <div class="row group-blog-post-header">
+            <div class="row generic-blog-post-header">
                 <div class="col-xs-10 group-blog-post-header-info">
                     <div class="media">
                         <div class="media-left">
@@ -82,8 +82,8 @@
                 {% if comment.createdBy.profile.profilePicture is not null %}
                     {% set commentProfilePicturePath = comment.createdBy.profile.profilePicture.getWebPath() %}
                 {% endif %} 
-                <ul class="media-list group-blog-post-comments">
-                    <li id="comment-{{comment.id}}" class="media group-blog-post-comment">
+                <ul class="media-list generic-blog-post-comments">
+                    <li id="comment-{{comment.id}}" class="media generic-blog-post-comment">
                         <div class="media-left">
                             <div class="group-blog-post-comment-avatar" style="background-image: url('{{asset(commentProfilePicturePath)}}')"></div>
                         </div>
