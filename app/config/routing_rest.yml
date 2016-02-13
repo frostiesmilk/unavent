@@ -2,3 +2,11 @@
 rest_group : 
   type : rest
   resource: "@FlowberGroupBundle/Resources/config/routing_rest.yml"
+  
+rest_post : 
+  type : rest
+  resource: "@FlowberPostBundle/Resources/config/routing_rest.yml"
+  
+rest_likes : 
+  type : rest
+  resource: "@FlowberLikeBundle/Resources/config/routing_rest.yml"

@@ -10,7 +10,7 @@
         {% if post.createdBy.profile.profilePicture is not null %}
             {% set postProfilePicturePath = post.createdBy.profile.profilePicture.getWebPath() %}
         {% endif %} 
-        <li class="group-blog-post">
+        <li id="post-{{post.id}}" class="group-blog-post">
             <div class="row">
                 <div class="col-xs-12 text-right">
                     {% if (post.createdBy == app.user) %}
@@ -35,20 +35,17 @@
                             </a>
                             <br/>
                             <span class="group-blog-post-header-info-time">{{ (post.creationDate)|date("\\l\\e d/m/Y \à H:i")}} </span><br/>
-                            <span class="group-blog-post-header-info-rating">
+                            <span id="post-rating-display-{{post.id}}" class="group-blog-post-header-info-rating">
                                 {% if (post.likes|length <= 1) %} 
-                                    {{(post.likes)|length}} personne aime
+                                    <span name="post-like-count">{{(post.likes)|length}}</span> <span name="post-like-label"> personne aime</span>
                                 {% else %}    
-                                    {{(post.likes)|length}} personnes aiment
+                                    <span name="post-like-count">{{(post.likes)|length}}</span> <span name="post-like-label"> personnes aiment</span>
                                 {% endif %}
-                                
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-2 generic-post-header-actions">
-                    
-                    
                     {% set userLike = 0 %}
                     
                     {% if (post.likes|length >= 1) %}
@@ -59,15 +56,19 @@
                         {% endfor %}
                     {% endif %}
                     
-                    {% if userLike != 0 %}
-                        <a onmouseenter="likeSwitchHover({{post.id}})" onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" href="{{ path('unlike_post_group', { 'like_id' : userLike, 'post_id' : post.id} ) }}">
+                    <form name="form-like" method="post" action="{% if userLike != 0 %}{{path('api_delete_like', {'likeId':userLike})}}{% else %}{{path('api_post_like_post')}}{% endif %}">
+                        <input name="post-id" value="{{post.id}}" type="hidden" />
+                        {% if userLike != 0 %}{# for like deletion #}
+                        <input name="_method" value="DELETE" type="hidden">
+                        {% endif %}
+                        
+                        <button {% if userLike == 0 %}hidden{% endif %} onmouseenter="likeSwitchHover({{post.id}})" onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" type="submit" name="deleteLike">
                             <span id="postLike{{post.id}}" class="glyphicon glyphicon-heart generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> Je n'aime plus</span>                          
-                        </a>
-                    {% else %}   
-                        <a onmouseenter="likeSwitchHover({{post.id}})"  onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" href="{{ path('like_post_group', { 'post_id' : post.id } ) }}">
+                        </button>   
+                        <button {% if userLike != 0 %}hidden{% endif %} onmouseenter="likeSwitchHover({{post.id}})"  onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" type="submit" name="addLike">
                             <span id="postLike{{post.id}}"  class="glyphicon glyphicon-heart-empty generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> J'aime</span>
-                        </a>
-                    {% endif %}
+                        </button>                        
+                    </form>
                 </div>
             </div>
             <div class="group-blog-post-content">
@@ -82,11 +83,11 @@
                     {% set commentProfilePicturePath = comment.createdBy.profile.profilePicture.getWebPath() %}
                 {% endif %} 
                 <ul class="media-list group-blog-post-comments">
-                    <li class="media group-blog-post-comment">
+                    <li id="comment-{{comment.id}}" class="media group-blog-post-comment">
                         <div class="media-left">
                             <div class="group-blog-post-comment-avatar" style="background-image: url('{{asset(commentProfilePicturePath)}}')"></div>
                         </div>
-                        <div class="media-body container">
+                        <div class="media-body">
                             <div class="row">
                                 <div class="col-xs-9 col-md-8">
                                     <div class="group-blog-post-comment-poster">
@@ -99,8 +100,10 @@
                                 </div>
                                 <div class="col-xs-3 col-md-4 text-right">
                                 {% if (comment.createdBy == app.user) %}
-                                    <a data-toggle="modal" data-target="#modal-delete-comment" href="#"><span class="glyphicon glyphicon-trash generic-comment-action-icon"></span></a>
-                                    {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
+                                    <a name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                        <span class="glyphicon glyphicon-trash generic-comment-action-icon"></span>
+                                        <input type="hidden" name="delete-comment-id" value="{{comment.id}}" />                                    
+                                    </a>                                    
                                 {% endif %}
                                 </div>
                             </div>
@@ -130,6 +133,7 @@
         </li>
         {% set counter = counter + 1 %}
     {% include 'FlowberPostBundle::modal/modalDeletePost.html.twig' %}
+    {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
 
     {% endfor %}
 </ul>

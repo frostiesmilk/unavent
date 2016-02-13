@@ -87,6 +87,7 @@ body {
 }
 .btn-red:hover {
   background-color: #BF493D;
+  color: white;
 }
 /* Forms */
 .form-error-custom {
@@ -101,7 +102,7 @@ body {
   color: #A94442;
 }
 .group-container {
-  padding-top: 50px;
+  padding-top: 30px;
   padding-bottom: 50px;
 }
 .group-container .group-blog-new-post {

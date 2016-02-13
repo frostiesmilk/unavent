@@ -103,6 +103,10 @@ fos_user:
                 sender_name:        Flowber
             template: FlowberUserBundle:email:reset_password.html.twig
                 
+sensio_framework_extra:
+    view:   { annotations: false }
+    router: { annotations: true }
+                
 fos_rest:
     param_fetcher_listener: true
     body_listener: true

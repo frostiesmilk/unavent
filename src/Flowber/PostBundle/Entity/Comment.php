@@ -63,9 +63,18 @@ class Comment
     /**
      * @var string
      *
-     * @ORM\Column(name="statut", type="string", length=255, nullable = true)
+     * @ORM\Column(name="status", type="boolean")
      */
-    private $statut;
+    private $status;
+    
+    
+    /**
+     *
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleteDate", type="datetime", nullable=true)
+     */
+    private $deleteDate;
     
     /**
      * Constructor
@@ -73,7 +82,15 @@ class Comment
     public function __construct()
     {
         $this->creationDate = new \Datetime();
-        $this->statut = '1';
+        $this->status = true; // visible
+    }
+    
+    /**
+     * Pseudo-delete comment
+     */
+    public function setDeleted(){
+        $this->setStatus(false);
+        $this->setDeleteDate(new \Datetime());
     }
     
     /**
@@ -224,26 +241,50 @@ class Comment
         return $this->photo;
     }
 
+
     /**
-     * Set statut
+     * Set status
      *
-     * @param string $statut
+     * @param boolean $status
      * @return Comment
      */
-    public function setStatut($statut)
+    public function setStatus($status)
     {
-        $this->statut = $statut;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get statut
+     * Get status
      *
-     * @return string 
+     * @return boolean 
      */
-    public function getStatut()
+    public function getStatus()
     {
-        return $this->statut;
+        return $this->status;
+    }
+
+    /**
+     * Set deleteDate
+     *
+     * @param \DateTime $deleteDate
+     * @return Comment
+     */
+    public function setDeleteDate($deleteDate)
+    {
+        $this->deleteDate = $deleteDate;
+
+        return $this;
+    }
+
+    /**
+     * Get deleteDate
+     *
+     * @return \DateTime 
+     */
+    public function getDeleteDate()
+    {
+        return $this->deleteDate;
     }
 }

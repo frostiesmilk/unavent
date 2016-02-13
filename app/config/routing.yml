@@ -1,3 +1,6 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 flowber_notification:
     resource: "@FlowberNotificationBundle/Resources/config/routing.yml"
     prefix:   /notification
@@ -38,6 +41,12 @@ flowber_user:
     resource: "@FlowberUserBundle/Resources/config/routing.yml"
     prefix:   /user
     
+#http://www.foulquier.info/tutoriaux/mise-en-place-d-une-api-rest-avec-fosrestbundle-dans-symfony-2
+flowber_post_anno:
+    resource: "@FlowberPostBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 #REST 
 rest : 
     type : rest 
