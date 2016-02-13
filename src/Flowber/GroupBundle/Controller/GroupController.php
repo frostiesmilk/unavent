@@ -18,7 +18,7 @@ use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 
 class GroupController extends Controller
 {
-    public function groupAction($id)
+    public function getGroupAction($id)
     {
         $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
 //        $posts = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->findByGroups($group);
@@ -110,7 +110,7 @@ class GroupController extends Controller
             ));
     }
     
-    public function createGroupAction()
+    public function getCreateGroupAction()
     {
         $user = $this->getUser();        
         $error = false; // detect error while processing forms
@@ -192,7 +192,7 @@ class GroupController extends Controller
   
     }
     
-    public function AllGroupsAction()
+    public function getAllGroupsAction()
     {
         $user = $this->getUser();        
 
@@ -203,7 +203,7 @@ class GroupController extends Controller
         ));
     }
     
-    public function groupGalleriesAction($id){
+    public function getGroupGalleriesAction($id){
         $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
         
         $profilePicture = null;
@@ -225,7 +225,7 @@ class GroupController extends Controller
                     'coverPicture' => $coverPicture ));
     }
     
-    public function groupMembersAction($id){
+    public function getGroupMembersAction($id){
         $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
         
         $profilePicture = null;
@@ -247,7 +247,7 @@ class GroupController extends Controller
                     'coverPicture' => $coverPicture ));
     }
     
-    public function groupEventsAction($id){
+    public function getGroupEventsAction($id){
         $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
         
         $profilePicture = null;

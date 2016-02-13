@@ -16,23 +16,13 @@ use Flowber\PostBundle\Form\CommentType;
 
 class EventController extends Controller
 {
-    public function eventPageAction($id)
+    public function getEventPageAction($id)
     {  
-        $repository = $this->getDoctrine()
-                   ->getManager()
-                   ->getRepository('FlowberEventBundle:Event');
-        $event = $repository->find($id);
-        
-        $profilePicture = $event->getProfilePicture();
-        $coverPicture = $event->getCoverPicture();
-        
-        if(isset($profilePicture)){
-            $profilePicture = $profilePicture->getWebPath();
-        }
-        if(isset($coverPicture)){
-            $coverPicture = $coverPicture->getWebPath();
-        }
-        
+        $user=$this->getUser();
+        $event = $this->container->get('flowber_event.event')->getEvent($id);        
+        $coverInfo = $this->container->get('flowber_event.event')->getCoverInfos($event);
+        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
+//      die(var_dump($eventInfo)) ;
         $mailToCreator = new PrivateMessage();
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
         
@@ -89,20 +79,18 @@ class EventController extends Controller
         }
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
-            array('eventId' => $event->getId(),
-                'result' => $event, 
-                'profilePicture' => $profilePicture, 
-                'coverPicture' => $coverPicture,
+            array(
+                'event' => $eventInfo,
+                'coverInfo' => $coverInfo, 
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
                 'postForm' => $postForm->createView(),
                 'posts' => $posts,
                 'commentForm' => $CommentArray,
-
             )
         );
     }
     
-    public function eventParticipantsPageAction($id){
+    public function getEventParticipantsPageAction($id){
         $repository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('FlowberEventBundle:Event');
@@ -125,7 +113,7 @@ class EventController extends Controller
                 'coverPicture' => $coverPicture));
     }
     
-    public function eventGalleryPageAction($id){
+    public function getEventGalleryPageAction($id){
         $repository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('FlowberEventBundle:Event');
@@ -148,7 +136,7 @@ class EventController extends Controller
                 'coverPicture' => $coverPicture));
     }
     
-    public function createEventAction()
+    public function getCreateEventAction()
     {
         $user = $this->getUser();        
         $error = FALSE;
@@ -177,7 +165,7 @@ class EventController extends Controller
             
             if ($eventForm->isValid()) {
                 $event->setCreatedBy($user);  
-                $event->addParticipant($user);
+                
             }  else{
                 $error = true;
             }
@@ -221,7 +209,7 @@ class EventController extends Controller
         ));
     }
     
-    public function allEventsPageAction()
+    public function getAllEventsPageAction()
     {
         $user = $this->getUser();        
 

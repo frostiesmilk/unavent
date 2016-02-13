@@ -1,0 +1,38 @@
+{# empty Twig template #}
+    <div id="friends" class="user-profile-friends user-profile">
+        <div class="user-profile-category-row text-center">
+            <span class="user-profile-category-title">Mes amis</span>
+        </div>
+                                
+        <div class="container">
+            <div class="row user-profile-friends-list">
+                {% for friend in friends %}
+                    <div class=" col-md-4 col-sm-6 col-xs-12">
+                        <div class="media user-profile-friends-list-element">
+                            <div class="media-left">
+                                <a class="user-profile-friends-list-element-details-name" href="{{ path('flowber_user_profile', { 'id' : friend.id } ) }}">
+                                    <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset(friend.profilePicture)}}')"></div>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="user-profile-friends-list-element-details">
+                                    <a class="user-profile-friends-list-element-details-name" href="{{ path('flowber_user_profile', { 'id' : friend.id } ) }}" title=" voir le profil de {{friend.name}}">
+                                        {{friend.name}}
+                                    </a>
+                                    <br/>
+                                    <span class="user-profile-friends-list-element-details-friends">
+                                        {{friend.friendNumber}}  {% if friend.friendNumber <= 1 %} ami {% else %} amis {% endif %}
+                                    </span> &middot; 
+                                    <span class="user-profile-friends-list-element-details-events">
+                                        12 évènements
+                                    </span>
+                                    <br/><button class="btn btn-default user-profile-friends-list-element-details-sendpm">Envoyer un message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+ 

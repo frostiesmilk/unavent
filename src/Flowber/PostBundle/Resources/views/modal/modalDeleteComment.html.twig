@@ -7,14 +7,17 @@
                 <h4 class="modal-title" id="myModalLabel">Etes vous sur de vouloir supprimer ce commentaire  ?</h4>
             </div>
             <div class="modal-footer">
-                <a  href="{{ path('delete_comment', { 'comment_id' : comment.id } ) }}"> 
-                    <button type="button" class="btn btn-default">
+                <form id="delete-comment-form" action="" method="post">
+                    <input name="_method" value="DELETE" type="hidden">
+                    <input type="hidden" id="delete-comment-id" >
+               
+                    <button type="submit" class="btn btn-default">
                         Oui
                     </button>
-                </a>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    Non
-                </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Non
+                    </button>
+                </form>
             </div>
         </div>
     </div>

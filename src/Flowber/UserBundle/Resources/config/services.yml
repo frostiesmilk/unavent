@@ -1,4 +1,4 @@
 services:
-#    flowber_user.example:
-#        class: Flowber\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    flowber_profile.profile:
+        class: Flowber\UserBundle\Entity\FriendshipManager
+        arguments: [@doctrine.orm.entity_manager] 

@@ -32,6 +32,13 @@ class Post
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleteDate", type="datetime", nullable=true)
+     */
+    private $deleteDate;
 
     /**
      * @var string
@@ -66,11 +73,11 @@ class Post
     private $photo;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="statut", type="string", length=255, nullable=true)
+     * @ORM\Column(name="status", type="boolean")
      */
-    private $statut;
+    private $status;
     
     /**
      * @ORM\ManyToOne(targetEntity="Flowber\GroupBundle\Entity\Groups", cascade={"persist"})
@@ -85,11 +92,18 @@ class Post
         $this->gallery = new \Doctrine\Common\Collections\ArrayCollection();
         $this->photo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate = new \Datetime();
-        $this->statut = 1;
+        $this->status = 1;
     }
 
- 
-
+    /**
+     * Pseudo-delete post
+     */
+    public function setDeleted(){
+        $this->setStatus(false);
+        $this->setDeleteDate(new \Datetime());
+    }
+    
+    
     /**
      * Get id
      *
@@ -225,7 +239,7 @@ class Post
         $commentsNotDeleted = array();
         
         foreach($this->comments as $comment){
-            if($comment->getStatut() != '0'){
+            if($comment->getStatus() != '0'){
                 $commentsNotDeleted[] = $comment;
             }        
         }
@@ -345,29 +359,6 @@ class Post
     }
 
     /**
-     * Set statut
-     *
-     * @param string $statut
-     * @return Post
-     */
-    public function setStatut($statut)
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
-    /**
-     * Get statut
-     *
-     * @return string 
-     */
-    public function getStatut()
-    {
-        return $this->statut;
-    }
-
-    /**
      * Add likes
      *
      * @param \Flowber\LikeBundle\Entity\Likes $likes
@@ -388,5 +379,51 @@ class Post
     public function removeLike(\Flowber\LikeBundle\Entity\Likes $likes)
     {
         $this->likes->removeElement($likes);
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Post
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set deleteDate
+     *
+     * @param \DateTime $deleteDate
+     * @return Post
+     */
+    public function setDeleteDate($deleteDate)
+    {
+        $this->deleteDate = $deleteDate;
+
+        return $this;
+    }
+
+    /**
+     * Get deleteDate
+     *
+     * @return \DateTime 
+     */
+    public function getDeleteDate()
+    {
+        return $this->deleteDate;
     }
 }

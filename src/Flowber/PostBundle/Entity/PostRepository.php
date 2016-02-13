@@ -24,8 +24,8 @@ class PostRepository extends EntityRepository
             ->from('FlowberPostBundle:Post', 'a')
             ->where('a.groups = :groupId')
             ->setParameter('groupId', $groupId)          
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '0')
+            ->andWhere('a.status != :status')
+            ->setParameter('status', '0')
             ->orderBy('a.creationDate', 'DESC');
         
         return $qb->getQuery()
@@ -43,8 +43,8 @@ class PostRepository extends EntityRepository
             ->from('FlowberPostBundle:Post', 'a')
             ->where('a.event = :eventId')
             ->setParameter('eventId', $eventId)          
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '0')
+            ->andWhere('a.status != :status')
+            ->setParameter('status', '0')
             ->orderBy('a.creationDate', 'DESC');
         
         return $qb->getQuery()
@@ -53,7 +53,7 @@ class PostRepository extends EntityRepository
     
     /*
      * Récupère les commentaire
-     * Return id, message, , nom du created by, photo du created by, creationdate
+     * Return id, message, nom du created by, photo du created by, creationdate
      */    
     public function getCommentFromPost($postId){
         $qb = $this->_em->createQueryBuilder();
@@ -62,8 +62,8 @@ class PostRepository extends EntityRepository
             ->from('FlowberPostBundle:Comment', 'a')
             ->where('a.post = :postId')
             ->setParameter('postId', $postId)          
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '0')
+            ->andWhere('a.status != :status')
+            ->setParameter('status', '0')
             ->orderBy('a.creationDate', 'DESC');
         
         return $qb->getQuery()

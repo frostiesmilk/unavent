@@ -40,7 +40,7 @@ class Likes
     {
         $this->creationDate = new \Datetime();        
     }
-    
+       
     /**
      * Get id
      *

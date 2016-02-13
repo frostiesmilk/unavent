@@ -140,7 +140,7 @@ class User extends BaseUser
     {
         return $this->firstname;
     }
-
+    
     /**
      * Set surname
      *
@@ -209,7 +209,16 @@ class User extends BaseUser
     {
         return $this->postalAddress;
     }
-
+    
+    /**
+     * Get postalAddress
+     *
+     * @return string 
+     */
+    public function getMainPostalAddress()
+    {
+        return $this->postalAddress[0];
+    }
     /**
      * Add postalAddress
      *

@@ -78,6 +78,7 @@ body {
 }
 .btn-red:hover {
   background-color: #BF493D;
+  color: white;
 }
 /* Forms */
 .form-error-custom {

@@ -19,8 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Wybe\FrontOfficeBundle\WybeFrontOfficeBundle(),
             new Flowber\UserBundle\FlowberUserBundle(),
-            new Flowber\FrontOfficeBundle\FlowberFrontOfficeBundle(),
-            new \FOS\UserBundle\FOSUserBundle,
+            new Flowber\FrontOfficeBundle\FlowberFrontOfficeBundle(),            
             new Flowber\ProfileBundle\FlowberProfileBundle(),
             new Flowber\GalleryBundle\FlowberGalleryBundle(),
             new Flowber\PrivateMessageBundle\FlowberPrivateMessageBundle(),
@@ -29,7 +28,9 @@ class AppKernel extends Kernel
             new Flowber\PostBundle\FlowberPostBundle(),
             new Flowber\LikeBundle\FlowberLikeBundle(),
             new Flowber\NotificationBundle\FlowberNotificationBundle(),
+            new \FOS\UserBundle\FOSUserBundle,
             new FOS\RestBundle\FOSRestBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 

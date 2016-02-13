@@ -8,7 +8,7 @@ flowber_group_search:
 
 flowber_group_homepage:
     path:     /{id}
-    defaults: { _controller: FlowberGroupBundle:Group:group }
+    defaults: { _controller: FlowberGroupBundle:Group:getGroup }
     requirements:
         id: \d+
     

@@ -70,8 +70,8 @@ class FriendController extends Controller
     public function acceptFriendRequestAction($id)
     {
         $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
-        $friendship = $userReposit->getFriendship($user, $this->getUser());
+        $friendshipReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:Friendship');
+        $friendship = $friendshipReposit->getFriendship($user, $this->getUser());
         $iAm = $this->getUser();
         
         if($friendship->getStatut() == "send"){
@@ -104,8 +104,8 @@ class FriendController extends Controller
     public function declineFriendRequestAction($id)
     {
         $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
-        $friendship = $userReposit->getFriendship($user, $this->getUser());
+        $friendshipReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:Friendship');
+        $friendship = $friendshipReposit->getFriendship($user, $this->getUser());
         
         if($friendship->getStatut() == "send"){
             $em = $this->getDoctrine()->getManager();
@@ -120,8 +120,8 @@ class FriendController extends Controller
     public function cancelFriendRequestAction($id)
     {
         $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
-        $friendship = $userReposit->getFriendship($this->getUser(), $user);
+        $friendshipReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:Friendship');
+        $friendship = $friendshipReposit->getFriendship($this->getUser(), $user);
        
         if($friendship->getStatut() == "send"){
             $em = $this->getDoctrine()->getManager();
@@ -137,9 +137,9 @@ class FriendController extends Controller
     public function unfriendAction($id)
     {
         $user = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User')->find($id);
-        $userReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:User');
-        $friendship1 = $userReposit->getFriendship($this->getUser(), $user);
-        $friendship2 = $userReposit->getFriendship($user, $this->getUser());
+        $friendshipReposit = $this->getDoctrine()->getManager()->getRepository('FlowberUserBundle:Friendship');
+        $friendship1 = $friendshipReposit->getFriendship($this->getUser(), $user);
+        $friendship2 = $friendshipReposit->getFriendship($user, $this->getUser());
        
         if($friendship1->getStatut() == "ok" and $friendship2->getStatut() == "ok"){
             $em = $this->getDoctrine()->getManager();
