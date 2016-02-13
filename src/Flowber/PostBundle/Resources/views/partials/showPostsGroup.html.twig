@@ -62,10 +62,10 @@
                         <input name="_method" value="DELETE" type="hidden">
                         {% endif %}
                         
-                        <button {% if userLike == 0 %}hidden{% endif %} onmouseenter="likeSwitchHover({{post.id}})" onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" type="submit" name="deleteLike">
-                            <span id="postLike{{post.id}}" class="glyphicon glyphicon-heart generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> Je n'aime plus</span>                          
+                        <button {% if userLike == 0 %}hidden{% endif %} onmouseenter='likeSwitchHover("post", "DeleteLike",{{post.id}})' onmouseleave='likeSwitchHover("post","DeleteLike",{{post.id}})' class="generic-post-like-button" type="submit" name="deleteLike">
+                            <span id="postDeleteLike{{post.id}}" class="glyphicon glyphicon-heart generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> Je n'aime plus</span>                          
                         </button>   
-                        <button {% if userLike != 0 %}hidden{% endif %} onmouseenter="likeSwitchHover({{post.id}})"  onmouseleave="likeSwitchHover({{post.id}})" class="generic-post-like-button" type="submit" name="addLike">
+                        <button {% if userLike != 0 %}hidden{% endif %} onmouseenter='likeSwitchHover("post", "Like",{{post.id}})'  onmouseleave='likeSwitchHover("post","Like",{{post.id}})' class="generic-post-like-button" type="submit" name="addLike">
                             <span id="postLike{{post.id}}"  class="glyphicon glyphicon-heart-empty generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> J'aime</span>
                         </button>                        
                     </form>

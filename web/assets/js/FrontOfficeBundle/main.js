@@ -174,16 +174,21 @@ autoClosingAlert(".alert-autoclosing", 3000);
 /**
  * Like button switch on hovering
  */
-function likeSwitchHover(postId){
+function likeSwitchHover(element, action, postId){
     
+    var idPrefix = element+action;
     // get class value of icon
-    var classValue = document.getElementById("postLike"+postId).className;
+    var classValue = document.getElementById(idPrefix+postId).className;
+    
+    // get the visible one (like or dislike button)
     
     if (classValue.includes("glyphicon-heart-empty")){ // if like empty
         // fill it
-        document.getElementById("postLike"+postId).className = classValue.replace("glyphicon-heart-empty", "glyphicon-heart");
+        console.log("remplissage: "+classValue);
+        document.getElementById(idPrefix+postId).className = classValue.replace("glyphicon-heart-empty", "glyphicon-heart");
     }else{
         // it's already liked, empty it
-        document.getElementById("postLike"+postId).className = classValue.replace("glyphicon-heart", "glyphicon-heart-empty");
+        console.log("vidage: "+classValue);
+        document.getElementById(idPrefix+postId).className = classValue.replace("glyphicon-heart", "glyphicon-heart-empty");
     }
 }
