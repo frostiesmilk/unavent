@@ -32,9 +32,9 @@
                     </tr>                        
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/time.png')}}" alt="Date et horaire"/></td>
-                        <td>{{ event.startDate|date("\\d\\u d/m/Y", "Europe/Paris") }} {{ event.startTime|date("\\à H:i", "Europe/Paris") }}</td>
+                        <td>{{ event.startDate|date("\\d\\u d/m/Y", "Europe/Paris") }} {{ event.startTime|date("\\à H:i", "Europe/Paris") }}
                         
-                        <td>{{ event.endDate|date("\\a\\u d/m/Y", "Europe/Paris") }} {{ event.endTime|date("\\à H:i", "Europe/Paris") }}</td>
+                        {{ event.endDate|date("\\a\\u d/m/Y", "Europe/Paris") }} {{ event.endTime|date("\\à H:i", "Europe/Paris") }}</td>
                     </tr>
 
                     <tr>
