@@ -16,3 +16,8 @@ services:
         class: Flowber\EventBundle\Validator\Constraints\DateRangeValidator
         tags:
             - { name: validator.constraint_validator, alias: daterange_validator }
+            
+#    Issue created here: https://github.com/FriendsOfSymfony/FOSUserBundle/issues/2048
+#    Short term fix (worked for me Symfony 3.0.* ) :
+    fos_user.doctrine_registry:
+        alias: doctrine
