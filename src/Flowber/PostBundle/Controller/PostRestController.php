@@ -9,8 +9,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
-use Flowber\PostBundle\Form\GroupPostType;
 //use Symfony\Component\HttpFoundation\JsonResponse;
+
+use Flowber\PostBundle\Entity\Comment;
+use Flowber\PostBundle\Form\CommentType;
 
 class PostRestController extends Controller
 {
@@ -18,60 +20,64 @@ class PostRestController extends Controller
     /**
      * Create new post
      * @param Request $request
-     * @param int $groupId
-     * @return View
+     * @param int $circleId
+     * @return View|array
      */
-    public function postGroupPostAction(Request $request, $groupId){
-        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($group_id);
+    public function postPostAction(Request $request, $circleId){
+        //$view = new View();// preparing response
         
-        if(!is_object($group)){
-            return array("");
+        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberFrontOfficeBundle:Circle')->find($circleId);
+        
+        if(!is_object($circle)){
+            return array("status"=>400, "message"=>"Circle not found");//$view-($repsData)->setStatusCode(400); // error
         }
         
         $post = new Post();
-        $form = $this->createForm(new GroupPostType(), $post);
+        $form = $this->createForm(new PostType(), $post);
         $form->bind($request);
-        
-        $view = new ResponseView();// preparing response
-        
+               
         if($form->isValid()){
             $em = $this->getDoctrine()->getManager();
             
             try{
                 $post->setCreatedBy($this->getUser());
-                $post->setGroups($group);
-                
-                if ($group->getCreatedBy() != $this->getUser()){
-                    $notification = new Notification ();
-                    $notification->setCreatedBy($this->getUser());
-                    $notification->setUser($group->getCreatedBy());
-                    $notification->setPageRoute('flowber_group_homepage');
-                    $notification->setPageId($group->getId());
-                    $notification->setMessage("a ajouté un post \""
-                            . $post->getMessage()
-                            . "\" dans ");
-                    $notification->setPageName($group->getTitle());
-                    $em->persist($notification);         
-                }
+                $post->setCircle($circle);
+//                
+//                if ($circle->getCreatedBy() != $this->getUser()){
+//                    $notification = new Notification ();
+//                    $notification->setCreatedBy($this->getUser());
+//                    $notification->setUser($circle->getCreatedBy());
+//                    $notification->setPageRoute('flowber_group_homepage');
+//                    $notification->setPageId($circle->getId());
+//                    $notification->setMessage("a ajouté un post \""
+//                            . $post->getMessage()
+//                            . "\" dans ");
+//                    $notification->setPageName($circle->getTitle());
+//                    $em->persist($notification);         
+//                }
                 
                 $em->persist($post);
                 $em->flush();
                 
             } catch (Exception $ex) {
-                $repsData = array("message" => "Post flush failed");
-                $view->setData($repsData)->setStatusCode(400); // ok
-                return $view;
+                $repsData = array("status"=>"error" ,"message" => "Post flush failed");
+                //$view->setData($repsData)->setStatusCode(400); // ok
+                return $repsData;
             }
             
-            $repsData = array("postId" => $post->getId(), "datetimeCreated"=> $post->getCreationDate());
-            $view->setData($repsData)->setStatusCode(200); // ok
+            // create new comment form
+            $comment = new Comment();
+            $commentFormView = $this->createForm(new CommentType, $comment)->createView();
             
-            return $view;
+            $repsData = array("status"=>"success", "postId" => $post->getId(), "datetimeCreated"=> $post->getCreationDate(), "commentForm"=>$commentFormView);
+            //$view->setData($repsData)->setStatusCode(200); // ok
+            
+            return $repsData;
         }
         
-        $repsData = array('form' => $form);
+        $repsData = array("status"=>"error",'form' => $form);
         
-        return $view->setDate($repsData)->setStatusCode(400); // ok
+        return $repsData;//$view->setDate($repsData)->setStatusCode(400); // error
     }
     
     /**

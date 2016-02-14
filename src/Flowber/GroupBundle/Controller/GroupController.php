@@ -8,7 +8,7 @@ use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\GroupBundle\Form\GroupsType;
 use Flowber\GroupBundle\Entity\Groups;
-use Flowber\PostBundle\Form\GroupPostType;
+use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\CommentType;
 use Flowber\PostBundle\Entity\Comment;
@@ -21,7 +21,6 @@ class GroupController extends Controller
     public function getGroupAction($id)
     {
         $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
-//        $posts = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->findByGroups($group);
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPost($id);   
@@ -39,18 +38,19 @@ class GroupController extends Controller
         //preparing new form for a post
         $post = new Post();
         $postwithEvent = new Post();
-        $postForm = $this->createForm(new GroupPostType(), $post);
+        $postForm = $this->createForm(new PostType(), $post);
         $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
         
         $CommentArray = array();
 
-        foreach ($posts as $post)
-        {
+//        foreach ($posts as $post)
+//        {
             $comment = new Comment();
             $commentForm = $this->createForm(new CommentType, $comment);
-            $CommentArray[] = $commentForm->createView();
-        }
+//            $CommentArray[] = $commentForm->createView();
+//        }
         
+        // for Private Messages
         $mailToCreator = new PrivateMessage();
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
         
@@ -103,7 +103,7 @@ class GroupController extends Controller
                     'profilePicture' => $profilePicture, 
                     'coverPicture' => $coverPicture,
                     'postForm' => $postForm->createView(),
-                    'commentForm' => $CommentArray,
+                    'commentForm' => $commentForm->createView(),//$CommentArray,
                     'postWithEventForm'=> $postWithEventForm->createView(),
                     'posts' => $posts,
                     'mailToCreatorForm' => $mailToCreatorForm->createView()

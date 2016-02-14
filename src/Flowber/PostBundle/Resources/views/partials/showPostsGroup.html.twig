@@ -68,8 +68,8 @@
             </div>
             <div class="generic-blog-post-content">
                 <p>{{post.message}}</p>
-                {% if (post.event != null) %}
-                    il y a un event                     
+                {% if (post.circle != null) %}
+                    il y a un cercle
                 {% endif %}
             </div>
             {% for comment in post.getComments() %}
@@ -138,13 +138,13 @@
                     </li>
                 </ul>
             {% endfor %}
-            <form name="form-new-comment" action="{{ path('add_comment_post', { 'post_id' : post.id } ) }}" method="post" {{ form_enctype(commentForm[counter]) }}>                
+            <form name="form-new-comment" action="{{ path('add_comment_post', { 'post_id' : post.id } ) }}" method="post" {{ form_enctype(commentForm) }}>                
                 <div class="media generic-blog-post-new-comment">
                     <div class="media-left hidden-xs">
                         <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(currentProfilePicturePath)}}')"></div>
                     </div>
                     <div class="media-body generic-blog-post-new-comment-field">
-                        {{form_widget(commentForm[counter])}}
+                        {{form_widget(commentForm)}}
                     </div>
                     <div class="media-right">
                         <button type="submit" class="btn btn-default btn-red"><span class="hidden-xs hidden-sm">Envoyer</span><span class="hidden-md hidden-lg glyphicon glyphicon-send"></span></button>

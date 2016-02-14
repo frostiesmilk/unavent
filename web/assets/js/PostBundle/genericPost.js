@@ -193,18 +193,19 @@ $("#generic-new-post").on("submit", function(e){
         //dataType: 'json', // JSON
         error: function(json){
             alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-        },
-        success: function(data){
-            console.log("inajax data: "+data);
         }
-    });
-//    }).done(function(data, textStatus, jqXHR){ // like success
-//       console.log("data: "+data);
-//       console.log("textStatus: "+textStatus);
-//       console.log("jqXHR: "+jqXHR.toString());
-//       document.getElementById("generic-new-post").reset();
-//       alert("post created");
+//        ,
+//        success: function(data){
+//            console.log("inajax data: "+data);
+//        }
 //    });
+    }).done(function(data, textStatus, jqXHR){ // like success
+       console.log("data.commentForm: "+data["commentForm"]);
+       console.log("textStatus: "+textStatus);
+       console.log("jqXHR: "+jqXHR.toString());
+       document.getElementById("generic-new-post").reset();
+       alert("post created");
+    });
 });
 
 /**
