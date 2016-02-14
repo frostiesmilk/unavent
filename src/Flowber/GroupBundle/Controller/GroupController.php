@@ -35,12 +35,12 @@ class GroupController extends Controller
         
         $CommentArray = array();
 
-//        foreach ($posts as $post)
-//        {
+        foreach ($posts as $post)
+        {
             $comment = new Comment();
             $commentForm = $this->createForm(new CommentType, $comment);
-//            $CommentArray[] = $commentForm->createView();
-//        }
+            $CommentArray[] = $commentForm->createView();
+        }
         
         // for Private Messages
         $mailToCreator = new PrivateMessage();
@@ -83,13 +83,19 @@ class GroupController extends Controller
             }
         }
         
+        $userInfos = array( "id"        => $user->getId(),
+                            "firstname" =>  $user->getFirstname(),
+                            "surname"   =>  $user->getSurname(),
+                            "profilePicture"    => $user->getProfile()->getProfilePicture());
+        
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
                 array('circle' => $groupInfos,
                     'postForm' => $postForm->createView(),
-                    'commentForm' => $commentForm->createView(),//$CommentArray,
+                    'commentForm' => $CommentArray,
                     'postWithEventForm'=> $postWithEventForm->createView(),
                     'posts' => $posts,
-                    'mailToCreatorForm' => $mailToCreatorForm->createView()
+                    'mailToCreatorForm' => $mailToCreatorForm->createView(),
+                    'user'  =>  $userInfos,
             ));
     }
     

@@ -67,7 +67,11 @@ class PostRestController extends Controller
             
             // create new comment form
             $comment = new Comment();
-            $commentFormView = $this->createForm(new CommentType, $comment)->createView();
+            $commentForm = $this->createForm(new CommentType, $comment);
+            
+            // render view to be sent with response
+            $commentFormView = $this->renderView('FlowberPostBundle:partials:commentForm.html.twig', 
+                    array("commentForm"=>$commentForm->createView()));
             
             $repsData = array("status"=>"success", "postId" => $post->getId(), "datetimeCreated"=> $post->getCreationDate(), "commentForm"=>$commentFormView);
             //$view->setData($repsData)->setStatusCode(200); // ok
@@ -106,8 +110,8 @@ class PostRestController extends Controller
         $post = $this->getDoctrine()->getRepository('FlowberPostBundle:Post')->find($postId);
         
         if(is_object($post)){
-            $currentCurrent = $this->getUser();
-            if($currentCurrent == $post->getCreatedBy()){ // checking if allowed to delete post (by author)
+            $currentUser = $this->getUser();
+            if($currentUser == $post->getCreatedBy()){ // checking if allowed to delete post (by author)
                 $post->setDeleted();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($post);

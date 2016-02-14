@@ -32,14 +32,14 @@ class LikeRestController extends Controller
         $post->addLike($like);
 
         // manage Notification
-        if ($post->getGroups() != null){
+        if ($post->getCircle() != null){
             $notification = new Notification ();
             $notification->setCreatedBy($this->getUser());
             $notification->setUser($post->getCreatedBy());
             $notification->setPageRoute('flowber_group_homepage');
-            $notification->setPageId($post->getGroups()->getId());
+            $notification->setPageId($post->getCircle()->getId());
             $notification->setMessage("a aimé votre post dans ");
-            $notification->setPageName($post->getGroups()->getTitle());
+            $notification->setPageName($post->getCircle()->getTitle());
             $em->persist($notification);
         }
 
@@ -54,7 +54,7 @@ class LikeRestController extends Controller
             $view->setData($repsData)->setStatusCode(200); // ok
         } catch (Exception $ex) {
             $repsData = array("message" => "flush error");
-            $view>setData($ex)->setStatusCode(400); // error
+            $view->setData($ex)->setStatusCode(400); // error
         }
         
         return $view;

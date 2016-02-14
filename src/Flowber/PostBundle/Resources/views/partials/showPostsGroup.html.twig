@@ -15,7 +15,6 @@
             <a name="postDeleteButton" data-toggle="modal" data-target="#modal-delete-post" href="#">
                 <span class="glyphicon glyphicon-remove generic-post-delete-icon"></span>
                 <input type="hidden" name="delete-post-id" value="{{post.id}}" />
-                <input type="hidden" name="delete-post-origin-entity" value="group" />
                 <input type="hidden" name="delete-post-origin-id" value="{{circle.id}}" />
             </a>
             {% endif %}
@@ -138,13 +137,13 @@
                     </li>
                 </ul>
             {% endfor %}
-            <form name="form-new-comment" action="{{ path('add_comment_post', { 'post_id' : post.id } ) }}" method="post" {{ form_enctype(commentForm) }}>                
+            <form name="form-new-comment" action="{{ path('add_comment_post', { 'post_id' : post.id } ) }}" method="post" {{ form_enctype(commentForm[counter]) }}>                
                 <div class="media generic-blog-post-new-comment">
                     <div class="media-left hidden-xs">
                         <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(currentProfilePicturePath)}}')"></div>
                     </div>
                     <div class="media-body generic-blog-post-new-comment-field">
-                        {{form_widget(commentForm)}}
+                        {{form_widget(commentForm[counter])}}
                     </div>
                     <div class="media-right">
                         <button type="submit" class="btn btn-default btn-red"><span class="hidden-xs hidden-sm">Envoyer</span><span class="hidden-md hidden-lg glyphicon glyphicon-send"></span></button>
@@ -156,17 +155,16 @@
             <a name="postDeleteButton" data-toggle="modal" data-target="#modal-delete-post" href="#">
                 <span class="glyphicon glyphicon-remove generic-post-delete-icon"></span>
                 <input type="hidden" name="delete-post-id" value="" />
-                <input type="hidden" name="delete-post-origin-entity" value="group" />
-                <input type="hidden" name="delete-post-origin-id" value="" />
+                <input type="hidden" name="delete-post-origin-id" value="{{circle.id}}" />
             </a>
             
             <div class="generic-blog-post-header">             
                 <div class="media">
                     <div class="media-left">
-                        <div class="media-object generic-blog-post-avatar" style=""></div>
+                        <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                     </div>
                     <div class="media-body">
-                        <a class="generic-blog-header-post-info-poster" href="">
+                        <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_user_profile', { 'id' : user.id } ) }}">
                         </a>
                         <br/>
                         <span class="generic-blog-post-time hidden-xs"></span>

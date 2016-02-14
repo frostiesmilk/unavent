@@ -46,7 +46,7 @@ class PostController extends Controller
                 $em->persist($comment);
                 $em->flush();
                 
-                return $this->redirect($this->generateUrl('flowber_group_homepage', array('id' => $post->getGroups()->getId())));
+                return $this->redirect($this->generateUrl('flowber_group_homepage', array('id' => $post->getCircle()->getId())));
             }
         }
         return $this->render('FlowberPostBundle:Default:index.html.twig', array('post_id' => $post_id));

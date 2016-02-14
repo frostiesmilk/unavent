@@ -11,13 +11,10 @@
  */
 $( "a[name='postDeleteButton']" ).on( "click", function() {
     var postId = $( this ).find("input[name=delete-post-id]").val() ;
-    var postOriginEntity = $( this ).find("input[name=delete-post-origin-entity]").val() ;
     var postOriginId = $( this ).find("input[name=delete-post-origin-id]").val() ;
     
-    //alert(Routing.generate('api_delete_post', {postId: postId}));
     $("#delete-post-form").attr('action', Routing.generate('api_delete_post_custom', {postId: postId}));
     $("#delete-post-id").val(postId);
-    $("#delete-post-origin-entity").val(postOriginEntity);
     $("#delete-post-origin-id").val(postOriginId);
 });
 
@@ -200,7 +197,7 @@ $("#generic-new-post").on("submit", function(e){
 //        }
 //    });
     }).done(function(data, textStatus, jqXHR){ // like success
-       console.log("data.commentForm: "+data["commentForm"]);
+       console.log("data.commentForm: "+data.commentForm);
        console.log("textStatus: "+textStatus);
        console.log("jqXHR: "+jqXHR.toString());
        document.getElementById("generic-new-post").reset();
