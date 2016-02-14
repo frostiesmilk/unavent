@@ -1,1 +1,37 @@
-{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/editGroup.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/> 
+{% endblock %}
+
+{% block smallMenu %}
+    {{parent()}}
+    <!-- BEGIN small screen menu -->
+    {% include 'FlowberGroupBundle::partials/groupNavbarSmall.html.twig' %}
+    <!-- END small screen menu -->
+{% endblock %}
+
+{% block body %}
+    
+    <!-- navbar top -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+
+    <!-- Event Banner -->  
+    {% include 'FlowberGroupBundle::partials/editGroup/editGroupCover.html.twig' %}
+ 
+    <!-- Second navbar -->
+    {% include 'FlowberGroupBundle::partials/editGroup/editGroupNavbar.html.twig' %}
+ 
+    <!-- Edit Event Content -->
+    {% include 'FlowberGroupBundle::partials/editGroup/editGroupContent.html.twig' %}
+    
+    <!-- footer -->                  
+    {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+
+{% endblock %}

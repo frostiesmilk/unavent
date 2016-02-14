@@ -4,63 +4,73 @@
 <div class="container">
     <div class="row">
         <div>
-                <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
 
-                <div class="col-xs-5 event-edit-form create-event-form form-horizontal">
+            <div class="col-xs-5 event-edit-form create-event-form form-horizontal">
                     
-                    <div class="form-title"> Modifier la sortie </div>
-                        {% if form_errors(eventForm) %}
-                        <div class="form-error-custom">
-                            {{form_errors(eventForm)}}                
-                        </div>
-                        {% endif %}
-                        {% if form_errors(eventForm.maxParticipants) %}
-                            <div class="form-error-custom">
-                            {{form_errors(eventForm.maxParticipants)}}
-                            </div>
-                        {% endif %}
-                        
-                        <div class="form-group">
-                            <label for="event-title" class="control-label">Titre *</label>
-                            {{form_widget(eventForm.title)}}
-                        </div>
-                        <div class="form-group">
-                            <label for="event-tease" class="control-label">Phrase d'accroche</label>
-                            {{form_widget(eventForm.subtitle)}}
-                        </div>
-                        <div class="form-group">
-                            <label for="event-category" class="control-label">Catégories</label>
-                            {{form_widget(eventForm.categories)}}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="event-category" class="control-label">Photo de profil</label>
-                                {{form_widget(profilePictureForm)}}
-                        </div>
-                        <div class="form-group">
-                            <label for="event-category" class="control-label">Photo de couverture</label>
-                                {{form_widget(coverPictureForm)}}
-                        </div>                
-                        <div class="form-group">
-                            <label for="event-description" class="control-label">Description</label>
-                            {{form_widget(eventForm.description)}}
-                        </div>
-                        <div class="form-group">
-                            <label for="event-description" class="control-label">{{form_label(eventForm.maxParticipants)}}</label>
-                            {{form_widget(eventForm.maxParticipants)}}
-                        </div>
-     
-
-                        <div class="form-group">
-                            <label class="control-label">Visibilité *</label>
-                            {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
-                        </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default">Confirmer</button>
-                    </div>
+                <div class="form-title"> Modifier la sortie </div>
+                
+                {% if form_errors(eventForm) %}
+                <div class="form-error-custom">
+                    {{form_errors(eventForm)}}                
                 </div>
+                {% endif %}
+                
+                {% if form_errors(eventForm.maxParticipants) %}
+                    <div class="form-error-custom">
+                    {{form_errors(eventForm.maxParticipants)}}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="event-title" class="control-label">Titre *</label>
+                    {{form_widget(eventForm.title)}}
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-tease" class="control-label">Phrase d'accroche</label>
+                    {{form_widget(eventForm.subtitle)}}
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-category" class="control-label">Catégories</label>
+                    {{form_widget(eventForm.categories)}}
+                </div>
+
+                <div class="form-group">
+                    <label for="event-category" class="control-label">Photo de profil</label>
+                        {{form_widget(profilePictureForm)}}
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-category" class="control-label">Photo de couverture</label>
+                        {{form_widget(coverPictureForm)}}
+                </div>   
+                
+                <div class="form-group">
+                    <label for="event-description" class="control-label">Description</label>
+                    {{form_widget(eventForm.description)}}
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-description" class="control-label">{{form_label(eventForm.maxParticipants)}}</label>
+                    {{form_widget(eventForm.maxParticipants)}}
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label">Visibilité *</label>
+                    {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Confirmer</button>
+                </div>
+                
+            </div>
                 <div class="col-xs-1">
                 </div>
+                
                 <div class="col-xs-6 event-edit-form create-event-form form-horizontal">
                     <div class="form-title"> Modifier le lieu et la date</div>
                         <div class="form-group">

@@ -124,13 +124,13 @@ class GroupManager extends BaseManager {
         return $isParticipant;
     }  
  
-    public function isCreator($user, $event)
+    public function isCreator($user, $group)
     {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
+        if (!is_object($group)) {
+            throw new AccessDeniedException('This group is not defined.');
         } 
-        $event = $this->getEvent($event);
-        if($event->getCreatedBy() == $user)
+        $group = $this->getGroup($group);
+        if($group->getCreatedBy() == $user)
             return true;
         else return false;
         
