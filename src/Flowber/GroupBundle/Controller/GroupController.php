@@ -20,21 +20,12 @@ class GroupController extends Controller
 {
     public function getGroupAction($id)
     {
-        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
-//        $posts = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->findByGroups($group);
+        $user=$this->getUser();
+        $group = $this->container->get('flowber_group.group')->getGroup($id);        
+        $groupInfos = $this->container->get('flowber_group.group')->getGroupInfos($group);
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPost($id);   
-        
-        $profilePicture = null;
-        $coverPicture = null;
-
-        if ($group->getProfilePicture() != null){
-            $profilePicture = $group->getProfilePicture()->getWebPath();
-        }
-        if ($group->getCoverPicture() != null){ 
-            $coverPicture = $group->getCoverPicture()->getWebPath();
-        }
         
         //preparing new form for a post
         $post = new Post();
@@ -92,16 +83,7 @@ class GroupController extends Controller
         }
         
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
-                array('title' => $group->getTitle(), 
-                    'subtitle' => $group->getSubtitle(), 
-                    'description' => $group->getDescription(), 
-                    'categories' => $group->getCategories(), 
-                    'firstname' => $group->getCreatedBy()->getFirstname(), 
-                    'surname' => $group->getCreatedBy()->getSurname(), 
-                    'id' => $group->getId(), 
-                    'groupId' => $group->getId(), 
-                    'profilePicture' => $profilePicture, 
-                    'coverPicture' => $coverPicture,
+                array('group' => $groupInfos,
                     'postForm' => $postForm->createView(),
                     'commentForm' => $CommentArray,
                     'postWithEventForm'=> $postWithEventForm->createView(),
@@ -191,38 +173,10 @@ class GroupController extends Controller
         ));
   
     }
-    
-    public function getAllGroupsAction()
+
+    public function editGroupAction()
     {
-        $user = $this->getUser();        
-
-        $allGroup = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->findByCreatedBy($user);
-        
-        return $this->render('FlowberGroupBundle:Default:allGroup.html.twig', array(
-            'allGroup' => $allGroup,
-        ));
-    }
-    
-    public function getGroupGalleriesAction($id){
-        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
-        
-        $profilePicture = null;
-        $coverPicture = null;
-
-        if ($group->getProfilePicture() != null){
-            $profilePicture = $group->getProfilePicture()->getWebPath();
-        }
-        if ($group->getCoverPicture() != null){ 
-            $coverPicture = $group->getCoverPicture()->getWebPath();
-        }
-        
-         return $this->render('FlowberGroupBundle:Default:groupGalleries.html.twig', 
-                array(
-                    'groupId' => $group->getId(),
-                    'title' => $group->getTitle(), 
-                    'subtitle' => $group->getSubtitle(), 
-                    'profilePicture' => $profilePicture, 
-                    'coverPicture' => $coverPicture ));
+         return $this->render('FlowberGroupBundle:Default:editGroup.html.twig');
     }
     
     public function getGroupMembersAction($id){
