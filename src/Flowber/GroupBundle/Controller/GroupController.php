@@ -24,7 +24,7 @@ class GroupController extends Controller
 //        $posts = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->findByGroups($group);
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-        $posts = $postRepository->getPostFromGroup($id);   
+        $posts = $postRepository->getPost($id);   
         
         $profilePicture = null;
         $coverPicture = null;

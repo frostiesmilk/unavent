@@ -17,13 +17,13 @@ class PostRepository extends EntityRepository
      * Récupère les posts d'un groupe
      * Return id, message, statut, event, nom du created by, photo du created by, creationdate
      */
-    public function getPostFromGroup($groupId){
+    public function getPost($id){
         $qb = $this->_em->createQueryBuilder();
         
         $qb->select('a')
             ->from('FlowberPostBundle:Post', 'a')
-            ->where('a.circle = :groupId')
-            ->setParameter('groupId', $groupId)          
+            ->where('a.circle = :id')
+            ->setParameter('id', $id)          
             ->andWhere('a.status != :status')
             ->setParameter('status', '0')
             ->orderBy('a.creationDate', 'DESC');
@@ -31,26 +31,7 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()
                   ->getResult();
     }
-    
-    /*
-     * Récupère les posts d'un event
-     * Return id, message, statut, event, nom du created by, photo du created by, creationdate
-     */
-    public function getPostFromEvent($eventId){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPostBundle:Post', 'a')
-            ->where('a.event = :eventId')
-            ->setParameter('eventId', $eventId)          
-            ->andWhere('a.status != :status')
-            ->setParameter('status', '0')
-            ->orderBy('a.creationDate', 'DESC');
-        
-        return $qb->getQuery()
-                  ->getResult();
-    }
-    
+       
     /*
      * Récupère les commentaire
      * Return id, message, nom du created by, photo du created by, creationdate
