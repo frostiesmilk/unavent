@@ -1,4 +1,4 @@
 services:
-#    flowber_group.example:
-#        class: Flowber\GroupBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    flowber_group.group:
+        class: Flowber\GroupBundle\Manager\GroupManager
+        arguments: [@doctrine.orm.entity_manager] 

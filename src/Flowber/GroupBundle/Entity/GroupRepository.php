@@ -14,17 +14,14 @@ class GroupRepository extends EntityRepository
 {
     public function getInfosGroup($id){  
         $query = $this->_em->createQuery(''
-                . 'SELECT groups.title, groups.subtitle, groups.description, '
-                 . 'user.firstname, user.surname, '
-                . 'photoC.id as coverPicture, photoP.id as profilePicture '
+                . 'SELECT groups.id, groups.title, groups.subtitle, groups.description, '
+                . 'concat(concat(user.firstname, :espace), user.surname) as createdBy '
                 . 'FROM FlowberGroupBundle:Groups groups '
                 . 'LEFT JOIN FlowberUserBundle:User user WITH groups.createdBy = user '
-                . 'LEFT JOIN FlowberGalleryBundle:Photo photoC WITH groups.coverPicture = photoC '
-                . 'LEFT JOIN FlowberGalleryBundle:Photo photoP WITH groups.profilePicture = photoP '
-                . 'LEFT JOIN FlowberFrontOfficeBundle:Category cat WITH groups.categories = cat '
                 . 'WHERE groups.id = :id');
         $query->setParameter('id', $id);
-        
+        $query->setParameter('espace', ' ');
+       
         return $query->getSingleResult();
     }
 }
