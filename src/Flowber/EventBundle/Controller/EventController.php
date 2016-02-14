@@ -280,7 +280,7 @@ class EventController extends Controller
             'eventForm' => $eventForm->createView(),
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
-            'event' => $eventInfo,
+            'circle' => $eventInfo,
             'coverInfo' => $coverInfo,
         ));
     }

@@ -32,20 +32,19 @@
     
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
-  {{event.address}} 
 {% endblock %}
 
 {% block javascripts %}
     {{parent()}}
     
     <script type="text/javascript" >
-        {% if event.address is not null and event.coordinates is not null %}      
-            var pLocation  = "{{event.coordinates | replace({'(': '', ')': ''})}}";
-            var pLocationDescription  = ';<strong>{{event.title}}</strong><br/>'+
-            {% if (event.address is not null) and (event.name is not null) %}
-                '{{event.name}},<br/>'+ 
+        {% if circle.address is not null and circle.coordinates is not null %}      
+            var pLocation  = "{{circle.coordinates | replace({'(': '', ')': ''})}}";
+            var pLocationDescription  = ';<strong>{{circle.title}}</strong><br/>'+
+            {% if (circle.address is not null) and (circle.name is not null) %}
+                '{{circle.name}},<br/>'+ 
             {% endif %}
-            '{{ event.startDate|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ event.startTime|date("\\à H:i", "Europe/Paris") }}';
+            '{{ circle.startDate|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ circle.startTime|date("\\à H:i", "Europe/Paris") }}';
         {% endif %}
     </script>
     
