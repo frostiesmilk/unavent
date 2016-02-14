@@ -6,17 +6,17 @@
     <div class="row">
         <div class="col-md-5">
             <div class="group-details">
-                <h2>{{group.title}}</h2>
+                <h2>{{circle.title}}</h2>
                 <table>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/host.png')}}" alt="Organisateur"/></td>
-                        <td>créé par <span class="group-details-host">{{group.createdBy}}</span></td>
+                        <td>créé par <span class="group-details-host">{{circle.createdBy}}</span></td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>
                         <td>
-                            {% if group.categories | length %}{# if categories are specified #}
-                                {% for category in group.categories %}
+                            {% if circle.categories | length %}{# if categories are specified #}
+                                {% for category in circle.categories %}
                                     <span>{{ category }}</span>      
                                     {% if not loop.last %}<span>,</span> {% endif %}
                                 {% endfor %}
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
-                        <td>{{group.description}}</td>
+                        <td>{{circle.description}}</td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>

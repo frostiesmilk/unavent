@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-5">
             <div class="event-details">
-                <h2>{{ event.title}}</h2>
-                {% if (event.address is not null) and (event.coordinates is not null) %}
+                <h2>{{ circle.title}}</h2>
+                {% if (circle.address is not null) and (circle.coordinates is not null) %}
                     <div id="map" class="gmap"></div>
                 {% endif %}                    
                 <table>
@@ -13,15 +13,15 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/host.png')}}" alt="Organisateur"/></td>
                         <td>créée par 
                             <span class="event-details-host">
-                                <a href="{{ path('flowber_user_profile', {'id': event.idCreatedBy}) }}"> {{ event.createdBy }} </a>
+                                <a href="{{ path('flowber_user_profile', {'id': circle.idCreatedBy}) }}"> {{ circle.createdBy }} </a>
                             </span>
                         </td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>
                         <td>
-                            {% if event.categories | length %}{# if categories are specified #}
-                                {% for category in event.categories %}
+                            {% if circle.categories | length %}{# if categories are specified #}
+                                {% for category in circle.categories %}
                                     <span>{{ category }}</span>      
                                     {% if not loop.last %}<span>,</span> {% endif %}
                                 {% endfor %}
@@ -32,15 +32,15 @@
                     </tr>                        
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/time.png')}}" alt="Date et horaire"/></td>
-                        <td>{{ event.startDate|date("\\d\\u d/m/Y", "Europe/Paris") }} {{ event.startTime|date("\\à H:i", "Europe/Paris") }}
+                        <td>{{ circle.startDate|date("\\d\\u d/m/Y", "Europe/Paris") }} {{ circle.startTime|date("\\à H:i", "Europe/Paris") }}
                         
-                        {{ event.endDate|date("\\a\\u d/m/Y", "Europe/Paris") }} {{ event.endTime|date("\\à H:i", "Europe/Paris") }}</td>
+                        {{ circle.endDate|date("\\a\\u d/m/Y", "Europe/Paris") }} {{ circle.endTime|date("\\à H:i", "Europe/Paris") }}</td>
                     </tr>
 
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
-                        <td>{% if event.address is not null %}
-                                {{event.name}} <br/>{{event.address}}<br/>{{event.zipcode}} {{event.city}}                          
+                        <td>{% if circle.address is not null %}
+                                {{circle.name}} <br/>{{circle.address}}<br/>{{circle.zipcode}} {{circle.city}}                          
                             {% else %}
                                 <span>Emplacement non défini</span>
                             {% endif %}
@@ -49,12 +49,12 @@
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
-                            {{event.participantsNumber}} {% if event.participantsNumber <= 1 %} participant {% else %} participants {% endif %}<br/>
+                            {{circle.participantsNumber}} {% if circle.participantsNumber <= 1 %} participant {% else %} participants {% endif %}<br/>
                         </td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
-                        <td><p class="event-details-description">{% if event.description is not null %}{{ event.description }}{% else %}Aucune description{% endif %}</p></td>
+                        <td><p class="event-details-description">{% if circle.description is not null %}{{ circle.description }}{% else %}Aucune description{% endif %}</p></td>
                     </tr>
                     {% if isCreator == false %}
                     <tr>
@@ -87,7 +87,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="newpost">
-                            <form action="{{ path('add_post_event', { 'event_id' : event.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
+                            <form action="{{ path('add_post_event', { 'event_id' : circle.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
                                 {{form_widget(postForm)}}
                                 <div class="event-blog-new-post-footer">
                                     <div class="event-blog-new-post-footer-confirm text-right">

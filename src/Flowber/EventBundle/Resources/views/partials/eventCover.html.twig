@@ -5,7 +5,7 @@
                 <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset(coverInfo.profilePicture)}}')"></div> 
             </div>
             <div class="col-xs-4 text-right hidden-lg hidden-lg hidden-md hidden-sm">
-                <a href="{{ path('flowber_edit_event', {'id': event.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="{{ path('flowber_edit_event', {'id': circle.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></a>
             </div>
             <div class="col-md-7 col-sm-9 col-xs-12">
                 <div class="generic-cover-title">
@@ -16,7 +16,7 @@
             {% if isCreator == true %}
             <div class="col-md-2 col-sm-3 hidden-xs text-center">
                 <div class="generic-cover-edit-button">
-                    <a href="{{ path('flowber_edit_event', {'id': event.id}) }}" class="btn btn-default">Modifier la sortie</a>
+                    <a href="{{ path('flowber_edit_event', {'id': circle.id}) }}" class="btn btn-default">Modifier la sortie</a>
                 </div>
             </div>
             {% endif %}
