@@ -84,7 +84,7 @@ class GroupController extends Controller
         }
         
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
-                array('group' => $groupInfos,
+                array('circle' => $groupInfos,
                     'postForm' => $postForm->createView(),
                     'commentForm' => $commentForm->createView(),//$CommentArray,
                     'postWithEventForm'=> $postWithEventForm->createView(),

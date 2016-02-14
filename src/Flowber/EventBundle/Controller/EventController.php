@@ -82,7 +82,7 @@ class EventController extends Controller
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
                 'isCreator' => $isCreator,
-                'event' => $eventInfo,
+                'circle' => $eventInfo,
                 'coverInfo' => $coverInfo, 
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
                 'postForm' => $postForm->createView(),
