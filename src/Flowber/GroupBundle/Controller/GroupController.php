@@ -8,7 +8,7 @@ use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\GroupBundle\Form\GroupsType;
 use Flowber\GroupBundle\Entity\Groups;
-use Flowber\PostBundle\Form\PostType;
+use Flowber\PostBundle\Form\GroupPostType;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\CommentType;
 use Flowber\PostBundle\Entity\Comment;
@@ -39,7 +39,7 @@ class GroupController extends Controller
         //preparing new form for a post
         $post = new Post();
         $postwithEvent = new Post();
-        $postForm = $this->createForm(new PostType, $post);
+        $postForm = $this->createForm(new GroupPostType(), $post);
         $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
         
         $CommentArray = array();

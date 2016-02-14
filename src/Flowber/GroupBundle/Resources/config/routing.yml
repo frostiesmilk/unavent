@@ -1,6 +1,6 @@
 flowber_group_create:
     path:     /nouveau
-    defaults: { _controller: FlowberGroupBundle:Group:createGroup }
+    defaults: { _controller: FlowberGroupBundle:Group:getCreateGroup }
 
 flowber_group_search:
     path:     /rechercher

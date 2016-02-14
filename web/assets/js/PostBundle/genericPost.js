@@ -178,7 +178,39 @@ function updateLikeDisplay(postId, action){
     
 }
 
+/**
+ * Create new post
+ */
 $("#generic-new-post").on("submit", function(e){
+    e.preventDefault();
+    
+    var $this = $(this); // L'objet jQuery du formulaire
+    
+    $.ajax({ 
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        //dataType: 'json', // JSON
+        error: function(json){
+            alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+        },
+        success: function(data){
+            console.log("inajax data: "+data);
+        }
+    });
+//    }).done(function(data, textStatus, jqXHR){ // like success
+//       console.log("data: "+data);
+//       console.log("textStatus: "+textStatus);
+//       console.log("jqXHR: "+jqXHR.toString());
+//       document.getElementById("generic-new-post").reset();
+//       alert("post created");
+//    });
+});
+
+/**
+ * Create new comment
+ */
+$("form[name='form-new-comment']").on("submit", function(e){
     e.preventDefault();
     
     var $this = $(this); // L'objet jQuery du formulaire
@@ -192,8 +224,9 @@ $("#generic-new-post").on("submit", function(e){
             alert("merde "+$this.attr('action')+" "+$this.attr('method'));
         }
     }).done(function(data, textStatus, jqXHR){ // like success
-       console.log(data);
-       document.getElementById("generic-new-post").reset();
-       alert("post created");
+        console.log(data);
+        $this.trigger("reset");
+        alert("comment created");
     });
 });
+

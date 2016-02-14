@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
+use Flowber\PostBundle\Form\GroupPostType;
+//use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PostRestController extends Controller
 {
@@ -16,11 +18,18 @@ class PostRestController extends Controller
     /**
      * Create new post
      * @param Request $request
+     * @param int $groupId
      * @return View
      */
-    public function postPostAction(Request $request){
+    public function postGroupPostAction(Request $request, $groupId){
+        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($group_id);
+        
+        if(!is_object($group)){
+            return array("");
+        }
+        
         $post = new Post();
-        $form = $this->createForm(new PostType(), $post);
+        $form = $this->createForm(new GroupPostType(), $post);
         $form->bind($request);
         
         $view = new ResponseView();// preparing response
@@ -29,6 +38,22 @@ class PostRestController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             try{
+                $post->setCreatedBy($this->getUser());
+                $post->setGroups($group);
+                
+                if ($group->getCreatedBy() != $this->getUser()){
+                    $notification = new Notification ();
+                    $notification->setCreatedBy($this->getUser());
+                    $notification->setUser($group->getCreatedBy());
+                    $notification->setPageRoute('flowber_group_homepage');
+                    $notification->setPageId($group->getId());
+                    $notification->setMessage("a ajouté un post \""
+                            . $post->getMessage()
+                            . "\" dans ");
+                    $notification->setPageName($group->getTitle());
+                    $em->persist($notification);         
+                }
+                
                 $em->persist($post);
                 $em->flush();
                 

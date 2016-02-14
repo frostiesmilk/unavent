@@ -128,11 +128,11 @@ and open the template in the editor.
         padding-left: initial;
         .generic-blog-post{
             border: 1px solid lightgrey;
-            padding-bottom: 20px;
+            padding-bottom: 5px;
             margin-bottom:20px;
             .generic-post-delete-icon{
-                padding: 5px;
-                color: initial;
+                float: right;
+                color: grey;
                 text-decoration: none;
             }
             
@@ -140,7 +140,7 @@ and open the template in the editor.
                 padding-left: 20px;
                 padding-right: 20px;
                 padding-top: 20px;
-                .group-blog-post-header-avatar{                
+                .generic-blog-post-avatar{                
                     background-position: center center;
                     background-repeat: no repeat;
                     background-size: cover;
@@ -149,23 +149,26 @@ and open the template in the editor.
                     width: 50px;
                 }
                 .generic-post-header-actions{
-                    .generic-post-header-actions-icon{
-                        text-decoration: none;
-                        color: initial;
-                        font-size: 1.3em;
+                    .generic-post-like-button{
+                        background-color: transparent;
+                        border: none;
+                        .generic-post-header-actions-icon-like{
+                            color: @red;
+                            font-size: 1.4em;
+                        }
                     }
                 }
                 
-                .group-blog-post-header-info-time{        
+                .generic-blog-post-time{        
                     color: grey;
                     font-size: 0.8em;
                 }
-                .group-blog-post-header-info-rating{        
+                .generic-blog-post-rating{        
                     color: grey;
                     font-size: 0.8em;
                 }
             }
-            .group-blog-post-content{
+            .generic-blog-post-content{
                 padding-left: 20px;
                 padding-right: 20px;
                 padding-top: 10px;
@@ -181,8 +184,8 @@ and open the template in the editor.
                     padding-left: 10px;
                 }
                 .generic-blog-post-comment{
-                    padding: 5px;
-                    .group-blog-post-comment-avatar{
+                    padding: 5px 0px 5px 5px;
+                    .generic-blog-post-comment-avatar{
                         border-radius: 50%;
                         background-position: center center;
                         background-size: cover;
@@ -190,12 +193,12 @@ and open the template in the editor.
                         width: 50px;
                     }
 
-                    .group-blog-post-comment-poster{
+                    .generic-blog-post-comment-poster{
                         @media(min-width: 768px){
                             display:inline;
                         }
                     }
-                    .group-blog-post-comment-time{  
+                    .generic-blog-post-comment-time{  
                         @media(min-width: 768px){
                             display:inline;
                         }
@@ -204,8 +207,12 @@ and open the template in the editor.
                     }
                     
                     .generic-comment-action-icon{
-                        color: initial;
+                        color: grey;
                         text-decoration: none;
+                    }
+                    
+                    .generic-blog-post-comment-content{
+                        
                     }
                 }
                 hr{
@@ -214,18 +221,18 @@ and open the template in the editor.
                 }
             }
 
-            .group-blog-post-new-comment{
+            .generic-blog-post-new-comment{
                 padding-top: 5px;
                 padding-left: 20px;
                 padding-right: 20px;
-                .group-blog-post-new-comment-avatar{
+                .generic-blog-post-new-comment-avatar{
                     border-radius: 50%;
                     background-position: center center;
                     background-size: cover;
                     height: 50px;
                     width: 50px;
                 }
-                .group-blog-post-new-comment-field{
+                .generic-blog-post-new-comment-field{
                     textarea{
                         width: 100%;
                         resize: none;

@@ -204,12 +204,12 @@ body {
 }
 .group-container .generic-blog-posts .generic-blog-post {
   border: 1px solid lightgrey;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
   margin-bottom: 20px;
 }
 .group-container .generic-blog-posts .generic-blog-post .generic-post-delete-icon {
-  padding: 5px;
-  color: initial;
+  float: right;
+  color: grey;
   text-decoration: none;
 }
 .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header {
@@ -217,7 +217,7 @@ body {
   padding-right: 20px;
   padding-top: 20px;
 }
-.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .group-blog-post-header-avatar {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-avatar {
   background-position: center center;
   background-repeat: no repeat;
   background-size: cover;
@@ -225,20 +225,23 @@ body {
   height: 50px;
   width: 50px;
 }
-.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-post-header-actions .generic-post-header-actions-icon {
-  text-decoration: none;
-  color: initial;
-  font-size: 1.3em;
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-post-header-actions .generic-post-like-button {
+  background-color: transparent;
+  border: none;
 }
-.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .group-blog-post-header-info-time {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-post-header-actions .generic-post-like-button .generic-post-header-actions-icon-like {
+  color: #E74C3C;
+  font-size: 1.4em;
+}
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-time {
   color: grey;
   font-size: 0.8em;
 }
-.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .group-blog-post-header-info-rating {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-rating {
   color: grey;
   font-size: 0.8em;
 }
-.group-container .generic-blog-posts .generic-blog-post .group-blog-post-content {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-content {
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
@@ -256,9 +259,9 @@ body {
   }
 }
 .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment {
-  padding: 5px;
+  padding: 5px 0px 5px 5px;
 }
-.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .group-blog-post-comment-avatar {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-avatar {
   border-radius: 50%;
   background-position: center center;
   background-size: cover;
@@ -266,40 +269,40 @@ body {
   width: 50px;
 }
 @media (min-width: 768px) {
-  .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .group-blog-post-comment-poster {
+  .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-poster {
     display: inline;
   }
 }
-.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .group-blog-post-comment-time {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-time {
   color: grey;
   font-size: 0.8em;
 }
 @media (min-width: 768px) {
-  .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .group-blog-post-comment-time {
+  .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-time {
     display: inline;
   }
 }
 .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-comment-action-icon {
-  color: initial;
+  color: grey;
   text-decoration: none;
 }
 .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments hr {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.group-container .generic-blog-posts .generic-blog-post .group-blog-post-new-comment {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment {
   padding-top: 5px;
   padding-left: 20px;
   padding-right: 20px;
 }
-.group-container .generic-blog-posts .generic-blog-post .group-blog-post-new-comment .group-blog-post-new-comment-avatar {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment .generic-blog-post-new-comment-avatar {
   border-radius: 50%;
   background-position: center center;
   background-size: cover;
   height: 50px;
   width: 50px;
 }
-.group-container .generic-blog-posts .generic-blog-post .group-blog-post-new-comment .group-blog-post-new-comment-field textarea {
+.group-container .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment .generic-blog-post-new-comment-field textarea {
   width: 100%;
   resize: none;
 }

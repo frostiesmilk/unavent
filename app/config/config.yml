@@ -114,8 +114,8 @@ fos_rest:
     view:
         view_response_listener: 'force'
         formats:
-            xml: true
             json : true
+            xml: true
         templating_formats:
             html: true
         force_redirects:
