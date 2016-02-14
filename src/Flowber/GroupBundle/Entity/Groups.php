@@ -21,17 +21,19 @@ use JMS\Serializer\Annotation\VirtualProperty;
  */
 class Groups extends Circle
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * 
-     * @Expose
-     */
-    private $id;
+//    /**
+//     * @var integer
+//     *
+//     * @ORM\Column(name="id", type="integer")
+//     * @ORM\Id
+//     * @ORM\GeneratedValue(strategy="AUTO")
+//     * 
+//     * @Expose
+//     */
+//    private $id;
 
+    
+    
     /**
      * @var string
      *
@@ -107,7 +109,7 @@ class Groups extends Circle
     {
 //        $this->creationDate = new \Datetime();
         parent::__construct();        
-        
+
         $this->galleries = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->members = new \Doctrine\Common\Collections\ArrayCollection();

@@ -181,7 +181,6 @@ class GroupController extends Controller
 //                $em->persist($profile);
 //                $em->flush();
                 // all good, back to profile page
-                die(var_dump($group->getId()));
                 return $this->redirect($this->generateUrl('flowber_group_homepage',array('id' => $group->getId())));
             }
         }        
