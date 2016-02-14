@@ -83,6 +83,8 @@ class EventManager extends BaseManager {
             throw new AccessDeniedException('This event is not defined.');
         } 
         $eventInfo = $this->getEventRepository()->getInfosEvent($event);
+        $eventInfo['coverPicture'] = $this->getCoverPicture($event);
+        $eventInfo['profilePicture'] = $this->getProfilePicture($event);
         $eventInfo['participantsNumber'] = $this->getEventRepository()->getParticipantsNumber($event);
         $eventInfo['participantsNames'] = $this->getEventRepository()->getParticipantsNames($event);
         $count=0;

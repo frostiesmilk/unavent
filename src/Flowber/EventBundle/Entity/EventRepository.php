@@ -15,7 +15,7 @@ class EventRepository extends EntityRepository
 {
     public function getInfosEvent($id){       
         $query = $this->_em->createQuery(''
-                . 'SELECT event.id, event.title, event.startDate, '
+                . 'SELECT event.id, event.title, event.subtitle, event.startDate, '
                 . 'event.startTime, event.endDate, event.endTime, event.description,  '
                 . 'address.name, address.address, address.city, address.zipcode, address.coordinates, '
                 . 'concat(concat(user.firstname, :espace), user.surname) as createdBy, user.id as idCreatedBy '

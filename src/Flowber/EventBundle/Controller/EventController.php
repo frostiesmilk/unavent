@@ -20,7 +20,6 @@ class EventController extends Controller
     {  
         $user=$this->getUser();
         $event = $this->container->get('flowber_event.event')->getEvent($id);        
-        $coverInfo = $this->container->get('flowber_event.event')->getCoverInfos($event);
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
         $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $event);
         //die(var_dump($isCreator)) ;
@@ -83,7 +82,6 @@ class EventController extends Controller
             array(
                 'isCreator' => $isCreator,
                 'circle' => $eventInfo,
-                'coverInfo' => $coverInfo, 
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
                 'postForm' => $postForm->createView(),
                 'posts' => $posts,

@@ -34,7 +34,7 @@ flowber_all_group_homepage:
     path:     /tous_mes_groupes
     defaults: { _controller: FlowberGroupBundle:Group:AllGroups }
 
-flowber_group_edit:
+flowber_edit_group:
     path:     /{id}/edit
     defaults: { _controller: FlowberGroupBundle:Group:editGroup }
     requirements:
