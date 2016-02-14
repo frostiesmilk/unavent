@@ -10,6 +10,7 @@ use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
+use Flowber\UserBundle\Form\EditUserType;
 
 class ProfileController extends Controller
 {
@@ -37,12 +38,16 @@ class ProfileController extends Controller
         //preparing new cover picture
         $coverPicture = new Photo();
         $coverPictureForm = $this->createForm(new CoverPictureType, $coverPicture);
+     
+        
+        $userForm = $this->createForm(new EditUserType, $user);
         
         $request = $this->get('request');
         // if form has been submitted
         if ($request->getMethod() == 'POST') { 
             // retrieving all forms
             $profileForm->handleRequest($request);
+            $userForm->handleRequest($request);
             $profilePictureForm->handleRequest($request);
             $coverPictureForm->handleRequest($request);
             
@@ -52,7 +57,7 @@ class ProfileController extends Controller
             if (!$profileForm->isValid()) {
                 $error = true;
             }
-                     
+            
             // processing profile picture form
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
@@ -90,7 +95,9 @@ class ProfileController extends Controller
         }
   
         return $this->render('FlowberProfileBundle:Default:editProfile.html.twig', 
-                array('profileForm' => $profileForm->createView(),
+                array('user' => $this->container->get('flowber_profile.profile')->getCoverInfos($user),
+                    'profileForm' => $profileForm->createView(),
+                    'userForm' => $userForm->createView(),
                     'profilePictureForm'=>$profilePictureForm->createView(),
                     'coverPictureForm'=>$coverPictureForm->createView()));
     }

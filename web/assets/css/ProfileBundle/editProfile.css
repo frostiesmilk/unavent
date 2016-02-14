@@ -102,12 +102,17 @@ body {
   color: #A94442;
 }
 .profile-edit-form {
-  margin: 50px auto 50px auto;
+  margin: 40px auto 40px auto;
   background-color: #ECECEC;
-  padding: 33px;
+  padding: 30px;
 }
 .profile-edit-form h1 {
   text-transform: uppercase;
+}
+.profile-edit-form .form-title {
+  font-size: 23px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 .profile-edit-form .form-group {
   margin-bottom: 6px;
@@ -121,4 +126,18 @@ body {
 .profile-edit-form .event-submit:hover {
   background-color: #BF493D;
 }
-/*# sourceMappingURL=editProfile.css.map */
+.hobbies-form .form-group {
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  padding: 10px;
+}
+.hobbies-form .form-group .control-label {
+  display: none;
+}
+.hobbies-form .form-group .form-group {
+  border-style: none;
+}
+.hobbies-form .form-group .form-group .control-label {
+  display: inline;
+}

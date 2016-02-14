@@ -1,20 +1,12 @@
-{# empty Twig template #}
 {% extends '::base_frontoffice.html.twig' %}
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/event.css') }}"/>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 250px;
-        margin:22px;
-      }
-     </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/editEvent.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.css')}}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/create-event-page.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/FrontOfficeBundle/generic-maps.css') }}"/>  
 {% endblock %}
 
 {% block smallMenu %}
@@ -30,17 +22,14 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
 
     <!-- Event Banner -->  
-    {% include 'FlowberEventBundle::partials/eventCover.html.twig' %}
+    {% include 'FlowberEventBundle::editEvent/editEventCover.html.twig' %}
  
     <!-- Second navbar -->
-    {% include 'FlowberEventBundle::partials/eventNavbar.html.twig' %}
-
-    <!-- Top alerts -->
-    {% include 'FlowberEventBundle::partials/eventAlerts.html.twig' %}    
+    {% include 'FlowberEventBundle::editEvent/editEventNavbar.html.twig' %}
+ 
+    <!-- Edit Event Content -->
+    {% include 'FlowberEventBundle::editEvent/editEventContent.html.twig' %}
     
-    <!-- page -->
-    {% include 'FlowberEventBundle::partials/eventContent.html.twig' %}
-   
     <!-- footer -->                  
     {% include 'WybeFrontOfficeBundle::partials/common/footer.html.twig' %}
   {{event.address}} 
@@ -60,11 +49,6 @@
         {% endif %}
     </script>
     
-    <script type="text/javascript" src="{{ asset('assets/js/FrontOfficeBundle/maps/gmaps.js') }}"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=showMap"
-    async defer></script>
-    
     <script type="text/javascript">
         $('#eventNavbar a').click(function (e) {
             e.preventDefault()
@@ -78,6 +62,14 @@
         });
     </script>
     
-    
+        {{parent()}}
+    {# Put specific JS below #}
+    <script type="text/javascript" src="{{ asset('assets/js/EventBundle/event.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/FrontOfficeBundle/maps/gmaps.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4slAxOS7yprod9nmIS1AZm3LC9gk_2Q&signed_in=true&libraries=places&callback=initMap"
+    async defer></script>
+    <script type="text/javascript" src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/FrontOfficeBundle/datetime/datetime-picker.js')}}"></script>
 
 {% endblock %}

@@ -1,0 +1,160 @@
+{% form_theme eventForm 'bootstrap_3_layout.html.twig' %}
+
+<!-- Form -->
+<div class="container">
+    <div class="row">
+        <div>
+                <form method="post" enctype="multipart/form-data">
+
+                <div class="col-xs-5 event-edit-form create-event-form form-horizontal">
+                    
+                    <div class="form-title"> Modifier la sortie </div>
+                        {% if form_errors(eventForm) %}
+                        <div class="form-error-custom">
+                            {{form_errors(eventForm)}}                
+                        </div>
+                        {% endif %}
+                        {% if form_errors(eventForm.maxParticipants) %}
+                            <div class="form-error-custom">
+                            {{form_errors(eventForm.maxParticipants)}}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="form-group">
+                            <label for="event-title" class="control-label">Titre *</label>
+                            {{form_widget(eventForm.title)}}
+                        </div>
+                        <div class="form-group">
+                            <label for="event-tease" class="control-label">Phrase d'accroche</label>
+                            {{form_widget(eventForm.subtitle)}}
+                        </div>
+                        <div class="form-group">
+                            <label for="event-category" class="control-label">Catégories</label>
+                            {{form_widget(eventForm.categories)}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-category" class="control-label">Photo de profil</label>
+                                {{form_widget(profilePictureForm)}}
+                        </div>
+                        <div class="form-group">
+                            <label for="event-category" class="control-label">Photo de couverture</label>
+                                {{form_widget(coverPictureForm)}}
+                        </div>                
+                        <div class="form-group">
+                            <label for="event-description" class="control-label">Description</label>
+                            {{form_widget(eventForm.description)}}
+                        </div>
+                        <div class="form-group">
+                            <label for="event-description" class="control-label">{{form_label(eventForm.maxParticipants)}}</label>
+                            {{form_widget(eventForm.maxParticipants)}}
+                        </div>
+     
+
+                        <div class="form-group">
+                            <label class="control-label">Visibilité *</label>
+                            {{form_widget(eventForm.privacy, {'label_attr':{'class':'radio-inline'}})}}
+                        </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Confirmer</button>
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                </div>
+                <div class="col-xs-6 event-edit-form create-event-form form-horizontal">
+                    <div class="form-title"> Modifier le lieu et la date</div>
+                        <div class="form-group">
+                            <label for="event-location" class="col-sm-2 control-label">Lieu</label>
+                            <br>
+                            <div class="col-sm-10">
+                                <input id="pac-input" class="autocomplete-map-controls" type="text"
+                                    placeholder="Enter a location">
+                               <div id="map" class="gmap"></div>           
+                           </div> 
+                        </div> 
+                         <div class="form-group">
+                            <label for="event-place-name" class="col-sm-2 control-label">Nom</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.postalAddress.name)}}
+                            </div>
+                        </div>                     
+                        <div class="form-group">
+                            <label for="event-address" class="col-sm-2 control-label">Adresse</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.postalAddress.address)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-city" class="col-sm-2 control-label">Ville</label>
+                            <div class="col-sm-10">
+                                {{form_widget(eventForm.postalAddress.city)}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-zipcode" class="col-sm-2 control-label">Code postal</label>
+                            <div class="col-sm-3">
+                                {{form_widget(eventForm.postalAddress.zipcode)}}
+                            </div>
+                            <label for="event-country" class="col-sm-2 control-label">Pays</label>
+                            <div class="col-sm-5">
+                                {{form_widget(eventForm.postalAddress.country)}}
+                            </div>
+                        </div>
+                            
+                        <br>
+                         <div class="form-group">
+                            <label for="event-date" class="col-sm-2 control-label">Heure</label>
+                         </div>
+                        <div class="form-group">
+                            <label for="event-date" class="col-sm-2 control-label">Début *</label>
+                            <div class="col-sm-10 form-inline">
+                                <div class="form-inline">
+                                    <div class="input-group">
+                                        {{form_widget(eventForm.startDate, {'attr': {'placeholder': 'Date de début'}})}} 
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group">
+                                        {{form_widget(eventForm.startTime, {'attr': {'placeholder': 'Heure de début'}})}}
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="event-date" class="col-sm-2 control-label">Fin</label>
+                            <div class="col-sm-10 form-inline">
+                                <div class="form-inline">
+                                    <div class="input-group">
+                                        {{form_widget(eventForm.endDate, {'attr': {'placeholder': 'Date de fin'}})}} 
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group">                            
+                                        {{form_widget(eventForm.endTime, {'attr': {'placeholder': 'Heure de fin'}})}}
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>                        
+                                </div>
+                            </div>
+                        </div>
+                        {{form_widget(eventForm.postalAddress.coordinates)}}
+
+                        {{ form_rest(eventForm) }}
+                        {{ form_rest(profilePictureForm) }}
+                        {{ form_rest(coverPictureForm) }}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Confirmer</button>
+                    </div>
+                </div> 
+            </form>                   
+        </div>
+    </div>
+</div>
+{# Le formulaire reste inchangé #}

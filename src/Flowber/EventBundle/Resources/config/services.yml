@@ -1,4 +1,4 @@
 services:
     flowber_event.event:
         class: Flowber\EventBundle\Manager\EventManager
-        arguments: [@doctrine.orm.entity_manager, @flowber_profile.profile] 
+        arguments: [@doctrine.orm.entity_manager] 
