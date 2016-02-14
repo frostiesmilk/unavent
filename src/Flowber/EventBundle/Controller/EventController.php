@@ -24,6 +24,7 @@ class EventController extends Controller
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
         $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $event);
         //die(var_dump($isCreator)) ;
+        
         $mailToCreator = new PrivateMessage();
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
         
@@ -65,7 +66,7 @@ class EventController extends Controller
         }   
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-        $posts = $postRepository->getPostFromEvent($id);  
+        $posts = $postRepository->getPost($id);  
 
         $post = new Post();
         $postForm = $this->createForm(new PostType, $post);
