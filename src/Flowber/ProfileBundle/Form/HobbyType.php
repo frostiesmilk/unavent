@@ -17,6 +17,7 @@ class HobbyType extends AbstractType
     {
         $builder
             ->add('category', 'entity', array(
+                    'label'  => 'Catégorie',
                     'class'    => 'FlowberFrontOfficeBundle:Category',
                     'property' => 'title',
                     'query_builder' => function(EntityRepository $er) {
@@ -24,9 +25,17 @@ class HobbyType extends AbstractType
                             ->orderBy('u.title', 'ASC');
                     },
                     )
-                  )
-            ->add('percent')
-            ->add('description')
+                )
+            ->add('percent', null,  
+                    array(
+                        'label'  => 'Pourcentage',
+                    )
+                )
+            ->add('description', 'text', 
+                    array(
+                        'label'  => 'Description',
+                    )  
+                )
         ;
     }
     

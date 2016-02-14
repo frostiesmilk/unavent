@@ -127,12 +127,11 @@ class EventManager extends BaseManager {
         if (!is_object($event)) {
             throw new AccessDeniedException('This event is not defined.');
         } 
-        
-        $isCreator = $this->getEventRepository()->isCreator($user, $event);
-        if ($isCreator != 0)
+        $event = $this->getEvent($event);
+        if($event->getCreatedBy() == $user)
             return true;
         else return false;
-     
+        
         return $isCreator;
     }  
  

@@ -15,7 +15,7 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- Profile edit Cover -->  
-    {% include 'FlowberProfileBundle::partials/editProfile/profileEditCover.html.twig' %}
+    {% include 'FlowberProfileBundle::partials/userProfile/cover.html.twig' %}           
         
     <!-- Second navbar -->
     {% include 'FlowberProfileBundle::partials/editProfile/profileEditNavbar.html.twig' %}
@@ -37,16 +37,6 @@
       // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
       var $container = $('div#flowber_profilebundle_profile_hobbies');
 
-      // On ajoute un lien pour ajouter une nouvelle catégorie
-      var $lienAjout = $('<a href="#" id="ajout_hobby" class="btn">Ajouter un hobby</a>');
-      $container.append($lienAjout);
-
-      // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-      $lienAjout.click(function(e) {
-        ajouterCategorie($container);
-        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
-        return false;
-      });
 
       // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
       var index = $container.find(':input').length;
@@ -60,6 +50,17 @@
           ajouterLienSuppression($(this));
         });
       }
+      
+      // On ajoute un lien pour ajouter une nouvelle catégorie
+      var $lienAjout = $('#ajout_hobby');
+      //$container.append($lienAjout);
+
+      // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+      $lienAjout.click(function(e) {
+        ajouterCategorie($container);
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        return false;
+      });
 
       // La fonction qui ajoute un formulaire Categorie
       function ajouterCategorie($container) {
@@ -82,7 +83,7 @@
       // La fonction qui ajoute un lien de suppression d'une catégorie
       function ajouterLienSuppression($prototype) {
         // Création du lien
-        $lienSuppression = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+        $lienSuppression = $('<a href="#" class="btn btn-danger">Supprimer !</a>');
 
         // Ajout du lien
         $prototype.append($lienSuppression);

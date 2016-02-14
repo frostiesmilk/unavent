@@ -2,24 +2,90 @@
 {% form_theme profileForm 'bootstrap_3_layout.html.twig' %}
 {% form_theme profilePictureForm 'bootstrap_3_layout.html.twig' %}
 {% form_theme coverPictureForm 'bootstrap_3_layout.html.twig' %}
+{% form_theme userForm 'bootstrap_3_layout.html.twig' %}
 
 <!-- Form -->
 <div class="container">
     <div class="row">
-        <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
-            <div class="profile-edit-form">
-                <form method="post" enctype="multipart/form-data">
-                    {{form_widget(profileForm)}}
-                    <hr/>
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                
+                <div class="col-xs-6 profile-edit-form ">
+                    
+                    <div class="form-title"> Modifier vos informations </div>
+                    
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-6">
+                        {{form_errors(userForm.firstname)}}
+                        {{form_label(userForm.firstname, 'Prénom'|trans)}}
+                        {{form_widget(userForm.firstname)}}    
+                        </div>
+
+                        <div class="col-xs-6">
+                        {{form_errors(userForm.surname)}}
+                        {{form_label(userForm.surname, 'Nom'|trans)}}
+                        {{form_widget(userForm.surname)}}
+                        </div>
+                    </div>
+                    <br>
+                    {{form_errors(profileForm.subtitle)}}
+                    {{form_label(profileForm.subtitle, 'Phrase d accroche'|trans)}}
+                    {{form_widget(profileForm.subtitle)}}                     
+                    <br>
+                    {{form_errors(userForm.sex)}}
+                    {{form_label(userForm.sex, 'Sexe'|trans)}}
+                    {{form_widget(userForm.sex, {'label_attr':{'class':'radio-inline'}})}}
+                    <br>
+                    {% if form_errors(userForm.birthdate) %}
+                    <div class="form-error-custom">
+                        {{form_errors(userForm.birthdate)}} 
+                    </div>
+                    {% endif %}  
+                    
+                    {{form_label(userForm.birthdate, 'Date de naissance'|trans)}}                   
+                    <div class="form-group form-inline">
+                        {{form_widget(userForm.birthdate, {'attr':{'class':'birthday-datepicker'}})}}
+                    </div>
+                        
+                    <br>
+                    {{form_errors(profileForm.description)}}
+                    {{form_label(profileForm.description, 'Description'|trans)}}
+                    {{form_widget(profileForm.description)}}  
+                    <br>
+                    {{form_errors(profileForm.job) }}
+                    {{form_label(profileForm.job, 'Travail'|trans)}}
+                    {{form_widget(profileForm.job)}}  
+                    <br>
+                    {{form_errors(profilePictureForm)}}
+                    {{form_label(profilePictureForm, 'Photo de profil'|trans)}}      
                     {{form_widget(profilePictureForm)}}
-                    <hr/>
+                    <br>
+                    {{form_errors(coverPictureForm)}}
+                    {{form_label(coverPictureForm, 'Photo de couverture'|trans)}} 
                     {{form_widget(coverPictureForm)}}
-                    <hr/>
+                    <br>
                     <div class="form-group">
                         <button type="submit" class="btn btn-default">Confirmer</button>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="col-xs-1">
+                </div>
+                <div class="col-xs-5 profile-edit-form">
+                    <div class="form-title"> Ajouter des hobbies </div>
+                    
+                    <br>
+                    <div class="hobbies-form">
+                        {{form_widget(profileForm.hobbies)}}  
+                    </div>
+                    {{form_rest(profileForm)}}                  
+                    <a href="#" id="ajout_hobby" class="btn">Ajouter un hobby</a>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Confirmer</button>
+                    </div>
+                </div> 
+                    
+            </form>
         </div>
     </div>
 </div>

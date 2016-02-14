@@ -22,7 +22,8 @@ class EventController extends Controller
         $event = $this->container->get('flowber_event.event')->getEvent($id);        
         $coverInfo = $this->container->get('flowber_event.event')->getCoverInfos($event);
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
-//      die(var_dump($eventInfo)) ;
+        $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $event);
+        //die(var_dump($isCreator)) ;
         $mailToCreator = new PrivateMessage();
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
         
@@ -63,7 +64,6 @@ class EventController extends Controller
             }
         }   
         
-        
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPostFromEvent($id);  
 
@@ -80,6 +80,7 @@ class EventController extends Controller
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
+                'isCreator' => $isCreator,
                 'event' => $eventInfo,
                 'coverInfo' => $coverInfo, 
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
@@ -106,7 +107,7 @@ class EventController extends Controller
             $coverPicture = $coverPicture->getWebPath();
         }
         
-        return $this->render('FlowberEventBundle:Default:event-member.html.twig', 
+        return $this->render('FlowberEventBundle:Default:eventMember.html.twig', 
                 array('eventId'=>$id, 
                 'result' => $event,
                 'profilePicture' => $profilePicture, 
@@ -129,7 +130,7 @@ class EventController extends Controller
             $coverPicture = $coverPicture->getWebPath();
         }
         
-        return $this->render('FlowberEventBundle:Default:event-gallery.html.twig', 
+        return $this->render('FlowberEventBundle:Default:eventGallery.html.twig', 
                 array('eventId'=>$id, 
                 'result' => $event,
                 'profilePicture' => $profilePicture, 
@@ -202,10 +203,84 @@ class EventController extends Controller
             }
         }
   
-        return $this->render('FlowberEventBundle:Default:create-event.html.twig', array(
+        return $this->render('FlowberEventBundle:Default:createEvent.html.twig', array(
             'eventForm' => $eventForm->createView(),
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
+        ));
+    }
+    
+    public function getEditEventAction($id)
+    {
+        $user=$this->getUser();
+        $event = $this->container->get('flowber_event.event')->getEvent($id);        
+        $coverInfo = $this->container->get('flowber_event.event')->getCoverInfos($event);
+        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
+        $eventForm = $this->createForm(new EventType, $event);
+        
+        //preparing eventual new profile picture
+        $profilePicture = new Photo();
+        $profilePictureForm = $this->createForm(new ProfilePictureType, $profilePicture);
+        
+        //preparing new cover picture
+        $coverPicture = new Photo();
+        $coverPictureForm = $this->createForm(new CoverPictureType, $coverPicture);
+        
+        $error = FALSE;
+        $request = $this->get('request');
+            
+        // if form has been submitted
+        if ($request->getMethod() == 'POST') { 
+            $eventForm->handleRequest($request);
+            $profilePictureForm->handleRequest($request);
+            $coverPictureForm->handleRequest($request);  
+            $em = $this->getDoctrine()->getManager();
+            
+            if ($eventForm->isValid()) {
+                $event->setCreatedBy($user);  
+                
+            }  else{
+                $error = true;
+            }
+            
+            // processing profile picture form
+            if($profilePictureForm->isValid()){
+                // profile picture was submitted
+                if($profilePicture->getFile() !== null){
+                    $event->setProfilePicture($profilePicture);
+                    $em->persist($profilePicture);
+                }
+            }else{
+                $error = true;
+            }
+            
+            // processing cover picture form
+            if($coverPictureForm->isValid()){
+                // cover picture was submitted
+                if($coverPicture->getFile() !== null){
+                    $event->setCoverPicture($coverPicture); 
+                    $em->persist($coverPicture);
+                }
+            }else{
+                $error = true;
+            }
+            
+            // no error
+            if(!$error){
+                // DB update
+                $em->persist($event);
+                $em->flush();
+                // all good, back to profile page
+                return $this->redirect($this->generateUrl('flowber_event_homepage',array('id' => $event->getId())));
+            }
+        }
+        
+        return $this->render('FlowberEventBundle:Default:editEvent.html.twig', array(
+            'eventForm' => $eventForm->createView(),
+            'profilePictureForm' => $profilePictureForm->createView(),
+            'coverPictureForm' => $coverPictureForm->createView(),
+            'event' => $eventInfo,
+            'coverInfo' => $coverInfo,
         ));
     }
     

@@ -72,13 +72,11 @@ class ProfileManager extends BaseManager {
     
     public function getCoverInfos($user)
     {
-        $coverInfos = new ArrayCollection();
-        
-        $coverInfos['subtitle'] = $this->getProfileRepository()->getSubtitle($user);
-        $coverInfos['coverPicture'] = $this->getCoverPicture($user);
-        $coverInfos['profilePicture'] = $this->getProfilePicture($user);
-     
-        return $coverInfos;
+        $profileInfos = $this->getProfileRepository()->getProfileInfos($user);      
+        $profileInfos['coverPicture'] = $this->getCoverPicture($user);
+        $profileInfos['profilePicture'] = $this->getProfilePicture($user);
+
+        return $profileInfos;
     }   
     
 

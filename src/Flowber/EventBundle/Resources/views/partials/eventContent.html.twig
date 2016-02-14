@@ -56,6 +56,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td><p class="event-details-description">{% if event.description is not null %}{{ event.description }}{% else %}Aucune description{% endif %}</p></td>
                     </tr>
+                    {% if isCreator == false %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
@@ -67,6 +68,7 @@
                             </form>
                         </td>
                     </tr>
+                    {% endif %}
                 </table>
             </div>
         </div>

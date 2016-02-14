@@ -50,27 +50,6 @@ class EventRepository extends EntityRepository
     }
     
     /*
-     * Est ce que la personne est le créateur de l'event
-     * return participant
-     */
-    public function isCreator($user, $event){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('participants')
-            ->from('FlowberEventBundle:Participants', 'participants')
-            ->where('participants.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('participants.event = :event')
-            ->setParameter('event', $event)
-            ->andWhere('participants.statut = :statut')
-            ->setParameter('statut', 'ok')
-            ->andWhere('participants.role = :role')
-            ->setParameter('role', 'creator');
-        
-        return count($qb->getQuery()->getResult());
-    }
-    
-    /*
      * Est ce que la personne est un administrateur de l'event
      * return participant
      */
