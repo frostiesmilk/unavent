@@ -63,9 +63,10 @@ class Post
     private $gallery;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\EventBundle\Entity\Event", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Flowber\FrontOfficeBundle\Entity\Circle", inversedBy="posts")
+     * @ORM\JoinColumn(name="circle_id", referencedColumnName="id")
      */
-    private $event;
+    private $circle;
 
     /**
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
@@ -79,10 +80,6 @@ class Post
      */
     private $status;
     
-    /**
-     * @ORM\ManyToOne(targetEntity="Flowber\GroupBundle\Entity\Groups", cascade={"persist"})
-     */
-    private $groups;
     /**
      * Constructor
      */
@@ -280,29 +277,6 @@ class Post
     }
 
     /**
-     * Set event
-     *
-     * @param \Flowber\EventBundle\Entity\Event $event
-     * @return Post
-     */
-    public function setEvent(\Flowber\EventBundle\Entity\Event $event = null)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Get event
-     *
-     * @return \Flowber\EventBundle\Entity\Event 
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
      * Add photo
      *
      * @param \Flowber\GalleryBundle\Entity\Photo $photo
@@ -333,29 +307,6 @@ class Post
     public function getPhoto()
     {
         return $this->photo;
-    }
-
-    /**
-     * Set groups
-     *
-     * @param \Flowber\GroupBundle\Entity\Groups $groups
-     * @return Post
-     */
-    public function setGroups(\Flowber\GroupBundle\Entity\Groups $groups = null)
-    {
-        $this->groups = $groups;
-
-        return $this;
-    }
-
-    /**
-     * Get groups
-     *
-     * @return \Flowber\GroupBundle\Entity\Groups 
-     */
-    public function getGroups()
-    {
-        return $this->groups;
     }
 
     /**
@@ -425,5 +376,28 @@ class Post
     public function getDeleteDate()
     {
         return $this->deleteDate;
+    }
+
+    /**
+     * Set circle
+     *
+     * @param \Flowber\FrontOfficeBundle\Entity\Circle $circle
+     * @return Post
+     */
+    public function setCircle(\Flowber\FrontOfficeBundle\Entity\Circle $circle = null)
+    {
+        $this->circle = $circle;
+
+        return $this;
+    }
+
+    /**
+     * Get circle
+     *
+     * @return \Flowber\FrontOfficeBundle\Entity\Circle 
+     */
+    public function getCircle()
+    {
+        return $this->circle;
     }
 }

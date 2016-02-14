@@ -4,7 +4,7 @@ namespace Flowber\GroupBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Flowber\GalleryBundle\Entity\Gallery;
-
+use Flowber\FrontOfficeBundle\Entity\Circle;
 // REST & JMSserializer
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
  * 
  * @ExclusionPolicy("all")
  */
-class Groups
+class Groups extends Circle
 {
     /**
      * @var integer
@@ -64,11 +64,6 @@ class Groups
      */
     private $categories;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
-     */
-    private $createdBy;
-
      /**
      * @ORM\ManyToOne(targetEntity="Flowber\GalleryBundle\Entity\Photo")
      * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
@@ -94,13 +89,6 @@ class Groups
     private $coverGallery;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="creationDate", type="datetime")
-     */
-    private $creationDate;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist", "remove"})
      */
     private $galleries;
@@ -117,7 +105,9 @@ class Groups
      */
     public function __construct()
     {
-        $this->creationDate = new \Datetime();
+//        $this->creationDate = new \Datetime();
+        parent::__construct();        
+        
         $this->galleries = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->members = new \Doctrine\Common\Collections\ArrayCollection();
@@ -125,19 +115,9 @@ class Groups
         $this->coverGallery = new Gallery();
         $this->getCoverGallery()->setTitle("Cover Pictures");
         $this->profileGallery = new Gallery();
-        $this->getProfileGallery()->setTitle("Profile Pictures");        
+        $this->getProfileGallery()->setTitle("Profile Pictures");  
     }
     
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * Set title
      *
@@ -246,29 +226,6 @@ class Groups
         
         return $categories_titles;
     }
-    
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Groups
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
 
     /**
      * Set profilePicture
@@ -360,29 +317,6 @@ class Groups
     public function getCoverGallery()
     {
         return $this->coverGallery;
-    }
-
-    /**
-     * Set creationDate
-     *
-     * @param \DateTime $creationDate
-     * @return Groups
-     */
-    public function setCreationDate($creationDate)
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    /**
-     * Get creationDate
-     *
-     * @return \DateTime 
-     */
-    public function getCreationDate()
-    {
-        return $this->creationDate;
     }
 
     /**

@@ -7,7 +7,7 @@ use Flowber\UserBundle\Entity\PostalAddress;
 use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\EventBundle\Validator\Constraints as EventAssert;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Flowber\FrontOfficeBundle\Entity\Circle;
 /**
  * Event
  *
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity (repositoryClass="Flowber\EventBundle\Entity\EventRepository")
  * @EventAssert\DateRange()
  */
-class Event 
+class Event extends Circle
 {
     /**
      * @var integer
@@ -74,11 +74,6 @@ class Event
      * @ORM\Column(name="endTime", type="time", nullable=true)
      */
     private $endTime;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
-     */
-    private $createdBy;
 
     /**
      *
@@ -156,25 +151,20 @@ class Event
      * @ORM\Column(name="tagUsers", type="string", length=255, nullable=true)
      */
     private $tagUsers;
-    
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="creationDate", type="datetime")
-     */
-    private $creationDate;
 
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();  
+        
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-        //$this->postalAddress = new PostalAddress();
-//        $this->coverPicture = new Photo();
-//        $this->profilePicture = new Photo();
+//      $this->postalAddress = new PostalAddress();
+//      $this->coverPicture = new Photo();
+//      $this->profilePicture = new Photo();
         $this->number_participants = 1; // first participant is creator
-        $this->creationDate = new \Datetime();
+//      $this->creationDate = new \Datetime();
     }
     
     /**
@@ -277,29 +267,6 @@ class Event
     public function getEventDate()
     {
         return $this->eventDate;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Event
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
     }
 
     /**
@@ -507,29 +474,6 @@ class Event
     public function getTagUsers()
     {
         return $this->tagUsers;
-    }
-
-    /**
-     * Set creationDate
-     *
-     * @param \DateTime $creationDate
-     * @return Event
-     */
-    public function setCreationDate($creationDate)
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    /**
-     * Get creationDate
-     *
-     * @return \DateTime 
-     */
-    public function getCreationDate()
-    {
-        return $this->creationDate;
     }
 
     /**

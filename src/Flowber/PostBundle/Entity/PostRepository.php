@@ -22,7 +22,7 @@ class PostRepository extends EntityRepository
         
         $qb->select('a')
             ->from('FlowberPostBundle:Post', 'a')
-            ->where('a.groups = :groupId')
+            ->where('a.circle = :groupId')
             ->setParameter('groupId', $groupId)          
             ->andWhere('a.status != :status')
             ->setParameter('status', '0')

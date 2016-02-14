@@ -23,7 +23,7 @@ class PostWithEventType extends AbstractType
                                      'class' => 'group-blog-new-post-content-text'),
                     'label' => false,
                  ))
-            ->add('event',        new EventType());  
+            ->add('circle',        new EventType());  
     }
     
     /**
