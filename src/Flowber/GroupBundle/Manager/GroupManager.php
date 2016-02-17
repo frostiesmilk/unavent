@@ -15,9 +15,9 @@ class GroupManager extends BaseManager {
         $this->em = $em;
     }
     
-    public function getGroup($id)
+    public function getCircle($id)
     {
-        $group = $this->getGroupRepository()->find($id);
+        $group = $this->getCircleRepository()->find($id);
       
         if (!is_object($group)) {
             throw new AccessDeniedException('This group is not defined.');
@@ -28,11 +28,8 @@ class GroupManager extends BaseManager {
     
     public function getProfilePicture($group)
     {
-        if (!is_object($group)) {
-            throw new AccessDeniedException('This group is not defined.');
-        }   
+        $group = $this->getCircle($group);
         
-        $group = $this->getGroup($group);
         $profilePicture = $group->getProfilePicture();
         
         if (empty($profilePicture)) {
@@ -49,7 +46,7 @@ class GroupManager extends BaseManager {
         if (!is_object($group)) {
             throw new AccessDeniedException('This group is not defined.');
         }   
-        $group = $this->getGroup($group);
+        $group = $this->getCircle($group);
         $coverPicture = $group->getCoverPicture();
         
         if (empty($coverPicture)) {
@@ -77,16 +74,16 @@ class GroupManager extends BaseManager {
         return $coverInfos;
     }  
     
-    public function getGroupInfos($group)
+    public function getCircleInfos($group)
     {
         if (!is_object($group)) {
             throw new AccessDeniedException('This group is not defined.');
         } 
-        $groupInfo = $this->getGroupRepository()->getInfosGroup($group);
+        $groupInfo = $this->getCircleRepository()->getInfosGroup($group);
         $groupInfo['coverPicture'] = $this->getCoverPicture($group);
         $groupInfo['profilePicture'] = $this->getProfilePicture($group); 
-        //$groupInfo['participantsNumber'] = $this->getGroupRepository()->getParticipantsNumber($group);
-        //$groupInfo['participantsNames'] = $this->getGroupRepository()->getParticipantsNames($group);
+        //$groupInfo['participantsNumber'] = $this->getCircleRepository()->getParticipantsNumber($group);
+        //$groupInfo['participantsNames'] = $this->getCircleRepository()->getParticipantsNames($group);
         $count=0;
         $groupInfo['categories']= new \Doctrine\Common\Collections\ArrayCollection();
 
@@ -129,7 +126,7 @@ class GroupManager extends BaseManager {
         if (!is_object($group)) {
             throw new AccessDeniedException('This group is not defined.');
         } 
-        $group = $this->getGroup($group);
+        $group = $this->getCircle($group);
         if($group->getCreatedBy() == $user)
             return true;
         else return false;
@@ -151,7 +148,7 @@ class GroupManager extends BaseManager {
         return $isAdmin;
     }  
     
-    public function getGroupRepository()
+    public function getCircleRepository()
     {
         return $this->em->getRepository('FlowberGroupBundle:Groups');
     }  

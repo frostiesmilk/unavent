@@ -21,3 +21,9 @@ flowber_edit_event:
 flowber_all_event_homepage:
     path:     /toutes_mes_sorties
     defaults: { _controller: FlowberEventBundle:Event:getAllEventsPage }
+
+flowber_add_participant:
+    path:     /{id}/addParticipant
+    defaults: { _controller: FlowberEventBundle:Participant:addParticipant }
+    requirements:
+        id: \d+

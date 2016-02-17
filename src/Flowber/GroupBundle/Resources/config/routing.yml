@@ -39,3 +39,9 @@ flowber_edit_group:
     defaults: { _controller: FlowberGroupBundle:Group:editGroup }
     requirements:
         id: \d+
+
+flowber_add_member:
+    path:     /{id}/addMember
+    defaults: { _controller: FlowberGroupBundle:Membership:addMember }
+    requirements:
+        id: \d+

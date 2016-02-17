@@ -21,8 +21,8 @@ class GroupController extends Controller
     public function getGroupAction($id)
     {
         $user=$this->getUser();
-        $group = $this->container->get('flowber_group.group')->getGroup($id);        
-        $groupInfos = $this->container->get('flowber_group.group')->getGroupInfos($group);
+        $group = $this->container->get('flowber_group.group')->getCircle($id);        
+        $groupInfos = $this->container->get('flowber_group.group')->getCircleInfos($group);
         $isCreator = $this->container->get('flowber_group.group')->isCreator($user, $group);
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
@@ -192,8 +192,8 @@ class GroupController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
 
-        $group = $this->container->get('flowber_group.group')->getGroup($id);        
-        $groupInfos = $this->container->get('flowber_group.group')->getGroupInfos($group);
+        $group = $this->container->get('flowber_group.group')->getCircle($id);        
+        $groupInfos = $this->container->get('flowber_group.group')->nb($group);
         
         // preparing profile to be edited
         $groupForm = $this->createForm(new GroupsType, $group);

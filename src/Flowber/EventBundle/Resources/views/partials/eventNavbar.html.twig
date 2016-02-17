@@ -33,10 +33,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <form method="post">
-                                <i class="fa fa-calendar-plus-o attend-event-submit" data-toggle="tooltip" data-placement="top" title="Participer à la sortie"></i>
-                            </form>
+                        <a href="#" data-toggle="modal" data-target="#modalAddParticipant" title="Participer à {{ circle.title }}">
+                            <i class="fa fa-calendar-plus-o attend-event-submit" data-toggle="tooltip" data-placement="top" title="Participer à {{ circle.title }}"></i>
                         </a>
                     </li>
                     <li>
@@ -48,3 +46,5 @@
             </div>
         </div>
     </nav>
+
+{% include 'FlowberEventBundle::partials/modalAddParticipant.html.twig' %} 

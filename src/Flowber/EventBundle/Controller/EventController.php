@@ -19,8 +19,8 @@ class EventController extends Controller
     public function getEventPageAction($id)
     {  
         $user=$this->getUser();
-        $event = $this->container->get('flowber_event.event')->getEvent($id);        
-        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
+        $event = $this->container->get('flowber_event.event')->getCircle($id);        
+        $eventInfo = $this->container->get('flowber_event.event')->getCircleInfos($event);
         $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $event);
         //die(var_dump($isCreator)) ;
         
@@ -90,7 +90,7 @@ class EventController extends Controller
         );
     }
     
-    public function getEventParticipantsPageAction($id){
+    public function getParticipantsPageAction($id){
         $repository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('FlowberEventBundle:Event');
@@ -212,9 +212,9 @@ class EventController extends Controller
     public function getEditEventAction($id)
     {
         $user=$this->getUser();
-        $event = $this->container->get('flowber_event.event')->getEvent($id);        
+        $event = $this->container->get('flowber_event.event')->getCircle($id);        
         $coverInfo = $this->container->get('flowber_event.event')->getCoverInfos($event);
-        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
+        $eventInfo = $this->container->get('flowber_event.event')->getCircleInfos($event);
         $eventForm = $this->createForm(new EventType, $event);
         
         //preparing eventual new profile picture

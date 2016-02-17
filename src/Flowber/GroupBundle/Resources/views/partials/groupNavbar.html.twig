@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" title='Rejoindre le groupe'>
+                    <a href="#" data-toggle="modal" data-target="#modalAddMember" title="Participer à {{ circle.title }}" title='Rejoindre le groupe {{ circle.title }}'>
                         <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
                     </a>
                 </li>
@@ -42,3 +42,5 @@
         </div>
     </div>
 </nav>
+
+{% include 'FlowberGroupBundle::partials/modalAddMember.html.twig' %} 
