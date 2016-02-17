@@ -53,45 +53,37 @@ $(document).ready(function() {
  * When clicking COMMENT delete
  * 
  */
-$( "a[name='commentDeleteButton']" ).on( "click", function() {
-    var commentId = $( this ).find("input[name=delete-comment-id]").val() ;
-    
-    //alert(Routing.generate('api_delete_comment', {commentId: commentId}));
-    $("#delete-comment-form").attr('action', Routing.generate('api_delete_comment', {commentId: commentId}));
-    $("#delete-comment-id").val(commentId);
-});
+function modalDeleteComment(e){
+    var commentId = e.querySelector("input[name=delete-comment-id]").value ;     
+    console.log("Comment delete clicked: "+commentId);
+    document.getElementById("delete-comment-form").setAttribute("action", Routing.generate('api_delete_comment', {commentId: commentId}) );
+    document.getElementById("delete-comment-id").value = commentId;
+}
 
 /**
  * Submitting COMMENT deletion
  */
-$(document).ready(function() {
-    // Lorsque je soumets le formulaire
-    $('#delete-comment-form').on('submit', function(e) {
-        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
- 
-        var $this = $(this); // L'objet jQuery du formulaire
-        var commentId = $this.find("#delete-comment-id").val();
+document.querySelector("#delete-comment-form").onsubmit = function(e){
+    e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
 
-        $.ajax({
-            url: $this.attr('action'),
-            type: $this.attr('method'),
-            data: $this.serialize(),
-            //dataType: 'json', // JSON
-            error: function(json){
-                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-            }
-        }).done(function(data, textStatus, jqXHR){
-            console.log(data);
-            var elem = document.getElementById('comment-'+commentId);
-            elem.parentNode.removeChild(elem);
-            $('#modal-delete-comment').modal("hide");
-            alert("Le commentaire a été supprimé.");
-        });
+    var $thisForm = $("#delete-comment-form"); // objet actuel
+    var commentId = document.getElementById("delete-comment-id").value;
 
+    $.ajax({
+        url: $thisForm.attr('action'),
+        type: $thisForm.attr('method'),
+        data: $thisForm.serialize(),
+        //dataType: 'json', // JSON
+        error: function(json){
+            alert("merde "+$thisForm.attr('action')+" "+$thisForm.attr('method'));
+        }
+    }).done(function(data, textStatus, jqXHR){
+        console.log(data);
+        var elem = document.getElementById('comment-'+commentId);
+        elem.parentNode.removeChild(elem);
+        $('#modal-delete-comment').modal("hide");
     });
-    
-});
-
+};
 
 /**
 * Pressing like button
@@ -212,6 +204,7 @@ $("form[name='form-new-comment']").on("submit", function(e){
     e.preventDefault();
     
     var $this = $(this); // L'objet jQuery du formulaire
+    var postId = $this.find("[name='post-id']").val();
     
     $.ajax({ 
         url: $this.attr('action'),
@@ -224,7 +217,31 @@ $("form[name='form-new-comment']").on("submit", function(e){
     }).done(function(data, textStatus, jqXHR){ // like success
         console.log(data);
         $this.trigger("reset");
+        
+        var list = document.getElementById("comments-for-post-"+postId);
+        var li = document.createElement("li");
+        li.setAttribute("id", "comment-"+data.commentId);
+        li.setAttribute("class","media generic-blog-post-comment");
+        
+        
+        var htmlComment = document.querySelector("#comments-for-post-"+postId+" [name='comment-empty']");
+        console.log("#comments-for-post-"+postId+" [name='comment-empty'] : "+htmlComment.innerHTML);
+        li.innerHTML = htmlComment.innerHTML;
+        
+        var commentDateHTML = li.querySelector(".generic-blog-post-comment-time span");
+        var commentDate = data.datetimeCreated;
+        commentDateHTML.innerHTML = moment(commentDate).format("[le] L [à] LT"); 
+        
+        var deleteCommentIdHTML = li.querySelector("[name='delete-comment-id']");
+        deleteCommentIdHTML.setAttribute("value", data.commentId);
+        
+        var messageCommentHTML = li.querySelector(".generic-blog-post-comment-content p");
+        messageCommentHTML.innerHTML = data.commentMessage;
+        
+        list.appendChild(li);
+        
         alert("comment created");
+        
     });
 });
 

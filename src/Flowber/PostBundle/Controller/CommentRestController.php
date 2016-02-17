@@ -3,6 +3,7 @@
 namespace Flowber\PostBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\View\View as ResponseView;
 use FOS\RestBundle\Util\Codes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -15,9 +16,12 @@ class CommentRestController extends Controller
     /**
      * Create new comment
      * @param Request $request
+     * @param int $postId
      * @return View
      */
-    public function postCommentAction(Request $request){
+    public function postCommentAction(Request $request, $postId){        
+        $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($postId);
+        
         $comment = new Comment();
         $form = $this->createForm(new CommentType(), $comment);
         $form->bind($request);
@@ -28,6 +32,23 @@ class CommentRestController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             try{
+                
+                $comment->setPost($post);
+                $comment->setCreatedBy($this->getUser());
+                
+//                if ($post->getCreatedBy() != $this->getUser()){
+//                    $notification = new Notification ();
+//                    $notification->setCreatedBy($this->getUser());
+//                    $notification->setUser($post->getCreatedBy());
+//                    $notification->setPageRoute('flowber_group_homepage');
+//                    $notification->setPageId($post->getGroups()->getId());
+//                    $notification->setMessage("a commenté votre post \""
+//                            . $post->getMessage()
+//                            . "\" dans ");
+//                    $notification->setPageName($post->getGroups()->getTitle());
+//                    $em->persist($notification);                
+//                }
+                
                 $em->persist($comment);
                 $em->flush();
                 
@@ -42,7 +63,7 @@ class CommentRestController extends Controller
                                 "firstname" => $author->getFirstname(),
                                 "surname"   => $author->getSurname());
             
-            $repsData = array("commentId" => $comment->getId(), "datetimeCreated"=> $comment->getCreationDate(), "author" => $authorInfo);
+            $repsData = array("commentId" => $comment->getId(), "datetimeCreated"=> $comment->getCreationDate(), "commentMessage"=>$comment->getMessage() , "author" => $authorInfo);
             $view->setData($repsData)->setStatusCode(200); // ok
             
             return $view;
