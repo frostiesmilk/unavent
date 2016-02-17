@@ -71,12 +71,41 @@
                     il y a un cercle
                 {% endif %}
             </div>
-            {% for comment in post.getComments() %}
-                {% set commentProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
-                {% if comment.createdBy.profile.profilePicture is not null %}
-                    {% set commentProfilePicturePath = comment.createdBy.profile.profilePicture.getWebPath() %}
-                {% endif %} 
-                <ul class="media-list generic-blog-post-comments">
+            <ul id="comments-for-post-{{post.id}}" class="media-list generic-blog-post-comments">
+                <li hidden name="comment-empty" class="media generic-blog-post-comment">
+                    <div class="media-left">
+                        <div class="generic-blog-post-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
+                    </div>
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-xs-9 col-md-8">
+                                <div class="generic-blog-post-comment-poster">
+                                    <a href="{{ path('flowber_user_profile', { 'id' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
+                                </div>
+
+                                <div class="generic-blog-post-comment-time hidden-xs">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3 col-md-4 text-right">
+                                <a onclick="modalDeleteComment(this)" name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                    <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
+                                    <input type="hidden" name="delete-comment-id" value="" />                                    
+                                </a>
+                            </div>
+                        </div>
+                        <div class="generic-blog-post-comment-content">
+                            <p>Message de commentaire</p>
+                        </div>
+                    </div>
+                    <hr/>
+                </li>
+                {% for comment in post.getComments() %}
+                    {% set commentProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
+                    {% if comment.createdBy.profile.profilePicture is not null %}
+                        {% set commentProfilePicturePath = comment.createdBy.profile.profilePicture.getWebPath() %}
+                    {% endif %} 
+
                     <li id="comment-{{comment.id}}" class="media generic-blog-post-comment">
                         <div class="media-left">
                             <div class="generic-blog-post-comment-avatar" style="background-image: url('{{asset(commentProfilePicturePath)}}')"></div>
@@ -94,7 +123,7 @@
                                 </div>
                                 <div class="col-xs-3 col-md-4 text-right">
                                 {% if (comment.createdBy == app.user) %}
-                                    <a name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                    <a onclick="modalDeleteComment(this)" name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
                                         <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
                                         <input type="hidden" name="delete-comment-id" value="{{comment.id}}" />                                    
                                     </a>                                    
@@ -107,37 +136,10 @@
                         </div>
                         <hr/>
                     </li>
-                    <li hidden id="comment-0" class="media generic-blog-post-comment">
-                        <div class="media-left">
-                            <div class="generic-blog-post-comment-avatar" style=""></div>
-                        </div>
-                        <div class="media-body">
-                            <div class="row">
-                                <div class="col-xs-9 col-md-8">
-                                    <div class="generic-blog-post-comment-poster">
-                                        <a href=""></a>
-                                    </div>
-
-                                    <div class="generic-blog-post-comment-time hidden-xs">
-                                        <span></span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-3 col-md-4 text-right">
-                                    <a name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
-                                        <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
-                                        <input type="hidden" name="delete-comment-id" value="" />                                    
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="generic-blog-post-comment-content">
-                                <p>Message de commentaire</p>
-                            </div>
-                        </div>
-                        <hr/>
-                    </li>
-                </ul>
-            {% endfor %}
-            <form name="form-new-comment" action="{{ path('add_comment_post', { 'post_id' : post.id } ) }}" method="post" {{ form_enctype(commentForm[counter]) }}>                
+                {% endfor %}
+            </ul>
+            <form name="form-new-comment" action="{{ path('api_post_comment', { 'postId' : post.id } ) }}" method="post" {{ form_enctype(commentForm[counter]) }}>
+                <input type="hidden" name="post-id" value="{{post.id}}"/>
                 <div class="media generic-blog-post-new-comment">
                     <div class="media-left hidden-xs">
                         <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(currentProfilePicturePath)}}')"></div>
@@ -196,13 +198,13 @@
                 <ul class="media-list generic-blog-post-comments">
                     <li hidden id="comment-0" class="media generic-blog-post-comment">
                         <div class="media-left">
-                            <div class="generic-blog-post-comment-avatar" style=""></div>
+                            <div class="generic-blog-post-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                         </div>
                         <div class="media-body">
                             <div class="row">
                                 <div class="col-xs-9 col-md-8">
                                     <div class="generic-blog-post-comment-poster">
-                                        <a href=""></a>
+                                        <a href="{{ path('flowber_user_profile', { 'id' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
                                     </div>
 
                                     <div class="generic-blog-post-comment-time hidden-xs">
