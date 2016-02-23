@@ -3,6 +3,7 @@
 namespace Flowber\PostBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\View\View as ResponseView;
 use FOS\RestBundle\Util\Codes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -25,7 +26,6 @@ class PostRestController extends Controller
      */
     public function postPostAction(Request $request, $circleId){
         //$view = new View();// preparing response
-        
         $circle = $this->getDoctrine()->getManager()->getRepository('FlowberFrontOfficeBundle:Circle')->find($circleId);
         
         if(!is_object($circle)){
@@ -73,7 +73,11 @@ class PostRestController extends Controller
             $commentFormView = $this->renderView('FlowberPostBundle:partials:commentForm.html.twig', 
                     array("commentForm"=>$commentForm->createView()));
             
-            $repsData = array("status"=>"success", "postId" => $post->getId(), "datetimeCreated"=> $post->getCreationDate(), "commentForm"=>$commentFormView);
+            $repsData = array(  "status"=>"success", 
+                                "postId" => $post->getId(), 
+                                "postMessage" => $post->getMessage(),
+                                "datetimeCreated"=> $post->getCreationDate(), 
+                                "commentForm"=>$commentFormView);
             //$view->setData($repsData)->setStatusCode(200); // ok
             
             return $repsData;
@@ -104,19 +108,36 @@ class PostRestController extends Controller
     /**
      * Delete post action
      * @var integer $postId
-     * @View(statusCode=204)
+     * @View
      */
     public function deletePostCustomAction($postId){
         $post = $this->getDoctrine()->getRepository('FlowberPostBundle:Post')->find($postId);
+        $dude = "really ".$postId ;
+        // preparing response
+        $view = new ResponseView();
         
-        if(is_object($post)){
-            $currentUser = $this->getUser();
-            if($currentUser == $post->getCreatedBy()){ // checking if allowed to delete post (by author)
-                $post->setDeleted();
-                $em = $this->getDoctrine()->getManager();
+        if(!is_object($post)){ return "fuck off";
+            $repsData = array("message" => "post not found");
+            $view->setData($repsData)->setStatusCode(400); // error
+            return $view;
+        }
+        $dude.= "it stinks";
+        $currentUser = $this->getUser();
+        if($currentUser == $post->getCreatedBy()){ // checking if allowed to delete post (by author)
+            $post->setDeleted();
+            $em = $this->getDoctrine()->getManager();
+            $dude.= "better";
+            try{
                 $em->persist($post);
                 $em->flush();
+            } catch (Exception $ex) {
+                $repsData = array("message" => "flush error");
+                $view->setData($repsData)->setStatusCode(400); // error
+                return $view;
             }
+            $dude.="great";
         }
+        
+        return $dude;
     }
 }

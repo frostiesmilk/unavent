@@ -9,7 +9,8 @@
  * When clicking POST delete
  * 
  */
-$( "a[name='postDeleteButton']" ).on( "click", function() {
+//$( "a[name='postDeleteButton']" ).on( "click", function() {
+$("body").on("click","a[name='postDeleteButton']", function(e) {
     var postId = $( this ).find("input[name=delete-post-id]").val() ;
     var postOriginId = $( this ).find("input[name=delete-post-origin-id]").val() ;
     
@@ -88,59 +89,59 @@ document.querySelector("#delete-comment-form").onsubmit = function(e){
 /**
 * Pressing like button
 */
-$( "form[name='form-like']" ).on( "submit", function(e) { 
-       e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+$("body").on("submit","form[name='form-like']", function(e) {
+    e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
 
-       var $this = $(this); // L'objet jQuery du formulaire
-       var postId = $this.find("input[name='post-id']").val();
+    var $this = $(this); // L'objet jQuery du formulaire
+    var postId = $this.find("input[name='post-id']").val();
+    console.log("postId: "+postId);
+    if($this.find("input[name='_method']").length){ // delete like
+        console.log("deleting like");
 
-       if($this.find("input[name='_method']").length){ // delete like
-            console.log("deleting like");
-           
-            // smooth display, change with no data control
-            $this.find("button[name='addLike']").removeAttr("hidden");
-            $this.find("button[name='deleteLike']").attr("hidden", "hidden");
-            updateLikeDisplay(postId, "delete");
-            
-            $.ajax({ 
-                url: $this.attr('action'),
-                type: $this.attr('method'),
-                data: $this.serialize(),
-                //dataType: 'json', // JSON
-                error: function(json){
-                    alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-                }
-            }).done(function(data, textStatus, jqXHR){ // like success
-                $this.find("input[name='_method']").remove(); // remove deletion function
-                $this.attr('action', Routing.generate('api_post_like_post'));
-            });
-       }else{ // add like
-            console.log("adding like");
-            
-            // smooth display, change with no data control
-            $this.find("button[name='deleteLike']").removeAttr("hidden");
-            $this.find("button[name='addLike']").attr("hidden", "hidden"); 
-            updateLikeDisplay(postId, "add");
-            
-            $.ajax({ 
-                url: $this.attr('action'),
-                type: $this.attr('method'),
-                data: {postId: postId},
-                //dataType: 'json', // JSON
-                error: function(json){
-                    alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-                }
-            }).done(function(data, textStatus, jqXHR){ // like success
-                console.log(data);
-                $this.append('<input name="_method" value="DELETE" type="hidden">'); // add deletion function
-                
-                var likeId = data.likeId;
-                $this.attr('action', Routing.generate('api_delete_like', {likeId: likeId}));
-            });
-       }
+        // smooth display, change with no data control
+        $this.find("button[name='addLike']").removeAttr("hidden");
+        $this.find("button[name='deleteLike']").attr("hidden", "hidden");
+        updateLikeDisplay(postId, "delete");
 
-       
-   });
+        $.ajax({ 
+            url: $this.attr('action'),
+            type: $this.attr('method'),
+            data: $this.serialize(),
+            //dataType: 'json', // JSON
+            error: function(json){
+                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+            }
+        }).done(function(data, textStatus, jqXHR){ // like success
+            $this.find("input[name='_method']").remove(); // remove deletion function
+            $this.attr('action', Routing.generate('api_post_like_post'));
+        });
+    }else{ // add like
+        console.log("adding like");
+
+        // smooth display, change with no data control
+        $this.find("button[name='deleteLike']").removeAttr("hidden");
+        $this.find("button[name='addLike']").attr("hidden", "hidden"); 
+        updateLikeDisplay(postId, "add");
+
+        $.ajax({ 
+            url: $this.attr('action'),
+            type: $this.attr('method'),
+            data: {postId: postId},
+            //dataType: 'json', // JSON
+            error: function(json){
+                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+            }
+        }).done(function(data, textStatus, jqXHR){ // like success
+            console.log(data);
+            $this.append('<input name="_method" value="DELETE" type="hidden">'); // add deletion function
+
+            var likeId = data.likeId;
+            $this.attr('action', Routing.generate('api_delete_like', {likeId: likeId}));
+        });
+    }
+
+
+});
 
 /**
  * 
@@ -170,37 +171,37 @@ function updateLikeDisplay(postId, action){
 /**
  * Create new post
  */
-$("#generic-new-post").on("submit", function(e){
-    e.preventDefault();
-    
-    var $this = $(this); // L'objet jQuery du formulaire
-    
-    $.ajax({ 
-        url: $this.attr('action'),
-        type: $this.attr('method'),
-        data: $this.serialize(),
-        //dataType: 'json', // JSON
-        error: function(json){
-            alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-        }
-//        ,
-//        success: function(data){
-//            console.log("inajax data: "+data);
+//$("#generic-new-post").on("submit", function(e){
+//    e.preventDefault();
+//    
+//    var $this = $(this); // L'objet jQuery du formulaire
+//    
+//    $.ajax({ 
+//        url: $this.attr('action'),
+//        type: $this.attr('method'),
+//        data: $this.serialize(),
+//        //dataType: 'json', // JSON
+//        error: function(json){
+//            alert("merde "+$this.attr('action')+" "+$this.attr('method'));
 //        }
+////        ,
+////        success: function(data){
+////            console.log("inajax data: "+data);
+////        }
+////    });
+//    }).done(function(data, textStatus, jqXHR){ // like success
+//       console.log("data.commentForm: "+data.commentForm);
+//       console.log("textStatus: "+textStatus);
+//       console.log("jqXHR: "+jqXHR.toString());
+//       document.getElementById("generic-new-post").reset();
+//       alert("post created");
 //    });
-    }).done(function(data, textStatus, jqXHR){ // like success
-       console.log("data.commentForm: "+data.commentForm);
-       console.log("textStatus: "+textStatus);
-       console.log("jqXHR: "+jqXHR.toString());
-       document.getElementById("generic-new-post").reset();
-       alert("post created");
-    });
-});
+//});
 
 /**
  * Create new comment
  */
-$("form[name='form-new-comment']").on("submit", function(e){
+$("body").on("submit","form[name='form-new-comment']", function(e) {
     e.preventDefault();
     
     var $this = $(this); // L'objet jQuery du formulaire
@@ -242,6 +243,80 @@ $("form[name='form-new-comment']").on("submit", function(e){
         
         alert("comment created");
         
+    });
+});
+
+/**
+ * Create new post
+ */
+$("#generic-new-post").on("submit", function(e){
+    e.preventDefault();
+    
+    var $this = $(this); // L'objet jQuery du formulaire
+    
+    $.ajax({ 
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        //dataType: 'json', // JSON
+        error: function(json){
+            alert("error "+$this.attr('action')+" "+$this.attr('method'));
+        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        console.log(data);
+        $this.trigger("reset");
+        
+        var list = document.querySelector("[name='generic-blog-posts-list']");
+        var li = document.createElement("li");
+        li.setAttribute("id", "post-"+data.postId);
+        li.setAttribute("class","generic-blog-post");
+        
+        
+        var htmlPost = document.querySelector("#post-0");
+        console.log("new post list : "+htmlPost.innerHTML);
+        li.innerHTML = htmlPost.innerHTML;
+        
+        var deletePostIdHTML = li.querySelector("[name='delete-post-id']");
+        deletePostIdHTML.setAttribute("value", data.postId);
+        
+        var postDateHTML = li.querySelector(".generic-blog-post-time span");
+        var postDate = data.datetimeCreated;
+        postDateHTML.innerHTML = moment(postDate).format("[le] L [à] LT"); 
+        
+        var postLikeSpanId = li.querySelector(".generic-blog-post-rating");
+        postLikeSpanId.setAttribute("id", "post-rating-display-"+data.postId);
+        
+        var postLikeForm = li.querySelector("form[name='form-like']");
+        postLikeForm.querySelector("input[name='post-id']").setAttribute("value", data.postId);               
+        
+        var messagePostHTML = li.querySelector(".generic-blog-post-content p");
+        messagePostHTML.innerHTML = data.postMessage;
+        
+        var buttonDeleteLikePost = li.querySelector("button[name='deleteLike']");
+        var buttonDeleteLikePostEnterVal = buttonDeleteLikePost.getAttribute("onmouseenter").replace("tbd", data.postId);
+        var buttonDeleteLikePostLeaveVal = buttonDeleteLikePost.getAttribute("onmouseleave").replace("tbd", data.postId);
+        buttonDeleteLikePost.setAttribute("onmouseenter", buttonDeleteLikePostEnterVal);
+        buttonDeleteLikePost.setAttribute("onmouseleave", buttonDeleteLikePostLeaveVal);
+        buttonDeleteLikePost.querySelector("span").setAttribute("id", "postDeleteLike"+data.postId);
+        
+        var buttonAddLikePost = li.querySelector("button[name='addLike']");
+        var buttonAddLikePostEnterVal = buttonAddLikePost.getAttribute("onmouseenter").replace("tbd", data.postId);
+        var buttonAddLikePostLeaveVal = buttonAddLikePost.getAttribute("onmouseleave").replace("tbd", data.postId);
+        buttonAddLikePost.setAttribute("onmouseenter", buttonAddLikePostEnterVal);
+        buttonAddLikePost.setAttribute("onmouseleave", buttonAddLikePostLeaveVal);
+        buttonAddLikePost.querySelector("span").setAttribute("id", "postLike"+data.postId);
+        
+        var postComments = li.querySelector("#comments-for-post-0");
+        postComments.setAttribute("id", "comments-for-post-"+data.postId);
+        
+        var postCommentForm = li.querySelector("form[name='form-new-comment']");
+        postCommentForm.setAttribute("action", Routing.generate("api_post_comment", {postId: data.postId}));
+        postCommentForm.querySelector("input[name='post-id']").setAttribute("value", data.postId);
+        
+        var PostCommentFormWidget = li.querySelector("div.generic-blog-post-new-comment-field");
+        PostCommentFormWidget.innerHTML = data.commentForm;
+        
+        list.insertBefore(li, list.firstChild);        
     });
 });
 
