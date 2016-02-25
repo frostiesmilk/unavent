@@ -87,6 +87,9 @@ class User extends BaseUser
         // for user profile
         $this->profile = new Profile();
         $this->getProfile()->setUser($this);
+        $this->getProfile()->setTitle('');
+        $this->getProfile()->setPrivacy('public');
+        
         
         $this->creationDate = new \Datetime();
     }

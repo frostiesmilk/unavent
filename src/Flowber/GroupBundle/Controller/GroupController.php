@@ -21,9 +21,11 @@ class GroupController extends Controller
     public function getGroupAction($id)
     {
         $user=$this->getUser();
-        $group = $this->container->get('flowber_group.group')->getCircle($id);        
-        $groupInfos = $this->container->get('flowber_group.group')->getCircleInfos($group);
-        $isCreator = $this->container->get('flowber_group.group')->isCreator($user, $group);
+        $group = $this->container->get('flowber_group.group')->getGroup($id);        
+        $groupInfos = $this->container->get('flowber_group.group')->getGroupInfos($group);
+        $isCreator = $this->container->get('flowber_circle.circle')->isCreator($user, $group);
+
+        $circle = $this->container->get('flowber_circle.circle')->getCircleInfos((int)$id);
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPost($id);   
@@ -46,43 +48,6 @@ class GroupController extends Controller
         // for Private Messages
         $mailToCreator = new PrivateMessage();
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
-        
-        $request = $this->get('request');
-        // if form has been submitted
-        if ($request->getMethod() == 'POST') {
-            $em = $this->getDoctrine()->getManager();
-            $mailToCreatorForm->handleRequest($request);
-            
-            // mail to creator has been submitted
-            if ($mailToCreatorForm->isValid()) {
-                $user = $this->getUser();  
-                $userTo = $group->getCreatedBy();
-                
-                // setting subject, sender and destination
-                $subject = "[".$group->getTitle()."] : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
-                $mailToCreator->setSubject($subject);
-                $mailToCreator->setUserFrom($user);
-                $mailToCreator->setUserTo($userTo);
-                
-                $em->persist($mailToCreator);
-                $em->flush();
-               
-                // message bag
-                $this->addFlash(
-                    'success',
-                    "Votre message a bien été envoyé à l'organisateur."
-                );
-                
-                // to prevent reposting
-                return $this->redirectToRoute('flowber_group_homepage', array('id'=>$group->getId()));
-            }else{
-                // message bag
-                $this->addFlash(
-                    'error',
-                    "Une erreur est survenue lors de l'envoi du message."
-                );
-            }
-        }
         
         $userInfos = array( "id"        => $user->getId(),
                             "firstname" =>  $user->getFirstname(),
@@ -145,7 +110,7 @@ class GroupController extends Controller
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
                 if($profilePicture->getFile() !== null){                    
-                    $profilePicture->addGallery($group->getProfileGallery());
+                    //$profilePicture->addGallery($group->getProfileGallery());
                     $group->setProfilePicture($profilePicture);
                     $em->persist($profilePicture);
                 }
@@ -157,7 +122,7 @@ class GroupController extends Controller
             if($coverPictureForm->isValid()){
                 // cover picture was submitted
                 if($coverPicture->getFile() !== null){
-                    $coverPicture->addGallery($group->getCoverGallery());
+                    //$coverPicture->addGallery($group->getCoverGallery());
                     $group->setCoverPicture($coverPicture);
                     $em->persist($coverPicture);
                 }
@@ -192,7 +157,7 @@ class GroupController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
 
-        $group = $this->container->get('flowber_group.group')->getCircle($id);        
+        $group = $this->container->get('flowber_group.group')->getGroup($id);        
         $groupInfos = $this->container->get('flowber_group.group')->nb($group);
         
         // preparing profile to be edited

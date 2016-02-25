@@ -63,7 +63,7 @@ class Post
     private $gallery;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\FrontOfficeBundle\Entity\Circle", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle", inversedBy="posts")
      * @ORM\JoinColumn(name="circle_id", referencedColumnName="id")
      */
     private $circle;

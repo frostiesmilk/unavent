@@ -1,0 +1,3 @@
+flowber_circle_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FlowberCircleBundle:Default:index }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowber\FrontOfficeBundle\Entity;
+namespace Flowber\CircleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

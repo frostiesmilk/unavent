@@ -18,12 +18,12 @@
                 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#" title="Envoyez un clin d'oeil">
+                        <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil">
                             <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> 
                         </a>
                     </li>
                     <li>
-                        <a href="#" title='Envoyez un mail au responsable de la sortie'>
+                        <a href="#" data-toggle="modal" data-target="#modalMessage" title='Envoyez un mail au responsable de la sortie'>
                             <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/>
                         </a>
                     </li>
@@ -48,3 +48,5 @@
     </nav>
 
 {% include 'FlowberEventBundle::partials/modalAddParticipant.html.twig' %} 
+{% include 'FlowberPrivateMessageBundle::partials/sendMessageToUser.html.twig' %} 
+{% include 'FlowberPrivateMessageBundle::partials/sendWinkToUser.html.twig' %} 

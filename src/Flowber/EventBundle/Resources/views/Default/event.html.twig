@@ -55,7 +55,7 @@
             {% if (circle.address is not null) and (circle.name is not null) %}
                 '{{circle.name}},<br/>'+ 
             {% endif %}
-            '{{ circle.startDate|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ circle.startTime|date("\\à H:i", "Europe/Paris") }}';
+            'le {{ circle.startDate }}';
         {% endif %}
     </script>
     
@@ -77,6 +77,6 @@
         });
     </script>
     
-    
+    <script type="text/javascript" src="{{asset('assets/js/PrivateMessageBundle/sendMessageForm.js')}}"
 
 {% endblock %}

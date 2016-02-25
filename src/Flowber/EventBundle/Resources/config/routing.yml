@@ -1,6 +1,8 @@
 flowber_event_homepage:
     path:     /sortie/{id}
     defaults: { _controller: FlowberEventBundle:Event:getEventPage }
+    requirements:
+        id : \d+
     
 flowber_event_participants:
     path:     /sortie/{id}/participants

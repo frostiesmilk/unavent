@@ -4,10 +4,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Voulez-vous envoyer un clin d'oeil à {{ user.name }} ?</h4>
+                <h4 class="modal-title" id="myModalLabel">Voulez-vous envoyer un clin d'oeil à  ?</h4>
             </div>
             <div class="modal-footer">
-                <a href="{{ path('flowber_send_wink', {'id': user.id}) }}"> 
+                <a href="{{ path('flowber_send_wink', {'id': circle.id}) }}"> 
                     <button type="button" class="btn btn-default">
                         Envoyer
                     </button>

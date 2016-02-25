@@ -10,3 +10,11 @@ rest_post :
 rest_likes : 
   type : rest
   resource: "@FlowberLikeBundle/Resources/config/routing_rest.yml"
+  
+rest_private_message : 
+  type : rest
+  resource: "@FlowberPrivateMessageBundle/Resources/config/routing_rest.yml"
+  
+rest_circle : 
+  type : rest
+  resource: "@FlowberCircleBundle/Resources/config/routing_rest.yml"

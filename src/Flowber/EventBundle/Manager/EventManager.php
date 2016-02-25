@@ -5,98 +5,70 @@ namespace Flowber\EventBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
+use Flowber\CircleBundle\Manager\CircleManager;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class EventManager extends BaseManager {
 
     protected $em;
+    protected $cm;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, CircleManager $cm)
     {
         $this->em = $em;
+        $this->cm = $cm;
     }
     
-    public function getCircle($id)
+    public function getEvent($id)
     {
-        $event = $this->getCircleRepository()->find($id);
-      
+        $event = $this->getEventRepository()->find($id);
+       
         if (!is_object($event)) {
             throw new AccessDeniedException('This event is not defined.');
         }   
         
         return $event;
     } 
-    
-    public function getProfilePicture($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        }   
-        
-        $event = $this->getCircle($event);
-        $profilePicture = $event->getProfilePicture();
-        
-        if (empty($profilePicture)) {
-            $profilePicture = 'assets/images/ProfileBundle/Default/profilePictureDefault.png';
-        } else {
-            $profilePicture = $profilePicture->getWebPath();
-        }
-        
-        return $profilePicture;
-    }   
 
-    public function getCoverPicture($event)
+    public function getEventInfos($event)
     {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        }   
-        $event = $this->getCircle($event);
-        $coverPicture = $event->getCoverPicture();
+        $event = $this->getEvent($event);
         
-        if (empty($coverPicture)) {
-            $coverPicture = 'assets/images/ProfileBundle/Default/coverPictureDefault.png';
+        $circleInfos= $this->cm->getCircleInfos($event); 
+        
+        if ($event->getEndDate() != null){
+            $circleInfos['endDate'] = 'Au ' . $event->getEndDate()->format('d/m/Y') . ' à ' . $event->getEndTime()->format('H:i:s');            
+            $circleInfos['startDate'] ='Du ';           
         } else {
-            $coverPicture = $coverPicture->getWebPath();
+            $circleInfos['startDate'] = 'Le ';            
+            $circleInfos['endDate'] = '';
+        }
+        $circleInfos['startDate'] .= $event->getStartDate()->format('d/m/Y') . ' à ' . $event->getStartTime()->format('H:i:s'); 
+        
+        if ( count($event->getCategories()) == 0){
+            $circleInfos['categories']='Aucune catégorie';
+        } else {
+            $count=0;
+            foreach ($event->getCategories() as $category){
+                $circleInfos['categories'].=$category->getTitle(); 
+                $count++;
+                if ($count<count($event->getCategories())){
+                   $circleInfos['categories'].=', '; 
+                }
+            } 
         }
         
-        return $coverPicture;
-    } 
-    
-    public function getCoverInfos($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        }   
-        
-        $coverInfos = new ArrayCollection();
-        
-        $coverInfos['title'] = $event->getTitle($event);
-        $coverInfos['subtitle'] = $event->getSubtitle($event);
-        $coverInfos['coverPicture'] = $this->getCoverPicture($event);
-        $coverInfos['profilePicture'] = $this->getProfilePicture($event);
-     
-        return $coverInfos;
-    }  
-    
-    public function getCircleInfos($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        $eventInfo = $this->getCircleRepository()->getInfosEvent($event);
-        $eventInfo['coverPicture'] = $this->getCoverPicture($event);
-        $eventInfo['profilePicture'] = $this->getProfilePicture($event);
-        $eventInfo['participantsNumber'] = $this->getCircleRepository()->getParticipantsNumber($event);
-        $eventInfo['participantsNames'] = $this->getCircleRepository()->getParticipantsNames($event);
-        $count=0;
-        $eventInfo['categories']= new \Doctrine\Common\Collections\ArrayCollection();
+        $circleInfos['address'] = $event->getPostalAddress()->getAddress();
+        $circleInfos['name'] = $event->getPostalAddress()->getName();
+        $circleInfos['zipcode'] = $event->getPostalAddress()->getZipcode();
+        $circleInfos['city'] = $event->getPostalAddress()->getCity();
+        $circleInfos['country'] = $event->getPostalAddress()->getCountry();
+        $circleInfos['coordinates'] = $event->getPostalAddress()->getCoordinates();
 
-        foreach ($event->getCategories() as $category){
-            $eventInfo['categories'][$count]=$category->getTitle(); 
-            $count++;
-        }
-        //die(var_dump($eventInfo));
-     
-        return $eventInfo;
+        $circleInfos['participantsNumber'] = $this->getEventRepository()->getParticipantsNumber($event);
+        $circleInfos['participantsNames'] = $this->getEventRepository()->getParticipantsNames($event);
+             
+        return $circleInfos;
     }    
 
     public function getEventParticipantsNames($event)
@@ -104,7 +76,7 @@ class EventManager extends BaseManager {
         if (!is_object($event)) {
             throw new AccessDeniedException('This event is not defined.');
         } 
-        $participantsNames = $this->getCircleRepository()->getParticipantsNames($event);
+        $participantsNames = $this->getEventRepository()->getParticipantsNames($event);
         die(var_dump($participantsNames));
 
         return $participantsNames;
@@ -116,7 +88,7 @@ class EventManager extends BaseManager {
             throw new AccessDeniedException('This event is not defined.');
         } 
         
-        $isParticipant = $this->getCircleRepository()->isParticipant($user, $event);
+        $isParticipant = $this->getEventRepository()->isParticipant($user, $event);
         if ($isParticipant != 0)
             return true;
         else return false;
@@ -126,15 +98,7 @@ class EventManager extends BaseManager {
  
     public function isCreator($user, $event)
     {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        $event = $this->getCircle($event);
-        if($event->getCreatedBy() == $user)
-            return true;
-        else return false;
-        
-        return $isCreator;
+        return $this->cm->isCreator($user, $event);
     }  
  
     public function isAdmin($user, $event)
@@ -143,7 +107,7 @@ class EventManager extends BaseManager {
             throw new AccessDeniedException('This event doesn\'t exist.');
         } 
         
-        $isAdmin = $this->getCircleRepository()->isAdmin($user, $event);
+        $isAdmin = $this->getEventRepository()->isAdmin($user, $event);
         if ($isAdmin != 0)
             return true;
         else return false;
@@ -151,7 +115,7 @@ class EventManager extends BaseManager {
         return $isAdmin;
     }  
     
-    public function getCircleRepository()
+    public function getEventRepository()
     {
         return $this->em->getRepository('FlowberEventBundle:Event');
     }  

@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Flowber\CircleBundle\FlowberCircleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

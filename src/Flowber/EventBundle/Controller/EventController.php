@@ -9,6 +9,7 @@ use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
+use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Comment;
@@ -18,55 +19,16 @@ class EventController extends Controller
 {
     public function getEventPageAction($id)
     {  
-        $user=$this->getUser();
-        $event = $this->container->get('flowber_event.event')->getCircle($id);        
-        $eventInfo = $this->container->get('flowber_event.event')->getCircleInfos($event);
-        $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $event);
-        //die(var_dump($isCreator)) ;
-        
-        $mailToCreator = new PrivateMessage();
-        $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
-        
-        $request = $this->get('request');
-        // if form has been submitted
-        if ($request->getMethod() == 'POST') {
-            $em = $this->getDoctrine()->getManager();
-            $mailToCreatorForm->handleRequest($request);
-            
-            // mail to creator has been submitted
-            if ($mailToCreatorForm->isValid()) {
-                $user = $this->getUser();  
-                $userTo = $event->getCreatedBy();
-                
-                // setting subject, sender and destination
-                $subject = "[".$event->getTitle()."] : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
-                $mailToCreator->setSubject($subject);
-                $mailToCreator->setUserFrom($user);
-                $mailToCreator->setUserTo($userTo);
-                
-                $em->persist($mailToCreator);
-                $em->flush();
-               
-                // message bag
-                $this->addFlash(
-                    'success',
-                    "Votre message a bien été envoyé à l'organisateur."
-                );
-                
-                // to prevent reposting
-                return $this->redirectToRoute('flowber_event_homepage', array('id'=>$event->getId()));
-            }else{
-                // message bag
-                $this->addFlash(
-                    'error',
-                    "Une erreur est survenue lors de l'envoi du message."
-                );
-            }
-        }   
+        $user=$this->getUser();  
+        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($id);
+        $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $id);
+
+        $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, new PrivateMessage);
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPost($id);  
-
+        
         $post = new Post();
         $postForm = $this->createForm(new PostType, $post);
         $CommentArray = array();
@@ -80,9 +42,10 @@ class EventController extends Controller
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
-                'isCreator' => $isCreator,
+                'isCreator' => false,
                 'circle' => $eventInfo,
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
+                'messageForm' => $privateMessageForm->createView(),
                 'postForm' => $postForm->createView(),
                 'posts' => $posts,
                 'commentForm' => $CommentArray,
@@ -212,9 +175,9 @@ class EventController extends Controller
     public function getEditEventAction($id)
     {
         $user=$this->getUser();
-        $event = $this->container->get('flowber_event.event')->getCircle($id);        
+        $event = $this->container->get('flowber_event.event')->getEvent($id);        
         $coverInfo = $this->container->get('flowber_event.event')->getCoverInfos($event);
-        $eventInfo = $this->container->get('flowber_event.event')->getCircleInfos($event);
+        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
         $eventForm = $this->createForm(new EventType, $event);
         
         //preparing eventual new profile picture

@@ -1,0 +1,4 @@
+services:
+    flowber_circle.circle:
+        class: Flowber\CircleBundle\Manager\CircleManager
+        arguments: [@doctrine.orm.entity_manager] 

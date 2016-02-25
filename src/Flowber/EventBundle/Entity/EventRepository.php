@@ -15,16 +15,13 @@ class EventRepository extends EntityRepository
 {
     public function getInfosEvent($id){       
         $query = $this->_em->createQuery(''
-                . 'SELECT event.id, event.title, event.subtitle, event.startDate, '
-                . 'event.startTime, event.endDate, event.endTime, event.description,  '
-                . 'address.name, address.address, address.city, address.zipcode, address.coordinates, '
-                . 'concat(concat(user.firstname, :espace), user.surname) as createdBy, user.id as idCreatedBy '
+                . 'SELECT event.startDate, '
+                . 'event.startTime, event.endDate, event.endTime, '
+                . 'address.name, address.address, address.city, address.zipcode, address.coordinates '
                 . 'FROM FlowberEventBundle:Event event '
                 . 'LEFT JOIN FlowberUserBundle:PostalAddress address  WITH event.postalAddress = address '
-                . 'LEFT JOIN FlowberUserBundle:User user WITH event.createdBy = user '
                 . 'WHERE event.id = :id');
         $query->setParameter('id', $id);
-        $query->setParameter('espace', ' ');
         
         return $query->getSingleResult();
     }

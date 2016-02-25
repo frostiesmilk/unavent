@@ -1,4 +1,4 @@
 services:
     flowber_group.group:
         class: Flowber\GroupBundle\Manager\GroupManager
-        arguments: [@doctrine.orm.entity_manager] 
+        arguments: [@doctrine.orm.entity_manager, @flowber_circle.circle] 

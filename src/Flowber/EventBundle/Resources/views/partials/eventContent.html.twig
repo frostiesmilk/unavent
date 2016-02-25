@@ -20,21 +20,14 @@
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>
                         <td>
-                            {% if circle.categories | length %}{# if categories are specified #}
-                                {% for category in circle.categories %}
-                                    <span>{{ category }}</span>      
-                                    {% if not loop.last %}<span>,</span> {% endif %}
-                                {% endfor %}
-                            {% else %}
-                                <span>Catégorie non spécifiée</span>
-                            {% endif %}
+                            {{ circle.categories }}
                         </td>
                     </tr>                        
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/time.png')}}" alt="Date et horaire"/></td>
-                        <td>{{ circle.startDate|date("\\d\\u d/m/Y", "Europe/Paris") }} {{ circle.startTime|date("\\à H:i", "Europe/Paris") }}
+                        <td>{{ circle.startDate }}
                         
-                        {{ circle.endDate|date("\\a\\u d/m/Y", "Europe/Paris") }} {{ circle.endTime|date("\\à H:i", "Europe/Paris") }}</td>
+                        {{ circle.endDate }}</td>
                     </tr>
 
                     <tr>
@@ -61,7 +54,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
                             Envoyer un e-mail à l'organisateur<br/>
-                            <form method="post">
+                            <form name="send-private-message-form" method="post" action="{{path('api_post_private_message', {"circleId": circle.id})}}">
                                 {{ form_widget(mailToCreatorForm.message, {'attr': {'class': 'event-mail', 'placeholder':'Votre message'}})}} 
                                 {{ form_rest(mailToCreatorForm) }}
                                 <button class="btn btn-default" type="submit">Envoyer</button>
