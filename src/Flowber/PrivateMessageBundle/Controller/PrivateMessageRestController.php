@@ -109,12 +109,13 @@ class PrivateMessageRestController extends Controller
         
         return $view;
     }
+    
     /**
-     * 1send a private message
-     * @var integer $postId
+     * Create wink (private message)
+     * @var integer $circleId
      * @View
      */
-    public function getSendWinkAction(Request $request, $circleId){    
+    public function postSendWinkAction(Request $request, $circleId){    
         $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
         $iAm = $this->getUser();
         

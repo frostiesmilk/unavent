@@ -48,11 +48,9 @@ $("form[name='send-private-message-with-title-form']").on("submit", function(e){
     });
 });
 
-$("body").on("click","button.sendWinkToUser", function(e){
+$("body").on("submit","#send-wink", function(e){
     e.preventDefault(); // empêcher le comportement normal: recharger la page
     var $this = $(this); // L'objet jQuery du formulaire
-    
-     var postId = $this.find("[name='sendWinkToUser']").val();
     
     $.ajax({
         url: $this.attr('action'),
