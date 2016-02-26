@@ -53,14 +53,15 @@ class PrivateMessage
     
     
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
      */
-    private $userFrom;
+    private $messageFrom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+     * @ORM\ManyToMany(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\JoinColumn(name="message_receiver", referencedColumnName="id", nullable=true)
      */
-    private $userTo;
+    private $messageTo;
     
     /**
      * Constructor
@@ -172,55 +173,65 @@ class PrivateMessage
     {
         return $this->statut;
     }
-
-    /**
-     * Set userFrom
-     *
-     * @param \Flowber\UserBundle\Entity\User $userFrom
-     * @return PrivateMessage
-     */
-    public function setUserFrom(\Flowber\UserBundle\Entity\User $userFrom = null)
-    {
-        $this->userFrom = $userFrom;
-
-        return $this;
-    }
-
-    /**
-     * Get userFrom
-     *
-     * @return \Flowber\UserBundle\Entity\User 
-     */
-    public function getUserFrom()
-    {
-        return $this->userFrom;
-    }
-
-    /**
-     * Set userTo
-     *
-     * @param \Flowber\UserBundle\Entity\User $userTo
-     * @return PrivateMessage
-     */
-    public function setUserTo(\Flowber\UserBundle\Entity\User $userTo = null)
-    {
-        $this->userTo = $userTo;
-
-        return $this;
-    }
-
-    /**
-     * Get userTo
-     *
-     * @return \Flowber\UserBundle\Entity\User 
-     */
-    public function getUserTo()
-    {
-        return $this->userTo;
-    }
     
     public function deleteMessage(\Flowber\PrivateMessageBundle\Entity\PrivateMessage $message)
     {
         $message.setStatut(0);
+    }
+
+    /**
+     * Set messageFrom
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $messageFrom
+     * @return PrivateMessage
+     */
+    public function setMessageFrom(\Flowber\CircleBundle\Entity\Circle $messageFrom = null)
+    {
+        $this->messageFrom = $messageFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get messageFrom
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getMessageFrom()
+    {
+        return $this->messageFrom;
+    }
+
+    /**
+     * Add messageTo
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $messageTo
+     * @return PrivateMessage
+     */
+    public function addMessageTo(\Flowber\CircleBundle\Entity\Circle $messageTo)
+    {
+        $this->messageTo[] = $messageTo;
+
+        return $this;
+    }
+
+    /**
+     * Remove messageTo
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $messageTo
+     */
+    public function removeMessageTo(\Flowber\CircleBundle\Entity\Circle $messageTo)
+    {
+        $this->messageTo->removeElement($messageTo);
+    }
+
+    /**
+     * Get messageTo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessageTo()
+    {
+        return $this->messageTo;
     }
 }

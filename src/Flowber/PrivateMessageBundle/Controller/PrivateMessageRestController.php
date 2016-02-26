@@ -43,8 +43,8 @@ class PrivateMessageRestController extends Controller
             // setting subject, sender and destination
             $subject = "[".$circle->getTitle()."] : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
             $mailToCreator->setSubject($subject);
-            $mailToCreator->setUserFrom($user);
-            $mailToCreator->setUserTo($userTo);
+            $mailToCreator->setMessageFrom($this->container->get('flowber_circle.circle')->getCircle($user->getProfile()->getId()));
+            $mailToCreator->addMessageTo($this->container->get('flowber_circle.circle')->getCircle($userTo->getProfile()->getId()));
 
             $em->persist($mailToCreator);
             $em->flush();
@@ -64,7 +64,7 @@ class PrivateMessageRestController extends Controller
         return $view;
     }
     
-        /**
+    /**
      * 1send a private message
      * @var integer $postId
      * @View
@@ -89,8 +89,8 @@ class PrivateMessageRestController extends Controller
             // setting subject, sender and destination
             $subject = "[".$circle->getTitle()."] : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
             $mailToCreator->setSubject($subject);
-            $mailToCreator->setUserFrom($user);
-            $mailToCreator->setUserTo($userTo);
+            $mailToCreator->setMessageFrom($this->container->get('flowber_circle.circle')->getCircle($user->getProfile()->getId()));
+            $mailToCreator->addMessageTo($this->container->get('flowber_circle.circle')->getCircle($userTo->getProfile()->getId()));
 
             $em->persist($mailToCreator);
             $em->flush();
@@ -106,6 +106,41 @@ class PrivateMessageRestController extends Controller
             $repsData = array("message" => "form error");
             $view->setData($ex)->setStatusCode(400); // error
         }
+        
+        return $view;
+    }
+    /**
+     * 1send a private message
+     * @var integer $postId
+     * @View
+     */
+    public function getSendWinkAction(Request $request, $circleId){    
+        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
+        $iAm = $this->getUser();
+        
+        if (!is_object($circle)) {
+            throw new AccessDeniedException('This circle does not have access to this section.');
+        }   
+        
+        $view = new ResponseView();
+
+        $message = new PrivateMessage();
+        $message->setMessageFrom($this->container->get('flowber_circle.circle')->getCircle($iAm->getProfile()->getId()));
+        $message->addMessageTo($circle);
+        $message->setMessage($iAm->getFirstName()." ".$iAm->getSurname()." vous a envoyé un un clin d'oeil");
+        $message->setSubject("Vous avez reçu un clin d'oeil !");
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($message);
+        $em->flush();   
+
+        try{ // flush
+            $repsData = array("circleId" => $circle->getId());
+            $view->setData($repsData)->setStatusCode(200); // ok
+        } catch (Exception $ex) {
+            $repsData = array("message" => "flush error");
+            $view->setData($ex)->setStatusCode(400); // error
+        }
+
         
         return $view;
     }

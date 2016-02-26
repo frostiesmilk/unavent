@@ -251,7 +251,7 @@ body {
 .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments {
   background-color: #F5F5F5;
   list-style: none;
-  padding-left: 60px;
+  padding-left: 20px;
 }
 @media (max-width: 768px) {
   .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments {
@@ -259,7 +259,8 @@ body {
   }
 }
 .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment {
-  padding: 5px 0px 5px 5px;
+  padding: 10px 0px 10px 5px;
+  margin-top: initial;
 }
 .group-container .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-avatar {
   border-radius: 50%;

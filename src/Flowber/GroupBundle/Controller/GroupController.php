@@ -15,6 +15,7 @@ use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\PostWithEventType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
+use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 
 class GroupController extends Controller
 {
@@ -48,6 +49,7 @@ class GroupController extends Controller
         // for Private Messages
         $mailToCreator = new PrivateMessage();
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
         $userInfos = array( "id"        => $user->getId(),
                             "firstname" =>  $user->getFirstname(),
@@ -58,6 +60,7 @@ class GroupController extends Controller
                 array('circle' => $groupInfos,
                     'isCreator' => $isCreator,
                     'postForm' => $postForm->createView(),
+                    'messageForm' => $privateMessageForm->createView(),
                     'commentForm' => $CommentArray,
                     'postWithEventForm'=> $postWithEventForm->createView(),
                     'posts' => $posts,

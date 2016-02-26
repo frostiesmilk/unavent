@@ -47,3 +47,26 @@ $("form[name='send-private-message-with-title-form']").on("submit", function(e){
         alert("Private Message successfuly sent");
     });
 });
+
+$("body").on("click",button.sendWinkToUser, function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    
+     var postId = $this.find("[name='sendWinkToUser']").val();
+    
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+        alert("Private Message successfuly sent");
+    });
+});

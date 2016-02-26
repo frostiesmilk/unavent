@@ -12,46 +12,26 @@ use Flowber\UserBundle\Entity\User;
  */
 class PrivateMessageRepository extends EntityRepository
 {
-//    public function getReceivedMessages(User $user){
-//        $sql = "SELECT message.subject, message.message, user.firstname, user.surname, user.email, message.creationDate "
-//            . "FROM (SELECT * FROM messages_to_user a, private_message b "
-//                    . "WHERE a.user_id = ".$user->getId()." "
-//                    . "AND a.private_message_id=b.id) "
-//                . "message, user "
-//            . "WHERE message.user_from_id = user.id ";
-//        
-//        $rsm = new ResultSetMapping;
-//        $rsm->addScalarResult('subject', 'subject');
-//        $rsm->addScalarResult('message', 'message');
-//        $rsm->addScalarResult('firstname', 'firstname');
-//        $rsm->addScalarResult('surname', 'surname');
-//        $rsm->addScalarResult('email', 'email');
-//        $rsm->addScalarResult('creationDate', 'creationDate');
-//        
-//        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
-//    }        
-    
-    /*
-     * Récupère les messages reçus
-     * return entity PrivateMessage
-     */
     public function getReceivedMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
+        $sql = "SELECT message.subject, message.message, user.firstname, user.surname, user.email, message.creationDate "
+            . "FROM (SELECT * FROM messages_to_user a, private_message b "
+                    . "WHERE a.user_id = ".$user->getId()." "
+                    . "AND a.private_message_id=b.id) "
+                . "message, user "
+            . "WHERE message.user_from_id = user.id ";
         
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->setParameter('userTo', $user)
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->orderBy('a.creationDate', 'DESC');
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('firstname', 'firstname');
+        $rsm->addScalarResult('surname', 'surname');
+        $rsm->addScalarResult('email', 'email');
+        $rsm->addScalarResult('creationDate', 'creationDate');
         
-        return $qb->getQuery()
-                  ->getResult();
-    }
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }        
     
+
     /*
      * Récupère les messages reçus non lus
      * return entity PrivateMessage

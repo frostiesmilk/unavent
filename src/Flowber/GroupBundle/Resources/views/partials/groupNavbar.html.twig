@@ -20,12 +20,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil">
-                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/wink.png')}}"/> 
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> 
                     </a>
                 </li>
                 <li>
-                    <a href="#" title='Envoyez un mail au responsable du groupe'>
-                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/bubble-chat.png')}}" />
+                    <a href="#" data-toggle="modal" data-target="#modalMessage" title='Envoyez un mail au responsable du groupe'>
+                        <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/>
                     </a>
                 </li>
                 <li>
@@ -44,3 +44,5 @@
 </nav>
 
 {% include 'FlowberGroupBundle::partials/modalAddMember.html.twig' %} 
+{% include 'FlowberPrivateMessageBundle::partials/sendMessageToUser.html.twig' %} 
+{% include 'FlowberPrivateMessageBundle::partials/sendWinkToUser.html.twig' %} 

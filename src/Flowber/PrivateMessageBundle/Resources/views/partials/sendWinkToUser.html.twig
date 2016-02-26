@@ -7,8 +7,8 @@
                 <h4 class="modal-title" id="myModalLabel">Voulez-vous envoyer un clin d'oeil à  ?</h4>
             </div>
             <div class="modal-footer">
-                <a href="{{ path('flowber_send_wink', {'id': circle.id}) }}"> 
-                    <button type="button" class="btn btn-default">
+                <a href="{{ path('api_get_send_wink', {'circleId': circle.id}) }}"> 
+                    <button type="button" class="btn btn-default" name="sendWinkToUser">
                         Envoyer
                     </button>
                 </a>

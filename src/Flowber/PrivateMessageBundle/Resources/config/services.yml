@@ -1,4 +1,4 @@
 services:
-#    flowber_private_message.example:
-#        class: Flowber\PrivateMessageBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    flowber_circle.circle:
+        class: Flowber\PrivateMessageBundle\Manager\PrivateMessageManager
+        arguments: [@doctrine.orm.entity_manager] 
