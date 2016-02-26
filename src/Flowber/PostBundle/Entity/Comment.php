@@ -173,29 +173,6 @@ class Comment
     }
 
     /**
-     * Set post
-     *
-     * @param string $post
-     * @return Comment
-     */
-    public function setPost($post)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Get post
-     *
-     * @return string 
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
      * Set likes
      *
      * @param string $likes
@@ -286,5 +263,28 @@ class Comment
     public function getDeleteDate()
     {
         return $this->deleteDate;
+    }
+
+    /**
+     * Set post
+     *
+     * @param \Flowber\PostBundle\Entity\Post $post
+     * @return Comment
+     */
+    public function setPost(\Flowber\PostBundle\Entity\Post $post)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get post
+     *
+     * @return \Flowber\PostBundle\Entity\Post 
+     */
+    public function getPost()
+    {
+        return $this->post;
     }
 }

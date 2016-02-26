@@ -377,14 +377,15 @@ class Post
     {
         return $this->deleteDate;
     }
+   
 
     /**
      * Set circle
      *
-     * @param \Flowber\FrontOfficeBundle\Entity\Circle $circle
+     * @param \Flowber\CircleBundle\Entity\Circle $circle
      * @return Post
      */
-    public function setCircle(\Flowber\FrontOfficeBundle\Entity\Circle $circle = null)
+    public function setCircle(\Flowber\CircleBundle\Entity\Circle $circle = null)
     {
         $this->circle = $circle;
 
@@ -394,7 +395,7 @@ class Post
     /**
      * Get circle
      *
-     * @return \Flowber\FrontOfficeBundle\Entity\Circle 
+     * @return \Flowber\CircleBundle\Entity\Circle 
      */
     public function getCircle()
     {

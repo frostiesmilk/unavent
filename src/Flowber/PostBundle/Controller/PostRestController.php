@@ -26,7 +26,7 @@ class PostRestController extends Controller
      */
     public function postPostAction(Request $request, $circleId){
         //$view = new View();// preparing response
-        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberFrontOfficeBundle:Circle')->find($circleId);
+        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
         
         if(!is_object($circle)){
             return array("status"=>400, "message"=>"Circle not found");//$view-($repsData)->setStatusCode(400); // error
