@@ -12,26 +12,26 @@
     
     {# Following is second menu for small screen as well #}
     <ul class="nav nav-pills nav-justified menu-secondary">
-        <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ user.name }}"><span class="glyphicon glyphicon-eye-open"></span></a></li>
-        <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ user.name }}"><span class="glyphicon glyphicon-list"></span></a></li>
-        <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ user.name }}"><span class="glyphicon glyphicon-apple"></span></a></li>
-        <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ user.name }}"> <span class="glyphicon glyphicon-picture"></span></a></li>
-        <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ user.name }}"><i class="fa fa-users"></i></a></li>
+        <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ circle.name }}"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+        <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ circle.name }}"><span class="glyphicon glyphicon-list"></span></a></li>
+        <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ circle.name }}"><span class="glyphicon glyphicon-apple"></span></a></li>
+        <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ circle.name }}"> <span class="glyphicon glyphicon-picture"></span></a></li>
+        <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ circle.name }}"><i class="fa fa-users"></i></a></li>
         <li>
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ user.name }}">
+                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ circle.name }}">
                         <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> Envoyer un clin d'oeil
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ user.name }}">
+                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ circle.name }}">
                         <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/> Envoyer un message
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.name }}comme ami">
+                    <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ circle.name }}comme ami">
                         <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/add-user.png')}}"/> Ajouter en ami
                     </a>
                 </li>
@@ -87,4 +87,6 @@
     <!--<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <script src="{{ asset('assets/js/GalleryBundle/bootstrap-image-gallery.js') }}"></script>
     <script src="{{ asset('assets/js/GalleryBundle/blueimp-gallery.js') }}"></script>-->
+    <script type="text/javascript" src="{{asset('assets/js/PrivateMessageBundle/sendMessageForm.js')}}"></script>
+
 {% endblock %}

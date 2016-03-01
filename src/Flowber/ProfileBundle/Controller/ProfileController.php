@@ -124,7 +124,7 @@ class ProfileController extends Controller
 
         return $this->render('FlowberProfileBundle:Default:currentUserProfile.html.twig', 
                 array(
-                    'user' => $profile,
+                    'circle' => $profile,
                     'friends' => $friends,
                 ));
     }
@@ -156,32 +156,14 @@ class ProfileController extends Controller
         }
 //      $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
         
-        // IF A PRIVATE MESSAGE HAS BEEN SENT
         $privateMessage = new PrivateMessage;
         $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
 
-        $request = $this->get('request');
-        
-        // if form has been submitted
-        if ($request->getMethod() == 'POST') { 
-            $privateMessageForm->handleRequest($request);
-            
-            if ($privateMessageForm->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $privateMessage->setUserFrom($this->getUser());
-                $privateMessage->setUserTo($user);
-                $em->persist($privateMessage);
-                $em->flush();
-                $this->addFlash( 'success',"Votre message a bien envoyé.");
-
-                return $this->redirect($this->generateUrl('flowber_user_profile', array('id' => $id)));
-            }
-        }
         // END IF A PRIVATE MESSAGE HAS BEEN SENT 
 
         return $this->render('FlowberProfileBundle:Default:userProfile.html.twig', 
                 array(
-                    'user' => $profile,
+                    'circle' => $profile,
                     'messageForm' => $privateMessageForm->createView(),
                     'isFriend' => $isFriend,
                     'sendRequest' => $requestFriend,

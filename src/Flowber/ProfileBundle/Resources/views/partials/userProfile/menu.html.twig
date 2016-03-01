@@ -13,21 +13,21 @@
         </div>
         <div id="second-navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ user.name }}">Fiche</a></li>
-                <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ user.name }}">Groupes</a></li>
-                <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ user.name }}">Sorties</a></li>
-                <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ user.name }}">Photos</a></li>
-                <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ user.name }}">Amis</a></li>
+                <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ circle.name }}">Fiche</a></li>
+                <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ circle.name }}">Groupes</a></li>
+                <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ circle.name }}">Sorties</a></li>
+                <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ circle.name }}">Photos</a></li>
+                <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ circle.name }}">Amis</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ user.name }}">
+                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ circle.name }}">
                         <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/wink.png')}}"/> 
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ user.name }}">
+                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ circle.name }}">
                         <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/bubble-chat.png')}}"/>
                     </a>
                 </li>
@@ -38,22 +38,22 @@
                             <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/friend.png')}}"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-large">
-                            <li><a tabindex="-1" href="{{ path('flowber_unfriend', {'id': user.id}) }}">Supprimer de mes amis</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_unfriend', {'id': circle.id}) }}">Supprimer de mes amis</a></li>
                         </ul>
                     </li>
                 {% elseif sendRequest == 0 %}              
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ user.name }} comme ami">
+                        <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ circle.name }} comme ami">
                             <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
                         </a>
                     </li>
                 {% elseif sendRequest == -1 %} 
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true" title="La demande d'ami avec {{ user.name }} est en attente de validation">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true" title="La demande d'ami avec {{ circle.name }} est en attente de validation">
                             <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-large">
-                            <li><a tabindex="-1" href="{{ path('flowber_cancel_friend_request', {'id': user.id}) }}">Annuler la demande</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_cancel_friend_request', {'id': circle.id}) }}">Annuler la demande</a></li>
                         </ul>
                     </li>                    
                 {% endif %}
