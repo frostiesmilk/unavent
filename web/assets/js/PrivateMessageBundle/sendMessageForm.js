@@ -65,6 +65,6 @@ $("body").on("submit","#send-wink", function(e){
 //        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
-        alert("Private Message successfuly sent");
+        document.getElementById("send-wink-message").innerHTML=("Votre wink a bien été envoyé");
     });
 });
