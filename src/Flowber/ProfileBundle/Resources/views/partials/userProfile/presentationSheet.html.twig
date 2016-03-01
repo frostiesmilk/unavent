@@ -6,17 +6,17 @@
                 
                 <div class="col-md-6 col-sm-6 col-xs-12 col-bg-white user-profile-element">
                     <div class="user-profile-introduction-text-block">
-                        <h3 class="name">{{ user.name }} </h3>
-                        <p class="user-job">{{ user.job }}</p>
-                        <p> {{ user.birthdate|date("d/m/Y") }} (23 ans)<br/>
-                            {{ user.city }} 
-                            {% if user.zipcode != '' %}
-                                ( {{ user.zipcode|number_format(0, '', '') }} )
+                        <h3 class="name">{{ circle.name }} </h3>
+                        <p class="user-job">{{ circle.job }}</p>
+                        <p> {{ circle.birthdate|date("d/m/Y") }} (23 ans)<br/>
+                            {{ circle.city }} 
+                            {% if circle.zipcode != '' %}
+                                ( {{ circle.zipcode|number_format(0, '', '') }} )
                             {% endif %}                               
                         </p>
                     </div>
                     <div class="user-profile-description">
-                        <p> {{ user.description }} </p>
+                        <p> {{ circle.description }} </p>
                     </div>
                 </div>
                     
@@ -25,10 +25,10 @@
                         <div class="user-profile-custom-icon" style="background-image: url('{{asset('images/frontoffice/user/user-custom-icons/kangaroo.png')}}')"></div>
                     -->
                     <h3>Mes inspirations</h3>
-                    {% if user.hobbies.count > 0 %}
+                    {% if circle.hobbies.count > 0 %}
                         <table class="user-profile-interest">
 
-                            {% for hobby in user.hobbies %}
+                            {% for hobby in circle.hobbies %}
                                 <tr>
                                     <td class="user-profile-interest-subject text-center">
                                         <span> {{ hobby.category.title }}</span><br/>

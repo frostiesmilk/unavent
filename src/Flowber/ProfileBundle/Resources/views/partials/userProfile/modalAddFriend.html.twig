@@ -3,10 +3,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Voulez-vous ajouter {{ user.name }} comme ami ?</h4>
+        <h4 class="modal-title" id="myModalLabel">Voulez-vous ajouter {{ circle.name }} comme ami ?</h4>
       </div>
       <div class="modal-footer">
-          <a tabindex="-1" href="{{ path('flowber_add_friend', {'id': user.id}) }}"><button type="button" class="btn btn-default">Oui</button></a>
+          <a tabindex="-1" href="{{ path('flowber_add_friend', {'id': circle.id}) }}"><button type="button" class="btn btn-default">Oui</button></a>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
       </div>
     </div>
