@@ -7,6 +7,9 @@ use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+// Entities
+use Flowber\CircleBundle\Entity\Circle;
+
 class CircleManager extends BaseManager {
 
     protected $em;
@@ -27,7 +30,7 @@ class CircleManager extends BaseManager {
         return $circle;
     } 
     
-    public function getProfilePicture($circle)
+    public function getProfilePicture(Circle $circle)
     {
         // Si on a envoyé un id, renvoyer un circle
         if (is_numeric($circle)){
@@ -49,7 +52,7 @@ class CircleManager extends BaseManager {
         return $profilePicture;
     } 
     
-    public function getCoverPicture($circle)
+    public function getCoverPicture(Circle $circle)
     {
         // Si on a envoyé un id, renvoyer un circle
         if (is_numeric($circle)){

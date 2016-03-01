@@ -25,9 +25,7 @@ class GroupController extends Controller
         $group = $this->container->get('flowber_group.group')->getGroup($id);        
         $groupInfos = $this->container->get('flowber_group.group')->getGroupInfos($group);
         $isCreator = $this->container->get('flowber_circle.circle')->isCreator($user, $group);
-
-        $circle = $this->container->get('flowber_circle.circle')->getCircleInfos((int)$id);
-        
+                
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPost($id);   
         
@@ -37,13 +35,13 @@ class GroupController extends Controller
         $postForm = $this->createForm(new PostType(), $post);
         $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
         
-        $CommentArray = array();
-
+        // forms for comments
+        $commentsForms = array();
         foreach ($posts as $post)
         {
             $comment = new Comment();
             $commentForm = $this->createForm(new CommentType, $comment);
-            $CommentArray[] = $commentForm->createView();
+            $commentsForms[] = $commentForm->createView();
         }
         
         // for Private Messages
@@ -51,22 +49,24 @@ class GroupController extends Controller
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
+        // user
         $userInfos = array( "id"        => $user->getId(),
                             "firstname" =>  $user->getFirstname(),
                             "surname"   =>  $user->getSurname(),
-                            "profilePicture"    => $user->getProfile()->getProfilePicture());
+                            "profilePicture"    => $this->container->get('flowber_profile.profile')->getProfilePicture($user));
         
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
-                array('circle' => $groupInfos,
-                    'isCreator' => $isCreator,
-                    'postForm' => $postForm->createView(),
-                    'messageForm' => $privateMessageForm->createView(),
-                    'commentForm' => $CommentArray,
-                    'postWithEventForm'=> $postWithEventForm->createView(),
-                    'posts' => $posts,
-                    'mailToCreatorForm' => $mailToCreatorForm->createView(),
-                    'user'  =>  $userInfos,
-            ));
+            array('circle' => $groupInfos,
+                'user'  =>  $userInfos,
+                'isCreator' => $isCreator,
+                'posts' => $posts,
+                // forms
+                'postForm' => $postForm->createView(),
+                'messageForm' => $privateMessageForm->createView(),
+                'commentForm' => $commentsForms,
+                'postWithEventForm'=> $postWithEventForm->createView(),
+                'mailToCreatorForm' => $mailToCreatorForm->createView(),                    
+        ));
     }
     
     public function getCreateGroupAction()

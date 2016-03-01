@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
 
+// Entities
+use Flowber\UserBundle\Entity\User;
+
 class ProfileManager extends BaseManager {
 
     protected $em;
@@ -31,7 +34,7 @@ class ProfileManager extends BaseManager {
         return $user->getFirstname().' '.$user->getSurname();
     } 
     
-    public function getProfile($user)
+    public function getProfile(User $user)
     {
         $profile = $this->getProfileRepository()->findOneByUser($user);
         
@@ -42,7 +45,7 @@ class ProfileManager extends BaseManager {
         return $profile;
     }
     
-    public function getProfilePicture($user)
+    public function getProfilePicture(User $user)
     {
         $profile = $this->getProfile($user);
         $profilePicture = $profile->getProfilePicture();

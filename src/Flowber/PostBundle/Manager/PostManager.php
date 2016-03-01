@@ -5,8 +5,9 @@ namespace Flowber\PostBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
+use Flowber\PostBundle\Entity\Post;
 
-class EventManager extends BaseManager {
+class PostManager extends BaseManager {
 
     protected $em;
 
@@ -19,13 +20,30 @@ class EventManager extends BaseManager {
     {
         $post = $this->getPostRepository()->find($id);
       
-        if (!is_object($event)) {
+        if (!is_object($post)) {
             throw new AccessDeniedException('This post is not defined.');
         }   
         
         return $post;
     } 
 
+    public function getPostInfos($pPost){
+        if(is_numeric($pPost)){
+            $post = $this->getPost($pPost);
+        }
+        
+        $post = $pPost;
+        
+        if(!is_object($post)){
+            return false;
+        }
+        
+        $postInfos = array(
+            "id"        => $post->getId(),
+            //"creator"   => 
+        );
+    }
+    
     public function getPostProfilePicture($post)
     {
         $post = $this->getPost($post);
@@ -71,84 +89,6 @@ class EventManager extends BaseManager {
         $coverInfos['profilePicture'] = $this->getProfilePicture($event);
      
         return $coverInfos;
-    }  
-    
-    public function getEventInfos($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        $eventInfo = $this->getEventRepository()->getInfosEvent($event);
-        $eventInfo['participantsNumber'] = $this->getEventRepository()->getParticipantsNumber($event);
-        $eventInfo['participantsNames'] = $this->getEventRepository()->getParticipantsNames($event);
-        $count=0;
-        $eventInfo['categories']= new \Doctrine\Common\Collections\ArrayCollection();
-
-        foreach ($event->getCategories() as $category){
-            $eventInfo['categories'][$count]=$category->getTitle(); 
-            $count++;
-        }
-        //die(var_dump($eventInfo));
-     
-        return $eventInfo;
-    }    
-
-    public function getEventParticipantsNames($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        $participantsNames = $this->getEventRepository()->getParticipantsNames($event);
-        die(var_dump($participantsNames));
-
-        return $participantsNames;
-    }   
-    
-    public function isParticipant($user, $event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        
-        $isParticipant = $this->getEventRepository()->isParticipant($user, $event);
-        if ($isParticipant != 0)
-            return true;
-        else return false;
-     
-        return $isParticipant;
-    }  
- 
-    public function isCreator($user, $event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        
-        $isCreator = $this->getEventRepository()->isCreator($user, $event);
-        if ($isCreator != 0)
-            return true;
-        else return false;
-     
-        return $isCreator;
-    }  
- 
-    public function isAdmin($user, $event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event doesn\'t exist.');
-        } 
-        
-        $isAdmin = $this->getEventRepository()->isAdmin($user, $event);
-        if ($isAdmin != 0)
-            return true;
-        else return false;
-     
-        return $isAdmin;
-    }  
-    
-    public function getEventRepository()
-    {
-        return $this->em->getRepository('FlowberEventBundle:Event');
-    }  
+    } 
     
 }
