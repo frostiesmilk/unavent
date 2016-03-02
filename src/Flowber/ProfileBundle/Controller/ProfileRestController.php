@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowber\CircleBundle\Controller;
+namespace Flowber\ProfileBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Util\Codes;
@@ -9,21 +9,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 
-use Flowber\LikeBundle\Entity\Likes;
-use Flowber\NotificationBundle\Entity\Notification;
-use Flowber\PostBundle\Entity\Post;
 
-class CircleRestController extends Controller
+class ProfileRestController extends Controller
 {   
     /**
      * 
-     * @param type $circleId
+     * @param type $profileId
      *     
      */
-    function getCircleAction ($circleId){
-        $circle = $this->container->get("flowber_circle.circle")->getCircle($circleId);
+    function getProfileAction ($profileId){
+        $circle = $this->container->get("flowber_circle.circle")->getCircle($profileId);
         $name = explode('\\', get_class($circle));
-        $circleClassName = end($name);
+        $circleClassName = end($circleName);
         
         die(var_dump(end($circleClassName)));
     }
