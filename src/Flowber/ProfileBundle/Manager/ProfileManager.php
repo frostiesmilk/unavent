@@ -8,6 +8,9 @@ use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+// Entities
+use Flowber\UserBundle\Entity\User;
+
 class ProfileManager extends BaseManager {
 
     protected $em;

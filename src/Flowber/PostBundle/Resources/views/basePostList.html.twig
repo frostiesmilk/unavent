@@ -1,7 +1,3 @@
-{% set currentProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
-{% if app.user.profile.profilePicture is not null %}
-    {% set currentProfilePicturePath = app.user.profile.profilePicture.getWebPath() %}
-{% endif %} 
 {% set counter = 0 %}
 
 <ul class="generic-blog-posts" name="generic-blog-posts-list">     
@@ -21,7 +17,7 @@
             <div class="generic-blog-post-header">             
                 <div class="media">
                     <div class="media-left">
-                        <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(postProfilePicturePath)}}')"></div>
+                        <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                     </div>
                     <div class="media-body">
                         <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_user_profile', { 'id' : post.createdBy.id } ) }}">
@@ -142,7 +138,7 @@
                 <input type="hidden" name="post-id" value="{{post.id}}"/>
                 <div class="media generic-blog-post-new-comment">
                     <div class="media-left hidden-xs">
-                        <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(currentProfilePicturePath)}}')"></div>
+                        <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                     </div>
                     <div class="media-body generic-blog-post-new-comment-field">
                         {{form_widget(commentForm[counter])}}
@@ -165,7 +161,7 @@
             <div class="generic-blog-post-header">             
                 <div class="media">
                     <div class="media-left">
-                        <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(currentProfilePicturePath)}}')"></div>
+                        <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                     </div>
                     <div class="media-body">
                         <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_user_profile', { 'id' : user.id } ) }}">
@@ -229,7 +225,7 @@
                 <input type="hidden" name="post-id" value="0"/>
                 <div class="media generic-blog-post-new-comment">
                     <div class="media-left hidden-xs">
-                        <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(currentProfilePicturePath)}}')"></div>
+                        <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                     </div>
                     <div class="media-body generic-blog-post-new-comment-field">
                         
