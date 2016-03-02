@@ -15,7 +15,7 @@ class ProfileRestController extends Controller
     /**
      * 
      * @param type $profileId
-     *     
+     * @return type
      */
     function getProfileAction ($profileId){
         $circle = $this->container->get("flowber_circle.circle")->getCircle($profileId);
