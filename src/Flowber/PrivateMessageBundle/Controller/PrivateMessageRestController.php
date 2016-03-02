@@ -23,7 +23,7 @@ class PrivateMessageRestController extends Controller
      * @var integer $postId
      * @View
      */
-    public function postPrivateMessageAction(Request $request, $circleId){    
+    public function postPrivatemessageAction(Request $request, $circleId){    
         $em = $this->getDoctrine()->getManager();
         $circle = $this->container->get('flowber_circle.circle')->getCircle($circleId);
 
@@ -69,7 +69,7 @@ class PrivateMessageRestController extends Controller
      * @var integer $postId
      * @View
      */
-    public function postPrivateMessageTitleAction(Request $request, $circleId){    
+    public function postPrivatemessagetitleAction(Request $request, $circleId){    
         $em = $this->getDoctrine()->getManager();
         $circle = $this->container->get('flowber_circle.circle')->getCircle($circleId);
 
@@ -115,7 +115,7 @@ class PrivateMessageRestController extends Controller
      * @var integer $circleId
      * @View
      */
-    public function postSendWinkAction(Request $request, $circleId){    
+    public function postSendwinkAction(Request $request, $circleId){    
         $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
         $iAm = $this->getUser();
         

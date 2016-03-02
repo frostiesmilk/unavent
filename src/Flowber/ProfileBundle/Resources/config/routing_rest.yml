@@ -1,5 +1,5 @@
-#src/Flowber/LikesBundle/Resources/config/routing_rest.yml
-like : 
+#src/Flowber/ProfileBundle/Resources/config/routing_rest.yml
+profile : 
     type: rest
     resource:     "FlowberProfileBundle:ProfileRest"
     name_prefix:  api_
