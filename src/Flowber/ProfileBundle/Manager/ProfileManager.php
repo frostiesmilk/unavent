@@ -3,38 +3,42 @@
 namespace Flowber\ProfileBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
+use Flowber\CircleBundle\Manager\CircleManager;
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProfileManager extends BaseManager {
 
     protected $em;
+    protected $cm;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, CircleManager $cm)
     {
         $this->em = $em;
-    }
+        $this->cm = $cm;
+   }
     
-    public function getUser($id)
+    public function getUser($profileId)
     {
-        $user = $this->getUserRepository()->find($id);
+        $profile = $this->getProfile($profileId);
       
-        if (!is_object($user)) {
+        if (!is_object($profile)) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
         
-        return $user;
+        return $profile->getUSer();
     } 
-
+ 
     public function getUserName($user)
     {
         return $user->getFirstname().' '.$user->getSurname();
     } 
     
-    public function getProfile($user)
+    public function getProfile($profileId)
     {
-        $profile = $this->getProfileRepository()->findOneByUser($user);
-        
+        $profile = $this->getProfileRepository()->find(1);
+
         if (empty($profile)) {
             throw new NotFoundHttpException("Le profil de l'utilisateur".$profile->getUser()->getFirstname()." n'existe pas.");
         } 
@@ -42,50 +46,19 @@ class ProfileManager extends BaseManager {
         return $profile;
     }
     
-    public function getProfilePicture($user)
-    {
-        $profile = $this->getProfile($user);
-        $profilePicture = $profile->getProfilePicture();
-        
-        if (empty($profilePicture)) {
-            $profilePicture = 'assets/images/ProfileBundle/Default/profilePictureDefault.png';
-        } else {
-            $profilePicture = $profilePicture->getWebPath();
-        }
-        
-        return $profilePicture;
-    }   
-
-    public function getCoverPicture($user)
-    {
-        $profile = $this->getProfile($user);
-        $coverPicture = $profile->getCoverPicture();
-        
-        if (empty($coverPicture)) {
-            $coverPicture = 'assets/images/ProfileBundle/Default/coverPictureDefault.png';
-        } else {
-            $coverPicture = $coverPicture->getWebPath();
-        }
-        
-        return $coverPicture;
-    } 
-    
-    public function getCoverInfos($user)
-    {
-        $profileInfos = $this->getProfileRepository()->getProfileInfos($user);      
-        $profileInfos['coverPicture'] = $this->getCoverPicture($user);
-        $profileInfos['profilePicture'] = $this->getProfilePicture($user);
-
-        return $profileInfos;
-    }   
-    
-
     public function getProfileInfos($user)
     {
-        $postalAdress = $user->getMainPostalAddress();
-        $profileInfos = $this->getProfileRepository()->getProfileInfos($user);      
-        $profileInfos['coverPicture'] = $this->getCoverPicture($user);
-        $profileInfos['profilePicture'] = $this->getProfilePicture($user);
+        $profile = $this->getProfile($user);
+        $profileInfos = $this->cm->getCoverInfos($profile);
+        $profileInfos['title'] = $this->getUserName($user);
+        $profileInfos['description'] = $profile->getDescription();
+        $profileInfos['job'] = $profile->getJob();
+        $profileInfos['creationDate'] = 'le ' . $profile->getCreationDate()->format('d/m/Y') . ' à ' . $profile->getCreationDate()->format('H:i:s');
+        $profileInfos['birthdate'] = $user->getBirthdate()->format('d/m/Y');
+        $profileInfos['sex'] = $user->getSex();
+        $profileInfos['id'] = $profile->getId();
+        
+        $postalAdress = $user->getMainPostalAddress($user);
         if (!is_object($postalAdress)){
             $profileInfos['city'] = '';
             $profileInfos['zipcode'] = '';           
@@ -93,8 +66,18 @@ class ProfileManager extends BaseManager {
             $profileInfos['city'] = $postalAdress->getCity();
             $profileInfos['zipcode'] = $postalAdress->getZipcode();
         }
-        $profileInfos['hobbies'] = $user->getProfile($user)->getHobbies();
-
+        $count = 0;
+        $profileInfos['hobbies']=new ArrayCollection();
+        if ( count($profile->getHobbies()) != 0){
+            foreach ($profile->getHobbies() as $hobby){
+                $profileInfos['hobbies'][$count]=new ArrayCollection();
+                $profileInfos['hobbies'][$count]['title'] = $hobby->getCategory()->getTitle();
+                $profileInfos['hobbies'][$count]['percent'] = $hobby->getPercent();
+                $profileInfos['hobbies'][$count]['description'] = $hobby->getDescription();
+                $count++;
+            } 
+        }
+                
         return $profileInfos;
     } 
     

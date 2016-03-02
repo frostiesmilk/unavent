@@ -3,7 +3,7 @@ flowber_profile_current_user:
     defaults: { _controller: FlowberProfileBundle:Profile:getCurrentUserProfile }
     
 flowber_user_profile:
-    path:     /membre/{id}
+    path:     /membre/{profileId}
     defaults: { _controller: FlowberProfileBundle:Profile:getUserProfile }
 
 flowber_profile_edit:

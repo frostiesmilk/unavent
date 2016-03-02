@@ -15,5 +15,16 @@ use Flowber\PostBundle\Entity\Post;
 
 class CircleRestController extends Controller
 {   
-   
+    /**
+     * 
+     * @param type $circleId
+     *     
+     */
+    function getCircleAction ($circleId){
+        $circle = $this->container->get("flowber_circle.circle")->getCircle($circleId);
+        $name = explode('\\', get_class($circle));
+        $circleClassName = end($circleName);
+        
+        die(var_dump(end($circleName)));
+    }
 }

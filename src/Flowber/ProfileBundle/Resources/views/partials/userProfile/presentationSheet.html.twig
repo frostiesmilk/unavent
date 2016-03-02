@@ -6,13 +6,11 @@
                 
                 <div class="col-md-6 col-sm-6 col-xs-12 col-bg-white user-profile-element">
                     <div class="user-profile-introduction-text-block">
-                        <h3 class="name">{{ circle.name }} </h3>
+                        <h3 class="name">{{ circle.title }} </h3>
                         <p class="user-job">{{ circle.job }}</p>
-                        <p> {{ circle.birthdate|date("d/m/Y") }} (23 ans)<br/>
+                        <p> {{ circle.birthdate}} (23 ans)<br/>
                             {{ circle.city }} 
-                            {% if circle.zipcode != '' %}
-                                ( {{ circle.zipcode|number_format(0, '', '') }} )
-                            {% endif %}                               
+                            {{ circle.zipcode|number_format(0, '', '') }} 
                         </p>
                     </div>
                     <div class="user-profile-description">
@@ -31,7 +29,7 @@
                             {% for hobby in circle.hobbies %}
                                 <tr>
                                     <td class="user-profile-interest-subject text-center">
-                                        <span> {{ hobby.category.title }}</span><br/>
+                                        <span> {{ hobby.title }}</span><br/>
                                         <div class="progress category-jauge">
                                             <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{ hobby.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ hobby.percent }}%">
                                               <span class="sr-only">{{ hobby.percent }}</span>

@@ -95,7 +95,7 @@ class ProfileController extends Controller
         }
   
         return $this->render('FlowberProfileBundle:Default:editProfile.html.twig', 
-                array('user' => $this->container->get('flowber_profile.profile')->getCoverInfos($user),
+                array('circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($user),
                     'profileForm' => $profileForm->createView(),
                     'userForm' => $userForm->createView(),
                     'profilePictureForm'=>$profilePictureForm->createView(),
@@ -116,6 +116,8 @@ class ProfileController extends Controller
         }   
         
         $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
+        //die(var_dump($profile));
+        
         $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
 
         if (empty($profile)) {
@@ -130,15 +132,15 @@ class ProfileController extends Controller
     }
     
     
-    public function getUserProfileAction($id) {
+    public function getUserProfileAction($profileId) {
         $currentUser = $this->getUser();
-        $user = $this->container->get('flowber_profile.profile')->getUser($id);        
+        $profile = $this->container->get('flowber_profile.profile')->getProfile($profileId);
+        $user = $this->container->get('flowber_profile.profile')->getUser($profileId);        
         
         // Si on veut afficher son profil
-        if ($currentUser == $user){
-            return $this->redirect($this->generateUrl('flowber_profile_current_user'));
-        }
-        
+        if ($currentUser == $user) { $isCurrent = true; }
+        else { $isCurrent = false; }
+               
         $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
         $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
         
@@ -164,6 +166,7 @@ class ProfileController extends Controller
         return $this->render('FlowberProfileBundle:Default:userProfile.html.twig', 
                 array(
                     'circle' => $profile,
+                    'isCreator' => $isCurrent,
                     'messageForm' => $privateMessageForm->createView(),
                     'isFriend' => $isFriend,
                     'sendRequest' => $requestFriend,

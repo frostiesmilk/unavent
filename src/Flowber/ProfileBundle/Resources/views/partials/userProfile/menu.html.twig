@@ -13,21 +13,21 @@
         </div>
         <div id="second-navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ circle.name }}">Fiche</a></li>
-                <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ circle.name }}">Groupes</a></li>
-                <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ circle.name }}">Sorties</a></li>
-                <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ circle.name }}">Photos</a></li>
-                <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ circle.name }}">Amis</a></li>
+                <li><a class="scroll-anchor" href="#fiche" title="Voir la fiche de {{ circle.title }}">Fiche</a></li>
+                <li><a class="scroll-anchor" href="#groups" title="voir les groupes de {{ circle.title }}">Groupes</a></li>
+                <li><a class="scroll-anchor" href="#events" title="Voir les sorties de {{ circle.title }}">Sorties</a></li>
+                <li><a class="scroll-anchor" href="#photos" title="Voir les photos de {{ circle.title }}">Photos</a></li>
+                <li><a class="scroll-anchor" href="#friends" title="Voir les amis de {{ circle.title }}">Amis</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ circle.name }}">
+                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ circle.title }}">
                         <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/wink.png')}}"/> 
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ circle.name }}">
+                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ circle.title }}">
                         <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/bubble-chat.png')}}"/>
                     </a>
                 </li>
@@ -43,7 +43,7 @@
                     </li>
                 {% elseif sendRequest == 0 %}              
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ circle.name }} comme ami">
+                        <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ circle.title }} comme ami">
                             <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
                         </a>
                     </li>
