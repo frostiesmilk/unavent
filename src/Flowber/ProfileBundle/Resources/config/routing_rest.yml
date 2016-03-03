@@ -4,5 +4,4 @@ profile :
     resource:     "FlowberProfileBundle:ProfileRest"
     name_prefix:  api_
     options:
-        expose: true
-        
+        expose: true      
