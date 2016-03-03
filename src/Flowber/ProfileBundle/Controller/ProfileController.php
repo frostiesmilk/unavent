@@ -19,16 +19,15 @@ class ProfileController extends Controller
      * @return type
      * @throws AccessDeniedException
      */
-    public function getEditProfileAction() {
+    public function getEditProfileAction($circleId) {
         $user = $this->getUser();        
         $error = false; // detect error while processing forms
         
         if (!is_object($user)) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
-        
         // preparing profile to be edited
-        $profile = $this->getDoctrine()->getManager()->getRepository('FlowberProfileBundle:Profile')->findOneByUser($user);
+        $profile = $this->container->get('flowber_profile.profile')->getProfile($circleId);
         $profileForm = $this->createForm(new ProfileType, $profile);
         
         //preparing eventual new profile picture
@@ -95,9 +94,10 @@ class ProfileController extends Controller
         }
   
         return $this->render('FlowberProfileBundle:Default:editProfile.html.twig', 
-                array('circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($user),
+                array('circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
                     'profileForm' => $profileForm->createView(),
                     'userForm' => $userForm->createView(),
+                    'isCreator'=> false,
                     'profilePictureForm'=>$profilePictureForm->createView(),
                     'coverPictureForm'=>$coverPictureForm->createView()));
     }
@@ -132,28 +132,25 @@ class ProfileController extends Controller
     }
     
     
-    public function getUserProfileAction($profileId) {
+    public function getUserProfileAction($circleId) {
         $currentUser = $this->getUser();
-        $profile = $this->container->get('flowber_profile.profile')->getProfile($profileId);
-        $user = $this->container->get('flowber_profile.profile')->getUser($profileId);        
-        
+        $circleInfos = $this->container->get('flowber_profile.profile')->getProfileInfos($circleId);
+        $circleUser = $this->container->get('flowber_profile.profile')->getUser($circleId);        
+        $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($circleUser);
+
         // Si on veut afficher son profil
-        if ($currentUser == $user) { $isCurrent = true; }
+        if ($currentUser == $circleUser) { $isCurrent = true; }
         else { $isCurrent = false; }
-               
-        $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
-        $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
-        
-        $friendshipReposit = $this->container->get('flowber_profile.profile')->getFriendshipRepository(); 
-        
-        $isFriend = $friendshipReposit->isFriendWithMe($user, $this->getUser());
-        $requestFriend = $friendshipReposit->hasSentAFriendRequest($user, $this->getUser());
+                     
+        $friendshipReposit = $this->container->get('flowber_profile.profile')->getFriendshipRepository();   
+        $isFriend = $friendshipReposit->isFriendWithMe($circleUser, $this->getUser());
+        $requestFriend = $friendshipReposit->hasSentAFriendRequest($circleUser, $this->getUser());
         
         if ($requestFriend != 0){
-            $this->addFlash( 'addFriend',$user->getFirstName()." ". $user->getSurName()." a envoyé une demande d'ami.");
+            $this->addFlash( 'addFriend',$circleUser->getFirstName()." ". $circleUser->getSurName()." a envoyé une demande d'ami.");
         } 
-        if ($friendshipReposit->hasSentAFriendRequest($this->getUser(), $user) != 0){
-            $this->addFlash('success', "Votre demande d'ami à ". $user->getFirstName()." ". $user->getSurName()." a bien été envoyée.");
+        if ($friendshipReposit->hasSentAFriendRequest($this->getUser(), $circleUser) != 0){
+            $this->addFlash('success', "Votre demande d'ami à ". $circleUser->getFirstName()." ". $circleUser->getSurName()." a bien été envoyée.");
             $requestFriend=-1;
         }
 //      $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
@@ -163,9 +160,9 @@ class ProfileController extends Controller
 
         // END IF A PRIVATE MESSAGE HAS BEEN SENT 
 
-        return $this->render('FlowberProfileBundle:Default:userProfile.html.twig', 
+        return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
-                    'circle' => $profile,
+                    'circle' => $circleInfos,
                     'isCreator' => $isCurrent,
                     'messageForm' => $privateMessageForm->createView(),
                     'isFriend' => $isFriend,

@@ -31,24 +31,30 @@ class GroupManager extends BaseManager {
     
     public function getGroupInfos($group)
     {
-        if (!is_object($group)) {
-            throw new AccessDeniedException('This group is not defined.');
-        } 
-        $groupInfo = $this->getGroupRepository()->getInfosGroup($group);
-        $groupInfo['coverPicture'] = $this->cm->getCoverPicture($group);
-        $groupInfo['profilePicture'] = $this->cm->getProfilePicture($group); 
+        $group = $this->getGroup($group);
+        
+        $circleInfos= $this->cm->getCircleInfos($group); 
+        
         //$groupInfo['participantsNumber'] = $this->getCircleRepository()->getParticipantsNumber($group);
         //$groupInfo['participantsNames'] = $this->getCircleRepository()->getParticipantsNames($group);
         $count=0;
-        $groupInfo['categories']= new \Doctrine\Common\Collections\ArrayCollection();
+        $circleInfos['categories']= new \Doctrine\Common\Collections\ArrayCollection();
 
-        foreach ($group->getCategories() as $category){
-            $groupInfo['categories'][$count]=$category->getTitle(); 
-            $count++;
+        if ( count($group->getCategories()) == 0){
+            $circleInfos['categories']='Aucune catégorie';
+        } else {
+            $count=0;
+            foreach ($group->getCategories() as $category){
+                $circleInfos['categories'].=$category->getTitle(); 
+                $count++;
+                if ($count<count($group->getCategories())){
+                   $circleInfos['categories'].=', '; 
+                }
+            } 
         }
         //die(var_dump($groupInfo));
      
-        return $groupInfo;
+        return $circleInfos;
     }    
     
     public function getGroupRepository()

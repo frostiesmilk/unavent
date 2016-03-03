@@ -13,7 +13,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/host.png')}}" alt="Organisateur"/></td>
                         <td>créée par 
                             <span class="event-details-host">
-                                <a href="{{ path('flowber_user_profile', {'id': circle.idCreatedBy}) }}"> {{ circle.createdBy }} </a>
+                                <a href="{{ path('api_get_circle', {'circleId': circle.idCreatedBy}) }}"> {{ circle.createdBy }} </a>
                             </span>
                         </td>
                     </tr>
@@ -54,7 +54,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
                             Envoyer un e-mail à l'organisateur<br/>
-                            <form name="send-private-message-form" method="post" action="{{path('api_post_private_message', {"circleId": circle.id})}}">
+                            <form name="send-private-message-form" method="post" action="{{path('api_post_privatemessage', {"circleId": circle.id})}}">
                                 {{ form_widget(mailToCreatorForm.message, {'attr': {'class': 'event-mail', 'placeholder':'Votre message'}})}} 
                                 {{ form_rest(mailToCreatorForm) }}
                                 <button class="btn btn-default" type="submit">Envoyer</button>

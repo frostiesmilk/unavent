@@ -30,7 +30,7 @@ class CircleManager extends BaseManager {
         return $circle;
     } 
     
-    public function getProfilePicture(Circle $circle)
+    public function getProfilePicture($circle)
     {
         // Si on a envoyé un id, renvoyer un circle
         if (is_numeric($circle)){
@@ -52,7 +52,7 @@ class CircleManager extends BaseManager {
         return $profilePicture;
     } 
     
-    public function getCoverPicture(Circle $circle)
+    public function getCoverPicture($circle)
     {
         // Si on a envoyé un id, renvoyer un circle
         if (is_numeric($circle)){
@@ -110,7 +110,7 @@ class CircleManager extends BaseManager {
         $circleInfos = $this->getCoverInfos($circle);
         $circleInfos['creationDate'] = 'le ' . $circle->getCreationDate()->format('d/m/Y') . ' à ' . $circle->getCreationDate()->format('H:i:s');
         $circleInfos['createdBy'] = $circle->getCreatedBy()->getFirstname() . ' ' . $circle->getCreatedBy()->getSurname();
-        $circleInfos['idCreatedBy'] = $circle->getCreatedBy()->getId();
+        $circleInfos['idCreatedBy'] = $circle->getCreatedBy()->getProfile()->getId();
         $circleInfos['description'] = $circle->getDescription();
         $circleInfos['privacy'] = $circle->getPrivacy();
      

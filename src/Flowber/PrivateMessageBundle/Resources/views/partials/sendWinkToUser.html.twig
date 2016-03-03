@@ -7,7 +7,7 @@
                 <h4 class="modal-title" id="send-wink-message" >Voulez-vous envoyer un clin d'oeil à  ?</h4>
             </div>
             <div class="modal-footer" >
-                <form id="send-wink" method="post" action="{{ path('api_post_send_wink', {'circleId': circle.id}) }}">
+                <form id="send-wink" method="post" action="{{ path('api_post_sendwink', {'circleId': circle.id}) }}">
      
                     <button type="submit" class="btn btn-default" name="sendWinkToUser">
                         Envoyer

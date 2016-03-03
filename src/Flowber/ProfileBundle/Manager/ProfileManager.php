@@ -40,7 +40,7 @@ class ProfileManager extends BaseManager {
     
     public function getProfile($profileId)
     {
-        $profile = $this->getProfileRepository()->find(1);
+        $profile = $this->getProfileRepository()->find($profileId);
 
         if (empty($profile)) {
             throw new NotFoundHttpException("Le profil de l'utilisateur".$profile->getUser()->getFirstname()." n'existe pas.");
@@ -49,9 +49,11 @@ class ProfileManager extends BaseManager {
         return $profile;
     }
     
-    public function getProfileInfos($user)
+    public function getProfileInfos($profileId)
     {
-        $profile = $this->getProfile($user);
+        $profile = $this->getProfile($profileId);
+        $user = $this->getUser($profileId);
+        
         $profileInfos = $this->cm->getCoverInfos($profile);
         $profileInfos['title'] = $this->getUserName($user);
         $profileInfos['description'] = $profile->getDescription();

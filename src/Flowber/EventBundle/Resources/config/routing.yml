@@ -1,5 +1,5 @@
 flowber_event_homepage:
-    path:     /sortie/{id}
+    path:     /sortie/{circleId}
     defaults: { _controller: FlowberEventBundle:Event:getEventPage }
     requirements:
         id : \d+
@@ -16,7 +16,7 @@ flowber_create_event_homepage:
     path:     /nouvelle_sortie
     defaults: { _controller: FlowberEventBundle:Event:getCreateEvent }
 
-flowber_edit_event:
+flowber_event_edit:
     path:     /sortie/{id}/edit
     defaults: { _controller: FlowberEventBundle:Event:getEditEvent }
 

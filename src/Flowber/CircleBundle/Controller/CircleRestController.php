@@ -23,8 +23,23 @@ class CircleRestController extends Controller
     function getCircleAction ($circleId){
         $circle = $this->container->get("flowber_circle.circle")->getCircle($circleId);
         $name = explode('\\', get_class($circle));
-        $circleClassName = end($name);
+        $circleClassName = strtolower(end($name));
         
-        die(var_dump(end($circleClassName)));
+        return $this->redirect($this->generateUrl('flowber_'.$circleClassName.'_homepage', array('circleId' => $circleId)));
+        die(var_dump($circleClassName));
+    }
+    
+    /**
+     * 
+     * @param type $circleId
+     *     
+     */
+    function getCircleEditAction ($circleId){
+        $circle = $this->container->get("flowber_circle.circle")->getCircle($circleId);
+        $name = explode('\\', get_class($circle));
+        $circleClassName = strtolower(end($name));
+        
+        return $this->redirect($this->generateUrl('flowber_'.$circleClassName.'_edit', array('circleId' => $circleId)));
+        die(var_dump($circleClassName));
     }
 }

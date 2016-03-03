@@ -8,20 +8,25 @@ use FOS\RestBundle\View\View as ResponseView;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Flowber\ProfileBundle\Form\ProfileType;
+use Flowber\GalleryBundle\Entity\Photo;
+use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
+use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
+use Flowber\GalleryBundle\Form\CoverPictureType;
+use Flowber\GalleryBundle\Form\ProfilePictureType;
+use Flowber\UserBundle\Form\EditUserType;
 
 class ProfileRestController extends Controller
 {   
     /**
      * 
      * @param type $profileId
-     *     
+     * @return type
+     * @throws type
+     * 
      */
     function getProfileAction ($profileId){
-        $circle = $this->container->get("flowber_circle.circle")->getCircle($profileId);
-        $name = explode('\\', get_class($circle));
-        $circleClassName = end($circleName);
-        
-        die(var_dump(end($circleClassName)));
+
     }
 }

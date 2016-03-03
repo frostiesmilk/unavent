@@ -19,15 +19,14 @@ use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 
 class GroupController extends Controller
 {
-    public function getGroupAction($id)
+    public function getGroupAction($circleId)
     {
-        $user=$this->getUser();
-        $group = $this->container->get('flowber_group.group')->getGroup($id);        
-        $groupInfos = $this->container->get('flowber_group.group')->getGroupInfos($group);
-        $isCreator = $this->container->get('flowber_circle.circle')->isCreator($user, $group);
+        $user=$this->getUser();  
+        $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId);
+        $isCreator = $this->container->get('flowber_circle.circle')->isCreator($user, $circleId);
                 
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-        $posts = $postRepository->getPost($id);   
+        $posts = $postRepository->getPost($circleId);   
         
         //preparing new form for a post
         $post = new Post();
@@ -48,15 +47,15 @@ class GroupController extends Controller
         $mailToCreator = new PrivateMessage();
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
-        
-        // user
+
+//        // user
         $userInfos = array( "id"        => $user->getId(),
                             "firstname" =>  $user->getFirstname(),
                             "surname"   =>  $user->getSurname(),
-                            "profilePicture"    => $this->container->get('flowber_profile.profile')->getProfilePicture($user));
+                            "profilePicture"    => $this->container->get('flowber_circle.circle')->getProfilePicture($groupInfo['idCreatedBy']));
         
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
-            array('circle' => $groupInfos,
+            array('circle' => $groupInfo,
                 'user'  =>  $userInfos,
                 'isCreator' => $isCreator,
                 'posts' => $posts,

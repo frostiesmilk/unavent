@@ -10,7 +10,9 @@
                 <table>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/host.png')}}" alt="Organisateur"/></td>
-                        <td>créé par <span class="group-details-host">{{circle.createdBy}}</span></td>
+                        <td>créé par <span class="group-details-host">
+                             <a href="{{ path('flowber_profile_homepage', {'circleId': circle.idCreatedBy}) }}"> {{ circle.createdBy }} </a>
+                        </span></td>
                     </tr>
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>

@@ -8,7 +8,7 @@
         <h4 class="modal-title" id="modalMessageLabel">Envoyez un message à  </h4>
       </div>
       <div class="modal-body">
-        <form name="send-private-message-with-title-form" method="post" action="{{path('api_post_private_message_title', {"circleId": circle.id})}}">
+        <form name="send-private-message-with-title-form" method="post" action="{{path('api_post_privatemessagetitle', {"circleId": circle.id})}}">
             {{form_start(messageForm)}}
                 {{form_widget(messageForm)}}
                 <div class="modal-footer">

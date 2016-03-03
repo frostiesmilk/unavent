@@ -6,8 +6,8 @@ flowber_group_search:
     path:     /rechercher
     defaults: { _controller: FlowberGroupBundle:Group:groupSearch }
 
-flowber_group_homepage:
-    path:     /{id}
+flowber_groups_homepage:
+    path:     /{circleId}
     defaults: { _controller: FlowberGroupBundle:Group:getGroup }
     requirements:
         id: \d+
@@ -34,8 +34,8 @@ flowber_all_group_homepage:
     path:     /tous_mes_groupes
     defaults: { _controller: FlowberGroupBundle:Group:AllGroups }
 
-flowber_edit_group:
-    path:     /{id}/edit
+flowber_groups_edit:
+    path:     /{circleId}/edit
     defaults: { _controller: FlowberGroupBundle:Group:editGroup }
     requirements:
         id: \d+

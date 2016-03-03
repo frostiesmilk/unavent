@@ -20,7 +20,7 @@
                         <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                     </div>
                     <div class="media-body">
-                        <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_user_profile', { 'id' : post.createdBy.id } ) }}">
+                        <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_profile_homepage', { 'circleId' : post.createdBy.id } ) }}">
                             {{post.createdBy.firstname}} {{post.createdBy.surname}}
                         </a>
                         <br/>
@@ -76,7 +76,7 @@
                         <div class="row">
                             <div class="col-xs-9 col-md-8">
                                 <div class="generic-blog-post-comment-poster">
-                                    <a href="{{ path('flowber_user_profile', { 'id' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
+                                    <a href="{{ path('flowber_profile_homepage', { 'circleId' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
                                 </div>
 
                                 <div class="generic-blog-post-comment-time hidden-xs">
@@ -110,7 +110,7 @@
                             <div class="row">
                                 <div class="col-xs-9 col-md-8">
                                     <div class="generic-blog-post-comment-poster">
-                                        <a href="{{ path('flowber_user_profile', { 'id' : comment.createdBy.id } ) }}">{{comment.createdBy.firstname}} {{comment.createdBy.surname}}</a>
+                                        <a href="{{ path('flowber_profile_homepage', { 'circleId' : comment.createdBy.id } ) }}">{{comment.createdBy.firstname}} {{comment.createdBy.surname}}</a>
                                     </div>
 
                                     <div class="generic-blog-post-comment-time hidden-xs">
@@ -164,7 +164,7 @@
                         <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
                     </div>
                     <div class="media-body">
-                        <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_user_profile', { 'id' : user.id } ) }}">
+                        <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_profile_homepage', { 'circleId' : user.id } ) }}">
                             {{user.firstname}} {{user.surname}}
                         </a>
                         <br/>
@@ -200,7 +200,7 @@
                         <div class="row">
                             <div class="col-xs-9 col-md-8">
                                 <div class="generic-blog-post-comment-poster">
-                                    <a href="{{ path('flowber_user_profile', { 'id' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
+                                    <a href="{{ path('flowber_profile_homepage', { 'circleId' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
                                 </div>
 
                                 <div class="generic-blog-post-comment-time hidden-xs">

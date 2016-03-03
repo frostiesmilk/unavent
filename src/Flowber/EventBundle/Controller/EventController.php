@@ -17,17 +17,17 @@ use Flowber\PostBundle\Form\CommentType;
 
 class EventController extends Controller
 {
-    public function getEventPageAction($id)
+    public function getEventPageAction($circleId)
     {  
         $user=$this->getUser();  
-        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($id);
-        $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $id);
+        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($circleId);
+        $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $circleId);
 
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, new PrivateMessage);
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-        $posts = $postRepository->getPost($id);  
+        $posts = $postRepository->getPost($circleId);  
         
         $post = new Post();
         $postForm = $this->createForm(new PostType, $post);

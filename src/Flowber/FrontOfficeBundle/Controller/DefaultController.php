@@ -8,8 +8,9 @@ class DefaultController extends Controller
 {
     public function homeAction()
     {
-        if($this->getUser()!= null){ // if logged in
-            return $this->redirect($this->generateUrl('flowber_profile_current_user'));
+        $user = $this->getUser();
+        if($user != null){ // if logged in
+            return $this->redirect($this->generateUrl('flowber_profile_homepage', array('circleId' => $user->getProfile()->getId())));
         }
         
         return $this->redirect($this->generateUrl('flowber_user_signin_homepage'));
