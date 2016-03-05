@@ -4,6 +4,8 @@ namespace Flowber\PrivateMessageBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Flowber\UserBundle\Entity\User;
+use Doctrine\ORM\Query\ResultSetMapping;
+
 /**
  * PrivateMessageRepository
  *
@@ -12,20 +14,17 @@ use Flowber\UserBundle\Entity\User;
  */
 class PrivateMessageRepository extends EntityRepository
 {
-    public function getReceivedMessages(User $user){
-        $sql = "SELECT message.subject, message.message, user.firstname, user.surname, user.email, message.creationDate "
-            . "FROM (SELECT * FROM messages_to_user a, private_message b "
-                    . "WHERE a.user_id = ".$user->getId()." "
+    public function getReceivedMessages($circleId){
+        $sql = "SELECT message.subject, message.message, message.message_from_id "
+            . "FROM (SELECT * FROM private_message_circle a, private_message b "
+                    . "WHERE a.circle_id = ".$circleId." "
                     . "AND a.private_message_id=b.id) "
-                . "message, user "
-            . "WHERE message.user_from_id = user.id ";
+                . "message ";
         
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('subject', 'subject');
         $rsm->addScalarResult('message', 'message');
-        $rsm->addScalarResult('firstname', 'firstname');
-        $rsm->addScalarResult('surname', 'surname');
-        $rsm->addScalarResult('email', 'email');
+        $rsm->addScalarResult('message_from_id', 'circleId');
         $rsm->addScalarResult('creationDate', 'creationDate');
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();

@@ -110,13 +110,16 @@ class PrivateMessageController extends Controller
         return $this->redirect($this->generateUrl('flowber_private_message_received_homepage'));
     }
     
-    public function getMessageReceivedAction($id)
+    public function getMessageReceivedAction($circleId)
     {
-        $message = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage')->find($id);
+       // $message = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage')->find($id);
         
         $user = $this->getUser();
         
         $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
+        $messages = $pmReposit->getReceivedMessages($circleId);
+
+        die(var_dump($messages));
         
         $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
         $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);

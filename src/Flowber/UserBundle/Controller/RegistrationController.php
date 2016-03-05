@@ -196,6 +196,11 @@ class RegistrationController extends BaseController{
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         
+        $em = $this->getDoctrine()->getManager();
+        $user->getProfile()->setTitle($user->getFirstname()." ".$user->getSurname());
+        $user->getProfile()->setCreatedBy($user->getProfile());
+        $em->persist($user);
+        $em->flush();
         // preparing the form for last step of registration
         $phone = new Phone;
         $formPhone = $this->createForm(new PhoneType, $phone);
@@ -209,7 +214,6 @@ class RegistrationController extends BaseController{
             $formPostal->bind($request);
 
             if ($formPhone->isValid() && $formPostal->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 $user->addPostalAddress($postal);
                 $user->addPhone($phone);
                 $em->persist($phone);
@@ -219,14 +223,18 @@ class RegistrationController extends BaseController{
                 $em->flush();
                 
                 // all set, redirecting to user profile!
-                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
+                return $this->redirect($this->generateUrl('api_get_circle', array(
+                    'circleId' => $user->getProfile()->getId()
+                )));
             }
         }
-
+        $circleInfos = $this->container->get('flowber_profile.profile')->getProfileInfos($user->getProfile()->getId());
+        //die(var_dump($circleInfos));
         // show last step of registration
         return $this->render('FlowberUserBundle:Default:signUpDetails.html.twig', array(
             'formPhone' => $formPhone->createView(), 
-            'formPostal' => $formPostal->createView()
+            'formPostal' => $formPostal->createView(),
+            'circle' => $circleInfos
         ));
     }
 }
