@@ -169,36 +169,6 @@ function updateLikeDisplay(postId, action){
 }
 
 /**
- * Create new post
- */
-//$("#generic-new-post").on("submit", function(e){
-//    e.preventDefault();
-//    
-//    var $this = $(this); // L'objet jQuery du formulaire
-//    
-//    $.ajax({ 
-//        url: $this.attr('action'),
-//        type: $this.attr('method'),
-//        data: $this.serialize(),
-//        //dataType: 'json', // JSON
-//        error: function(json){
-//            alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-//        }
-////        ,
-////        success: function(data){
-////            console.log("inajax data: "+data);
-////        }
-////    });
-//    }).done(function(data, textStatus, jqXHR){ // like success
-//       console.log("data.commentForm: "+data.commentForm);
-//       console.log("textStatus: "+textStatus);
-//       console.log("jqXHR: "+jqXHR.toString());
-//       document.getElementById("generic-new-post").reset();
-//       alert("post created");
-//    });
-//});
-
-/**
  * Create new comment
  */
 $("body").on("submit","form[name='form-new-comment']", function(e) {
@@ -253,6 +223,17 @@ $("#generic-new-post").on("submit", function(e){
     e.preventDefault();
     
     var $this = $(this); // L'objet jQuery du formulaire
+    
+    
+    
+    var postLoader = document.getElementById("generic-blog-posts-loader");    
+    console.log("before "+postLoader.hasAttribute("hidden"));
+    //postLoader.removeAttribute("hidden"); // remove loader
+    postLoader.setAttribute("style", ""); // show loader
+    
+    //$("#generic-blog-posts-loader").removeAttr("hidden");
+    
+    console.log("after "+postLoader.hasAttribute("hidden"));
     
     $.ajax({ 
         url: $this.attr('action'),
@@ -318,5 +299,8 @@ $("#generic-new-post").on("submit", function(e){
         
         list.insertBefore(li, list.firstChild);        
     });
+    
+    //postLoader.setAttribute("hidden", "hidden"); // display loader
+    postLoader.setAttribute("style", "display:none;"); 
 });
 

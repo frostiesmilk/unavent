@@ -23,6 +23,8 @@ module.exports = function (grunt) {
                     'css/font-awesome.css': 'font-awesome/css/font-awesome.css',
                     'css/angular-csp.css': 'angular/angular-csp.css',
                     'css/bootstrap-datetimepicker.css': 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
+                    'css/toolkits/spinkit.css': 'SpinKit/css/spinkit.css',
+                    'css/toolkits/spinners/': 'SpinKit/css/spinners/*.css',
                 }
             },            
             fonts: {
