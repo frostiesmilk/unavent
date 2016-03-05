@@ -102,7 +102,7 @@ class GroupController extends Controller
             
             // processing profile edit
             if ($groupForm->isValid()) { 
-                $group->setCreatedBy($user);
+                $group->setCreatedBy($user->getProfile());
                 $em->persist($group);
             }else{
                 $error = true;
@@ -139,7 +139,7 @@ class GroupController extends Controller
 //                $em->persist($profile);
 //                $em->flush();
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_group_homepage',array('id' => $group->getId())));
+                return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $group->getId())));
             }
         }        
          return $this->render('FlowberGroupBundle:Default:createGroup.html.twig', array(
@@ -222,7 +222,7 @@ class GroupController extends Controller
 //                $em->persist($profile);
 //                $em->flush();
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_group_homepage',array('id' => $group->getId())));
+                return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $group->getId())));
             }
         } 
         

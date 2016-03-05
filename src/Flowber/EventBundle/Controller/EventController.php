@@ -42,7 +42,7 @@ class EventController extends Controller
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
-                'isCreator' => false,
+                'isCreator' => $isCreator,
                 'circle' => $eventInfo,
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),
@@ -127,7 +127,7 @@ class EventController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             if ($eventForm->isValid()) {
-                $event->setCreatedBy($user);  
+                $event->setCreatedBy($user->getProfile());  
                 
             }  else{
                 $error = true;
@@ -161,7 +161,7 @@ class EventController extends Controller
                 $em->persist($event);
                 $em->flush();
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_event_homepage',array('id' => $event->getId())));
+                return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $event->getId())));
             }
         }
   
@@ -233,7 +233,7 @@ class EventController extends Controller
                 $em->persist($event);
                 $em->flush();
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_event_homepage',array('id' => $event->getId())));
+                return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $event->getId())));
             }
         }
         

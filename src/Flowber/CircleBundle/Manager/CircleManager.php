@@ -109,8 +109,8 @@ class CircleManager extends BaseManager {
         
         $circleInfos = $this->getCoverInfos($circle);
         $circleInfos['creationDate'] = 'le ' . $circle->getCreationDate()->format('d/m/Y') . ' à ' . $circle->getCreationDate()->format('H:i:s');
-        $circleInfos['createdBy'] = $circle->getCreatedBy()->getFirstname() . ' ' . $circle->getCreatedBy()->getSurname();
-        $circleInfos['idCreatedBy'] = $circle->getCreatedBy()->getProfile()->getId();
+        $circleInfos['createdBy'] = $circle->getCreatedBy()->getUser()->getFirstname() . ' ' . $circle->getCreatedBy()->getUser()->getSurname();
+        $circleInfos['idCreatedBy'] = $circle->getCreatedBy()->getId();
         $circleInfos['description'] = $circle->getDescription();
         $circleInfos['privacy'] = $circle->getPrivacy();
      
@@ -128,7 +128,7 @@ class CircleManager extends BaseManager {
             throw new AccessDeniedException('This circle is not defined.');
         } 
         
-        if($circle->getCreatedBy() == $user)
+        if($circle->getCreatedBy() == $user->getProfile())
             return true;
         else return false;
         
