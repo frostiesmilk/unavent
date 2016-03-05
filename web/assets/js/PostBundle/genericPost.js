@@ -224,14 +224,9 @@ $("#generic-new-post").on("submit", function(e){
     
     var $this = $(this); // L'objet jQuery du formulaire
     
-    
-    
     var postLoader = document.getElementById("generic-blog-posts-loader");    
     console.log("before "+postLoader.hasAttribute("hidden"));
-    //postLoader.removeAttribute("hidden"); // remove loader
-    postLoader.setAttribute("style", ""); // show loader
-    
-    //$("#generic-blog-posts-loader").removeAttr("hidden");
+    postLoader.removeAttribute("hidden"); // display loader
     
     console.log("after "+postLoader.hasAttribute("hidden"));
     
@@ -241,9 +236,12 @@ $("#generic-new-post").on("submit", function(e){
         data: $this.serialize(),
         //dataType: 'json', // JSON
         error: function(json){
+            postLoader.setAttribute("hidden", "hidden"); // remove loader
             alert("error "+$this.attr('action')+" "+$this.attr('method'));
         }
     }).done(function(data, textStatus, jqXHR){ // like success
+        postLoader.setAttribute("hidden", "hidden"); // remove loader
+        
         console.log(data);
         $this.trigger("reset");
         
@@ -299,8 +297,5 @@ $("#generic-new-post").on("submit", function(e){
         
         list.insertBefore(li, list.firstChild);        
     });
-    
-    //postLoader.setAttribute("hidden", "hidden"); // display loader
-    postLoader.setAttribute("style", "display:none;"); 
 });
 
