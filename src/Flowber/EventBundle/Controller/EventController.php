@@ -137,6 +137,7 @@ class EventController extends Controller
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
                 if($profilePicture->getFile() !== null){
+                    $profilePicture->addGallery($event->getProfileGallery());
                     $event->setProfilePicture($profilePicture);
                     $em->persist($profilePicture);
                 }
@@ -148,6 +149,7 @@ class EventController extends Controller
             if($coverPictureForm->isValid()){
                 // cover picture was submitted
                 if($coverPicture->getFile() !== null){
+                    $coverPicture->addGallery($event->getCoverGallery());
                     $event->setCoverPicture($coverPicture); 
                     $em->persist($coverPicture);
                 }
@@ -209,6 +211,7 @@ class EventController extends Controller
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
                 if($profilePicture->getFile() !== null){
+                    $profilePicture->addGallery($event->getProfileGallery());
                     $event->setProfilePicture($profilePicture);
                     $em->persist($profilePicture);
                 }
@@ -220,6 +223,7 @@ class EventController extends Controller
             if($coverPictureForm->isValid()){
                 // cover picture was submitted
                 if($coverPicture->getFile() !== null){
+                    $coverPicture->addGallery($event->getCoverGallery());
                     $event->setCoverPicture($coverPicture); 
                     $em->persist($coverPicture);
                 }

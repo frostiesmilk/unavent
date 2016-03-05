@@ -8,13 +8,13 @@ use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 
 class PrivateMessageController extends Controller
 {
-    public function getAllMessagesReceivedAction()
+    public function getAllMessagesReceivedAction($circleId)
     {
         $user = $this->getUser();
         
         $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         
-        $messagesReceived = $pmReposit->getReceivedMessages($user);
+        $messages = $pmReposit->getReceivedMessages($circleId);
         $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
         $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
@@ -118,20 +118,18 @@ class PrivateMessageController extends Controller
         
         $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         $messages = $pmReposit->getReceivedMessages($circleId);
-
-        die(var_dump($messages));
         
-        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
-        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
-        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
+//        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+//        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+//        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         
-        $message->setStatut('1');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($message);
-        $em->flush();
+//        $message->setStatut('1');
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($message);
+//        $em->flush();
                 
         $privateMessage = new PrivateMessage;
-        $privateMessage->setSubject('RE : '.$message->getSubject());
+        //$privateMessage->setSubject('RE : '.$message->getSubject());
         $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
 
         $request = $this->get('request');

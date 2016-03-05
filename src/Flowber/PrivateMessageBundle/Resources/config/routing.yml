@@ -1,6 +1,6 @@
 flowber_privatemessage_received_homepage:
     path:     /recus/{circleId}
-    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageReceived }
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getAllMessagesReceived }
 
 flowber_private_message_send_homepage:
     path:     /mesages_envoyes

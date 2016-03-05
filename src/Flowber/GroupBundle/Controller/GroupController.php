@@ -112,7 +112,7 @@ class GroupController extends Controller
             if($profilePictureForm->isValid()){
                 // profile picture was submitted
                 if($profilePicture->getFile() !== null){                    
-                    //$profilePicture->addGallery($group->getProfileGallery());
+                    $profilePicture->addGallery($group->getProfileGallery());
                     $group->setProfilePicture($profilePicture);
                     $em->persist($profilePicture);
                 }
@@ -124,7 +124,7 @@ class GroupController extends Controller
             if($coverPictureForm->isValid()){
                 // cover picture was submitted
                 if($coverPicture->getFile() !== null){
-                    //$coverPicture->addGallery($group->getCoverGallery());
+                    $coverPicture->addGallery($group->getCoverGallery());
                     $group->setCoverPicture($coverPicture);
                     $em->persist($coverPicture);
                 }
@@ -150,7 +150,7 @@ class GroupController extends Controller
   
     }
 
-    public function editGroupAction($id)
+    public function editGroupAction($circleId)
     {
         $user = $this->getUser();        
         $error = false; // detect error while processing forms
@@ -159,8 +159,8 @@ class GroupController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
 
-        $group = $this->container->get('flowber_group.group')->getGroup($id);        
-        $groupInfos = $this->container->get('flowber_group.group')->nb($group);
+        $group = $this->container->get('flowber_group.group')->getGroup($circleId);        
+        $groupInfos = $this->container->get('flowber_group.group')->getGroupInfos($group);
         
         // preparing profile to be edited
         $groupForm = $this->createForm(new GroupsType, $group);
@@ -185,7 +185,6 @@ class GroupController extends Controller
             
             // processing profile edit
             if ($groupForm->isValid()) { 
-                $group->setCreatedBy($user);
                 $em->persist($group);
             }else{
                 $error = true;
