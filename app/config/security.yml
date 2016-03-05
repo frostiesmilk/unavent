@@ -30,7 +30,7 @@ security:
                 login_path: flowber_user_signin_homepage # fos_user_security_login
                 check_path: fos_user_security_check
                 always_use_default_target_path: true  
-                default_target_path: flowber_profile_current_user
+                default_target_path: flowber_front_office_redirect
             logout:
                 path:   fos_user_security_logout
                 target: flowber_user_signin_homepage

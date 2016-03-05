@@ -84,13 +84,12 @@ class PrivateMessageRestController extends Controller
         // mail to creator has been submitted
         if ($mailToCreatorForm->isValid()) {
             $user = $this->getUser();  
-            $userTo = $circle->getCreatedBy();
 
             // setting subject, sender and destination
             $subject = "[".$circle->getTitle()."] : Nouveau message privé de ".$user->getFirstname()." ".$user->getSurname();
             $mailToCreator->setSubject($subject);
             $mailToCreator->setMessageFrom($this->container->get('flowber_circle.circle')->getCircle($user->getProfile()->getId()));
-            $mailToCreator->addMessageTo($this->container->get('flowber_circle.circle')->getCircle($userTo->getProfile()->getId()));
+            $mailToCreator->addMessageTo($this->container->get('flowber_circle.circle')->getCircle($circle->getCreatedBy()));
 
             $em->persist($mailToCreator);
             $em->flush();
