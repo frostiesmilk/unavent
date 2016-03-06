@@ -120,6 +120,12 @@ class Circle
     {
         $this->creationDate = new \Datetime();
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();     
+        $this->profileGallery = new Gallery();    
+        $this->profileGallery->setTitle("photos de profil");
+        $this->coverGallery = new Gallery();     
+        $this->coverGallery->setTitle("photos de couverture");
+        $this->galleries = new \Doctrine\Common\Collections\ArrayCollection();     
+        $this->subscribers = new \Doctrine\Common\Collections\ArrayCollection();     
     }
 
     /**

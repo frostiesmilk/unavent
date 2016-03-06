@@ -1,4 +1,4 @@
 services:
-    flowber_circle.circle:
+    flowber_privateMessage.privateMessage:
         class: Flowber\PrivateMessageBundle\Manager\PrivateMessageManager
-        arguments: [@doctrine.orm.entity_manager] 
+        arguments: [@doctrine.orm.entity_manager, @flowber_circle.circle] 

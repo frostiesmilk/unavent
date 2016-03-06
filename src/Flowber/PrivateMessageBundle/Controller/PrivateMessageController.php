@@ -11,39 +11,37 @@ class PrivateMessageController extends Controller
     public function getAllMessagesReceivedAction()
     {
         $user = $this->getUser();
+        $messagesInfos = $this->container->get('flowber_privateMessage.privateMessage')->getMessageReceived($user->getProfile()->getId());
+
+       // $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        //$numberSendMessages = $pmReposit->getSentMessagesNumber($user);
+        //$numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
         
-        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
-        
-        $messagesReceived = $pmReposit->getReceivedMessages($user);
-        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
-        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
-        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
-        
-        return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessageReceived.html.twig', array(
-            "userMessages"=>$messagesReceived,
-            "numberDeletedMessages"=>$numberDeletedMessages,
-            "numberReceiveddMessages"=>$numberReceivedMessages,
-            "numberSendMessages"=>$numberSendMessages,
+        return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
+            "messages"=>$messagesInfos,
+           // "numberDeletedMessages"=>$numberDeletedMessages,
+           // "numberReceiveddMessages"=>$numberReceivedMessages,
+            //"numberSendMessages"=>$numberSendMessages,
             "type"=>'received',
             ));
     }
     
-    public function getAllMessagesSendAction()
+    public function getAllMessagesSentAction()
     {
         $user = $this->getUser();
         
-        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
+        $messagesInfos = $this->container->get('flowber_privateMessage.privateMessage')->getMessageSent($user->getProfile()->getId());
         
-        $messagesSend = $pmReposit->getSentMessages($user);
-        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
-        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
-        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+        //$messagesSend = $pmReposit->getSentMessages($user);
+        //$numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        //$numberSendMessages = $pmReposit->getSentMessagesNumber($user);
+        //$numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
 
-        return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessageSend.html.twig', array(
-            "userMessages"=>$messagesSend,
-            "numberDeletedMessages"=>$numberDeletedMessages,
-            "numberReceiveddMessages"=>$numberReceivedMessages,
-            "numberSendMessages"=>$numberSendMessages,
+        return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
+            "messages"=>$messagesInfos,
+//            "numberDeletedMessages"=>$numberDeletedMessages,
+//            "numberReceiveddMessages"=>$numberReceivedMessages,
+//            "numberSendMessages"=>$numberSendMessages,
             "type"=>'send',
                 ));
     }
@@ -52,18 +50,18 @@ class PrivateMessageController extends Controller
     {
         $user = $this->getUser();
         
-        $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
+        $messagesInfos = $this->container->get('flowber_privateMessage.privateMessage')->getMessagedeleted($user->getProfile()->getId());
         
-        $messagesDeleted = $pmReposit->getDeletedMessages($user);
-        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
-        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
-        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
+//        $messagesDeleted = $pmReposit->getDeletedMessages($user);
+//        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+//        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+//        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         
-        return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessageDeleted.html.twig', array(
-            "userMessages"=>$messagesDeleted,
-            "numberDeletedMessages"=>$numberDeletedMessages,
-            "numberReceiveddMessages"=>$numberReceivedMessages,
-            "numberSendMessages"=>$numberSendMessages,
+        return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
+            "messages"=>$messagesInfos,
+//            "numberDeletedMessages"=>$numberDeletedMessages,
+//            "numberReceiveddMessages"=>$numberReceivedMessages,
+//            "numberSendMessages"=>$numberSendMessages,
             "type"=>'deleted',
                 ));
     }
@@ -118,20 +116,18 @@ class PrivateMessageController extends Controller
         
         $pmReposit = $this->getDoctrine()->getManager()->getRepository('FlowberPrivateMessageBundle:PrivateMessage');
         $messages = $pmReposit->getReceivedMessages($circleId);
-
-        die(var_dump($messages));
         
-        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
-        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
-        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
+//        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+//        $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
+//        $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         
-        $message->setStatut('1');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($message);
-        $em->flush();
+//        $message->setStatut('1');
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($message);
+//        $em->flush();
                 
         $privateMessage = new PrivateMessage;
-        $privateMessage->setSubject('RE : '.$message->getSubject());
+        //$privateMessage->setSubject('RE : '.$message->getSubject());
         $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
 
         $request = $this->get('request');

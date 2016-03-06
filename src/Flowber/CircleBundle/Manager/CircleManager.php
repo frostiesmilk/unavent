@@ -74,6 +74,22 @@ class CircleManager extends BaseManager {
         return $coverPicture;
     }
     
+    public function getTitle($circle)
+    {
+        // Si on a envoyé un id, renvoyer un circle
+        if (is_numeric($circle)){
+            $circle = $this->getCircle($circle);
+        }
+        //Vérifie si le circle existe bien.        
+        if (!is_object($circle)) {
+            throw new AccessDeniedException('This circle is not defined.');
+        }   
+
+        $title = $circle->getTitle();
+       
+        return $title;
+    }  
+    
     public function getCoverInfos($circle)
     {
         // Si on a envoyé un id, renvoyer un circle

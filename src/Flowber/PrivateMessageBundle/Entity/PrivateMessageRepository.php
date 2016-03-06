@@ -15,42 +15,103 @@ use Doctrine\ORM\Query\ResultSetMapping;
 class PrivateMessageRepository extends EntityRepository
 {
     public function getReceivedMessages($circleId){
-        $sql = "SELECT message.subject, message.message, message.message_from_id "
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.statut, message.id, message.creationDate "
             . "FROM (SELECT * FROM private_message_circle a, private_message b "
                     . "WHERE a.circle_id = ".$circleId." "
                     . "AND a.private_message_id=b.id) "
-                . "message ";
+                . "message WHERE statut='1' OR statut='2' ORDER BY message.creationDate desc";
         
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('subject', 'subject');
         $rsm->addScalarResult('message', 'message');
-        $rsm->addScalarResult('message_from_id', 'circleId');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_from_id', 'circleFromId');
         $rsm->addScalarResult('creationDate', 'creationDate');
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
-    }        
+    }
     
-
+    public function getReceivedDeletedMessages($circleId){
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.statut, message.id, message.creationDate "
+            . "FROM (SELECT * FROM private_message_circle a, private_message b "
+                    . "WHERE a.circle_id = ".$circleId." "
+                    . "AND a.private_message_id=b.id) message "
+                . "WHERE message.statut='3' ORDER BY message.creationDate desc";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_from_id', 'circleFromId');
+        $rsm->addScalarResult('creationDate', 'creationDate');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    } 
+    
+    public function getSentMessages($circleId){
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.statut, message.id, message.creationDate "
+            . "FROM private_message message "
+                . "WHERE message.message_from_id = ".$circleId." AND( statut='1' OR statut='2') ORDER BY message.creationDate desc";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+         $rsm->addScalarResult('message_from_id', 'circleFromId');
+       $rsm->addScalarResult('creationDate', 'creationDate');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }  
+    
+    public function getSentDeletedMessages($circleId){
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.message_from_id, message.statut, message.id, message.creationDate "
+            . "FROM private_message message "
+                . "WHERE message.message_from_id = ".$circleId." AND message.statut='3' ORDER BY message.creationDate desc";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_from_id', 'circleFromId');
+        $rsm->addScalarResult('creationDate', 'creationDate');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }  
+    
+    public function getReceiversMessages($messageId){
+        $sql = "SELECT a.circle_id FROM private_message_circle a "
+                    . "WHERE a.private_message_id = ".$messageId;
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'receiverId');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }  
+    
     /*
      * Récupère les messages reçus non lus
      * return entity PrivateMessage
      * A FAIRE
      */
     public function getReceivedMessagesNotRead(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->setParameter('userTo', $user)
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->orderBy('a.creationDate', 'DESC');
-        
-        return $qb->getQuery()
-                  ->getResult();
+//        $qb = $this->_em->createQueryBuilder();
+//        
+//        $qb->select('a')
+//            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
+//            ->where('a.userTo = :userTo')
+//            ->setParameter('userTo', $user)
+//            ->andWhere('a.statut != :statut')
+//            ->setParameter('statut', '3')
+//            ->andWhere('a.statut != :statutbis')
+//            ->setParameter('statutbis', '0')
+//            ->orderBy('a.creationDate', 'DESC');
+//        
+//        return $qb->getQuery()
+//                  ->getResult();
     }
     
     /*
@@ -58,18 +119,18 @@ class PrivateMessageRepository extends EntityRepository
      * return integer
      */    
     public function getReceiveddMessagesNumber(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->setParameter('userTo', $user);
-
-        return count($qb->getQuery()->getResult());
+//        $qb = $this->_em->createQueryBuilder();
+//        
+//        $qb->select('a')
+//            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
+//            ->where('a.userTo = :userTo')
+//            ->andWhere('a.statut != :statut')
+//            ->setParameter('statut', '3')
+//            ->andWhere('a.statut != :statutbis')
+//            ->setParameter('statutbis', '0')
+//            ->setParameter('userTo', $user);
+//
+//        return count($qb->getQuery()->getResult());
     }
     
     /*
@@ -77,18 +138,18 @@ class PrivateMessageRepository extends EntityRepository
      * return integer
      */        
     public function getReceiveddMessagesNotReadNumber(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->setParameter('userTo', $user);
-
-        return count($qb->getQuery()->getResult());
+//        $qb = $this->_em->createQueryBuilder();
+//        
+//        $qb->select('a')
+//            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
+//            ->where('a.userTo = :userTo')
+//            ->andWhere('a.statut != :statut')
+//            ->setParameter('statut', '3')
+//            ->andWhere('a.statut != :statutbis')
+//            ->setParameter('statutbis', '0')
+//            ->setParameter('userTo', $user);
+//
+//        return count($qb->getQuery()->getResult());
     }  
 
     /*
@@ -96,20 +157,20 @@ class PrivateMessageRepository extends EntityRepository
      * return entity PrivateMessage
      */
     public function getDeletedMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->setParameter('userTo', $user)            
-            ->orWhere('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut = :statut')
-            ->setParameter('statut', '3')
-            ->orderBy('a.creationDate', 'DESC');
-        
-        return $qb->getQuery()
-                  ->getResult();
+//        $qb = $this->_em->createQueryBuilder();
+//        
+//        $qb->select('a')
+//            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
+//            ->where('a.userTo = :userTo')
+//            ->setParameter('userTo', $user)            
+//            ->orWhere('a.userFrom = :userFrom')
+//            ->setParameter('userFrom', $user)
+//            ->andWhere('a.statut = :statut')
+//            ->setParameter('statut', '3')
+//            ->orderBy('a.creationDate', 'DESC');
+//        
+//        return $qb->getQuery()
+//                  ->getResult();
     }
 
     /*
@@ -117,59 +178,59 @@ class PrivateMessageRepository extends EntityRepository
      * return integer
      */     
     public function getDeletedMessagesNumber(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userTo = :userTo')
-            ->setParameter('userTo', $user)            
-            ->orWhere('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut = :statut')
-            ->setParameter('statut', '3');  
-        
-        return count($qb->getQuery()
-                ->getResult());
+//        $qb = $this->_em->createQueryBuilder();
+//        
+//        $qb->select('a')
+//            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
+//            ->where('a.userTo = :userTo')
+//            ->setParameter('userTo', $user)            
+//            ->orWhere('a.userFrom = :userFrom')
+//            ->setParameter('userFrom', $user)
+//            ->andWhere('a.statut = :statut')
+//            ->setParameter('statut', '3');  
+//        
+//        return count($qb->getQuery()
+//                ->getResult());
     }
     
     /*
      * Récupère les messages envoyés
      * return entity PrivateMessage
      */    
-    public function getSentMessages(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->orderBy('a.creationDate', 'DESC');
-        
-        return $qb->getQuery()
-                  ->getResult();
-    }
+//    public function getSentMessages(User $user){
+//        $qb = $this->_em->createQueryBuilder();
+//        
+//        $qb->select('a')
+//            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
+//            ->where('a.userFrom = :userFrom')
+//            ->setParameter('userFrom', $user)
+//            ->andWhere('a.statut != :statut')
+//            ->setParameter('statut', '3')
+//            ->andWhere('a.statut != :statutbis')
+//            ->setParameter('statutbis', '0')
+//            ->orderBy('a.creationDate', 'DESC');
+//        
+//        return $qb->getQuery()
+//                  ->getResult();
+//    }
     
     /*
      * Récupère le nombre messages envoyé
      * return integer
      */      
     public function getSentMessagesNumber(User $user){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('a')
-            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
-            ->where('a.userFrom = :userFrom')
-            ->setParameter('userFrom', $user)
-            ->andWhere('a.statut != :statut')
-            ->setParameter('statut', '3')
-            ->andWhere('a.statut != :statutbis')
-            ->setParameter('statutbis', '0')
-            ->setParameter('userFrom', $user);
-
-        return count($qb->getQuery()->getResult());
+//        $qb = $this->_em->createQueryBuilder();
+//        
+//        $qb->select('a')
+//            ->from('FlowberPrivateMessageBundle:PrivateMessage', 'a')
+//            ->where('a.userFrom = :userFrom')
+//            ->setParameter('userFrom', $user)
+//            ->andWhere('a.statut != :statut')
+//            ->setParameter('statut', '3')
+//            ->andWhere('a.statut != :statutbis')
+//            ->setParameter('statutbis', '0')
+//            ->setParameter('userFrom', $user);
+//
+//        return count($qb->getQuery()->getResult());
     }
 }

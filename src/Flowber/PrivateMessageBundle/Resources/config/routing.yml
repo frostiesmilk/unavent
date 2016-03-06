@@ -1,24 +1,24 @@
 flowber_privatemessage_received_homepage:
-    path:     /recus/{circleId}
-    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageReceived }
+    path:     /recus
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getAllMessagesReceived }
 
-flowber_private_message_send_homepage:
-    path:     /mesages_envoyes
-    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getAllMessagesSend }
+flowber_privatemessage_sent_homepage:
+    path:     /envoyes
+    defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getAllMessagesSent }
 
-flowber_private_message_deleted_homepage:
+flowber_privatemessage_deleted_homepage:
     path:     /mesages_supprimes
     defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getAllMessagesDeleted }
 
-flowber_private_message_one_received_homepage:
+flowber_privatemessage_one_received_homepage:
     path:     /mesage_recu/{id}
     defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageReceived }
 
-flowber_private_message_send_one_homepage:
+flowber_privatemessage_send_one_homepage:
     path:     /mesage_send/{id}
     defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageSend }
     
-flowber_private_message_deleted_one_homepage:
+flowber_privatemessage_deleted_one_homepage:
     path:     /mesage_deleted/{id}
     defaults: { _controller: FlowberPrivateMessageBundle:PrivateMessage:getMessageDeleted }
     
