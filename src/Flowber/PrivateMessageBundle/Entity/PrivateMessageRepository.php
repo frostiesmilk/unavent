@@ -15,22 +15,83 @@ use Doctrine\ORM\Query\ResultSetMapping;
 class PrivateMessageRepository extends EntityRepository
 {
     public function getReceivedMessages($circleId){
-        $sql = "SELECT message.subject, message.message, message.message_from_id "
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.statut, message.id, message.creationDate "
             . "FROM (SELECT * FROM private_message_circle a, private_message b "
                     . "WHERE a.circle_id = ".$circleId." "
                     . "AND a.private_message_id=b.id) "
-                . "message ";
+                . "message WHERE statut='1' OR statut='2' ORDER BY message.creationDate desc";
         
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('subject', 'subject');
         $rsm->addScalarResult('message', 'message');
-        $rsm->addScalarResult('message_from_id', 'circleId');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_from_id', 'circleFromId');
         $rsm->addScalarResult('creationDate', 'creationDate');
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
-    }        
+    }
     
-
+    public function getReceivedDeletedMessages($circleId){
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.statut, message.id, message.creationDate "
+            . "FROM (SELECT * FROM private_message_circle a, private_message b "
+                    . "WHERE a.circle_id = ".$circleId." "
+                    . "AND a.private_message_id=b.id) message "
+                . "WHERE message.statut='3' ORDER BY message.creationDate desc";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_from_id', 'circleFromId');
+        $rsm->addScalarResult('creationDate', 'creationDate');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    } 
+    
+    public function getSentMessages($circleId){
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.statut, message.id, message.creationDate "
+            . "FROM private_message message "
+                . "WHERE message.message_from_id = ".$circleId." AND( statut='1' OR statut='2') ORDER BY message.creationDate desc";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+         $rsm->addScalarResult('message_from_id', 'circleFromId');
+       $rsm->addScalarResult('creationDate', 'creationDate');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }  
+    
+    public function getSentDeletedMessages($circleId){
+        $sql = "SELECT message.subject, message.message, message.message_from_id, message.message_from_id, message.statut, message.id, message.creationDate "
+            . "FROM private_message message "
+                . "WHERE message.message_from_id = ".$circleId." AND message.statut='3' ORDER BY message.creationDate desc";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_from_id', 'circleFromId');
+        $rsm->addScalarResult('creationDate', 'creationDate');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }  
+    
+    public function getReceiversMessages($messageId){
+        $sql = "SELECT a.circle_id FROM private_message_circle a "
+                    . "WHERE a.private_message_id = ".$messageId;
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'receiverId');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }  
+    
     /*
      * Récupère les messages reçus non lus
      * return entity PrivateMessage
@@ -136,7 +197,7 @@ class PrivateMessageRepository extends EntityRepository
      * Récupère les messages envoyés
      * return entity PrivateMessage
      */    
-    public function getSentMessages(User $user){
+//    public function getSentMessages(User $user){
 //        $qb = $this->_em->createQueryBuilder();
 //        
 //        $qb->select('a')
@@ -151,7 +212,7 @@ class PrivateMessageRepository extends EntityRepository
 //        
 //        return $qb->getQuery()
 //                  ->getResult();
-    }
+//    }
     
     /*
      * Récupère le nombre messages envoyé

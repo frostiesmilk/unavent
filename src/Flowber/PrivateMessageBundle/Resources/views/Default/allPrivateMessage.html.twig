@@ -14,15 +14,15 @@
     <div class="messages-container">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 messages-menu">
+                <div class="col-md-2 messages-menu">
                     <div class="list-group messages-menu-list">
-                        <a href="{{path('flowber_private_message_received_homepage')}}" class="list-group-item{% if type == 'received' %} active {% endif %}"><span class="badge">{{ numberReceiveddMessages|number_format }}</span>Messages reçus </a>
-                        <a href="{{path('flowber_private_message_send_homepage')}}" class="list-group-item {% if type == 'send' %} active {% endif %}"><span class="badge">{{ numberSendMessages|number_format }}</span>Messages envoyés</a>
-                        <a href="{{path('flowber_private_message_deleted_homepage')}}" class="list-group-item {% if type == 'deleted' %} active {% endif %}"><span class="badge">{{ numberDeletedMessages|number_format }}</span>Corbeille</a>
+                        <a href="{{path('flowber_privatemessage_received_homepage')}}" class="list-group-item {% if type == 'received' %} active {% endif %}"><span class="badge"></span>Messages reçus </a>
+                        <a href="{{path('flowber_privatemessage_sent_homepage')}}" class="list-group-item {% if type == 'send' %} active {% endif %}"><span class="badge"></span>Messages envoyés</a>
+                        <a href="{{path('flowber_privatemessage_deleted_homepage')}}" class="list-group-item {% if type == 'deleted' %} active {% endif %}"><span class="badge"></span>Corbeille</a>
                     </div>
                 </div>
                 
-                <div class="col-md-9 messages-content">
+                <div class="col-md-10 messages-content">
                     <table class="table table-hover messages-stream">
                         <thead>
                             <tr>
@@ -35,35 +35,40 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for userMessage in userMessages %}
+                            {% for message in messages %}
 
-                                    <tr class="messages-stream-element" data-href="{{ path('flowber_private_message_one_received_homepage', {'id': userMessage.id}) }}">
-                                        <td class="messages-stream-element-clickable">
+                                    <tr class="messages-stream-element" data-href="{{ path('flowber_privatemessage_one_received_homepage', {'id': message.messageId}) }}">
+                                        <td class="col-md-2 messages-stream-element-clickable">
                                             <span class="messages-stream-element-author">
-                                                {% if userMessage.statut == '2' %}  <b> {% endif %}
-                                                    {{ userMessage.userTo.firstname }} {{ userMessage.userFrom.surname }}
-                                                {% if userMessage.statut == '2' %}  </b> {% endif %}
+                                                {% if message.statut == '2' %}  <b> {% endif %}
+                                                    {% if message.is == 'sent' %} 
+                                                        A : {{ message.receiversName }}    
+                                                    {% else %}
+                                                        {{ message.circleFromTitle }}
+                                                    {% endif %}
+                                                {% if message.statut == '2' %}  </b> {% endif %}
                                             </span>
                                         </td>
-                                        <td class="messages-stream-element-clickable">
+                                        <td class="col-md-9 messages-stream-element-clickable">
                                             <span class="messages-stream-element-subject">
-                                                {% if userMessage.statut == '2'%}  <b> {% endif %}
-                                                    {{ userMessage.subject }}
-                                                {% if userMessage.statut == '2'%}  </b> {% endif %}
+                                                {% if message.statut == '2'%}  <b> {% endif %}
+                                                    {{ message.subject }}
+                                                {% if message.statut == '2'%}  </b> {% endif %}
                                             </span> 
                                             - 
-                                            <span class="messages-stream-element-content-preview">{{ userMessage.message }}</span>
-                                        </td>
-                                        <td class="messages-stream-element-clickable">
-                                            <span class="messages-stream-element-date">{{ userMessage.creationDate|date("\\l\\e d/m/Y  \\à G:i") }}</span>
+                                            <span class="messages-stream-element-content-preview">{{ message.message }}</span>
+                                        </td >
+                                        <td class="col-md-1 messages-stream-element-clickable">
+                                            <span class="messages-stream-element-date">{{ message.creationDate|date("\\l\\e d/m") }}</span><br>
+                                            <span class="messages-stream-element-date">{{ message.creationDate|date("\\à G:i") }}</span>
                                         </td>  
-                                        <td>
-                                            <a tabindex="-1" href="{{ path('flowber_delete_message', {'id': userMessage.id, 'type':'r'}) }}">
+                                        <td class="col-md-2">
+                                            <a tabindex="-1" href="{{ path('flowber_delete_message', {'id': message.messageId, 'type':'r'}) }}">
                                                 <button type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
                                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                 </button>
                                             </a>
-                                            <a tabindex="-1" href="{{ path('flowber_read_message', {'id': userMessage.id}) }}">
+                                            <a tabindex="-1" href="{{ path('flowber_read_message', {'id': message.messageId}) }}">
                                                 <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
                                                     <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                                                 </button>
