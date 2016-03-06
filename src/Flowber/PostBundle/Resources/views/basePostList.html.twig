@@ -1,7 +1,7 @@
 {% set counter = 0 %}
 
 <div class="generic-blog">
-    <div id="generic-blog-posts-loader" style="display:none;" class="spinner">
+    <div id="generic-blog-posts-loader" hidden class="spinner">
         <div class="double-bounce1"></div>
         <div class="double-bounce2"></div>
     </div>
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-3 col-md-4 text-right">
-                                    <a onclick="modalDeleteComment(this)" name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                    <a name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
                                         <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
                                         <input type="hidden" name="delete-comment-id" value="" />                                    
                                     </a>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="col-xs-3 col-md-4 text-right">
                                     {% if (comment.createdBy == app.user) %}
-                                        <a onclick="modalDeleteComment(this)" name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                        <a name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
                                             <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
                                             <input type="hidden" name="delete-comment-id" value="{{comment.id}}" />                                    
                                         </a>                                    
@@ -214,7 +214,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-3 col-md-4 text-right">
-                                    <a onclick="modalDeleteComment(this)" name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                    <a name="commentDeleteButton" data-togglname="commentDeleteButton"e="modal" data-target="#modal-delete-comment" href="#">
                                         <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
                                         <input type="hidden" name="delete-comment-id" value="" />                                    
                                     </a>

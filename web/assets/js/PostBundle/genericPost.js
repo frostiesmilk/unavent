@@ -4,26 +4,11 @@
  * and open the template in the editor.
  */
 
-
-/**
- * When clicking POST delete
- * 
- */
-//$( "a[name='postDeleteButton']" ).on( "click", function() {
-$("body").on("click","a[name='postDeleteButton']", function(e) {
-    var postId = $( this ).find("input[name=delete-post-id]").val() ;
-    var postOriginId = $( this ).find("input[name=delete-post-origin-id]").val() ;
-    
-    $("#delete-post-form").attr('action', Routing.generate('api_delete_post_custom', {postId: postId}));
-    $("#delete-post-id").val(postId);
-    $("#delete-post-origin-id").val(postOriginId);
-});
-
 /**
  * Submitting POST deletion
  * @param {type} param
  */
-$(document).ready(function() {
+function postDeleteSubmit(){
     // Lorsque je soumets le formulaire
     $('#delete-post-form').on('submit', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
@@ -44,104 +29,64 @@ $(document).ready(function() {
             var elem = document.getElementById('post-'+postId);
             elem.parentNode.removeChild(elem);
             $('#modal-delete-post').modal("hide");
-            alert("Le poste a été supprimé.");
         });
-
     });
-});
+}
+
+/**
+ * When clicking POST delete
+ * 
+ */
+function postDeleteClick(){
+    $("body").on("click","a[name='postDeleteButton']", function(e) {
+        var postId = $( this ).find("input[name=delete-post-id]").val() ;
+        var postOriginId = $( this ).find("input[name=delete-post-origin-id]").val() ;
+
+        $("#delete-post-form").attr('action', Routing.generate('api_delete_post_custom', {postId: postId}));
+        $("#delete-post-id").val(postId);
+        $("#delete-post-origin-id").val(postOriginId);
+    });
+}
 
 /**
  * When clicking COMMENT delete
  * 
  */
-function modalDeleteComment(e){
-    var commentId = e.querySelector("input[name=delete-comment-id]").value ;     
-    console.log("Comment delete clicked: "+commentId);
-    document.getElementById("delete-comment-form").setAttribute("action", Routing.generate('api_delete_comment', {commentId: commentId}) );
-    document.getElementById("delete-comment-id").value = commentId;
+function modalDeleteComment(){$("body").on("click","a[name='commentDeleteButton']", function(e) {
+        e.preventDefault();
+        var commentId = $(this).find("input[name=delete-comment-id]").val();     
+        console.log("Comment delete clicked: "+commentId);
+        document.getElementById("delete-comment-form").setAttribute("action", Routing.generate('api_delete_comment', {commentId: commentId}) );
+        document.getElementById("delete-comment-id").value = commentId;
+    });
 }
 
 /**
  * Submitting COMMENT deletion
  */
-document.querySelector("#delete-comment-form").onsubmit = function(e){
-    e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+function submitCommentDelete(){
+    document.querySelector("#delete-comment-form").onsubmit = function(e){
+        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
 
-    var $thisForm = $("#delete-comment-form"); // objet actuel
-    var commentId = document.getElementById("delete-comment-id").value;
+        var $thisForm = $("#delete-comment-form"); // objet actuel
+        var commentId = document.getElementById("delete-comment-id").value;
 
-    $.ajax({
-        url: $thisForm.attr('action'),
-        type: $thisForm.attr('method'),
-        data: $thisForm.serialize(),
-        //dataType: 'json', // JSON
-        error: function(json){
-            alert("merde "+$thisForm.attr('action')+" "+$thisForm.attr('method'));
-        }
-    }).done(function(data, textStatus, jqXHR){
-        console.log(data);
-        var elem = document.getElementById('comment-'+commentId);
-        elem.parentNode.removeChild(elem);
-        $('#modal-delete-comment').modal("hide");
-    });
-};
-
-/**
-* Pressing like button
-*/
-$("body").on("submit","form[name='form-like']", function(e) {
-    e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
-
-    var $this = $(this); // L'objet jQuery du formulaire
-    var postId = $this.find("input[name='post-id']").val();
-    console.log("postId: "+postId);
-    if($this.find("input[name='_method']").length){ // delete like
-        console.log("deleting like");
-
-        // smooth display, change with no data control
-        $this.find("button[name='addLike']").removeAttr("hidden");
-        $this.find("button[name='deleteLike']").attr("hidden", "hidden");
-        updateLikeDisplay(postId, "delete");
-
-        $.ajax({ 
-            url: $this.attr('action'),
-            type: $this.attr('method'),
-            data: $this.serialize(),
+        $.ajax({
+            url: $thisForm.attr('action'),
+            type: $thisForm.attr('method'),
+            data: $thisForm.serialize(),
             //dataType: 'json', // JSON
             error: function(json){
-                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+                alert("merde "+$thisForm.attr('action')+" "+$thisForm.attr('method'));
             }
-        }).done(function(data, textStatus, jqXHR){ // like success
-            $this.find("input[name='_method']").remove(); // remove deletion function
-            $this.attr('action', Routing.generate('api_post_like_post'));
-        });
-    }else{ // add like
-        console.log("adding like");
-
-        // smooth display, change with no data control
-        $this.find("button[name='deleteLike']").removeAttr("hidden");
-        $this.find("button[name='addLike']").attr("hidden", "hidden"); 
-        updateLikeDisplay(postId, "add");
-
-        $.ajax({ 
-            url: $this.attr('action'),
-            type: $this.attr('method'),
-            data: {postId: postId},
-            //dataType: 'json', // JSON
-            error: function(json){
-                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-            }
-        }).done(function(data, textStatus, jqXHR){ // like success
+        }).done(function(data, textStatus, jqXHR){
             console.log(data);
-            $this.append('<input name="_method" value="DELETE" type="hidden">'); // add deletion function
-
-            var likeId = data.likeId;
-            $this.attr('action', Routing.generate('api_delete_like', {likeId: likeId}));
+            var elem = document.getElementById('comment-'+commentId);
+            elem.parentNode.removeChild(elem);
+            $('#modal-delete-comment').modal("hide");
         });
-    }
-
-
-});
+    };
+}
 
 /**
  * 
@@ -169,57 +114,10 @@ function updateLikeDisplay(postId, action){
 }
 
 /**
- * Create new comment
- */
-$("body").on("submit","form[name='form-new-comment']", function(e) {
-    e.preventDefault();
-    
-    var $this = $(this); // L'objet jQuery du formulaire
-    var postId = $this.find("[name='post-id']").val();
-    
-    $.ajax({ 
-        url: $this.attr('action'),
-        type: $this.attr('method'),
-        data: $this.serialize(),
-        //dataType: 'json', // JSON
-        error: function(json){
-            alert("merde "+$this.attr('action')+" "+$this.attr('method'));
-        }
-    }).done(function(data, textStatus, jqXHR){ // like success
-        console.log(data);
-        $this.trigger("reset");
-        
-        var list = document.getElementById("comments-for-post-"+postId);
-        var li = document.createElement("li");
-        li.setAttribute("id", "comment-"+data.commentId);
-        li.setAttribute("class","media generic-blog-post-comment");
-        
-        
-        var htmlComment = document.querySelector("#comments-for-post-"+postId+" [name='comment-empty']");
-        console.log("#comments-for-post-"+postId+" [name='comment-empty'] : "+htmlComment.innerHTML);
-        li.innerHTML = htmlComment.innerHTML;
-        
-        var commentDateHTML = li.querySelector(".generic-blog-post-comment-time span");
-        var commentDate = data.datetimeCreated;
-        commentDateHTML.innerHTML = moment(commentDate).format("[le] L [à] LT"); 
-        
-        var deleteCommentIdHTML = li.querySelector("[name='delete-comment-id']");
-        deleteCommentIdHTML.setAttribute("value", data.commentId);
-        
-        var messageCommentHTML = li.querySelector(".generic-blog-post-comment-content p");
-        messageCommentHTML.innerHTML = data.commentMessage;
-        
-        list.appendChild(li);
-        
-        alert("comment created");
-        
-    });
-});
-
-/**
  * Create new post
  */
-$("#generic-new-post").on("submit", function(e){
+function createNewPost(){
+    $("#generic-new-post").on("submit", function(e){
     e.preventDefault();
     
     var $this = $(this); // L'objet jQuery du formulaire
@@ -298,4 +196,120 @@ $("#generic-new-post").on("submit", function(e){
         list.insertBefore(li, list.firstChild);        
     });
 });
+}
 
+/**
+ * Create new comment
+ */
+function newCommentSubmit(){
+    $("body").on("submit","form[name='form-new-comment']", function(e) {
+    e.preventDefault();
+    
+    var $this = $(this); // L'objet jQuery du formulaire
+    var postId = $this.find("[name='post-id']").val();
+    
+    $.ajax({ 
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        //dataType: 'json', // JSON
+        error: function(json){
+            alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        console.log(data);
+        $this.trigger("reset");
+        
+        var list = document.getElementById("comments-for-post-"+postId);
+        var li = document.createElement("li");
+        li.setAttribute("id", "comment-"+data.commentId);
+        li.setAttribute("class","media generic-blog-post-comment");        
+        
+        var htmlComment = document.querySelector("#comments-for-post-"+postId+" [name='comment-empty']");
+        console.log("#comments-for-post-"+postId+" [name='comment-empty'] : "+htmlComment.innerHTML);
+        li.innerHTML = htmlComment.innerHTML;
+        
+        var commentDateHTML = li.querySelector(".generic-blog-post-comment-time span");
+        var commentDate = data.datetimeCreated;
+        commentDateHTML.innerHTML = moment(commentDate).format("[le] L [à] LT"); 
+        
+        var deleteCommentIdHTML = li.querySelector("[name='delete-comment-id']");
+        deleteCommentIdHTML.setAttribute("value", data.commentId);
+        
+        var messageCommentHTML = li.querySelector(".generic-blog-post-comment-content p");
+        messageCommentHTML.innerHTML = data.commentMessage;
+        
+        list.appendChild(li);        
+    });
+});
+}
+
+/**
+* Pressing like button
+*/
+function pressLikeButton(){
+    $("body").on("submit","form[name='form-like']", function(e) {
+    e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+
+    var $this = $(this); // L'objet jQuery du formulaire
+    var postId = $this.find("input[name='post-id']").val();
+    console.log("postId: "+postId);
+    if($this.find("input[name='_method']").length){ // delete like
+        console.log("deleting like");
+
+        // smooth display, change with no data control
+        $this.find("button[name='addLike']").removeAttr("hidden");
+        $this.find("button[name='deleteLike']").attr("hidden", "hidden");
+        updateLikeDisplay(postId, "delete");
+
+        $.ajax({ 
+            url: $this.attr('action'),
+            type: $this.attr('method'),
+            data: $this.serialize(),
+            //dataType: 'json', // JSON
+            error: function(json){
+                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+            }
+        }).done(function(data, textStatus, jqXHR){ // like success
+            $this.find("input[name='_method']").remove(); // remove deletion function
+            $this.attr('action', Routing.generate('api_post_like_post'));
+        });
+    }else{ // add like
+        console.log("adding like");
+
+        // smooth display, change with no data control
+        $this.find("button[name='deleteLike']").removeAttr("hidden");
+        $this.find("button[name='addLike']").attr("hidden", "hidden"); 
+        updateLikeDisplay(postId, "add");
+
+        $.ajax({ 
+            url: $this.attr('action'),
+            type: $this.attr('method'),
+            data: {postId: postId},
+            //dataType: 'json', // JSON
+            error: function(json){
+                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+            }
+        }).done(function(data, textStatus, jqXHR){ // like success
+            console.log(data);
+            $this.append('<input name="_method" value="DELETE" type="hidden">'); // add deletion function
+
+            var likeId = data.likeId;
+            $this.attr('action', Routing.generate('api_delete_like', {likeId: likeId}));
+        });
+    }
+
+
+});
+}
+
+$(document).ready(function() {
+    postDeleteSubmit();
+    postDeleteClick();
+    modalDeleteComment();
+    submitCommentDelete();
+    //updateLikeDisplay;
+    createNewPost();
+    newCommentSubmit();
+    pressLikeButton();
+});

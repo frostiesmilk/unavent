@@ -128,18 +128,20 @@
 /**
  * Back to top animation
  */
-$('.back-top').each(function(){
-    $(this).click(function(){ 
-        $('html,body').animate({ scrollTop: 0 }, 'fast');
-        console.log("yo");
-        return false; 
+function smoothScrollToTop(){
+    $('.back-top').each(function(){
+        $(this).click(function(){ 
+            $('html,body').animate({ scrollTop: 0 }, 'fast');
+            console.log("yo");
+            return false; 
+        });
     });
-});
+}
 
 /**
  * Smooth scroll to anchor
  */
-$(document).ready(function(){
+function smoothScrollAnchor(){
     $('a.scroll-anchor').on('click',function (e) {
         e.preventDefault();
 
@@ -153,14 +155,17 @@ $(document).ready(function(){
             //window.location.hash = target;
         });
     });
-});
+}
 
-/**
- * Enable generic Bootstrap tooltips
- */
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+
+$(document).ready(function(){
+    smoothScrollAnchor();
+    smoothScrollToTop();
+    /**
+    * Enable generic Bootstrap tooltips
+    */
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
 /**
  * Alert auto close
