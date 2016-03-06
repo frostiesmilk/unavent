@@ -10,83 +10,291 @@ and open the template in the editor.
 
 @import "../FrontOfficeBundle/frontoffice-common";
 
-.generic-new-post-navbar{        
-    .generic-new-post-navbar-option{
-        width: 1%; // inline trick
-        display: table-cell; // inline trick
-        .generic-new-post-navbar-option-clickable{
-            background-color: @dark-blue;
-            border-radius: initial;
-            border: initial;
-            color: white;
-        }                
-        .generic-new-post-navbar-option-clickable:hover{
-            background-color: @dark-blue-alt;
-            border: initial;
+.generic-blog-new-post{ // create new post frame
+    border: solid 1px lightgrey;
+    margin-bottom: 20px;
+    @media(max-width: 768px){
+        margin-top: 20px;
+    }
+    
+    .generic-new-post-navbar{
+        .generic-new-post-navbar-option{
+            width: 1%; // inline trick
+            display: table-cell; // inline trick
+            .generic-new-post-navbar-option-clickable{
+                background-color: @dark-blue;
+                border-radius: initial;
+                border: initial;
+                color: white;
+            }                
+            .generic-new-post-navbar-option-clickable:hover{
+                background-color: @dark-blue-alt;
+                border: initial;
+            }
+            .generic-new-post-navbar-option-icon{
+                height: 30px;
+                width: 30px;
+            }
+            .generic-new-post-navbar-option-label{
+                @media(max-width: 768px){
+                    display: none;
+                }
+            }
         }
-        .generic-new-post-navbar-option-icon{
-            height: 30px;
-            width: 30px;
-        }
-        .generic-new-post-navbar-option-label{
-            @media(max-width: 768px){
-                display: none;
+        .active{
+            .generic-new-post-navbar-option-clickable{
+                background-color: @blue-alt!important;                    
+            }
+
+            .generic-new-post-navbar-option-clickable:hover, .generic-new-post-navbar-option-clickable:focus{
+                color: white;
             }
         }
     }
-    .active{
-        .generic-new-post-navbar-option-clickable{
-            background-color: @blue-alt!important;                    
+    
+    .generic-blog-new-post-content{
+        .generic-blog-new-post-content-text{
+            width: 100%;
+            resize: none;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            padding: 10px;
         }
         
-        .generic-new-post-navbar-option-clickable:hover, .generic-new-post-navbar-option-clickable:focus{
-            color: white;
+        .generic-blog-new-post-event{
+            padding: 20px;
+            #map {
+                height: 300px;
+                width: 100%;
+            }
+            .controls {
+                margin-top: 10px;
+                border: 1px solid transparent;
+                border-radius: 2px 0 0 2px;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                height: 32px;
+                outline: none;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            #pac-input {
+                background-color: #fff;
+                font-family: Roboto;
+                font-size: 15px;
+                font-weight: 300;
+                margin-left: 12px;
+                padding: 0 11px 0 13px;
+                text-overflow: ellipsis;
+                width: 300px;
+                z-index: 9999;
+            }
+
+            #pac-input:focus {
+                border-color: #4d90fe;
+            }
+
+            .pac-container {
+                font-family: Roboto;
+            }
+
+            #type-selector {
+                color: #fff;
+                background-color: #4d90fe;
+                padding: 5px 11px 0px 11px;
+            }
+
+            #type-selector label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
         }
     }
+    
+    .generic-blog-new-post-footer{
+        padding: 5px;
+        height: 45px;
+        .group-blog-new-post-footer-confirm{
+            button:hover{
+                color: white;
+            }
+        }
+    }       
 }
 
 .generic-blog{
-    
+    .generic-blog-posts{
+        list-style: none;
+        padding-left: initial;
+        .generic-blog-post{
+            border: 1px solid lightgrey;
+            padding-bottom: 5px;
+            margin-bottom:20px;
+            .generic-post-delete-icon{
+                float: right;
+                color: grey;
+                text-decoration: none;
+            }
+            
+            .generic-blog-post-header{    
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 20px;
+                .generic-blog-post-avatar{                
+                    background-position: center center;
+                    background-repeat: no repeat;
+                    background-size: cover;
+                    border-radius: 50%;
+                    height: 50px;
+                    width: 50px;
+                }
+                .generic-post-header-actions{
+                    .generic-post-like-button{
+                        background-color: transparent;
+                        border: none;
+                        .generic-post-header-actions-icon-like{
+                            color: @red;
+                            font-size: 1.4em;
+                        }
+                    }
+                }
+                
+                .generic-blog-post-time{        
+                    color: grey;
+                    font-size: 0.8em;
+                }
+                .generic-blog-post-rating{        
+                    color: grey;
+                    font-size: 0.8em;
+                }
+            }
+            .generic-blog-post-content{
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid lightgrey;
+            }
+
+            .generic-blog-post-comments{
+                background-color: @light-grey-background;
+                list-style: none;
+                padding-left: 20px;
+                @media(max-width: 768px){
+                    padding-left: 10px;
+                }
+                .generic-blog-post-comment{
+                    padding: 10px 0px 10px 5px;
+                    margin-top: initial;
+                    .generic-blog-post-comment-avatar{
+                        border-radius: 50%;
+                        background-position: center center;
+                        background-size: cover;
+                        height: 50px;
+                        width: 50px;
+                    }
+
+                    .generic-blog-post-comment-poster{
+                        @media(min-width: 768px){
+                            display:inline;
+                        }
+                    }
+                    .generic-blog-post-comment-time{  
+                        @media(min-width: 768px){
+                            display:inline;
+                        }
+                        color: grey;
+                        font-size: 0.8em;
+                    }
+                    
+                    .generic-comment-action-icon{
+                        color: grey;
+                        text-decoration: none;
+                    }
+                    
+                    .generic-blog-post-comment-content{
+                        
+                    }
+                    
+                    .generic-blog-post-comment-error{
+                        font-size: 15px;
+                        color: red;
+                        padding: 5px;
+                    }
+                    
+                }
+                hr{
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                }
+            }
+
+            .generic-blog-post-new-comment{
+                padding-top: 5px;
+                padding-left: 20px;
+                padding-right: 20px;
+                .generic-blog-post-new-comment-avatar{
+                    border-radius: 50%;
+                    background-position: center center;
+                    background-size: cover;
+                    height: 50px;
+                    width: 50px;
+                }
+                .generic-blog-post-new-comment-field{
+                    textarea{
+                        width: 100%;
+                        resize: none;
+                    }
+                }
+            }
+        }
+    }  
 }
 
 .spinner {
-        width: 40px;
-        height: 40px;
+/*    width: 40px;
+    height: 40px;
 
-        position: relative;
-        margin: auto;
+    position: relative;
+    margin: auto;*/
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 50px;
+}
+
+.double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+    0%, 100% { 
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% { 
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
     }
-
-    .double-bounce1, .double-bounce2 {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: #333;
-        opacity: 0.6;
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-        animation: sk-bounce 2.0s infinite ease-in-out;
-    }
-
-    .double-bounce2 {
-        -webkit-animation-delay: -1.0s;
-        animation-delay: -1.0s;
-    }
-
-    @-webkit-keyframes sk-bounce {
-        0%, 100% { -webkit-transform: scale(0.0) }
-        50% { -webkit-transform: scale(1.0) }
-    }
-
-    @keyframes sk-bounce {
-        0%, 100% { 
-          transform: scale(0.0);
-          -webkit-transform: scale(0.0);
-        } 50% { 
-          transform: scale(1.0);
-          -webkit-transform: scale(1.0);
-        }
-    }
+}

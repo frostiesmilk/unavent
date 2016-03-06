@@ -122,11 +122,9 @@ function createNewPost(){
     
     var $this = $(this); // L'objet jQuery du formulaire
     
-    var postLoader = document.getElementById("generic-blog-posts-loader");    
-    console.log("before "+postLoader.hasAttribute("hidden"));
-    postLoader.removeAttribute("hidden"); // display loader
-    
-    console.log("after "+postLoader.hasAttribute("hidden"));
+    // display loader
+    $this.find("button[type='submit']").addClass("hidden");// hide submit button
+    $this.find(".spinner").removeAttr("hidden");
     
     $.ajax({ 
         url: $this.attr('action'),
@@ -134,11 +132,16 @@ function createNewPost(){
         data: $this.serialize(),
         //dataType: 'json', // JSON
         error: function(json){
-            postLoader.setAttribute("hidden", "hidden"); // remove loader
+            // remove loader
+            $this.find(".spinner").attr("hidden", "hidden"); // hide submit button
+            $this.find("[type='submit']").removeClass("hidden");
+            
             alert("error "+$this.attr('action')+" "+$this.attr('method'));
         }
     }).done(function(data, textStatus, jqXHR){ // like success
-        postLoader.setAttribute("hidden", "hidden"); // remove loader
+        // remove loader
+        $this.find(".spinner").attr("hidden", "hidden"); // hide submit button
+        $this.find("[type='submit']").removeClass("hidden");
         
         console.log(data);
         $this.trigger("reset");
@@ -207,27 +210,37 @@ function newCommentSubmit(){
     
     var $this = $(this); // L'objet jQuery du formulaire
     var postId = $this.find("[name='post-id']").val();
+    var formData = {"url": $this.attr('action'),
+                    "type": $this.attr('method'),
+                    "data": $this.serialize()};
+    
+    // comment list
+    var list = document.getElementById("comments-for-post-"+postId);
+    
+    // adding the comment on view
+    var li = document.createElement("li"); // new comment li
+    li.setAttribute("class","media generic-blog-post-comment"); 
+    var htmlComment = document.querySelector("#comments-for-post-"+postId+" [name='comment-empty']");
+    li.innerHTML = htmlComment.innerHTML;
+    var messageCommentHTML = li.querySelector(".generic-blog-post-comment-content p");
+    messageCommentHTML.innerHTML = $this.find("textarea").val();
+    
+    list.appendChild(li);
+    
+    $this.trigger("reset"); // reset comment form
     
     $.ajax({ 
-        url: $this.attr('action'),
-        type: $this.attr('method'),
-        data: $this.serialize(),
+        url: formData["url"],
+        type: formData["type"],
+        data: formData["data"],
         //dataType: 'json', // JSON
         error: function(json){
-            alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+            li.querySelector(".generic-blog-post-comment-time span").innerHTML = "Erreur. Le commentaire n'a pas été envoyé. Veuillez recommencer.";
+            li.querySelector(".generic-blog-post-comment-error").classList.remove("hidden"); // display error icon
         }
     }).done(function(data, textStatus, jqXHR){ // like success
         console.log(data);
-        $this.trigger("reset");
-        
-        var list = document.getElementById("comments-for-post-"+postId);
-        var li = document.createElement("li");
         li.setAttribute("id", "comment-"+data.commentId);
-        li.setAttribute("class","media generic-blog-post-comment");        
-        
-        var htmlComment = document.querySelector("#comments-for-post-"+postId+" [name='comment-empty']");
-        console.log("#comments-for-post-"+postId+" [name='comment-empty'] : "+htmlComment.innerHTML);
-        li.innerHTML = htmlComment.innerHTML;
         
         var commentDateHTML = li.querySelector(".generic-blog-post-comment-time span");
         var commentDate = data.datetimeCreated;
@@ -235,11 +248,8 @@ function newCommentSubmit(){
         
         var deleteCommentIdHTML = li.querySelector("[name='delete-comment-id']");
         deleteCommentIdHTML.setAttribute("value", data.commentId);
+        document.querySelector("#comment-"+data.commentId+" [name='commentDeleteButton']").classList.remove("hidden");
         
-        var messageCommentHTML = li.querySelector(".generic-blog-post-comment-content p");
-        messageCommentHTML.innerHTML = data.commentMessage;
-        
-        list.appendChild(li);        
     });
 });
 }

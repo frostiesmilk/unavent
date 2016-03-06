@@ -1,11 +1,6 @@
 {% set counter = 0 %}
 
 <div class="generic-blog">
-    <div id="generic-blog-posts-loader" hidden class="spinner">
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-    </div>
-
     <ul class="generic-blog-posts" name="generic-blog-posts-list">     
         {% for post in posts %}
             {% set postProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
@@ -90,10 +85,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-3 col-md-4 text-right">
-                                    <a name="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                    <a name="commentDeleteButton" class="hidden" data-toggle="modal" data-target="#modal-delete-comment" href="#">
                                         <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
                                         <input type="hidden" name="delete-comment-id" value="" />                                    
                                     </a>
+                                    <span class="glyphicon glyphicon-warning-sign generic-blog-post-comment-error hidden"></span>
                                 </div>
                             </div>
                             <div class="generic-blog-post-comment-content">
@@ -214,10 +210,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-3 col-md-4 text-right">
-                                    <a name="commentDeleteButton" data-togglname="commentDeleteButton"e="modal" data-target="#modal-delete-comment" href="#">
+                                    <a name="commentDeleteButton" class="hidden" data-togglname="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
                                         <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
                                         <input type="hidden" name="delete-comment-id" value="" />                                    
                                     </a>
+                                    <span class="glyphicon glyphicon-warning-sign generic-blog-post-comment-error hidden"></span>
                                 </div>
                             </div>
                             <div class="generic-blog-post-comment-content">

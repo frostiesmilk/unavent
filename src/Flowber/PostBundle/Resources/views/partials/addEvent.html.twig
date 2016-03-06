@@ -1,6 +1,7 @@
+{% form_theme postWithEventForm.message 'bootstrap_3_layout.html.twig' %}
 {% form_theme postWithEventForm 'bootstrap_3_layout.html.twig' %}
 
-<div role="tabpanel" class="tab-pane group-blog-new-post-event" id="newevent">
+<div role="tabpanel" class="tab-pane generic-blog-new-post-event" id="newevent">
     <form action="{{ path('add_post_with_event', { 'group_id' : circle.id } ) }}" method="post" {{ form_enctype(postWithEventForm) }}> 
         <div class="form-group row">
             <label for="event-title" class="col-sm-3 control-label text-right">Ajouter un commentaire</label>

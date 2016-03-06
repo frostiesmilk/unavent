@@ -157,16 +157,6 @@ function smoothScrollAnchor(){
     });
 }
 
-
-$(document).ready(function(){
-    smoothScrollAnchor();
-    smoothScrollToTop();
-    /**
-    * Enable generic Bootstrap tooltips
-    */
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
 /**
  * Alert auto close
  */
@@ -174,3 +164,16 @@ function autoClosingAlert(selector, delay) {
    var alert = $(selector).alert();
    window.setTimeout(function() { alert.alert('close') }, delay);
 }
+
+/**
+* Enable generic Bootstrap tooltips
+*/
+function enableBootstrapTooltip(){
+    $('[data-toggle="tooltip"]').tooltip();
+}
+
+$(document).ready(function(){
+    smoothScrollAnchor();
+    smoothScrollToTop();    
+    enableBootstrapTooltip();
+});

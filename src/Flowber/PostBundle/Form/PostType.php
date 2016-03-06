@@ -18,8 +18,7 @@ class PostType extends AbstractType
             ->add('message',        'textarea',              
                 array(
                 'attr' => array(
-                     'placeholder' => 'Ecrire un message',
-                                     'class' => 'group-blog-new-post-content-text'),
+                     'placeholder' => 'Ecrire un message'),
                     'label' => false,
                  ));  
     }
