@@ -313,7 +313,7 @@ function pressLikeButton(){
 });
 }
 
-$(document).ready(function() {
+$(function() {
     postDeleteSubmit();
     postDeleteClick();
     modalDeleteComment();

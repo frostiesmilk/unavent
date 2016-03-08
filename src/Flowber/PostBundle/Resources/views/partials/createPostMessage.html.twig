@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane active" id="newpost">
-    <form id="generic-new-post" action="{{ path('api_post_post', { 'circleId': circle.id} ) }}" method="post" {{ form_enctype(postForm) }}>                
+    <form onsubmit="return false;" id="generic-new-post" action="{{ path('api_post_post', { 'circleId': circle.id} ) }}" method="post" {{ form_enctype(postForm) }}>                
         {{form_widget(postForm.message, {'attr': {'class':'generic-blog-new-post-content-text'}})}}
         {{form_rest(postForm)}}
         <div class="generic-blog-new-post-footer">
