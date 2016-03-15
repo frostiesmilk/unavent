@@ -1,7 +1,94 @@
 {% set counter = 0 %}
 
 <div class="generic-blog">
-    <ul class="generic-blog-posts" name="generic-blog-posts-list">     
+    <ul class="generic-blog-posts" name="generic-blog-posts-list"> 
+        <li hidden id="post-0" class="generic-blog-post">
+
+                <a name="postDeleteButton" data-toggle="modal" data-target="#modal-delete-post" href="#">
+                    <span class="glyphicon glyphicon-remove generic-post-delete-icon"></span>
+                    <input type="hidden" name="delete-post-id" value="0" />
+                    <input type="hidden" name="delete-post-origin-id" value="{{circle.id}}" />
+                </a>
+
+                <div class="generic-blog-post-header">             
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
+                        </div>
+                        <div class="media-body">
+                            <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_profile_homepage', { 'circleId' : user.id } ) }}">
+                                {{user.firstname}} {{user.surname}}
+                            </a>
+                            <br/>
+                            <div class="generic-blog-post-time hidden-xs"><span></span></div>
+                            <span id="post-rating-display-0" class="generic-blog-post-rating">                            
+                                <span name="post-like-count">0</span> <span name="post-like-label"> personne aime</span>
+                            </span>
+                        </div>
+
+                        <div class="media-right media-middle generic-post-header-actions">
+                            <form name="form-like" method="post" action="{{path('api_post_like_post')}}">
+                                <input name="post-id" value="0" type="hidden" />
+
+                                <button hidden onmouseenter='likeSwitchHover("post", "DeleteLike",tbd)' onmouseleave='likeSwitchHover("post","DeleteLike",tbd)' class="generic-post-like-button" type="submit" name="deleteLike">
+                                    <span id="postDeleteLike0" class="glyphicon glyphicon-heart generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> Je n'aime plus</span>                          
+                                </button>   
+                                <button onmouseenter='likeSwitchHover("post", "Like",tbd)'  onmouseleave='likeSwitchHover("post","Like",tbd)' class="generic-post-like-button" type="submit" name="addLike">
+                                    <span id="postLike0"  class="glyphicon glyphicon-heart-empty generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> J'aime</span>
+                                </button>                        
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="generic-blog-post-content">
+                    <p>Post message</p>
+                </div>
+                <ul id="comments-for-post-0" class="media-list generic-blog-post-comments">
+                    <li hidden name="comment-empty" class="media generic-blog-post-comment">
+                        <div class="media-left">
+                            <div class="generic-blog-post-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
+                        </div>
+                        <div class="media-body">
+                            <div class="row">
+                                <div class="col-xs-9 col-md-8">
+                                    <div class="generic-blog-post-comment-poster">
+                                        <a href="{{ path('flowber_profile_homepage', { 'circleId' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
+                                    </div>
+
+                                    <div class="generic-blog-post-comment-time hidden-xs">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-4 text-right">
+                                    <a name="commentDeleteButton" class="hidden" data-togglname="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
+                                        <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
+                                        <input type="hidden" name="delete-comment-id" value="" />                                    
+                                    </a>
+                                    <span class="glyphicon glyphicon-warning-sign generic-blog-post-comment-error hidden"></span>
+                                </div>
+                            </div>
+                            <div class="generic-blog-post-comment-content">
+                                <p>Message de commentaire</p>
+                            </div>
+                        </div>
+                        <hr/>
+                    </li>
+                </ul>
+                <form name="form-new-comment" action="{{ path('api_post_comment', { 'postId' : 0 } ) }}" method="post">
+                    <input type="hidden" name="post-id" value="0"/>
+                    <div class="media generic-blog-post-new-comment">
+                        <div class="media-left hidden-xs">
+                            <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
+                        </div>
+                        <div class="media-body generic-blog-post-new-comment-field">
+
+                        </div>
+                        <div class="media-right">
+                            <button type="submit" class="btn btn-default btn-red"><span class="hidden-xs hidden-sm">Envoyer</span><span class="hidden-md hidden-lg glyphicon glyphicon-send"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </li>
         {% for post in posts %}
             {% set postProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
             {% if post.createdBy.profile.profilePicture is not null %}
@@ -152,99 +239,14 @@
                 </form>
             </li>
 
-            <li hidden id="post-0" class="generic-blog-post">
-
-                <a name="postDeleteButton" data-toggle="modal" data-target="#modal-delete-post" href="#">
-                    <span class="glyphicon glyphicon-remove generic-post-delete-icon"></span>
-                    <input type="hidden" name="delete-post-id" value="0" />
-                    <input type="hidden" name="delete-post-origin-id" value="{{circle.id}}" />
-                </a>
-
-                <div class="generic-blog-post-header">             
-                    <div class="media">
-                        <div class="media-left">
-                            <div class="media-object generic-blog-post-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
-                        </div>
-                        <div class="media-body">
-                            <a class="generic-blog-header-post-info-poster" href="{{ path('flowber_profile_homepage', { 'circleId' : user.id } ) }}">
-                                {{user.firstname}} {{user.surname}}
-                            </a>
-                            <br/>
-                            <div class="generic-blog-post-time hidden-xs"><span></span></div>
-                            <span id="post-rating-display-0" class="generic-blog-post-rating">                            
-                                <span name="post-like-count">0</span> <span name="post-like-label"> personne aime</span>
-                            </span>
-                        </div>
-
-                        <div class="media-right media-middle generic-post-header-actions">
-                            <form name="form-like" method="post" action="{{path('api_post_like_post')}}">
-                                <input name="post-id" value="0" type="hidden" />
-
-                                <button hidden onmouseenter='likeSwitchHover("post", "DeleteLike",tbd)' onmouseleave='likeSwitchHover("post","DeleteLike",tbd)' class="generic-post-like-button" type="submit" name="deleteLike">
-                                    <span id="postDeleteLike0" class="glyphicon glyphicon-heart generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> Je n'aime plus</span>                          
-                                </button>   
-                                <button onmouseenter='likeSwitchHover("post", "Like",tbd)'  onmouseleave='likeSwitchHover("post","Like",tbd)' class="generic-post-like-button" type="submit" name="addLike">
-                                    <span id="postLike0"  class="glyphicon glyphicon-heart-empty generic-post-header-actions-icon generic-post-header-actions-icon-like"></span><span class="generic-post-header-actions-icon-label hidden-xs hidden-sm"> J'aime</span>
-                                </button>                        
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="generic-blog-post-content">
-                    <p>Post message</p>
-                </div>
-                <ul id="comments-for-post-0" class="media-list generic-blog-post-comments">
-                    <li hidden name="comment-empty" class="media generic-blog-post-comment">
-                        <div class="media-left">
-                            <div class="generic-blog-post-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
-                        </div>
-                        <div class="media-body">
-                            <div class="row">
-                                <div class="col-xs-9 col-md-8">
-                                    <div class="generic-blog-post-comment-poster">
-                                        <a href="{{ path('flowber_profile_homepage', { 'circleId' : user.id } ) }}">{{user.firstname}}  {{user.surname}}</a>
-                                    </div>
-
-                                    <div class="generic-blog-post-comment-time hidden-xs">
-                                        <span></span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-3 col-md-4 text-right">
-                                    <a name="commentDeleteButton" class="hidden" data-togglname="commentDeleteButton" data-toggle="modal" data-target="#modal-delete-comment" href="#">
-                                        <span class="glyphicon glyphicon-remove generic-comment-action-icon"></span>
-                                        <input type="hidden" name="delete-comment-id" value="" />                                    
-                                    </a>
-                                    <span class="glyphicon glyphicon-warning-sign generic-blog-post-comment-error hidden"></span>
-                                </div>
-                            </div>
-                            <div class="generic-blog-post-comment-content">
-                                <p>Message de commentaire</p>
-                            </div>
-                        </div>
-                        <hr/>
-                    </li>
-                </ul>
-                <form name="form-new-comment" action="{{ path('api_post_comment', { 'postId' : 0 } ) }}" method="post">
-                    <input type="hidden" name="post-id" value="0"/>
-                    <div class="media generic-blog-post-new-comment">
-                        <div class="media-left hidden-xs">
-                            <div class="generic-blog-post-new-comment-avatar" style="background-image: url('{{asset(user.profilePicture)}}')"></div>
-                        </div>
-                        <div class="media-body generic-blog-post-new-comment-field">
-
-                        </div>
-                        <div class="media-right">
-                            <button type="submit" class="btn btn-default btn-red"><span class="hidden-xs hidden-sm">Envoyer</span><span class="hidden-md hidden-lg glyphicon glyphicon-send"></span></button>
-                        </div>
-                    </div>
-                </form>
-            </li>
+            
 
 
             {% set counter = counter + 1 %}
-        {% include 'FlowberPostBundle::modal/modalDeletePost.html.twig' %}
-        {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
+        
 
         {% endfor %}
     </ul>
+    {% include 'FlowberPostBundle::modal/modalDeletePost.html.twig' %}
+    {% include 'FlowberPostBundle::modal/modalDeleteComment.html.twig' %}
 </div>

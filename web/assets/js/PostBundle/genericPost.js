@@ -65,7 +65,7 @@ function modalDeleteComment(){$("body").on("click","a[name='commentDeleteButton'
  * Submitting COMMENT deletion
  */
 function submitCommentDelete(){
-    document.querySelector("#delete-comment-form").onsubmit = function(e){
+    $("body").on("submit","#delete-comment-form", function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
 
         var $thisForm = $("#delete-comment-form"); // objet actuel
@@ -85,7 +85,7 @@ function submitCommentDelete(){
             elem.parentNode.removeChild(elem);
             $('#modal-delete-comment').modal("hide");
         });
-    };
+    });
 }
 
 /**
@@ -313,7 +313,7 @@ function pressLikeButton(){
 });
 }
 
-$(document).ready(function() {
+$(function() {
     postDeleteSubmit();
     postDeleteClick();
     modalDeleteComment();
