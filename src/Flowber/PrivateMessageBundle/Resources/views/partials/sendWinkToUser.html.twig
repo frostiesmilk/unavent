@@ -8,13 +8,12 @@
             </div>
             <div class="modal-footer" >
                 <form id="send-wink" method="post" action="{{ path('api_post_sendwink', {'circleId': circle.id}) }}">
-     
                     <button type="submit" class="btn btn-default" name="sendWinkToUser">
                         Envoyer
                     </button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    Ne pas envoyer
-                </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Ne pas envoyer
+                    </button>
                 </form>
             </div>
         </div>

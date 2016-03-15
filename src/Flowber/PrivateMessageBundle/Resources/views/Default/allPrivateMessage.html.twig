@@ -16,9 +16,9 @@
             <div class="row">
                 <div class="col-md-2 messages-menu">
                     <div class="list-group messages-menu-list">
-                        <a href="{{path('flowber_privatemessage_received_homepage')}}" class="list-group-item {% if type == 'received' %} active {% endif %}"><span class="badge"></span>Messages reçus </a>
-                        <a href="{{path('flowber_privatemessage_sent_homepage')}}" class="list-group-item {% if type == 'send' %} active {% endif %}"><span class="badge"></span>Messages envoyés</a>
-                        <a href="{{path('flowber_privatemessage_deleted_homepage')}}" class="list-group-item {% if type == 'deleted' %} active {% endif %}"><span class="badge"></span>Corbeille</a>
+                        <a href="{{path('flowber_privatemessage_received_homepage')}}" class="list-group-item {% if type == 'received' %} active {% endif %}"><span class="badge" id="messageReceveivedNumber">{{number.received}}</span>Messages reçus </a>
+                        <a href="{{path('flowber_privatemessage_sent_homepage')}}" class="list-group-item {% if type == 'send' %} active {% endif %}"><span class="badge" id="messageSentNumber">{{number.sent}}</span>Messages envoyés</a>
+                        <a href="{{path('flowber_privatemessage_deleted_homepage')}}" class="list-group-item {% if type == 'deleted' %} active {% endif %}"><span class="badge" id="messageDeletedNumber">{{number.deleted}}</span>Corbeille</a>
                     </div>
                 </div>
                 
@@ -36,24 +36,27 @@
                         </thead>
                         <tbody>
                             {% for message in messages %}
-
-                                    <tr class="messages-stream-element" data-href="{{ path('flowber_privatemessage_one_received_homepage', {'id': message.messageId}) }}">
+                                    <tr id="messageFrom-{{message.messageId}}" class="messages-stream-element" data-href="{{ path('flowber_privatemessage_one_received_homepage', {'id': message.messageId}) }}">
                                         <td class="col-md-2 messages-stream-element-clickable">
-                                            <span class="messages-stream-element-author">
-                                                {% if message.statut == '2' %}  <b> {% endif %}
-                                                    {% if message.is == 'sent' %} 
+                                            {% if message.statut == '2'%}  
+                                                <span id="messageFromTitle-{{message.messageId}}" class="bold messages-stream-element-author">
+                                            {% else %}
+                                                <span id="messageFromTitle-{{message.messageId}}" class="messages-stream-element-author">
+                                            {% endif %}
+                                                    {% if message.is == 'sent' or message.is == 'sentDeleted' %} 
                                                         A : {{ message.receiversName }}    
                                                     {% else %}
                                                         {{ message.circleFromTitle }}
                                                     {% endif %}
-                                                {% if message.statut == '2' %}  </b> {% endif %}
-                                            </span>
+                                             </span>
                                         </td>
                                         <td class="col-md-9 messages-stream-element-clickable">
-                                            <span class="messages-stream-element-subject">
-                                                {% if message.statut == '2'%}  <b> {% endif %}
+                                            {% if message.statut == '2'%}  
+                                                <span id="messageFromSubject-{{message.messageId}}" class="bold messages-stream-element-subject">
+                                            {% else %}
+                                                <span id="messageFromSubject-{{message.messageId}}" class="messages-stream-element-subject">
+                                            {% endif %}
                                                     {{ message.subject }}
-                                                {% if message.statut == '2'%}  </b> {% endif %}
                                             </span> 
                                             - 
                                             <span class="messages-stream-element-content-preview">{{ message.message }}</span>
@@ -61,20 +64,57 @@
                                         <td class="col-md-1 messages-stream-element-clickable">
                                             <span class="messages-stream-element-date">{{ message.creationDate|date("\\l\\e d/m") }}</span><br>
                                             <span class="messages-stream-element-date">{{ message.creationDate|date("\\à G:i") }}</span>
-                                        </td>  
-                                        <td class="col-md-2">
-                                            <a tabindex="-1" href="{{ path('flowber_delete_message', {'id': message.messageId, 'type':'r'}) }}">
-                                                <button type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
-                                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                                </button>
-                                            </a>
-                                            <a tabindex="-1" href="{{ path('flowber_read_message', {'id': message.messageId}) }}">
-                                                <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
-                                                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                                                </button>
-                                            </a>
-                                        </td>
-                                    </tr>                           
+                                        </td> 
+                                        {% if message.is == 'received' %} 
+                                            <td class="col-md-2">
+                                                <form id="deleteReceivedMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletereceviedmessage', {'id': message.messageId}) }}">
+                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                    </button>
+                                                </form>
+                                                <form id="readNotRead" class="{{message.messageId}}" method="post" action="{{ path('api_post_read', {'id': message.messageId}) }}">
+                                                    <button id="messageFromSubmit-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
+                                                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        {% elseif message.is == 'sent' %}
+                                            <td class="col-md-2">
+                                                <form id="deleteSentMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletesentmessage', {'id': message.messageId}) }}">
+                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                    </button>
+                                                </form>
+                                            </td>                                        
+                                        {% elseif message.is == 'sentDeleted' %}
+                                            <td class="col-md-2">
+                                                <form id="deleteSentDeletedMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletesentdeletedmessage', {'id': message.messageId}) }}">
+                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                    </button>
+                                                </form>
+                                                <form id="CancelSentDeleted" class="{{message.messageId}}" method="post" action="{{ path('api_post_cancelsentdeleted', {'id': message.messageId}) }}">
+                                                    <button id="messageFromSubmit-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
+                                                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                                    </button>
+                                                </form>
+                                            </td>                                               
+                                        {% elseif message.is == 'receivedDeleted' %}
+                                            <td class="col-md-2">
+
+                                                <form id="deleteReceivedDeletedMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletereceiveddeletedmessage', {'id': message.messageId}) }}">
+                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                    </button>
+                                                </form>
+                                                <form id="CancelReceivedDeleted" class="{{message.messageId}}" method="post" action="{{ path('api_post_cancelreceiveddeleted', {'id': message.messageId}) }}">
+                                                    <button id="messageFromSubmit-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
+                                                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                                    </button>
+                                                </form>                                            
+                                            </td>  
+                                        {% endif %}
+                                </tr>                           
 
                             {% endfor %}
                             {#
@@ -99,4 +139,5 @@
     {{parent()}}
     {# Put specific JS below #}    
     <script src="{{ asset('assets/js/PrivateMessageBundle/messages.js') }}"></script>
+    <script src="{{ asset('assets/js/PrivateMessageBundle/sendMessageForm.js') }}"></script>
 {% endblock %}

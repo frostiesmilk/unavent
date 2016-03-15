@@ -101,33 +101,263 @@ body {
 .form-error-custom span {
   color: #A94442;
 }
-.generic-new-post-navbar .generic-new-post-navbar-option {
+.generic-blog-new-post {
+  border: solid 1px lightgrey;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .generic-blog-new-post {
+    margin-top: 20px;
+  }
+}
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option {
   width: 1%;
   display: table-cell;
 }
-.generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable {
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable {
   background-color: #293540;
   border-radius: initial;
   border: initial;
   color: white;
 }
-.generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable:hover {
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable:hover {
   background-color: #1B242B;
   border: initial;
 }
-.generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-icon {
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-icon {
   height: 30px;
   width: 30px;
 }
 @media (max-width: 768px) {
-  .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-label {
+  .generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-label {
     display: none;
   }
 }
-.generic-new-post-navbar .active .generic-new-post-navbar-option-clickable {
+.generic-blog-new-post .generic-new-post-navbar .active .generic-new-post-navbar-option-clickable {
   background-color: #66A0BE !important;
 }
-.generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:hover,
-.generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:focus {
+.generic-blog-new-post .generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:hover,
+.generic-blog-new-post .generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:focus {
   color: white;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-content-text {
+  width: 100%;
+  resize: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding: 10px;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event {
+  padding: 20px;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #map {
+  height: 300px;
+  width: 100%;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event .controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+  z-index: 9999;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #pac-input:focus {
+  border-color: #4d90fe;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event .pac-container {
+  font-family: Roboto;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+.generic-blog-new-post .generic-blog-new-post-footer {
+  padding: 5px;
+  height: 45px;
+}
+.generic-blog-new-post .generic-blog-new-post-footer .group-blog-new-post-footer-confirm button:hover {
+  color: white;
+}
+.generic-blog .generic-blog-posts {
+  list-style: none;
+  padding-left: initial;
+}
+.generic-blog .generic-blog-posts .generic-blog-post {
+  border: 1px solid lightgrey;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-post-delete-icon {
+  float: right;
+  color: grey;
+  text-decoration: none;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-avatar {
+  background-position: center center;
+  background-repeat: no repeat;
+  background-size: cover;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-post-header-actions .generic-post-like-button {
+  background-color: transparent;
+  border: none;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-post-header-actions .generic-post-like-button .generic-post-header-actions-icon-like {
+  color: #E74C3C;
+  font-size: 1.4em;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-time {
+  color: grey;
+  font-size: 0.8em;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-rating {
+  color: grey;
+  font-size: 0.8em;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments {
+  background-color: #F5F5F5;
+  list-style: none;
+  padding-left: 20px;
+}
+@media (max-width: 768px) {
+  .generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments {
+    padding-left: 10px;
+  }
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment {
+  padding: 10px 0px 10px 5px;
+  margin-top: initial;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-avatar {
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+@media (min-width: 768px) {
+  .generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-poster {
+    display: inline;
+  }
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-time {
+  color: grey;
+  font-size: 0.8em;
+}
+@media (min-width: 768px) {
+  .generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-time {
+    display: inline;
+  }
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-comment-action-icon {
+  color: grey;
+  text-decoration: none;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-error {
+  font-size: 15px;
+  color: red;
+  padding: 5px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment .generic-blog-post-new-comment-avatar {
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment .generic-blog-post-new-comment-field textarea {
+  width: 100%;
+  resize: none;
+}
+.spinner {
+  /*    width: 40px;
+    height: 40px;
+
+    position: relative;
+    margin: auto;*/
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 50px;
+}
+.double-bounce1,
+.double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation: sk-bounce 2s infinite ease-in-out;
+  animation: sk-bounce 2s infinite ease-in-out;
+}
+.double-bounce2 {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+@-webkit-keyframes sk-bounce {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
 }

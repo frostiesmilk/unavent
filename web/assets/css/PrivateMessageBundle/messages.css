@@ -25,6 +25,10 @@ and open the template in the editor.
   font-family: amaranthRegular;
   src: url(../../fonts/Amaranth-Regular.ttf);
 }
+/* all site */
+body {
+  font-size: 13px;
+}
 /* Colored backgrounds */
 .background-dark-blue {
   background-color: #293540;
@@ -83,6 +87,7 @@ and open the template in the editor.
 }
 .btn-red:hover {
   background-color: #BF493D;
+  color: white;
 }
 /* Forms */
 .form-error-custom {
@@ -108,6 +113,12 @@ and open the template in the editor.
 }
 .messages-container .messages-content .messages-stream .messages-stream-element .messages-stream-element-clickable {
   cursor: pointer;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element .bold {
+  font-weight: bold;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element .collapse {
+  visibility: collapse;
 }
 .messages-container .messages-content .messages-stream .messages-stream-element .messages-stream-element-content-preview {
   color: grey;
@@ -163,4 +174,3 @@ and open the template in the editor.
 .message-show .message-show-reply .message-show-reply-submit {
   margin-bottom: 1px;
 }
-/*# sourceMappingURL=messages.css.map */

@@ -12,16 +12,15 @@ class PrivateMessageController extends Controller
     {
         $user = $this->getUser();
         $messagesInfos = $this->container->get('flowber_privateMessage.privateMessage')->getMessageReceived($user->getProfile()->getId());
+        $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());
 
-       // $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
+        // $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
         //$numberSendMessages = $pmReposit->getSentMessagesNumber($user);
         //$numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
         
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
             "messages"=>$messagesInfos,
-           // "numberDeletedMessages"=>$numberDeletedMessages,
-           // "numberReceiveddMessages"=>$numberReceivedMessages,
-            //"numberSendMessages"=>$numberSendMessages,
+            "number"=>$number,
             "type"=>'received',
             ));
     }
@@ -31,6 +30,7 @@ class PrivateMessageController extends Controller
         $user = $this->getUser();
         
         $messagesInfos = $this->container->get('flowber_privateMessage.privateMessage')->getMessageSent($user->getProfile()->getId());
+        $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());
         
         //$messagesSend = $pmReposit->getSentMessages($user);
         //$numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
@@ -39,9 +39,7 @@ class PrivateMessageController extends Controller
 
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
             "messages"=>$messagesInfos,
-//            "numberDeletedMessages"=>$numberDeletedMessages,
-//            "numberReceiveddMessages"=>$numberReceivedMessages,
-//            "numberSendMessages"=>$numberSendMessages,
+            "number"=>$number,
             "type"=>'send',
                 ));
     }
@@ -51,6 +49,7 @@ class PrivateMessageController extends Controller
         $user = $this->getUser();
         
         $messagesInfos = $this->container->get('flowber_privateMessage.privateMessage')->getMessagedeleted($user->getProfile()->getId());
+        $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());
         
 //        $messagesDeleted = $pmReposit->getDeletedMessages($user);
 //        $numberReceivedMessages = $pmReposit->getReceiveddMessagesNumber($user);
@@ -59,9 +58,7 @@ class PrivateMessageController extends Controller
         
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
             "messages"=>$messagesInfos,
-//            "numberDeletedMessages"=>$numberDeletedMessages,
-//            "numberReceiveddMessages"=>$numberReceivedMessages,
-//            "numberSendMessages"=>$numberSendMessages,
+            "number"=>$number,
             "type"=>'deleted',
                 ));
     }

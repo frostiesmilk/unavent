@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Flowber\PrivateMessageBundle\Entity;
 
@@ -58,8 +58,7 @@ class PrivateMessage
     private $messageFrom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\CircleBundle\Entity\Circle")
-     * @ORM\JoinColumn(name="message_receiver", referencedColumnName="id", nullable=true)
+     * @ORM\OneToMany(targetEntity="Flowber\PrivateMessageBundle\Entity\Receiver", mappedBy="message", cascade={"persist"})
      */
     private $messageTo;
     
@@ -72,6 +71,8 @@ class PrivateMessage
         $this->statut = '2';
     }
     
+
+
     /**
      * Get id
      *
@@ -173,11 +174,6 @@ class PrivateMessage
     {
         return $this->statut;
     }
-    
-    public function deleteMessage(\Flowber\PrivateMessageBundle\Entity\PrivateMessage $message)
-    {
-        $message.setStatut(0);
-    }
 
     /**
      * Set messageFrom
@@ -205,10 +201,10 @@ class PrivateMessage
     /**
      * Add messageTo
      *
-     * @param \Flowber\CircleBundle\Entity\Circle $messageTo
+     * @param \Flowber\PrivateMessageBundle\Entity\Receiver $messageTo
      * @return PrivateMessage
      */
-    public function addMessageTo(\Flowber\CircleBundle\Entity\Circle $messageTo)
+    public function addMessageTo(\Flowber\PrivateMessageBundle\Entity\Receiver $messageTo)
     {
         $this->messageTo[] = $messageTo;
 
@@ -218,9 +214,9 @@ class PrivateMessage
     /**
      * Remove messageTo
      *
-     * @param \Flowber\CircleBundle\Entity\Circle $messageTo
+     * @param \Flowber\PrivateMessageBundle\Entity\Receiver $messageTo
      */
-    public function removeMessageTo(\Flowber\CircleBundle\Entity\Circle $messageTo)
+    public function removeMessageTo(\Flowber\PrivateMessageBundle\Entity\Receiver $messageTo)
     {
         $this->messageTo->removeElement($messageTo);
     }

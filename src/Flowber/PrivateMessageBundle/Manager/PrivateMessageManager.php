@@ -24,6 +24,7 @@ class PrivateMessageManager extends BaseManager {
         $pmReposit = $this->getPrivateMessageRepository();
         
         $messages = $pmReposit->getReceivedMessages($circleId);
+        
         $count = 0;
         foreach ($messages as $message ){
             $messages[$count]['circleFromProfilePicture'] = $this->cm->getProfilePicture($message['circleFromId']);
@@ -41,7 +42,7 @@ class PrivateMessageManager extends BaseManager {
         $messages = $pmReposit->getSentMessages($circleId);
 
         $count = 0;
-        foreach ($messages as $message ){
+        foreach ($messages as $message ){         
             $receivers = $pmReposit->getReceiversMessages($message['messageId']);
             $messages[$count]['circleFromTitle'] = $this->cm->getTitle($message['circleFromId']);
             $messages[$count]['is'] = 'sent';
@@ -77,7 +78,7 @@ class PrivateMessageManager extends BaseManager {
         foreach ($messages as $message ){
             $messages[$count]['circleFromProfilePicture'] = $this->cm->getProfilePicture($message['circleFromId']);
             $messages[$count]['circleFromTitle'] = $this->cm->getTitle($message['circleFromId']);
-            $messages[$count]['is'] = 'received';
+            $messages[$count]['is'] = 'receivedDeleted';
             
             $receivers = $pmReposit->getReceiversMessages($message['messageId']);
             $messages[$count]['receiversName']='';
@@ -112,7 +113,7 @@ class PrivateMessageManager extends BaseManager {
         foreach ($messages as $message ){
             $messages[$count]['circleFromProfilePicture'] = $this->cm->getProfilePicture($message['circleFromId']);
             $messages[$count]['circleFromTitle'] = $this->cm->getTitle($message['circleFromId']);
-            $messages[$count]['is'] = 'sent';
+            $messages[$count]['is'] = 'sentDeleted';
             
             $receivers = $pmReposit->getReceiversMessages($message['messageId']);
             $messages[$count]['receiversName']='';           
@@ -144,6 +145,17 @@ class PrivateMessageManager extends BaseManager {
         $messages = array_merge($messagesR, $messagesD);
       
         return $messages;
+    }   
+
+    public function getMessagesNumber($circleId)
+    {        
+        $pmReposit = $this->getPrivateMessageRepository();
+
+        $number['received'] = $pmReposit->getCountReceivedMessages($circleId);
+        $number['sent'] = $pmReposit->getCountSentMessages($circleId);
+        $number['deleted'] = $pmReposit->getCountReceivedDeletedMessages($circleId) + $pmReposit->getCountSentDeletedMessages($circleId);
+      
+        return $number;
     }   
     
     public function getPrivateMessageRepository()
