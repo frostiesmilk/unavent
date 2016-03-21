@@ -262,14 +262,17 @@ function pressLikeButton(){
     e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
 
     var $this = $(this); // L'objet jQuery du formulaire
+    $this.find("button").button('loading');
     var postId = $this.find("input[name='post-id']").val();
     console.log("postId: "+postId);
     if($this.find("input[name='_method']").length){ // delete like
         console.log("deleting like");
-
+        
         // smooth display, change with no data control
         $this.find("button[name='addLike']").removeAttr("hidden");
+        $this.find("button[name='addLike']").removeClass("hidden");
         $this.find("button[name='deleteLike']").attr("hidden", "hidden");
+        $this.find("button[name='deleteLike']").addClass("hidden");
         updateLikeDisplay(postId, "delete");
 
         $.ajax({ 
@@ -278,18 +281,23 @@ function pressLikeButton(){
             data: $this.serialize(),
             //dataType: 'json', // JSON
             error: function(json){
-                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+                $this.find("button").button('reset');
+                alert("Error deleting like");
             }
         }).done(function(data, textStatus, jqXHR){ // like success
-            $this.find("input[name='_method']").remove(); // remove deletion function
+//            $this.find("input[name='_method']").remove(); // remove deletion function
+            $this.find("button").button('reset');
             $this.attr('action', Routing.generate('api_post_like_post'));
         });
+        $this.find("input[name='_method']").remove(); // remove deletion function
     }else{ // add like
         console.log("adding like");
 
         // smooth display, change with no data control
         $this.find("button[name='deleteLike']").removeAttr("hidden");
+        $this.find("button[name='deleteLike']").removeClass("hidden");
         $this.find("button[name='addLike']").attr("hidden", "hidden"); 
+        $this.find("button[name='addLike']").addClass("hidden"); 
         updateLikeDisplay(postId, "add");
 
         $.ajax({ 
@@ -298,15 +306,17 @@ function pressLikeButton(){
             data: {postId: postId},
             //dataType: 'json', // JSON
             error: function(json){
-                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+                $this.find("button").button('reset');
+                alert("Error adding like");
             }
         }).done(function(data, textStatus, jqXHR){ // like success
             console.log(data);
-            $this.append('<input name="_method" value="DELETE" type="hidden">'); // add deletion function
-
+//            $this.append('<input name="_method" value="DELETE" type="hidden">'); // add deletion function
+            $this.find("button").button('reset');
             var likeId = data.likeId;
             $this.attr('action', Routing.generate('api_delete_like', {likeId: likeId}));
         });
+        $this.append('<input name="_method" value="DELETE" type="hidden">'); // add deletion function
     }
 
 

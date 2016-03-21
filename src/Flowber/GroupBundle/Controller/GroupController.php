@@ -28,6 +28,12 @@ class GroupController extends Controller
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPost($circleId);   
         
+        // test
+//        $likedWhat =  $postRepository->hasUserLikedPost($postRepository->find(12), $user);
+//        
+//        return \Symfony\Component\HttpFoundation\JsonResponse::create($likedWhat);
+        // test stop
+
         //preparing new form for a post
         $post = new Post();
         $postwithEvent = new Post();
