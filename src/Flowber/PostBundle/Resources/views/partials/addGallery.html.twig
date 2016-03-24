@@ -1,7 +1,17 @@
 <div role="tabpanel" class="tab-pane" id="newphoto">
-    <form action="/file-upload" class="dropzone">
+    <!--<form action="/file-upload" class="dropzone">
     <div class="fallback">
       <input name="file" type="file" multiple />
     </div>
-  </form>
+  </form>-->
+    {{form_start(postWithPicturesForm, {'attr':{'class':'dropzone'}})}}
+    {{form_widget(postWithPicturesForm.message)}}
+    <div class="fallback">
+        {{form(postWithPicturesForm.gallery)}}
+    </div>
+    
+    <button type="submit">Envoyer</button>
+    
+    {{form_rest(postWithPicturesForm)}}
+    {{form_end(postWithPicturesForm)}}
 </div>

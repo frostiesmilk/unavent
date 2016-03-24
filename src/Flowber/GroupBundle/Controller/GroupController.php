@@ -13,6 +13,7 @@ use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\CommentType;
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\PostWithEventType;
+use Flowber\PostBundle\Form\PostWithPicturesType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
@@ -28,16 +29,12 @@ class GroupController extends Controller
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
         $posts = $postRepository->getPost($circleId);   
         
-        // test
-//        $likedWhat =  $postRepository->hasUserLikedPost($postRepository->find(12), $user);
-//        
-//        return \Symfony\Component\HttpFoundation\JsonResponse::create($likedWhat);
-        // test stop
-
         //preparing new form for a post
         $post = new Post();
         $postwithEvent = new Post();
+        $postWithPictures = new Post();
         $postForm = $this->createForm(new PostType(), $post);
+        $postWithPicturesForm = $this->createForm(new PostWithPicturesType, $postWithPictures);
         $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
         
         // forms for comments
@@ -67,6 +64,7 @@ class GroupController extends Controller
                 'posts' => $posts,
                 // forms
                 'postForm' => $postForm->createView(),
+                'postWithPicturesForm' => $postWithPicturesForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),
                 'commentForm' => $commentsForms,
                 'postWithEventForm'=> $postWithEventForm->createView(),

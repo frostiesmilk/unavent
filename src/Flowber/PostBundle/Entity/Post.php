@@ -58,7 +58,7 @@ class Post
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist"})
      */
     private $gallery;
 
@@ -86,7 +86,6 @@ class Post
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->gallery = new \Doctrine\Common\Collections\ArrayCollection();
         $this->photo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate = new \Datetime();
         $this->status = 1;
@@ -244,39 +243,6 @@ class Post
     }
 
     /**
-     * Add gallery
-     *
-     * @param \Flowber\GalleryBundle\Entity\Gallery $gallery
-     * @return Post
-     */
-    public function addGallery(\Flowber\GalleryBundle\Entity\Gallery $gallery)
-    {
-        $this->gallery[] = $gallery;
-
-        return $this;
-    }
-
-    /**
-     * Remove gallery
-     *
-     * @param \Flowber\GalleryBundle\Entity\Gallery $gallery
-     */
-    public function removeGallery(\Flowber\GalleryBundle\Entity\Gallery $gallery)
-    {
-        $this->gallery->removeElement($gallery);
-    }
-
-    /**
-     * Get gallery
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGallery()
-    {
-        return $this->gallery;
-    }
-
-    /**
      * Add photo
      *
      * @param \Flowber\GalleryBundle\Entity\Photo $photo
@@ -400,5 +366,28 @@ class Post
     public function getCircle()
     {
         return $this->circle;
+    }
+
+    /**
+     * Set gallery
+     *
+     * @param \Flowber\GalleryBundle\Entity\Gallery $gallery
+     * @return Post
+     */
+    public function setGallery(\Flowber\GalleryBundle\Entity\Gallery $gallery = null)
+    {
+        $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    /**
+     * Get gallery
+     *
+     * @return \Flowber\GalleryBundle\Entity\Gallery 
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
     }
 }
