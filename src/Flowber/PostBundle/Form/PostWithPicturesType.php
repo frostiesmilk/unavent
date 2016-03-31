@@ -5,7 +5,8 @@ namespace Flowber\PostBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Flowber\GalleryBundle\Form\GalleryOnlyType;
+//use Flowber\GalleryBundle\Form\GalleryOnlyType;
+use Flowber\GalleryBundle\Form\DataTransformer\PictureFilesTransformer;
 
 class PostWithPicturesType extends AbstractType
 {
@@ -15,10 +16,14 @@ class PostWithPicturesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('message')
-            ->add('gallery', new GalleryOnlyType())
-        ;
+        $builder->add('message');
+
+        $builder->create('files', 'file', array(
+                                                            'multiple' => true, 
+                                                            'data_class' => null,
+                                                        )
+                            )
+                    ->addModelTransformer(new PictureFilesTransformer());
     }
     
     /**
