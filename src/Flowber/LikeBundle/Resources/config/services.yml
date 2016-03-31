@@ -2,3 +2,6 @@ services:
 #    flowber_like.example:
 #        class: Flowber\LikeBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    flowber_like.like:
+        class: Flowber\LikeBundle\Manager\LikeManager
+        arguments: [@doctrine.orm.entity_manager, @flowber_circle.circle, @flowber_post.post] 

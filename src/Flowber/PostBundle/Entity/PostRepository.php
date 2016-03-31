@@ -51,4 +51,23 @@ class PostRepository extends EntityRepository
                   ->getResult();
     }
     
+    public function hasUserLikedPost($post, $user){
+
+//        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+//        $rsm->addRootEntityFromClassMetadata(‘MonBundle:MonEntite’, ‘alias’);
+        
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+
+        $sql = 'SELECT l.id id '
+                . 'FROM post_likes AS pl, likes AS l '
+                . 'WHERE pl.post_id = '.$post->getId().' '
+                . 'AND l.created_by_id = '.$user->getId();
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+
+        $result = $query->getResult();
+        
+        return count($result)>0;
+    }
 }

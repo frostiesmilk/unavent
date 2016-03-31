@@ -13,9 +13,11 @@ use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\CommentType;
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\PostWithEventType;
+use Flowber\PostBundle\Form\PostWithPicturesType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
+use Flowber\GalleryBundle\Entity\Gallery;
 
 class GroupController extends Controller
 {
@@ -31,8 +33,44 @@ class GroupController extends Controller
         //preparing new form for a post
         $post = new Post();
         $postwithEvent = new Post();
+        $postWithPictures = new Post();
         $postForm = $this->createForm(new PostType(), $post);
+        $postWithPicturesForm = $this->createForm(new PostWithPicturesType, $postWithPictures);
         $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
+        
+        // post gallery upload
+        $request = $this->get('request');
+        
+        // if form has been submitted
+        if ($request->getMethod() == 'POST') { 
+            $postWithPicturesForm->handleRequest($request);
+            
+            $em = $this->getDoctrine()->getManager();
+            
+            if($postWithPicturesForm->isValid()){
+                $postGallery = new Gallery();
+                
+                $files = $postWithPicturesForm->get('files')->getData();
+                foreach($files as $file)
+                {
+                    $file->preUpload();
+                    $file->upload();
+                    $file->addGallery($postGallery);
+                    
+                    $em->persist($file);                    
+                }
+                
+                $postWithPictures->setGallery($postGallery);
+                $em->persist($postWithPictures);
+                
+                try{
+                    $em->flush();
+                } catch (Exception $ex) {
+                    
+                }
+                
+            }
+        }
         
         // forms for comments
         $commentsForms = array();
@@ -61,6 +99,7 @@ class GroupController extends Controller
                 'posts' => $posts,
                 // forms
                 'postForm' => $postForm->createView(),
+                'postWithPicturesForm' => $postWithPicturesForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),
                 'commentForm' => $commentsForms,
                 'postWithEventForm'=> $postWithEventForm->createView(),

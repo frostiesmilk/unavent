@@ -22,5 +22,5 @@ class LikesRepository extends EntityRepository
         
         return $qb->getQuery()
                   ->getResult();
-    }
+    }  
 }

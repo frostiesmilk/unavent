@@ -23,13 +23,14 @@ class LikeRestController extends Controller
     public function postLikePostAction(Request $request){
         
         $postId = $request->request->get('postId');
+        $user = $this->getUser();
         
         $post = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post')->find($postId);
         $em = $this->getDoctrine()->getManager();
         
-        $like = new Likes();
-        $like->setCreatedBy($this->getUser());
-        $post->addLike($like);
+//        $like = new Likes();
+//        $like->setCreatedBy($this->getUser());
+//        $post->addLike($like);
 
         // manage Notification
         if ($post->getCircle() != null){
@@ -46,16 +47,27 @@ class LikeRestController extends Controller
         // preparing response
         $view = new ResponseView();
                 
-        try{
-            $em->persist($like);
-            $em->persist($post);
-            $em->flush();
-            $repsData = array("likeId" => $like->getId());
+        $likedAdded = $this->container->get('flowber_like.like')->addLikePost($post, $user);
+        
+        if($likedAdded){
+            $repsData = array("likeId" => $likedAdded);
             $view->setData($repsData)->setStatusCode(200); // ok
-        } catch (Exception $ex) {
-            $repsData = array("message" => "flush error");
-            $view->setData($ex)->setStatusCode(400); // error
+        }else{
+            $repsData = array("message" => "Error Add Like");
+            $view->setData($repsData)->setStatusCode(400); // error           
         }
+        
+//        try{
+//            $em->persist($like);
+//            $em->persist($post);
+//            $em->flush();
+            
+//            $repsData = array("likeId" => $like->getId());
+//            $view->setData($repsData)->setStatusCode(200); // ok
+//        } catch (Exception $ex) {
+//            $repsData = array("message" => "flush error");
+//            $view->setData($ex)->setStatusCode(400); // error
+//        }
         
         return $view;
     }

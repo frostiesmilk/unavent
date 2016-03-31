@@ -112,21 +112,21 @@ class PostRestController extends Controller
      */
     public function deletePostCustomAction($postId){
         $post = $this->getDoctrine()->getRepository('FlowberPostBundle:Post')->find($postId);
-        $dude = "really ".$postId ;
+        
         // preparing response
         $view = new ResponseView();
         
-        if(!is_object($post)){ return "fuck off";
+        if(!is_object($post)){
             $repsData = array("message" => "post not found");
             $view->setData($repsData)->setStatusCode(400); // error
             return $view;
         }
-        $dude.= "it stinks";
+
         $currentUser = $this->getUser();
         if($currentUser == $post->getCreatedBy()){ // checking if allowed to delete post (by author)
             $post->setDeleted();
             $em = $this->getDoctrine()->getManager();
-            $dude.= "better";
+
             try{
                 $em->persist($post);
                 $em->flush();
@@ -135,9 +135,8 @@ class PostRestController extends Controller
                 $view->setData($repsData)->setStatusCode(400); // error
                 return $view;
             }
-            $dude.="great";
         }
         
-        return $dude;
+        return "Error: Delete Post";
     }
 }
