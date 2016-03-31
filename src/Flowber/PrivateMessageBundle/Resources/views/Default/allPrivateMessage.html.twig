@@ -36,12 +36,20 @@
                         </thead>
                         <tbody>
                             {% for message in messages %}
-                                    <tr id="messageFrom-{{message.messageId}}" class="messages-stream-element" data-href="{{ path('flowber_privatemessage_one_received_homepage', {'id': message.messageId}) }}">
+                                {% if message.is == 'sent' %}
+                                    <tr id="messageFrom-{{message.messageId}}" class="messages-stream-element" data-href="{{ path('mp_sent', {'id': message.messageId}) }}">
+                                {% elseif  message.is == 'sentDeleted' %} 
+                                    <tr id="messageFrom-{{message.messageId}}" class="messages-stream-element" data-href="{{ path('mp_sentDeleted', {'id': message.messageId}) }}">
+                                {% elseif message.is == 'received' %}
+                                    <tr id="messageFrom-{{message.receiverMessageId}}" class="messages-stream-element" data-href="{{ path('mp_received', {'id': message.messageId}) }}">
+                               {% elseif message.is == 'receivedDeleted'%}
+                                    <tr id="messageFrom-{{message.receiverMessageId}}" class="messages-stream-element" data-href="{{ path('mp_receivedDeleted', {'id': message.messageId}) }}">
+                                {% endif %} 
                                         <td class="col-md-2 messages-stream-element-clickable">
                                             {% if message.statut == '2'%}  
-                                                <span id="messageFromTitle-{{message.messageId}}" class="bold messages-stream-element-author">
+                                                <span id="messageFromTitle-{{message.receiverMessageId}}" class="bold messages-stream-element-author">
                                             {% else %}
-                                                <span id="messageFromTitle-{{message.messageId}}" class="messages-stream-element-author">
+                                                <span id="messageFromTitle-{{message.receiverMessageId}}" class="messages-stream-element-author">
                                             {% endif %}
                                                     {% if message.is == 'sent' or message.is == 'sentDeleted' %} 
                                                         A : {{ message.receiversName }}    
@@ -52,9 +60,9 @@
                                         </td>
                                         <td class="col-md-9 messages-stream-element-clickable">
                                             {% if message.statut == '2'%}  
-                                                <span id="messageFromSubject-{{message.messageId}}" class="bold messages-stream-element-subject">
+                                                <span id="messageFromSubject-{{message.receiverMessageId}}" class="bold messages-stream-element-subject">
                                             {% else %}
-                                                <span id="messageFromSubject-{{message.messageId}}" class="messages-stream-element-subject">
+                                                <span id="messageFromSubject-{{message.receiverMessageId}}" class="messages-stream-element-subject">
                                             {% endif %}
                                                     {{ message.subject }}
                                             </span> 
@@ -67,13 +75,13 @@
                                         </td> 
                                         {% if message.is == 'received' %} 
                                             <td class="col-md-2">
-                                                <form id="deleteReceivedMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletereceviedmessage', {'id': message.messageId}) }}">
-                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                <form id="deleteReceivedMessage" class="{{message.receiverMessageId}}" method="post" action="{{ path('api_post_deletereceviedmessage', {'id': message.receiverMessageId}) }}">
+                                                    <button id="messageFromDelete-{{message.receiverMessageId}}" type="submit" class="btn btn-default btn-xs" title="Supprimer le message"> 
                                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                     </button>
                                                 </form>
-                                                <form id="readNotRead" class="{{message.messageId}}" method="post" action="{{ path('api_post_read', {'id': message.messageId}) }}">
-                                                    <button id="messageFromSubmit-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
+                                                <form id="readNotRead" class="{{message.receiverMessageId}}" method="post" action="{{ path('api_post_read', {'id': message.receiverMessageId}) }}">
+                                                    <button id="messageFromSubmit-{{message.receiverMessageId}}" type="submit" class="btn btn-default btn-xs" title="Marquer comme Lu ou Non Lu"> 
                                                         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                                                     </button>
                                                 </form>
@@ -81,20 +89,20 @@
                                         {% elseif message.is == 'sent' %}
                                             <td class="col-md-2">
                                                 <form id="deleteSentMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletesentmessage', {'id': message.messageId}) }}">
-                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" title="Supprimer le message"> 
                                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                     </button>
                                                 </form>
                                             </td>                                        
                                         {% elseif message.is == 'sentDeleted' %}
                                             <td class="col-md-2">
-                                                <form id="deleteSentDeletedMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletesentdeletedmessage', {'id': message.messageId}) }}">
-                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                <form id="deleteDeletedMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletesentdeletedmessage', {'id': message.messageId}) }}">
+                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" title="Supprimer le message"> 
                                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                     </button>
                                                 </form>
                                                 <form id="CancelSentDeleted" class="{{message.messageId}}" method="post" action="{{ path('api_post_cancelsentdeleted', {'id': message.messageId}) }}">
-                                                    <button id="messageFromSubmit-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
+                                                    <button id="messageFromSubmit-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" title="Marquer comme Lu ou Non Lu"> 
                                                         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                                                     </button>
                                                 </form>
@@ -102,13 +110,13 @@
                                         {% elseif message.is == 'receivedDeleted' %}
                                             <td class="col-md-2">
 
-                                                <form id="deleteReceivedDeletedMessage" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletereceiveddeletedmessage', {'id': message.messageId}) }}">
-                                                    <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer le message"> 
+                                                <form id="deleteDeletedMessage" class="{{message.receiverMessageId}}" method="post" action="{{ path('api_post_deletereceiveddeletedmessage', {'id': message.receiverMessageId}) }}">
+                                                    <button id="messageFromDelete-{{message.receiverMessageId}}" type="submit" class="btn btn-default btn-xs" title="Supprimer le message"> 
                                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                     </button>
                                                 </form>
-                                                <form id="CancelReceivedDeleted" class="{{message.messageId}}" method="post" action="{{ path('api_post_cancelreceiveddeleted', {'id': message.messageId}) }}">
-                                                    <button id="messageFromSubmit-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Marquer comme Lu ou Non Lu"> 
+                                                <form id="CancelReceivedDeleted" class="{{message.receiverMessageId}}" method="post" action="{{ path('api_post_cancelreceiveddeleted', {'id': message.receiverMessageId}) }}">
+                                                    <button id="messageFromSubmit-{{message.receiverMessageId}}" type="submit" class="btn btn-default btn-xs" title="Marquer comme Lu ou Non Lu"> 
                                                         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                                                     </button>
                                                 </form>                                            

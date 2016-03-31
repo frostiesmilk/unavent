@@ -16,7 +16,7 @@ class PrivateMessageRepository extends EntityRepository
 {
     public function getReceivedMessages($circleId){
         $sql = "SELECT message.subject, message.message, message.message_from_id, "
-                . "message.id, message.statut, message.creationDate "
+                . "message.message_id, message.statut, message.creationDate "
                 . "FROM (SELECT b.subject, a.id, b.message, b.message_from_id, b.creationDate, "
                 . "a.message_id, a.receiver, a.statut FROM receiver a, private_message b "
                 . "WHERE a.receiver = ".$circleId." AND a.message_id=b.id ) message "
@@ -28,13 +28,32 @@ class PrivateMessageRepository extends EntityRepository
         $rsm->addScalarResult('subject', 'subject');
         $rsm->addScalarResult('message', 'message');
         $rsm->addScalarResult('statut', 'statut');
-        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_id', 'messageId');
         $rsm->addScalarResult('message_from_id', 'circleFromId');
         $rsm->addScalarResult('creationDate', 'creationDate');
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }
+    
+    public function getOneReceivedMessage($id){
+        $sql = "SELECT message.subject, message.message, message.message_from_id, "
+                . "message.id, message.statut, message.creationDate "
+                . "FROM  private_message message "
+                . "WHERE id = ".$id." "
+                . "ORDER BY message.creationDate desc";
 
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subject', 'subject');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_from_id', 'circleFromId');
+        $rsm->addScalarResult('creationDate', 'creationDate');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getSingleResult();
+    }
+    
     public function getCountReceivedMessages($circleId){
         $sql = "SELECT "
                 . "message.id "
@@ -52,7 +71,7 @@ class PrivateMessageRepository extends EntityRepository
     
     public function getReceivedDeletedMessages($circleId){
         $sql = "SELECT message.subject, message.message, message.message_from_id, "
-                . "message.id, message.statut, message.creationDate "
+                . "message.message_id, message.statut, message.creationDate "
                 . "FROM (SELECT b.subject, a.id, b.message, b.message_from_id, b.creationDate, "
                 . "a.message_id, a.receiver, a.statut FROM receiver a, private_message b "
                 . "WHERE a.receiver = ".$circleId." AND a.message_id=b.id ) message "
@@ -64,7 +83,7 @@ class PrivateMessageRepository extends EntityRepository
         $rsm->addScalarResult('subject', 'subject');
         $rsm->addScalarResult('message', 'message');
         $rsm->addScalarResult('statut', 'statut');
-        $rsm->addScalarResult('id', 'messageId');
+        $rsm->addScalarResult('message_id', 'messageId');
         $rsm->addScalarResult('message_from_id', 'circleFromId');
         $rsm->addScalarResult('creationDate', 'creationDate');
         
@@ -143,6 +162,7 @@ class PrivateMessageRepository extends EntityRepository
         
         return count($this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult());
     }    
+    
     public function getReceiversMessages($messageId){
         $sql = "SELECT receiver FROM receiver WHERE message_id = ".$messageId;
         
@@ -152,6 +172,14 @@ class PrivateMessageRepository extends EntityRepository
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }  
     
+     public function getReceiversId($messageId, $receiver){
+        $sql = "SELECT id FROM receiver WHERE message_id = ".$messageId ." and receiver = ".$receiver;
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('id', 'receiverMessageId');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getSingleResult();
+    }     
     /*
      * Récupère les messages reçus non lus
      * return entity PrivateMessage

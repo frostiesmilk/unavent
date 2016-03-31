@@ -48,6 +48,29 @@ $("form[name='send-private-message-with-title-form']").on("submit", function(e){
     });
 });
 
+$("form[name='send-private-message-with-title-form-received']").on("submit", function(e){
+    console.log("petite marie");
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+        alert("Private Message successfuly sent");
+        incrementSentMessage();
+    });
+});
+
 $("body").on("submit","#send-wink", function(e){
     e.preventDefault(); // empêcher le comportement normal: recharger la page
     var $this = $(this); // L'objet jQuery du formulaire
@@ -95,6 +118,34 @@ $("body").on("submit","#readNotRead", function(e){
             document.getElementById("messageFromSubject-"+$this.attr('class')).className = "messages-stream-element-subject";
         } else {
             document.getElementById("messageFromSubject-"+$this.attr('class')).className="bold messages-stream-element-subject";
+        }
+        document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=false;
+    });
+});
+
+$("body").on("submit","#readNotReadReceived", function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=true;
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+        if (document.getElementById("messageFromSubmit-"+$this.attr('class')).title == "marquer comme non lu" ){
+            document.getElementById("spanmessageFromSubmit-"+$this.attr('class')).className="glyphicon glyphicon-eye-close";
+            document.getElementById("messageFromSubmit-"+$this.attr('class')).title="marquer comme lu";     
+        } else {
+            document.getElementById("spanmessageFromSubmit-"+$this.attr('class')).className="glyphicon glyphicon-eye-open";
+            document.getElementById("messageFromSubmit-"+$this.attr('class')).title="marquer comme non lu";               
         }
         document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=false;
     });
@@ -165,8 +216,77 @@ $("body").on("submit","#deleteReceivedMessage", function(e){
     });
 });
 
+$("body").on("submit","#deleteOneReceivedMessage", function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
+    document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=true;
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+            incrementDeletedMessage();
+            decrementReceivedMessage();
+            document.getElementById("messageFromDelete-"+$this.attr('class')).innerHTML = "message supprimé";
+    });
+});
+$("body").on("submit","#deleteOneReceivedDeletedMessage", function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
+    document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=true;
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+            decrementDeletedMessage();
+            document.getElementById("messageFromDelete-"+$this.attr('class')).innerHTML = "message supprimé";
+    });
+});
 
+// UTILISE
+$("body").on("submit","#deleteDeletedMessage", function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+            decrementDeletedMessage();
+    });
+    document.getElementById("messageFromDelete-"+$this.attr('class')).innerHTML = "message supprimé";
+    document.getElementById("messageFrom-"+$this.attr('class')).className = "messages-stream-element collapse";
+});
 
+// UTILISE
 $("body").on("submit","#deleteSentMessage", function(e){
     e.preventDefault(); // empêcher le comportement normal: recharger la page
     var $this = $(this); // L'objet jQuery du formulaire
@@ -186,11 +306,34 @@ $("body").on("submit","#deleteSentMessage", function(e){
         $this.trigger("reset"); // on reset le form
             incrementDeletedMessage();
             decrementSentMessage();
-            document.getElementById("messageFrom-"+$this.attr('class')).className = "messages-stream-element collapse";
+    });
+    document.getElementById("messageFrom-"+$this.attr('class')).className = "messages-stream-element collapse";
+});
+// UTILISE
+$("body").on("submit","#deleteOneSentDeletedMessage", function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
+    document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=true;
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+            decrementDeletedMessage();
+            document.getElementById("messageFromDelete-"+$this.attr('class')).innerHTML = "message supprimé";
     });
 });
-
-$("body").on("submit","#deleteSentDeletedMessage", function(e){
+// UTILISE
+$("body").on("submit","#deleteOneSentMessage", function(e){
     e.preventDefault(); // empêcher le comportement normal: recharger la page
     var $this = $(this); // L'objet jQuery du formulaire
     document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
@@ -207,33 +350,11 @@ $("body").on("submit","#deleteSentDeletedMessage", function(e){
 //        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
-            decrementDeletedMessage();
-            document.getElementById("messageFrom-"+$this.attr('class')).className = "messages-stream-element collapse";
+            incrementDeletedMessage();
+            decrementSentMessage();
+            document.getElementById("messageFromDelete-"+$this.attr('class')).innerHTML = "message supprimé";
     });
 });
-
-$("body").on("submit","#deleteReceivedDeletedMessage", function(e){
-    e.preventDefault(); // empêcher le comportement normal: recharger la page
-    var $this = $(this); // L'objet jQuery du formulaire
-    document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
-    $.ajax({
-        url: $this.attr('action'),
-        type: $this.attr('method'),
-        data: $this.serialize(),
-        error: function(data){
-            alert("error");
-        }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
-    }).done(function(data, textStatus, jqXHR){ // like success
-        $this.trigger("reset"); // on reset le form
-            decrementDeletedMessage();
-            document.getElementById("messageFrom-"+$this.attr('class')).className = "messages-stream-element collapse";
-    });
-});
-
 $("body").on("submit","#CancelReceivedDeleted", function(e){
     e.preventDefault(); // empêcher le comportement normal: recharger la page
     var $this = $(this); // L'objet jQuery du formulaire
@@ -277,5 +398,53 @@ $("body").on("submit","#CancelSentDeleted", function(e){
             decrementDeletedMessage();
             incrementSentMessage();
             document.getElementById("messageFrom-"+$this.attr('class')).className = "messages-stream-element collapse";
+    });
+});
+
+$("body").on("submit","#CancelOneSentDeleted", function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=true;
+    document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+            decrementDeletedMessage();
+            incrementSentMessage();
+            document.getElementById("messageFromSubmit-"+$this.attr('class')).innerHTML = "message dans 'envoyé'";
+    });
+});
+
+$("body").on("submit","#CancelOneReceivedDeleted", function(e){
+    e.preventDefault(); // empêcher le comportement normal: recharger la page
+    var $this = $(this); // L'objet jQuery du formulaire
+    document.getElementById("messageFromSubmit-"+$this.attr('class')).disabled=true;
+    document.getElementById("messageFromDelete-"+$this.attr('class')).disabled=true;
+    $.ajax({
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: $this.serialize(),
+        error: function(data){
+            alert("error");
+        }
+//        success: function(data){
+//            $this.trigger("reset"); // on reset le form
+//            alert("Private Message successfuly sent");
+//        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        $this.trigger("reset"); // on reset le form
+            decrementDeletedMessage();
+            incrementReceivedMessage();
+            document.getElementById("messageFromSubmit-"+$this.attr('class')).innerHTML = "message dans 'reçus'";
     });
 });

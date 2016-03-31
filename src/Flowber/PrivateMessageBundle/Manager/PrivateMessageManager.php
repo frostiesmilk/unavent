@@ -35,7 +35,26 @@ class PrivateMessageManager extends BaseManager {
 
         return $messages;
     } 
+    
+    public function getMessageReceivedCompleted($id)
+    {
+        $pmReposit = $this->getPrivateMessageRepository();
+        
+        $message = $pmReposit->getOneReceivedMessage($id);
+        $receivers = $pmReposit->getReceiversMessages($message['messageId']);
+        $message['circleFromTitle'] = $this->cm->getTitle($message['circleFromId']);
+        $message['is'] = 'sent';
 
+        $count2=0;
+        foreach ($receivers as $receiver ){
+            $message['receivers'][$count2]['name']=$this->cm->getTitle($receiver['receiverId']);
+            $message['receivers'][$count2]['id']=$receiver['receiverId'];
+            $count2++;
+        }
+
+        return $message;
+    } 
+    
     public function getMessageSent($circleId)
     {
         $pmReposit = $this->getPrivateMessageRepository();
@@ -64,7 +83,7 @@ class PrivateMessageManager extends BaseManager {
             }
             $count++;
         }
-        
+
         return $messages;
     } 
 

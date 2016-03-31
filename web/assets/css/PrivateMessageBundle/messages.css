@@ -101,6 +101,9 @@ body {
 .form-error-custom span {
   color: #A94442;
 }
+.grey {
+  color: #888;
+}
 .messages-container {
   padding-top: 80px;
 }
@@ -135,11 +138,12 @@ body {
   border-bottom: 1px solid lightgrey;
 }
 .message-show .message-show-details {
-  padding: 10px;
+  padding: 6px;
   border-bottom: 1px solid lightgrey;
+  background-color: #fafafa;
 }
 .message-show .message-show-details .message-show-details-correspondents .message-show-details-correspondents-label {
-  padding-right: 5px;
+  padding-right: 10px;
   font-weight: bold;
   font-size: 11px;
 }
@@ -148,10 +152,17 @@ body {
 }
 .message-show .message-show-content {
   padding: 10px;
-  border-bottom: 1px solid lightgrey;
+  margin-top: 20px;
+  border: 1px solid lightgrey;
+  font-size: 14px;
+}
+.message-show .message-show-reply-title {
+  font-weight: bold;
+  border-top: 1px solid #dedede;
+  padding-top: 10px;
 }
 .message-show .message-show-reply {
-  padding: 10px 10px 20px 10px;
+  padding: 0px 10px 10px 10px;
 }
 .message-show .message-show-reply .message-show-reply-thumbnail {
   background-repeat: no repeat;

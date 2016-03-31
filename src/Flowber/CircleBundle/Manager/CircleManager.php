@@ -144,7 +144,7 @@ class CircleManager extends BaseManager {
             throw new AccessDeniedException('This circle is not defined.');
         } 
         
-        if($circle->getCreatedBy() == $user->getProfile())
+        if($circle->getCreatedBy()->getId() == $user->getProfile()->getId())
             return true;
         else return false;
         

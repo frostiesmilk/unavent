@@ -10,6 +10,10 @@ and open the template in the editor.
 
 @import "../FrontOfficeBundle/frontoffice-common";
 
+.grey {
+    color : #888;
+}
+
 .messages-container{
     padding-top: 80px;
     
@@ -57,11 +61,12 @@ and open the template in the editor.
     }
     
     .message-show-details{
-        padding: 10px;
+        padding: 6px;
         border-bottom: 1px solid lightgrey;
+        background-color: #fafafa;
         .message-show-details-correspondents{
             .message-show-details-correspondents-label{
-                padding-right: 5px;
+                padding-right: 10px;
                 font-weight: bold;
                 font-size: 11px;
             }
@@ -75,11 +80,20 @@ and open the template in the editor.
     
     .message-show-content{
         padding: 10px;
-        border-bottom: 1px solid lightgrey;
+        margin-top : 20px;
+        border : 1px solid lightgrey;
+        font-size: 14px;
     }
     
+    .message-show-reply-title{
+        font-weight: bold;
+        border-top: 1px solid #dedede;
+        padding-top : 10px;
+    }   
+    
     .message-show-reply{
-        padding: 10px 10px 20px 10px;
+        padding: 0px 10px 10px 10px;
+
         .message-show-reply-thumbnail{
             @media (max-width: 768px) { 
                 display: none;

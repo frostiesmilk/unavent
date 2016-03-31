@@ -1,0 +1,95 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/PrivateMessageBundle/messages.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+    <!-- navbar top -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <div class="messages-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 messages-menu">
+                    <div class="list-group messages-menu-list">
+                        <a href="{{path('flowber_privatemessage_received_homepage')}}" class="list-group-item"><span class="badge" id="messageReceveivedNumber">{{number.received}}</span>Messages reçus </a>
+                        <a href="{{path('flowber_privatemessage_sent_homepage')}}" class="list-group-item active"><span class="badge" id="messageSentNumber">{{number.sent}}</span>Messages envoyés</a>
+                        <a href="{{path('flowber_privatemessage_deleted_homepage')}}" class="list-group-item"><span class="badge" id="messageDeletedNumber">{{number.deleted}}</span>Corbeille</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-10 messages-content">
+                    <div class="message-show">
+
+                        <table class="table message-options-bar">
+                            <thead>
+                                <tr>
+                                    <th><a type="button" class="btn btn-default  btn-xs"  data-toggle="tooltip" data-placement="top" title="Retourner à tous les messages" href="{{path('flowber_privatemessage_sent_homepage')}}">
+                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Tous les messages</a>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <div class="container-fluid">
+                            <div class="row message-show-subject">
+                                <div class="col-md-10 col-xs-10">
+                                    <h3 class="message-subject">{{ message.subject }}</h3>       
+                                </div>
+                                <div class="col-md-2 col-xs-1 text-right" > 
+                                    <form id="deleteOneSentMessage" style="margin-top : 5px;" class="{{message.messageId}}" method="post" action="{{ path('api_post_deletesentmessage', {'id': message.messageId}) }}">
+                                        <button id="messageFromDelete-{{message.messageId}}" type="submit" class="btn btn-default btn-xs" title="Supprimer le message"> 
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </button>
+                                    </form>
+                                </div>   
+                            </div>  
+                            <div class="row">
+                                <div class="col-md-12 message-show-details">
+                                    <div class="row message-show-details-correspondents bg-grey">
+                                        <div class="col-md-8 col-xs-12">
+                                            <span class="grey">Envoyé à </span>{% for receiver in message.receivers %}
+                                                    <a href="{{ path('api_get_circle', {'circleId': receiver.id}) }}"> 
+                                                        {{ receiver.name }} 
+                                                    </a>
+                                                {% endfor %}
+                                            <br>
+ 
+                                            <span class="grey">De la part de </span>
+                                            <a href="{{ path('api_get_circle', {'circleId': message.circleFromId}) }}">{{ message.circleFromTitle }}</a>
+                                        </div>
+                                        <div class="col-md-4 col-xs-12 text-right grey">
+                                            <br>
+                                            {{ (message.creationDate)|date("\\l\\e d/m/Y \\à H:i", "Europe/Paris") }} 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom:20px">
+                                <div class="col-md-12 message-show-content">
+                                    <p> {{ message.message }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+   
+    <!-- footer -->                  
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}    
+    <script src="{{ asset('assets/js/PrivateMessageBundle/messages.js') }}"></script>
+    <script src="{{ asset('assets/js/PrivateMessageBundle/sendMessageForm.js') }}"></script>
+
+{% endblock %}
