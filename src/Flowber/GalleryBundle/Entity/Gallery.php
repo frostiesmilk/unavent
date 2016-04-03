@@ -4,12 +4,14 @@ namespace Flowber\GalleryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Flowber\GalleryBundle\Entity\Photo;
 
 /**
  * Gallery
  *
  * @ORM\Table()
  * @ORM\Entity (repositoryClass="Flowber\GalleryBundle\Entity\GalleryRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Gallery
 {
@@ -37,10 +39,18 @@ class Gallery
     private $description;
 
     /**
+     * @var Flowber\GalleryBundle\Entity\Photo
+     * 
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", mappedBy="galleries", cascade={"persist"})
      */
     private $photos;
 
+    /**
+     *
+     * @var ArrayCollection
+     */
+    private $uploadedFiles;
+    
     /**
      * @var \DateTime
      *
@@ -54,9 +64,30 @@ class Gallery
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->uploadedFiles = new ArrayCollection();
         $this->creationDate = new \Datetime();
     }
 
+    /**
+    * @ORM\PreFlush()
+    */
+    public function upload()
+    {
+        foreach($this->uploadedFiles as $uploadedFile)
+        {
+            if ($uploadedFile) {
+                $photo = new Photo();
+                $photo->setFile($uploadedFile);
+                $photo->setExtension($uploadedFile->guessExtension());
+                // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
+                $photo->setAlt($uploadedFile->getClientOriginalName());
+                $this->getPhotos()->add($photo);
+                $photo->addGallery($this);
+                unset($uploadedFile);
+            }
+        }
+    }
+    
     /**
      * Get id
      *
@@ -180,5 +211,20 @@ class Gallery
     public function removePhoto(\Flowber\GalleryBundle\Entity\Photo $photos)
     {
         $this->photos->removeElement($photos);
+    }
+    
+    /**
+     * @return ArrayCollection
+     */
+    public function getUploadedFiles()
+    {
+        return $this->uploadedFiles;
+    }
+    /**
+     * @param ArrayCollection $uploadedFiles
+     */
+    public function setUploadedFiles($uploadedFiles)
+    {
+        $this->uploadedFiles = $uploadedFiles;
     }
 }

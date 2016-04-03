@@ -10,10 +10,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
+use Flowber\PostBundle\Form\PostWithPicturesType;
 //use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
+use Exception;
 
 class PostRestController extends Controller
 {
@@ -86,6 +88,63 @@ class PostRestController extends Controller
         $repsData = array("status"=>"error",'form' => $form);
         
         return $repsData;//$view->setDate($repsData)->setStatusCode(400); // error
+    }
+    
+    /**
+     * Create new post with optional gallery
+     * @param Request $request
+     * @param int $circleId
+     * @return View|array
+     */
+    public function postPostGalleryAction(Request $request, $circleId){
+        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
+
+        if(!is_object($circle)){
+            return array("status"=>400, "message"=>"Circle not found");//$view-($repsData)->setStatusCode(400); // error
+        }
+        
+        $post = new Post();
+        $form = $this->createForm(new PostWithPicturesType(), $post);
+        
+         // if form has been submitted
+        $form->handleRequest($request);
+
+        $postGalleryView = null;
+        if($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $post->setCreatedBy($this->getUser());
+            $post->setCircle($circle);                
+            $em->persist($post);  
+            
+            try{
+                $em->flush();
+                $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($post->getGallery()->getId());
+                $postGalleryView = $this->renderView('FlowberPostBundle:partials:postGallery.html.twig', array('postGallery'=>$postGallery));
+            } catch (Exception $ex) {
+                $repsData = array("status"=>"error" ,"message" => "Post flush failed: ".$ex->getMessage());
+                return $repsData;
+            }
+            
+            // create new comment form
+            $comment = new Comment();
+            $commentForm = $this->createForm(new CommentType, $comment);
+
+            // render view to be sent with response
+            $commentFormView = $this->renderView('FlowberPostBundle:partials:commentForm.html.twig', 
+                    array("commentForm"=>$commentForm->createView()));
+
+            $repsData = array(  "status"=>"success", 
+                                "postId" => $post->getId(), 
+                                "postMessage" => $post->getMessage(),
+                                "postGalleryView" => $postGalleryView,
+                                "datetimeCreated"=> $post->getCreationDate(), 
+                                "commentForm"=>$commentFormView);
+            //$view->setData($repsData)->setStatusCode(200); // ok
+            return $repsData;
+        }
+        
+        $repsData = array("status"=>"error",'form' => $form);        
+        return $repsData;
     }
     
     /**

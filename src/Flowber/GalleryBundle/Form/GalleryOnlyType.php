@@ -5,6 +5,7 @@ namespace Flowber\GalleryBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Flowber\GalleryBundle\Form\PhotoOnlyType;
 
 class GalleryOnlyType extends AbstractType
 {
@@ -15,14 +16,11 @@ class GalleryOnlyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('title')
-//            ->add('description')
-//            ->add('creationDate')
-            ->add('photos', 'file', array(
-                    'multiple' => true, 
+            ->add('uploadedFiles', 'file', array(
+                    'multiple' => true,
                     'data_class' => null,
+                    'required' => false,
                 ));
-//                ->add('photos');
     }
     
     /**

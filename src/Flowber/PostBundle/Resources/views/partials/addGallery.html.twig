@@ -1,17 +1,24 @@
 <div role="tabpanel" class="tab-pane" id="newphoto">
-    <!--<form action="/file-upload" class="dropzone">
-    <div class="fallback">
-      <input name="file" type="file" multiple />
-    </div>
-  </form>-->
-    {{form_start(postWithPicturesForm, {'attr':{'class':'dropzone'}})}}
-    {{form_widget(postWithPicturesForm.message)}}
-    <div class="fallback">
-        {{form_widget(postWithPicturesForm.files)}}
-    </div>
-    
-    <button type="submit">Envoyer</button>
-    
-    {{form_rest(postWithPicturesForm)}}
-    {{form_end(postWithPicturesForm)}}
+    <form onsubmit="return false;" id="generic-new-post-with-gallery" action="{{ path('api_post_post_gallery', { 'circleId': circle.id} ) }}" method="post" {{ form_enctype(postWithPicturesForm) }}>
+
+        {{form_widget(postWithPicturesForm.message, {'attr': {'class':'generic-blog-new-post-content-text'}})}}
+
+        <div class="generic-blog-new-post-footer row">
+            <div class="generic-blog-new-post-footer-actions col-xs-6 text-left">
+                <div class="generic-blog-new-post-footer-actions-upload">
+                    <!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-picture"></span> Ajouter des photos</button>-->
+                    {{form_widget(postWithPicturesForm.gallery.uploadedFiles, {'attr': {'class':'generic-blog-new-post-footer-actions-uploadfield'}})}}
+                </div>
+            </div>
+            <div class="generic-blog-new-post-footer-confirm col-xs-6 text-right">
+                <div id="generic-blog-posts-loader" hidden class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+                <button type="submit" class="btn btn-default btn-red">Envoyer</button>
+            </div>
+        </div>
+
+        {{form_rest(postWithPicturesForm)}}
+    </form>
 </div>

@@ -27,9 +27,9 @@ class Photo
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="extension", type="string", length=255)
      */
-    private $url;
+    private $extension;
 
     /**
      * @var string
@@ -39,7 +39,7 @@ class Photo
     private $alt;
 
     /**
-     * @var string
+     * @var UploadedFile
      *
      * @ORM\Column(name="file", type="string", length=255, nullable=true)
      */
@@ -77,12 +77,12 @@ class Photo
     private $galleries;
     
     /**
-     * Constructor
+     * @param UploadedFile $uploadedFile
      */
-    public function __construct()
+    public function __construct(UploadedFile $uploadedFile = null)
     {
         $this->galleries = new ArrayCollection();
-        $this->creationDate = new \Datetime();
+        $this->creationDate = new \Datetime();      
     }
     
     /**
@@ -93,29 +93,6 @@ class Photo
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     * @return Photo
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 
     /**
@@ -152,12 +129,12 @@ class Photo
         $this->file = $file;
 
         // On vérifie si on avait déjà un fichier pour cette entité
-        if (null !== $this->url) {
+        if (null !== $this->extension) {
             // On sauvegarde l'extension du fichier pour le supprimer plus tard
-            $this->tempFilename = $this->url;
+            $this->tempFilename = $this->extension;
 
-            // On réinitialise les valeurs des attributs url et alt
-            $this->url = null;
+            // On réinitialise les valeurs des attributs extension et alt
+            $this->extension = null;
             $this->alt = null;
         }
     }
@@ -231,7 +208,7 @@ class Photo
 
         // Le nom du fichier est son id, on doit juste stocker également son extension
         // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
-        $this->url = $this->file->guessExtension();
+        $this->extension = $this->file->guessExtension();
 
         // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
         $this->alt = $this->file->getClientOriginalName();
@@ -259,7 +236,7 @@ class Photo
       // On déplace le fichier envoyé dans le répertoire de notre choix
       $this->file->move(
         $this->getUploadRootDir(), // Le répertoire de destination
-        $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
+        $this->id.'.'.$this->extension   // Le nom du fichier à créer, ici « id.extension »
       );
       $this->setFile(null);
     }
@@ -270,7 +247,7 @@ class Photo
     public function preRemoveUpload()
     {
       // On sauvegarde temporairement le nom du fichier, car il dépend de l'id
-      $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->url;
+      $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->extension;
     }
 
     /**
@@ -299,7 +276,7 @@ class Photo
     
     public function getWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getExtension();
     }
 
     /**
@@ -355,5 +332,28 @@ class Photo
     public function getGalleries()
     {
         return $this->galleries;
+    }
+
+    /**
+     * Set extension
+     *
+     * @param string $extension
+     * @return Photo
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+
+        return $this;
+    }
+
+    /**
+     * Get extension
+     *
+     * @return string 
+     */
+    public function getExtension()
+    {
+        return $this->extension;
     }
 }

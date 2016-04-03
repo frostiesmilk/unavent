@@ -11,7 +11,7 @@
 /web/bundles/
 /nbproject/private/
 /web/uploads/*
-/web/assets/css/*
+/web/assets/css/*Bundle/
 
 !nodejs & grunt & bower START
 /.tmp

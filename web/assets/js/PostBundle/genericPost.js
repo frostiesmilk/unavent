@@ -202,6 +202,103 @@ function createNewPost(){
 }
 
 /**
+ * Create new post with gallery
+ */
+function createNewPostWithGallery(){
+    $("#generic-new-post-with-gallery").on("submit", function(e){
+    e.preventDefault();
+    
+    var $this = $(this); // L'objet jQuery du formulaire
+    var formdata = (window.FormData) ? new FormData($this[0]) : null;
+    var data = (formdata !== null) ? formdata : $this.serialize();
+    
+    // display loader
+    $this.find("button[type='submit']").addClass("hidden");// hide submit button
+    $this.find(".spinner").removeAttr("hidden");
+    
+    $.ajax({ 
+        url: $this.attr('action'),
+        type: $this.attr('method'),
+        data: data,
+        contentType: false, // obligatoire pour de l'upload
+        processData: false, // obligatoire pour de l'upload
+        dataType: 'json', // selon le retour attendu
+        error: function(json){
+            // remove loader
+            $this.find(".spinner").attr("hidden", "hidden"); // hide submit button
+            $this.find("[type='submit']").removeClass("hidden");
+            
+            alert("error "+$this.attr('action')+" "+$this.attr('method'));
+        }
+    }).done(function(data, textStatus, jqXHR){ // like success
+        // remove loader
+        $this.find(".spinner").attr("hidden", "hidden"); // hide submit button
+        $this.find("[type='submit']").removeClass("hidden");
+        
+        console.log(data);
+        $this.trigger("reset");
+        
+        var list = document.querySelector("[name='generic-blog-posts-list']");
+        var li = document.createElement("li");
+        li.setAttribute("id", "post-"+data.postId);
+        li.setAttribute("class","generic-blog-post");
+        
+        
+        var htmlPost = document.querySelector("#post-0");
+        console.log("new post list : "+htmlPost.innerHTML);
+        li.innerHTML = htmlPost.innerHTML;
+        
+        var deletePostIdHTML = li.querySelector("[name='delete-post-id']");
+        deletePostIdHTML.setAttribute("value", data.postId);
+        
+        var postDateHTML = li.querySelector(".generic-blog-post-time span");
+        var postDate = data.datetimeCreated;
+        postDateHTML.innerHTML = moment(postDate).format("[le] L [à] LT"); 
+        
+        var postLikeSpanId = li.querySelector(".generic-blog-post-rating");
+        postLikeSpanId.setAttribute("id", "post-rating-display-"+data.postId);
+        
+        var postLikeForm = li.querySelector("form[name='form-like']");
+        postLikeForm.querySelector("input[name='post-id']").setAttribute("value", data.postId);               
+        
+        var messagePostHTML = li.querySelector(".generic-blog-post-content p");
+        messagePostHTML.innerHTML = data.postMessage;
+        
+        // attach gallery to post
+        var postGalleryHTML = document.createElement('div');
+        postGalleryHTML.innerHTML = data.postGalleryView;
+        li.querySelector(".generic-blog-post-content").appendChild(postGalleryHTML);
+        
+        var buttonDeleteLikePost = li.querySelector("button[name='deleteLike']");
+        var buttonDeleteLikePostEnterVal = buttonDeleteLikePost.getAttribute("onmouseenter").replace("tbd", data.postId);
+        var buttonDeleteLikePostLeaveVal = buttonDeleteLikePost.getAttribute("onmouseleave").replace("tbd", data.postId);
+        buttonDeleteLikePost.setAttribute("onmouseenter", buttonDeleteLikePostEnterVal);
+        buttonDeleteLikePost.setAttribute("onmouseleave", buttonDeleteLikePostLeaveVal);
+        buttonDeleteLikePost.querySelector("span").setAttribute("id", "postDeleteLike"+data.postId);
+        
+        var buttonAddLikePost = li.querySelector("button[name='addLike']");
+        var buttonAddLikePostEnterVal = buttonAddLikePost.getAttribute("onmouseenter").replace("tbd", data.postId);
+        var buttonAddLikePostLeaveVal = buttonAddLikePost.getAttribute("onmouseleave").replace("tbd", data.postId);
+        buttonAddLikePost.setAttribute("onmouseenter", buttonAddLikePostEnterVal);
+        buttonAddLikePost.setAttribute("onmouseleave", buttonAddLikePostLeaveVal);
+        buttonAddLikePost.querySelector("span").setAttribute("id", "postLike"+data.postId);
+        
+        var postComments = li.querySelector("#comments-for-post-0");
+        postComments.setAttribute("id", "comments-for-post-"+data.postId);
+        
+        var postCommentForm = li.querySelector("form[name='form-new-comment']");
+        postCommentForm.setAttribute("action", Routing.generate("api_post_comment", {postId: data.postId}));
+        postCommentForm.querySelector("input[name='post-id']").setAttribute("value", data.postId);
+        
+        var PostCommentFormWidget = li.querySelector("div.generic-blog-post-new-comment-field");
+        PostCommentFormWidget.innerHTML = data.commentForm;
+        
+        list.insertBefore(li, list.firstChild);        
+    });
+});
+}
+
+/**
  * Create new comment
  */
 function newCommentSubmit(){
@@ -330,6 +427,7 @@ $(function() {
     submitCommentDelete();
     //updateLikeDisplay;
     createNewPost();
+    createNewPostWithGallery();
     newCommentSubmit();
     pressLikeButton();
 });

@@ -122,7 +122,7 @@
                             </span>
                         </div>
 
-                        <div class="media-right media-middle generic-post-header-actions">
+                        <div class="media-right generic-post-header-actions">
                             {% set userLike = 0 %}
 
                             {% if (post.likes|length >= 1) %}
@@ -151,8 +151,14 @@
                 </div>
                 <div class="generic-blog-post-content">
                     <p>{{post.message}}</p>
-                    {% if (post.circle != null) %}
-                        il y a un cercle
+                    
+                    {% if post.gallery and post.gallery.photos|length > 0 %}
+                        
+                    <div class="generic-blog-post-content-gallery row">
+                        {% for picture in post.gallery.photos %}
+                        <div class="col-xs-4 generic-blog-post-content-gallery-element" style="background-image:url({{asset(picture.getWebPath())}}); height:150px; width: 150px;"></div>
+                        {% endfor %}
+                    </div>
                     {% endif %}
                 </div>
                 <ul id="comments-for-post-{{post.id}}" class="media-list generic-blog-post-comments">
