@@ -10,7 +10,7 @@
 /vendor/
 /web/bundles/
 /nbproject/private/
-/web/uploads/*
+/web/uploads/
 /web/assets/css/*Bundle/
 
 !nodejs & grunt & bower START
