@@ -27,6 +27,7 @@ class GroupController extends Controller
         $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId);
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
+        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
         $posts = $postRepository->getPost($circleId);   
 
         //preparing new form for a post
@@ -34,7 +35,7 @@ class GroupController extends Controller
         $postwithEvent = new Post();
         $postWithPictures = new Post();
         $postForm = $this->createForm(new PostType(), $post);
-        $postWithPicturesForm = $this->createForm(new PostWithPicturesType, $postWithPictures);
+        $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);
         $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
         
         // post gallery upload
@@ -47,19 +48,9 @@ class GroupController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             if($postWithPicturesForm->isValid()){
-                $postGallery = new Gallery();
+                $postWithPictures->setCreatedBy($this->getUser());
+                $postWithPictures->setCircle($circleRepository->find($circleId));
                 
-                $files = $postWithPicturesForm->get('files')->getData();
-                foreach($files as $file)
-                {
-                    $file->preUpload();
-                    $file->upload();
-                    $file->addGallery($postGallery);
-                    
-                    $em->persist($file);                    
-                }
-                
-                $postWithPictures->setGallery($postGallery);
                 $em->persist($postWithPictures);
                 
                 try{
