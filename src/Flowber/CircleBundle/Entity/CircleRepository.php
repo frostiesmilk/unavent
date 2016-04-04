@@ -3,6 +3,7 @@
 namespace Flowber\CircleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * CircleRepository
@@ -12,4 +13,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class CircleRepository extends EntityRepository
 {
+    public function hasSentRequest($user, $circle){       
+        $query = $this->_em->createQuery(''
+                . 'SELECT 1 '
+                . 'FROM FlowberCircleBundle:Request request '
+                . 'WHERE request.sender = :user ' 
+                . 'AND request.circle = :circle '
+                . 'AND request.statut = :statut');
+        $query->setParameter('user', $user);
+        $query->setParameter('circle', $circle);
+        $query->setParameter('statut', "sent");
+        
+        return count($query->getResult());
+    }
+    
+    public function ismember($user, $circle){  
+        $sql = "SELECT a.circle_id "
+                . "FROM subscribers a "
+                . "WHERE a.circle_id = ".$circle." AND a.subscriber_id=".$user." AND a.role='member' ";
+       
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'requestId');
+
+        return count($this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult());   
+    }
+   
 }

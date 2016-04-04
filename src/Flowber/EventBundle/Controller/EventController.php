@@ -21,7 +21,7 @@ class EventController extends Controller
     {  
         $user=$this->getUser();  
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($circleId);
-        $isCreator = $this->container->get('flowber_event.event')->isCreator($user, $circleId);
+        $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
 
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, new PrivateMessage);
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
@@ -42,7 +42,7 @@ class EventController extends Controller
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
-                'isCreator' => $isCreator,
+                'role' => $role,
                 'circle' => $eventInfo,
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),

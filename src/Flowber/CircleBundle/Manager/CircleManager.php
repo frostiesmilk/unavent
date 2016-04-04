@@ -29,6 +29,20 @@ class CircleManager extends BaseManager {
         
         return $circle;
     } 
+     
+    public function getClass($id)
+    {
+        $circle = $this->getCircleRepository()->find($id);
+
+        if (!is_object($circle)) {
+            throw new AccessDeniedException('This event is not defined.');
+        }  
+        
+        $name = explode('\\', get_class($circle));
+        $circleClassName = strtolower(end($name));  
+        
+        return $circleClassName;
+    } 
     
     public function getProfilePicture($circle)
     {
@@ -132,6 +146,44 @@ class CircleManager extends BaseManager {
      
         return $circleInfos;
     }   
+
+    public function getRequestInfos($circle)
+    {
+       $requestInfos = $this->getRequestRepository()->getInfosRequest($circle);
+       
+       $count=0;
+        foreach ($requestInfos as $request ){
+            $requestInfos[$count]['senderName']=$this->getTitle(intval($requestInfos[$count]['senderId']));
+            $requestInfos[$count]['senderPic']=$this->getProfilePicture(intval($requestInfos[$count]['senderId']));
+            $requestInfos[$count]['circleName']=$this->getTitle(intval($requestInfos[$count]['circleId']));
+            $requestInfos[$count]['circleClass']=$this->getClass(intval($requestInfos[$count]['circleId']));
+            $count++;
+        }
+        return $requestInfos;
+    }  
+    
+    public function getRequest($requestId)
+    {
+       $request = $this->getRequestRepository()->find($requestId);
+
+        return $request;
+    }  
+    
+    public function getRequestWithCircleUser($circleId, $currentUser)
+    {
+       $request = $this->getRequestRepository()->getRequestWithCircleUser($circleId, $currentUser);
+
+        return $request;
+    }  
+    
+    public function getSubscriptionWithCircleUser($circleId, $currentUser)
+    {
+        $circle = $this->getCircle($circleId);    
+        
+        $request = $this->getRequestRepository()->getSubscriptionWithCircleUser($circle, $currentUser);
+
+        return $request;
+    }  
     
     public function isCreator($user, $circle)
     {
@@ -149,11 +201,27 @@ class CircleManager extends BaseManager {
         else return false;
         
         return $isCreator;
-    }    
+    } 
+    
+    public function getRole($user, $circle)
+    {
+        if ($this->isCreator($user, $circle) == true){
+            return "creator";
+        } else if ($this->getCircleRepository()->ismember($user->getProfile()->getId(), $circle) == 1){
+            return "member";
+        } else if ($this->getCircleRepository()->hasSentRequest($user->getProfile(), $circle) == 1){
+            return "requestSent";
+        }
+        return "no";
+    }  
     
     public function getCircleRepository()
     {
         return $this->em->getRepository('FlowberCircleBundle:Circle');
     }  
-    
+     
+    public function getRequestRepository()
+    {
+        return $this->em->getRepository('FlowberCircleBundle:Request');
+    }     
 }

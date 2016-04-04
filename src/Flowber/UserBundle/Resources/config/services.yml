@@ -1,4 +1,0 @@
-services:
-    flowber_profile.profile:
-        class: Flowber\UserBundle\Entity\FriendshipManager
-        arguments: [@doctrine.orm.entity_manager] 

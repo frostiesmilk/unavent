@@ -87,6 +87,7 @@ body {
 }
 .btn-red:hover {
   background-color: #BF493D;
+  color: white;
 }
 /* Forms */
 .form-error-custom {
@@ -120,6 +121,9 @@ body {
 .user-profile .user-profile-resume .user-profile-element {
   padding-top: 50px;
   padding-bottom: 50px;
+}
+.user-profile .user-profile-resume .user-profile-element .user-profile-element-title {
+  margin-top: inherit;
 }
 .user-profile .user-profile-resume .user-profile-interest-title {
   margin-top: 0px;
@@ -391,4 +395,3 @@ body {
   overflow: auto;
   color: #333;
 }
-/*# sourceMappingURL=profile.css.map */

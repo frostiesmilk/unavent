@@ -1,0 +1,56 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAddSubscriber"  aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabelSR"></h4>
+      </div>
+      <div class="modal-footer" >
+        <form id="SendRequest" method="post" action="{{ path('api_post_sendrequest', {'circleId': circle.id}) }}" style="display:inline">
+            <button type="submit" id="validateRequestSR" class="btn btn-default" title="envoyer une demande"> 
+                oui
+            </button>
+        </form>
+        <button type="button" id="refuseRequestSR" class="btn btn-primary" data-dismiss="modal" style="display:inline">Non</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalDeleteRequest"  aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabelDR"></h4>
+     </div>
+      <div class="modal-footer" >
+        <form id="DeleteRequest" method="post" action="{{ path('api_post_deleterequest', {'circleId': circle.id}) }}" style="display:inline">
+            <button type="submit" id="validateRequestDR" class="btn btn-default" title="envoyer une demande"> 
+                oui
+            </button>
+        </form>
+        <button type="button" id="refuseRequestDR" class="btn btn-primary" data-dismiss="modal" style="display:inline">Non</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalUnsubscribe"  aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabelU"></h4>
+      </div>
+      <div class="modal-footer" >
+        <form id="Unsubscribe" method="post" action="{{ path('api_post_unsubscribe', {'circleId': circle.id}) }}" style="display:inline">
+            <button type="submit" id="validateRequestU" class="btn btn-default" title="envoyer une demande"> 
+                oui
+            </button>
+        </form>
+        <button type="button" id="refuseRequestU" class="btn btn-primary" data-dismiss="modal" style="display:inline">Non</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

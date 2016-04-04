@@ -49,7 +49,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td><p class="event-details-description">{% if circle.description is not null %}{{ circle.description }}{% else %}Aucune description{% endif %}</p></td>
                     </tr>
-                    {% if isCreator == false %}
+                    {% if role == "creator" %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>

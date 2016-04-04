@@ -1,1 +1,3 @@
-
+flowber_request:
+    path:     /requete
+    defaults: { _controller: FlowberCircleBundle:Circle:getRequestPage }
