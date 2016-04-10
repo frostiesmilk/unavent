@@ -118,13 +118,14 @@ class PostRestController extends Controller
             
             try{
                 $em->flush();
-                $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($post->getGallery()->getId());
-                $postGalleryView = $this->renderView('FlowberPostBundle:partials:postGallery.html.twig', array('postGallery'=>$postGallery));
             } catch (Exception $ex) {
                 $repsData = array("status"=>"error" ,"message" => "Post flush failed: ".$ex->getMessage());
                 return $repsData;
             }
             
+//            $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($post->getGallery()->getId());
+            $postGalleryView = $this->createPostGalleryView($post->getGallery()->getId());//$this->renderView('FlowberPostBundle:partials:postGallery.html.twig', array('postGallery'=>$postGallery));
+          
             // create new comment form
             $comment = new Comment();
             $commentForm = $this->createForm(new CommentType, $comment);
@@ -147,6 +148,12 @@ class PostRestController extends Controller
         return $repsData;
     }
     
+    public function createPostGalleryView($galleryId){
+        $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
+        return $this->renderView('FlowberPostBundle:partials:postGallery.html.twig', array('postGallery'=>$postGallery));
+    }
+
+
     /**
      * 
      * @param type $postId

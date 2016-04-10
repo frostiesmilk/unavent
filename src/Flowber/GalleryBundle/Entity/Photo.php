@@ -25,6 +25,13 @@ class Photo
     private $id;
 
     /**
+     *
+     * @var string
+     * @ORM\Column(name="path", type="string", length=255, nullable=true)
+     */
+    private $path;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="extension", type="string", length=255)
@@ -40,8 +47,6 @@ class Photo
 
     /**
      * @var UploadedFile
-     *
-     * @ORM\Column(name="file", type="string", length=255, nullable=true)
      */
     private $file;
 
@@ -59,6 +64,13 @@ class Photo
      */
     private $description;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="size", type="integer", nullable=true)
+     */
+    private $size;    
+    
     /**
      * @var \DateTime
      *
@@ -79,10 +91,24 @@ class Photo
     /**
      * @param UploadedFile $uploadedFile
      */
-    public function __construct(UploadedFile $uploadedFile = null)
+    public function __construct()
     {
         $this->galleries = new ArrayCollection();
-        $this->creationDate = new \Datetime();      
+        $this->creationDate = new \Datetime();
+    }
+    
+    /**
+    * @param UploadedFile $uploadedFile
+    */
+    public function setTheFile(UploadedFile $uploadedFile)
+    {
+        $path = sha1(uniqid(mt_rand(), true)).'.'.$uploadedFile->guessExtension();
+        $this->setExtension($uploadedFile->guessExtension());
+        $this->setPath($path);
+        $this->setSize($uploadedFile->getClientSize());
+        $this->setAlt($uploadedFile->getClientOriginalName());
+
+        $uploadedFile->move($this->getUploadRootDir(), $path);
     }
     
     /**
@@ -127,13 +153,13 @@ class Photo
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
-
-        // On vérifie si on avait déjà un fichier pour cette entité
-        if (null !== $this->extension) {
-            // On sauvegarde l'extension du fichier pour le supprimer plus tard
-            $this->tempFilename = $this->extension;
-
-            // On réinitialise les valeurs des attributs extension et alt
+        // check if we have an old image path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->tempFilename = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
             $this->extension = null;
             $this->alt = null;
         }
@@ -201,18 +227,14 @@ class Photo
     */
    public function preUpload()
    {
-        // Si jamais il n'y a pas de fichier (champ facultatif)
-        if (null === $this->file) {
-            return;
+        if (null !== $this->getFile()) {
+            // do whatever you want to generate a unique name
+            $filename = sha1(uniqid(mt_rand(), true));
+            $this->alt = $this->file->getClientOriginalName();
+            $this->extension = $this->getFile()->guessExtension();
+            $this->path = $filename.'.'.$this->getFile()->guessExtension();
         }
-
-        // Le nom du fichier est son id, on doit juste stocker également son extension
-        // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
-        $this->extension = $this->file->guessExtension();
-
-        // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
-        $this->alt = $this->file->getClientOriginalName();
-    }  
+   }  
         
     /**
      * @ORM\PostPersist()
@@ -220,25 +242,23 @@ class Photo
      */
     public function upload()
     {
-      // Si jamais il n'y a pas de fichier (champ facultatif)
-      if (null === $this->file) {
-        return;
-      }
-
-      // Si on avait un ancien fichier, on le supprime
-      if (null !== $this->tempFilename) {
-        $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
-        if (file_exists($oldFile)) {
-          unlink($oldFile);
+        if (null === $this->getFile()) {
+            return;
         }
-      }
 
-      // On déplace le fichier envoyé dans le répertoire de notre choix
-      $this->file->move(
-        $this->getUploadRootDir(), // Le répertoire de destination
-        $this->id.'.'.$this->extension   // Le nom du fichier à créer, ici « id.extension »
-      );
-      $this->setFile(null);
+        // if there is an error when moving the file, an exception will
+        // be automatically thrown by move(). This will properly prevent
+        // the entity from being persisted to the database on error
+        $this->getFile()->move($this->getUploadRootDir(), $this->path);
+
+        // check if we have an old image
+        if (isset($this->tempFilename)) {
+            // delete the old image
+            unlink($this->getUploadRootDir().'/'.$this->tempFilename);
+            // clear the temp image path
+            $this->tempFilename = null;
+        }
+        $this->file = null;
     }
 
     /**
@@ -276,7 +296,7 @@ class Photo
     
     public function getWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getExtension();
+        return $this->getUploadDir().'/'.$this->getPath();//.$this->getId().'.'.$this->getExtension();
     }
 
     /**
@@ -355,5 +375,51 @@ class Photo
     public function getExtension()
     {
         return $this->extension;
+    }
+
+    /**
+     * Set size
+     *
+     * @param integer $size
+     * @return Photo
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return integer 
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Photo
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

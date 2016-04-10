@@ -27,9 +27,7 @@ class GroupController extends Controller
         $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId);
         $isCreator = $this->container->get('flowber_circle.circle')->isCreator($user, $circleId);
                 
-        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
-        $posts = $postRepository->getPost($circleId);   
+        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');           
         
         //preparing new form for a post
         $post = new Post();
@@ -37,31 +35,9 @@ class GroupController extends Controller
         $postWithPictures = new Post();
         $postForm = $this->createForm(new PostType(), $post);
         $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);
-        $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);
+        $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);        
         
-        // post gallery upload
-        $request = $this->get('request');
-        
-        // if form has been submitted
-        if ($request->getMethod() == 'POST') { 
-            $postWithPicturesForm->handleRequest($request);
-            
-            $em = $this->getDoctrine()->getManager();
-            
-            if($postWithPicturesForm->isValid()){
-                $postWithPictures->setCreatedBy($this->getUser());
-                $postWithPictures->setCircle($circleRepository->find($circleId));
-                
-                $em->persist($postWithPictures);
-                
-                try{
-                    $em->flush();
-                } catch (Exception $ex) {
-                    
-                }
-                
-            }
-        }
+        $posts = $postRepository->getPost($circleId);
         
         // forms for comments
         $commentsForms = array();
@@ -77,7 +53,7 @@ class GroupController extends Controller
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, $mailToCreator);
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
 
-//        // user
+        // user
         $userInfos = array( "id"        => $user->getId(),
                             "firstname" =>  $user->getFirstname(),
                             "surname"   =>  $user->getSurname(),

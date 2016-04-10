@@ -77,10 +77,7 @@ class Gallery
         {
             if ($uploadedFile) {
                 $photo = new Photo();
-                $photo->setFile($uploadedFile);
-                $photo->setExtension($uploadedFile->guessExtension());
-                // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
-                $photo->setAlt($uploadedFile->getClientOriginalName());
+                $photo->setTheFile($uploadedFile);                
                 $this->getPhotos()->add($photo);
                 $photo->addGallery($this);
                 unset($uploadedFile);
