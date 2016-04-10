@@ -89,7 +89,7 @@ class ProfileController extends Controller
 //                $em->persist($profile);
 //                $em->flush();
                 // all good, back to profile page
-                return $this->redirect($this->generateUrl('flowber_profile_current_user'));
+                return $this->redirect($this->generateUrl('api_get_circle', array('circleId' => $circleId)));
             }
         }
   
@@ -97,7 +97,7 @@ class ProfileController extends Controller
                 array('circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
                     'profileForm' => $profileForm->createView(),
                     'userForm' => $userForm->createView(),
-                    'isCreator'=> false,
+                    'role'=> 'no',
                     'profilePictureForm'=>$profilePictureForm->createView(),
                     'coverPictureForm'=>$coverPictureForm->createView()));
     }
@@ -136,25 +136,8 @@ class ProfileController extends Controller
         $currentUser = $this->getUser();
         $circleInfos = $this->container->get('flowber_profile.profile')->getProfileInfos($circleId);
         $circleUser = $this->container->get('flowber_profile.profile')->getUser($circleId);        
-        $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($circleUser);
+        $role = $this->container->get('flowber_circle.circle')->getRole($currentUser, $circleUser->getProfile()->getId());
 
-        // Si on veut afficher son profil
-        if ($currentUser == $circleUser) { $isCurrent = true; }
-        else { $isCurrent = false; }
-                     
-        $friendshipReposit = $this->container->get('flowber_profile.profile')->getFriendshipRepository();   
-        $isFriend = $friendshipReposit->isFriendWithMe($circleUser, $this->getUser());
-        $requestFriend = $friendshipReposit->hasSentAFriendRequest($circleUser, $this->getUser());
-        
-        if ($requestFriend != 0){
-            $this->addFlash( 'addFriend',$circleUser->getFirstName()." ". $circleUser->getSurName()." a envoyé une demande d'ami.");
-        } 
-        if ($friendshipReposit->hasSentAFriendRequest($this->getUser(), $circleUser) != 0){
-            $this->addFlash('success', "Votre demande d'ami à ". $circleUser->getFirstName()." ". $circleUser->getSurName()." a bien été envoyée.");
-            $requestFriend=-1;
-        }
-//      $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
-        
         $privateMessage = new PrivateMessage;
         $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
 
@@ -163,11 +146,9 @@ class ProfileController extends Controller
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
                     'circle' => $circleInfos,
-                    'isCreator' => $isCurrent,
+                    'role' => $role,
                     'messageForm' => $privateMessageForm->createView(),
-                    'isFriend' => $isFriend,
-                    'sendRequest' => $requestFriend,
-                    'friends' => $friends,
+                    'friends' => null,
                 ));
     }
 }

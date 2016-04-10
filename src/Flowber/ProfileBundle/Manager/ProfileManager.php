@@ -86,34 +86,7 @@ class ProfileManager extends BaseManager {
                 
         return $profileInfos;
     } 
-    
-    public function getFriendsResume($user)
-    {
-        $friendsRepository = $this->getFriendshipRepository();
-        $friends = $friendsRepository->getFriendsForProfile($user);
-        $count=0;
-        foreach ($friends as $friend){
-            $friends[$count]['friendNumber']=$friendsRepository->getFriendsNumber($friends[$count]['id']); 
-            $friends[$count]['profilePicture']=$this->getProfilePicture($friends[$count]['id']); 
-            $count++;
-//            $friendsRepository->getFriendsNumber($this->getUser($friend['id']));         
-        }
-        
-        return $friends;
-    } 
-    
-    public function getFriendsName($user)
-    {
-        $friendsRepository = $this->getFriendshipRepository();
-        $friends = $friendsRepository->getFriendsForProfile($user);
-        return $friends;
-    }    
-    
-    public function getFriendshipRepository()
-    {
-        return $this->em->getRepository('FlowberUserBundle:Friendship');
-    }  
-    
+ 
     public function getProfileRepository()
     {
         return $this->em->getRepository('FlowberProfileBundle:Profile');

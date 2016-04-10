@@ -25,10 +25,11 @@ class GroupController extends Controller
     {
         $user=$this->getUser();  
         $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId);
-        $isCreator = $this->container->get('flowber_circle.circle')->isCreator($user, $circleId);
-                
-        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');           
-        
+        $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
+        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
+        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
+        $posts = $postRepository->getPost($circleId);   
+
         //preparing new form for a post
         $post = new Post();
         $postwithEvent = new Post();
@@ -62,7 +63,7 @@ class GroupController extends Controller
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
             array('circle' => $groupInfo,
                 'user'  =>  $userInfos,
-                'isCreator' => $isCreator,
+                'role' => $role,
                 'posts' => $posts,
                 // forms
                 'postForm' => $postForm->createView(),

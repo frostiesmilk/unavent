@@ -20,7 +20,7 @@ class Subscribers
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
      */
     private $subscriber;
 
@@ -34,23 +34,31 @@ class Subscribers
     /**
      * @var string
      *
-     * @ORM\Column(name="statut", type="string", length=255)
+     * @ORM\Column(name="statut", type="string", length=255, nullable=true)
      */
     private $statut;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=255)
+     * @ORM\Column(name="role", type="string", length=255, nullable=true)
      */
     private $role;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="string", length=255)
+     * @ORM\Column(name="message", type="string", length=255, nullable=true)
      */
     private $message;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->creationDate = new \Datetime();   
+    }
 
     /**
      * Set creationDate
@@ -170,10 +178,10 @@ class Subscribers
     /**
      * Set subscriber
      *
-     * @param \Flowber\UserBundle\Entity\User $subscriber
+     * @param \Flowber\CircleBundle\Entity\Circle $subscriber
      * @return Subscribers
      */
-    public function setSubscriber(\Flowber\UserBundle\Entity\User $subscriber)
+    public function setSubscriber(\Flowber\CircleBundle\Entity\Circle $subscriber)
     {
         $this->subscriber = $subscriber;
 
@@ -183,7 +191,7 @@ class Subscribers
     /**
      * Get subscriber
      *
-     * @return \Flowber\UserBundle\Entity\User 
+     * @return \Flowber\CircleBundle\Entity\Circle 
      */
     public function getSubscriber()
     {

@@ -13,10 +13,10 @@
                     <p class="generic-cover-title-description hidden-xs">{{ circle.subtitle }}</p>
                 </div>
             </div>
-            {% if isCreator == true %}
+            {% if role == "creator" %}
             <div class="col-md-2 col-sm-3 hidden-xs text-center">
                 <div class="generic-cover-edit-button">
-                    <a href="{{ path('api_get_circle_edit', {'circleId': circle.id}) }}" class="btn btn-default">Modifier la sortie</a>
+                    <a href="{{ path('api_get_circle_edit', {'circleId': circle.id}) }}" class="btn btn-default">Modifier </a>
                 </div>
             </div>
             {% endif %}

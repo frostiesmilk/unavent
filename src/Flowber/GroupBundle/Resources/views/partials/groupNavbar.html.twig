@@ -18,6 +18,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+            {% if role != "creator" %}
                 <li>
                     <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil">
                         <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> 
@@ -28,21 +29,57 @@
                         <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/>
                     </a>
                 </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#modalAddMember" title="Participer à {{ circle.title }}" title='Rejoindre le groupe {{ circle.title }}'>
-                        <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
-                    </a>
+                {% if role == "no" %}
+                    <li id="sendRequest" style="display:inline">
+                        <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title='Rejoindre le groupe {{ circle.title }}' data-whatever="Voulez vous être membre du groupe {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        </a>
+                    </li>
+                    <li id="deleteRequest" style="display:none">
+                        <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title='Annuler la demande pour : {{ circle.title }}' data-whatever="Voulez-vous annuler votre demande d'adhésion au groupe {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                        </a>
+                    </li>
+                {% elseif role == "member"  %}
+                    <li id="unsubscribe" style="display:inline">
+                        <a href="#" data-toggle="modal" data-target="#modalUnsubscribe" title='Voulez-vous vous désinscrire du groupe : {{ circle.title }}' data-whatever="Voulez-vous vous désinscrire du groupe {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/removeFriend.png')}}"/>
+                        </a>
+                    </li>
+                    <li id="sendRequest" style="display:none">
+                        <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title='Rejoindre le groupe {{ circle.title }}' data-whatever="Voulez vous être membre du groupe {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        </a>
+                    </li>
+                    <li id="deleteRequest" style="display:none">
+                        <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title='Annuler la demande pour : {{ circle.title }}' data-whatever="Voulez-vous annuler votre demande d'adhésion au groupe {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                        </a>
+                    </li>
+                {% elseif role == "requestSent"  %}
+                    <li id="deleteRequest"style="display:inline" >
+                        <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title='Annuler la demande pour : {{ circle.title }}' data-whatever="Voulez-vous annuler votre demande d'adhésion au groupe {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                        </a>
+                    </li>
+                    <li id="sendRequest" style="display:none">
+                        <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title='Rejoindre le groupe {{ circle.title }}' data-whatever="Voulez vous être membre du groupe {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        </a>
+                    </li>
+                {% endif %}
                 </li>
                 <li>
                     <a class="back-top" href="#" title="Remonter en haut de la page">
                         <span class="fa fa-caret-up"></span>
                     </a>
                 </li>
+            {% endif %}
             </ul>
         </div>
     </div>
 </nav>
 
-{% include 'FlowberGroupBundle::partials/modalAddMember.html.twig' %} 
+{% include 'FlowberCircleBundle::partials/modalAddSubscriber.html.twig' %} 
 {% include 'FlowberPrivateMessageBundle::partials/sendMessageToUser.html.twig' %} 
 {% include 'FlowberPrivateMessageBundle::partials/sendWinkToUser.html.twig' %} 

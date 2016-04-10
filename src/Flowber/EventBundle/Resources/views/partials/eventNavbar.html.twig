@@ -32,11 +32,45 @@
                             <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/tag-person.png')}}"/>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#modalAddParticipant" title="Participer à {{ circle.title }}">
-                            <i class="fa fa-calendar-plus-o attend-event-submit" data-toggle="tooltip" data-placement="top" title="Participer à {{ circle.title }}"></i>
-                        </a>
-                    </li>
+                    {% if role == "no" %}
+                        <li id="sendRequest" style="display:inline">
+                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                            </a>
+                        </li>
+                        <li id="deleteRequest"  style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                            </a>
+                        </li>                        
+                    {% elseif role == "member"  %}
+                        <li id="unsubscribe" style="display:inline">
+                            <a href="#" data-toggle="modal" data-target="#modalUnsubscribe" title='Se désinscrire de la sortie {{ circle.title }}' data-whatever="Voulez-vous vous désinscrire de la sortie {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/removeFriend.png')}}"/>
+                            </a> 
+                        </li>
+                        <li id="deleteRequest"  style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                            </a>
+                        </li>  
+                        <li id="sendRequest" style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                            </a>
+                        </li>
+                    {% elseif role == "requestSent"  %}
+                        <li id="deleteRequest"  style="display:inline">
+                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                            </a>
+                        </li>
+                        <li id="sendRequest" style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                            </a>
+                        </li>
+                    {% endif %}
                     <li>
                         <a class="back-top" href="#" title="Remonter en haut de la page">
                             <span class="fa fa-caret-up"></span>
@@ -47,6 +81,6 @@
         </div>
     </nav>
 
-{% include 'FlowberEventBundle::partials/modalAddParticipant.html.twig' %} 
+{% include 'FlowberCircleBundle::partials/modalAddSubscriber.html.twig' %} 
 {% include 'FlowberPrivateMessageBundle::partials/sendMessageToUser.html.twig' %} 
 {% include 'FlowberPrivateMessageBundle::partials/sendWinkToUser.html.twig' %} 

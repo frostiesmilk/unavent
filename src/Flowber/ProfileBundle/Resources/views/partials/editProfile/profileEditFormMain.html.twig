@@ -77,9 +77,9 @@
                     <br>
                     <div class="hobbies-form">
                         {{form_widget(profileForm.hobbies)}}  
+                        {{form_rest(profileForm)}}                  
                     </div>
-                    {{form_rest(profileForm)}}                  
-                    <a href="#" id="ajout_hobby" class="btn">Ajouter un hobby</a>
+                    <a href="#" id="ajout_hobby" class="btn" onclick="addHobby()">Ajouter un hobby</a>
                     <div class="form-group">
                         <button type="submit" class="btn btn-default">Confirmer</button>
                     </div>

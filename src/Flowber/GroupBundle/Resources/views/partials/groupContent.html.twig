@@ -38,7 +38,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td>{{circle.description}}</td>
                     </tr>
-                    {% if isCreator == false %}
+                    {% if role != "creator" %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>

@@ -25,6 +25,10 @@ and open the template in the editor.
   font-family: amaranthRegular;
   src: url(../../fonts/Amaranth-Regular.ttf);
 }
+/* all site */
+body {
+  font-size: 13px;
+}
 /* Colored backgrounds */
 .background-dark-blue {
   background-color: #293540;
@@ -83,6 +87,7 @@ and open the template in the editor.
 }
 .btn-red:hover {
   background-color: #BF493D;
+  color: white;
 }
 /* Forms */
 .form-error-custom {
@@ -135,4 +140,3 @@ and open the template in the editor.
 .create-event-form .event-submit:hover {
   background-color: #BF493D;
 }
-/*# sourceMappingURL=create-event-page.css.map */

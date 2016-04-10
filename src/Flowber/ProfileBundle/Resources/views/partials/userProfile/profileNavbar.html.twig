@@ -21,43 +21,59 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ circle.title }}">
-                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/wink.png')}}"/> 
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ circle.title }}">
-                        <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/bubble-chat.png')}}"/>
-                    </a>
-                </li>
-                
-                {% if isFriend == 1 %}
+                {% if role != "creator" %}
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true" title="{{ user.name }} est votre ami">
-                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/friend.png')}}"/>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-large">
-                            <li><a tabindex="-1" href="{{ path('flowber_unfriend', {'id': circle.id}) }}">Supprimer de mes amis</a></li>
-                        </ul>
-                    </li>
-                {% elseif sendRequest == 0 %}              
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#modalAddFriend" title="Ajouter {{ circle.title }} comme ami">
-                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/wink.png')}}"/> 
                         </a>
                     </li>
-                {% elseif sendRequest == -1 %} 
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true" title="La demande d'ami avec {{ circle.name }} est en attente de validation">
-                            <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        <a href="#" data-toggle="modal" data-target="#modalMessage" title="Envoyez un message à {{ circle.title }}">
+                            <img class="menu-link-icon" src="{{asset('assets/images/ProfileBundle/menu/bubble-chat.png')}}"/>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-large">
-                            <li><a tabindex="-1" href="{{ path('flowber_cancel_friend_request', {'id': circle.id}) }}">Annuler la demande</a></li>
-                        </ul>
-                    </li>                    
+                    </li>
+                    
+                    {% if role == "no" %}
+                        <li id="sendRequest" style="display:inline">
+                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Envoyer une demanbde d'ami à {{ circle.title }}" data-whatever="Envoyer une demande d'ami à {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                            </a>
+                        </li>
+                        <li id="deleteRequest"  style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Envoyer une demanbde d'ami à {{ circle.title }}" data-whatever="Annuler la demande d'ami à {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                            </a>
+                        </li>
+                    {% elseif role == "member"  %}
+                        <li id="unsubscribe" style="display:inline">
+                            <a id="unsubscribe" href="#" data-toggle="modal" data-target="#modalUnsubscribe" title='Supprimer {{ circle.title }}' data-whatever="Voulez-vous supprimer {{ circle.title }} de vos amis">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/removeFriend.png')}}"/>
+                            </a> 
+                        </li>
+                        <li id="deleteRequest"  style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Envoyer une demanbde d'ami à {{ circle.title }}" data-whatever="Annuler la demande d'ami à {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                            </a>
+                        </li>                        
+                         <li id="sendRequest" style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Envoyer une demanbde d'ami à {{ circle.title }}" data-whatever="Envoyer une demande d'ami à {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                            </a>
+                        </li>  
+                    {% elseif role == "requestSent"  %}
+                        <li id="deleteRequest" style="display:inline">
+                           <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Envoyer une demanbde d'ami à {{ circle.title }}" data-whatever="Annuler la demande d'ami à {{ circle.title }}">
+                               <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                           </a>
+                        </li>
+                         <li id="sendRequest" style="display:none">
+                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Envoyer une demanbde d'ami à {{ circle.title }}" data-whatever="Envoyer une demande d'ami à {{ circle.title }}">
+                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                            </a>
+                        </li>                   
+                    {% endif%}
+                    
                 {% endif %}
-
                 <li>
                     <a class="back-top" href="#" title="Remonter en haut de la page">
                         <span class="fa fa-caret-up"></span>
@@ -73,4 +89,4 @@
 
 {% include 'FlowberPrivateMessageBundle::partials/sendMessageToUser.html.twig' %} 
 {% include 'FlowberPrivateMessageBundle::partials/sendWinkToUser.html.twig' %} 
-{% include 'FlowberProfileBundle::partials/userProfile/modalAddFriend.html.twig' %} 
+{% include 'FlowberCircleBundle::partials/modalAddSubscriber.html.twig' %} 
