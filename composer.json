@@ -24,7 +24,8 @@
         "friendsofsymfony/rest-bundle": "^1.7",
         "jms/serializer-bundle": "^1.1",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
-        "oneup/uploader-bundle": "~1.4"
+        "oneup/uploader-bundle": "~1.4",
+        "liip/imagine-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
