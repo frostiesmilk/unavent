@@ -249,6 +249,17 @@ body {
   padding-bottom: 10px;
   border-bottom: 1px solid lightgrey;
 }
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-content .generic-blog-post-content-gallery {
+  padding: 10px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-content .generic-blog-post-content-gallery .generic-blog-post-content-gallery-element {
+  width: 150px;
+  height: 150px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 5px;
+}
 .generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments {
   background-color: #F5F5F5;
   list-style: none;
