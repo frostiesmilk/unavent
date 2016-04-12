@@ -12,6 +12,7 @@
 /nbproject/private/
 /web/uploads/
 /web/assets/css/*Bundle/
+/web/media/cache/
 
 !nodejs & grunt & bower START
 /.tmp
