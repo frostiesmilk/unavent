@@ -22,14 +22,15 @@ function postDeleteSubmit(){
             data: $this.serialize(),
             //dataType: 'json', // JSON
             error: function(json){
-                alert("merde "+$this.attr('action')+" "+$this.attr('method'));
+                alert("Error post delete. Please contact the site administrator.");
             }
         }).done(function(data, textStatus, jqXHR){
             console.log(data);
-            var elem = document.getElementById('post-'+postId);
-            elem.parentNode.removeChild(elem);
-            $('#modal-delete-post').modal("hide");
         });
+        
+        var elem = document.getElementById('post-'+postId);
+        elem.parentNode.removeChild(elem); // delete post from view
+        $('#modal-delete-post').modal("hide");// close modal
     });
 }
 
