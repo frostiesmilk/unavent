@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="newphoto">
+<div role="tabpanel" class="tab-pane active" id="newpost">
     <form onsubmit="return false;" id="generic-new-post-with-gallery" action="{{ path('api_post_post_gallery', { 'circleId': circle.id} ) }}" method="post" {{ form_enctype(postWithPicturesForm) }}>
 
         {{form_widget(postWithPicturesForm.message, {'attr': {'class':'generic-blog-new-post-content-text'}})}}

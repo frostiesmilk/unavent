@@ -4,7 +4,7 @@
     {% include 'FlowberGroupBundle::partials/groupAlerts.html.twig' %}   
     
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5"><!-- Group summary -->
             <div class="group-details">
                 <h2>{{circle.title}}</h2>
                 <table>
@@ -57,7 +57,7 @@
         <div class="col-md-7">
             <div class="group-blog">
                 
-                {% include 'FlowberPostBundle::partials/createPost.html.twig' %}
+                {% include 'FlowberPostBundle::partials/newGroupPost.html.twig' %}
                 {% include 'FlowberPostBundle::basePostList.html.twig' %}               
                 
             </div>

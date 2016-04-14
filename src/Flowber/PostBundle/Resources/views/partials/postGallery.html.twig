@@ -2,7 +2,7 @@
 {% if postGallery.photos|length > 0 %}
     <div class="generic-blog-post-content-gallery row">
         {% for picture in postGallery.photos %}
-        <div class="col-xs-4 generic-blog-post-content-gallery-element" style="background-image:url({{asset(picture.getWebPath())}});"></div>
+        <div class="col-xs-4 generic-blog-post-content-gallery-element" style="background-image:url({{asset(picture.getWebPath()|imagine_filter('post_message_picture_thumb'))}});"></div>
         {% endfor %}
     </div>
 {% endif %}
