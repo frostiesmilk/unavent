@@ -2,7 +2,7 @@
     <div class="container" >
         <div class="row-fluid">  
             <div class="col-md-3 col-sm-3 col-xs-8">            
-                <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset(circle.profilePicture)}}')"></div> 
+                <div class="generic-cover-profile-picture img-circle" style="background-image: url('{{asset(circle.profilePicture|imagine_filter('circle_cover_badge'))}}')"></div> 
             </div>
             <div class="col-xs-4 text-right hidden-lg hidden-lg hidden-md hidden-sm">
                 <a href="{{ path('api_get_circle_edit', {'circleId': circle.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></a>

@@ -131,3 +131,15 @@ jms_serializer:
             FlowberGroupBundle:
                 namespace_prefix: "Flowber\\GroupBundle"
                 path: "%kernel.root_dir%/serializer/FlowberGroupBundle"
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        circle_cover_badge:
+            quality: 90
+            filters:
+                thumbnail: { size: [200, 200], mode: inbound }

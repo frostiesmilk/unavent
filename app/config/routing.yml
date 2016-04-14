@@ -64,3 +64,7 @@ wybe_front_office:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    
+#LiipImagineBundle
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
