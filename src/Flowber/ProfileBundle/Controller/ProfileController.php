@@ -92,55 +92,39 @@ class ProfileController extends Controller
                 return $this->redirect($this->generateUrl('api_get_circle', array('circleId' => $circleId)));
             }
         }
-  
+        
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav; 
+        
         return $this->render('FlowberProfileBundle:Default:editProfile.html.twig', 
                 array('circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
                     'profileForm' => $profileForm->createView(),
                     'userForm' => $userForm->createView(),
                     'role'=> 'no',
                     'profilePictureForm'=>$profilePictureForm->createView(),
+                    'navbar' => $navbar,
                     'coverPictureForm'=>$coverPictureForm->createView()));
     }
-    
-    /**
-     * Get logged user profile
-     * @return type
-     * @throws AccessDeniedException
-     * @throws NotFoundHttpException
-     */
-    public function getCurrentUserProfileAction() {
-        $user = $this->getUser();
-        
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }   
-        
-        $profile = $this->container->get('flowber_profile.profile')->getProfileInfos($user);
-        //die(var_dump($profile));
-        
-        $friends = $this->container->get('flowber_profile.profile')->getFriendsResume($user);
-
-        if (empty($profile)) {
-            throw new NotFoundHttpException("Le profil de l'utilisateur ".$profile->getUser()->getFirstname()." n'existe pas.");
-        }    
-
-        return $this->render('FlowberProfileBundle:Default:currentUserProfile.html.twig', 
-                array(
-                    'circle' => $profile,
-                    'friends' => $friends,
-                ));
-    }
-    
     
     public function getUserProfileAction($circleId) {
         $currentUser = $this->getUser();
         $circleInfos = $this->container->get('flowber_profile.profile')->getProfileInfos($circleId);
+        $friends = $this->container->get('flowber_profile.profile')->getFriends($circleId);
+        $groups = $this->container->get('flowber_group.group')->getGroups($circleId);
+        $events = $this->container->get('flowber_event.event')->getEvents($circleId);
         $circleUser = $this->container->get('flowber_profile.profile')->getUser($circleId);        
         $role = $this->container->get('flowber_circle.circle')->getRole($currentUser, $circleUser->getProfile()->getId());
 
         $privateMessage = new PrivateMessage;
         $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
-
+        
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;
+        
         // END IF A PRIVATE MESSAGE HAS BEEN SENT 
 
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
@@ -148,7 +132,10 @@ class ProfileController extends Controller
                     'circle' => $circleInfos,
                     'role' => $role,
                     'messageForm' => $privateMessageForm->createView(),
-                    'friends' => null,
+                    'friends' => $friends,
+                    'groups' => $groups,
+                    'events' => $events,
+                    'navbar' => $navbar
                 ));
     }
 }

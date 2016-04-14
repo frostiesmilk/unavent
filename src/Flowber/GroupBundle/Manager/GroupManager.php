@@ -57,6 +57,66 @@ class GroupManager extends BaseManager {
         return $circleInfos;
     }    
     
+    /*
+     * Récupère le nombre d'ami du cercle $id qui sont membre du groupe $circleId
+     */
+    public function getFriendsInGroup($circleId, $id)
+    {
+        $friends = $this->getGroupRepository()->GetFriendsId($id);
+        $members = $this->getGroupRepository()->GetMembers($circleId);
+       
+        $nbFriend=0;
+        if ( count($members) != 0){
+            $count=0;
+            foreach ($members as $member){
+                if ( count($friends) != 0){
+                    $count2=0;
+                    foreach ($friends as $friend){
+                        if ($friend==$member){
+                            $nbFriend++;
+                        }
+                        $count2++;
+                    } 
+                }        
+                $count++;
+            } 
+        }        
+
+        return $nbFriend;
+    } 
+    
+    public function getGroups($circleId)
+    {
+        $groups = $this->getGroupRepository()->GetGroupsId($circleId);
+        if ( count($groups) != 0){
+            $count=0;
+            foreach ($groups as $group){
+                $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+                $groups[$count]['profilePicture'] = $this->cm->getProfilePicture($groups[$count]['id']);
+                 $subtitle = substr($this->cm->getCircle($groups[$count]['id'])->getSubtitle(), 0, 75).'...';                
+                $groups[$count]['subtitle'] = $subtitle;
+                $groups[$count]['members'] = $this->getGroupRepository()->GetCountMembers($groups[$count]['id']);
+                $groups[$count]['friends'] = $this->getFriendsInGroup($groups[$count]['id'], $circleId);
+                $count++;
+            } 
+        }        
+
+        return $groups;
+    }
+
+    public function getGroupsNavbar($circleId)
+    {
+        $groups = $this->getGroupRepository()->GetFourGroupsId($circleId);
+        $count=0;
+        foreach ($groups as $group){
+            $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+            $groups[$count]['profilePicture'] = $this->cm->getProfilePicture($groups[$count]['id']);
+            $count++;
+        }   
+
+        return $groups;
+    }
+    
     public function getGroupRepository()
     {
         return $this->em->getRepository('FlowberGroupBundle:Groups');

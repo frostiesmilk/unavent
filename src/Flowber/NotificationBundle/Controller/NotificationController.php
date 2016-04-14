@@ -14,9 +14,15 @@ class NotificationController extends Controller
             $notification->setStatut('2');
         }
         
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;    
+        
         return $this->render('FlowberNotificationBundle:Default:getNotification.html.twig', 
                 array(
                     'notifications' => $notifications,
+                    'navbar' => $navbar
                 ));
     }
 

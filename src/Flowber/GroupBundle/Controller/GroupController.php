@@ -60,12 +60,17 @@ class GroupController extends Controller
                             "surname"   =>  $user->getSurname(),
                             "profilePicture"    => $this->container->get('flowber_circle.circle')->getProfilePicture($groupInfo['idCreatedBy']));
         
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;    
+        
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
             array('circle' => $groupInfo,
                 'user'  =>  $userInfos,
                 'role' => $role,
                 'posts' => $posts,
-                // forms
+                'navbar' => $navbar,
                 'postForm' => $postForm->createView(),
                 'postWithPicturesForm' => $postWithPicturesForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),
@@ -148,9 +153,16 @@ class GroupController extends Controller
                 // all good, back to profile page
                 return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $group->getId())));
             }
-        }        
+        }    
+        
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;    
+        
          return $this->render('FlowberGroupBundle:Default:createGroup.html.twig', array(
             'groupForm' => $groupForm->createView(),
+            'navbar' => $navbar,
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
         ));
@@ -232,8 +244,14 @@ class GroupController extends Controller
             }
         } 
         
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;    
+        
         return $this->render('FlowberGroupBundle:Default:editGroup.html.twig', array (
             'circle' => $groupInfos,
+            'navbar' => $navbar,
             'groupForm' => $groupForm->createView(),
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),

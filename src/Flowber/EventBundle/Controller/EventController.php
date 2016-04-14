@@ -40,9 +40,15 @@ class EventController extends Controller
             $CommentArray[] = $commentForm->createView();
         }
         
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;    
+        
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
                 'role' => $role,
+                'navbar' => $navbar,
                 'circle' => $eventInfo,
                 'mailToCreatorForm' => $mailToCreatorForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),
@@ -69,9 +75,15 @@ class EventController extends Controller
             $coverPicture = $coverPicture->getWebPath();
         }
         
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav; 
+        
         return $this->render('FlowberEventBundle:Default:eventMember.html.twig', 
                 array('eventId'=>$id, 
                 'result' => $event,
+                'navbar' => $navbar,
                 'profilePicture' => $profilePicture, 
                 'coverPicture' => $coverPicture));
     }
@@ -166,9 +178,15 @@ class EventController extends Controller
                 return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $event->getId())));
             }
         }
-  
+        
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;   
+        
         return $this->render('FlowberEventBundle:Default:createEvent.html.twig', array(
             'eventForm' => $eventForm->createView(),
+            'navbar' => $navbar,
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
         ));
@@ -241,11 +259,17 @@ class EventController extends Controller
             }
         }
         
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;   
+        
         return $this->render('FlowberEventBundle:Default:editEvent.html.twig', array(
             'eventForm' => $eventForm->createView(),
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
             'circle' => $eventInfo,
+            'navbar' => $navbar,
             'coverInfo' => $coverInfo,
         ));
     }
@@ -256,8 +280,14 @@ class EventController extends Controller
 
         $allEvent = $this->getDoctrine()->getManager()->getRepository('FlowberEventBundle:Event')->findByCreatedBy($user);
         
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;   
+        
         return $this->render('FlowberEventBundle:Default:allEvent.html.twig', array(
             'allEvent' => $allEvent,
+            'navbar' => $navbar,
         ));
     }
 }

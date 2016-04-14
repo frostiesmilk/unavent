@@ -21,9 +21,7 @@ class CircleRestController extends Controller
     function getCircleAction ($circleId){
         $circleClassName = $this->container->get("flowber_circle.circle")->getClass($circleId);
 
-        
-        return $this->redirect($this->generateUrl('flowber_'.$circleClassName.'_homepage', array('circleId' => $circleId)));
-        die(var_dump($circleClassName));
+        return $this->redirect($this->generateUrl('flowber_'.$circleClassName.'_homepage',  array('circleId' => $circleId )));
     }
     
     /**
@@ -37,7 +35,6 @@ class CircleRestController extends Controller
         $circleClassName = strtolower(end($name));
         
         return $this->redirect($this->generateUrl('flowber_'.$circleClassName.'_edit', array('circleId' => $circleId)));
-        die(var_dump($circleClassName));
     }
     
     /**
@@ -86,6 +83,7 @@ class CircleRestController extends Controller
         $subscriber->setCircle($this->container->get("flowber_circle.circle")->getCircle($request->getCircle()));
         $subscriber->setSubscriber($this->container->get("flowber_circle.circle")->getCircle($request->getSender()));
         $subscriber->setRole($request->getRole());
+        $subscriber->setStatut($this->container->get("flowber_circle.circle")->getClass($request->getCircle()));
         $subscriber->setMessage($request->getMessage());
 
         $em = $this->getDoctrine()->getManager();
@@ -96,6 +94,7 @@ class CircleRestController extends Controller
         $subscriber2->setCircle($this->container->get("flowber_circle.circle")->getCircle($request->getSender()));
         $subscriber2->setRole($request->getRole());
         $subscriber2->setMessage($request->getMessage());            
+        $subscriber2->setStatut($this->container->get("flowber_circle.circle")->getClass($request->getCircle()));
         $em->persist($subscriber2);           
         }
         

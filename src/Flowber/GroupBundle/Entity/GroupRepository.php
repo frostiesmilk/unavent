@@ -3,6 +3,7 @@
 namespace Flowber\GroupBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * GroupRepository
@@ -23,5 +24,83 @@ class GroupRepository extends EntityRepository
         $query->setParameter('espace', ' ');
        
         return $query->getSingleResult();
+    }
+
+    /*
+     * Récupère les id des groupes auquel participe l'user circle
+     */
+    public function GetGroupsId($circle){
+        $sql = "SELECT sub.circle_id "
+                . "FROM  subscribers sub "
+                . "WHERE sub.subscriber_id=".$circle." "
+                . "AND sub.statut='groups' "
+                . "ORDER BY sub.creationDate desc";
+
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'id');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }
+    
+    /*
+     * Récupère les id des groupes auquel participe l'user circle
+     */
+    public function GetFourGroupsId($circle){
+        $sql = "SELECT sub.circle_id "
+                . "FROM  subscribers sub "
+                . "WHERE sub.subscriber_id=".$circle." "
+                . "AND sub.statut='groups' "
+                . "ORDER BY sub.creationDate desc "
+                . "LIMIT 4";
+
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'id');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }
+    /*
+     * Récupère le nombre de membre du groupe circle
+     */
+    public function GetCountMembers($circle){
+        $sql = "SELECT sub.circle_id "
+                . "FROM  subscribers sub "
+                . "WHERE sub.circle_id=".$circle;
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'id');
+        
+        return count($this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult());
+    }  
+    
+    /*
+     * Récupère les ids des membres du groupe
+     */
+    public function GetMembers($circle){
+        $sql = "SELECT sub.subscriber_id "
+                . "FROM  subscribers sub "
+                . "WHERE sub.circle_id=".$circle;        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('subscriber_id', 'id');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }   
+
+    /*
+     * Récupère les id des amis du cercle $circle
+     */
+    public function GetFriendsId($circle){
+        $sql = "SELECT sub.circle_id "
+                . "FROM  subscribers sub "
+                . "WHERE sub.subscriber_id=".$circle." "
+                . "AND sub.statut='profile' "
+                . "ORDER BY sub.creationDate desc";
+
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'id');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }
 }

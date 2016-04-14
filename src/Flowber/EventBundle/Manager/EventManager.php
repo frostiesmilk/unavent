@@ -114,6 +114,65 @@ class EventManager extends BaseManager {
      
         return $isAdmin;
     }  
+     public function getFriendsInEvent($circleId, $id)
+    {
+        $friends = $this->getEventRepository()->GetFriendsId($id);
+        $members = $this->getEventRepository()->GetMembers($circleId);
+        $nbFriend=0;
+        if ( count($members) != 0){
+            $count=0;
+            foreach ($members as $member){
+                if ( count($friends) != 0){
+                    $count2=0;
+                    foreach ($friends as $friend){
+                        if ($friend==$member){
+                            $nbFriend++;
+                        }
+                        $count2++;
+                    } 
+                }        
+                $count++;
+            } 
+        }        
+
+        return $nbFriend;
+    }
+    
+    public function getEvents($circleId)
+    {
+        $events = $this->getEventRepository()->GetEventsId($circleId);
+        if ( count($events) != 0){
+            $count=0;
+            foreach ($events as $eventss){
+                $event = $this->getEvent($events[$count]['id']);
+                $events[$count]['title'] = $event->getTitle();
+                $events[$count]['city'] = $event->getPostalAddress()->getCity();
+                $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
+                $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
+                $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
+                $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
+                $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
+                $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $circleId);
+                $count++;
+            } 
+        }        
+        return $events;
+    }   
+
+    public function getEventsNavbar($circleId)
+    {
+        $events = $this->getEventRepository()->GetEventsId($circleId);
+        $count=0;
+        foreach ($events as $eventss){
+            $event = $this->getEvent($events[$count]['id']);
+            $events[$count]['title'] = $event->getTitle();
+            $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
+            $count++;
+        } 
+      
+        return $events;
+    }   
+    
     
     public function getEventRepository()
     {
