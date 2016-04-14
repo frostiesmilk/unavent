@@ -14,8 +14,8 @@ class NotificationController extends Controller
             $notification->setStatut('2');
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;    
         

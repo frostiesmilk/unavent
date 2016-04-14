@@ -40,8 +40,8 @@ class EventController extends Controller
             $CommentArray[] = $commentForm->createView();
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;    
         
@@ -75,8 +75,8 @@ class EventController extends Controller
             $coverPicture = $coverPicture->getWebPath();
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -179,8 +179,8 @@ class EventController extends Controller
             }
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;   
         
@@ -259,8 +259,8 @@ class EventController extends Controller
             }
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;   
         
@@ -280,8 +280,8 @@ class EventController extends Controller
 
         $allEvent = $this->getDoctrine()->getManager()->getRepository('FlowberEventBundle:Event')->findByCreatedBy($user);
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;   
         

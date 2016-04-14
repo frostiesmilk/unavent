@@ -21,8 +21,8 @@ class PrivateMessageController extends Controller
             $count++;
         }
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -46,8 +46,8 @@ class PrivateMessageController extends Controller
             $count++;
         } 
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -76,8 +76,8 @@ class PrivateMessageController extends Controller
             $count++;
         }  
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -138,8 +138,8 @@ class PrivateMessageController extends Controller
 
         $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -159,8 +159,8 @@ class PrivateMessageController extends Controller
         $messageInfo['receiverMessageId']=null;
         $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());            
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -187,8 +187,8 @@ class PrivateMessageController extends Controller
             $em->flush();
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
 
@@ -221,8 +221,8 @@ class PrivateMessageController extends Controller
             $em->flush();
         }
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -252,8 +252,8 @@ class PrivateMessageController extends Controller
         $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
         $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         
@@ -278,8 +278,8 @@ class PrivateMessageController extends Controller
         $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
         $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
         

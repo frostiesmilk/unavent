@@ -28,10 +28,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-large">
                         <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '1'}) }}">groupe 1</a></li>
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '2'}) }}">groupe 2</a></li>
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '3'}) }}">groupe 3</a></li>
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '4'}) }}">groupe 4</a></li>
+                            {% for event in navbar.group %}                              
+                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '1'}) }}">groupe 1</a></li>
+                            {% endfor %}
                         </ul>
                         <ul class="dropbown-menu-col">
                             <li><a tabindex="-1" href="{{ path('flowber_group_create') }}">Créer un groupe</a></li>
