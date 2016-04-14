@@ -18,6 +18,7 @@ use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 use Flowber\GalleryBundle\Entity\Gallery;
+use Flowber\CircleBundle\Entity\Subscribers;
 
 class GroupController extends Controller
 {
@@ -147,10 +148,17 @@ class GroupController extends Controller
             // no error
             if(!$error){  
                 $em->persist($group);
-                $em->flush();
-//                $em->persist($profile);
-//                $em->flush();
-                // all good, back to profile page
+                 $em->flush();                
+               
+                $subscriber = new Subscribers();
+                $subscriber->setCircle($this->container->get("flowber_circle.circle")->getCircle($group->getId()));
+                $subscriber->setSubscriber($this->container->get("flowber_circle.circle")->getCircle($user->getProfile()->getId()));
+                $subscriber->setRole('admin');
+                $subscriber->setStatut($this->container->get("flowber_circle.circle")->getClass($group->getId()));
+                $subscriber->setMessage('');
+                
+                $em->persist($subscriber);
+                $em->flush();                
                 return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $group->getId())));
             }
         }    

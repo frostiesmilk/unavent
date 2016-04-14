@@ -161,7 +161,7 @@ class EventManager extends BaseManager {
 
     public function getEventsNavbar($circleId)
     {
-        $events = $this->getEventRepository()->GetEventsId($circleId);
+        $events = $this->getEventRepository()->GetFourEventsId($circleId);
         $count=0;
         foreach ($events as $eventss){
             $event = $this->getEvent($events[$count]['id']);

@@ -14,6 +14,7 @@ use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
+use Flowber\CircleBundle\Entity\Subscribers;
 
 class EventController extends Controller
 {
@@ -174,6 +175,17 @@ class EventController extends Controller
                 // DB update
                 $em->persist($event);
                 $em->flush();
+                
+                $subscriber = new Subscribers();
+                $subscriber->setCircle($this->container->get("flowber_circle.circle")->getCircle($event->getId()));
+                $subscriber->setSubscriber($this->container->get("flowber_circle.circle")->getCircle($user->getProfile()->getId()));
+                $subscriber->setRole('admin');
+                $subscriber->setStatut($this->container->get("flowber_circle.circle")->getClass($event->getId()));
+                $subscriber->setMessage('');
+                
+                $em->persist($subscriber);
+                $em->flush();    
+                
                 // all good, back to profile page
                 return $this->redirect($this->generateUrl('api_get_circle',array('circleId' => $event->getId())));
             }
