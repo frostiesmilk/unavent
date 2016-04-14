@@ -28,8 +28,8 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-large">
                         <ul class="dropbown-menu-col">
-                            {% for event in navbar.group %}                              
-                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '1'}) }}">groupe 1</a></li>
+                            {% for group in navbar.group %}                              
+                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">{{group.title}}</a></li>
                             {% endfor %}
                         </ul>
                         <ul class="dropbown-menu-col">
@@ -45,10 +45,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-large">
                         <ul class="dropbown-menu-col">
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '1'}) }}">sortie 1</a></li>
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '2'}) }}">sortie 2</a></li>
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '3'}) }}">sortie 3</a></li>
-                            <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '5'}) }}">sortie 5</a></li>
+                            {% for event in navbar.event %}                              
+                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">{{event.title}}</a></li>
+                            {% endfor %}
                         </ul>
                         <ul class="dropbown-menu-col">
                             <li><a tabindex="-1" href="{{ path('flowber_create_event_homepage') }}">Créer une sortie</a></li>

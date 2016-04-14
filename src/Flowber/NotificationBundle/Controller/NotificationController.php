@@ -9,6 +9,7 @@ class NotificationController extends Controller
     public function getNotificationAction()
     {
         $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
+        $user=$this->getUser();  
         
         foreach($notifications as $notification){
             $notification->setStatut('2');
