@@ -112,6 +112,13 @@ class PostRestController extends Controller
         $postGalleryView = null;
         if($form->isValid()){
             $em = $this->getDoctrine()->getManager();
+            
+            if(count($post->getGallery()->getPhotos())<1){ // no gallery
+                $post->setGallery(null);
+            }else{ // prepare gallery view
+                $postGalleryView = $this->createPostGalleryView($post->getGallery()->getId());
+            }
+            
             $post->setCreatedBy($this->getUser());
             $post->setCircle($circle);                
             $em->persist($post);  
@@ -124,7 +131,7 @@ class PostRestController extends Controller
             }
             
 //            $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($post->getGallery()->getId());
-            $postGalleryView = $this->createPostGalleryView($post->getGallery()->getId());//$this->renderView('FlowberPostBundle:partials:postGallery.html.twig', array('postGallery'=>$postGallery));
+            
           
             // create new comment form
             $comment = new Comment();
