@@ -27,18 +27,25 @@ class GroupController extends Controller
         $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId);
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
         $posts = $postRepository->getPost($circleId);   
 
         //preparing new form for a post
-        $post = new Post();
+        $newPost = new Post();
         $postwithEvent = new Post();
         $postWithPictures = new Post();
-        $postForm = $this->createForm(new PostType(), $post);
+        $postForm = $this->createForm(new PostType(), $newPost);
         $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);
-        $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);        
+        $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);      
         
-        $posts = $postRepository->getPost($circleId);
+        $request = $this->get('request');
+        $postWithEventForm->bind($request);
+        
+        if ($request->getMethod() == 'POST' && $postWithEventForm->isValid()) { 
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($postwithEvent);
+            $em->flush($postwithEvent);
+        }
         
         // forms for comments
         $commentsForms = array();

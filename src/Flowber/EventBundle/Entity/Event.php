@@ -3,8 +3,6 @@
 namespace Flowber\EventBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Flowber\UserBundle\Entity\PostalAddress;
-use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\EventBundle\Validator\Constraints as EventAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 use Flowber\CircleBundle\Entity\Circle;
@@ -28,7 +26,7 @@ class Event extends Circle
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startTime", type="time")
+     * @ORM\Column(name="startTime", type="time", nullable=true)
      */
     private $startTime;
     

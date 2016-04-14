@@ -69,6 +69,12 @@ class Post
     private $circle;
 
     /**
+     * @ORM\OneToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\JoinColumn(name="displayedCircleId", referencedColumnName="id", nullable=true)
+     */
+    private $attachedEvent;
+    
+    /**
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
      */
     private $photo;
@@ -389,5 +395,28 @@ class Post
     public function getGallery()
     {
         return $this->gallery;
+    }
+
+    /**
+     * Set attachedEvent
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $attachedEvent
+     * @return Post
+     */
+    public function setAttachedEvent(\Flowber\CircleBundle\Entity\Circle $attachedEvent = null)
+    {
+        $this->attachedEvent = $attachedEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get attachedEvent
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getAttachedEvent()
+    {
+        return $this->attachedEvent;
     }
 }

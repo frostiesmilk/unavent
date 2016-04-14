@@ -43,7 +43,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="text", nullable=true)
+     * @ORM\Column(name="message", type="text")
      */
     private $message;
 
@@ -68,6 +68,12 @@ class Post
      */
     private $circle;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\JoinColumn(name="displayedCircleId", referencedColumnName="id", nullable=true)
+     */
+    private $attachedEvent;
+    
     /**
      * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", cascade={"persist"})
      */
