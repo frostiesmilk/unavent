@@ -13,16 +13,25 @@
                 <div class="col-md-3 col-xs-6">
                     <div class="thumbnail group-list-thumbnail ">
                         <div class="caption group-name-frame">
-                            <h3 class="group-name font-white">{{group.title}}</h3>
+                            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                                <h3 class="group-name font-white">{{group.title}}</h3>
+                            </a>
                         </div>
                         <div class="group-image-frame">
-                            <img class="group-image" src="{{asset(group.profilePicture)}}" alt=""/>                                
+                            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                                <img class="group-image" src="{{asset(group.profilePicture)}}" alt=""/>      
+                            </a>
                         </div>
 
                         <div class="caption text-center ">
                             <p class="font-white group-description">{{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}   
-                                &middot; {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   </p>
-                            <button class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</button>
+                                &middot; {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
+                            </p>
+                            <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
+                                <button class="btn btn-default font-white group-join-button"> 
+                                    <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir le groupe 
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

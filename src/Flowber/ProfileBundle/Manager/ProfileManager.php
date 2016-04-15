@@ -106,7 +106,25 @@ class ProfileManager extends BaseManager {
         
         return $friends;
     }
-
+    
+    public function getFriendsFromList($friends)
+    {
+        if ( count($friends) != 0){
+            $count=0;
+            foreach ($friends as $friend){
+                $friends[$count]['name'] = $this->getUserName($this->getUser($friends[$count]['id']));
+                $friends[$count]['profilePicture'] = $this->cm->getProfilePicture($friends[$count]['id']);
+                $subtitle = substr($this->getProfile($friends[$count]['id'])->getSubtitle(), 0, 75).'...';                
+                $friends[$count]['subtitle'] = $subtitle;
+                $friends[$count]['numberFriend'] = $this->getProfileRepository()->GetCountFriend($friends[$count]['id']);
+                $friends[$count]['numberEvent'] = $this->getProfileRepository()->GetCountEvent($friends[$count]['id']);
+                $friends[$count]['numberGroup'] = $this->getProfileRepository()->GetCountGroup($friends[$count]['id']);
+                $count++;
+            } 
+        }        
+        
+        return $friends;
+    }
         
     public function getProfileRepository()
     {

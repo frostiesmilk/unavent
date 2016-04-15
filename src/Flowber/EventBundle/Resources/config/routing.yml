@@ -17,7 +17,7 @@ flowber_create_event_homepage:
     defaults: { _controller: FlowberEventBundle:Event:getCreateEvent }
 
 flowber_event_edit:
-    path:     /sortie/{id}/edit
+    path:     /{circleId}/edit
     defaults: { _controller: FlowberEventBundle:Event:getEditEvent }
 
 flowber_all_event_homepage:

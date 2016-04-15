@@ -9,7 +9,6 @@
 {% block smallMenu %}
     {{parent()}}
     <!-- BEGIN small screen menu -->
-    {% include 'FlowberGroupBundle::partials/groupNavbarSmall.html.twig' %}
     <!-- END small screen menu -->
 {% endblock %}
 
@@ -27,32 +26,8 @@
 
         <div class="container user-profile-groups-container">
             <div class="row">
-                {% for group in allGroup %}
 
-                    {% set groupProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
-                    {% if group.profilePicture is not null %}
-                        {% set groupProfilePicturePath = group.profilePicture.getWebPath() %}
-                    {% endif %} 
 
-                    <div class="col-md-3 col-xs-6">
-                        <div class="thumbnail group-list-thumbnail ">
-                            <div class="caption group-name-frame">
-                                <a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': group.id}) }}">
-                                    <h3 class="group-name">{{ group.title }}</h3>
-                                </a>
-                            </div>
-                            <div class="group-image-frame">
-                                <a tabindex="-1" href="{{ path('flowber_event_homepage', {'id': group.id}) }}">
-                                    <img class="group-image" src="{{asset(groupProfilePicturePath)}}" alt=""/>
-                                </a>                        
-                            </div>
-                            <div class="caption text-center ">
-                                <p class="group-description">238 membres &middot; 2 amis</p>
-                                <button class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</button>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
             </div>  
         </div>  
     </div>

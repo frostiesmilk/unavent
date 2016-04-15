@@ -44,7 +44,6 @@
             {% if (circle.address is not null) and (circle.name is not null) %}
                 '{{circle.name}},<br/>'+ 
             {% endif %}
-            '{{ circle.startDate|date("\\l\\e d/m/Y", "Europe/Paris") }} {{ circle.startTime|date("\\à H:i", "Europe/Paris") }}';
         {% endif %}
     </script>
     

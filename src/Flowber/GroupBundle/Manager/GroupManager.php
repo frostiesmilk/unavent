@@ -5,7 +5,7 @@ namespace Flowber\GroupBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use Flowber\CircleBundle\Manager\CircleManager;
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 class GroupManager extends BaseManager {
 
@@ -103,7 +103,16 @@ class GroupManager extends BaseManager {
 
         return $groups;
     }
+    
+    public function getGroupMembers($circleId)
+    {
+        $groups = $this->getGroupRepository()->GetGroupsId($circleId);
 
+        $members = $this->getGroupRepository()->GetMembers($circleId);
+
+        return $members;
+    }
+    
     public function getGroupsNavbar($circleId)
     {
         $groups = $this->getGroupRepository()->GetFourGroupsId($circleId);

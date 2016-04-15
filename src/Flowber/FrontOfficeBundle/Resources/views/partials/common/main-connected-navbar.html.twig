@@ -34,8 +34,8 @@
                         </ul>
                         <ul class="dropbown-menu-col">
                             <li><a tabindex="-1" href="{{ path('flowber_group_create') }}">Créer un groupe</a></li>
-                            <li><a tabindex="-1" href="{{ path('flowber_group_search') }}">Chercher un groupe</a></li>
-                            <li><a tabindex="-1" href="{{ path('flowber_all_group_homepage') }}">Voir tous mes groupes </a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_group_research') }}">Chercher un groupe!</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_all_group', {'id': app.user.profile.id}) }}">Voir tous mes groupes </a></li>
                         </ul>
                     </ul>
                 </li>

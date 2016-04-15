@@ -25,6 +25,7 @@ class GroupController extends Controller
     public function getGroupAction($circleId)
     {
         $user=$this->getUser();  
+        
         $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId);
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
         $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
@@ -267,53 +268,90 @@ class GroupController extends Controller
     }
     
     public function getGroupMembersAction($id){
-        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
-        
-        $profilePicture = null;
-        $coverPicture = null;
+        $user = $this->getUser();        
+        $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($id);
+        $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
 
-        if ($group->getProfilePicture() != null){
-            $profilePicture = $group->getProfilePicture()->getWebPath();
-        }
-        if ($group->getCoverPicture() != null){ 
-            $coverPicture = $group->getCoverPicture()->getWebPath();
-        }
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;  
         
-         return $this->render('FlowberGroupBundle:Default:groupMembers.html.twig', 
-                array(
-                    'groupId' => $group->getId(),
-                    'title' => $group->getTitle(), 
-                    'subtitle' => $group->getSubtitle(), 
-                    'profilePicture' => $profilePicture, 
-                    'coverPicture' => $coverPicture ));
+        $members = $this->container->get("flowber_group.group")->getGroupMembers($id);
+        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
+
+        return $this->render('FlowberGroupBundle:Default:groupMembers.html.twig', 
+                array('circle' => $groupInfo,
+                'role' => $role,
+                'messageForm' => $privateMessageForm->createView(),
+                'navbar' => $navbar,
+                'members' => $memberInfos
+                 ));
     }
     
     public function getGroupEventsAction($id){
-        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
-        
-        $profilePicture = null;
-        $coverPicture = null;
+        $user = $this->getUser();        
+        $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($id);
+        $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
 
-        if ($group->getProfilePicture() != null){
-            $profilePicture = $group->getProfilePicture()->getWebPath();
-        }
-        if ($group->getCoverPicture() != null){ 
-            $coverPicture = $group->getCoverPicture()->getWebPath();
-        }
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;  
         
          return $this->render('FlowberGroupBundle:Default:groupEvents.html.twig', 
-                array(
-                    'groupId' => $group->getId(),
-                    'title' => $group->getTitle(), 
-                    'subtitle' => $group->getSubtitle(), 
-                    'profilePicture' => $profilePicture, 
-                    'coverPicture' => $coverPicture ));
+                array('circle' => $groupInfo,
+                'role' => $role,
+                'messageForm' => $privateMessageForm->createView(),
+                'navbar' => $navbar
+                 ));
+    }
+
+    public function getGroupGalleriesAction($id){
+        $user = $this->getUser();        
+        $group = $this->getDoctrine()->getManager()->getRepository('FlowberGroupBundle:Groups')->find($id);
+        $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($id);
+        $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;  
+        
+         return $this->render('FlowberGroupBundle:Default:groupGalleries.html.twig', 
+                array('circle' => $groupInfo,
+                'role' => $role,
+                'messageForm' => $privateMessageForm->createView(),
+                'navbar' => $navbar
+                 ));
+    }
+
+    public function getAllGroupsAction($id){
+        $user = $this->getUser();        
+
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;  
+        
+         return $this->render('FlowberGroupBundle:Default:allGroup.html.twig', 
+                array('navbar' => $navbar
+                 ));
     }
     
-    public function groupSearchAction(){
-
+    public function getSearchAction(){
+        $user = $this->getUser();        
         
-         return $this->render('FlowberGroupBundle:Default:groupSearch.html.twig', 
-                array());
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;
+        
+        return $this->render('FlowberGroupBundle:Default:groupSearch.html.twig', 
+                array('navbar' => $navbar
+                ));
     }
 }

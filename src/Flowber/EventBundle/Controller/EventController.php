@@ -204,11 +204,11 @@ class EventController extends Controller
         ));
     }
     
-    public function getEditEventAction($id)
+    public function getEditEventAction($circleId)
     {
         $user=$this->getUser();
-        $event = $this->container->get('flowber_event.event')->getEvent($id);        
-        $coverInfo = $this->container->get('flowber_event.event')->getCoverInfos($event);
+        $event = $this->container->get('flowber_event.event')->getEvent($circleId);        
+      //  $groupInfos = $this->container->get('flowber_event.event')->getEventInfos($group);
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event);
         $eventForm = $this->createForm(new EventType, $event);
         
@@ -231,7 +231,7 @@ class EventController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             if ($eventForm->isValid()) {
-                $event->setCreatedBy($user);  
+                $event->setCreatedBy($user->getProfile());  
                 
             }  else{
                 $error = true;
@@ -282,7 +282,7 @@ class EventController extends Controller
             'coverPictureForm' => $coverPictureForm->createView(),
             'circle' => $eventInfo,
             'navbar' => $navbar,
-            'coverInfo' => $coverInfo,
+            //'coverInfo' => $coverInfo,
         ));
     }
     
