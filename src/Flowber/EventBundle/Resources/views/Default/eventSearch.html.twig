@@ -1,12 +1,38 @@
-   <div id="events" class="user-profile-events user-profile">
-        
-            <div class="user-profile-category-row text-center">
-                <span class="user-profile-category-title">Mes évènements</span>
-            </div>
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
 
-            <div class="container user-profile-events-container">
-                <div class="row">
-                    {% for event in events %}
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
+{% endblock %}
+
+{% block smallMenu %}
+    {{parent()}}
+    <!-- BEGIN small screen menu -->
+    <!-- END small screen menu -->
+{% endblock %}
+
+{% block body %}
+
+    <!-- Main menu -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+       
+    <!-- Cover -->
+    <div class="jumbotron create-event-cover" style="background-image: url({{asset('assets/images/UserBundle/signIn/cover-streetsheeps.jpg')}})">    
+        <div class="container" >
+            <div class="row-fluid text-center">       
+                <h1 class="create-event-cover-title ">Recherchez votre prochaine aventure !</h1>
+                <form class="form-inline">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Rechercher un groupe">
+                </div>
+                <button type="submit" class="btn btn-default">Rechercher !</button>
+                </form>
+            </div>
+        </div>
+        <div class="container event-thumbnail-display-container">
+            <div class="row">
+                {% for event in events %}
                         <div class="col-md-3 col-xs-6">
                             <div class="thumbnail event-list-thumbnail ">
                                 <div class="caption event-name-frame">
@@ -38,19 +64,18 @@
                             </div>
                         </div>
                     {%endfor%}
-                </div>
             </div>
-        
-    </div>
-                                
-    <!-- My gallery -->   
-    <div id="photos" class="user-profile-gallery background-dark-blue user-profile">
-        <div class="user-profile-category-row  text-center">
-            <span class="user-profile-category-title font-white">Mes galeries</span>
         </div>
+    </div>
 
-        <div class="container user-profile-gallery-container">
-            <span class="font-white"> Gallerie une</span>
-            <div id="links"></div>
-        </div>
-    </div>
+    
+    <!-- footer -->                  
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}    
+    
+{% endblock %}

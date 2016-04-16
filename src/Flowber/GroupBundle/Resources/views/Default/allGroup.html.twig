@@ -3,13 +3,12 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/profile.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
 {% endblock %}
 
 {% block smallMenu %}
     {{parent()}}
     <!-- BEGIN small screen menu -->
-    {% include 'FlowberGroupBundle::partials/groupNavbarSmall.html.twig' %}
     <!-- END small screen menu -->
 {% endblock %}
 
@@ -17,42 +16,48 @@
     <!-- navbar top -->
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
        
-   <div class="user-profile-groups user-profile" style="padding-top : 50px">
+   <div class="user-profile-groups user-profile">
 
-        <div class="user-profile-category-row  container text-center">
-            <div class="row">
-                <span class="user-profile-category-title">Mes groupes</span>
+    <div class="jumbotron create-event-cover" style="background-image: url({{asset('assets/images/UserBundle/signIn/cover-streetsheeps.jpg')}})">    
+        <div class="container" >
+            <div class="row-fluid text-center">       
+                <h1 class="create-event-cover-title ">Tous mes groupes !</h1>
             </div>
         </div>
+    </div>
 
-        <div class="container user-profile-groups-container">
+        <div class="container user-profile-groups-container" style="padding-bottom : 50px">
             <div class="row">
-                {% for group in allGroup %}
-
-                    {% set groupProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
-                    {% if group.profilePicture is not null %}
-                        {% set groupProfilePicturePath = group.profilePicture.getWebPath() %}
-                    {% endif %} 
-
+                {% for group in groups %}
                     <div class="col-md-3 col-xs-6">
                         <div class="thumbnail group-list-thumbnail ">
                             <div class="caption group-name-frame">
-                                <a tabindex="-1" href="{{ path('flowber_group_homepage', {'id': group.id}) }}">
-                                    <h3 class="group-name">{{ group.title }}</h3>
+                                <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                                    <h3 class="group-name">{{group.title}}</h3>
                                 </a>
                             </div>
                             <div class="group-image-frame">
-                                <a tabindex="-1" href="{{ path('flowber_event_homepage', {'id': group.id}) }}">
-                                    <img class="group-image" src="{{asset(groupProfilePicturePath)}}" alt=""/>
-                                </a>                        
+                                <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                                    <img class="group-image" src="{{asset(group.profilePicture)}}" alt=""/>      
+                                </a>
                             </div>
+
                             <div class="caption text-center ">
-                                <p class="group-description">238 membres &middot; 2 amis</p>
-                                <button class="btn btn-default font-white group-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</button>
+                                <p class="group-description">
+                                    <a href="{{ path('flowber_group_members', {'id': group.id}) }}">
+                                        {{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}  
+                                    </a>
+                                    dont {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
+                                </p>
+                                <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
+                                    <button class="btn btn-default font-white group-join-button"> 
+                                        <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir le groupe 
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                {%endfor%}
             </div>  
         </div>  
     </div>

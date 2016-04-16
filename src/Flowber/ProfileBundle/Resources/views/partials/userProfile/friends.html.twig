@@ -25,14 +25,20 @@
                                     </div>
                                     <br/>
                                     <span class="user-profile-friends-list-element-details-friends">
-                                        {{friend.numberFriend}}  {% if friend.numberFriend <= 1 %} ami {% else %} amis {% endif %}
+                                        <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#friends">
+                                            {{friend.numberFriend}}  {% if friend.numberFriend <= 1 %} ami {% else %} amis {% endif %}
+                                        </a>
                                     </span> &middot; 
                                     <span class="user-profile-friends-list-element-details-events">
-                                        {{friend.numberEvent}}  {% if friend.numberEvent <= 1 %} sortie {% else %} sorties {% endif %}
+                                        <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#events"> 
+                                            {{friend.numberEvent}}  {% if friend.numberEvent <= 1 %} sortie {% else %} sorties {% endif %}
+                                        </a>
                                     </span>
                                     </span> &middot; 
                                     <span class="user-profile-friends-list-element-details-events">
+                                        <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#groups">
                                         {{friend.numberGroup}}  {% if friend.numberGroup <= 1 %} groupe {% else %} groupes {% endif %}
+                                        </a>
                                     </span>
                                     <br/>
                                 </div>

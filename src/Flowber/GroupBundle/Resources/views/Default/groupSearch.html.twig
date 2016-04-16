@@ -4,7 +4,7 @@
 {% block stylesheets %}
     {{parent()}}
     {# Put specific CSS below #}
-    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/create-event-page.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/> 
 {% endblock %}
 
 {% block body %}
@@ -17,15 +17,51 @@
         <div class="container" >
             <div class="row-fluid text-center">       
                 <h1 class="create-event-cover-title ">Recherchez votre prochaine aventure !</h1>
+                <form class="form-inline">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Rechercher un groupe">
+                </div>
+                <button type="submit" class="btn btn-default">Rechercher !</button>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- Form -->
     <div class="container">
-        <div class="row">
+        <div class="row" style="padding-top : 30px; padding-bottom : 50px;">
             <div class="col-xs-12">
-                Rechercher
+            <h2>Tous les groupes</h2>
+            {% for group in groups %}
+                <div class="col-md-3 col-xs-6">
+                    <div class="thumbnail group-list-thumbnail ">
+                        <div class="caption group-name-frame">
+                            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                                <h3 class="group-name">{{group.title}}</h3>
+                            </a>
+                        </div>
+                        <div class="group-image-frame">
+                            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                                <img class="group-image" src="{{asset(group.profilePicture)}}" alt=""/>      
+                            </a>
+                        </div>
+
+                        <div class="caption text-center ">
+                            <p class="group-description">
+                                <a href="{{ path('flowber_group_members', {'id': group.id}) }}">
+                                    {{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}  
+                                </a>
+                                dont {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
+                            </p>
+                            <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
+                                <button class="btn btn-default font-white group-join-button"> 
+                                    <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir le groupe 
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
             </div>
         </div>
     </div>

@@ -180,4 +180,19 @@ class EventRepository extends EntityRepository
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }
+    
+    /*
+     * Récupère tous les id des groupes auquel participe l'user circle
+     */
+    public function GetAllEventsId(){
+        $sql = "SELECT sub.circle_id "
+                . "FROM  subscribers sub "
+                . "WHERE sub.statut='event' "
+                . "ORDER BY sub.creationDate desc";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('circle_id', 'id');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
+    }    
 }

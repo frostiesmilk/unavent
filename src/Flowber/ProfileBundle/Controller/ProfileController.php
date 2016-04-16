@@ -112,8 +112,8 @@ class ProfileController extends Controller
         $currentUser = $this->getUser();
         $circleInfos = $this->container->get('flowber_profile.profile')->getProfileInfos($circleId);
         $friends = $this->container->get('flowber_profile.profile')->getFriends($circleId);
-        $groups = $this->container->get('flowber_group.group')->getGroups($circleId);
-        $events = $this->container->get('flowber_event.event')->getEvents($circleId);
+        $groups = $this->container->get('flowber_group.group')->getGroups($circleId, $currentUser->getProfile()->getId());
+        $events = $this->container->get('flowber_event.event')->getEvents($circleId, $currentUser->getProfile()->getId());
         $circleUser = $this->container->get('flowber_profile.profile')->getUser($circleId);        
         $role = $this->container->get('flowber_circle.circle')->getRole($currentUser, $circleUser->getProfile()->getId());
 
