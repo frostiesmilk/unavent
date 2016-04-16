@@ -396,27 +396,4 @@ class Post
     {
         return $this->gallery;
     }
-
-    /**
-     * Set attachedEvent
-     *
-     * @param \Flowber\CircleBundle\Entity\Circle $attachedEvent
-     * @return Post
-     */
-    public function setAttachedEvent(\Flowber\CircleBundle\Entity\Circle $attachedEvent = null)
-    {
-        $this->attachedEvent = $attachedEvent;
-
-        return $this;
-    }
-
-    /**
-     * Get attachedEvent
-     *
-     * @return \Flowber\CircleBundle\Entity\Circle 
-     */
-    public function getAttachedEvent()
-    {
-        return $this->attachedEvent;
-    }
 }

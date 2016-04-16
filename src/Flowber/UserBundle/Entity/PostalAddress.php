@@ -45,7 +45,7 @@ class PostalAddress
     /**
      * @var integer
      *
-     * @ORM\Column(name="zipcode", type="integer")
+     * @ORM\Column(name="zipcode", type="integer", nullable=true)
      */
     private $zipcode;
 

@@ -4,7 +4,7 @@
 <div role="tabpanel" class="tab-pane generic-blog-new-post-event" id="newevent">
     <form action="{{ path('add_post_with_event', { 'group_id' : circle.id } ) }}" method="post" {{ form_enctype(postWithEventForm) }}> 
         <div class="form-group row">
-            <label for="event-title" class="col-sm-3 control-label text-right">Ajouter un commentaire</label>
+            <label for="event-title" class="col-sm-3 control-label text-right">Ajouter un commentaire *</label>
             <div class="col-sm-9">
                 {{form_widget(postWithEventForm.message)}}
             </div>
@@ -14,39 +14,39 @@
             {{form_errors(postWithEventForm)}}                
         </div>
         {% endif %}
-        {% if form_errors(postWithEventForm.circle.maxParticipants) %}
+        {% if form_errors(postWithEventForm.attachedEvent.maxParticipants) %}
             <div class="form-error-custom">
-            {{form_errors(postWithEventForm.circle.maxParticipants)}}
+            {{form_errors(postWithEventForm.attachedEvent.maxParticipants)}}
             </div>
             {% endif %}
         <div class="form-group row">
             <label for="event-title" class="col-sm-3 control-label text-right">Titre *</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.title)}}
+                {{form_widget(postWithEventForm.attachedEvent.title)}}
             </div>
         </div>
         <div class="form-group row">
             <label for="event-tease" class="col-sm-3 control-label text-right">Phrase d'accroche</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.subtitle)}}
+                {{form_widget(postWithEventForm.attachedEvent.subtitle)}}
             </div>
         </div>
         <div class="form-group row">
             <label for="event-category" class="col-sm-3 control-label text-right">Catégories</label>            
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.categories)}}
+                {{form_widget(postWithEventForm.attachedEvent.categories)}}
             </div>
         </div>             
         <div class="form-group row">
             <label for="event-description" class="col-sm-3 control-label text-right">Description</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.description)}}
+                {{form_widget(postWithEventForm.attachedEvent.description)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-description" class="col-sm-3 control-label text-right">{{form_label(postWithEventForm.circle.maxParticipants)}}</label>
+            <label for="event-description" class="col-sm-3 control-label text-right">{{form_label(postWithEventForm.attachedEvent.maxParticipants)}}</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.maxParticipants)}}
+                {{form_widget(postWithEventForm.attachedEvent.maxParticipants)}}
             </div>
         </div>
         <div class="form-group row">
@@ -60,43 +60,43 @@
          <div class="form-group row">
             <label for="event-place-name" class="col-sm-3 control-label text-right">Nom</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.postalAddress.name)}}
+                {{form_widget(postWithEventForm.attachedEvent.postalAddress.name)}}
             </div>
         </div>                     
         <div class="form-group row">
             <label for="event-address" class="col-sm-3 control-label text-right">Adresse</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.postalAddress.address)}}
+                {{form_widget(postWithEventForm.attachedEvent.postalAddress.address)}}
             </div>
         </div>
         <div class="form-group row">
             <label for="event-city" class="col-sm-3 control-label text-right">Ville</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.postalAddress.city)}}
+                {{form_widget(postWithEventForm.attachedEvent.postalAddress.city)}}
             </div>
         </div>
         <div class="form-group row">
             <label for="event-zipcode" class="col-sm-3 control-label  text-right">Code postal</label>
             <div class="col-sm-3">
-                {{form_widget(postWithEventForm.circle.postalAddress.zipcode)}}
+                {{form_widget(postWithEventForm.attachedEvent.postalAddress.zipcode)}}
             </div>
             <label for="event-country" class="col-sm-2 control-label  text-right">Pays</label>
             <div class="col-sm-4">
-                {{form_widget(postWithEventForm.circle.postalAddress.country)}}
+                {{form_widget(postWithEventForm.attachedEvent.postalAddress.country)}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="event-date" class="col-sm-3 control-label  text-right">Début *</label>
+            <label for="event-date" class="col-sm-3 control-label  text-right">Début</label>
             <div class="col-sm-9 form-inline">
                 <div class="form-inline">
                     <div class="input-group">
-                        {{form_widget(postWithEventForm.circle.startDate, {'attr': {'placeholder': 'Date de début'}})}} 
+                        {{form_widget(postWithEventForm.attachedEvent.startDate, {'attr': {'placeholder': 'Date de début *'}})}} 
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
                     </div>
                     <div class="input-group">
-                        {{form_widget(postWithEventForm.circle.startTime, {'attr': {'placeholder': 'Heure de début'}})}}
+                        {{form_widget(postWithEventForm.attachedEvent.startTime, {'attr': {'placeholder': 'Heure de début'}})}}
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
@@ -109,13 +109,13 @@
             <div class="col-sm-9 form-inline">
                 <div class="form-inline">
                     <div class="input-group">
-                        {{form_widget(postWithEventForm.circle.endDate, {'attr': {'placeholder': 'Date de fin'}})}} 
+                        {{form_widget(postWithEventForm.attachedEvent.endDate, {'attr': {'placeholder': 'Date de fin'}})}} 
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
                     </div>
                     <div class="input-group">                            
-                        {{form_widget(postWithEventForm.circle.endTime, {'attr': {'placeholder': 'Heure de fin'}})}}
+                        {{form_widget(postWithEventForm.attachedEvent.endTime, {'attr': {'placeholder': 'Heure de fin'}})}}
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
@@ -126,10 +126,10 @@
         <div class="form-group row">
             <label class="col-sm-3 control-label  text-right">Visibilité *</label>
             <div class="col-sm-9">
-                {{form_widget(postWithEventForm.circle.privacy, {'label_attr':{'class':'radio-inline'}})}}
+                {{form_widget(postWithEventForm.attachedEvent.privacy, {'label_attr':{'class':'radio-inline'}})}}
             </div>
         </div>
-        {{form_widget(postWithEventForm.circle.postalAddress.coordinates)}}
+        {{form_widget(postWithEventForm.attachedEvent.postalAddress.coordinates)}}
         <div class="form-group row">                
             <div class="col-sm-offset-3 col-sm-9">
                 <button type="submit" class="btn btn-default event-submit">Continuer</button>

@@ -41,6 +41,7 @@ class EventType extends AbstractType
                                                     'widget' => 'single_text',
                                                     'input' => 'datetime',
                                                     'attr' => array('class' => 'flowber_timepicker'),
+                                                    'required' => false,
             ))
             ->add('endDate',      'date', array(
                                                     'widget' => 'single_text',
