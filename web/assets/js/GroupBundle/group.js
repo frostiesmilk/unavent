@@ -14,4 +14,4 @@
  * For Google Map
  * @type String
  */
-var initMapPrefix = "flowber_postbundle_post_circle_";
+var initMapPrefix = "flowber_postbundle_post_attachedEvent_";

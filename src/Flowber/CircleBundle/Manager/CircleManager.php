@@ -139,7 +139,7 @@ class CircleManager extends BaseManager {
         
         $circleInfos = $this->getCoverInfos($circle);
         $circleInfos['creationDate'] = 'le ' . $circle->getCreationDate()->format('d/m/Y') . ' à ' . $circle->getCreationDate()->format('H:i:s');
-        $circleInfos['createdBy'] = $circle->getCreatedBy()->getUser()->getFirstname() . ' ' . $circle->getCreatedBy()->getUser()->getSurname();
+        $circleInfos['createdBy'] = $circle->getCreatedBy()->getTitle();
         $circleInfos['idCreatedBy'] = $circle->getCreatedBy()->getId();
         $circleInfos['description'] = $circle->getDescription();
         $circleInfos['privacy'] = $circle->getPrivacy();

@@ -160,6 +160,11 @@
                         {% endfor %}
                     </div>
                     {% endif %}
+                    
+                    
+                    {% if post.attachedEvent %}
+                        {% include 'FlowberPostBundle::partials/showPostEvent.html.twig' %}
+                    {% endif %}
                 </div>
                 <ul id="comments-for-post-{{post.id}}" class="media-list generic-blog-post-comments">
                     <li hidden name="comment-empty" class="media generic-blog-post-comment">

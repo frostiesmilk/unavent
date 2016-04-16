@@ -22,7 +22,7 @@ class Post
     private $id;
 
     /**
-      * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+      * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
       */
     private $createdBy;
 
@@ -70,7 +70,7 @@ class Post
 
     /**
      * @ORM\OneToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
-     * @ORM\JoinColumn(name="displayedCircleId", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="attachedEvent", referencedColumnName="id", nullable=true)
      */
     private $attachedEvent;
     
@@ -183,29 +183,6 @@ class Post
     public function getLikes()
     {
         return $this->likes;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param \Flowber\UserBundle\Entity\User $createdBy
-     * @return Post
-     */
-    public function setCreatedBy(\Flowber\UserBundle\Entity\User $createdBy)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return \Flowber\UserBundle\Entity\User 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
     }
 
     /**
@@ -418,5 +395,28 @@ class Post
     public function getAttachedEvent()
     {
         return $this->attachedEvent;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $createdBy
+     * @return Post
+     */
+    public function setCreatedBy(\Flowber\CircleBundle\Entity\Circle $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }
