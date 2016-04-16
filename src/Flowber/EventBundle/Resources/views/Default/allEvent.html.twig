@@ -4,65 +4,36 @@
 {% block stylesheets %}
     {{parent()}}
     <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
-    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/all-event.css') }}"/> 
 {% endblock %}
 
 {% block smallMenu %}
     {{parent()}}
     <!-- BEGIN small screen menu -->
-    
-
+    {% include 'FlowberEventBundle::partials/eventNavbarSmall.html.twig' %}
     <!-- END small screen menu -->
 {% endblock %}
 
 {% block body %}
-    <!-- navbar top -->
-    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %} 
+
+    <!-- Main menu -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
-   <div class="all-event">
-        <div class="category-row text-center">
-            <span class="category-title">Mes évènements</span>
+    <!-- Event Banner -->  
+    {% include 'FlowberCircleBundle::partials/cover.html.twig' %}           
+
+    <!-- Second menu -->
+    {% include 'FlowberProfileBundle::partials/userProfile/profileNavbar.html.twig' %} 
+   
+    <!-- page -->
+        <div id="friends" class="user-profile-friends user-profile">
+        <div class="user-profile-category-row text-center">
+            <span class="user-profile-category-title">Toutes mes sorties</span>
         </div>
 
-        <div class="container event-thumbnail-display-container">
-            <div class="row">
-                {% for event in allEvent %}
-                    
-                    {% set eventProfilePicturePath = 'assets/images/ProfileBundle/Default/profilePictureDefault.png' %} {# default User Cover #}
-                    {% if event.profilePicture is not null %}
-                        {% set eventProfilePicturePath = event.profilePicture.getWebPath() %}
-                    {% endif %} 
-                    
-                    <div class="col-md-3 col-xs-6">
-                        <div class="thumbnail event-list-thumbnail ">
-                            <div class="caption event-name-frame">
-                                <a tabindex="-1" href="{{ path('flowber_event_homepage', {'id': event.id}) }}">
-                                    <h3 class="event-name">{{ event.title }}</h3>
-                                </a>
-                            </div>
-                            <div class="event-image-frame">
-                                <a tabindex="-1" href="{{ path('flowber_event_homepage', {'id': event.id}) }}">
-                                    <img class="event-image" src="{{asset(eventProfilePicturePath)}}" alt=""/>
-                                </a>
-                                <p class="event-image-frame-date">
-                                    <span class="event-image-frame-date-day">{{ event.startDate|date("\\l\\e d/m/Y") }}</span><br/>                                                      
-                                    <span class="event-image-frame-date-day">{{ event.startTime|date("\\à g:i") }}</span>                                                       
-                                </p>
-                            </div>
-
-                            <div class="caption text-center ">
-                                <p class="event-description">238 participants &middot; 3 amis {% if event.postalAddress.city is defined %}&middot; {{ event.postalAddress.city }}{% endif%}</p>
-                                <button class="btn btn-default font-white event-join-button"><span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Rejoindre</button>
-                            </div>
-                        </div>
-                    </div>  
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-                                
+   
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
 {% endblock %}
 
 {% block javascripts %}

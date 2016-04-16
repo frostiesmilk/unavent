@@ -51,8 +51,8 @@
                         </ul>
                         <ul class="dropbown-menu-col">
                             <li><a tabindex="-1" href="{{ path('flowber_create_event_homepage') }}">Créer une sortie</a></li>
-                            <li><a tabindex="-1" href="{{ path('wybe_front_office_look_for_event') }}">Chercher une sortie</a></li>
-                            <li><a tabindex="-1" href="{{ path('flowber_all_event_homepage') }}">Voir toutes mes sorties </a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_event_search') }}">Chercher une sortie</a></li>
+                            <li><a tabindex="-1" href="{{ path('flowber_all_event_homepage', {'id': app.user.profile.id}) }}">Voir toutes mes sorties </a></li>
                         </ul>
                     </ul>
                 </li>

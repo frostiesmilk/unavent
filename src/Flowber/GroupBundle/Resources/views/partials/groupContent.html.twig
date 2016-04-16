@@ -14,30 +14,31 @@
                              <a href="{{ path('flowber_profile_homepage', {'circleId': circle.idCreatedBy}) }}"> {{ circle.createdBy }} </a>
                         </span></td>
                     </tr>
+                    {% if circle.categories | length %}{# if categories are specified #}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/category.png')}}" alt="categories"/></td>
                         <td>
-                            {% if circle.categories | length %}{# if categories are specified #}
-                                {% for category in circle.categories %}
-                                    <span>{{ category }}</span>      
-                                    {% if not loop.last %}<span>,</span> {% endif %}
-                                {% endfor %}
-                            {% else %}
-                                <span>Catégorie non spécifiée</span>
-                            {% endif %}
+                            {{circle.categories}}
                         </td>
                     </tr>                        
+                    {% else %}
+                        <span>Catégorie non spécifiée</span>
+                    {% endif %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
-                            8 membres dont 1 ami<br/>
-                            <span class="group-details-participant">Marie BOIVENT</span>, <span class="group-details-participant">Equina YOU</span>
+                            <a href="{{ path('flowber_group_members', {'id': circle.id}) }}">
+                                {{circle.members}} {% if circle.members <= 1 %} membre {% else %} membres {% endif %}
+                            </a>
+                            dont {{circle.friends}} {% if circle.friends <= 1 %} ami {% else %} amis {% endif %}<br/>
                         </td>
                     </tr>
+                    {% if circle.description | length %}{# if categories are specified #}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td>{{circle.description}}</td>
                     </tr>
+                    {% endif %}
                     {% if role != "creator" %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>

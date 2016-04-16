@@ -42,7 +42,10 @@
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
-                            {{circle.participantsNumber}} {% if circle.participantsNumber <= 1 %} participant {% else %} participants {% endif %}<br/>
+                            {{circle.members}} {% if circle.members <= 1 %} participant {% else %} participants {% endif %}
+                            {% if circle.friends is not null %}
+                                dont {{circle.friends}} {% if circle.friends <= 1 %} ami {% else %} amis {% endif %}                         
+                            {% endif %}
                         </td>
                     </tr>
                     <tr>

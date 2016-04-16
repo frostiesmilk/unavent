@@ -29,7 +29,7 @@ class GroupManager extends BaseManager {
         return $group;
     } 
     
-    public function getGroupInfos($group)
+    public function getGroupInfos($group, $current)
     {
         $group = $this->getGroup($group);
         
@@ -38,8 +38,8 @@ class GroupManager extends BaseManager {
         //$groupInfo['participantsNumber'] = $this->getCircleRepository()->getParticipantsNumber($group);
         //$groupInfo['participantsNames'] = $this->getCircleRepository()->getParticipantsNames($group);
         $count=0;
-        $circleInfos['categories']= new \Doctrine\Common\Collections\ArrayCollection();
-
+        $circleInfos['members'] = $this->getGroupRepository()->GetCountMembers($group->getId());
+        $circleInfos['friends'] = $this->getFriendsInGroup($group->getId(), $current);
         if ( count($group->getCategories()) == 0){
             $circleInfos['categories']='Aucune catégorie';
         } else {
@@ -85,7 +85,7 @@ class GroupManager extends BaseManager {
         return $nbFriend;
     } 
     
-    public function getGroups($circleId)
+    public function getGroups($circleId, $current)
     {
         $groups = $this->getGroupRepository()->GetGroupsId($circleId);
         if ( count($groups) != 0){
@@ -96,7 +96,26 @@ class GroupManager extends BaseManager {
                  $subtitle = substr($this->cm->getCircle($groups[$count]['id'])->getSubtitle(), 0, 75).'...';                
                 $groups[$count]['subtitle'] = $subtitle;
                 $groups[$count]['members'] = $this->getGroupRepository()->GetCountMembers($groups[$count]['id']);
-                $groups[$count]['friends'] = $this->getFriendsInGroup($groups[$count]['id'], $circleId);
+                $groups[$count]['friends'] = $this->getFriendsInGroup($groups[$count]['id'], $current);
+                $count++;
+            } 
+        }        
+
+        return $groups;
+    }
+
+    public function getAllGroups($current)
+    {
+        $groups = $this->getGroupRepository()->GetAllGroupsId();
+        if ( count($groups) != 0){
+            $count=0;
+            foreach ($groups as $group){
+                $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+                $groups[$count]['profilePicture'] = $this->cm->getProfilePicture($groups[$count]['id']);
+                 $subtitle = substr($this->cm->getCircle($groups[$count]['id'])->getSubtitle(), 0, 75).'...';                
+                $groups[$count]['subtitle'] = $subtitle;
+                $groups[$count]['members'] = $this->getGroupRepository()->GetCountMembers($groups[$count]['id']);
+                $groups[$count]['friends'] = $this->getFriendsInGroup($groups[$count]['id'], $current);
                 $count++;
             } 
         }        
@@ -106,8 +125,6 @@ class GroupManager extends BaseManager {
     
     public function getGroupMembers($circleId)
     {
-        $groups = $this->getGroupRepository()->GetGroupsId($circleId);
-
         $members = $this->getGroupRepository()->GetMembers($circleId);
 
         return $members;

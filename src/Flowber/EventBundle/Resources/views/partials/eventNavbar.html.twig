@@ -17,59 +17,61 @@
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil">
-                            <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> 
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#modalMessage" title='Envoyez un mail au responsable de la sortie'>
-                            <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" title='Inviter des gens à participer à la sortie'>
-                            <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/tag-person.png')}}"/>
-                        </a>
-                    </li>
-                    {% if role == "no" %}
-                        <li id="sendRequest" style="display:inline">
-                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
-                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                    {% if role != "creator" %}
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil">
+                                <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> 
                             </a>
                         </li>
-                        <li id="deleteRequest"  style="display:none">
-                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
-                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
-                            </a>
-                        </li>                        
-                    {% elseif role == "member"  %}
-                        <li id="unsubscribe" style="display:inline">
-                            <a href="#" data-toggle="modal" data-target="#modalUnsubscribe" title='Se désinscrire de la sortie {{ circle.title }}' data-whatever="Voulez-vous vous désinscrire de la sortie {{ circle.title }}">
-                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/removeFriend.png')}}"/>
-                            </a> 
-                        </li>
-                        <li id="deleteRequest"  style="display:none">
-                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
-                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
-                            </a>
-                        </li>  
-                        <li id="sendRequest" style="display:none">
-                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
-                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#modalMessage" title='Envoyez un mail au responsable de la sortie'>
+                                <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/>
                             </a>
                         </li>
-                    {% elseif role == "requestSent"  %}
-                        <li id="deleteRequest"  style="display:inline">
-                            <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
-                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                        <li>
+                            <a href="#" title='Inviter des gens à participer à la sortie'>
+                                <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/tag-person.png')}}"/>
                             </a>
                         </li>
-                        <li id="sendRequest" style="display:none">
-                            <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
-                                <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
-                            </a>
-                        </li>
+                        {% if role == "no" %}
+                            <li id="sendRequest" style="display:inline">
+                                <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
+                                    <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                                </a>
+                            </li>
+                            <li id="deleteRequest"  style="display:none">
+                                <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
+                                    <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                                </a>
+                            </li>                        
+                        {% elseif role == "member"  %}
+                            <li id="unsubscribe" style="display:inline">
+                                <a href="#" data-toggle="modal" data-target="#modalUnsubscribe" title='Se désinscrire de la sortie {{ circle.title }}' data-whatever="Voulez-vous vous désinscrire de la sortie {{ circle.title }}">
+                                    <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/removeFriend.png')}}"/>
+                                </a> 
+                            </li>
+                            <li id="deleteRequest"  style="display:none">
+                                <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
+                                    <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                                </a>
+                            </li>  
+                            <li id="sendRequest" style="display:none">
+                                <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
+                                    <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                                </a>
+                            </li>
+                        {% elseif role == "requestSent"  %}
+                            <li id="deleteRequest"  style="display:inline">
+                                <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
+                                    <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
+                                </a>
+                            </li>
+                            <li id="sendRequest" style="display:none">
+                                <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
+                                    <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                     <li>
                         <a class="back-top" href="#" title="Remonter en haut de la page">

@@ -9,7 +9,7 @@
 {% block smallMenu %}
     {{parent()}}
     <!-- BEGIN small screen menu -->
-    {% include 'FlowberEventBundle::partials/event-navbar-small.html.twig' %}
+    {% include 'FlowberEventBundle::partials/eventNavbarSmall.html.twig' %}
     <!-- END small screen menu -->
 {% endblock %}
 
@@ -19,19 +19,55 @@
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
     
     <!-- Event Banner -->  
-    {% include 'FlowberEventBundle::partials/eventCover.html.twig' %}
+    {% include 'FlowberCircleBundle::partials/cover.html.twig' %}           
 
     <!-- Second menu -->
-    {% include 'FlowberEventBundle::partials/event-navbar.html.twig' %}
+    {% include 'FlowberEventBundle::partials/eventNavbar.html.twig' %}
    
     <!-- page -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Membres</h1>
+        <div id="friends" class="user-profile-friends user-profile">
+        <div class="user-profile-category-row text-center">
+            <span class="user-profile-category-title">Participants</span>
+        </div>
+            <br>          
+        <div class="container">
+            <div class="row user-profile-friends-list">
+                {% for friend in members %}
+                    <div class=" col-md-4 col-sm-6 col-xs-12">
+                        <div class="media user-profile-friends-list-element">
+                            <div class="media-left">
+                                <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}"> 
+                                    <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset(friend.profilePicture)}}')"></div>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="user-profile-friends-list-element-details">
+                                    <a class="user-profile-friends-list-element-details-name" href="{{ path('api_get_circle', { 'circleId' : friend.id } ) }}" title=" voir le profil de {{friend.name}}">
+                                        <b>{{friend.name}}</b>
+                                    </a>
+                                    <br/>
+                                    <div class="user-profile-friends-list-element-subtitle-friends">
+                                        {{friend.subtitle}}
+                                    </div>
+                                    <br/>
+                                    <span class="user-profile-friends-list-element-details-friends">
+                                        {{friend.numberFriend}}  {% if friend.numberFriend <= 1 %} ami {% else %} amis {% endif %}
+                                    </span> &middot; 
+                                    <span class="user-profile-friends-list-element-details-events">
+                                        {{friend.numberEvent}}  {% if friend.numberEvent <= 1 %} sortie {% else %} sorties {% endif %}
+                                    </span>
+                                    </span> &middot; 
+                                    <span class="user-profile-friends-list-element-details-events">
+                                        {{friend.numberGroup}}  {% if friend.numberGroup <= 1 %} groupe {% else %} groupes {% endif %}
+                                    </span>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                {% endfor %}
             </div>
         </div>
-    </div>  
    
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}

@@ -24,8 +24,11 @@
                         </div>
 
                         <div class="caption text-center ">
-                            <p class="font-white group-description">{{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}   
-                                &middot; {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
+                            <p class="font-white group-description">
+                                <a href="{{ path('flowber_group_members', {'id': group.id}) }}">
+                                    {{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}  
+                                </a>
+                                dont {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
                             </p>
                             <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
                                 <button class="btn btn-default font-white group-join-button"> 

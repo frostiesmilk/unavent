@@ -30,7 +30,7 @@ class EventManager extends BaseManager {
         return $event;
     } 
 
-    public function getEventInfos($event)
+    public function getEventInfos($event, $current)
     {
         $event = $this->getEvent($event);
         
@@ -58,6 +58,8 @@ class EventManager extends BaseManager {
             } 
         }
         
+        $circleInfos['members'] = $this->getEventRepository()->GetCountMembers($event->getId());
+        $circleInfos['friends'] = $this->getFriendsInEvent($event->getId(), $current);
         $circleInfos['address'] = $event->getPostalAddress()->getAddress();
         $circleInfos['name'] = $event->getPostalAddress()->getName();
         $circleInfos['zipcode'] = $event->getPostalAddress()->getZipcode();
@@ -114,6 +116,14 @@ class EventManager extends BaseManager {
      
         return $isAdmin;
     }  
+    
+    public function getEventMembers($circleId)
+    {
+        $members = $this->getEventRepository()->GetMembers($circleId);
+
+        return $members;
+    }    
+    
      public function getFriendsInEvent($circleId, $id)
     {
         $friends = $this->getEventRepository()->GetFriendsId($id);
@@ -138,7 +148,7 @@ class EventManager extends BaseManager {
         return $nbFriend;
     }
     
-    public function getEvents($circleId)
+    public function getEvents($circleId, $current)
     {
         $events = $this->getEventRepository()->GetEventsId($circleId);
         if ( count($events) != 0){
@@ -152,7 +162,7 @@ class EventManager extends BaseManager {
                 $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
                 $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
                 $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
-                $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $circleId);
+                $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $current);
                 $count++;
             } 
         }        
@@ -173,6 +183,25 @@ class EventManager extends BaseManager {
         return $events;
     }   
     
+    public function getAllGroups($current)
+    {
+        $events = $this->getEventRepository()->GetAllEventsId();
+        $count=0;
+        foreach ($events as $eventss){
+            $event = $this->getEvent($events[$count]['id']);
+            $events[$count]['title'] = $event->getTitle();
+            $events[$count]['city'] = $event->getPostalAddress()->getCity();
+            $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
+            $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
+            $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
+            $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
+            $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
+            $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $current);
+            $count++;
+        } 
+
+        return $events;
+    }
     
     public function getEventRepository()
     {
