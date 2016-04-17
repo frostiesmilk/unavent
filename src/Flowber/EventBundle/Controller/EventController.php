@@ -286,7 +286,8 @@ class EventController extends Controller
         $eventInfo = $this->container->get('flowber_circle.circle')->getCoverInfos($id, $user->getProfile()->getId());
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
-        
+        $events = $this->container->get('flowber_event.event')->getEvents($user->getProfile()->getId(), $user->getProfile()->getId());
+
         $members = $this->container->get("flowber_event.event")->getEventMembers($id);
         $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
         //die(var_dump($members));
@@ -298,7 +299,7 @@ class EventController extends Controller
         return $this->render('FlowberEventBundle:Default:allEvent.html.twig', 
                 array( 
                 'role' => $role,
-                //'members' => $memberInfos,
+                'events' => $events,
                 'messageForm' => $privateMessageForm->createView(),
                 'circle' => $eventInfo,
                 'navbar' => $navbar));
@@ -306,7 +307,7 @@ class EventController extends Controller
     
     public function getEventSearchPageAction(){
         $user = $this->getUser();        
-        $events = $this->container->get('flowber_event.event')->getAllGroups($user->getProfile()->getId());
+        $events = $this->container->get('flowber_event.event')->getAllEvents($user->getProfile()->getId());
        
         
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());

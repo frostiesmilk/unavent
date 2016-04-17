@@ -183,7 +183,7 @@ class EventManager extends BaseManager {
         return $events;
     }   
     
-    public function getAllGroups($current)
+    public function getAllEvents($current)
     {
         $events = $this->getEventRepository()->GetAllEventsId();
         $count=0;
