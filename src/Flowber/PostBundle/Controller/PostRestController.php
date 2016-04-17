@@ -151,6 +151,16 @@ class PostRestController extends Controller
         return $repsData;
     }
     
+    /**
+     * Create new post with event
+     * @param Request $request
+     * @param int $circleId
+     * @return View|array
+     */
+    public function postPostEventAction(Request $request, $circleId){
+        
+    }
+    
     public function createPostGalleryView($galleryId){
         $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
         return $this->renderView('FlowberPostBundle:partials:postGallery.html.twig', array('postGallery'=>$postGallery));
