@@ -32,11 +32,10 @@ class GroupController extends Controller
         $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
         
         //preparing new form for a post
-        $newPost = new Post();
         $postWithEvent = new Post();
         $postWithPictures = new Post();
-        $postForm = $this->createForm(new PostType(), $newPost);
         $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);
+        
         $postWithEventForm = $this->createForm(new PostWithEventType, $postWithEvent);      
            
         $request = $this->get('request');
@@ -91,7 +90,6 @@ class GroupController extends Controller
                 'role' => $role,
                 'posts' => $posts,
                 'navbar' => $navbar,
-                'postForm' => $postForm->createView(),
                 'postWithPicturesForm' => $postWithPicturesForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),
                 'commentForm' => $commentsForms,

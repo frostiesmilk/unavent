@@ -1,7 +1,7 @@
 {% form_theme postWithEventForm 'bootstrap_3_layout.html.twig' %}
 
 <div role="tabpanel" class="tab-pane generic-blog-new-post-event" id="newevent">
-    {{form_start(postWithEventForm)}}
+    <form action="" method="post">
         {% if form_errors(postWithEventForm) %}
         <div class="form-error-custom">
             {{form_errors(postWithEventForm)}}                
@@ -129,5 +129,5 @@
             </div>
         </div>
         {{ form_rest(postWithEventForm) }}
-    {{form_end(postWithEventForm)}}
+    </form>
 </div>

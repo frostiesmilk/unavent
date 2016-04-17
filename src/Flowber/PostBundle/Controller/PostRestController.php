@@ -108,18 +108,11 @@ class PostRestController extends Controller
         
          // if form has been submitted
         $form->handleRequest($request);
-
-        $postGalleryView = null;
+        $postGalleryView = "";
         if($form->isValid()){
             $em = $this->getDoctrine()->getManager();
             
-            if(count($post->getGallery()->getPhotos())<1){ // no gallery
-                $post->setGallery(null);
-            }else{ // prepare gallery view
-                $postGalleryView = $this->createPostGalleryView($post->getGallery()->getId());
-            }
-            
-            $post->setCreatedBy($this->getUser());
+            $post->setCreatedBy($this->getUser()->getProfile());
             $post->setCircle($circle);                
             $em->persist($post);  
             
@@ -130,9 +123,12 @@ class PostRestController extends Controller
                 return $repsData;
             }
             
-//            $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($post->getGallery()->getId());
+            if(count($post->getGallery()->getPhotos())<1){ // no gallery
+                $post->setGallery(null);
+            }else{ // prepare gallery view
+                $postGalleryView = $this->createPostGalleryView($post->getGallery()->getId());
+            }
             
-          
             // create new comment form
             $comment = new Comment();
             $commentForm = $this->createForm(new CommentType, $comment);
@@ -195,8 +191,8 @@ class PostRestController extends Controller
             return $view;
         }
 
-        $currentUser = $this->getUser();
-        if($currentUser == $post->getCreatedBy()){ // checking if allowed to delete post (by author)
+        $currentUserProfile = $this->getUser()->getProfile();
+        if($currentUserProfile == $post->getCreatedBy()){ // checking if allowed to delete post (by author)
             $post->setDeleted();
             $em = $this->getDoctrine()->getManager();
 

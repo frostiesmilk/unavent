@@ -28,9 +28,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-large">
                         <ul class="dropbown-menu-col">
-                            {% for group in navbar.group %}                              
-                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">{{group.title}}</a></li>
-                            {% endfor %}
+                            {% if navbar.group is defined %}
+                                {% for group in navbar.group %}                              
+                                    <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">{{group.title}}</a></li>
+                                {% endfor %}
+                            {% endif %}
                         </ul>
                         <ul class="dropbown-menu-col">
                             <li><a tabindex="-1" href="{{ path('flowber_group_create') }}">Créer un groupe</a></li>
@@ -45,9 +47,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-large">
                         <ul class="dropbown-menu-col">
-                            {% for event in navbar.event %}                              
-                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">{{event.title}}</a></li>
-                            {% endfor %}
+                            {% if navbar.group is defined %}
+                                {% for event in navbar.event %}                              
+                                    <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">{{event.title}}</a></li>
+                                {% endfor %}
+                            {% endif %}
                         </ul>
                         <ul class="dropbown-menu-col">
                             <li><a tabindex="-1" href="{{ path('flowber_create_event_homepage') }}">Créer une sortie</a></li>
