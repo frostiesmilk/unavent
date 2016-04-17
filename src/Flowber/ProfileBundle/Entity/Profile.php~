@@ -1,0 +1,51 @@
+<?php
+
+namespace Flowber\ProfileBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Flowber\UserBundle\Entity\User as User;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Flowber\GalleryBundle\Entity\Gallery as Gallery;
+use Flowber\CircleBundle\Entity\Circle;
+
+/**
+ * Profile
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Flowber\ProfileBundle\Entity\ProfileRepository")
+ */
+class Profile extends Circle
+{
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="job", type="string", length=255, nullable=true)
+     */
+    private $job;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Hobby", cascade={"persist"})
+     * @ORM\JoinTable(name="users_hobbies",
+     *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="hobby_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $hobbies;
+    
+    /**
+     *@ORM\OneToOne(targetEntity="Flowber\UserBundle\Entity\User", inversedBy="profile")
+     *@ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();  
+        
+        $this->hobbies = new ArrayCollection(); 
+    }
+}

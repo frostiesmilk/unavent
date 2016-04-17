@@ -1,0 +1,102 @@
+<?php
+
+namespace Flowber\GroupBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Flowber\GalleryBundle\Entity\Gallery;
+use Flowber\CircleBundle\Entity\Circle;
+// REST & JMSserializer
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups as AnnotGroups;
+use JMS\Serializer\Annotation\VirtualProperty;
+
+/**
+ * Groups
+ *
+ * @ORM\Table()
+ * @ORM\Entity (repositoryClass="Flowber\GroupBundle\Entity\GroupRepository")
+ * 
+ * @ExclusionPolicy("all")
+ */
+class Groups extends Circle
+{
+    /**
+     * @ORM\ManyToMany(targetEntity="Flowber\FrontOfficeBundle\Entity\Category")
+     */
+    private $categories;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();        
+
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set categories
+     *
+     * @param string $categories
+     * @return Groups
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return string 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Get Group categories titles
+     * @return string array
+     * 
+     * @VirtualProperty
+     */
+    public function getCategoriesTitle(){
+        $categories_titles = array();
+        $categories = $this->getCategories();
+        
+        foreach($categories AS $category){
+            $categories_titles[] = $category->getTitle();
+        }
+        
+        return $categories_titles;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \Flowber\FrontOfficeBundle\Entity\Category $categories
+     * @return Groups
+     */
+    public function addCategory(\Flowber\FrontOfficeBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Flowber\FrontOfficeBundle\Entity\Category $categories
+     */
+    public function removeCategory(\Flowber\FrontOfficeBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+}

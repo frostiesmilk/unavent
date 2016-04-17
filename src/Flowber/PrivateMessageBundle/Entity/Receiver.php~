@@ -1,0 +1,44 @@
+<?php
+
+namespace Flowber\PrivateMessageBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Receiver
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Flowber\PrivateMessageBundle\Entity\ReceiverRepository")
+ */
+class Receiver
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Flowber\PrivateMessageBundle\Entity\PrivateMessage", inversedBy="messageTo")
+     */
+    private $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\JoinColumn(name="receiver", referencedColumnName="id", nullable=true)
+     */
+    private $receiver;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statut", type="string", length=255)
+     */
+    private $statut;
+
+
+
+}

@@ -1,0 +1,57 @@
+<?php
+
+namespace Flowber\CircleBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Subscribers
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Flowber\CircleBundle\Entity\SubscribersRepository")
+ */
+class Subscribers
+{
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     */
+    private $circle;
+
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     */
+    private $subscriber;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="creationDate", type="datetime")
+     */
+    private $creationDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statut", type="string", length=255)
+     */
+    private $statut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=255)
+     */
+    private $role;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="string", length=255)
+     */
+    private $message;
+
+
+
+}
