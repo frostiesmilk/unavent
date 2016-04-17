@@ -1,14 +1,7 @@
-{% form_theme postWithEventForm.message 'bootstrap_3_layout.html.twig' %}
 {% form_theme postWithEventForm 'bootstrap_3_layout.html.twig' %}
 
 <div role="tabpanel" class="tab-pane generic-blog-new-post-event" id="newevent">
-    <form action="{{ path('add_post_with_event', { 'group_id' : circle.id } ) }}" method="post" {{ form_enctype(postWithEventForm) }}> 
-        <div class="form-group row">
-            <label for="event-title" class="col-sm-3 control-label text-right">Ajouter un commentaire *</label>
-            <div class="col-sm-9">
-                {{form_widget(postWithEventForm.message)}}
-            </div>
-        </div>
+    <form action="" method="post">
         {% if form_errors(postWithEventForm) %}
         <div class="form-error-custom">
             {{form_errors(postWithEventForm)}}                
@@ -132,7 +125,7 @@
         {{form_widget(postWithEventForm.attachedEvent.postalAddress.coordinates)}}
         <div class="form-group row">                
             <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-default event-submit">Continuer</button>
+                <button type="submit" class="btn btn-default event-submit">Créer l'évènement pour le groupe</button>
             </div>
         </div>
         {{ form_rest(postWithEventForm) }}

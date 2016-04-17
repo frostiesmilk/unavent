@@ -28,27 +28,37 @@ class GroupController extends Controller
         
         $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId, $user->getProfile()->getId());
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
-        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-        $posts = $postRepository->getPost($circleId);   
-
+        $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');      
+        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
+        
         //preparing new form for a post
-        $newPost = new Post();
-        $postwithEvent = new Post();
+        $postWithEvent = new Post();
         $postWithPictures = new Post();
-        $postForm = $this->createForm(new PostType(), $newPost);
         $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);
-        $postWithEventForm = $this->createForm(new PostWithEventType, $postwithEvent);      
         
+        $postWithEventForm = $this->createForm(new PostWithEventType, $postWithEvent);      
+           
         $request = $this->get('request');
-        $postWithEventForm->bind($request);
-        
-        if ($request->getMethod() == 'POST' && $postWithEventForm->isValid()) { 
-            $em = $this->getDoctrine()->getManager();
+        if ($request->getMethod() == 'POST'){
+            $postWithEventForm->bind($request);
             
-            $em->persist($postwithEvent);
-            $em->flush($postwithEvent);
+            if($postWithEventForm->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                $userProfile = $user->getProfile();
+                $postEvent = $postWithEvent->getAttachedEvent();
+                $postEvent->setCreatedBy($userProfile);
+                $postWithEvent->setMessage($postEvent->getTitle());
+                $postWithEvent->setCreatedBy($userProfile);
+                $postWithEvent->setCircle($circle);
+                $postWithEvent->getAttachedEvent()->setCreatedBy($circle);
+
+                $em->persist($postWithEvent);
+                $em->persist($postEvent);
+                $em->flush($postWithEvent);                
+            }
         }
         
+        $posts = $postRepository->getPost($circleId);
         // forms for comments
         $commentsForms = array();
         foreach ($posts as $post)
@@ -80,7 +90,6 @@ class GroupController extends Controller
                 'role' => $role,
                 'posts' => $posts,
                 'navbar' => $navbar,
-                'postForm' => $postForm->createView(),
                 'postWithPicturesForm' => $postWithPicturesForm->createView(),
                 'messageForm' => $privateMessageForm->createView(),
                 'commentForm' => $commentsForms,

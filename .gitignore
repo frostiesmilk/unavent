@@ -10,6 +10,9 @@
 /vendor/
 /web/bundles/
 /nbproject/private/
+
+!Flowber custom
+/src/Wybe/
 /web/uploads/
 /web/assets/css/*Bundle/
 /web/media/cache/

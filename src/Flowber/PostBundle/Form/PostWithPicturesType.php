@@ -18,7 +18,7 @@ class PostWithPicturesType extends AbstractType
     {
         $builder->add('message', 'textarea', array(
                                                 'attr' => array(
-                                                     'placeholder' => 'Ecrire un message'),
+                                                    'placeholder' => 'Ecrire un message'),
                                                     'label' => false,
                                                  ))
                 ->add("gallery", new GalleryOnlyType(), array('required'=>false));

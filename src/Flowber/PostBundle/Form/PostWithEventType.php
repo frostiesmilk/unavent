@@ -16,13 +16,13 @@ class PostWithEventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message', 'textarea',              
-                                    array(
-                                        'attr' => array(
-                                                    'placeholder' => 'Ecrire un message'),
-                                                    'label' => false,
-                                     )
-            )
+//            ->add('message', 'textarea',              
+//                                    array(
+//                                        'attr' => array(
+//                                                    'placeholder' => 'Ecrire un message'),
+//                                                    'label' => false,
+//                                     )
+//            )
             ->add('attachedEvent', new EventType());  
     }
     
