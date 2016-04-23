@@ -17,6 +17,13 @@ flowber_group_galleries:
     defaults: { _controller: FlowberGroupBundle:Group:getGroupGalleries }
     requirements:
         id: \d+
+        
+flowber_group_gallery:
+    path:     /{circleId}/gallery/{galleryId}
+    defaults: { _controller: FlowberGroupBundle:Group:getGroupGallery }
+    requirements:
+        circleId: \d+
+        galleryId: \d+
     
 flowber_group_members:
     path:     /{id}/membres

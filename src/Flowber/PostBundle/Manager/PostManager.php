@@ -91,4 +91,7 @@ class PostManager extends BaseManager {
         return $coverInfos;
     } 
     
+    public function getPostRepository(){
+        return $this->em->getRepository('FlowberPostBundle:Post');
+    }
 }

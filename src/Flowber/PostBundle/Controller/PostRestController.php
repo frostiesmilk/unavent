@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Form\PostWithPicturesType;
+use Flowber\PostBundle\Form\PostWithEventType;
 //use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Flowber\PostBundle\Entity\Comment;
@@ -158,12 +159,69 @@ class PostRestController extends Controller
      * @return View|array
      */
     public function postPostEventAction(Request $request, $circleId){
+        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
+
+        if(!is_object($circle)){
+            return array("status"=>400, "message"=>"Circle not found");//$view-($repsData)->setStatusCode(400); // error
+        }
         
+        $post = new Post();
+        $form = $this->createForm(new PostWithEventType(), $post);
+        
+         // if form has been submitted
+        $form->handleRequest($request);
+        $postAttachmentView = "";
+        if($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            
+            $userProfile = $this->getUser()->getProfile();
+            $postEvent = $post->getAttachedEvent();
+            $postEvent->setCreatedBy($userProfile);
+            $post->setMessage($postEvent->getTitle());
+            $post->setCreatedBy($userProfile);
+            $post->setCircle($circle);
+            $post->getAttachedEvent()->setCreatedBy($circle);
+
+            $em->persist($post);
+            $em->persist($postEvent);  
+            
+            try{
+                $em->flush();
+            } catch (Exception $ex) {
+                $repsData = array("status"=>"error" ,"message" => "Post flush failed: ".$ex->getMessage());
+                return $repsData;
+            }
+            
+            if(count($post->getAttachedEvent())>0){ // if there is a post attachment
+                $postAttachmentView = $this->renderView('FlowberPostBundle:partials:showPostEvent.html.twig', 
+                        array("post" =>$post));
+            }
+            
+            // create new comment form
+            $comment = new Comment();
+            $commentForm = $this->createForm(new CommentType, $comment);
+
+            // render view to be sent with response
+            $commentFormView = $this->renderView('FlowberPostBundle:partials:commentForm.html.twig', 
+                    array("commentForm"=>$commentForm->createView()));
+
+            $repsData = array(  "status"=>"success", 
+                                "postId" => $post->getId(), 
+                                "postMessage" => $post->getMessage(),
+                                "postAttachmentView" => $postAttachmentView,
+                                "datetimeCreated"=> $post->getCreationDate(), 
+                                "commentForm"=>$commentFormView);
+            //$view->setData($repsData)->setStatusCode(200); // ok
+            return $repsData;
+        }
+        
+        $repsData = array("status"=>"error",'form' => $form);        
+        return $repsData;
     }
     
     public function createPostGalleryView($galleryId){
         $postGallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
-        return $this->renderView('FlowberPostBundle:partials:postGallery.html.twig', array('postGallery'=>$postGallery));
+        return $this->renderView('FlowberPostBundle:partials:viewPostGallery.html.twig', array('postGallery'=>$postGallery));
     }
 
 

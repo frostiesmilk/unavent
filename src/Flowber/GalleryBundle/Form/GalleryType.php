@@ -17,9 +17,11 @@ class GalleryType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('creationDate')
-            ->add('photos')
-        ;
+            ->add('uploadedFiles', 'file', array(
+                'multiple' => true,
+                'data_class' => null,
+                'required' => false,
+            ));
     }
     
     /**

@@ -1,0 +1,56 @@
+{# empty Twig template #}
+{% extends '::base_frontoffice.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
+{% endblock %}
+
+{% block smallMenu %}
+    {{parent()}}
+    <!-- BEGIN small screen menu -->
+    {% include 'FlowberGroupBundle::partials/groupNavbarSmall.html.twig' %}
+    <!-- END small screen menu -->
+{% endblock %}
+
+{% block body %}
+
+    <!-- navbar top -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+    
+    <!-- Group Cover -->  
+    {% include 'FlowberCircleBundle::partials/cover.html.twig' %}           
+
+    <!-- Second navbar -->
+    {% include 'FlowberGroupBundle::partials/groupNavbar.html.twig' %}
+    
+    <!-- Galleries -->  
+    <div class="container">
+        <div class="row">
+            <h1>{{gallery.title}}</h1>
+            <h3>{{gallery.description}}</h3>
+        </div>
+        <div class="row">            
+            {% for photo in gallery.photos %}
+            <div class="col-xs-3">
+                <div class="gallery-image" style="background-image:url('{{asset(photo.getWebPath())}}');
+                    background-position: center center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    height: 200px;
+                    width: 200px;">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>    
+   
+    <!-- footer -->                  
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}
+{% endblock %}
