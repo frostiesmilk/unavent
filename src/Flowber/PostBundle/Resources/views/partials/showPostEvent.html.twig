@@ -5,14 +5,14 @@
         <div class="media-left">
             <a href="{{path('api_get_circle', {'circleId':post.attachedEvent.id})}}">
                 {% if post.attachedEvent.profilePicture %}
-                    <img class="media-object" src="{{post.attachedEvent.profilePicture.getWebPath()}}" alt="..." >
+                    <img class="media-object" src="{{asset(post.attachedEvent.profilePicture.getWebPath())}}" alt="..." >
                 {% else %} 
                     <img class="media-object" src="" alt="..." >
                 {% endif %}
             </a>
         </div>
         <div class="media-body">
-            <h4 class="media-heading">{{post.attachedEvent.title}}</h4>
+            <h4 class="media-heading"><a href="{{path('api_get_circle', {'circleId':post.attachedEvent.id})}}">{{post.attachedEvent.title}}</a></h4>
             <div class="">{{post.attachedEvent.subtitle}}</div>
         </div>
     </div>

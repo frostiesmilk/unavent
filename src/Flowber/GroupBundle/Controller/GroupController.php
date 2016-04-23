@@ -18,6 +18,7 @@ use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 use Flowber\GalleryBundle\Entity\Gallery;
+use Flowber\GalleryBundle\Form\GalleryType;
 use Flowber\CircleBundle\Entity\Subscribers;
 
 class GroupController extends Controller
@@ -34,27 +35,35 @@ class GroupController extends Controller
         //preparing new form for a post
         $postWithEvent = new Post();
         $postWithPictures = new Post();
-        $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);
-        
+        $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);        
         $postWithEventForm = $this->createForm(new PostWithEventType, $postWithEvent);      
            
+        // preparing new Gallery
+        $newGroupGallery = new Gallery();
+        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
+        
         $request = $this->get('request');
         if ($request->getMethod() == 'POST'){
-            $postWithEventForm->bind($request);
+            $newGalleryForm->bind($request);
             
-            if($postWithEventForm->isValid()){
+            if($newGalleryForm->isValid()){
                 $em = $this->getDoctrine()->getManager();
-                $userProfile = $user->getProfile();
-                $postEvent = $postWithEvent->getAttachedEvent();
-                $postEvent->setCreatedBy($userProfile);
-                $postWithEvent->setMessage($postEvent->getTitle());
-                $postWithEvent->setCreatedBy($userProfile);
-                $postWithEvent->setCircle($circle);
-                $postWithEvent->getAttachedEvent()->setCreatedBy($circle);
+                if(empty($newGroupGallery->getTitle())){
+                    $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
+                }
+                $circle->addGallery($newGroupGallery);
+                
+                $em->persist($circle);
+                
+                try{
+                    $em->flush();  
+                    return $this->redirect($this->generateUrl(
+                        'flowber_group_gallery',
+                        array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
+                    ));
+                } catch (Exception $ex) {
 
-                $em->persist($postWithEvent);
-                $em->persist($postEvent);
-                $em->flush($postWithEvent);                
+                }                              
             }
         }
         
@@ -94,7 +103,8 @@ class GroupController extends Controller
                 'messageForm' => $privateMessageForm->createView(),
                 'commentForm' => $commentsForms,
                 'postWithEventForm'=> $postWithEventForm->createView(),
-                'mailToCreatorForm' => $mailToCreatorForm->createView(),                    
+                'mailToCreatorForm' => $mailToCreatorForm->createView(),
+                'newGalleryForm' => $newGalleryForm->createView(),
         ));
     }
     
@@ -336,12 +346,33 @@ class GroupController extends Controller
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;
         
-         return $this->render('FlowberGroupBundle:Default:groupGalleries.html.twig', 
+         return $this->render('FlowberGroupBundle:Default:showGroupGalleries.html.twig', 
                 array('circle' => $groupInfo,
                 'role' => $role,
                 'messageForm' => $privateMessageForm->createView(),
                 'navbar' => $navbar
                  ));
+    }
+    
+    public function getGroupGalleryAction($circleId, $galleryId){
+        $user = $this->getUser();        
+        $groupInfo = $this->container->get('flowber_group.group')->getGroupInfos($circleId, $user->getProfile()->getId());
+        $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+
+        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
+        $navbar['event'] = $eventsNav;
+        $navbar['group'] = $groupsNav;
+        
+        $gallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
+        
+        return $this->render('FlowberGroupBundle:Default:showGroupGallery.html.twig',
+                array('circle' => $groupInfo,
+                'role' => $role,
+                'messageForm' => $privateMessageForm->createView(),
+                'navbar' => $navbar,
+                'gallery' => $gallery));
     }
 
     public function getAllGroupsAction($id){

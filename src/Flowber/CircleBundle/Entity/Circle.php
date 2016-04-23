@@ -84,7 +84,7 @@ class Circle
     private $coverGallery;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Gallery", cascade={"persist"})
      */
     private $galleries;
 

@@ -14,7 +14,7 @@
                 <li><a href="{{ path('api_get_circle', {'circleId': circle.id}) }}">Actualités</a></li>
                 <li><a href="{{ path('flowber_group_members', {'id': circle.id}) }}">Membres</a></li>
                 <li><a href="{{ path('flowber_group_events', {'id': circle.id}) }}">Sorties</a></li>
-                <li><a href="{{ path('flowber_group_galleries', {'id': circle.id}) }}">Galleries</a></li>
+                <li><a href="{{ path('flowber_group_galleries', {'id': circle.id}) }}">Galeries</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -29,7 +29,7 @@
                         <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/bubble-chat.png')}}"/>
                     </a>
                 </li>
-                {% if role == "no" or role == "cantsee" %}
+                {% if role == "no" %}
                     <li id="sendRequest" style="display:inline">
                         <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title='Rejoindre le groupe {{ circle.title }}' data-whatever="Voulez vous être membre du groupe {{ circle.title }}">
                             <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
