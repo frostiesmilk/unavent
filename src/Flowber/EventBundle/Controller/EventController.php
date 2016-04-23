@@ -78,7 +78,7 @@ class EventController extends Controller
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
         
         $members = $this->container->get("flowber_event.event")->getEventMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
+        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members, $user->getProfile()->getId());
         //die(var_dump($members));
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
@@ -101,7 +101,7 @@ class EventController extends Controller
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
         
         $members = $this->container->get("flowber_event.event")->getEventMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
+        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members, $user->getProfile()->getId());
         //die(var_dump($members));
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
@@ -300,7 +300,7 @@ class EventController extends Controller
         $events = $this->container->get('flowber_event.event')->getEvents($user->getProfile()->getId(), $user->getProfile()->getId());
 
         $members = $this->container->get("flowber_event.event")->getEventMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
+        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members, $user->getProfile()->getId());
         //die(var_dump($members));
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());

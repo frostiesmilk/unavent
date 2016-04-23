@@ -295,7 +295,7 @@ class GroupController extends Controller
         $navbar['group'] = $groupsNav;  
         
         $members = $this->container->get("flowber_group.group")->getGroupMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
+        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members, $user->getProfile()->getId());
 
         return $this->render('FlowberGroupBundle:Default:groupMembers.html.twig', 
                 array('circle' => $groupInfo,
