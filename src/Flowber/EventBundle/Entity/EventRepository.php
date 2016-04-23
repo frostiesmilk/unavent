@@ -26,81 +26,6 @@ class EventRepository extends EntityRepository
         
         return $query->getSingleResult();
     }
- 
-    
-    /*
-     * Est ce que la personne participe à l'event
-     * return participant
-     */
-    public function isParticipant($user, $event){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('participants')
-            ->from('FlowberEventBundle:Participants', 'participants')
-            ->where('participants.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('participants.event = :event')
-            ->setParameter('event', $event)
-            ->andWhere('participants.statut = :statut')
-            ->setParameter('statut', 'ok');
-        
-        return count($qb->getQuery()->getResult());
-    }
-    
-    /*
-     * Est ce que la personne est un administrateur de l'event
-     * return participant
-     */
-    public function isAdmin($user, $event){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('participants')
-            ->from('FlowberEventBundle:Participants', 'participants')
-            ->where('participants.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('participants.event = :event')
-            ->setParameter('event', $event)
-            ->andWhere('participants.statut = :statut')
-            ->setParameter('statut', 'ok')
-            ->andWhere('participants.role = :role')
-            ->setParameter('role', 'admin');
-        
-        return count($qb->getQuery()->getResult());
-    }
-    
-    /*
-     * Récupère de nombre de participants
-     * return count
-     */
-    public function getParticipantsNumber($event){
-        $qb = $this->_em->createQueryBuilder();
-        
-        $qb->select('participants')
-            ->from('FlowberEventBundle:Participants', 'participants')
-            ->andWhere('participants.event = :event')
-            ->setParameter('event', $event)
-            ->andWhere('participants.statut = :statut')
-            ->setParameter('statut', 'ok');
-        
-        return count($qb->getQuery()->getResult());
-    }
-    
-    /*
-     * Récupère de nombre de participants
-     * return count
-     */
-    public function getParticipantsNames($event){
-        $query = $this->_em->createQuery(''
-                . 'SELECT user.id, '
-                . 'concat(concat(user.firstname, :espace), user.surname) as createdBy '
-                . 'FROM FlowberEventBundle:Participants participants '
-                . 'LEFT JOIN FlowberUserBundle:User user WITH participants.user = user '
-                . 'WHERE participants.event = :event');
-        $query->setParameter('event', $event);
-        $query->setParameter('espace', ' ');
-        
-        return $query->getResult();
-    }
     
         /*
      * Récupère la phrase d'accroche et la description
@@ -185,13 +110,13 @@ class EventRepository extends EntityRepository
      * Récupère tous les id des groupes auquel participe l'user circle
      */
     public function GetAllEventsId(){
-        $sql = "SELECT sub.circle_id "
-                . "FROM  subscribers sub "
-                . "WHERE sub.statut='event' "
-                . "ORDER BY sub.creationDate desc";
+        $sql = "SELECT event.id "
+                . "FROM  Event event "
+                . "ORDER BY event.startDate desc "
+                . "LIMIT 18";
         
         $rsm = new ResultSetMapping;
-        $rsm->addScalarResult('circle_id', 'id');
+        $rsm->addScalarResult('id', 'id');
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }    

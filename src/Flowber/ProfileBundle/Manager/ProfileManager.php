@@ -87,7 +87,7 @@ class ProfileManager extends BaseManager {
         return $profileInfos;
     } 
 
-    public function getFriends($profileId)
+    public function getFriends($profileId, $current)
     {
         $friends = $this->getProfileRepository()->GetFriendsId($profileId);
         if ( count($friends) != 0){
@@ -100,6 +100,7 @@ class ProfileManager extends BaseManager {
                 $friends[$count]['numberFriend'] = $this->getProfileRepository()->GetCountFriend($friends[$count]['id']);
                 $friends[$count]['numberEvent'] = $this->getProfileRepository()->GetCountEvent($friends[$count]['id']);
                 $friends[$count]['numberGroup'] = $this->getProfileRepository()->GetCountGroup($friends[$count]['id']);
+                $friends[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($current), $friends[$count]['id']);
                 $count++;
             } 
         }        

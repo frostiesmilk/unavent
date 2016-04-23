@@ -1,0 +1,44 @@
+<div class=" col-md-4 col-sm-6 col-xs-12">
+    <div class="media user-profile-friends-list-element">
+        <div class="media-left">
+            <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}"> 
+                <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset(friend.profilePicture)}}')"></div>
+            </a>
+        </div>
+        <div class="media-body">
+            <div class="user-profile-friends-list-element-details">
+                <a class="user-profile-friends-list-element-details-name" href="{{ path('api_get_circle', { 'circleId' : friend.id } ) }}" title=" voir le profil de {{friend.name}}">
+                    <b>{{friend.name}}</b>
+                </a>
+                {%if friend.role == 'member'%}
+                    <span class="glyphicon glyphicon-ok"  aria-hidden="true"></span>
+                {% endif %}
+                {% if friend.role == 'creator'%}
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                {% endif %}
+                <br/>
+                <div class="user-profile-friends-list-element-subtitle-friends">
+                    {{friend.subtitle}}
+                </div>
+                <br/>
+                <span class="user-profile-friends-list-element-details-friends">
+                    <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#friends">
+                        {{friend.numberFriend}}  {% if friend.numberFriend <= 1 %} ami {% else %} amis {% endif %}
+                    </a>
+                </span> &middot; 
+                <span class="user-profile-friends-list-element-details-events">
+                    <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#events"> 
+                        {{friend.numberEvent}}  {% if friend.numberEvent <= 1 %} sortie {% else %} sorties {% endif %}
+                    </a>
+                </span>
+                </span> &middot; 
+                <span class="user-profile-friends-list-element-details-events">
+                    <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#groups">
+                    {{friend.numberGroup}}  {% if friend.numberGroup <= 1 %} groupe {% else %} groupes {% endif %}
+                    </a>
+                </span>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>  

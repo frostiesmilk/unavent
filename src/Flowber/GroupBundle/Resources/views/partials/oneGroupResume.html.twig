@@ -1,0 +1,38 @@
+<div class="col-md-3 col-xs-6">
+    <div class="thumbnail group-list-thumbnail ">
+        <div class="caption group-name-frame" style="color:black">
+            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                <h3 class="group-name">{{group.title}}</h3>
+            </a>
+            {%if group.role != 'no' and group.role != 'cantsee'%}
+                {%if group.role == 'creator'%}
+                    <span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
+                {% else %}
+                    <span class="glyphicon glyphicon-ok"  aria-hidden="true"></span>
+                {% endif %}
+            {% endif %}
+            {% if group.role == 'cantsee'%}
+                <span class="glyphicon glyphicon-lock red" aria-hidden="true"></span>
+            {% endif %}
+        </div>
+        <div class="group-image-frame">
+            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
+                <img class="group-image" src="{{asset(group.profilePicture)}}" alt=""/>      
+            </a>
+        </div>
+
+        <div class="caption text-center ">
+            <p class="group-description">
+                <a href="{{ path('flowber_group_members', {'id': group.id}) }}">
+                    {{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}  
+                </a>
+                dont {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
+            </p>
+            <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
+                <button class="btn btn-default font-white group-join-button"> 
+                    <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir le groupe 
+                </button>
+            </a>
+        </div>
+    </div>
+</div>

@@ -66,6 +66,21 @@ class CircleManager extends BaseManager {
         return $profilePicture;
     } 
     
+    public function getPrivacy($circle)
+    {
+        // Si on a envoyé un id, renvoyer un circle
+        if (is_numeric($circle)){
+            $circle = $this->getCircle($circle);
+        }
+        //Vérifie si le circle existe bien.        
+        if (!is_object($circle)) {
+            throw new AccessDeniedException('This circle is not defined.');
+        }   
+        
+        $privacy = $circle->getPrivacy();
+                
+        return $privacy;
+    }     
     public function getCoverPicture($circle)
     {
         // Si on a envoyé un id, renvoyer un circle
@@ -203,6 +218,23 @@ class CircleManager extends BaseManager {
         return $isCreator;
     } 
     
+    public function isCreatorCircle($user, $circle)
+    {
+        // Si on a envoyé un id, renvoyer un circle
+        if (is_numeric($circle)){
+            $circle = $this->getCircle($circle);
+        }
+        //Vérifie si le circle existe bien.
+        if (!is_object($circle)) {
+            throw new AccessDeniedException('This circle is not defined.');
+        } 
+        
+        if($circle->getCreatedBy()->getId() == $user->getId())
+            return true;
+        else return false;
+        
+        return $isCreator;
+    }    
     public function getRole($user, $circle)
     {
         if ($this->isCreator($user, $circle) == true){
@@ -212,9 +244,25 @@ class CircleManager extends BaseManager {
         } else if ($this->getCircleRepository()->hasSentRequest($user->getProfile(), $circle) == 1){
             return "requestSent";
         }
+        if ($this->getPrivacy($circle)=="private"){
+            return "cantsee";
+        }
         return "no";
     }  
-    
+    public function getRoleCircle($user, $circle)
+    {
+        if ($this->isCreatorCircle($user, $circle) == true){
+            return "creator";
+        } else if ($this->getCircleRepository()->ismember($user->getId(), $circle) == 1){
+            return "member";
+        } else if ($this->getCircleRepository()->hasSentRequest($user, $circle) == 1){
+            return "requestSent";
+        }
+        if ($this->getPrivacy($circle)=="private"){
+            return "cantsee";
+        }
+        return "no";
+    }      
     public function getCircleRepository()
     {
         return $this->em->getRepository('FlowberCircleBundle:Circle');

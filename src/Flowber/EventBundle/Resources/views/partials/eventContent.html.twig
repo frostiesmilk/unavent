@@ -5,7 +5,7 @@
         <div class="col-md-5">
             <div class="event-details">
                 <h2>{{ circle.title}}</h2>
-                {% if (circle.address is not null) and (circle.coordinates is not null) %}
+                {% if role != "cantsee" and (circle.address is not null) and (circle.coordinates is not null)  %}
                     <div id="map" class="gmap"></div>
                 {% endif %}                    
                 <table>
@@ -29,16 +29,27 @@
                         
                         {{ circle.endDate }}</td>
                     </tr>
-
-                    <tr>
-                        <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
-                        <td>{% if circle.address is not null %}
-                                {{circle.name}} <br/>{{circle.address}}<br/>{{circle.zipcode}} {{circle.city}}                          
-                            {% else %}
-                                <span>Emplacement non défini</span>
-                            {% endif %}
-                        </td>
-                    </tr>
+                    {% if role != "cantsee" %}
+                        <tr>
+                            <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
+                            <td>{% if circle.address is not null %}
+                                    {{circle.name}} <br/>{{circle.address}}<br/>{{circle.zipcode}} {{circle.city}}                          
+                                {% else %}
+                                    <span>Emplacement non défini</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                            <tr>
+                            <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
+                            <td>{% if circle.address is not null %}
+                                    {{circle.city}}                          
+                                {% else %}
+                                    <span>Emplacement non défini</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
@@ -52,7 +63,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td><p class="event-details-description">{% if circle.description is not null %}{{ circle.description }}{% else %}Aucune description{% endif %}</p></td>
                     </tr>
-                    {% if role == "creator" %}
+                    {% if role != "creator" %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
@@ -68,6 +79,7 @@
                 </table>
             </div>
         </div>
+        {% if role != "cantsee" %}
         <div class="col-md-7">
             <div class="event-blog">
                 <div class="event-blog-new-post">
@@ -109,5 +121,9 @@
                 
             </div>
         </div>
+        {% else %}
+            Cette sortie est privée.
+        {% endif %}
+
     </div>                
 </div>

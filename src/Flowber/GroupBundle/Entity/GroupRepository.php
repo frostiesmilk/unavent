@@ -47,13 +47,12 @@ class GroupRepository extends EntityRepository
      * Récupère tous les id des groupes auquel participe l'user circle
      */
     public function GetAllGroupsId(){
-        $sql = "SELECT sub.circle_id "
-                . "FROM  subscribers sub "
-                . "WHERE sub.statut='groups' "
-                . "ORDER BY sub.creationDate desc";
+        $sql = "SELECT id "
+                . "FROM groups "
+                . "LIMIT 12";
         
         $rsm = new ResultSetMapping;
-        $rsm->addScalarResult('circle_id', 'id');
+        $rsm->addScalarResult('id', 'id');
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }    

@@ -60,43 +60,25 @@ class EventManager extends BaseManager {
         
         $circleInfos['members'] = $this->getEventRepository()->GetCountMembers($event->getId());
         $circleInfos['friends'] = $this->getFriendsInEvent($event->getId(), $current);
-        $circleInfos['address'] = $event->getPostalAddress()->getAddress();
-        $circleInfos['name'] = $event->getPostalAddress()->getName();
-        $circleInfos['zipcode'] = $event->getPostalAddress()->getZipcode();
-        $circleInfos['city'] = $event->getPostalAddress()->getCity();
-        $circleInfos['country'] = $event->getPostalAddress()->getCountry();
-        $circleInfos['coordinates'] = $event->getPostalAddress()->getCoordinates();
-
-        $circleInfos['participantsNumber'] = $this->getEventRepository()->getParticipantsNumber($event);
-        $circleInfos['participantsNames'] = $this->getEventRepository()->getParticipantsNames($event);
-             
+        if (count($event->getPostalAddress()) != 0){
+            $circleInfos['address'] = $event->getPostalAddress()->getAddress();
+            $circleInfos['name'] = $event->getPostalAddress()->getName();
+            $circleInfos['zipcode'] = $event->getPostalAddress()->getZipcode();
+            $circleInfos['city'] = $event->getPostalAddress()->getCity();
+            $circleInfos['country'] = $event->getPostalAddress()->getCountry();
+            $circleInfos['coordinates'] = $event->getPostalAddress()->getCoordinates();
+        }
+        else {
+            $circleInfos['address'] = '';
+            $circleInfos['name'] = '';
+            $circleInfos['zipcode'] = '';
+            $circleInfos['city'] = '';
+            $circleInfos['country'] = '';
+            $circleInfos['coordinates'] = '';            
+        }
+        
         return $circleInfos;
     }    
-
-    public function getEventParticipantsNames($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        $participantsNames = $this->getEventRepository()->getParticipantsNames($event);
-        die(var_dump($participantsNames));
-
-        return $participantsNames;
-    }   
-    
-    public function isParticipant($user, $event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        } 
-        
-        $isParticipant = $this->getEventRepository()->isParticipant($user, $event);
-        if ($isParticipant != 0)
-            return true;
-        else return false;
-     
-        return $isParticipant;
-    }  
  
     public function isCreator($user, $event)
     {
@@ -156,13 +138,19 @@ class EventManager extends BaseManager {
             foreach ($events as $eventss){
                 $event = $this->getEvent($events[$count]['id']);
                 $events[$count]['title'] = $event->getTitle();
-                $events[$count]['city'] = $event->getPostalAddress()->getCity();
+                if (count($event->getPostalAddress()) != 0){
+                    $events[$count]['city'] = $event->getPostalAddress()->getCity();
+                }
+                else {
+                    $events[$count]['city'] = '';        
+                }
                 $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
                 $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
                 $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
                 $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
                 $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
                 $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $current);
+                $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($current), $events[$count]['id']);
                 $count++;
             } 
         }        
@@ -190,13 +178,19 @@ class EventManager extends BaseManager {
         foreach ($events as $eventss){
             $event = $this->getEvent($events[$count]['id']);
             $events[$count]['title'] = $event->getTitle();
-            $events[$count]['city'] = $event->getPostalAddress()->getCity();
+            if (count($event->getPostalAddress()) != 0){
+                $events[$count]['city'] = $event->getPostalAddress()->getCity();
+            }
+            else {
+                $events[$count]['city'] = '';        
+            }            
             $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
             $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
             $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
             $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
             $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
             $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $current);
+            $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($current), $events[$count]['id']);
             $count++;
         } 
 

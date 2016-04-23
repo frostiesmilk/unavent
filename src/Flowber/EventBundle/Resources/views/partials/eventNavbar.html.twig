@@ -33,7 +33,7 @@
                                 <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/tag-person.png')}}"/>
                             </a>
                         </li>
-                        {% if role == "no" %}
+                        {% if role == "no" or role == "cantsee"%}
                             <li id="sendRequest" style="display:inline">
                                 <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
                                     <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>

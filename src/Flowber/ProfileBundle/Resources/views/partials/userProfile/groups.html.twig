@@ -10,34 +10,7 @@
     <div class="container user-profile-groups-container">
         <div class="row">
             {% for group in groups %}
-                <div class="col-md-3 col-xs-6">
-                    <div class="thumbnail group-list-thumbnail ">
-                        <div class="caption group-name-frame">
-                            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
-                                <h3 class="group-name font-white">{{group.title}}</h3>
-                            </a>
-                        </div>
-                        <div class="group-image-frame">
-                            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">
-                                <img class="group-image" src="{{asset(group.profilePicture)}}" alt=""/>      
-                            </a>
-                        </div>
-
-                        <div class="caption text-center ">
-                            <p class="font-white group-description">
-                                <a href="{{ path('flowber_group_members', {'id': group.id}) }}">
-                                    {{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}  
-                                </a>
-                                dont {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
-                            </p>
-                            <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
-                                <button class="btn btn-default font-white group-join-button"> 
-                                    <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir le groupe 
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}
             {%endfor%}
         </div>  
     </div>  

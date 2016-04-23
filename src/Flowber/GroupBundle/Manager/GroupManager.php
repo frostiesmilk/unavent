@@ -97,6 +97,7 @@ class GroupManager extends BaseManager {
                 $groups[$count]['subtitle'] = $subtitle;
                 $groups[$count]['members'] = $this->getGroupRepository()->GetCountMembers($groups[$count]['id']);
                 $groups[$count]['friends'] = $this->getFriendsInGroup($groups[$count]['id'], $current);
+                $groups[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($current), $groups[$count]['id']);
                 $count++;
             } 
         }        
@@ -116,6 +117,7 @@ class GroupManager extends BaseManager {
                 $groups[$count]['subtitle'] = $subtitle;
                 $groups[$count]['members'] = $this->getGroupRepository()->GetCountMembers($groups[$count]['id']);
                 $groups[$count]['friends'] = $this->getFriendsInGroup($groups[$count]['id'], $current);
+                $groups[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($current), $groups[$count]['id']);
                 $count++;
             } 
         }        

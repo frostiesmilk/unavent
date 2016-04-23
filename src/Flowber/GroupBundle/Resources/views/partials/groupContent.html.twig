@@ -55,6 +55,7 @@
                 </table>
             </div>
         </div>
+        {% if role != "cantsee" %}
         <div class="col-md-7">
             <div class="group-blog">
                 
@@ -63,5 +64,8 @@
                 
             </div>
         </div>
+        {% else %}
+            Cette sortie est privée.
+        {% endif %}
     </div>
 </div>

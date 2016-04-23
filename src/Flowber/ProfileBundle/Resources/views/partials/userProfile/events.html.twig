@@ -7,36 +7,7 @@
             <div class="container user-profile-events-container">
                 <div class="row">
                     {% for event in events %}
-                        <div class="col-md-3 col-xs-6">
-                            <div class="thumbnail event-list-thumbnail ">
-                                <div class="caption event-name-frame">
-                                    <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">
-                                        <h3 class="event-name">{{event.title}}</h3>
-                                    </a>
-                                </div>
-                                <div class="event-image-frame">
-                                    <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">
-                                        <img class="event-image" src="{{asset(event.profilePicture)}}" alt=""/>
-                                    </a>
-                                    <p class="event-image-frame-date">
-                                        <span class="event-image-frame-date-day">{{event.startDate}}</span><br/>                                                      
-                                        <span class="event-image-frame-date-day">{{event.startHour}}</span>                                                       
-                                    </p>
-                                </div>
-
-                                <div class="caption text-center ">
-                                    <p class="event-description">{{event.members}} {% if event.members <= 1 %} participant {% else %} participants {% endif %}  
-                                        &middot; {{event.friends}} {% if event.friends <= 1 %} ami {% else %} amis {% endif %}   
-                                        &middot; {{event.city}}
-                                    </p>
-                                    <a  href="{{ path('api_get_circle', {'circleId': event.id}) }}"> 
-                                        <button class="btn btn-default font-white event-join-button">
-                                            <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir la sortie
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                       {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
                     {%endfor%}
                 </div>
             </div>
