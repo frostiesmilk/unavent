@@ -130,9 +130,8 @@ class EventManager extends BaseManager {
         return $nbFriend;
     }
     
-    public function getEvents($circleId, $current)
+    public function getEventsFromList($events, $current)
     {
-        $events = $this->getEventRepository()->GetEventsId($circleId);
         if ( count($events) != 0){
             $count=0;
             foreach ($events as $eventss){
@@ -156,6 +155,13 @@ class EventManager extends BaseManager {
         }        
         return $events;
     }   
+    
+    public function getEvents($circleId, $current){
+        
+        $events = $this->getEventRepository()->GetEventsId($circleId);
+        
+        return $this->getEventsFromList($events, $current);
+    }
 
     public function getEventsNavbar($circleId)
     {

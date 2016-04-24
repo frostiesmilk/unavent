@@ -1,8 +1,34 @@
-{# Flowber/PostBundle/Resources/views/partials/postGallery.html.twig #}
+{# Flowber/PostBundle/Resources/views/partials/viewPostGallery.html.twig #}
 {% if postGallery.photos|length > 0 %}
     <div class="generic-blog-post-content-gallery row">
         {% for picture in postGallery.photos %}
-        <div class="col-xs-4 generic-blog-post-content-gallery-element" style="background-image:url({{asset(picture.getWebPath()|imagine_filter('post_message_picture_thumb'))}});"></div>
+        <div 
+            class="col-xs-4 generic-blog-post-content-gallery-element" 
+            style="background-image:url({{asset(picture.getWebPath()|imagine_filter('post_message_picture_thumb'))}});"
+            onclick="afficheGallery(this)" data-toggle="modal" data-target="#galleryModal">
+        </div>
         {% endfor %}
     </div>
 {% endif %}
+
+
+    
+<div class="modal fade bs-example-modal-lg" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Photo</h4>
+            </div>
+            <div class="modal-body text-center">
+                <img id="imageSlide" src="#" style="width:80% ; height:70%;"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="previousPic">Précédent</button>
+                <button type="button" class="btn btn-default" id="nextPic">Suivant</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('assets/js/GalleryBundle/postGallery.js') }}"></script>
