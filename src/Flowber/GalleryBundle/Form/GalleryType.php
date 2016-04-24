@@ -20,7 +20,7 @@ class GalleryType extends AbstractType
             ->add('uploadedFiles', 'file', array(
                 'multiple' => true,
                 'data_class' => null,
-                'required' => false,
+                'required' => true,
             ));
     }
     

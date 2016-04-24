@@ -3,7 +3,7 @@
 namespace Flowber\GroupBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Flowber\GalleryBundle\Entity\Gallery;
+use Flowber\EventBundle\Entity\Event;
 use Flowber\CircleBundle\Entity\Circle;
 // REST & JMSserializer
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -25,6 +25,12 @@ class Groups extends Circle
      * @ORM\ManyToMany(targetEntity="Flowber\FrontOfficeBundle\Entity\Category")
      */
     private $categories;
+    
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Flowber\EventBundle\Entity\Event")
+     */
+    private $events;
 
     /**
      * Constructor
@@ -99,4 +105,37 @@ class Groups extends Circle
         $this->categories->removeElement($categories);
     }
 
+
+    /**
+     * Add events
+     *
+     * @param \Flowber\EventBundle\Entity\Event $events
+     * @return Groups
+     */
+    public function addEvent(\Flowber\EventBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Flowber\EventBundle\Entity\Event $events
+     */
+    public function removeEvent(\Flowber\EventBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
 }

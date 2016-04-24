@@ -7,6 +7,7 @@ use Flowber\EventBundle\Form\EventType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
+use Flowber\GalleryBundle\Entity\Gallery;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageOnlyType;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
@@ -14,6 +15,8 @@ use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
+use Flowber\PostBundle\Form\PostWithPicturesType;
+use Flowber\GalleryBundle\Form\GalleryType;
 use Flowber\CircleBundle\Entity\Subscribers;
 
 class EventController extends Controller
@@ -24,6 +27,14 @@ class EventController extends Controller
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
         $privacy = $this->container->get('flowber_circle.circle')->getPrivacy($circleId);
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($circleId, $user->getProfile()->getId());
+        
+        //preparing new form for a post
+        $postWithPictures = new Post();
+        $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);              
+           
+        // preparing new Gallery
+        $newGroupGallery = new Gallery();
+        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
         
         if($role=='cantsee'){
             $posts = null;
@@ -59,6 +70,7 @@ class EventController extends Controller
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
+                'user' => $user,
                 'role' => $role,
                 'navbar' => $navbar,
                 'circle' => $eventInfo,
@@ -67,6 +79,8 @@ class EventController extends Controller
                 'postForm' => $postForm,
                 'posts' => $posts,
                 'commentForm' => $CommentArray,
+                'postWithPicturesForm' => $postWithPicturesForm->createView(),
+                'newGalleryForm' => $newGalleryForm->createView(),
             )
         );
     }

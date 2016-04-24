@@ -82,43 +82,9 @@
         {% if role != "cantsee" %}
         <div class="col-md-7">
             <div class="event-blog">
-                <div class="event-blog-new-post">
-                    <ul id="eventNavbar" class="nav nav-tabs nav-justified event-blog-new-post-navbar">
-                        <li role="presentation" class="event-blog-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
-                            <a href="#newpost"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/new-post.png')}}" alt=""/> Ecrire un message</a>
-                        </li>
-                        <li role="presentation" class="event-blog-new-post-navbar-option" aria-controls="newphoto" role="tab" data-toggle="tab">
-                            <a href="#newphoto"><img class="event-blog-new-post-navbar-option-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/photo.png')}}" alt=""/> Ajouter une gallerie </a>
-                        </li>
-                    </ul>
-                        
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="newpost">
-                            <form action="{{ path('add_post_event', { 'event_id' : circle.id } ) }}" method="post" {{ form_enctype(postForm) }}>                
-                                {{form_widget(postForm)}}
-                                <div class="event-blog-new-post-footer">
-                                    <div class="event-blog-new-post-footer-confirm text-right">
-                                        <button type="submit" class="btn btn-default btn-red">Envoyer</button>
-                                    </div>
-                                </div>
-                            </form>          
-                        </div>
-                        <div role="tabpanel" class="tab-pane " id="newphoto">
-                            <form>                
-                                Photo
-                                <div class="event-blog-new-post-footer">
-                                    <div class="event-blog-new-post-footer-confirm text-right">
-                                        <button type="submit" class="btn btn-default btn-red">Envoyer</button>
-                                    </div>
-                                </div>
-                            </form>          
-                        </div>
-                    </div>
-                </div>
-
-                {% include 'FlowberPostBundle::partials/showPostsEvent.html.twig' %}
-                
+                {% include 'FlowberPostBundle::partials/newEventPost.html.twig' %}
+                {% include 'FlowberPostBundle::basePostList.html.twig' %}
+                {#% include 'FlowberPostBundle::partials/showPostsEvent.html.twig' %#}                
             </div>
         </div>
         {% else %}

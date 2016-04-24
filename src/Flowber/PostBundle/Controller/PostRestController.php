@@ -181,9 +181,11 @@ class PostRestController extends Controller
             $post->setCreatedBy($userProfile);
             $post->setCircle($circle);
             $post->getAttachedEvent()->setCreatedBy($circle);
+            $circle->addEvent($postEvent);
 
             $em->persist($post);
             $em->persist($postEvent);  
+            $em->persist($circle);
             
             try{
                 $em->flush();
