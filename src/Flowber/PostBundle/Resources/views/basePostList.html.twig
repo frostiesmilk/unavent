@@ -155,9 +155,8 @@
                     {% if post.gallery and post.gallery.photos|length > 0 %}
                         
                     <div class="generic-blog-post-content-gallery row">
-                        {% for picture in post.gallery.photos %}
-                        <div class="col-xs-4 generic-blog-post-content-gallery-element" style="background-image:url({{asset(picture.getWebPath()|imagine_filter('post_message_picture_thumb'))}});"></div>
-                        {% endfor %}
+                        {% set postGallery = post.gallery %}
+                        {% include 'FlowberPostBundle::partials/viewPostGallery.html.twig' %}
                     </div>
                     {% endif %}
                     

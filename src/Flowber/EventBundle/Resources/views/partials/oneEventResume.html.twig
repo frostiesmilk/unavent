@@ -1,23 +1,25 @@
-<div class="col-md-3 col-xs-6">
+<div class="col-md-3 col-sm-6 col-xs-12">
     <div class="thumbnail event-list-thumbnail ">
         <div class="caption event-name-frame">
-            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">
+            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}" title="voir la sortie {{event.title}}">
                 <h3 class="event-name">{{event.title}}</h3>
             </a>
-            {%if event.role != 'no' and event.role != 'cantsee'%}
-                {%if event.role == 'creator'%}
-                    <span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
-                {% else %}
-                    <span class="glyphicon glyphicon-ok"  aria-hidden="true"></span>
+            <div style="position : absolute; right : 25px; top:35px;">
+                {%if event.role != 'no' and event.role != 'cantsee'%}
+                    {%if event.role == 'creator'%}
+                        <span class="glyphicon glyphicon-user"  aria-hidden="true" title="J'ai créé cette sortie"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-ok"  aria-hidden="true" title="Je participe"></span>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-            {% if event.role == 'cantsee'%}
-                <span class="glyphicon glyphicon-lock red" aria-hidden="true"></span>
-            {% endif %}
+                {% if event.role == 'cantsee'%}
+                    <span class="glyphicon glyphicon-lock red" aria-hidden="true" title="Cette sortie est privée"></span>
+                {% endif %}
+            </div>
         </div>
         <div class="event-image-frame">
             <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">
-                <img class="event-image" src="{{asset(event.profilePicture)}}" alt=""/>
+                <img class="event-image" src="{{asset(event.profilePicture)}}" alt="" title="voir la sortie {{event.title}}"/>
             </a>
             <p class="event-image-frame-date">
                 <span class="event-image-frame-date-day">{{event.startDate}}</span><br/>                                                      
@@ -27,11 +29,11 @@
         </div>
 
         <div class="caption text-center ">
-            <a href="{{ path('flowber_event_participants', {'id': event.id}) }}">
+            <a href="{{ path('flowber_event_participants', {'id': event.id}) }}" title="voir les participatns de {{event.title}}">
                 <p class="event-description">{{event.members}} {% if event.members <= 1 %} participant {% else %} participants {% endif %}  
             </a> 
-                &middot; {{event.friends}} {% if event.friends <= 1 %} ami {% else %} amis {% endif %}   
-                &middot; {{event.city}}
+                &middot; <span title="{{event.friends}} {% if event.friends <= 1 %} ami participe {% else %} amis participent {% endif %}à {{event.title}}">{{event.friends}} {% if event.friends <= 1 %} ami {% else %} amis {% endif %} </span>  
+                &middot; <span title="{{event.title}} se déroule à {{event.city}}">{{event.city}}</span>
             </p>
             <a  href="{{ path('api_get_circle', {'circleId': event.id}) }}"> 
                 <button class="btn btn-default font-white event-join-button">

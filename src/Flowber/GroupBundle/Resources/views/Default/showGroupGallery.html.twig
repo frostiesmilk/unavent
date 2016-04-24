@@ -25,25 +25,8 @@
     {% include 'FlowberGroupBundle::partials/groupNavbar.html.twig' %}
     
     <!-- Galleries -->  
-    <div class="container">
-        <div class="row">
-            <h1>{{gallery.title}}</h1>
-            <h3>{{gallery.description}}</h3>
-        </div>
-        <div class="row">            
-            {% for photo in gallery.photos %}
-            <div class="col-xs-3">
-                <div class="gallery-image" style="background-image:url('{{asset(photo.getWebPath())}}');
-                    background-position: center center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    height: 200px;
-                    width: 200px;">
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>    
+    {% include 'FlowberGalleryBundle::partials/galleries.html.twig' %}
+
    
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
