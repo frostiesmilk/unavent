@@ -67,6 +67,8 @@ class EventController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;    
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
@@ -98,6 +100,8 @@ class EventController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
         
         return $this->render('FlowberEventBundle:Default:eventMember.html.twig', 
                 array( 
@@ -121,6 +125,8 @@ class EventController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
         
         return $this->render('FlowberEventBundle:Default:eventGallery.html.twig', 
                 array( 
@@ -214,6 +220,8 @@ class EventController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;   
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
         
         return $this->render('FlowberEventBundle:Default:createEvent.html.twig', array(
             'eventForm' => $eventForm->createView(),
@@ -294,6 +302,8 @@ class EventController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;   
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
         
         return $this->render('FlowberEventBundle:Default:editEvent.html.twig', array(
             'eventForm' => $eventForm->createView(),
@@ -320,6 +330,8 @@ class EventController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
         
         return $this->render('FlowberEventBundle:Default:allEvent.html.twig', 
                 array( 
@@ -338,7 +350,8 @@ class EventController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;
-        
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());       
         return $this->render('FlowberEventBundle:Default:eventSearch.html.twig', 
                 array('navbar' => $navbar,
                 'events' => $events

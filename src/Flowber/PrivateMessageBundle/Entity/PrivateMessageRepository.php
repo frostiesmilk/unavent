@@ -35,6 +35,19 @@ class PrivateMessageRepository extends EntityRepository
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }
     
+    public function getNumberMessageNotRead($circleId){
+        $sql = "SELECT  statut "
+                . "FROM  receiver a "
+                . "WHERE receiver = ".$circleId."  "
+                . "AND  a.statut='2'";
+
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('statut', 'statut');
+        
+        return count($this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult());
+    }  
+    
     public function getOneReceivedMessage($id){
         $sql = "SELECT message.subject, message.message, message.message_from_id, "
                 . "message.id, message.statut, message.creationDate "

@@ -31,6 +31,18 @@ class RequestRepository extends EntityRepository
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();    
     }
+
+    public function getCountInfosRequest($id){  
+        $sql = "SELECT a.id "
+                . "FROM request a, request_circle b "
+                . "WHERE b.circle_id = ".$id." AND b.request_id=a.id AND a.statut='sent' "
+                . "ORDER BY a.creationDate desc";
+       
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('id', 'id');
+        
+        return count($this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult());    
+    }
     
     public function getRequest($id){  
         $em = $this->getDoctrine()->getManager();

@@ -161,7 +161,14 @@ class CircleManager extends BaseManager {
      
         return $circleInfos;
     }   
-
+    
+    public function getCountRequestInfos($circle)
+    {
+       $requestInfos = $this->getRequestRepository()->getCountInfosRequest($circle);
+       
+        return $requestInfos;
+    }
+    
     public function getRequestInfos($circle)
     {
        $requestInfos = $this->getRequestRepository()->getInfosRequest($circle);
