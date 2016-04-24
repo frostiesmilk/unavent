@@ -4,92 +4,76 @@ namespace Flowber\PostBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
-use Doctrine\Common\Collections\ArrayCollection;
+use Flowber\CircleBundle\Manager\CircleManager;
+use Flowber\CircleBundle\Entity\Circle;
+use Flowber\EventBundle\Manager\EventManager;
+use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Entity\Post;
+use Flowber\UserBundle\Entity\User;
 
 class PostManager extends BaseManager {
 
     protected $em;
+    protected $cm;
+    protected $eventmanager;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, CircleManager $cm, EventManager $eventmanager)
     {
         $this->em = $em;
+        $this->cm = $cm;
+        $this->eventmanager = $eventmanager;
     }
     
-    public function getPost($id)
+    public function getCirclePosts(Circle $circle, User $currentUser)
     {
-        $post = $this->getPostRepository()->find($id);
-      
-        if (!is_object($post)) {
-            throw new AccessDeniedException('This post is not defined.');
-        }   
+        $posts = $this->getPostRepository()->getCirclePosts($circle, $currentUser);        
+        $infos = [];
         
-        return $post;
-    } 
-
-    public function getPostInfos($pPost){
-        if(is_numeric($pPost)){
-            $post = $this->getPost($pPost);
+        foreach($posts AS $post){
+            $infos[] = $this->getPostInfos($post, $currentUser);
         }
         
-        $post = $pPost;
-        
-        if(!is_object($post)){
-            return false;
-        }
-        
-        $postInfos = array(
-            "id"        => $post->getId(),
-            //"creator"   => 
-        );
+        return $infos;
     }
     
-    public function getPostProfilePicture($post)
+    public function getPostInfos(Post $post, User $currentUser)
     {
-        $post = $this->getPost($post);
-        $profilePicture = $post->getProfilePicture();
+        $infos = [];
         
-        if (empty($profilePicture)) {
-            $profilePicture = 'assets/images/ProfileBundle/Default/profilePictureDefault.png';
-        } else {
-            $profilePicture = $profilePicture->getWebPath();
+        $infos["id"] = $post->getId();
+        $infos["attachedEvent"] = null;
+        if(!empty($post->getAttachedEvent())){
+            $infos["attachedEvent"] = $this->eventmanager->getEventInfos($post->getAttachedEvent()->getId(), $currentUser);
         }
         
-        return $profilePicture;
-    }   
-
-    public function getCoverPicture($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        }   
-        $event = $this->getEvent($event);
-        $coverPicture = $event->getCoverPicture();
-        
-        if (empty($coverPicture)) {
-            $coverPicture = 'assets/images/ProfileBundle/Default/coverPictureDefault.png';
-        } else {
-            $coverPicture = $coverPicture->getWebPath();
+        $infos["circle"] = array("id" => $post->getCircle()->getId());
+        $infos["createdBy"] = $this->cm->getCircleInfos($post->getCreatedBy());
+        $infos["creationDate"] = $post->getCreationDate();
+        $infos["deleteDate"] = $post->getDeleteDate();
+        $infos["gallery"] = $post->getGallery();
+        $infos["likes"] = $post->getLikes();
+        $infos["message"] = $post->getMessage();
+        $infos["status"] = $post->getStatus();
+        $infos["comments"] = [];
+        foreach($post->getComments() AS $comment){
+            $infos["comments"][]= $this->getCommentInfos($comment);
         }
         
-        return $coverPicture;
-    } 
+        return $infos;
+    }
     
-    public function getCoverInfos($event)
-    {
-        if (!is_object($event)) {
-            throw new AccessDeniedException('This event is not defined.');
-        }   
+    public function getCommentInfos(Comment $comment){
+        $infos = [];
         
-        $coverInfos = new ArrayCollection();
+        $infos["id"] = $comment->getId();
+        $infos["createdBy"] = $this->cm->getCircleInfos($comment->getCreatedBy());
+        $infos["creationDate"] = $comment->getCreationDate();
+        $infos["deleteDate"] = $comment->getDeleteDate();        
+        $infos["likes"] = $comment->getLikes();
+        $infos["message"] = $comment->getMessage();    
         
-        $coverInfos['title'] = $event->getTitle($event);
-        $coverInfos['subtitle'] = $event->getSubtitle($event);
-        $coverInfos['coverPicture'] = $this->getCoverPicture($event);
-        $coverInfos['profilePicture'] = $this->getProfilePicture($event);
-     
-        return $coverInfos;
-    } 
+        return $infos;
+    }
     
     public function getPostRepository(){
         return $this->em->getRepository('FlowberPostBundle:Post');

@@ -34,14 +34,14 @@ class LikeRestController extends Controller
 
         // manage Notification
         if ($post->getCircle() != null){
-            $notification = new Notification ();
-            $notification->setCreatedBy($this->getUser());
-            $notification->setUser($post->getCreatedBy());
-            $notification->setPageRoute('flowber_group_homepage');
-            $notification->setPageId($post->getCircle()->getId());
-            $notification->setMessage("a aimé votre post dans ");
-            $notification->setPageName($post->getCircle()->getTitle());
-            $em->persist($notification);
+//            $notification = new Notification ();
+//            $notification->setCreatedBy($this->getUser());
+//            $notification->setUser($post->getCreatedBy());
+//            $notification->setPageRoute('flowber_group_homepage');
+//            $notification->setPageId($post->getCircle()->getId());
+//            $notification->setMessage("a aimé votre post dans ");
+//            $notification->setPageName($post->getCircle()->getTitle());
+//            $em->persist($notification);
         }
 
         // preparing response
@@ -56,19 +56,6 @@ class LikeRestController extends Controller
             $repsData = array("message" => "Error Add Like");
             $view->setData($repsData)->setStatusCode(400); // error           
         }
-        
-//        try{
-//            $em->persist($like);
-//            $em->persist($post);
-//            $em->flush();
-            
-//            $repsData = array("likeId" => $like->getId());
-//            $view->setData($repsData)->setStatusCode(200); // ok
-//        } catch (Exception $ex) {
-//            $repsData = array("message" => "flush error");
-//            $view->setData($ex)->setStatusCode(400); // error
-//        }
-        
         return $view;
     }
     

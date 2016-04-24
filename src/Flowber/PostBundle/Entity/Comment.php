@@ -22,7 +22,7 @@ class Comment
     private $id;
 
     /**
-      * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+      * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
       */
     private $createdBy;
 
@@ -101,29 +101,6 @@ class Comment
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Comment
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
     }
 
     /**
@@ -286,5 +263,28 @@ class Comment
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $createdBy
+     * @return Comment
+     */
+    public function setCreatedBy(\Flowber\CircleBundle\Entity\Circle $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }

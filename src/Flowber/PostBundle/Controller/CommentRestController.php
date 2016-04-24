@@ -34,7 +34,7 @@ class CommentRestController extends Controller
             try{
                 
                 $comment->setPost($post);
-                $comment->setCreatedBy($this->getUser());
+                $comment->setCreatedBy($this->getUser()->getProfile());
                 
 //                if ($post->getCreatedBy() != $this->getUser()){
 //                    $notification = new Notification ();
@@ -60,8 +60,7 @@ class CommentRestController extends Controller
             
             $author = $comment->getCreatedBy();
             $authorInfo = array("id"        => $author->getId(),
-                                "firstname" => $author->getFirstname(),
-                                "surname"   => $author->getSurname());
+                                "title" => $author->getTitle());
             
             $repsData = array("commentId" => $comment->getId(), "datetimeCreated"=> $comment->getCreationDate(), "commentMessage"=>$comment->getMessage() , "author" => $authorInfo);
             $view->setData($repsData)->setStatusCode(200); // ok

@@ -32,6 +32,10 @@ class EventManager extends BaseManager {
 
     public function getEventInfos($event, $current)
     {
+        if(empty($event)){
+            return null;
+        }
+        
         $event = $this->getEvent($event);
         
         $circleInfos= $this->cm->getCircleInfos($event); 
@@ -66,6 +70,7 @@ class EventManager extends BaseManager {
             } 
         }
         
+        $circleInfos['id'] = $event->getId();
         $circleInfos['members'] = $this->getEventRepository()->GetCountMembers($event->getId());
         $circleInfos['friends'] = $this->getFriendsInEvent($event->getId(), $current);
         if (count($event->getPostalAddress()) != 0){

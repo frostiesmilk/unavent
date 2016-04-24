@@ -24,6 +24,7 @@ class EventController extends Controller
     public function getEventPageAction($circleId)
     {  
         $user=$this->getUser(); 
+        $circle = $this->getDoctrine()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
         $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
         $privacy = $this->container->get('flowber_circle.circle')->getPrivacy($circleId);
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($circleId, $user->getProfile()->getId());
@@ -43,7 +44,7 @@ class EventController extends Controller
         }
         else {
             $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
-            $posts = $postRepository->getPost($circleId);  
+            $posts = $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user);
 
             $post = new Post();
             $postForm = $this->createForm(new PostType, $post)->createView();
@@ -61,7 +62,7 @@ class EventController extends Controller
         $mailToCreatorForm = $this->createForm(new PrivateMessageOnlyType, new PrivateMessage);
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
-
+        $userProfileInfos = $this->container->get("flowber_profile.profile")->getProfileInfos($user->getProfile()->getId());
         
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
@@ -70,7 +71,7 @@ class EventController extends Controller
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
-                'user' => $user,
+                'user' => $userProfileInfos,
                 'role' => $role,
                 'navbar' => $navbar,
                 'circle' => $eventInfo,

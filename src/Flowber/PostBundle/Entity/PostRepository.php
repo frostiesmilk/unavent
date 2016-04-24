@@ -17,13 +17,13 @@ class PostRepository extends EntityRepository
      * Récupère les posts d'un groupe
      * Return id, message, statut, event, nom du created by, photo du created by, creationdate
      */
-    public function getPost($id){
+    public function getCirclePosts($circle){
         $qb = $this->_em->createQueryBuilder();
         
         $qb->select('a')
             ->from('FlowberPostBundle:Post', 'a')
             ->where('a.circle = :id')
-            ->setParameter('id', $id)          
+            ->setParameter('id', $circle->getId())          
             ->andWhere('a.status != :status')
             ->setParameter('status', '0')
             ->orderBy('a.creationDate', 'DESC');

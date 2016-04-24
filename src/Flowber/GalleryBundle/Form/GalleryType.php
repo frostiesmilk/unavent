@@ -21,6 +21,9 @@ class GalleryType extends AbstractType
                 'multiple' => true,
                 'data_class' => null,
                 'required' => true,
+                'attr' => array(
+                    'accept' => 'image/*',
+                    ),
             ));
     }
     

@@ -33,10 +33,10 @@ class GroupController extends Controller
         $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
         
         //preparing new form for a post
-        $postWithEvent = new Post();
+        $postWithEvent = new Post();        
+        $postWithEventForm = $this->createForm(new PostWithEventType, $postWithEvent);    
         $postWithPictures = new Post();
-        $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);        
-        $postWithEventForm = $this->createForm(new PostWithEventType, $postWithEvent);      
+        $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);  
            
         // preparing new Gallery
         $newGroupGallery = new Gallery();
@@ -67,7 +67,8 @@ class GroupController extends Controller
             }
         }
         
-        $posts = $postRepository->getPost($circleId);
+        //$posts = $postRepository->getCirclePosts($circle);
+        $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user);
         // forms for comments
         $commentsForms = array();
         foreach ($posts as $post)
@@ -83,10 +84,7 @@ class GroupController extends Controller
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
 
         // user
-        $userInfos = array( "id"        => $user->getId(),
-                            "firstname" =>  $user->getFirstname(),
-                            "surname"   =>  $user->getSurname(),
-                            "profilePicture"    => $this->container->get('flowber_circle.circle')->getProfilePicture($groupInfo['idCreatedBy']));
+        $userProfileInfos = $this->container->get("flowber_profile.profile")->getProfileInfos($user->getProfile()->getId());
         
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
@@ -95,7 +93,7 @@ class GroupController extends Controller
 
         return $this->render('FlowberGroupBundle:Default:group.html.twig', 
             array('circle' => $groupInfo,
-                'user'  =>  $userInfos,
+                'user'  =>  $userProfileInfos,
                 'role' => $role,
                 'posts' => $posts,
                 'navbar' => $navbar,

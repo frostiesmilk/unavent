@@ -1,4 +1,4 @@
 services:
     flowber_post.post:
         class: Flowber\PostBundle\Manager\PostManager
-        arguments: [@doctrine.orm.entity_manager] 
+        arguments: [@doctrine.orm.entity_manager, @flowber_circle.circle, @flowber_event.event] 
