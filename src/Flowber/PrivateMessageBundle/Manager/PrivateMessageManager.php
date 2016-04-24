@@ -36,6 +36,13 @@ class PrivateMessageManager extends BaseManager {
         return $messages;
     } 
     
+    public function getNumberMessageNotRead($circleId)
+    {
+        $pmReposit = $this->getPrivateMessageRepository();
+        $number = $pmReposit->getNumberMessageNotRead($circleId);
+        return $number;
+    }   
+    
     public function getMessageReceivedCompleted($id)
     {
         $pmReposit = $this->getPrivateMessageRepository();

@@ -97,6 +97,8 @@ class ProfileController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav; 
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($profile->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($profile->getId());
         
         return $this->render('FlowberProfileBundle:Default:editProfile.html.twig', 
                 array('circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
@@ -123,6 +125,8 @@ class ProfileController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($currentUser->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($currentUser->getProfile()->getId());
         
         // END IF A PRIVATE MESSAGE HAS BEEN SENT 
 
