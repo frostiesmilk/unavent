@@ -47,15 +47,10 @@ class PostRepository extends EntityRepository
             ->setParameter('status', '0')
             ->orderBy('a.creationDate', 'DESC');
         
-        return $qb->getQuery()
-                  ->getResult();
+        return $qb->getQuery()->getResult();
     }
     
-    public function hasUserLikedPost($post, $user){
-
-//        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
-//        $rsm->addRootEntityFromClassMetadata(‘MonBundle:MonEntite’, ‘alias’);
-        
+    public function hasUserLikedPost($post, $user){        
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('id', 'id');
 

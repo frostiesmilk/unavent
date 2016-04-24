@@ -20,6 +20,8 @@ class GalleryOnlyType extends AbstractType
                     'multiple' => true,
                     'data_class' => null,
                     'required' => false,
+                    'attr' => array('accept' => 'image/*',
+                        ),                    
                 ));
     }
     

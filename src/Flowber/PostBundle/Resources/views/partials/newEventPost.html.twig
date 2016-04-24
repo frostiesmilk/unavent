@@ -1,0 +1,18 @@
+<div class="generic-blog-new-post">
+    <ul id="groupNavbar" class="nav nav-tabs nav-justified generic-new-post-navbar">
+        <li role="presentation" class="generic-new-post-navbar-option active" aria-controls="newpost" role="tab" data-toggle="tab">
+            <a href="#newpost" class="generic-new-post-navbar-option-clickable"><img class="generic-new-post-navbar-option-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/new-post.png')}}" alt=""/><span class="generic-new-post-navbar-option-label"> Message</span></a>
+        </li>
+        <li role="presentation" class="generic-new-post-navbar-option" aria-controls="newgallery" role="tab" data-toggle="tab">
+            <a href="#newgallery" class="generic-new-post-navbar-option-clickable"><img class="generic-new-post-navbar-option-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/photo.png')}}" alt=""/><span class="generic-new-post-navbar-option-label"> Ajouter une gallerie</span></a>
+        </li>
+    </ul>        
+        
+     <!-- Tab panes -->
+    <div class="tab-content generic-blog-new-post-content">
+        
+        {% include 'FlowberPostBundle::partials/newPostMessage.html.twig' %}
+        {% include 'FlowberPostBundle::partials/newGalleryFromBlog.html.twig' %}
+        
+    </div>
+</div>

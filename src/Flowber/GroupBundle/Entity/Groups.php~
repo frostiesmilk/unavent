@@ -3,7 +3,7 @@
 namespace Flowber\GroupBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Flowber\GalleryBundle\Entity\Gallery;
+use Flowber\EventBundle\Entity\Event;
 use Flowber\CircleBundle\Entity\Circle;
 // REST & JMSserializer
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -25,6 +25,12 @@ class Groups extends Circle
      * @ORM\ManyToMany(targetEntity="Flowber\FrontOfficeBundle\Entity\Category")
      */
     private $categories;
+    
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Flowber\EventBundle\Entity\Event")
+     */
+    private $events;
 
     /**
      * Constructor
