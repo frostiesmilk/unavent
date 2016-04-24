@@ -30,13 +30,13 @@ class EventManager extends BaseManager {
         return $event;
     } 
 
-    public function getEventInfos($event, $current)
+    public function getEventInfos($eventId, $current)
     {
-        if(empty($event)){
+        if(empty($eventId)){
             return null;
         }
         
-        $event = $this->getEvent($event);
+        $event = $this->getEvent($eventId);
         
         $circleInfos= $this->cm->getCircleInfos($event); 
         

@@ -43,7 +43,7 @@ class PostRestController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             try{
-                $post->setCreatedBy($this->getUser());
+                $post->setCreatedBy($this->getUser()->getProfile());
                 $post->setCircle($circle);
 //                
 //                if ($circle->getCreatedBy() != $this->getUser()){
@@ -168,19 +168,19 @@ class PostRestController extends Controller
         $post = new Post();
         $form = $this->createForm(new PostWithEventType(), $post);
         
+        $userProfile = $this->getUser()->getProfile();
+        
          // if form has been submitted
         $form->handleRequest($request);
         $postAttachmentView = "";
         if($form->isValid()){
             $em = $this->getDoctrine()->getManager();
             
-            $userProfile = $this->getUser()->getProfile();
             $postEvent = $post->getAttachedEvent();
             $postEvent->setCreatedBy($userProfile);
             $post->setMessage($postEvent->getTitle());
             $post->setCreatedBy($userProfile);
             $post->setCircle($circle);
-            $post->getAttachedEvent()->setCreatedBy($circle);
             $circle->addEvent($postEvent);
 
             $em->persist($post);
@@ -195,8 +195,9 @@ class PostRestController extends Controller
             }
             
             if(count($post->getAttachedEvent())>0){ // if there is a post attachment
+                $eventInfos = $this->container->get('flowber_event.event')->getEventInfos($post->getAttachedEvent()->getId(), $userProfile->getId());
                 $postAttachmentView = $this->renderView('FlowberPostBundle:partials:showPostEvent.html.twig', 
-                        array("post" =>$post));
+                        array("event" =>$eventInfos));
             }
             
             // create new comment form

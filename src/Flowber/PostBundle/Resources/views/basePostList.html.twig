@@ -158,6 +158,7 @@
                     
                     
                     {% if post.attachedEvent %}
+                        {% set event = post.attachedEvent %}
                         {% include 'FlowberPostBundle::partials/showPostEvent.html.twig' %}
                     {% endif %}
                 </div>

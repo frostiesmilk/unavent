@@ -68,7 +68,7 @@ class GroupController extends Controller
         }
         
         //$posts = $postRepository->getCirclePosts($circle);
-        $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user);
+        $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user->getProfile()->getId());
         // forms for comments
         $commentsForms = array();
         foreach ($posts as $post)

@@ -55,11 +55,6 @@
                 format: 'LT',
             });
         });
-
-        $('#groupNavbar a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
         
         $("#newPostTextArea, #newMailToHost").keyup(function(e) {
             while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {

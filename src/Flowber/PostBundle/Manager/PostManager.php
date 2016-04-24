@@ -24,7 +24,7 @@ class PostManager extends BaseManager {
         $this->eventmanager = $eventmanager;
     }
     
-    public function getCirclePosts(Circle $circle, User $currentUser)
+    public function getCirclePosts(Circle $circle, $currentUser)
     {
         $posts = $this->getPostRepository()->getCirclePosts($circle, $currentUser);        
         $infos = [];
@@ -36,7 +36,7 @@ class PostManager extends BaseManager {
         return $infos;
     }
     
-    public function getPostInfos(Post $post, User $currentUser)
+    public function getPostInfos(Post $post, $currentUser)
     {
         $infos = [];
         
