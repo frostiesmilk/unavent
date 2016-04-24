@@ -110,7 +110,6 @@ class ProfileController extends Controller
     
     public function getUserProfileAction($circleId) {
         $currentUser = $this->getUser();
-        $role = $this->container->get('flowber_circle.circle')->getRole($currentUser, $circleUser->getProfile()->getId());
         $circleInfos = $this->container->get('flowber_profile.profile')->getProfileInfos($circleId);
         $friends = $this->container->get('flowber_profile.profile')->getFriends($circleId, $currentUser->getProfile()->getId());
         $groups = $this->container->get('flowber_group.group')->getGroups($circleId, $currentUser->getProfile()->getId());
@@ -118,6 +117,7 @@ class ProfileController extends Controller
         $circleUser = $this->container->get('flowber_profile.profile')->getUser($circleId);        
         $privateMessage = new PrivateMessage;
         $privateMessageForm = $this->createForm(new PrivateMessageType, $privateMessage);
+        $role = $this->container->get('flowber_circle.circle')->getRole($currentUser, $circleUser->getProfile()->getId());
         
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($circleId);
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($circleId);
