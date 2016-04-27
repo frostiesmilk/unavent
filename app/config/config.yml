@@ -74,12 +74,11 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
-    auth_mode: "%mailer_auth_mode%"  # added
-    host:      "%mailer_host%"
-    port:      "%mailer_port%"       # added 
+#    auth_mode: "%mailer_auth_mode%"  # added
+#    host:      "%mailer_host%"
+#    port:      "%mailer_port%"       # added 
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory }
 
 fos_user:
     db_driver:     orm                               # Le type de BDD à utiliser
