@@ -93,13 +93,13 @@ fos_user:
             enabled: true
             from_email:
                 address:            "%mailer_user%"
-                sender_name:        Flowber Admin           
+                sender_name:        Flowber Site           
             template: FlowberUserBundle:email:registration_confirmation.html.twig
     resetting:
         email:
             from_email:
                 address:            "%mailer_user%"
-                sender_name:        Flowber Admin
+                sender_name:        Flowber Site
             template: FlowberUserBundle:email:reset_password.html.twig
                 
 sensio_framework_extra:
