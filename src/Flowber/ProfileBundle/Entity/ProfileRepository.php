@@ -135,6 +135,52 @@ class ProfileRepository extends EntityRepository
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }   
     
+    /**
+     * Get Profiles by title
+     * @param type $string
+     * @param type $currentCircle
+     * @return type
+     */
+    public function getProfilesByTitleSearch($string, $currentCircle){
+        
+        $profiles = [];
+       
+        $query = $this->_em->createQuery(''
+                . 'SELECT p.id as id '
+                . 'FROM FlowberProfileBundle:Profile p, FlowberCircleBundle:Subscribers sub '
+                . 'WHERE sub.circle = p '
+                . 'AND  sub.subscriber = :currentCircle '
+                . 'AND p.title LIKE :string ')
+        ->setParameter('currentCircle', $currentCircle)
+        ->setParameter('string', "%".$string."%");
+        
+        $subscribedProfiles = $query->getResult();
+        
+        foreach($subscribedProfiles AS $profile){
+            $profiles[] = $profile;
+        }
+        
+        //////////
+        
+        $query = $this->_em->createQuery(''
+                . 'SELECT p.id as id ' 
+                . 'FROM FlowberProfileBundle:Profile p '
+                . 'WHERE p.privacy = :privacy '
+                . 'AND p.title LIKE :string ')
+        ->setParameter('privacy', "public")
+        ->setParameter('string', "%".$string."%");
+        
+        $publicProfiles = $query->getResult();
+        
+        foreach($publicProfiles AS $profile){
+            if(!in_array($profile, $profiles)){
+                $profiles[] = $profile;
+            }
+        }
+        
+        return $profiles;
+    }
+    
     /*
      * Récupère les hobbies de l'utilisateur
      * Return title, percent, description

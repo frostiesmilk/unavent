@@ -18,7 +18,7 @@ class GroupManager extends BaseManager {
         $this->cm = $cm;
     }
     
-    public function getGroup($id)
+    public function getGroupById($id)
     {
         $group = $this->getGroupRepository()->find($id);
       
@@ -29,9 +29,9 @@ class GroupManager extends BaseManager {
         return $group;
     } 
     
-    public function getGroupInfos($group, $current)
+    public function getGroupInfos($groupId, $current)
     {
-        $group = $this->getGroup($group);
+        $group = $this->getGroupById($groupId);
         
         $circleInfos= $this->cm->getCircleInfos($group); 
         
@@ -84,6 +84,33 @@ class GroupManager extends BaseManager {
 
         return $nbFriend;
     } 
+    
+    public function getGroupsInArray($arrayGroupsIds, $currentCircleId){
+        
+        $groups = [];
+        
+        foreach($arrayGroupsIds AS $groupId){
+            $subtitle = substr($this->cm->getCircle($groupId['id'])->getSubtitle(), 0, 75).'...'; 
+//            $groups[]['id'] = $groupId['id'];
+//            $groups[]['title'] = $this->cm->getCircle($groupId['id'])->getTitle();
+//            $groups[]['profilePicture'] = $this->cm->getProfilePicture($groupId['id']);                           
+//            $groups[]['subtitle'] = $subtitle;
+//            $groups[]['members'] = $this->getGroupRepository()->GetCountMembers($groupId['id']);
+//            $groups[]['friends'] = $this->getFriendsInGroup($groupId['id'], $currentCircleId);
+//            $groups[]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($currentCircleId), $groupId['id']);
+            $groups[] = array(
+                'id' => $groupId['id'],
+                'title' => $this->cm->getCircle($groupId['id'])->getTitle(),
+                'profilePicture' => $this->cm->getProfilePicture($groupId['id']),
+                'subtitle' => $subtitle,
+                'members' => $this->getGroupRepository()->GetCountMembers($groupId['id']),
+                'friends' => $this->getFriendsInGroup($groupId['id'], $currentCircleId),
+                'role' => $this->cm->getRoleCircle($this->cm->getCircle($currentCircleId), $groupId['id']),
+            );
+        }
+        
+        return $groups;
+    }
     
     public function getGroups($circleId, $current)
     {

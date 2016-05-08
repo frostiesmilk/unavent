@@ -116,4 +116,51 @@ class GroupRepository extends EntityRepository
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
     }
+    
+    /**
+     * Get groups by title
+     * 
+     * @param type $string
+     * @param type $currentCircle
+     * @return array of groups IDs
+     */
+    public function getGroupsByTitleSearch($string, $currentCircle){
+        
+        $groups = [];
+       
+        $query = $this->_em->createQuery(''
+                . 'SELECT g.id as id '
+                . 'FROM FlowberGroupBundle:Groups g, FlowberCircleBundle:Subscribers sub '
+                . 'WHERE sub.circle = g '
+                . 'AND  sub.subscriber = :currentCircle '
+                . 'AND g.title LIKE :string ')
+        ->setParameter('currentCircle', $currentCircle)
+        ->setParameter('string', "%".$string."%");
+        
+        $subscribedGroups = $query->getResult();
+        
+        foreach($subscribedGroups AS $group){
+            $groups[] = $group;
+        }
+        
+        //////////
+        
+        $query = $this->_em->createQuery(''
+                . 'SELECT g.id as id ' 
+                . 'FROM FlowberGroupBundle:Groups g '
+                . 'WHERE g.privacy = :privacy '
+                . 'AND g.title LIKE :string ')
+        ->setParameter('privacy', "public")
+        ->setParameter('string', "%".$string."%");
+        
+        $publicGroups = $query->getResult();
+        
+        foreach($publicGroups AS $group){
+            if(!in_array($group, $groups)){
+                $groups[] = $group;
+            }
+        }
+        
+        return $groups;
+    }
 }

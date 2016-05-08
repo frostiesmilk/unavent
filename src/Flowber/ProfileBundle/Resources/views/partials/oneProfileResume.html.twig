@@ -1,16 +1,16 @@
 <div class=" col-md-4 col-sm-6 col-xs-12">
-    <div class="media user-profile-friends-list-element">
+    <div class="media generic-profile-list-element">
         <div class="media-left">
             <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}" title="Voir le profil de {{friend.name}}"> 
-                <div class="user-profile-friends-list-element-avatar" style="background-image:url('{{asset(friend.profilePicture)}}')"></div>
+                <div class="generic-profile-list-element-avatar" style="background-image:url('{{asset(friend.profilePicture)}}')"></div>
             </a>
         </div>
         <div class="media-body">
-            <div class="user-profile-friends-list-element-details" style="color:black">
-                <a class="user-profile-friends-list-element-details-name" href="{{ path('api_get_circle', { 'circleId' : friend.id } ) }}" title="Voir le profil de {{friend.name}}">
+            <div class="generic-profile-list-element-details">
+                <a class="generic-profile-list-element-details-name" href="{{ path('api_get_circle', { 'circleId' : friend.id } ) }}" title="Voir le profil de {{friend.name}}">
                     <b>{{friend.name}}</b>
                 </a>
-                <div style="position : absolute; right : 25px; top:8px;">
+                <div class="generic-profile-list-element-role">
                     {%if friend.role == 'member'%}
                         <span class="glyphicon glyphicon-ok"  aria-hidden="true" title="{{friend.name}} est ton ami"></span>
                     {% endif %}
@@ -19,22 +19,22 @@
                     {% endif %}
                 </div>
                 <br/>
-                <div class="user-profile-friends-list-element-subtitle-friends">
+                <div class="generic-profile-list-element-subtitle-friends">
                     {{friend.subtitle}}
                 </div>
                 <br/>
-                <span class="user-profile-friends-list-element-details-friends">
+                <span class="generic-profile-list-element-details-friends">
                     <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#friends" title="{{friend.name}} a {{friend.numberFriend}}{% if friend.numberFriend <= 1 %} ami {% else %} amis {% endif %}">
                         {{friend.numberFriend}}  {% if friend.numberFriend <= 1 %} ami {% else %} amis {% endif %}
                     </a>
                 </span> &middot; 
-                <span class="user-profile-friends-list-element-details-events">
+                <span class="generic-profile-list-element-details-events">
                     <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#events" title="{{friend.name}} participe à {{friend.numberEvent}}{% if friend.numberEvent <= 1 %} sortie {% else %} sorties {% endif %}"> 
                         {{friend.numberEvent}}  {% if friend.numberEvent <= 1 %} sortie {% else %} sorties {% endif %}
                     </a>
                 </span>
                 </span> &middot; 
-                <span class="user-profile-friends-list-element-details-events">
+                <span class="generic-profile-list-element-details-events">
                     <a href="{{ path('api_get_circle', {'circleId': friend.id}) }}#groups" title="{{friend.name}} est membre de {{friend.numberGroup}}{% if friend.numberGroup <= 1 %} groupe {% else %} groupes {% endif %}">
                     {{friend.numberGroup}}  {% if friend.numberGroup <= 1 %} groupe {% else %} groupes {% endif %}
                     </a>

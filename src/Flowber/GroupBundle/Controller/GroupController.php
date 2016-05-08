@@ -86,6 +86,7 @@ class GroupController extends Controller
         // user
         $userProfileInfos = $this->container->get("flowber_profile.profile")->getProfileInfos($user->getProfile()->getId());
         
+        // for navbar
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;

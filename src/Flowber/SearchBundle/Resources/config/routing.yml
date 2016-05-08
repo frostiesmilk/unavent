@@ -1,0 +1,3 @@
+flowber_search_all:
+    path:     /all
+    defaults: { _controller: FlowberSearchBundle:Default:searchAll }
