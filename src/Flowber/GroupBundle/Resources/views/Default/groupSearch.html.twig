@@ -19,9 +19,9 @@
                 <h1 class="create-event-cover-title ">Recherchez votre prochaine aventure !</h1>
                 <form class="form-inline">
                 <div class="form-group">
-                  <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Rechercher un groupe">
+                  <input type="text" class="form-control" name="keywords" placeholder="Rechercher un groupe">
                 </div>
-                <button type="submit" class="btn btn-default">Rechercher !</button>
+                <button type="submit" class="btn btn-default btn-red">Rechercher !</button>
                 </form>
             </div>
         </div>
@@ -31,11 +31,15 @@
     <div class="container">
         <div class="row" style="padding-top : 30px; padding-bottom : 50px;">
             <div class="col-xs-12">
-                <br>
-            <h2>Tous les derniers groupes</h2>
-            {% for group in groups %}
-                {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}                
-            {%endfor%}
+                {% if searchMode %}
+                    <h2>Groupes trouvés ({{groups|length}})</h2>
+                {% else %}
+                    <h2>Tous les derniers groupes</h2>
+                {% endif %}
+                
+                {% for group in groups %}
+                    {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}                
+                {%endfor%}
             </div>
         </div>
     </div>
