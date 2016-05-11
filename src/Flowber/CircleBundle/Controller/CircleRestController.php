@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Flowber\CircleBundle\Entity\Request as OneRequest;
 use Flowber\CircleBundle\Entity\Subscribers;
+use Flowber\NotificationBundle\Entity\Notification;
 
 class CircleRestController extends Controller
 {   
@@ -97,6 +98,15 @@ class CircleRestController extends Controller
         $subscriber2->setStatut($this->container->get("flowber_circle.circle")->getClass($request->getCircle()));
         $em->persist($subscriber2);           
         }
+
+        $notification = new Notification ();
+        $notification->setCreatedBy($this->getUser()->getProfile());
+        $notification->setUser($request->getSender());
+        $notification->setPageRoute('api_circle');
+        $notification->setPageId($request->getCircle()->getId());
+        $notification->setMessage("a accepté votre demande ");
+        $notification->setPageName($request->getCircle()->getTitle());
+        $em->persist($notification);
         
         $em->remove($request);
         $em->persist($subscriber);

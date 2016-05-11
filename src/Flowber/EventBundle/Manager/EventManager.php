@@ -158,11 +158,10 @@ class EventManager extends BaseManager {
                 }
                 $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
                 $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
-                
                 if(empty($event->getStartTime())){
-                    $events[$count]['startTime'] = "";
+                    $events[$count]['startHour'] = "";
                 }else{
-                    $events[$count]['startTime'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
+                    $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
                 }
                 
                 $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
@@ -171,7 +170,7 @@ class EventManager extends BaseManager {
                 $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($currentCircleId), $events[$count]['id']);
                 $count++;
             } 
-        }        
+        }      
         return $events;
     }   
     

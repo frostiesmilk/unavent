@@ -32,10 +32,6 @@ $("body").on("submit","#readNotRead", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
         if (document.getElementById("messageFromTitle-"+$this.attr('class')).className[0] == 'b') {
@@ -63,10 +59,6 @@ $("body").on("submit","#readNotReadReceived", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
         if (document.getElementById("messageFromSubmit-"+$this.attr('class')).title == "marquer comme non lu" ){
@@ -133,10 +125,6 @@ $("body").on("submit","#deleteReceivedMessage", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             incrementDeletedMessage();
@@ -157,10 +145,6 @@ $("body").on("submit","#deleteOneReceivedMessage", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             incrementDeletedMessage();
@@ -180,10 +164,6 @@ $("body").on("submit","#deleteOneReceivedDeletedMessage", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             decrementDeletedMessage();
@@ -203,10 +183,6 @@ $("body").on("submit","#deleteDeletedMessage", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             decrementDeletedMessage();
@@ -227,10 +203,6 @@ $("body").on("submit","#deleteSentMessage", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             incrementDeletedMessage();
@@ -251,10 +223,6 @@ $("body").on("submit","#deleteOneSentDeletedMessage", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             decrementDeletedMessage();
@@ -273,10 +241,6 @@ $("body").on("submit","#deleteOneSentMessage", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             incrementDeletedMessage();
@@ -295,10 +259,6 @@ $("body").on("submit","#CancelReceivedDeleted", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             decrementDeletedMessage();
@@ -318,10 +278,6 @@ $("body").on("submit","#CancelSentDeleted", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             decrementDeletedMessage();
@@ -342,10 +298,6 @@ $("body").on("submit","#CancelOneSentDeleted", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             decrementDeletedMessage();
@@ -366,10 +318,6 @@ $("body").on("submit","#CancelOneReceivedDeleted", function(e){
         error: function(data){
             alert("error");
         }
-//        success: function(data){
-//            $this.trigger("reset"); // on reset le form
-//            alert("Private Message successfuly sent");
-//        }
     }).done(function(data, textStatus, jqXHR){ // like success
         $this.trigger("reset"); // on reset le form
             decrementDeletedMessage();

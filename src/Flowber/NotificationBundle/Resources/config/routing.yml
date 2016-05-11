@@ -1,7 +1,0 @@
-flowber_notification_homepage:
-    path:     /notification
-    defaults: { _controller: FlowberNotificationBundle:Notification:getNotification }
-
-flowber_read_notification_homepage:
-    path:     /notification/{notification_id}
-    defaults: { _controller: FlowberNotificationBundle:Notification:getNotification }

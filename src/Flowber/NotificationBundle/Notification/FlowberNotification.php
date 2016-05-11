@@ -24,12 +24,6 @@ class FlowberNotification {
     }
     
     public function getNotification(){        
-        $user = $this->doctrine->getManager()->getRepository('FlowberUserBundle:User')->find($this->context->getToken()->getUser()->getId());
 
-        $notifications = $this->doctrine->getManager()
-                ->getRepository('FlowberNotificationBundle:Notification')
-                ->findByUser($user, array('creationDate' => 'desc'));
-        
-        return $notifications;
     }
 }

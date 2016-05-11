@@ -1,4 +1,4 @@
 services:
-#    flowber_front_office.example:
-#        class: Flowber\FrontOfficeBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    flowber_front_office.front_office:
+        class: Flowber\FrontOfficeBundle\Manager\FrontOfficeManager
+        arguments: [@security.context, @flowber_circle.circle, @flowber_event.event, @flowber_group.group, @flowber_privateMessage.privateMessage]

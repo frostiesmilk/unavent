@@ -8,8 +8,14 @@ class NotificationController extends Controller
 {
     public function getNotificationAction()
     {
-        $notifications = $this->container->get('flowber_notification.notification')->getNotification($this->getDoctrine(), $this); 
-        $user=$this->getUser();  
+        $user=$this->getUser()->getProfile();  
+
+        $notifications = $this->doctrine->getManager()
+                ->getRepository('FlowberNotificationBundle:Notification')
+                ->findByUser($user, array('creationDate' => 'desc'));  
+        
+        die(var_dump($notifications));
+                
         
         foreach($notifications as $notification){
             $notification->setStatut('2');
@@ -19,6 +25,8 @@ class NotificationController extends Controller
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
         $navbar['group'] = $groupsNav;    
+        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());  
         
         return $this->render('FlowberNotificationBundle:Default:getNotification.html.twig', 
                 array(
