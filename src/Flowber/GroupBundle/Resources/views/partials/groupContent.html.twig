@@ -47,8 +47,9 @@
                             <form name="send-private-message-form" method="post" action="{{path('api_post_privatemessage', {"circleId": circle.id})}}">
                                 {{ form_widget(mailToCreatorForm.message, {'attr': {'class': 'group-mail', 'placeholder':'Votre message'}})}} 
                                 {{ form_rest(mailToCreatorForm) }}
-                                <button class="btn btn-default" type="submit">Envoyer</button>
+                                <button id="message_send_content" class="btn btn-default" type="submit">Envoyer</button>
                             </form>
+                            <span id="message_response"> </span>
                         </td>
                     </tr>
                     {% endif %}

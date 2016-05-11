@@ -22,12 +22,12 @@ class Notification
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
      */
     private $createdBy;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
      */
     private $user;
 
@@ -230,36 +230,14 @@ class Notification
         return $this->creationDate;
     }
 
-    /**
-     * Set user
-     *
-     * @param \Flowber\UserBundle\Entity\User $user
-     * @return Notification
-     */
-    public function setUser(\Flowber\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Flowber\UserBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 
     /**
      * Set createdBy
      *
-     * @param \Flowber\UserBundle\Entity\User $createdBy
+     * @param \Flowber\CircleBundle\Entity\Circle $createdBy
      * @return Notification
      */
-    public function setCreatedBy(\Flowber\UserBundle\Entity\User $createdBy = null)
+    public function setCreatedBy(\Flowber\CircleBundle\Entity\Circle $createdBy = null)
     {
         $this->createdBy = $createdBy;
 
@@ -269,10 +247,33 @@ class Notification
     /**
      * Get createdBy
      *
-     * @return \Flowber\UserBundle\Entity\User 
+     * @return \Flowber\CircleBundle\Entity\Circle 
      */
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $user
+     * @return Notification
+     */
+    public function setUser(\Flowber\CircleBundle\Entity\Circle $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

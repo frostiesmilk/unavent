@@ -6,18 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CircleController extends Controller
 {
-    function getRequestPageAction (){
-        $profile = $this->getUser()->getProfile();  
+    function getRequestPageAction (){        
         
-        $user=$this->getUser();  
-        
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($profile->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($profile->getId());
-        $navbar['group'] = $groupsNav; 
-        $requestInfos = $this->container->get('flowber_circle.circle')->getRequestInfos($profile->getId());
+        $navbar = $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos();
+        $requestInfos = $this->container->get('flowber_circle.circle')->getCurrentUserRequestInfos();
 
         return $this->render('FlowberCircleBundle:Default:getRequest.html.twig', 
             array(
@@ -26,4 +18,18 @@ class CircleController extends Controller
             )
         );
     }
+    
+    function getNotificationPageAction (){
+        
+        $navbar = $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos();
+        $requestInfos = $this->container->get('flowber_circle.circle')->getCurrentUserRequestInfos();
+
+        return $this->render('FlowberCircleBundle:Default:getNotification.html.twig', 
+            array(
+                'notifications' => $requestInfos,
+                'navbar' => $navbar                
+            )
+        );
+    }
+    
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\SecurityContext;
 
 // Entities
 use Flowber\CircleBundle\Entity\Circle;
@@ -13,10 +14,16 @@ use Flowber\CircleBundle\Entity\Circle;
 class CircleManager extends BaseManager {
 
     protected $em;
-
-    public function __construct(EntityManager $em)
+    protected $context;
+    
+    public function __construct(EntityManager $em, SecurityContext $securityContext)
     {
         $this->em = $em;
+        $this->context = $securityContext;    
+    }
+    
+    public function getCurrentUserId(){      
+        return $this->context->getToken()->getUser()->getProfile()->getId();
     }
     
     public function getCircle($id)
@@ -80,7 +87,8 @@ class CircleManager extends BaseManager {
         $privacy = $circle->getPrivacy();
                 
         return $privacy;
-    }     
+    }   
+    
     public function getCoverPicture($circle)
     {
         // Si on a envoyé un id, renvoyer un circle
@@ -137,6 +145,7 @@ class CircleManager extends BaseManager {
         $coverInfos['subtitle'] = $circle->getSubtitle();
         $coverInfos['coverPicture'] = $this->getCoverPicture($circle);
         $coverInfos['profilePicture'] = $this->getProfilePicture($circle);
+        $coverInfos['role'] = $this->getCurrentUserRole($circle);
      
         return $coverInfos;
     }   
@@ -182,7 +191,22 @@ class CircleManager extends BaseManager {
             $count++;
         }
         return $requestInfos;
-    }  
+    } 
+    
+    public function getCurrentUserRequestInfos()
+    {
+       $requestInfos = $this->getRequestRepository()->getInfosRequest($this->getCurrentUserId());
+       
+       $count=0;
+        foreach ($requestInfos as $request ){
+            $requestInfos[$count]['senderName']=$this->getTitle(intval($requestInfos[$count]['senderId']));
+            $requestInfos[$count]['senderPic']=$this->getProfilePicture(intval($requestInfos[$count]['senderId']));
+            $requestInfos[$count]['circleName']=$this->getTitle(intval($requestInfos[$count]['circleId']));
+            $requestInfos[$count]['circleClass']=$this->getClass(intval($requestInfos[$count]['circleId']));
+            $count++;
+        }
+        return $requestInfos;
+    }      
     
     public function getRequest($requestId)
     {
@@ -207,7 +231,7 @@ class CircleManager extends BaseManager {
         return $request;
     }  
     
-    public function isCreator($user, $circle)
+    public function isCreator($userId, $circle)
     {
         // Si on a envoyé un id, renvoyer un circle
         if (is_numeric($circle)){
@@ -218,7 +242,7 @@ class CircleManager extends BaseManager {
             throw new AccessDeniedException('This circle is not defined.');
         } 
         
-        if($circle->getCreatedBy()->getId() == $user->getProfile()->getId())
+        if($circle->getCreatedBy()->getId() == $userId)
             return true;
         else return false;
         
@@ -242,9 +266,10 @@ class CircleManager extends BaseManager {
         
         return $isCreator;
     }    
+    
     public function getRole($user, $circle)
     {
-        if ($this->isCreator($user, $circle) == true){
+        if ($this->isCreator($user->getProfile()->getId(), $circle) == true){
             return "creator";
         } else if ($this->getCircleRepository()->ismember($user->getProfile()->getId(), $circle) == 1){
             return "member";
@@ -255,7 +280,23 @@ class CircleManager extends BaseManager {
             return "cantsee";
         }
         return "no";
-    }  
+    }
+    
+    public function getCurrentUserRole($circle)
+    {
+        if ($this->isCreator($this->getCurrentUserId(), $circle) == true){
+            return "creator";
+        } else if ($this->getCircleRepository()->ismember($this->getCurrentUserId(), $circle) == 1){
+            return "member";
+        } else if ($this->getCircleRepository()->hasSentRequest($this->getCurrentUserId(), $circle) == 1){
+            return "requestSent";
+        }
+        if ($this->getPrivacy($circle)=="private"){
+            return "cantsee";
+        }
+        return "no";
+    }   
+    
     public function getRoleCircle($user, $circle)
     {
         if ($this->isCreatorCircle($user, $circle) == true){
@@ -269,7 +310,8 @@ class CircleManager extends BaseManager {
             return "cantsee";
         }
         return "no";
-    }      
+    }    
+    
     public function getCircleRepository()
     {
         return $this->em->getRepository('FlowberCircleBundle:Circle');
@@ -278,5 +320,6 @@ class CircleManager extends BaseManager {
     public function getRequestRepository()
     {
         return $this->em->getRepository('FlowberCircleBundle:Request');
-    }     
+    }    
+    
 }
