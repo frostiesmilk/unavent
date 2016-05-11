@@ -5,7 +5,7 @@ namespace Flowber\SearchBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class SearchController extends Controller
 {
     public function searchAllAction(Request $request)
     {

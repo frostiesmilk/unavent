@@ -3,6 +3,8 @@
 namespace Flowber\GroupBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
@@ -404,10 +406,22 @@ class GroupController extends Controller
                  ));
     }
     
-    public function getSearchAction(){
-        $user = $this->getUser();        
-         $groups = $this->container->get('flowber_group.group')->getAllGroups($user->getProfile()->getId());
-       
+    public function getSearchAction(Request $request){
+        $user = $this->getUser();     
+        
+        $keywordsRaw = $request->query->get('keywords');        
+        $keywords = trim($keywordsRaw);
+        $searchMode = false;
+        
+        if(!empty($keywords)){ // if search
+            // search groups
+            $searchMode = true;
+            $selectedGroups = $this->getDoctrine()->getRepository("FlowberGroupBundle:Groups")->getGroupsByTitleSearch($keywords, $user->getProfile());
+            $groups = $this->container->get("flowber_group.group")->getGroupsInArray($selectedGroups, $user->getProfile()->getId());
+        }else{ // no search, we display all groups
+            $groups = $this->container->get('flowber_group.group')->getAllGroups($user->getProfile()->getId());
+        }
+        
         $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
         $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
         $navbar['event'] = $eventsNav;
@@ -416,8 +430,10 @@ class GroupController extends Controller
         $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
         
         return $this->render('FlowberGroupBundle:Default:groupSearch.html.twig', 
-                array('navbar' => $navbar,
-                'groups' => $groups
-                ));
+            array(
+                'searchMode'    => $searchMode,
+                'navbar'        => $navbar,
+                'groups'        => $groups,
+        ));
     }
 }
