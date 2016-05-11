@@ -92,8 +92,9 @@ class ProfileManager extends BaseManager {
         return $this->getProfileInfos($this->cm->getCurrentUserId());
     } 
     
-    public function getFriends($profileId, $current)
+    public function getFriends($profileId)
     {
+        $current = $this->cm->getCurrentUserId();
         $friends = $this->getProfileRepository()->GetFriendsId($profileId);
         if ( count($friends) != 0){
             $count=0;

@@ -268,11 +268,10 @@ class EventController extends Controller
     public function getAllEventsPageAction($id)
     {
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
-        $events = $this->container->get('flowber_event.event')->getCurrentUserEvents();
         
         return $this->render('FlowberEventBundle:Default:allEvent.html.twig', 
                 array( 
-                'events' => $events,
+                'events' => $this->container->get('flowber_event.event')->getCurrentUserEvents(),
                 'messageForm' => $privateMessageForm->createView(),
                 'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
                 'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos()

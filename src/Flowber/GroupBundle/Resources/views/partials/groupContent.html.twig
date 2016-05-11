@@ -39,7 +39,7 @@
                         <td>{{circle.description}}</td>
                     </tr>
                     {% endif %}
-                    {% if role != "creator" %}
+                    {% if circle.role != "creator" %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
@@ -56,7 +56,7 @@
                 </table>
             </div>
         </div>
-        {% if role != "cantsee" %}
+        {% if circle.role != "cantsee" %}
         <div class="col-md-7">
             <div class="group-blog">
                 

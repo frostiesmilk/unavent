@@ -18,6 +18,17 @@ class GroupManager extends BaseManager {
         $this->cm = $cm;
     }
     
+    public function getGroup($id)
+    {
+        $group = $this->getGroupRepository()->find($id);
+       
+        if (!is_object($group)) {
+            throw new AccessDeniedException('This group is not defined.');
+        }   
+        
+        return $group;
+    }     
+    
     public function getGroupById($id)
     {
         $group = $this->getGroupRepository()->find($id);
@@ -29,8 +40,9 @@ class GroupManager extends BaseManager {
         return $group;
     } 
     
-    public function getGroupInfos($groupId, $current)
+    public function getGroupInfos($groupId)
     {
+        $current = $this->cm->getCurrentUserId();
         $group = $this->getGroupById($groupId);
         
         $circleInfos= $this->cm->getCircleInfos($group); 
@@ -112,8 +124,9 @@ class GroupManager extends BaseManager {
         return $groups;
     }
     
-    public function getGroups($circleId, $current)
+    public function getGroups($circleId)
     {
+        $current = $this->cm->getCurrentUserId();
         $groups = $this->getGroupRepository()->GetGroupsId($circleId);
         if ( count($groups) != 0){
             $count=0;
@@ -132,8 +145,9 @@ class GroupManager extends BaseManager {
         return $groups;
     }
 
-    public function getAllGroups($current)
+    public function getAllGroups()
     {
+        $current = $this->cm->getCurrentUserId();
         $groups = $this->getGroupRepository()->GetAllGroupsId();
         if ( count($groups) != 0){
             $count=0;

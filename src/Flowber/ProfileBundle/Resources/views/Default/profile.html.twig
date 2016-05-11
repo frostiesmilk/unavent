@@ -22,7 +22,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
             
             <ul class="dropdown-menu dropdown-menu-right">
-                {% if role != "creator" %}
+                {% if circle.role != "creator" %}
                     <li>
                         <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil à {{ circle.title }}">
                             <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> Envoyer un clin d'oeil

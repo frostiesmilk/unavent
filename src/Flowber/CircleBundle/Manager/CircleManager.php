@@ -286,9 +286,9 @@ class CircleManager extends BaseManager {
     {
         if ($this->isCreator($this->getCurrentUserId(), $circle) == true){
             return "creator";
-        } else if ($this->getCircleRepository()->ismember($this->getCurrentUserId(), $circle) == 1){
+        } else if ($this->getCircleRepository()->ismember($this->getCurrentUserId(), $circle->getId()) == 1){
             return "member";
-        } else if ($this->getCircleRepository()->hasSentRequest($this->getCurrentUserId(), $circle) == 1){
+        } else if ($this->getCircleRepository()->hasSentRequest($this->getCurrentUserId(), $circle->getId()) == 1){
             return "requestSent";
         }
         if ($this->getPrivacy($circle)=="private"){

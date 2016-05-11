@@ -15,7 +15,9 @@
 {% block body %}
     <!-- navbar top -->
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
-       
+    <!-- Second menu -->
+    {% include 'FlowberProfileBundle::partials/userProfile/profileNavbar.html.twig' %} 
+    
    <div class="user-profile-groups user-profile">
 
     <div class="jumbotron create-event-cover" style="background-image: url({{asset('assets/images/UserBundle/signIn/cover-streetsheeps.jpg')}})">    
