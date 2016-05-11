@@ -63,10 +63,12 @@
             </ul>
             <!---->
             <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left menu-search" role="search">
-                    <span class="glyphicon glyphicon-search icon-search" aria-hidden="true"></span>
-                    <div class="form-group">
-                        <input type="text" class="form-control menu-search-input" placeholder="Rechercher">
+                <form action="{{path('flowber_search_all')}}" method="GET" class="navbar-form navbar-left menu-search" role="search">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default navbar-search-button" type="submit"><span class="glyphicon glyphicon-search icon-search" aria-hidden="true"></span></button>
+                        </span>
+                        <input type="text" name="keywords" class="form-control menu-search-input" placeholder="Rechercher" required="required">
                     </div>                        
                 </form>
                 <li class="dropdown">

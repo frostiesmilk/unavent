@@ -119,5 +119,48 @@ class EventRepository extends EntityRepository
         $rsm->addScalarResult('id', 'id');
         
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();
-    }    
+    }   
+    
+
+    public function getEventsByTitleSearch($string, $currentCircle){
+        
+        $events = [];
+       
+        // looking for subscribed or hosted events
+        $query = $this->_em->createQuery(''
+                . 'SELECT e.id as id '
+                . 'FROM FlowberEventBundle:Event e, FlowberCircleBundle:Subscribers sub '
+                . 'WHERE sub.circle = e '
+                . 'AND  sub.subscriber = :currentCircle '
+                . 'AND e.title LIKE :string ')
+        ->setParameter('currentCircle', $currentCircle)
+        ->setParameter('string', "%".$string."%");
+        
+        $subscribedEvents = $query->getResult();
+        
+        foreach($subscribedEvents AS $event){
+            $events[] = $event;
+        }
+        
+        //////////
+        
+        // looking for public events
+        $query = $this->_em->createQuery(''
+                . 'SELECT e.id as id ' 
+                . 'FROM FlowberEventBundle:Event e '
+                . 'WHERE e.privacy = :privacy '
+                . 'AND e.title LIKE :string ')
+        ->setParameter('privacy', "public")
+        ->setParameter('string', "%".$string."%");
+        
+        $publicEvents = $query->getResult();
+        
+        foreach($publicEvents AS $event){
+            if(!in_array($event, $events)){ // no clone
+                $events[] = $event;
+            }
+        }
+        
+        return $events;
+    }
 }

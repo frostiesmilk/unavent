@@ -1,3 +1,7 @@
+flowber_search:
+    resource: "@FlowberSearchBundle/Resources/config/routing.yml"
+    prefix:   /search
+
 flowber_circle:
     resource: "@FlowberCircleBundle/Resources/config/routing.yml"
     prefix:   /

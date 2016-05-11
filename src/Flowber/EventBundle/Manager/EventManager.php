@@ -143,7 +143,7 @@ class EventManager extends BaseManager {
         return $nbFriend;
     }
     
-    public function getEventsFromList($events, $current)
+    public function getEventsFromList($events, $currentCircleId)
     {
         if ( count($events) != 0){
             $count=0;
@@ -166,8 +166,8 @@ class EventManager extends BaseManager {
                 
                 $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
                 $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
-                $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $current);
-                $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($current), $events[$count]['id']);
+                $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $currentCircleId);
+                $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($currentCircleId), $events[$count]['id']);
                 $count++;
             } 
         }      
