@@ -17,7 +17,7 @@
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
-                    {% if role != "creator" %}
+                    {% if circle.role != "creator" %}
                         <li>
                             <a href="#" data-toggle="modal" data-target="#modal-wink" title="Envoyez un clin d'oeil">
                                 <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/wink.png')}}"/> 
@@ -33,7 +33,7 @@
                                 <img class="menu-link-icon" src="{{asset('assets/images/FrontOfficeBundle/icons/tag-person.png')}}"/>
                             </a>
                         </li>
-                        {% if role == "no" or role == "cantsee"%}
+                        {% if circle.role == "no" or circle.role == "cantsee"%}
                             <li id="sendRequest" style="display:inline">
                                 <a href="#" data-toggle="modal" data-target="#modalAddSubscriber" title="Participer à l'évènement {{ circle.title }}" data-whatever="Participer à l'évènement {{ circle.title }}">
                                     <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
@@ -44,7 +44,7 @@
                                     <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>
                                 </a>
                             </li>                        
-                        {% elseif role == "member"  %}
+                        {% elseif circle.role == "member"  %}
                             <li id="unsubscribe" style="display:inline">
                                 <a href="#" data-toggle="modal" data-target="#modalUnsubscribe" title='Se désinscrire de la sortie {{ circle.title }}' data-whatever="Voulez-vous vous désinscrire de la sortie {{ circle.title }}">
                                     <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/removeFriend.png')}}"/>
@@ -60,7 +60,7 @@
                                     <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/addFriend.png')}}"/>
                                 </a>
                             </li>
-                        {% elseif role == "requestSent"  %}
+                        {% elseif circle.role == "requestSent"  %}
                             <li id="deleteRequest"  style="display:inline">
                                 <a href="#" data-toggle="modal" data-target="#modalDeleteRequest" title="Ne plus participer à l'évènement {{ circle.title }}" data-whatever="Ne plus participer à l'évènement {{ circle.title }}">
                                     <img class="menu-link-icon" src="{{asset('assets/images/UserBundle/friendShip/deleteFriend.png')}}"/>

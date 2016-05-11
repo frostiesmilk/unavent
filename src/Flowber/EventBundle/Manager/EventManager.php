@@ -30,8 +30,9 @@ class EventManager extends BaseManager {
         return $event;
     } 
 
-    public function getEventInfos($eventId, $current)
+    public function getEventInfos($eventId)
     {
+        $current = $this->cm->getCurrentUserId();
         if(empty($eventId)){
             return null;
         }
@@ -143,8 +144,9 @@ class EventManager extends BaseManager {
         return $nbFriend;
     }
     
-    public function getEventsFromList($events, $currentCircleId)
+    public function getEventsFromList($events)
     {
+        $currentCircleId=$this->cm->getCurrentUserId();
         if ( count($events) != 0){
             $count=0;
             foreach ($events as $eventss){
@@ -174,13 +176,18 @@ class EventManager extends BaseManager {
         return $events;
     }   
     
-    public function getEvents($circleId, $current){
+    public function getEvents($circleId){
         
         $events = $this->getEventRepository()->GetEventsId($circleId);
         
-        return $this->getEventsFromList($events, $current);
+        return $this->getEventsFromList($events);
     }
 
+    public function getCurrentUserEvents(){
+        
+        return $this->getEvents($this->cm->getCurrentUserId());
+    }
+    
     public function getPostEvent($postId, $currentUser){
         
     }
@@ -199,8 +206,9 @@ class EventManager extends BaseManager {
         return $events;
     }   
     
-    public function getAllEvents($current)
+    public function getAllEvents()
     {
+        $current =$this->cm->getCurrentUserId();
         $events = $this->getEventRepository()->GetAllEventsId();
         $count=0;
         foreach ($events as $eventss){
@@ -214,7 +222,10 @@ class EventManager extends BaseManager {
             }            
             $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
             $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
-            $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
+            $events[$count]['startHour'] = '';
+            if (count($event->getStartTime()) != 0) {
+                $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 
+            }
             $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
             $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
             $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $current);

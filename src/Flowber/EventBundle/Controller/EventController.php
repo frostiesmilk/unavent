@@ -25,7 +25,6 @@ class EventController extends Controller
     {  
         $user=$this->getUser(); 
         $circle = $this->getDoctrine()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
-        $role = $this->container->get('flowber_circle.circle')->getRole($user, $circleId);
         $privacy = $this->container->get('flowber_circle.circle')->getPrivacy($circleId);
         $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($circleId, $user->getProfile()->getId());
         $posts = null;
@@ -40,7 +39,7 @@ class EventController extends Controller
         $newGroupGallery = new Gallery();
         $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
         
-        if($role!='cantsee'){
+        if($eventInfo['role']!='cantsee'){
             $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
             $posts = $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user);
             
@@ -57,8 +56,7 @@ class EventController extends Controller
         
         return $this->render('FlowberEventBundle:Default:event.html.twig', 
             array(
-                'user' => $this->container->get("flowber_profile.profile")->getProfileInfos($user->getProfile()->getId()),
-                'role' => $role,
+                'user' => $this->container->get("flowber_profile.profile")->getCurrentProfileInfos(),
                 'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),
                 'circle' => $eventInfo,
                 'mailToCreatorForm' => $this->createForm(new PrivateMessageOnlyType, new PrivateMessage)->createView(),
@@ -72,38 +70,33 @@ class EventController extends Controller
         );
     }
     
-    public function getParticipantsPageAction($id){
-        $user=$this->getUser();  
-        $eventInfo = $this->container->get('flowber_circle.circle')->getCoverInfos($id);
+    public function getParticipantsPageAction($id)
+    {
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
-        $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
-        
+       
         $members = $this->container->get("flowber_event.event")->getEventMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members, $user->getProfile()->getId());
+        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
         
         return $this->render('FlowberEventBundle:Default:eventMember.html.twig', 
                 array( 
-                'role' => $role,
                 'members' => $memberInfos,
                 'messageForm' => $privateMessageForm->createView(),
-                'circle' => $eventInfo,
+                'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
                 'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos()
                 ));
     }
     
-    public function getGalleryPageAction($id){
-        $user=$this->getUser();  
-        $eventInfo = $this->container->get('flowber_circle.circle')->getCoverInfos($id);
+    public function getGalleryPageAction($id)
+    {
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
         $members = $this->container->get("flowber_event.event")->getEventMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members, $user->getProfile()->getId());
+        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
         
         return $this->render('FlowberEventBundle:Default:eventGallery.html.twig', 
                 array( 
-                'role' => $eventInfo['role'],
                 'messageForm' => $privateMessageForm->createView(),
-                'circle' => $eventInfo,
+                'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
                 'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos()
                 ));
     }
@@ -112,9 +105,11 @@ class EventController extends Controller
     {
         $user = $this->getUser();        
         $error = FALSE;
+        
         if (!is_object($user)) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
+        
         $event = new \Flowber\EventBundle\Entity\Event;
         $eventForm = $this->createForm(new EventType, $event);
         
@@ -187,16 +182,9 @@ class EventController extends Controller
             }
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav;   
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
-        
         return $this->render('FlowberEventBundle:Default:createEvent.html.twig', array(
             'eventForm' => $eventForm->createView(),
-            'navbar' => $navbar,
+            'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
         ));
@@ -205,9 +193,8 @@ class EventController extends Controller
     public function getEditEventAction($circleId)
     {
         $user=$this->getUser();
+
         $event = $this->container->get('flowber_event.event')->getEvent($circleId);        
-      //  $groupInfos = $this->container->get('flowber_event.event')->getEventInfos($group);
-        $eventInfo = $this->container->get('flowber_event.event')->getEventInfos($event, $user->getProfile()->getId());
         $eventForm = $this->createForm(new EventType, $event);
         
         //preparing eventual new profile picture
@@ -269,62 +256,36 @@ class EventController extends Controller
             }
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav;   
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
-        
         return $this->render('FlowberEventBundle:Default:editEvent.html.twig', array(
             'eventForm' => $eventForm->createView(),
             'profilePictureForm' => $profilePictureForm->createView(),
             'coverPictureForm' => $coverPictureForm->createView(),
-            'circle' => $eventInfo,
-            'navbar' => $navbar,
-            //'coverInfo' => $coverInfo,
+            'circle' => $this->container->get('flowber_event.event')->getEventInfos($circleId),
+            'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos()
         ));
     }
     
     public function getAllEventsPageAction($id)
     {
-        $user=$this->getUser();  
-        $eventInfo = $this->container->get('flowber_circle.circle')->getCoverInfos($id, $user->getProfile()->getId());
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
-        $role = $this->container->get('flowber_circle.circle')->getRole($user, $id);
-        $events = $this->container->get('flowber_event.event')->getEvents($user->getProfile()->getId(), $user->getProfile()->getId());
-
-        $members = $this->container->get("flowber_event.event")->getEventMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members, $user->getProfile()->getId());
-        //die(var_dump($members));
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $events = $this->container->get('flowber_event.event')->getCurrentUserEvents();
         
         return $this->render('FlowberEventBundle:Default:allEvent.html.twig', 
                 array( 
-                'role' => $role,
                 'events' => $events,
                 'messageForm' => $privateMessageForm->createView(),
-                'circle' => $eventInfo,
-                'navbar' => $navbar));
+                'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
+                'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos()
+                ));
     }
     
-    public function getEventSearchPageAction(){
-        $user = $this->getUser();        
-        $events = $this->container->get('flowber_event.event')->getAllEvents($user->getProfile()->getId());
+    public function getEventSearchPageAction()
+    {
+        $events = $this->container->get('flowber_event.event')->getAllEvents();
        
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav;
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());       
         return $this->render('FlowberEventBundle:Default:eventSearch.html.twig', 
-                array('navbar' => $navbar,
+                array(
+                'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
                 'events' => $events
                 ));
     }

@@ -86,7 +86,12 @@ class ProfileManager extends BaseManager {
                 
         return $profileInfos;
     } 
-
+    
+    public function getCurrentProfileInfos()
+    {
+        return $this->getProfileInfos($this->cm->getCurrentUserId());
+    } 
+    
     public function getFriends($profileId, $current)
     {
         $friends = $this->getProfileRepository()->GetFriendsId($profileId);
@@ -108,8 +113,9 @@ class ProfileManager extends BaseManager {
         return $friends;
     }
     
-    public function getFriendsFromList($friends, $current)
+    public function getFriendsFromList($friends)
     {
+        $current = $this->cm->getCurrentUserId();
         if ( count($friends) != 0){
             $count=0;
             foreach ($friends as $friend){
@@ -133,7 +139,6 @@ class ProfileManager extends BaseManager {
         return $this->em->getRepository('FlowberProfileBundle:Profile');
     }
 
-    
     public function getUserRepository()
     {
         return $this->em->getRepository('FlowberUserBundle:User');

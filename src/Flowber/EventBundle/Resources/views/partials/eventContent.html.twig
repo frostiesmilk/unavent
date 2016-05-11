@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-5">
             <div class="event-details">
-                <h2>{{ circle.title}}</h2>
-                {% if role != "cantsee" and (circle.address is not null) and (circle.coordinates is not null)  %}
+                <h2>{{ circle.title}} </h2>
+                {% if circle.role != "cantsee" and (circle.address != '') and (circle.coordinates !='')  %}
                     <div id="map" class="gmap"></div>
                 {% endif %}                    
                 <table>
@@ -29,10 +29,10 @@
                         
                         {{ circle.endDate }}</td>
                     </tr>
-                    {% if role != "cantsee" %}
+                    {% if circle.role != "cantsee" %}
                         <tr>
                             <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
-                            <td>{% if circle.address is not null %}
+                            <td>{% if circle.address != '' %}
                                     {{circle.name}} <br/>{{circle.address}}<br/>{{circle.zipcode}} {{circle.city}}                          
                                 {% else %}
                                     <span>Emplacement non défini</span>
@@ -42,7 +42,7 @@
                     {% else %}
                             <tr>
                             <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/location.png')}}" alt="Lieu"/></td>
-                            <td>{% if circle.address is not null %}
+                            <td>{% if circle.address != '' %}
                                     {{circle.city}}                          
                                 {% else %}
                                     <span>Emplacement non défini</span>
@@ -53,7 +53,9 @@
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
-                            {{circle.members}} {% if circle.members <= 1 %} participant {% else %} participants {% endif %}
+                            <a href="{{ path('flowber_event_participants', {'id': circle.id}) }}" title="voir les participatns de {{circle.title}}">
+                                {{circle.members}} {% if circle.members <= 1 %} participant {% else %} participants {% endif %}
+                            </a>
                             {% if circle.friends is not null %}
                                 dont {{circle.friends}} {% if circle.friends <= 1 %} ami {% else %} amis {% endif %}                         
                             {% endif %}
@@ -63,7 +65,7 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/description.png')}}" alt="Description de l'évènement"/></td>
                         <td><p class="event-details-description">{% if circle.description is not null %}{{ circle.description }}{% else %}Aucune description{% endif %}</p></td>
                     </tr>
-                    {% if role != "creator" %}
+                    {% if circle.role != "creator" %}
                     <tr>
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/mail.png')}}" alt="Envoyer un message à l'organisteur"/></td>
                         <td>
@@ -80,7 +82,7 @@
                 </table>
             </div>
         </div>
-        {% if role != "cantsee" %}
+        {% if circle.role != "cantsee" %}
         <div class="col-md-7">
             <div class="event-blog">
                 {% include 'FlowberPostBundle::partials/newEventPost.html.twig' %}
