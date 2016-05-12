@@ -50,14 +50,14 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
     
-    public function hasUserLikedPost($post, $user){        
+    public function hasUserLikedPost($post, $circle){        
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('id', 'id');
 
         $sql = 'SELECT l.id id '
                 . 'FROM post_likes AS pl, likes AS l '
                 . 'WHERE pl.post_id = '.$post->getId().' '
-                . 'AND l.created_by_id = '.$user->getId();
+                . 'AND l.created_by_id = '.$circle->getId();
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
 
