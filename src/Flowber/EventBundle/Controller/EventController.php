@@ -2,7 +2,10 @@
 
 namespace Flowber\EventBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Flowber\EventBundle\Form\EventType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
@@ -296,7 +299,7 @@ class EventController extends Controller
                                                     'attr' => array('class' => 'flowber_timepicker'),
                                                     'required' => false,)
                                 )
-                                ->add('categories', 'category', array(
+                                ->add('categories', 'entity', array(
                                         'class'    => 'FlowberFrontOfficeBundle:Category',
                                         'property' => 'title',
                                         'multiple' => true,
@@ -317,7 +320,7 @@ class EventController extends Controller
                 array(
                 'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
                 'events' => $events,
-                'searchEventForm' => $searchEventForm->getForm(),
+                'searchEventForm' => $searchEventForm->getForm()->createView(),
                 ));
     }
 }

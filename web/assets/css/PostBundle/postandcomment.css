@@ -1,0 +1,384 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13 déc. 2015, 19:45:20
+    Author     : Equina
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 août 2015, 19:30:41
+    Author     : Equina
+*/
+/* Colors */
+@font-face {
+  font-family: erasMediumItc;
+  src: url(../../fonts/ERASMD.TTF);
+}
+@font-face {
+  font-family: amaranthRegular;
+  src: url(../../fonts/Amaranth-Regular.ttf);
+}
+/* all site */
+body {
+  font-size: 13px;
+}
+/* Colored backgrounds */
+.background-dark-blue {
+  background-color: #293540;
+}
+/* Colored fonts */
+.font-white {
+  color: white;
+}
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
+/* Create a medium height at 40px */
+.navbar-md {
+  min-height: 40px;
+}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-md .navbar-brand {
+  height: 40px;
+}
+.navbar-md .navbar-toggle {
+  margin: 6px 12px 6px 0px;
+  padding: 6px 7px 6px 7px;
+}
+.navbar-md .navbar-toggle .icon-bar {
+  width: 19px;
+}
+/* Create a small height at 30px */
+.navbar-sm {
+  min-height: 40px;
+}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-sm .navbar-brand {
+  height: 40px;
+}
+.navbar-sm .navbar-toggle {
+  margin: 3px 9px 3px 0px;
+  padding: 4px 4px 4px 4px;
+}
+.navbar-sm .navbar-toggle .icon-bar {
+  width: 16px;
+}
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+  color: white;
+}
+/* Forms */
+.form-error-custom {
+  color: #A94442;
+  background-color: #F2DEDE;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+}
+.form-error-custom span {
+  color: #A94442;
+}
+.generic-blog-new-post {
+  border: solid 1px lightgrey;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .generic-blog-new-post {
+    margin-top: 20px;
+  }
+}
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option {
+  width: 1%;
+  display: table-cell;
+}
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable {
+  background-color: #293540;
+  border-radius: initial;
+  border: initial;
+  color: white;
+}
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-clickable:hover {
+  background-color: #1B242B;
+  border: initial;
+}
+.generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-icon {
+  height: 30px;
+  width: 30px;
+}
+@media (max-width: 768px) {
+  .generic-blog-new-post .generic-new-post-navbar .generic-new-post-navbar-option .generic-new-post-navbar-option-label {
+    display: none;
+  }
+}
+.generic-blog-new-post .generic-new-post-navbar .active .generic-new-post-navbar-option-clickable {
+  background-color: #66A0BE !important;
+}
+.generic-blog-new-post .generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:hover,
+.generic-blog-new-post .generic-new-post-navbar .active .generic-new-post-navbar-option-clickable:focus {
+  color: white;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-content-text {
+  width: 100%;
+  resize: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding: 10px;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-gallery {
+  padding: 20px;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event {
+  padding: 20px;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #map {
+  height: 300px;
+  width: 100%;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event .controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+  z-index: 9999;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #pac-input:focus {
+  border-color: #4d90fe;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event .pac-container {
+  font-family: Roboto;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+.generic-blog-new-post .generic-blog-new-post-content .generic-blog-new-post-event #type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+.generic-blog-new-post .generic-blog-new-post-footer {
+  padding: 5px;
+  height: 45px;
+}
+.generic-blog-new-post .generic-blog-new-post-footer .group-blog-new-post-footer-confirm button:hover {
+  color: white;
+}
+.generic-blog .generic-blog-posts {
+  list-style: none;
+  padding-left: initial;
+}
+.generic-blog .generic-blog-posts .generic-blog-post {
+  border: 1px solid lightgrey;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-post-delete-icon {
+  float: right;
+  color: grey;
+  text-decoration: none;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-avatar {
+  background-position: center center;
+  background-repeat: no repeat;
+  background-size: cover;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-post-header-actions .generic-post-like-button {
+  background-color: transparent;
+  border: none;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-post-header-actions .generic-post-like-button .generic-post-header-actions-icon-like {
+  color: #E74C3C;
+  font-size: 1.4em;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-time {
+  color: grey;
+  font-size: 0.8em;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-header .generic-blog-post-rating {
+  color: grey;
+  font-size: 0.8em;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-content .generic-blog-post-content-gallery {
+  padding: 10px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-content .generic-blog-post-content-gallery .generic-blog-post-content-gallery-element {
+  width: 150px;
+  height: 150px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 5px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments {
+  background-color: #F5F5F5;
+  list-style: none;
+  padding-left: 20px;
+}
+@media (max-width: 768px) {
+  .generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments {
+    padding-left: 10px;
+  }
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment {
+  padding: 10px 0px 10px 5px;
+  margin-top: initial;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-avatar {
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+@media (min-width: 768px) {
+  .generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-poster {
+    display: inline;
+  }
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-time {
+  color: grey;
+  font-size: 0.8em;
+}
+@media (min-width: 768px) {
+  .generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-time {
+    display: inline;
+  }
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-comment-action-icon {
+  color: grey;
+  text-decoration: none;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments .generic-blog-post-comment .generic-blog-post-comment-error {
+  font-size: 15px;
+  color: red;
+  padding: 5px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-comments hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment .generic-blog-post-new-comment-avatar {
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-new-comment .generic-blog-post-new-comment-field textarea {
+  width: 100%;
+  resize: none;
+}
+.generic-blog .generic-blog-posts .generic-blog-post .generic-blog-post-event .generic-blog-post-event-thumbnail {
+  height: 75px;
+  width: 75px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.spinner {
+  /*    width: 40px;
+    height: 40px;
+
+    position: relative;
+    margin: auto;*/
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 50px;
+}
+.double-bounce1,
+.double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation: sk-bounce 2s infinite ease-in-out;
+  animation: sk-bounce 2s infinite ease-in-out;
+}
+.double-bounce2 {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+@-webkit-keyframes sk-bounce {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+}
