@@ -22,7 +22,8 @@ class CircleManager extends BaseManager {
         $this->context = $securityContext;    
     }
     
-    public function getCurrentUserId(){      
+    public function getCurrentUserId()
+    {      
         return $this->context->getToken()->getUser()->getProfile()->getId();
     }
     
