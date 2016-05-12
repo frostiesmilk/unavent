@@ -1,0 +1,187 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20 oct. 2015, 16:44:48
+    Author     : Equina
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 août 2015, 19:30:41
+    Author     : Equina
+*/
+/* Colors */
+@font-face {
+  font-family: erasMediumItc;
+  src: url(../../fonts/ERASMD.TTF);
+}
+@font-face {
+  font-family: amaranthRegular;
+  src: url(../../fonts/Amaranth-Regular.ttf);
+}
+/* all site */
+body {
+  font-size: 13px;
+}
+/* Colored backgrounds */
+.background-dark-blue {
+  background-color: #293540;
+}
+/* Colored fonts */
+.font-white {
+  color: white;
+}
+/* Colored background */
+.bg-white {
+  background-color: white;
+}
+/* Create a medium height at 40px */
+.navbar-md {
+  min-height: 40px;
+}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-md .navbar-brand {
+  height: 40px;
+}
+.navbar-md .navbar-toggle {
+  margin: 6px 12px 6px 0px;
+  padding: 6px 7px 6px 7px;
+}
+.navbar-md .navbar-toggle .icon-bar {
+  width: 19px;
+}
+/* Create a small height at 30px */
+.navbar-sm {
+  min-height: 40px;
+}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-sm .navbar-brand {
+  height: 40px;
+}
+.navbar-sm .navbar-toggle {
+  margin: 3px 9px 3px 0px;
+  padding: 4px 4px 4px 4px;
+}
+.navbar-sm .navbar-toggle .icon-bar {
+  width: 16px;
+}
+.btn-red {
+  background-color: #E74C3C;
+  color: white;
+  border-color: #BF493D;
+  font-weight: bold;
+}
+.btn-red:hover {
+  background-color: #BF493D;
+  color: white;
+}
+/* Forms */
+.form-error-custom {
+  color: #A94442;
+  background-color: #F2DEDE;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+}
+.form-error-custom span {
+  color: #A94442;
+}
+.grey {
+  color: #888;
+}
+.messages-container {
+  padding-top: 80px;
+}
+.messages-container .messages-content .messages-stream {
+  list-style: none;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element {
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element .messages-stream-element-clickable {
+  cursor: pointer;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element .bold {
+  font-weight: bold;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element .collapse {
+  visibility: collapse;
+}
+.messages-container .messages-content .messages-stream .messages-stream-element .messages-stream-element-content-preview {
+  color: grey;
+}
+.message-show .message-options-bar {
+  margin-bottom: initial;
+}
+@media (max-width: 768px) {
+  .message-show .message-options-bar .message-options-bar-text {
+    display: none;
+  }
+}
+.message-show .message-show-subject {
+  border-bottom: 1px solid lightgrey;
+}
+.message-show .message-show-details {
+  padding: 6px;
+  border-bottom: 1px solid lightgrey;
+  background-color: #fafafa;
+}
+.message-show .message-show-details .message-show-details-correspondents .message-show-details-correspondents-label {
+  padding-right: 10px;
+  font-weight: bold;
+  font-size: 11px;
+}
+.message-show .message-show-details .message-show-details-actions .message-show-details-actions-reply {
+  transform: scaleX(-1);
+}
+.message-show .message-show-content {
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid lightgrey;
+  font-size: 14px;
+}
+.message-show .message-show-reply-title {
+  font-weight: bold;
+  border-top: 1px solid #dedede;
+  padding-top: 10px;
+}
+.message-show .message-show-reply {
+  padding: 0px 10px 10px 10px;
+}
+.message-show .message-show-reply .message-show-reply-thumbnail {
+  background-repeat: no repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+@media (max-width: 768px) {
+  .message-show .message-show-reply .message-show-reply-thumbnail {
+    display: none;
+  }
+}
+.message-show .message-show-reply .message-show-reply-textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  color: grey;
+}
+.message-show .message-show-reply .message-show-reply-submit {
+  margin-bottom: 1px;
+}
