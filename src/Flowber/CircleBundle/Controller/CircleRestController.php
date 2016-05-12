@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Flowber\CircleBundle\Entity\Request as OneRequest;
 use Flowber\CircleBundle\Entity\Subscribers;
-use Flowber\NotificationBundle\Entity\Notification;
+use Flowber\CircleBundle\Entity\Notification;
 
 class CircleRestController extends Controller
 {   

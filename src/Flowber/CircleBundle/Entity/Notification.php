@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowber\NotificationBundle\Entity;
+namespace Flowber\CircleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Notification
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Flowber\NotificationBundle\Entity\NotificationRepository")
+ * @ORM\Entity(repositoryClass="Flowber\CircleBundle\Entity\NotificationRepository")
  */
 class Notification
 {

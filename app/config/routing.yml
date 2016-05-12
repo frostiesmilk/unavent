@@ -9,10 +9,6 @@ flowber_circle:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-flowber_notification:
-    resource: "@FlowberNotificationBundle/Resources/config/routing.yml"
-    prefix:   /notification
-
 flowber_like:
     resource: "@FlowberLikeBundle/Resources/config/routing.yml"
     prefix:   /like

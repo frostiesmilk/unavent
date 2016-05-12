@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new Flowber\GalleryBundle\FlowberGalleryBundle(),
             new Flowber\GroupBundle\FlowberGroupBundle(),
             new Flowber\LikeBundle\FlowberLikeBundle(),
-            new Flowber\NotificationBundle\FlowberNotificationBundle(),
             new Flowber\PostBundle\FlowberPostBundle(),
             new Flowber\PrivateMessageBundle\FlowberPrivateMessageBundle(),           
             new Flowber\ProfileBundle\FlowberProfileBundle(),            
