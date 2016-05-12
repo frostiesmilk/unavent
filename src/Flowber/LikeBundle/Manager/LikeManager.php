@@ -27,7 +27,7 @@ class LikeManager extends BaseManager {
         return $this->em->getRepository('FlowberPostBundle:Post');
     }  
     
-    public function addLikePost($pPost, $user){
+    public function addLikePost($pPost, $circle){
         
         $post = $pPost;
         
@@ -35,14 +35,14 @@ class LikeManager extends BaseManager {
             return false;
         }
         
-        $hasLiked = $this->getPostRepository()->hasUserLikedPost($post, $user);
+        $hasLiked = $this->getPostRepository()->hasUserLikedPost($post, $circle);
         
         if($hasLiked){
             return false;
         }
                 
         $like = new Likes();
-        $like->setCreatedBy($user);
+        $like->setCreatedBy($circle);
         $post->addLike($like);
         $this->em->persist($like);
         $this->em->persist($post);

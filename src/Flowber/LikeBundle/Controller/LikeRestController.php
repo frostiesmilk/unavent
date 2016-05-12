@@ -47,7 +47,7 @@ class LikeRestController extends Controller
         // preparing response
         $view = new ResponseView();
                 
-        $likedAdded = $this->container->get('flowber_like.like')->addLikePost($post, $user);
+        $likedAdded = $this->container->get('flowber_like.like')->addLikePost($post, $user->getProfile());
         
         if($likedAdded){
             $repsData = array("likeId" => $likedAdded);
@@ -68,8 +68,8 @@ class LikeRestController extends Controller
         $like = $this->getDoctrine()->getRepository('FlowberLikeBundle:Likes')->find($likeId);
         
         if(is_object($like)){
-            $currentCurrent = $this->getUser();
-            if($currentCurrent == $like->getCreatedBy()){ // checking if allowed to delete post (by author)
+            $currentCircle = $this->getUser()->getProfile();
+            if($currentCircle == $like->getCreatedBy()){ // checking if allowed to delete post (by author)
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($like);
                 $em->flush();
