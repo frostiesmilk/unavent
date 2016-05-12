@@ -29,8 +29,9 @@ class GroupController extends Controller
     {
         $user=$this->getUser();  
                 
-        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
-        
+        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
+        $circle = $circleRepository->find($circleId);
+           
         //preparing new form for a post
         $postWithEvent = new Post();        
         $postWithEventForm = $this->createForm(new PostWithEventType, $postWithEvent);    
