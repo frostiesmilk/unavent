@@ -14,7 +14,6 @@
 !Flowber custom
 /src/Wybe/
 /web/uploads/
-/web/assets/css/*Bundle/
 /web/media/cache/
 
 !nodejs & grunt & bower START

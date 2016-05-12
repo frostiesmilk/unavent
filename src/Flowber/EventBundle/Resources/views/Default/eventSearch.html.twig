@@ -31,14 +31,20 @@
             </div>
         </div>
     </div>
-        <div class="container event-thumbnail-display-container" style="margin-top : 20px; margin-bottom : 20px">
-            <div class="row">
-                <h2>Toutes les dernières sorties</h2>
+        
+    <div class="container">
+        <div class="row">
+            {{form(searchEventForm)}}
+        </div>
+    </div>
+        
+    <div class="container event-thumbnail-display-container" style="margin-top : 20px; margin-bottom : 20px">
+        <div class="row">
+            <h2>Toutes les dernières sorties</h2>
 
-                {% for event in events %}
-                       {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
-                {%endfor%}
-            </div>
+            {% for event in events %}
+                   {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
+            {%endfor%}
         </div>
     </div>
 

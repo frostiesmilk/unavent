@@ -280,12 +280,44 @@ class EventController extends Controller
     
     public function getEventSearchPageAction()
     {
+        $searchEventData = array();
+        $searchEventForm = $this->createFormBuilder($searchEventData)
+                                ->add('title', 'text')
+                                ->add('eventDate', 'date',array(
+                                                            'widget' => 'single_text',
+                                                            'input' => 'datetime',
+                                                            'format' => 'dd/MM/yyyy',
+                                                            'attr' => array('class' => 'flowber_datepicker')
+                                                        )
+                                )
+                                ->add('eventTime', 'time', array(
+                                                    'widget' => 'single_text',
+                                                    'input' => 'datetime',
+                                                    'attr' => array('class' => 'flowber_timepicker'),
+                                                    'required' => false,)
+                                )
+                                ->add('categories', 'category', array(
+                                        'class'    => 'FlowberFrontOfficeBundle:Category',
+                                        'property' => 'title',
+                                        'multiple' => true,
+                                        'required' => false,
+                                        'query_builder' => function(EntityRepository $er) {
+                                            return $er->createQueryBuilder('u')
+                                                ->orderBy('u.title', 'ASC');
+                                        },
+                                    )
+                                )
+                                ->add('placeName', 'text')
+                                ->add('zipcode', 'text');
+                                                    
+        
         $events = $this->container->get('flowber_event.event')->getAllEvents();
        
         return $this->render('FlowberEventBundle:Default:eventSearch.html.twig', 
                 array(
                 'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
-                'events' => $events
+                'events' => $events,
+                'searchEventForm' => $searchEventForm->getForm(),
                 ));
     }
 }
