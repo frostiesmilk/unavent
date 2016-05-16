@@ -295,6 +295,18 @@ class GroupController extends Controller
 
     public function getGroupGalleriesAction($id)
     {
+        $circleRepository = $this->getDoctrine()->getRepository('FlowberCircleBundle:Circle');
+        $circle = $circleRepository->find($id);
+        
+        if(!is_object($circle)){
+            return false;
+        }
+        
+        // Use code below to get all galleries ids
+//        $galleryRepository = $this->getDoctrine()->getRepository('FlowberGalleryBundle:Gallery');        
+//        $galleriesIDs = $galleryRepository->getGalleriesIdsFromCircle($circle);
+        
+        
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
          return $this->render('FlowberGroupBundle:Default:showGroupGalleries.html.twig', 
