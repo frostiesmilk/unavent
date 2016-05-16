@@ -151,7 +151,12 @@ class EventManager extends BaseManager {
             $count=0;
             foreach ($events as $eventss){
                 $event = $this->getEvent($events[$count]['id']);
-                $events[$count]['title'] = $event->getTitle();
+                if (strlen ( $event->getTitle() ) >=26 ){
+                    $events[$count]['title'] = substr($event->getTitle(), 0, 25).' ...';
+                } else {
+                    $events[$count]['title'] = $event->getTitle();
+                }
+                $events[$count]['createdBy'] = $event->getCreatedBy();
                 if (count($event->getPostalAddress()) != 0){
                     $events[$count]['city'] = $event->getPostalAddress()->getCity();
                 }
@@ -170,6 +175,7 @@ class EventManager extends BaseManager {
                 $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
                 $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $currentCircleId);
                 $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($currentCircleId), $events[$count]['id']);
+                $events[$count]['maxParticipants'] = $event->getMaxParticipants();
                 $count++;
             } 
         }      
@@ -198,7 +204,11 @@ class EventManager extends BaseManager {
         $count=0;
         foreach ($events as $eventss){
             $event = $this->getEvent($events[$count]['id']);
-            $events[$count]['title'] = $event->getTitle();
+            if (strlen ( $event->getTitle() ) >=26 ){
+                $events[$count]['title'] = substr($event->getTitle(), 0, 25).' ...';
+            } else {
+                $events[$count]['title'] = $event->getTitle();
+            }            
             $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
             $count++;
         } 
@@ -213,7 +223,11 @@ class EventManager extends BaseManager {
         $count=0;
         foreach ($events as $eventss){
             $event = $this->getEvent($events[$count]['id']);
-            $events[$count]['title'] = $event->getTitle();
+            if (strlen ( $event->getTitle() ) >=26 ){
+                $events[$count]['title'] = substr($event->getTitle(), 0, 25).' ...';
+            } else {
+                $events[$count]['title'] = $event->getTitle();
+            }            
             if (count($event->getPostalAddress()) != 0){
                 $events[$count]['city'] = $event->getPostalAddress()->getCity();
             }
@@ -230,7 +244,8 @@ class EventManager extends BaseManager {
             $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
             $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $current);
             $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($current), $events[$count]['id']);
-            $count++;
+            $events[$count]['maxParticipants'] = $event->getMaxParticipants();
+           $count++;
         } 
 
         return $events;

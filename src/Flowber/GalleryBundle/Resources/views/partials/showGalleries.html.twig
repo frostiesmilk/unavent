@@ -12,7 +12,12 @@
                     </div>
                     <div class="group-image-frame">
                         <a tabindex="-1" href="{{ path('flowber_group_gallery', {'circleId' : circle.id, 'galleryId' : gallery.id}) }}" title="voir la galerie {{gallery.title}}">
-                            <img class="group-image" src="{{asset(gallery.photos.0)}}" alt="" onmouseover="this.src='{{asset(gallery.photos.1)}}'" onmouseout="this.src='{{asset(gallery.photos.0)}}'"/>      
+                            {% if gallery.photos.1 == 'non'%}
+                                <img class="group-image" src="{{asset(gallery.photos.0)}}" alt=""/>      
+                            {% else %}
+                                <img class="group-image" src="{{asset(gallery.photos.0)}}" alt="" onmouseover="this.src='{{asset(gallery.photos.1)}}'" onmouseout="this.src='{{asset(gallery.photos.0)}}'"/>      
+                            {% endif %}
+                        
                         </a>
                     </div>
                     <div class="caption text-center ">

@@ -92,7 +92,7 @@ class GalleryManager extends BaseManager {
                 return $webPaths;   
             }
         }
-        
+        $webPaths[] = 'non';
         return $webPaths;        
     }   
     

@@ -30,7 +30,11 @@
         <div class="caption text-center ">
             <p class="event-description">
             <a href="{{ path('flowber_event_participants', {'id': event.id}) }}" title="voir les participatns de {{event.title}}">
-                {{event.members}} {% if event.members <= 1 %} participant {% else %} participants {% endif %}  
+                {%if event.maxParticipants != ''%}
+                    {{event.members}} / {{ event.maxParticipants }}  {% if event.maxParticipants <= 1 %} participant {% else %} participants {% endif %} 
+                {% else %}
+                    {{event.members}} {% if event.members <= 1 %} participant {% else %} participants {% endif %}                     
+                {% endif %}
             </a> 
                 &middot; <span title="{{event.friends}} {% if event.friends <= 1 %} ami participe {% else %} amis participent {% endif %}à {{event.title}}">{{event.friends}} {% if event.friends <= 1 %} ami {% else %} amis {% endif %} </span>  
                 &middot; <span title="{{event.title}} se déroule à {{event.city}}">{{event.city}}</span>

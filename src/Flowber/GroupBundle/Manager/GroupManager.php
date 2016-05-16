@@ -132,7 +132,11 @@ class GroupManager extends BaseManager {
         if ( count($groups) != 0){
             $count=0;
             foreach ($groups as $group){
-                $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+                if (strlen ( $this->cm->getCircle($groups[$count]['id'])->getTitle() ) >=26 ){
+                    $groups[$count]['title'] = substr($this->cm->getCircle($groups[$count]['id'])->getTitle(), 0, 25).' ...';
+                } else {
+                    $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+                }   
                 $groups[$count]['profilePicture'] = $this->cm->getProfilePicture($groups[$count]['id']);
                  $subtitle = substr($this->cm->getCircle($groups[$count]['id'])->getSubtitle(), 0, 75).'...';                
                 $groups[$count]['subtitle'] = $subtitle;
@@ -160,7 +164,11 @@ class GroupManager extends BaseManager {
         if ( count($groups) != 0){
             $count=0;
             foreach ($groups as $group){
-                $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+                if (strlen ( $this->cm->getCircle($groups[$count]['id'])->getTitle() ) >=26 ){
+                    $groups[$count]['title'] = substr($this->cm->getCircle($groups[$count]['id'])->getTitle(), 0, 25).' ...';
+                } else {
+                    $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+                }   
                 $groups[$count]['profilePicture'] = $this->cm->getProfilePicture($groups[$count]['id']);
                  $subtitle = substr($this->cm->getCircle($groups[$count]['id'])->getSubtitle(), 0, 75).'...';                
                 $groups[$count]['subtitle'] = $subtitle;
@@ -186,7 +194,11 @@ class GroupManager extends BaseManager {
         $groups = $this->getGroupRepository()->GetFourGroupsId($circleId);
         $count=0;
         foreach ($groups as $group){
-            $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+            if (strlen ( $this->cm->getCircle($groups[$count]['id'])->getTitle() ) >=26 ){
+                $groups[$count]['title'] = substr($this->cm->getCircle($groups[$count]['id'])->getTitle(), 0, 25).' ...';
+            } else {
+                $groups[$count]['title'] = $this->cm->getCircle($groups[$count]['id'])->getTitle();
+            } 
             $groups[$count]['profilePicture'] = $this->cm->getProfilePicture($groups[$count]['id']);
             $count++;
         }   
