@@ -31,6 +31,14 @@
                 <h1>Sorties</h1>
             </div>
         </div>
+        
+        <div class="container user-profile-events-container">
+            <div class="row">
+                {% for event in events %}
+                   {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
+                {%endfor%}
+            </div>
+        </div>
     </div>    
    
     <!-- footer -->                  

@@ -97,9 +97,10 @@ class GroupManager extends BaseManager {
         return $nbFriend;
     } 
     
-    public function getGroupsInArray($arrayGroupsIds, $currentCircleId){
+    public function getGroupsInArray($arrayGroupsIds){
         
         $groups = [];
+        $currentCircleId = $this->cm->getCurrentUserId();
         
         foreach($arrayGroupsIds AS $groupId){
             $subtitle = substr($this->cm->getCircle($groupId['id'])->getSubtitle(), 0, 75).'...'; 
@@ -145,6 +146,13 @@ class GroupManager extends BaseManager {
         return $groups;
     }
 
+        public function getEvents($circleId)
+    {
+        $groups = $this->getGroupRepository()->getEventsId($circleId);
+
+        return $groups;
+    }
+    
     public function getAllGroups()
     {
         $current = $this->cm->getCurrentUserId();

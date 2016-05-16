@@ -282,10 +282,13 @@ class GroupController extends Controller
     public function getGroupEventsAction($id)
     {
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
-        
-         return $this->render('FlowberGroupBundle:Default:groupEvents.html.twig', 
+        $eventsId = $this->container->get("flowber_group.group")->getEvents($this->container->get("flowber_circle.circle")->getCircle($id));
+        $events = $this->container->get("flowber_event.event")->getEventsFromList($eventsId);
+
+        return $this->render('FlowberGroupBundle:Default:groupEvents.html.twig', 
                 array('circle'  => $this->container->get('flowber_group.group')->getGroupInfos($id),
                 'messageForm'   => $privateMessageForm->createView(),
+                'events'   => $events,
                 'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
                  ));
     }
