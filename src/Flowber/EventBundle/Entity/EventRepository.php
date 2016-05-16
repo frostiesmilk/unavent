@@ -163,4 +163,8 @@ class EventRepository extends EntityRepository
         
         return $events;
     }
+    
+    public function findEventsIdByCriteria($arrayCriteria){
+        
+    }
 }
