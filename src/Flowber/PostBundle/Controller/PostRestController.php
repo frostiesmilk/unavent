@@ -17,6 +17,7 @@ use Flowber\PostBundle\Form\PostWithEventType;
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
 use Exception;
+use Flowber\CircleBundle\Entity\Subscribers;
 
 class PostRestController extends Controller
 {
@@ -182,6 +183,7 @@ class PostRestController extends Controller
             $post->setCreatedBy($userProfile);
             $post->setCircle($circle);
             $circle->addEvent($postEvent);
+            
 
             $em->persist($post);
             $em->persist($postEvent);  
@@ -196,6 +198,20 @@ class PostRestController extends Controller
             
             if(count($post->getAttachedEvent())>0){ // if there is a post attachment
                 $eventInfos = $this->container->get('flowber_event.event')->getEventInfos($post->getAttachedEvent()->getId(), $userProfile->getId());
+                $subscriber = new Subscribers();
+                $subscriber->setCircle($this->container->get("flowber_circle.circle")->getCircle($post->getAttachedEvent()->getId()));
+                $subscriber->setSubscriber($this->container->get("flowber_circle.circle")->getCircle($userProfile->getId()));
+                $subscriber->setRole('admin');
+                $subscriber->setStatut($this->container->get("flowber_circle.circle")->getClass($post->getAttachedEvent()->getId()));
+                $subscriber->setMessage('');
+
+                $em->persist($subscriber);
+                try{
+                    $em->flush();
+                } catch (Exception $ex) {
+                    $repsData = array("status"=>"error" ,"message" => "Post flush failed: ".$ex->getMessage());
+                    return $repsData;
+                }
                 $postAttachmentView = $this->renderView('FlowberPostBundle:partials:showPostEvent.html.twig', 
                         array("event" =>$eventInfos));
             }
@@ -207,6 +223,8 @@ class PostRestController extends Controller
             // render view to be sent with response
             $commentFormView = $this->renderView('FlowberPostBundle:partials:commentForm.html.twig', 
                     array("commentForm"=>$commentForm->createView()));
+            
+
 
             $repsData = array(  "status"=>"success", 
                                 "postId" => $post->getId(), 
