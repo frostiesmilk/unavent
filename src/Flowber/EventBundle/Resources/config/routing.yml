@@ -8,9 +8,16 @@ flowber_event_participants:
     path:     /{id}/participants
     defaults: { _controller: FlowberEventBundle:Event:getParticipantsPage }
     
-flowber_event_gallery:
-    path:     /{id}/gallerie
+flowber_event_galleries:
+    path:     /{id}/galleries
     defaults: { _controller: FlowberEventBundle:Event:getGalleryPage }
+    
+flowber_event_gallery:
+    path:     /{circleId}/gallery/{galleryId}
+    defaults: { _controller: FlowberEventBundle:Event:getEventGallery }
+    requirements:
+        circleId: \d+
+        galleryId: \d+
 
 flowber_create_event_homepage:
     path:     /nouvelle_sortie

@@ -43,6 +43,31 @@ class EventController extends Controller
         $newGroupGallery = new Gallery();
         $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
         
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST'){
+            $newGalleryForm->bind($request);
+            
+            if($newGalleryForm->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                if(empty($newGroupGallery->getTitle())){
+                    $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
+                }
+                $circle->addGallery($newGroupGallery);
+                
+                $em->persist($circle);
+                
+                try{
+                    $em->flush();  
+                    return $this->redirect($this->generateUrl(
+                        'flowber_event_gallery',
+                        array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
+                    ));
+                } catch (Exception $ex) {
+
+                }                              
+            }
+        }
+        
         if($eventInfo['role']!='cantsee'){
             $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
             $posts = $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user);
@@ -103,6 +128,18 @@ class EventController extends Controller
                 'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
                 'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos()
                 ));
+    }
+    
+    public function getEventGalleryAction($circleId, $galleryId)
+    {       
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+        $gallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
+        
+        return $this->render('FlowberEventBundle:Default:showEventGallery.html.twig',
+                array('circle'  => $this->container->get('flowber_event.event')->getEventInfos($circleId),
+                'messageForm'   => $privateMessageForm->createView(),
+                'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
+                'gallery'       => $gallery));
     }
     
     public function getCreateEventAction()
