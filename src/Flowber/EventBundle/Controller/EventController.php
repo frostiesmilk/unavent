@@ -5,6 +5,7 @@ namespace Flowber\EventBundle\Controller;
 use Doctrine\ORM\EntityRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 use Flowber\EventBundle\Form\EventType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
@@ -281,11 +282,12 @@ class EventController extends Controller
                 ));
     }
     
-    public function getEventSearchPageAction()
+    public function getEventSearchPageAction(Request $request, $eventsID=null)
     {
         $searchEventData = array();
         $searchEventForm = $this->createFormBuilder($searchEventData)
-                                ->add('title', 'text')
+                                ->setMethod('POST')
+                                ->add('title', 'text', array('required' => false))
                                 ->add('eventDate', 'date',array(
                                                             'widget' => 'single_text',
                                                             'input' => 'datetime',
@@ -310,17 +312,29 @@ class EventController extends Controller
                                         },
                                     )
                                 )
-                                ->add('placeName', 'text')
-                                ->add('zipcode', 'text');
-                                                    
+                                ->add('placeName', 'text', array('required' => false))
+                                ->add('zipcode', 'text', array('required' => false))
+                ->getForm();
+                             
+        $searchEventForm->handleRequest($request);
+
+        if ($searchEventForm->isSubmitted() && $searchEventForm->isValid()) {
+            $eventRepository = $this->getDoctrine()->getRepository('FlowberEventBundle:Event');
+                  
+            $searchEventData = $searchEventForm->getData();
+            $foundEventsID =  $eventRepository->findEventsIdByCriteria($searchEventData);
+            
+            return $this->generateUrl('flowber_event_search', array('eventsID'=>$foundEventsID));
+        }
         
         $events = $this->container->get('flowber_event.event')->getAllEvents();
        
         return $this->render('FlowberEventBundle:Default:eventSearch.html.twig', 
-                array(
-                'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
-                'events' => $events,
-                'searchEventForm' => $searchEventForm->getForm()->createView(),
-                ));
+                    array(
+                        'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
+                        'events' => $events,
+                        'searchEventForm' => $searchEventForm->createView(),
+                    )
+                );
     }
 }
