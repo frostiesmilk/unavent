@@ -37,7 +37,12 @@ class GalleryManager extends BaseManager {
         $count = 0;
         foreach ($galleries as $gallery){
             $gal = $this->getGalleryRepository()->find($gallery);
-            $photos[$count]['title'] = $gal->getTitle();
+            
+            if (strlen ( $gal->getTitle() ) >=26 ){
+                $photos[$count]['title'] = substr($gal->getTitle(), 0, 25).' ...';
+            } else {
+                $photos[$count]['title'] = $gal->getTitle();
+            }  
             $photos[$count]['id'] = $gallery;
             $photos[$count]['description'] = $gal->getDescription();
             //$photos[$count]['createdBy'] = $gal->getCreatedBy();
