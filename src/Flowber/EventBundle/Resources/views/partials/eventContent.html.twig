@@ -54,10 +54,13 @@
                         <td class="icon"><img src="{{asset('assets/images/FrontOfficeBundle/icons/participants.png')}}" alt="Participants"/></td>
                         <td>
                             <a href="{{ path('flowber_event_participants', {'id': circle.id}) }}" title="voir les participatns de {{circle.title}}">
-                                {{circle.members}} {% if circle.members <= 1 %} participant {% else %} participants {% endif %}
+                                <b>{{circle.members}}</b> {% if circle.members <= 1 %} participant {% else %} participants {% endif %}
                             </a>
                             {% if circle.friends is not null %}
                                 dont {{circle.friends}} {% if circle.friends <= 1 %} ami {% else %} amis {% endif %}                         
+                            {% endif %}<br>
+                            {%if circle.maxParticipants != ''%}
+                                <b>{{ circle.maxParticipants }}</b> {% if circle.maxParticipants <= 1 %} participant {% else %} participants {% endif %} maximum             
                             {% endif %}
                         </td>
                     </tr>

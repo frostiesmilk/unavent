@@ -42,7 +42,12 @@ class EventController extends Controller
         // preparing new Gallery
         $newGroupGallery = new Gallery();
         $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
-        
+
+        if($eventInfo['role']=='no' or $eventInfo['role']=='cantsee'){
+             if($eventInfo['maxParticipants']==$eventInfo['members']){
+                 $eventInfo['role']='cantsub';
+             }
+         }
         if($eventInfo['role']!='cantsee'){
             $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
             $posts = $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user);

@@ -74,6 +74,7 @@ class EventManager extends BaseManager {
         $circleInfos['id'] = $event->getId();
         $circleInfos['members'] = $this->getEventRepository()->GetCountMembers($event->getId());
         $circleInfos['friends'] = $this->getFriendsInEvent($event->getId(), $current);
+        $circleInfos['maxParticipants'] = $event->getMaxParticipants();
         if (count($event->getPostalAddress()) != 0){
             $circleInfos['address'] = $event->getPostalAddress()->getAddress();
             $circleInfos['name'] = $event->getPostalAddress()->getName();
@@ -174,8 +175,8 @@ class EventManager extends BaseManager {
                 $events[$count]['subtitle'] = substr($event->getSubtitle(), 0, 75).'...';
                 $events[$count]['members'] = $this->getEventRepository()->GetCountMembers($events[$count]['id']);
                 $events[$count]['friends'] = $this->getFriendsInEvent($events[$count]['id'], $currentCircleId);
-                $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($currentCircleId), $events[$count]['id']);
                 $events[$count]['maxParticipants'] = $event->getMaxParticipants();
+                $events[$count]['role'] = $this->cm->getRoleCircle($this->cm->getCircle($currentCircleId), $events[$count]['id']);
                 $count++;
             } 
         }      
