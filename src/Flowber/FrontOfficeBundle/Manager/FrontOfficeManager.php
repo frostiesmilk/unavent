@@ -38,6 +38,7 @@ class FrontOfficeManager extends BaseManager {
         $navbar['event'] = $eventsNav;
         $navbar['requestNumber'] = $this->circleManager->getCountRequestInfos($this->getCurrentUserId());
         $navbar['messageNumber'] = $this->pmManager->getNumberMessageNotRead($this->getCurrentUserId());
+        $navbar['notificationNumber'] = $this->circleManager->getCountNotification($this->getCurrentUserId());
         $navbar['group'] = $groupsNav; 
         
         return $navbar;

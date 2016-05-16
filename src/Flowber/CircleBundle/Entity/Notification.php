@@ -24,12 +24,12 @@ class Notification
     /**
      * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
      */
-    private $createdBy;
+    private $sender;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\OneToMany(targetEntity="Flowber\CircleBundle\Entity\NotificationReceiver", mappedBy="notification", cascade={"persist"})
      */
-    private $user;
+    private $receivers;
 
     /**
      * @var string
@@ -80,8 +80,9 @@ class Notification
     {
         $this->creationDate = new \Datetime();     
         $this->statut = '1';
+        $this->receivers = new \Doctrine\Common\Collections\ArrayCollection();     
     }
-    
+
     /**
      * Get id
      *
@@ -230,50 +231,59 @@ class Notification
         return $this->creationDate;
     }
 
-
     /**
-     * Set createdBy
+     * Set sender
      *
-     * @param \Flowber\CircleBundle\Entity\Circle $createdBy
+     * @param \Flowber\CircleBundle\Entity\Circle $sender
      * @return Notification
      */
-    public function setCreatedBy(\Flowber\CircleBundle\Entity\Circle $createdBy = null)
+    public function setSender(\Flowber\CircleBundle\Entity\Circle $sender = null)
     {
-        $this->createdBy = $createdBy;
+        $this->sender = $sender;
 
         return $this;
     }
 
     /**
-     * Get createdBy
+     * Get sender
      *
      * @return \Flowber\CircleBundle\Entity\Circle 
      */
-    public function getCreatedBy()
+    public function getSender()
     {
-        return $this->createdBy;
+        return $this->sender;
     }
 
     /**
-     * Set user
+     * Add receivers
      *
-     * @param \Flowber\CircleBundle\Entity\Circle $user
+     * @param \Flowber\CircleBundle\Entity\Circle $receivers
      * @return Notification
      */
-    public function setUser(\Flowber\CircleBundle\Entity\Circle $user = null)
+    public function addReceiver(\Flowber\CircleBundle\Entity\Circle $receivers)
     {
-        $this->user = $user;
+        $this->receivers[] = $receivers;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Remove receivers
      *
-     * @return \Flowber\CircleBundle\Entity\Circle 
+     * @param \Flowber\CircleBundle\Entity\Circle $receivers
      */
-    public function getUser()
+    public function removeReceiver(\Flowber\CircleBundle\Entity\Circle $receivers)
     {
-        return $this->user;
+        $this->receivers->removeElement($receivers);
+    }
+
+    /**
+     * Get receivers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReceivers()
+    {
+        return $this->receivers;
     }
 }

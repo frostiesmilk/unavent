@@ -7,6 +7,8 @@ use Flowber\FrontOfficeBundle\Entity\BaseManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
+use Flowber\CircleBundle\Entity\Notification;
+use Flowber\CircleBundle\Entity\NotificationReceiver;
 
 // Entities
 use Flowber\CircleBundle\Entity\Circle;
@@ -128,6 +130,21 @@ class CircleManager extends BaseManager {
         return $title;
     }  
     
+    public function getCreatedBy($circle)
+    {
+        // Si on a envoyé un id, renvoyer un circle
+        if (is_numeric($circle)){
+            $circle = $this->getCircle($circle);
+        }
+        //Vérifie si le circle existe bien.        
+        if (!is_object($circle)) {
+            throw new AccessDeniedException('This circle is not defined.');
+        }   
+
+        $createdBy = $circle->getCreatedBy();
+       
+        return $createdBy;
+    }    
     public function getCoverInfos($circle)
     {
         // Si on a envoyé un id, renvoyer un circle
@@ -179,6 +196,49 @@ class CircleManager extends BaseManager {
         return $requestInfos;
     }
     
+    public function getCountNotification($circle)
+    {
+       $numberNotification = $this->getNotificationRepository()->getNumberNotifications($circle);
+       //die(var_dump($numberNotification));
+        return $numberNotification;
+    }   
+    
+    public function addNotificationList($sender, $message, $pageName, $pageRoute, $pageId, $receivers){
+        $notification = new Notification ();
+        $notification->setSender($sender);
+        $notification->setPageRoute($pageRoute);
+        $notification->setPageId($pageId);
+        $notification->setMessage($message);
+        $notification->setPageName($pageName);
+        foreach ($receivers as $receiver){
+            var_dump($receiver['id']);
+            $notifReceiver = new NotificationReceiver();
+            $notifReceiver->setStatut('received');
+            $notifReceiver->setReceiver($this->getCircle($receiver['id']));
+            $notifReceiver->setNotification($notification);
+            $this->em->persist($notifReceiver);
+        }
+        $this->em->persist($notification);
+        $this->em->flush();        
+    }
+
+    public function addNotification($sender, $message, $pageName, $pageRoute, $pageId, $receiver){
+        
+        $notification = new Notification ();
+        $notification->setSender($sender);
+        $notification->setPageRoute($pageRoute);
+        $notification->setPageId($pageId);
+        $notification->setMessage($message);
+        $notification->setPageName($pageName);
+        $notifReceiver = new NotificationReceiver();
+        $notifReceiver->setStatut('received');
+        $notifReceiver->setReceiver($receiver);
+        $notifReceiver->setNotification($notification);
+        $this->em->persist($notification);
+        $this->em->persist($notifReceiver);
+        $this->em->flush();
+    }
+    
     public function getRequestInfos($circle)
     {
        $requestInfos = $this->getRequestRepository()->getInfosRequest($circle);
@@ -196,22 +256,39 @@ class CircleManager extends BaseManager {
     
     public function getCurrentUserRequestInfos()
     {
-       $requestInfos = $this->getRequestRepository()->getInfosRequest($this->getCurrentUserId());
+        return $this->getRequestInfos($this->getCurrentUserId());
+    } 
+    
+    public function getNotificationsInfos($circle)
+    {
+       $notificationsInfos = $this->getNotificationRepository()->getInfosNotifications($circle);
        
        $count=0;
-        foreach ($requestInfos as $request ){
-            $requestInfos[$count]['senderName']=$this->getTitle(intval($requestInfos[$count]['senderId']));
-            $requestInfos[$count]['senderPic']=$this->getProfilePicture(intval($requestInfos[$count]['senderId']));
-            $requestInfos[$count]['circleName']=$this->getTitle(intval($requestInfos[$count]['circleId']));
-            $requestInfos[$count]['circleClass']=$this->getClass(intval($requestInfos[$count]['circleId']));
+        foreach ($notificationsInfos as $notif ){
+            $notificationsInfos[$count]['senderName']=$this->getTitle(intval($notif['senderId']));
+            $notificationsInfos[$count]['senderPic']=$this->getProfilePicture(intval($notif['senderId']));
+            $notificationsInfos[$count]['pagePic']=$this->getProfilePicture(intval($notif['pageId']));
             $count++;
         }
-        return $requestInfos;
+        
+        return $notificationsInfos;
+    } 
+    
+    public function getCurrentUserNotificationsInfos()
+    {
+        return $this->getNotificationsInfos($this->getCurrentUserId());
     }      
     
     public function getRequest($requestId)
     {
        $request = $this->getRequestRepository()->find($requestId);
+
+        return $request;
+    }  
+    
+    public function getNotificationReceiver($notifId)
+    {
+       $request = $this->em->getRepository('FlowberCircleBundle:NotificationReceiver')->find($notifId);
 
         return $request;
     }  
@@ -321,6 +398,10 @@ class CircleManager extends BaseManager {
     public function getRequestRepository()
     {
         return $this->em->getRepository('FlowberCircleBundle:Request');
-    }    
+    }   
     
+    public function getNotificationRepository()
+    {
+        return $this->em->getRepository('FlowberCircleBundle:Notification');
+    }        
 }

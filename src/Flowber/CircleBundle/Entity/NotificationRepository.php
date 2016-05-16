@@ -1,9 +1,10 @@
 <?php
 
-namespace Flowber\NotificationBundle\Entity;
+namespace Flowber\CircleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Flowber\UserBundle\Entity\User;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * NotificationRepository
@@ -13,16 +14,36 @@ use Flowber\UserBundle\Entity\User;
  */
 class NotificationRepository extends EntityRepository
 {
-    /*
-     * Récupère les notifications d'un utilisateur
-     * Return entities notifications
-     * Order by creationDate desc 
-     * limit 10
-     */    
-    public function getUserNotification(User $user){
-        $qb = $this->_em->createQueryBuilder();
+    public function getInfosNotifications($circleId){  
+        $sql = "SELECT a.id, b.id as notifReceivedId, a.sender_id, a.message, a.pageName, a.pageRoute, a.pageId, b.statut, a.creationDate, b.statut "
+                . "FROM notification a, notification_receiver b "
+                . "WHERE b.receiver = ".$circleId." AND b.notification_id=a.id "
+                . "ORDER BY a.creationDate desc";
+       
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('sender_id', 'senderId');
+        $rsm->addScalarResult('id', 'requestId');
+        $rsm->addScalarResult('notifReceivedId', 'notifReceivedId');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('message', 'message');
+        $rsm->addScalarResult('pageName', 'pageName');
+        $rsm->addScalarResult('pageRoute', 'pageRoute');
+        $rsm->addScalarResult('pageId', 'pageId');
+        $rsm->addScalarResult('statut', 'statut');
+        $rsm->addScalarResult('creationDate', 'creationDate');
         
-        return $qb->getQuery()
-                  ->getResult();
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult();    
     }
+    
+    public function getNumberNotifications($circleId){  
+        $sql = "SELECT b.id "
+                . "FROM notification_receiver b "
+                . "WHERE b.receiver = ".$circleId." AND b.statut='received'";
+       
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('id', 'id');
+       
+        return count($this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult());    
+    }
+    
 }
