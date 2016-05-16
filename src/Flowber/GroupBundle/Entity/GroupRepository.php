@@ -5,6 +5,8 @@ namespace Flowber\GroupBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 
+use Flowber\GroupBundle\Entity\Groups;
+
 /**
  * GroupRepository
  *
@@ -162,5 +164,23 @@ class GroupRepository extends EntityRepository
         }
         
         return $groups;
+    }
+    
+    /**
+     * Returns array of Events IDs of Group
+     * @param Groups $group
+     * @return matrix []['id']
+     */
+    public function getEventsId(Groups $group){
+        $sql = "SELECT event_id "
+                . "FROM  groups_event "
+                . "WHERE groups_id = :groupId ";
+
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('event_id', 'id');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+                ->setParameter('groupId', $group->getId())
+                ->getResult();    
     }
 }

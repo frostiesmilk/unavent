@@ -5,6 +5,8 @@ namespace Flowber\CircleBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 
+use Flowber\CircleBundle\Entity\Circle;
+
 /**
  * CircleRepository
  *
@@ -36,6 +38,24 @@ class CircleRepository extends EntityRepository
         $rsm->addScalarResult('circle_id', 'requestId');
 
         return count($this->getEntityManager()->createNativeQuery($sql, $rsm)->getResult());   
+    }
+    
+    /**
+     * Returns array of Galleries IDs of Circle
+     * @param Circle $circle
+     * @return matrix []['id']
+     */
+    public function getGalleriesId(Circle $circle){
+        $sql = "SELECT gallery_id "
+                . "FROM  circle_gallery "
+                . "WHERE circle_id = :circleId ";
+
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('gallery_id', 'id');
+        
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+                ->setParameter('circleId', $circle->getId())
+                ->getResult();   
     }
    
 }
