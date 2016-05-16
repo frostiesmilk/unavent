@@ -300,19 +300,19 @@ class GroupController extends Controller
         
         if(!is_object($circle)){
             return false;
-        }
+        }    
         
-        // Use code below to get all galleries ids
-//        $galleryRepository = $this->getDoctrine()->getRepository('FlowberGalleryBundle:Gallery');        
-//        $galleriesIDs = $galleryRepository->getGalleriesIdsFromCircle($circle);
-        
-        
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id));
+        $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
+        //die(var_dump($galleries));
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
          return $this->render('FlowberGroupBundle:Default:showGroupGalleries.html.twig', 
                 array('circle'  => $this->container->get('flowber_group.group')->getGroupInfos($id),
                 'messageForm'   => $privateMessageForm->createView(),
-                'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
+                'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),   
+                'galleries'     => $galleries,
+                'galleriesId'     => $galleriesId
                  ));
     }
     

@@ -25,6 +25,40 @@ class GalleryManager extends BaseManager {
     {
         $this->em = $em;
     }    
+
+    /**
+     * Return array of photos web paths of all galleries of a circle
+     * @param Circle $circleId
+     * @return array of photos webpaths
+     */
+    public function getGalleries($circleId){
+        $galleries = $this->getGalleryRepository()->getGalleriesIdsFromCircle($circleId);
+        $photos = [];
+        $count = 0;
+        foreach ($galleries as $gallery){
+            $gal = $this->getGalleryRepository()->find($gallery);
+            $photos[$count]['title'] = $gal->getTitle();
+            $photos[$count]['id'] = $gallery;
+            $photos[$count]['description'] = $gal->getDescription();
+            //$photos[$count]['createdBy'] = $gal->getCreatedBy();
+            $photos[$count]['creationDate'] = 'Le '.$gal->getCreationDate()->format('d/m/Y').' à '. $gal->getCreationDate()->format('H:i:s');
+            $photos[$count]['photos'] = $this->getTwoPhotoWebPathFromGallery($this->getGalleryRepository()->find($gallery));
+            $count++;
+        }
+        
+        return $photos;        
+    }
+
+    /**
+     * Return array of id of all the galleries of a circle
+     * @param Circle $circleId
+     * @return array of id
+     */
+    public function getGalleriesId($circleId){
+        $galleriesId = $this->getGalleryRepository()->getGalleriesIdsFromCircle($circleId);
+        
+        return $galleriesId;        
+    }
     
     /**
      * Return array of photos web paths of a gallery
@@ -41,4 +75,29 @@ class GalleryManager extends BaseManager {
         
         return $webPaths;        
     }
+    
+    /**
+     * Return array of photos web paths of a gallery
+     * @param Gallery $gallery
+     * @return array of photos webpaths
+     */
+    public function getTwoPhotoWebPathFromGallery(Gallery $gallery){
+        $webPaths = [];
+        
+        $count = 0;
+        foreach($gallery->getPhotos() AS $photo){
+            $count++;
+            $webPaths[] = $photo->getWebPath();
+            if ($count == 2){
+                return $webPaths;   
+            }
+        }
+        
+        return $webPaths;        
+    }   
+    
+    public function getGalleryRepository()
+    {
+        return $this->em->getRepository('FlowberGalleryBundle:Gallery');
+    }  
 }
