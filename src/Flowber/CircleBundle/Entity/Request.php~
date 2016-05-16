@@ -39,21 +39,21 @@ class Request
     /**
      * @var string
      *
-     * @ORM\Column(name="statut", type="string", length=255)
+     * @ORM\Column(name="statut", type="string", length=255, nullable=true)
      */
     private $statut;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=255)
+     * @ORM\Column(name="role", type="string", length=255, nullable=true)
      */
     private $role;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="string", length=255)
+     * @ORM\Column(name="message", type="string", length=255, nullable=true)
      */
     private $message;
 

@@ -22,11 +22,11 @@ class CircleController extends Controller
     function getNotificationPageAction (){
         
         $navbar = $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos();
-        $requestInfos = $this->container->get('flowber_circle.circle')->getCurrentUserRequestInfos();
+        $notificationsInfos = $this->container->get('flowber_circle.circle')->getCurrentUserNotificationsInfos();
 
         return $this->render('FlowberCircleBundle:Default:getNotification.html.twig', 
             array(
-                'notifications' => $requestInfos,
+                'notifications' => $notificationsInfos,
                 'navbar' => $navbar                
             )
         );

@@ -230,15 +230,8 @@ class RegistrationController extends BaseController{
         }
         $circleInfos = $this->container->get('flowber_profile.profile')->getProfileInfos($user->getProfile()->getId());
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav;    
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
-        
-        //die(var_dump($circleInfos));
-        // show last step of registration
+        $navbar = $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos();
+
         return $this->render('FlowberUserBundle:Default:signUpDetails.html.twig', array(
             'formPhone' => $formPhone->createView(), 
             'navbar' => $navbar,

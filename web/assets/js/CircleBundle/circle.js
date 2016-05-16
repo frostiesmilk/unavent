@@ -18,7 +18,7 @@ $("body").on("submit","#SendRequest", function(e){
             alert("error");
         }
     }).done(function(data, textStatus, jqXHR){ // like success
-        document.getElementById("gridSystemModalLabelSR").innerHTML="votre demande a bien été acceptée";
+        document.getElementById("gridSystemModalLabelSR").innerHTML="votre demande a bien été envoyée";
         document.getElementById("refuseRequestSR").innerHTML="ok"; 
         document.getElementById("refuseRequestSR").disabled=false; 
         document.getElementById("validateRequestSR").disabled=false; 

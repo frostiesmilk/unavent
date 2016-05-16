@@ -30,43 +30,49 @@
                                 Vous n'avez reçu aucune notification.
                             {% endif %}
                             {% for notification in notifications %}
-                                    <tr class="request-stream-element" data-href="{{ path('api_get_circle', {'circleId': notification.circleId}) }}">
-                                        <td class="messages-stream-element-clickable">
-                                            <a href="{{ path('api_get_circle', {'circleId': notification.senderId}) }}">
-                                                <img src="{{asset(notification.senderPic)}}" height="50px" alt="profile picture"/>
-                                            </a>
-                                        </td>
-                                        <td class="messages-stream-element-clickable"> 
-                                            <span class="request-forms">
-                                                <a href="{{ path('api_get_circle', {'circleId': notification.senderId}) }}">
-                                                    {{notification.senderName}}
-                                                </a>
-                                                {% if notification.circleClass == 'groups' %}
-                                                    souhaite devenir membre du groupe : 
-                                                    <a href="{{ path('api_get_circle', {'circleId': notification.circleId}) }}">
-                                                       {{notification.circleName}}
-                                                   </a>
-                                                {% elseif notification.circleClass == 'profile' %}                                                
-                                                    souhaite devenir ton ami !
-                                                {% elseif notification.circleClass == 'event' %}
-                                                    souhaite participer à l'évènement : 
-                                                    <a href="{{ path('api_get_circle', {'circleId': notification.circleId}) }}">
-                                                       {{notification.circleName}}
-                                                   </a>
-                                                {% endif %}
-                                           </span><br>
-                                            <span id="reponse-{{notification.requestId}}" class="col-xs-12 text-right">
-                                                 <form id="AcceptRequest" class="{{notification.requestId}}" method="post" action="{{ path('api_post_acceptrequest', {'requestId': notification.requestId}) }}" style="display:inline">
-                                                    <button type="submit" id="AcceptRequestButton-{{request.requestId}}" class="btn btn-default request-button-ok" title="accepter une demande"> 
-                                                        Accepter
-                                                    </button>
-                                                </form>
-                                                 <form id="RefuseRequest" class="{{notification.requestId}}" method="post" action="{{ path('api_post_refuserequest', {'requestId': notification.requestId}) }}" style="display:inline">
-                                                    <button type="submit" id="RefuseRequestButton-{{notification.requestId}}" class="btn btn-default request-button-not-ok" title="refuser une demande"> 
-                                                        Refuser
-                                                    </button>
-                                                </form>
-                                            </span>
+                                    <tr class="request-stream-element" data-href="{{ path('api_get_circle', {'circleId': notification.pageId}) }}">
+                                        <td id="uneNotificationTd-{{notification.notifReceivedId}}" class="messages-stream-element-clickable" style="display:inline">
+                                            {% if notification.statut == 'received' %}
+                                                <span id="uneNotification" class="request-forms" style="font-weight : bold">
+                                            {% else %}
+                                                <span id="uneNotification" class="request-forms">
+                                            {% endif %}   
+                                            
+                                                <span class="col-md-11">
+                                                    <a href="{{ path('api_get_circle', {'circleId': notification.senderId}) }}">
+                                                        <img src="{{asset(notification.senderPic)}}" height="50px" alt="profile picture"/>
+                                                    </a>
+                                                    <a href="{{ path('api_get_circle', {'circleId': notification.senderId}) }}" style="margin-left : 15px;">
+                                                        {{notification.senderName}}
+                                                    </a>
+                                                         {{notification.message}}
+
+                                                    <a href="{{ path('api_get_circle', {'circleId': notification.pageId}) }}">
+                                                       {{notification.pageName}}
+                                                    </a>
+                                                </span>
+                                                <span class="col-md-1">
+                                                    {% if notification.statut == 'received' %}
+                                                        <form id="ReadNotif" class="{{notification.notifReceivedId}}" method="post" action="{{ path('api_post_readnotification', {'notificationId': notification.notifReceivedId}) }}" style="display:inline">
+                                                            <button type="submit" id="ReadNotificationButton-{{notification.notifReceivedId}}" class="btn btn-default request-button-ok" title="marquer comme lu"> 
+                                                                <span id="spanReadNotificationButton-{{notification.notifReceivedId}}" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                            </button>
+                                                        </form>                                                    
+                                                    {% else %}
+                                                        <form id="ReadNotif" class="{{notification.notifReceivedId}}" method="post" action="{{ path('api_post_readnotification', {'notificationId': notification.notifReceivedId}) }}" style="display:inline">
+                                                            <button type="submit" id="ReadNotificationButton-{{notification.notifReceivedId}}" class="btn btn-default request-button-ok" title="marquer comme non lu"> 
+                                                                <span id="spanReadNotificationButton-{{notification.notifReceivedId}}" class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                                            </button>
+                                                        </form>
+                                                    {% endif %}                                                    
+
+                                                    <form id="DeleteNotif" class="{{notification.notifReceivedId}}" method="post" action="{{ path('api_post_deletenotification', {'notificationId': notification.notifReceivedId}) }}" style="display:inline">
+                                                        <button type="submit" id="DeleteNotificationButton-{{notification.notifReceivedId}}" class="btn btn-default request-button-ok" title="marquer comme lue"> 
+                                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                        </button>
+                                                    </form>                                                
+                                                </span>
+                                            </span>                  
                                         </td>
                                     </tr>                                    
                             {% endfor%}
@@ -84,6 +90,6 @@
 
 {% block javascripts %}
     {{parent()}}
-    <script src="{{ asset('assets/js/CircleBundle/request.js') }}"></script>
+    <script src="{{ asset('assets/js/CircleBundle/notification.js') }}"></script>
 
 {% endblock %}
