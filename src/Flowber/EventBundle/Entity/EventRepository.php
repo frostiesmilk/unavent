@@ -165,6 +165,148 @@ class EventRepository extends EntityRepository
     }
     
     public function findEventsIdByCriteria($arrayCriteria){
+        //die(var_dump($arrayCriteria));
         
+        $sql = "";
+                
+        $postalAddressInvoked = false;
+        $select = "SELECT event.id as event_id ";
+        $from = "FROM event, circle ";
+        $conditions = "WHERE event.id = circle.id ";
+        
+        if(!empty($arrayCriteria['title'])){
+            $conditions.= "AND circle.title LIKE :title ";
+            //$query->setParameter('title', "%".$arrayCriteria['title']."%");
+        }
+        
+        if(!empty($arrayCriteria['eventDate']) || !$arrayCriteria['pastEvent'] ){
+            $conditions.= "AND event.startDate >= :startDate ";
+        }
+        
+        if(!empty($arrayCriteria['eventTime'])){
+            $conditions.= "AND ( event.startTime >= :startTime "
+                    . "OR event.startTime IS NULL ) ";
+//            $query->setParameter('startTime', $arrayCriteria['eventTime']);
+        }
+
+        
+        if($arrayCriteria['categories']->count()){ 
+            $arrayCategories = $arrayCriteria['categories']->toArray();
+            $categoriesIDs = [];
+            foreach($arrayCategories AS $category){
+                $categoriesIDs[] = $category->getId();
+            }
+            $categories = implode(",", $categoriesIDs);
+            $from.= " , event_category ";
+            $conditions.= "AND event_category.event_id = event.id ";
+            $conditions.= "AND event_category.category_id IN (:categories) ";
+//            $query->setParameter('categories', $categories);
+        }
+
+        if(!empty($arrayCriteria['zipcode'])){
+            if(!$postalAddressInvoked){ // add from postalAddress
+                $postalAddressInvoked = true;
+                $from.= ", postal_address ";
+                $conditions.= "AND postal_address.id = event.postal_address_id ";
+            }
+            
+            $conditions.= "AND postal_address.zipcode = :zipcode ";
+//            $query->setParameter('zipcode', $arrayCriteria['zipcode']);
+        }
+        
+        if(!empty($arrayCriteria['placeName'])){
+            if(!$postalAddressInvoked){ // add from postalAddress
+                $postalAddressInvoked = true;
+                $from.= ", postal_address ";
+                $conditions.= "AND postal_address.id = event.postal_address_id ";
+            }
+            
+            $conditions.= "AND postal_address.name LIKE :placeName ";
+//            $query->setParameter('placeName', "%".$arrayCriteria['placeName']."%");
+        }        
+        
+        if($arrayCriteria['pastEvent']){ // if past events included, we display from most recent to oldest
+            $order = "ORDER BY event.startDate DESC, event.startTime DESC ";
+        }else{
+            $order = "ORDER BY event.startDate ASC, event.startTime ASC ";
+        }
+        
+        $sql = $select.$from.$conditions.$order;
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('event_id', 'id');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        //die(var_dump($dql));
+        
+        if(!empty($arrayCriteria['title'])){
+            $query->setParameter('title', "%".$arrayCriteria['title']."%");
+        }
+        
+        if(!empty($arrayCriteria['eventDate'])){
+            $startDateFormatted = $arrayCriteria['eventDate']->format("Y-m-d");
+//            die($startDateFormatted);
+            $query->setParameter('startDate', $startDateFormatted);
+        }elseif(!$arrayCriteria['pastEvent']){
+//            die("do not include past events");
+            $startDate = new \DateTime("today");
+            $startDateFormatted = $startDate->format("Y-m-d");
+            $query->setParameter('startDate', $startDateFormatted);
+        }
+        
+        if(!empty($arrayCriteria['eventTime'])){
+            $query->setParameter('startTime', $arrayCriteria['eventTime']);
+        }
+        
+        if($arrayCriteria['categories']->count()){
+            $query->setParameter('categories', $categories);
+        }
+
+        if(!empty($arrayCriteria['zipcode'])){
+            $query->setParameter('zipcode', $arrayCriteria['zipcode']);
+        }
+        
+        if(!empty($arrayCriteria['placeName'])){
+            $query->setParameter('placeName', "%".$arrayCriteria['placeName']."%");
+        }
+
+        
+        $result = $query->getResult();
+//        die(var_dump($query->getSQL()));
+                
+        if(!$arrayCriteria['fullEvent']){
+            $filtered = [];
+            foreach($result AS $e){
+                if(!$this->isEventFull($e["id"])){
+                    $filtered[]["id"] = $e["id"];
+                }
+            }
+            $result = $filtered;
+        }
+//        die(var_dump($result));
+        
+        return $result;
     }
+    
+    public function isEventFull($eventId){
+        $sql = "SELECT event.max_participants AS maxParticipants, subcount.nb AS subcount "
+                . "FROM  event, (SELECT count(circle_id) as nb FROM subscribers WHERE circle_id = :eventId ) subcount "
+                . "WHERE event.id = :eventId ";
+
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('maxParticipants', 'maxParticipants');
+        $rsm->addScalarResult('subcount', 'subcount');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->setParameter('eventId', $eventId);
+        
+        $result = $query->getSingleResult();
+        
+//        die("id: ".$eventId." - ".!(is_nan($result["maxParticipants"])));
+//        die("id: ".$eventId." - ".(is_numeric($result["maxParticipants"]) && ($result["maxParticipants"] >= $result["subcount"])));
+        
+        if(is_nan($result["maxParticipants"])){
+            return false;
+        }
+        
+        return  $result["subcount"] >= $result["maxParticipants"];
+    }
+    
 }

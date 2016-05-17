@@ -329,8 +329,8 @@ class EventController extends Controller
                                                             'widget' => 'single_text',
                                                             'input' => 'datetime',
                                                             'format' => 'dd/MM/yyyy',
-                                                            'attr' => array('class' => 'flowber_datepicker')
-                                                        )
+                                                            'attr' => array('class' => 'flowber_datepicker'),
+                                                            'required' => false,)
                                 )
                                 ->add('eventTime', 'time', array(
                                                     'widget' => 'single_text',
@@ -351,26 +351,39 @@ class EventController extends Controller
                                 )
                                 ->add('placeName', 'text', array('required' => false))
                                 ->add('zipcode', 'text', array('required' => false))
+                                ->add('fullEvent', 'checkbox', array(
+                                                                'required' => false,
+                                                                'label' => "Inclure les évènements complets",
+                                                                'attr' => array('class' => 'checkbox-inline')))
+                                ->add('pastEvent', 'checkbox', array(
+                                                                'required' => false,
+                                                                'label' => "Inclure les évènements passés",
+                                                                'attr' => array('class' => 'checkbox-inline')))
                 ->getForm();
                              
         $searchEventForm->handleRequest($request);
-
+        $foundEventsID = null;
+        $searchMode = false;
         if ($searchEventForm->isSubmitted() && $searchEventForm->isValid()) {
+            $searchMode = true;
             $eventRepository = $this->getDoctrine()->getRepository('FlowberEventBundle:Event');
                   
             $searchEventData = $searchEventForm->getData();
             $foundEventsID =  $eventRepository->findEventsIdByCriteria($searchEventData);
-            
-            return $this->generateUrl('flowber_event_search', array('eventsID'=>$foundEventsID));
         }
         
-        $events = $this->container->get('flowber_event.event')->getAllEvents();
-       
+        if($searchMode){ // if search mode
+            $events = $this->container->get('flowber_event.event')->getEventsFromList($foundEventsID);
+        }else{
+            $events = $this->container->get('flowber_event.event')->getAllEvents();
+        }
+        
         return $this->render('FlowberEventBundle:Default:eventSearch.html.twig', 
                     array(
                         'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
                         'events' => $events,
                         'searchEventForm' => $searchEventForm->createView(),
+                        'searchMode' => $searchMode,
                     )
                 );
     }

@@ -176,6 +176,16 @@ class EventManager extends BaseManager {
         return $events;
     }   
     
+    public function getEventsFromIdList($eventsIdList){
+        $eventsInfos = [];
+        
+        foreach($eventsIdList AS $id){
+            $eventsInfos[] = $this->getEventInfos($id);
+        }
+        
+        return $eventsInfos;
+    }
+    
     public function getEvents($circleId){
         
         $events = $this->getEventRepository()->GetEventsId($circleId);
