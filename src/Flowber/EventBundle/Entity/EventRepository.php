@@ -299,10 +299,10 @@ class EventRepository extends EntityRepository
         
         $result = $query->getSingleResult();
         
-//        die("id: ".$eventId." - ".!(is_nan($result["maxParticipants"])));
+//        die("id: ".$eventId." - ".$result["maxParticipants"]);
 //        die("id: ".$eventId." - ".(is_numeric($result["maxParticipants"]) && ($result["maxParticipants"] >= $result["subcount"])));
         
-        if(is_nan($result["maxParticipants"])){
+        if(!is_numeric($result["maxParticipants"])){
             return false;
         }
         
