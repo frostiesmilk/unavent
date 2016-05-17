@@ -68,6 +68,12 @@ class EventController extends Controller
             }
         }
         
+
+        if($eventInfo['role']=='no' or $eventInfo['role']=='cantsee'){
+             if($eventInfo['maxParticipants']==$eventInfo['members']){
+                 $eventInfo['role']='cantsub';
+             }
+         }
         if($eventInfo['role']!='cantsee'){
             $postRepository = $this->getDoctrine()->getManager()->getRepository('FlowberPostBundle:Post');
             $posts = $posts = $this->container->get('flowber_post.post')->getCirclePosts($circle, $user);
