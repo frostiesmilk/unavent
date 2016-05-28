@@ -141,8 +141,18 @@ liip_imagine:
         circle_cover_badge:
             quality: 90
             filters:
+                auto_rotate: ~
                 thumbnail: { size: [200, 200], mode: inbound }
+                
         post_message_picture_thumb:
             quality: 90
             filters:
+                auto_rotate: ~
                 thumbnail: { size: [150, 150], mode: inbound }
+                
+        generic_thumb:
+            quality: 90
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [150, 150], mode: inbound }
+                
