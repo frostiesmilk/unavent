@@ -125,15 +125,18 @@ class EventController extends Controller
     {
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
-        $members = $this->container->get("flowber_event.event")->getEventMembers($id);
-        $memberInfos = $this->container->get("flowber_profile.profile")->getFriendsFromList($members);
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id));
+        $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
         
         return $this->render('FlowberEventBundle:Default:eventGallery.html.twig', 
                 array( 
-                'messageForm' => $privateMessageForm->createView(),
-                'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
-                'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos()
-                ));
+                    'messageForm' => $privateMessageForm->createView(),
+                    'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
+                    'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),
+                    'galleries' => $galleries,
+                    'galleriesId' => $galleriesId,
+                )
+            );
     }
     
     public function getEventGalleryAction($circleId, $galleryId)

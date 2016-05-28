@@ -26,13 +26,13 @@
     {% include 'FlowberGroupBundle::partials/groupNavbar.html.twig' %}
     
     <!-- Galleries -->  
-        <div id="friends" class="user-profile-friends user-profile">
+    <div id="friends" class="user-profile-friends user-profile">
         <div class="user-profile-category-row text-center">
             <span class="user-profile-category-title">Membres</span>
         </div>
-            <br>          
+     
         <div class="container">
-            <div class="row user-profile-friends-list">
+            <div class="row generic-profile-list">
                 {% for friend in members %}
                     {% include 'FlowberProfileBundle::partials/oneProfileResume.html.twig' %}
                 {% endfor %}

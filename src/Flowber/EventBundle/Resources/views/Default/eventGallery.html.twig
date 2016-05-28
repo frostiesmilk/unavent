@@ -4,6 +4,7 @@
 {% block stylesheets %}
     {{parent()}}
     <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/GalleryBundle/generic-gallery.css') }}"/> 
 {% endblock %}
 
 {% block smallMenu %}
@@ -26,10 +27,11 @@
    
     <!-- page -->
         <div id="friends" class="user-profile-friends user-profile">
-        <div class="user-profile-category-row text-center">
-            <span class="user-profile-category-title">Galleries</span>
+            <div class="user-profile-category-row text-center">
+                <span class="user-profile-category-title">Galleries</span>
+            </div>
+            {% include 'FlowberGalleryBundle::partials/showGalleries.html.twig' %}
         </div>
-
    
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
