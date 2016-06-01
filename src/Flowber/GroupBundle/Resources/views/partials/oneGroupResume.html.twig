@@ -19,7 +19,7 @@
         </div>
         <div class="group-image-frame">
             <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}" title="voir le groupe {{group.title}}">
-                <img class="group-image" src="{{asset(group.profilePicture)}}" alt=""/>      
+                <img class="group-image" src="{{asset(group.profilePicture | imagine_filter('generic_thumb'))}}" alt=""/>      
             </a>
         </div>
 

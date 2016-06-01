@@ -19,7 +19,7 @@
         </div>
         <div class="event-image-frame">
             <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">
-                <img class="event-image" src="{{asset(event.profilePicture)}}" alt="" title="voir la sortie {{event.title}}"/>
+                <img class="event-image" src="{{asset(event.profilePicture | imagine_filter('generic_thumb'))}}" alt="" title="voir la sortie {{event.title}}"/>
             </a>
             <p class="event-image-frame-date">
                 <span class="event-image-frame-date-day">{{event.startDate}}</span><br/>
