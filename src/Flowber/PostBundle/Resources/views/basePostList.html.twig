@@ -159,7 +159,9 @@
                     
                     {% if post.attachedEvent %}
                         {% set event = post.attachedEvent %}
-                        {% include 'FlowberPostBundle::partials/showPostEvent.html.twig' %}
+                        <div class="generic-blog-post-event">
+                        {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}
+                        </div>
                     {% endif %}
                 </div>
                 <ul id="comments-for-post-{{post.id}}" class="media-list generic-blog-post-comments">

@@ -23,7 +23,9 @@
             </a>
             <p class="event-image-frame-date">
                 <span class="event-image-frame-date-day">{{event.startDate}}</span><br/>
+                {% if event.startHour is defined %}
                 <span class="event-image-frame-date-day">{{event.startHour}}</span>   
+                {% endif %}
             </p>
         </div>
 

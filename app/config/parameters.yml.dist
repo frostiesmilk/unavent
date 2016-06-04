@@ -14,7 +14,7 @@ parameters:
     # mailer_host:       127.0.0.1
     # mailer_auth_mode:   ~
     # mailer_port:   ~
-    mailer_user:       ~
+    mailer_user:       flowber.site@gmail.com
     mailer_password:   ~
     # spool:              { type: memory }
     

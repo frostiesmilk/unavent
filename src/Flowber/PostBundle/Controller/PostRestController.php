@@ -212,7 +212,7 @@ class PostRestController extends Controller
                     $repsData = array("status"=>"error" ,"message" => "Post flush failed: ".$ex->getMessage());
                     return $repsData;
                 }
-                $postAttachmentView = $this->renderView('FlowberPostBundle:partials:showPostEvent.html.twig', 
+                $postAttachmentView = $this->renderView('FlowberEventBundle:partials:oneEventResume.html.twig', 
                         array("event" =>$eventInfos));
             }
             
