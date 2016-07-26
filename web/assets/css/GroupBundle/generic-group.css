@@ -103,7 +103,7 @@ body {
 }
 .group-list-thumbnail {
   border: none;
-  padding: initial;
+  padding: 25px 0px 0px 0px;
   background: none;
   margin-bottom: initial;
 }
@@ -117,18 +117,28 @@ body {
   opacity: 0.6;
 }
 .group-list-thumbnail .group-name-frame {
-  height: 5em;
-  display: table-cell;
-  vertical-align: bottom;
-  padding: initial;
+  padding: 1px;
+}
+.group-list-thumbnail .group-name-frame .group-name-link {
+  display: inline-block;
 }
 .group-list-thumbnail .group-name-frame .group-name {
+  margin: 0px;
   text-transform: uppercase;
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 14px;
   font-weight: bold;
   text-align: justify;
+}
+.group-list-thumbnail .group-name-frame .group-role {
+  float: right;
+}
+.group-list-thumbnail .group-name-frame .group-role .group-role-allowed {
+  color: black;
+}
+.group-list-thumbnail .group-name-frame .group-role .group-role-private {
+  color: #E74C3C;
 }
 .group-list-thumbnail .group-description {
   font-size: 11px;

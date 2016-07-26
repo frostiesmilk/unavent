@@ -12,7 +12,7 @@ and open the template in the editor.
 
 .group-list-thumbnail{
     border : none;
-    padding: initial;
+    padding: 25px 0px 0px 0px;
     background: none;
     margin-bottom: initial;
     .group-image{            
@@ -27,17 +27,27 @@ and open the template in the editor.
     }
 
     .group-name-frame{
-        height: 5em;
-        display: table-cell;
-        vertical-align: bottom;
-        padding: initial;
+        padding: 1px;
+        .group-name-link{
+            display: inline-block;
+        }
         .group-name{
+            margin: 0px;
             text-transform: uppercase;
             text-overflow: ellipsis;
             overflow: hidden;
             font-size: 14px;
             font-weight: bold;
             text-align: justify;
+        }
+        .group-role{
+            float: right;
+            .group-role-allowed{
+                color: black;
+            }
+            .group-role-private{
+                color: @red;
+            }
         }
     }
 

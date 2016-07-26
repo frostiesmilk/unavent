@@ -21,7 +21,7 @@
     <!-- Event Banner -->  
     <!-- Second menu -->
     {% include 'FlowberProfileBundle::partials/userProfile/profileNavbar.html.twig' %} 
-   
+
     <!-- page -->
         <div id="friends" class="user-profile-friends user-profile" style="margin-top : 80px">
         <div class="user-profile-category-row text-center">
@@ -30,11 +30,13 @@
         <div class="container event-thumbnail-display-container">
             <div class="row">
                 {% for event in events %}
-                       {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
-                    {%endfor%}
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                       {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}  
+                    </div>
+                {%endfor%}
             </div>
         </div>
-   
+
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
     

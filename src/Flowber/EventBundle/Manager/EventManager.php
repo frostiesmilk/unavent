@@ -165,7 +165,7 @@ class EventManager extends BaseManager {
                     $events[$count]['city'] = '';        
                 }
                 $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
-                $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
+                $events[$count]['startDate'] = 'Le ' . $event->getStartDate()->format('d/m/Y');
                 if(empty($event->getStartTime())){
                     $events[$count]['startHour'] = "";
                 }else{
@@ -246,7 +246,7 @@ class EventManager extends BaseManager {
                 $events[$count]['city'] = '';        
             }            
             $events[$count]['profilePicture'] = $this->cm->getProfilePicture($events[$count]['id']);
-            $events[$count]['startDate'] = 'Le' . $event->getStartDate()->format('d/m/Y');
+            $events[$count]['startDate'] = 'Le ' . $event->getStartDate()->format('d/m/Y');
             $events[$count]['startHour'] = '';
             if (count($event->getStartTime()) != 0) {
                 $events[$count]['startHour'] = ' à ' . $event->getStartTime()->format('H:i:s'); 

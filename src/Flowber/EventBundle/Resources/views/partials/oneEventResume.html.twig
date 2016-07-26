@@ -1,10 +1,10 @@
-<div class="col-md-3 col-sm-6 col-xs-12">
+<!--<div class="col-md-3 col-sm-6 col-xs-12">-->
     <div class="thumbnail event-list-thumbnail ">
         <div class="caption event-name-frame">
-            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}" title="voir la sortie {{event.title}}">
+            <a class="event-name-link" tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}" title="voir la sortie {{event.title}}">
                 <h3 class="event-name">{{event.title}}</h3>
             </a>
-            <div style="position : absolute; right : 25px; top:35px;">
+            <div class="event-name-frame-host" >
                 {%if event.role != 'no' and event.role != 'cantsee'%}
                     {%if event.role == 'creator'%}
                         <span class="glyphicon glyphicon-user"  aria-hidden="true" title="J'ai créé cette sortie"></span>
@@ -28,6 +28,8 @@
                 {% endif %}
             </p>
         </div>
+                
+                
 
         <div class="caption text-center ">
             <p class="event-description">
@@ -48,4 +50,4 @@
             </a>
         </div>
     </div>
-</div>
+<!--</div>-->

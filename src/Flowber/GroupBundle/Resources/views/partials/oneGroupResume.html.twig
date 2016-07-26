@@ -1,43 +1,41 @@
-<div class="col-md-3 col-xs-6">
-    <div class="thumbnail group-list-thumbnail">
-        <div class="caption group-name-frame" style="color:black">
-            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}" title="voir le groupe {{group.title}}">
-                <h3 class="group-name">{{group.title}}</h3>
-            </a>
-            <div style="position : absolute; right : 25px; top:35px;">
-                {%if group.role != 'no' and group.role != 'cantsee'%}
-                    {%if group.role == 'creator'%}
-                        <span class="glyphicon glyphicon-user"  aria-hidden="true" title="J'ai créé ce groupe"></span>
-                    {% else %}
-                        <span class="glyphicon glyphicon-ok"  aria-hidden="true" title="Je suis membre"></span>
-                    {% endif %}
+<div class="thumbnail group-list-thumbnail">
+    <div class="caption group-name-frame" >
+        <a class="group-name-link" tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}" title="voir le groupe {{group.title}}">
+            <h3 class="group-name">{{group.title}}</h3>
+        </a>
+        <div class="group-role">
+            {%if group.role != 'no' and group.role != 'cantsee'%}
+                {%if group.role == 'creator'%}
+                    <span class="glyphicon glyphicon-user group-role-allowed"  aria-hidden="true" title="J'ai créé ce groupe"></span>
+                {% else %}
+                    <span class="glyphicon glyphicon-ok group-role-allowed"  aria-hidden="true" title="Je suis membre"></span>
                 {% endif %}
-                {% if group.role == 'cantsee'%}
-                    <span class="glyphicon glyphicon-lock red" aria-hidden="true" title="Ce groupe est privée"></span>
-                {% endif %}
-            </div>
+            {% endif %}
+            {% if group.role == 'cantsee'%}
+                <span class="glyphicon glyphicon-lock group-role-private" aria-hidden="true" title="Ce groupe est privée"></span>
+            {% endif %}
         </div>
-        <div class="group-image-frame">
-            <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}" title="voir le groupe {{group.title}}">
-                <img class="group-image" src="{{asset(group.profilePicture | imagine_filter('generic_thumb'))}}" alt=""/>      
-            </a>
-        </div>
+    </div>
+    <div class="group-image-frame">
+        <a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}" title="voir le groupe {{group.title}}">
+            <img class="group-image" src="{{asset(group.profilePicture | imagine_filter('generic_thumb'))}}" alt=""/>      
+        </a>
+    </div>
 
-        <div class="caption text-center ">
-            <p class="group-description">
-                <a href="{{ path('flowber_group_members', {'id': group.id}) }}" title="voir les membres de {{group.title}}">
-                    {{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}  
-                </a>
-                dont 
-                <span title="{{group.friends}} {% if group.friends <= 1 %} ami est {% else %} amis sont {% endif %} membre du groupe {{group.title}}">
-                    {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
-                </span>
-            </p>
-            <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
-                <button class="btn btn-default font-white group-join-button"> 
-                    <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir le groupe 
-                </button>
+    <div class="caption text-center ">
+        <p class="group-description">
+            <a href="{{ path('flowber_group_members', {'id': group.id}) }}" title="voir les membres de {{group.title}}">
+                {{group.members}} {% if group.members <= 1 %} membre {% else %} membres {% endif %}  
             </a>
-        </div>
+            dont 
+            <span title="{{group.friends}} {% if group.friends <= 1 %} ami est {% else %} amis sont {% endif %} membre du groupe {{group.title}}">
+                {{group.friends}} {% if group.friends <= 1 %} ami {% else %} amis {% endif %}   
+            </span>
+        </p>
+        <a  href="{{ path('api_get_circle', {'circleId': group.id}) }}"> 
+            <button class="btn btn-default font-white group-join-button"> 
+                <span class="glyphicon glyphicon-plus font-white" aria-hidden="true"></span> Voir le groupe 
+            </button>
+        </a>
     </div>
 </div>

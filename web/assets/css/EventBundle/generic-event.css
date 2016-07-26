@@ -101,12 +101,9 @@ body {
 .form-error-custom span {
   color: #A94442;
 }
-.event-thumbnail-display-container {
-  padding-bottom: 27px;
-}
 .event-list-thumbnail {
   border: none;
-  padding: initial;
+  padding: 25px 0px 0px 0px;
   background: none;
   margin-bottom: initial;
 }
@@ -119,8 +116,11 @@ body {
 .event-list-thumbnail .event-image:hover {
   opacity: 0.6;
 }
+.event-list-thumbnail .event-image-frame {
+  position: relative;
+}
 .event-list-thumbnail .event-image-frame .event-image-frame-date {
-  top: 25%;
+  top: 5px;
   position: absolute;
   left: 30px;
   font-weight: bold;
@@ -143,18 +143,22 @@ body {
   left: 33%;
 }
 .event-list-thumbnail .event-name-frame {
-  height: 5em;
-  display: table-cell;
-  vertical-align: bottom;
-  padding: initial;
+  padding: 1px;
+}
+.event-list-thumbnail .event-name-frame .event-name-link {
+  display: inline-block;
 }
 .event-list-thumbnail .event-name-frame .event-name {
+  margin: 0px;
   text-transform: uppercase;
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 14px;
   font-weight: bold;
   text-align: justify;
+}
+.event-list-thumbnail .event-name-frame-host {
+  float: right;
 }
 .event-list-thumbnail .event-description {
   font-size: 11px;

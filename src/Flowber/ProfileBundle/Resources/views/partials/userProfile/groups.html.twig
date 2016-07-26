@@ -10,7 +10,9 @@
     <div class="container user-profile-groups-container">
         <div class="row">
             {% for group in groups %}
+                <div class="col-md-3 col-xs-6">
                 {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}
+                </div>
             {%endfor%}
         </div>  
     </div>  
