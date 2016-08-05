@@ -34,7 +34,9 @@
         <div class="container">
             <div class="row generic-profile-list">
                 {% for friend in members %}
+                    <div class=" col-md-4 col-sm-6 col-xs-12">
                     {% include 'FlowberProfileBundle::partials/oneProfileResume.html.twig' %}
+                    </div>
                 {% endfor %}
             </div>
         </div>
