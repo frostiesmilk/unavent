@@ -10,60 +10,73 @@ and open the template in the editor.
 
 @import "../FrontOfficeBundle/frontoffice-common";
 
-.gallery-list-thumbnail{
-    border : none;
-    padding: 25px 0px 0px 0px;
-    background: none;
-    margin-bottom: initial;
-    .gallery-image{            
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-        box-shadow: #000 0em 0em 0em;
-    }
-
-    .gallery-image:hover{
-        opacity: 0.6;
-    }
-
-    .gallery-name-frame{
-        padding: 1px;
-        .gallery-name-link{
-            display: inline-block;
+.gallery-list{
+    margin-top : 20px; 
+    margin-bottom : 40px;
+    .gallery-list-thumbnail{
+        border : none;
+        padding: 25px 0px 0px 0px;
+        background: none;
+        margin-bottom: initial;
+        .gallery-image{            
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            box-shadow: #000 0em 0em 0em;
         }
-        .gallery-name{
-            margin: 0px;
-            text-transform: uppercase;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            font-size: 14px;
+
+        .gallery-image:hover{
+            opacity: 0.6;
+        }
+
+        .gallery-name-frame{
+            padding: 1px;
+            .gallery-name-link{
+                display: inline-block;
+            }
+            .gallery-name{
+                margin: 0px;
+                text-transform: uppercase;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: justify;
+            }
+            .gallery-role{
+                float: right;
+                .gallery-role-allowed{
+                    color: black;
+                }
+                .gallery-role-private{
+                    color: @red;
+                }
+            }
+        }
+
+        .gallery-description{
+            font-size: 11px;
+            color: #888;
+        }    
+
+        .gallery-join-button{
+            background-color: @red;
+            border: none;
+            padding: 4px 0px;
+            width: 100%
+        }
+        .gallery-join-button:hover{
             font-weight: bold;
-            text-align: justify;
-        }
-        .gallery-role{
-            float: right;
-            .gallery-role-allowed{
-                color: black;
-            }
-            .gallery-role-private{
-                color: @red;
-            }
+            color: @light-blue;
         }
     }
+}
 
-    .gallery-description{
-        font-size: 11px;
-        color: #888;
-    }    
-
-    .gallery-join-button{
-        background-color: @red;
-        border: none;
-        padding: 4px 0px;
-        width: 100%
-    }
-    .gallery-join-button:hover{
-        font-weight: bold;
-        color: @light-blue;
-    }
+.album-image{
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
 }

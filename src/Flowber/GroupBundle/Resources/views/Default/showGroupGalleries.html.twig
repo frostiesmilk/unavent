@@ -4,7 +4,7 @@
 {% block stylesheets %}
     {{parent()}}
     <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/generic-profile.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/GalleryBundle/generic-gallery.css') }}"/> 
 {% endblock %}
 
 {% block smallMenu %}
@@ -32,7 +32,7 @@
                 <h1>Galleries</h1>
             </div>
             
-            {% include 'FlowberGalleryBundle::partials/showGalleries.html.twig' %}
+            {% include 'FlowberGalleryBundle::partials/gallery-album-list.html.twig' %}
 
         </div>
     </div>    

@@ -101,28 +101,32 @@ body {
 .form-error-custom span {
   color: #A94442;
 }
-.gallery-list-thumbnail {
+.gallery-list {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.gallery-list .gallery-list-thumbnail {
   border: none;
   padding: 25px 0px 0px 0px;
   background: none;
   margin-bottom: initial;
 }
-.gallery-list-thumbnail .gallery-image {
+.gallery-list .gallery-list-thumbnail .gallery-image {
   width: 100%;
   height: 140px;
   object-fit: cover;
   box-shadow: #000 0em 0em 0em;
 }
-.gallery-list-thumbnail .gallery-image:hover {
+.gallery-list .gallery-list-thumbnail .gallery-image:hover {
   opacity: 0.6;
 }
-.gallery-list-thumbnail .gallery-name-frame {
+.gallery-list .gallery-list-thumbnail .gallery-name-frame {
   padding: 1px;
 }
-.gallery-list-thumbnail .gallery-name-frame .gallery-name-link {
+.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-name-link {
   display: inline-block;
 }
-.gallery-list-thumbnail .gallery-name-frame .gallery-name {
+.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-name {
   margin: 0px;
   text-transform: uppercase;
   text-overflow: ellipsis;
@@ -131,26 +135,34 @@ body {
   font-weight: bold;
   text-align: justify;
 }
-.gallery-list-thumbnail .gallery-name-frame .gallery-role {
+.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-role {
   float: right;
 }
-.gallery-list-thumbnail .gallery-name-frame .gallery-role .gallery-role-allowed {
+.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-role .gallery-role-allowed {
   color: black;
 }
-.gallery-list-thumbnail .gallery-name-frame .gallery-role .gallery-role-private {
+.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-role .gallery-role-private {
   color: #E74C3C;
 }
-.gallery-list-thumbnail .gallery-description {
+.gallery-list .gallery-list-thumbnail .gallery-description {
   font-size: 11px;
   color: #888;
 }
-.gallery-list-thumbnail .gallery-join-button {
+.gallery-list .gallery-list-thumbnail .gallery-join-button {
   background-color: #E74C3C;
   border: none;
   padding: 4px 0px;
   width: 100%;
 }
-.gallery-list-thumbnail .gallery-join-button:hover {
+.gallery-list .gallery-list-thumbnail .gallery-join-button:hover {
   font-weight: bold;
   color: #E1EBF5;
+}
+.album-image {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+  width: 200px;
+  cursor: pointer;
 }

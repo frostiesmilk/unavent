@@ -4,6 +4,7 @@
 {% block stylesheets %}
     {{parent()}}
     <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/GalleryBundle/generic-gallery.css') }}"/>
 {% endblock %}
 
 {% block smallMenu %}
@@ -25,8 +26,7 @@
     {% include 'FlowberGroupBundle::partials/groupNavbar.html.twig' %}
     
     <!-- Galleries -->  
-    {% include 'FlowberGalleryBundle::partials/galleries.html.twig' %}
-
+    {% include 'FlowberGalleryBundle::partials/show-album.html.twig' %}
    
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}

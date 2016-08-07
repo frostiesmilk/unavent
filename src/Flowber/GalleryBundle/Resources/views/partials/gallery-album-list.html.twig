@@ -1,8 +1,8 @@
-<div class="container" style="margin-top : 20px; margin-bottom : 40px;">
+<div class="container gallery-list" >
     <div class="row">
         {% for gallery in galleries %}
             <div class="col-md-3 col-xs-6">
-                {% include 'FlowberGalleryBundle::partials/gallery-thumbnail.html.twig' %}
+                {% include 'FlowberGalleryBundle::partials/gallery-album-thumbnail.html.twig' %}
             </div>
         {% endfor %}
     </div>
@@ -21,7 +21,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="previousPic">Précédent</button>
                 <button type="button" class="btn btn-default" id="nextPic">Suivant</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
