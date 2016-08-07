@@ -6,4 +6,7 @@ flowber_profile_edit:
     path:     /{circleId}/edit
     defaults: { _controller: FlowberProfileBundle:Profile:getEditProfile }
 
+flowber_profile_current_user:
+    path: /me
+    defaults: { _controller: FlowberProfileBundle:Profile:getCurrentUserProfile }
     

@@ -58,7 +58,7 @@ class ResettingController extends BaseController{
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('flowber_profile_current_user');
+                $url = $this->generateUrl('flowber_front_office_redirect');
                 $response = new RedirectResponse($url);
             }
 

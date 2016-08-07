@@ -114,4 +114,8 @@ class ProfileController extends Controller
                     'messageForm' => $privateMessageForm->createView()
                 ));
     }
+    
+    public function getCurrentUserProfileAction(){
+        return $this->getUserProfileAction($this->getUser()->getId());
+    }
 }

@@ -101,6 +101,11 @@ body {
 .form-error-custom span {
   color: #A94442;
 }
+.container-alert {
+  position: fixed;
+  bottom: 0px;
+  z-index: 9999;
+}
 .user-profile .user-profile-category-row {
   padding-top: 27px;
   padding-bottom: 20px;
