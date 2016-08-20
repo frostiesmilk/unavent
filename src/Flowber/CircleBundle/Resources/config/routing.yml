@@ -5,3 +5,14 @@ flowber_request:
 flowber_notification:
     path:     /notification
     defaults: { _controller: FlowberCircleBundle:Circle:getNotificationPage }
+    
+flowber_circle_galleries:
+    path:     /{id}/galleries
+    defaults: { _controller: FlowberCircleBundle:Circle:getCircleGalleries }
+    
+flowber_circle_gallery:
+    path:     /{circleId}/gallery/{galleryId}
+    defaults: { _controller: FlowberCircleBundle:Circle:getCircleGallery }
+    requirements:
+        circleId: \d+
+        galleryId: \d+

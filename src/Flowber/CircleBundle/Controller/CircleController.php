@@ -32,4 +32,21 @@ class CircleController extends Controller
         );
     }
     
+    /**
+     * $id is Circle's ID
+     * @param type $id
+     */
+    function getCircleGalleriesAction($id){
+        $circleClassName = $this->container->get("flowber_circle.circle")->getClass($id);
+
+        return $this->redirect($this->generateUrl('flowber_'.$circleClassName.'_galleries',  array('id' => $id )));
+        
+    }
+    
+    function getCircleGalleryAction($circleId, $galleryId){
+        $circleClassName = $this->container->get("flowber_circle.circle")->getClass($circleId);
+
+        return $this->redirect($this->generateUrl('flowber_'.$circleClassName.'_gallery',  array('circleId' => $circleId, 'galleryId'=>$galleryId )));
+        
+    }
 }

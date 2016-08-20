@@ -121,14 +121,14 @@ class EventController extends Controller
                 ));
     }
     
-    public function getGalleryPageAction($id)
+    public function getEventGalleriesAction($id)
     {
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
         $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id));
         $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
         
-        return $this->render('FlowberEventBundle:Default:eventGallery.html.twig', 
+        return $this->render('FlowberEventBundle:Default:showEventGalleries.html.twig', 
                 array( 
                     'messageForm' => $privateMessageForm->createView(),
                     'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),

@@ -10,7 +10,7 @@ flowber_event_participants:
     
 flowber_event_galleries:
     path:     /{id}/galleries
-    defaults: { _controller: FlowberEventBundle:Event:getGalleryPage }
+    defaults: { _controller: FlowberEventBundle:Event:getEventGalleries }
     
 flowber_event_gallery:
     path:     /{circleId}/gallery/{galleryId}

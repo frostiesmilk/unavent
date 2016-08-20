@@ -4,7 +4,7 @@ flowber_search:
 
 flowber_circle:
     resource: "@FlowberCircleBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /circle
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

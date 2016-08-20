@@ -101,32 +101,36 @@ body {
 .form-error-custom span {
   color: #A94442;
 }
-.gallery-list {
+.gallery-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.galleries-list {
   margin-top: 20px;
   margin-bottom: 40px;
 }
-.gallery-list .gallery-list-thumbnail {
+.galleries-list .gallery-thumbnail {
   border: none;
   padding: 25px 0px 0px 0px;
   background: none;
   margin-bottom: initial;
 }
-.gallery-list .gallery-list-thumbnail .gallery-image {
+.galleries-list .gallery-thumbnail .gallery-image-featured {
   width: 100%;
   height: 140px;
   object-fit: cover;
   box-shadow: #000 0em 0em 0em;
 }
-.gallery-list .gallery-list-thumbnail .gallery-image:hover {
+.galleries-list .gallery-thumbnail .gallery-image-featured:hover {
   opacity: 0.6;
 }
-.gallery-list .gallery-list-thumbnail .gallery-name-frame {
+.galleries-list .gallery-thumbnail .gallery-name-frame {
   padding: 1px;
 }
-.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-name-link {
+.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-name-link {
   display: inline-block;
 }
-.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-name {
+.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-name {
   margin: 0px;
   text-transform: uppercase;
   text-overflow: ellipsis;
@@ -135,35 +139,41 @@ body {
   font-weight: bold;
   text-align: justify;
 }
-.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-role {
+.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role {
   float: right;
 }
-.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-role .gallery-role-allowed {
+.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role .gallery-role-allowed {
   color: black;
 }
-.gallery-list .gallery-list-thumbnail .gallery-name-frame .gallery-role .gallery-role-private {
+.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role .gallery-role-private {
   color: #E74C3C;
 }
-.gallery-list .gallery-list-thumbnail .gallery-description {
+.galleries-list .gallery-thumbnail .gallery-description {
   font-size: 11px;
   color: #888;
 }
-.gallery-list .gallery-list-thumbnail .gallery-join-button {
+.galleries-list .gallery-thumbnail .gallery-join-button {
   background-color: #E74C3C;
   border: none;
   padding: 4px 0px;
   width: 100%;
 }
-.gallery-list .gallery-list-thumbnail .gallery-join-button:hover {
+.galleries-list .gallery-thumbnail .gallery-join-button:hover {
   font-weight: bold;
   color: #E1EBF5;
 }
-.album-image {
+.gallery-image-list {
+  padding-bottom: 20px;
+}
+.gallery-image-list .gallery-image-preview-frame {
+  padding: 5px;
+}
+.gallery-image-list .gallery-image-preview-frame .gallery-image-preview {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
   height: 200px;
-  width: 200px;
+  width: 100%;
   cursor: pointer;
 }
 .slide-image {

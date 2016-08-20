@@ -1,25 +1,26 @@
-<div class="container" style="margin-top : 20px; margin-bottom : 40px;">
-    <a href="{{path('flowber_group_galleries', {'id':circle.id})}}" class="btn btn-default">Retour à la galerie</a>
+<div class="container gallery-container">
+    <div class="row">
+        <a href="{{path('flowber_group_galleries', {'id':circle.id})}}" class="btn btn-default">Retour aux galeries</a>
+    </div>
     <div class="row">
         <h1>{{gallery.title}}</h1>
         <h4>Ajouté le {{gallery.creationDate|date("d/m/y H:i")}}</h4>
         <h3>{{gallery.description}}</h3>
     </div>
-    <div class="row">            
+    <div class="row gallery-image-list">            
         {% for photo in gallery.photos %}
-        <div class="col-xs-2">
-            <div class="album-image" style="background-image:url('{{asset(photo.getWebPath())}}');"
+        <div class="col-xs-2 gallery-image-preview-frame">
+            <div class="gallery-image-preview" style="background-image:url('{{asset(photo.getWebPath())}}');"
                 onclick="afficheGallery(this);" data-toggle="modal" data-target="#myModal">
             </div>
         </div>
         {% endfor %}
     </div>
-</div>    
-    
-<div class="container">
-    <a href="{{path('flowber_group_galleries', {'id':circle.id})}}" class="btn btn-default">Retour à la galerie</a>
+    <div class="row">
+        <a href="{{path('flowber_group_galleries', {'id':circle.id})}}" class="btn btn-default">Retour aux galeries</a>
+    </div>
 </div>
-    
+
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

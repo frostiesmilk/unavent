@@ -10,22 +10,27 @@ and open the template in the editor.
 
 @import "../FrontOfficeBundle/frontoffice-common";
 
-.gallery-list{
+.gallery-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.galleries-list{
     margin-top : 20px; 
     margin-bottom : 40px;
-    .gallery-list-thumbnail{
+    .gallery-thumbnail{
         border : none;
         padding: 25px 0px 0px 0px;
         background: none;
         margin-bottom: initial;
-        .gallery-image{            
+        .gallery-image-featured{            
             width: 100%;
             height: 140px;
             object-fit: cover;
             box-shadow: #000 0em 0em 0em;
         }
 
-        .gallery-image:hover{
+        .gallery-image-featured:hover{
             opacity: 0.6;
         }
 
@@ -72,13 +77,19 @@ and open the template in the editor.
     }
 }
 
-.album-image{
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 200px;
-    width: 200px;
-    cursor: pointer;
+.gallery-image-list{
+    padding-bottom: 20px;
+    .gallery-image-preview-frame{
+        padding: 5px;
+        .gallery-image-preview{
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 200px;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
 }
 
 .slide-image{
