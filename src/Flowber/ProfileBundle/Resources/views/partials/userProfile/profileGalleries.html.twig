@@ -2,18 +2,22 @@
 {% form_theme newGalleryForm 'bootstrap_3_layout.html.twig' %}
 
 <div id="photos" class="user-profile-gallery background-dark-blue user-profile">
-    <div class="user-profile-category-row  text-center">
-        <span class="user-profile-category-title font-white">Mes galeries</span>
+    <div class="container">
+        <div class="row user-profile-category-row">
+            <div class="col-xs-12 text-center">
+                <span class="user-profile-category-title font-white">Mes galeries</span>
+            </div>
+        </div>
     </div>
 
     <div class="container user-profile-gallery-container galleries-list">
         <div class="row">
-            <!--<div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-xs-12 text-center">
                 <button class="btn btn-default" data-toggle="modal" data-target="#addGalleryModal"><span class="glyphicon glyphicon-picture"></span> Ajouter une galerie</button>
-            </div>-->
+            </div>
             <!-- Galleries list -->
             {% for gallery in galleries %}
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-xs-12">
             {% include 'FlowberGalleryBundle::partials/gallery-thumbnail.html.twig' %}
             </div>
             {% endfor %}
@@ -47,6 +51,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                {{form_rest(newGalleryForm)}}
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 <button type="submit" class="btn btn-primary btn-red">Valider</button>
             </div>

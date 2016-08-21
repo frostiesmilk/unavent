@@ -113,8 +113,7 @@ class ProfileController extends Controller
         // for private messages
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         
-        // Retrieve profile galleries
-        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($circleId));
+        // Retrieving galleries here = BUG! WHYYYYYYYYYYYYYYYYY?????
         
         // for adding new gallery in profile
         $newGroupGallery = new Gallery();
@@ -138,6 +137,9 @@ class ProfileController extends Controller
             return $this->redirect($this->generateUrl('flowber_profile_gallery', array('circleId' => $circleId, 'galleryId' => $galleryId)));
         }
         
+        // Retrieve profile galleries
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($circle);
+        
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
                     'circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
@@ -157,7 +159,6 @@ class ProfileController extends Controller
         
         return $this->render('FlowberProfileBundle:Default:profileGallery.html.twig',
             array(
-                '_fragment' => "photos",
                 'circle'  => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
                 //'messageForm'   => $privateMessageForm->createView(),
                 'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    

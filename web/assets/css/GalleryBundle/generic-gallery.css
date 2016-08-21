@@ -105,13 +105,9 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.galleries-list {
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
 .galleries-list .gallery-thumbnail {
   border: none;
-  padding: 0px 0px 0px 0px;
+  padding: 10px 0px 10px 0px;
   background: none;
   margin-bottom: initial;
 }
