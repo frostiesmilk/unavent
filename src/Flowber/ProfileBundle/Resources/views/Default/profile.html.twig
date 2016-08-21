@@ -4,6 +4,7 @@
     {{parent()}}
     <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/profile.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/generic-profile.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/GalleryBundle/generic-gallery.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/generic-group.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
 {% endblock %}
@@ -76,6 +77,7 @@
     {% include 'FlowberProfileBundle::partials/userProfile/events.html.twig' %}
     
     <!-- My gallery modal-->
+    {% include 'FlowberProfileBundle::partials/userProfile/profileGalleries.html.twig' %}
     
     <!-- My friends-->                            
     {% include 'FlowberProfileBundle::partials/userProfile/friends.html.twig' %}           

@@ -12,13 +12,13 @@ flowber_groups_homepage:
     requirements:
         id: \d+
 
-flowber_group_galleries:
+flowber_groups_galleries:
     path:     /{id}/galleries
     defaults: { _controller: FlowberGroupBundle:Group:getGroupGalleries }
     requirements:
         id: \d+
         
-flowber_group_gallery:
+flowber_groups_gallery:
     path:     /{circleId}/gallery/{galleryId}
     defaults: { _controller: FlowberGroupBundle:Group:getGroupGallery }
     requirements:

@@ -37,6 +37,13 @@ class GroupController extends Controller
         $postWithEventForm = $this->createForm(new PostWithEventType, $postWithEvent);    
         $postWithPictures = new Post();
         $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);  
+        
+        //preparing optional new event profile picture
+        $eventProfilePicture = new Photo();
+        $eventProfilePictureForm = $this->createForm(new ProfilePictureType, $eventProfilePicture);        
+        //preparing optional new event cover picture
+        $eventCoverPicture = new Photo();
+        $eventCoverPictureForm = $this->createForm(new CoverPictureType, $eventCoverPicture);
            
         // preparing new Gallery
         $newGroupGallery = new Gallery();
@@ -58,7 +65,7 @@ class GroupController extends Controller
                 try{
                     $em->flush();  
                     return $this->redirect($this->generateUrl(
-                        'flowber_group_gallery',
+                        'flowber_groups_gallery',
                         array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
                     ));
                 } catch (Exception $ex) {
@@ -91,6 +98,8 @@ class GroupController extends Controller
                 'messageForm'           => $privateMessageForm->createView(),
                 'commentForm'           => $commentsForms,
                 'postWithEventForm'     => $postWithEventForm->createView(),
+                'eventProfilePictureForm'   => $eventProfilePictureForm->createView(),
+                'eventCoverPictureForm'     => $eventCoverPictureForm->createView(),
                 'mailToCreatorForm'     => $mailToCreatorForm->createView(),
                 'newGalleryForm'        => $newGalleryForm->createView(),
         ));

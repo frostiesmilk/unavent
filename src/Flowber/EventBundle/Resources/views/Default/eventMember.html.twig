@@ -3,6 +3,7 @@
 
 {% block stylesheets %}
     {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/event.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/generic-profile.css') }}"/> 
 {% endblock %}
@@ -26,19 +27,17 @@
     {% include 'FlowberEventBundle::partials/eventNavbar.html.twig' %}
    
     <!-- page -->
-    <div id="friends" class="user-profile-friends user-profile">
-        <div class="user-profile-category-row text-center">
-            <span class="user-profile-category-title">Participants</span>
-        </div>
-          
-        <div class="container">
-            <div class="row generic-profile-list">
-                {% for friend in members %}
-                    <div class=" col-md-4 col-sm-6 col-xs-12">
-                    {% include 'FlowberProfileBundle::partials/oneProfileResume.html.twig' %}
-                    </div>
-                {% endfor %}
-            </div>
+    <div class="event-page-title-row text-center">
+        <span class="event-page-title">Participants</span>
+    </div>
+
+    <div class="container">
+        <div class="row generic-profile-list">
+            {% for friend in members %}
+                <div class=" col-md-4 col-sm-6 col-xs-12">
+                {% include 'FlowberProfileBundle::partials/oneProfileResume.html.twig' %}
+                </div>
+            {% endfor %}
         </div>
     </div>
    

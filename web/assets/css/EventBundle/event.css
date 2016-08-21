@@ -251,3 +251,12 @@ body {
 .alert-event-main {
   margin-bottom: -50px;
 }
+.event-page-title-row {
+  padding-top: 27px;
+  padding-bottom: 20px;
+}
+.event-page-title-row .event-page-title {
+  font-size: 25px;
+  border-bottom: 1px solid;
+  padding-bottom: 15px;
+}

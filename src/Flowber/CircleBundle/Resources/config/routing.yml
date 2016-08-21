@@ -7,8 +7,8 @@ flowber_notification:
     defaults: { _controller: FlowberCircleBundle:Circle:getNotificationPage }
     
 flowber_circle_galleries:
-    path:     /{id}/galleries
-    defaults: { _controller: FlowberCircleBundle:Circle:getCircleGalleries }
+    path:     /{id}/galleries/{anchor}
+    defaults: { _controller: FlowberCircleBundle:Circle:getCircleGalleries, anchor: null }
     
 flowber_circle_gallery:
     path:     /{circleId}/gallery/{galleryId}

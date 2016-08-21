@@ -1,6 +1,10 @@
+{% if anchor is not defined or anchor is empty  %}
+{% set anchor = "" %}
+{% endif %}
+
 <div class="container gallery-container">
     <div class="row">
-        <a href="{{path('flowber_group_galleries', {'id':circle.id})}}" class="btn btn-default">Retour aux galeries</a>
+        <a href="{{path('flowber_circle_galleries', {'id':circle.id, 'anchor':anchor})}}" class="btn btn-default">Retour aux galeries</a>
     </div>
     <div class="row">
         <h1>{{gallery.title}}</h1>
@@ -17,7 +21,7 @@
         {% endfor %}
     </div>
     <div class="row">
-        <a href="{{path('flowber_group_galleries', {'id':circle.id})}}" class="btn btn-default">Retour aux galeries</a>
+        <a href="{{path('flowber_circle_galleries', {'id':circle.id, 'anchor':anchor})}}" class="btn btn-default">Retour aux galeries</a>
     </div>
 </div>
 

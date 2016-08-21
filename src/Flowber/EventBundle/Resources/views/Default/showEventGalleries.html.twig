@@ -3,6 +3,7 @@
 
 {% block stylesheets %}
     {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/event.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('assets/css/EventBundle/generic-event.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('assets/css/GalleryBundle/generic-gallery.css') }}"/> 
 {% endblock %}
@@ -26,12 +27,12 @@
     {% include 'FlowberEventBundle::partials/eventNavbar.html.twig' %}
    
     <!-- page -->
-        <div id="friends" class="user-profile-friends user-profile">
-            <div class="user-profile-category-row text-center">
-                <span class="user-profile-category-title">Galleries</span>
-            </div>
-            {% include 'FlowberGalleryBundle::partials/list-galleries.html.twig' %}
-        </div>
+    <div class="event-page-title-row text-center">
+        <span class="event-page-title">Galeries</span>
+    </div>
+    
+    <!-- Galleries list -->
+    {% include 'FlowberGalleryBundle::partials/list-galleries.html.twig' %}
    
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}

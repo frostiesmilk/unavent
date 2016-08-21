@@ -2,13 +2,17 @@
 
 namespace Flowber\ProfileBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Flowber\ProfileBundle\Form\ProfileType;
+use Flowber\GalleryBundle\Entity\Gallery;
 use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\PrivateMessageBundle\Form\PrivateMessageType;
 use Flowber\PrivateMessageBundle\Entity\PrivateMessage;
 use Flowber\GalleryBundle\Form\CoverPictureType;
+use Flowber\GalleryBundle\Form\GalleryType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\UserBundle\Form\EditUserType;
 
@@ -97,22 +101,69 @@ class ProfileController extends Controller
                     'userForm' => $userForm->createView(),
                     'profilePictureForm'=>$profilePictureForm->createView(),
                     'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),
-                    'coverPictureForm'=>$coverPictureForm->createView()));
+                    'coverPictureForm'=>$coverPictureForm->createView()
+                ));
     }
     
-    public function getUserProfileAction($circleId) 
+    public function getUserProfileAction(Request $request, $circleId) 
     {
+        // retrieve profile
+        $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
+        
+        // for private messages
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+        
+        // Retrieve profile galleries
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($circleId));
+        
+        // for adding new gallery in profile
+        $newGroupGallery = new Gallery();
+        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
+        
+        // post request
+        $newGalleryForm->handleRequest($request);        
+        if($newGalleryForm->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $circle->addGallery($newGroupGallery);
+            $em->persist($circle);
+            
+            try{
+                $em->flush();
+            } catch (Exception $ex) {
+
+            }
+            
+            $galleryId = $newGroupGallery->getId();
+            
+            return $this->redirect($this->generateUrl('flowber_profile_gallery', array('circleId' => $circleId, 'galleryId' => $galleryId)));
+        }
         
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(
                     'circle' => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
                     'friends' => $this->container->get('flowber_profile.profile')->getFriends($circleId),
+                    'galleries' => $galleries,
                     'groups' => $this->container->get('flowber_group.group')->getGroups($circleId),
                     'events' => $this->container->get('flowber_event.event')->getEvents($circleId),
                     'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),
-                    'messageForm' => $privateMessageForm->createView()
+                    'messageForm' => $privateMessageForm->createView(),
+                    'newGalleryForm' => $newGalleryForm->createView(),
                 ));
+    }
+    
+    public function getProfileGalleryAction($circleId, $galleryId){
+        //$privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+        $gallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
+        
+        return $this->render('FlowberProfileBundle:Default:profileGallery.html.twig',
+            array(
+                '_fragment' => "photos",
+                'circle'  => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
+                //'messageForm'   => $privateMessageForm->createView(),
+                'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
+                'gallery'       => $gallery
+            )
+        );
     }
     
     public function getCurrentUserProfileAction(){

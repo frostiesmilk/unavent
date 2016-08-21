@@ -3,14 +3,14 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/css/GalleryBundle/generic-gallery.css') }}"/> 
+    <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/profile.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/GalleryBundle/generic-gallery.css') }}"/>
 {% endblock %}
 
 {% block smallMenu %}
     {{parent()}}
     <!-- BEGIN small screen menu -->
-    {% include 'FlowberGroupBundle::partials/groupNavbarSmall.html.twig' %}
+    
     <!-- END small screen menu -->
 {% endblock %}
 
@@ -22,14 +22,10 @@
     <!-- Group Cover -->  
     {% include 'FlowberCircleBundle::partials/cover.html.twig' %}           
 
-    <!-- Second navbar -->
-    {% include 'FlowberGroupBundle::partials/groupNavbar.html.twig' %}
-    
     <!-- Galleries -->  
-    <div class="group-page-title-row text-center">
-        <span class="group-page-title">Galeries</span>
-    </div>
-    {% include 'FlowberGalleryBundle::partials/list-galleries.html.twig' %}
+    {# if needed add anchor for redirection #}
+    {% set anchor = "photos" %}
+    {% include 'FlowberGalleryBundle::partials/show-gallery.html.twig' %}
    
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}

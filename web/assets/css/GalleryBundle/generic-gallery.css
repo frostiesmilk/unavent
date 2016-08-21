@@ -111,7 +111,7 @@ body {
 }
 .galleries-list .gallery-thumbnail {
   border: none;
-  padding: 25px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
   background: none;
   margin-bottom: initial;
 }

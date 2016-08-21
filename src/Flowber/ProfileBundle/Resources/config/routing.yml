@@ -10,3 +10,13 @@ flowber_profile_current_user:
     path: /me
     defaults: { _controller: FlowberProfileBundle:Profile:getCurrentUserProfile }
     
+flowber_profile_galleries:
+    path:     /{id}
+    defaults: { _controller: FlowberProfileBundle:Profile:getUserProfile }
+    
+flowber_profile_gallery:
+    path:     /{circleId}/gallery/{galleryId}
+    defaults: { _controller: FlowberProfileBundle:Profile:getProfileGallery }
+    requirements:
+        circleId: \d+
+        galleryId: \d+

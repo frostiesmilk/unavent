@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Flowber\EventBundle\Entity\Event;
 use Flowber\EventBundle\Form\EventType;
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
@@ -160,14 +161,14 @@ class EventController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }   
         
-        $event = new \Flowber\EventBundle\Entity\Event;
+        $event = new Event();
         $eventForm = $this->createForm(new EventType, $event);
         
-        //preparing eventual new profile picture
+        //preparing optional new profile picture
         $profilePicture = new Photo();
         $profilePictureForm = $this->createForm(new ProfilePictureType, $profilePicture);
         
-        //preparing new cover picture
+        //preparing optional new cover picture
         $coverPicture = new Photo();
         $coverPictureForm = $this->createForm(new CoverPictureType, $coverPicture);
         

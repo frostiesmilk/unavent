@@ -8,6 +8,8 @@ use FOS\RestBundle\Util\Codes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
+
+use Flowber\GalleryBundle\Entity\Photo;
 use Flowber\PostBundle\Entity\Post;
 use Flowber\PostBundle\Form\PostType;
 use Flowber\PostBundle\Form\PostWithPicturesType;
@@ -16,6 +18,8 @@ use Flowber\PostBundle\Form\PostWithEventType;
 
 use Flowber\PostBundle\Entity\Comment;
 use Flowber\PostBundle\Form\CommentType;
+use Flowber\GalleryBundle\Form\CoverPictureType;
+use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Exception;
 use Flowber\CircleBundle\Entity\Subscribers;
 
@@ -169,10 +173,20 @@ class PostRestController extends Controller
         $post = new Post();
         $form = $this->createForm(new PostWithEventType(), $post);
         
+        //preparing optional new event profile picture
+        $eventProfilePicture = new Photo();
+        $eventProfilePictureForm = $this->createForm(new ProfilePictureType(), $eventProfilePicture);        
+        //preparing optional new event cover picture
+        $eventCoverPicture = new Photo();
+        $eventCoverPictureForm = $this->createForm(new CoverPictureType(), $eventCoverPicture);
+        
         $userProfile = $this->getUser()->getProfile();
         
          // if form has been submitted
+        $error = FALSE;
         $form->handleRequest($request);
+        $eventProfilePictureForm->handleRequest($request);
+        $eventCoverPictureForm->handleRequest($request);
         $postAttachmentView = "";
         if($form->isValid()){
             $em = $this->getDoctrine()->getManager();
@@ -182,9 +196,32 @@ class PostRestController extends Controller
             $post->setMessage($postEvent->getTitle());
             $post->setCreatedBy($userProfile);
             $post->setCircle($circle);
-            $circle->addEvent($postEvent);
-            
+            $circle->addEvent($postEvent);            
 
+            // processing profile picture form
+            if($eventProfilePictureForm->isValid()){
+                // profile picture was submitted
+                if($eventProfilePicture->getFile() !== null){
+                    $eventProfilePicture->addGallery($postEvent->getProfileGallery());
+                    $postEvent->setProfilePicture($eventProfilePicture);
+                    $em->persist($eventProfilePicture);
+                }
+            }else{
+                $error = true;
+            }
+            
+            // processing cover picture form
+            if($eventCoverPictureForm->isValid()){
+                // cover picture was submitted
+                if($eventCoverPicture->getFile() !== null){
+                    $eventCoverPicture->addGallery($postEvent->getCoverGallery());
+                    $postEvent->setCoverPicture($eventCoverPicture); 
+                    $em->persist($eventCoverPicture);
+                }
+            }else{
+                $error = true;
+            }
+            
             $em->persist($post);
             $em->persist($postEvent);  
             $em->persist($circle);
@@ -197,6 +234,7 @@ class PostRestController extends Controller
             }
             
             if(count($post->getAttachedEvent())>0){ // if there is a post attachment
+                // add Subscribers
                 $eventInfos = $this->container->get('flowber_event.event')->getEventInfos($post->getAttachedEvent()->getId(), $userProfile->getId());
                 $subscriber = new Subscribers();
                 $subscriber->setCircle($this->container->get("flowber_circle.circle")->getCircle($post->getAttachedEvent()->getId()));
@@ -223,8 +261,6 @@ class PostRestController extends Controller
             // render view to be sent with response
             $commentFormView = $this->renderView('FlowberPostBundle:partials:commentForm.html.twig', 
                     array("commentForm"=>$commentForm->createView()));
-            
-
 
             $repsData = array(  "status"=>"success", 
                                 "postId" => $post->getId(), 

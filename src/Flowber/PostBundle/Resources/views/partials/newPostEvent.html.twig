@@ -29,6 +29,18 @@
             <div class="col-sm-9">
                 {{form_widget(postWithEventForm.attachedEvent.categories)}}
             </div>
+        <div class="form-group row">
+            <label for="event-category" class="col-sm-3 control-label text-right">Photo de profil</label>
+            <div class="col-sm-9" style="margin-top:15px;">
+                {{form_widget(eventProfilePictureForm)}}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="event-category" class="col-sm-3 control-label text-right">Photo de couverture</label>
+            <div class="col-sm-9"  style="margin-top:10px;">
+                {{form_widget(eventCoverPictureForm)}}
+            </div>
+        </div>
         </div>             
         <div class="form-group row">
             <label for="event-description" class="col-sm-3 control-label text-right">Description</label>

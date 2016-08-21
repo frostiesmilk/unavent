@@ -1,29 +1,15 @@
-   <div id="events" class="user-profile-events user-profile">
-        
-            <div class="user-profile-category-row text-center">
-                <span class="user-profile-category-title">Mes évènements</span>
-            </div>
+<div id="events" class="user-profile-events user-profile">        
+     <div class="user-profile-category-row text-center">
+         <span class="user-profile-category-title">Mes évènements</span>
+     </div>
 
-            <div class="container user-profile-events-container">
-                <div class="row">
-                    {% for event in events %}
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                        {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
-                        </div>
-                    {%endfor%}
-                </div>
-            </div>
-        
-    </div>
-                                
-    <!-- My gallery -->   
-    <div id="photos" class="user-profile-gallery background-dark-blue user-profile">
-        <div class="user-profile-category-row  text-center">
-            <span class="user-profile-category-title font-white">Mes galeries</span>
-        </div>
-
-        <div class="container user-profile-gallery-container">
-            <span class="font-white"> Gallerie une</span>
-            <div id="links"></div>
-        </div>
-    </div>
+     <div class="container user-profile-events-container">
+         <div class="row">
+             {% for event in events %}
+                 <div class="col-md-3 col-sm-6 col-xs-12">
+                 {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
+                 </div>
+             {%endfor%}
+         </div>
+     </div>        
+ </div>
