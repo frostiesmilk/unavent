@@ -48,6 +48,7 @@ class GalleryManager extends BaseManager {
             //$photos[$count]['createdBy'] = $gal->getCreatedBy();
             $photos[$count]['creationDate'] = 'Le '.$gal->getCreationDate()->format('d/m/Y').' à '. $gal->getCreationDate()->format('H:i:s');
             $photos[$count]['photos'] = $this->getTwoPhotoWebPathFromGallery($this->getGalleryRepository()->find($gallery));
+            $photos[$count]['createdById'] = $gal->getCreatedBy()->getId();
             $count++;
         }
         

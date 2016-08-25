@@ -11,8 +11,8 @@
                 <img class="gallery-image-featured" src="{{asset(gallery.photos.0)}}" alt=""/>
             {% else %}
                 <img class="gallery-image-featured" src="{{asset(gallery.photos.0)}}" alt="" onmouseover="this.src='{{asset(gallery.photos.1)}}'" onmouseout="this.src='{{asset(gallery.photos.0)}}'"/>      
-            {% endif %}
-
+            {% endif %}            
+            <span class="gallery-image-frame-actions"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Supprimer l'image"></span></span>
         </a>
     </div>
     <div class="caption text-center ">

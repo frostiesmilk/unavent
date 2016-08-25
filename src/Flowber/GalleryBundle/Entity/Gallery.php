@@ -59,6 +59,12 @@ class Gallery
     private $creationDate;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\JoinColumn(name="created_by_circle_id", referencedColumnName="id")
+     */
+    private $createdBy;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -223,5 +229,28 @@ class Gallery
     public function setUploadedFiles($uploadedFiles)
     {
         $this->uploadedFiles = $uploadedFiles;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $createdBy
+     * @return Gallery
+     */
+    public function setCreatedBy(\Flowber\CircleBundle\Entity\Circle $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }

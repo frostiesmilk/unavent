@@ -41,8 +41,8 @@ class EventController extends Controller
         $postWithPicturesForm = $this->createForm(new PostWithPicturesType(), $postWithPictures);              
            
         // preparing new Gallery
-        $newGroupGallery = new Gallery();
-        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
+        $newEventGallery = new Gallery();
+        $newGalleryForm = $this->createForm(new GalleryType(), $newEventGallery);
         
         $request = $this->get('request');
         if ($request->getMethod() == 'POST'){
@@ -50,10 +50,13 @@ class EventController extends Controller
             
             if($newGalleryForm->isValid()){
                 $em = $this->getDoctrine()->getManager();
-                if(empty($newGroupGallery->getTitle())){
-                    $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
+                
+                $newEventGallery->setCreatedBy($user->getProfile());
+                
+                if(empty($newEventGallery->getTitle())){
+                    $newEventGallery->setTitle("Galerie du ".$newEventGallery->getCreationDate()->format('Y-m-d H:i'));
                 }
-                $circle->addGallery($newGroupGallery);
+                $circle->addGallery($newEventGallery);
                 
                 $em->persist($circle);
                 
@@ -61,7 +64,7 @@ class EventController extends Controller
                     $em->flush();  
                     return $this->redirect($this->generateUrl(
                         'flowber_event_gallery',
-                        array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
+                        array('circleId' => $circle->getId(), 'galleryId' =>$newEventGallery->getId())
                     ));
                 } catch (Exception $ex) {
 

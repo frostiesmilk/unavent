@@ -118,8 +118,20 @@ class PostRestController extends Controller
         if($form->isValid()){
             $em = $this->getDoctrine()->getManager();
             
-            $post->setCreatedBy($this->getUser()->getProfile());
-            $post->setCircle($circle);                
+            $userProfile = $this->getUser()->getProfile();
+            
+            $hasGallery = false;
+            $uploadedFiles = $post->getGallery()->getUploadedFiles();
+            if($uploadedFiles[0]==null){ // no gallery
+                $post->setGallery(null);
+            }else{
+                $postGallery = $post->getGallery();
+                $postGallery->setCreatedBy($userProfile);
+                $hasGallery = true;
+            }
+            
+            $post->setCreatedBy($userProfile);
+            $post->setCircle($circle);    
             $em->persist($post);  
             
             try{
@@ -129,10 +141,9 @@ class PostRestController extends Controller
                 return $repsData;
             }
             
-            if(count($post->getGallery()->getPhotos())<1){ // no gallery
-                $post->setGallery(null);
-            }else{ // prepare gallery view
-                $postGalleryView = $this->createPostGalleryView($post->getGallery()->getId());
+            if($hasGallery){ // there's supposed to be a gallery = prepare galleryView
+                $postGallery = $post->getGallery();
+                $postGalleryView = $this->createPostGalleryView($postGallery->getId());// prepare gallery view
             }
             
             // create new comment form

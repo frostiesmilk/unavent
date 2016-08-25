@@ -55,6 +55,9 @@ class GroupController extends Controller
             
             if($newGalleryForm->isValid()){
                 $em = $this->getDoctrine()->getManager();
+                
+                $newGroupGallery->setCreatedBy($user->getProfile());
+                
                 if(empty($newGroupGallery->getTitle())){
                     $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
                 }
