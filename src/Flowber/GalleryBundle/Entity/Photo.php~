@@ -72,6 +72,12 @@ class Photo
     private $size;    
     
     /**
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\JoinColumn(name="created_by_circle_id", referencedColumnName="id")
+     */
+    private $createdBy;
+    
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")

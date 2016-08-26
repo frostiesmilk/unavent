@@ -230,4 +230,27 @@ class Gallery
     {
         $this->uploadedFiles = $uploadedFiles;
     }
+
+    /**
+     * Set createdBy
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $createdBy
+     * @return Gallery
+     */
+    public function setCreatedBy(\Flowber\CircleBundle\Entity\Circle $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
 }

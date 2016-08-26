@@ -51,7 +51,7 @@ class EventController extends Controller
             if($newGalleryForm->isValid()){
                 $em = $this->getDoctrine()->getManager();
                 
-                $newEventGallery->setCreatedBy($user->getProfile());
+                $newEventGallery->setCreatedBy($user->getProfile()); // it will set the same creator for the photos
                 
                 if(empty($newEventGallery->getTitle())){
                     $newEventGallery->setTitle("Galerie du ".$newEventGallery->getCreationDate()->format('Y-m-d H:i'));

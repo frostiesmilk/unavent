@@ -72,6 +72,12 @@ class Photo
     private $size;    
     
     /**
+     * @ORM\ManyToOne(targetEntity="Flowber\CircleBundle\Entity\Circle")
+     * @ORM\JoinColumn(name="created_by_circle_id", referencedColumnName="id")
+     */
+    private $createdBy;
+    
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
@@ -233,6 +239,7 @@ class Photo
             $this->alt = $this->file->getClientOriginalName();
             $this->extension = $this->getFile()->guessExtension();
             $this->path = $filename.'.'.$this->getFile()->guessExtension();
+            $this->size = $this->getFile()->getClientSize();
         }
    }  
         
@@ -421,5 +428,28 @@ class Photo
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \Flowber\CircleBundle\Entity\Circle $createdBy
+     * @return Photo
+     */
+    public function setCreatedBy(\Flowber\CircleBundle\Entity\Circle $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Flowber\CircleBundle\Entity\Circle 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }

@@ -141,8 +141,18 @@ class PostRestController extends Controller
                 return $repsData;
             }
             
-            if($hasGallery){ // there's supposed to be a gallery = prepare galleryView
-                $postGallery = $post->getGallery();
+            if($hasGallery){ // there's supposed to be a gallery = prepare galleryView & define createdBy
+//                $em->refresh($postGallery);
+//                $postGallery = $post->getGallery();
+//                $galleryPhotos = $postGallery->getPhotos();
+//                foreach($galleryPhotos AS $photo){ // define createdBy
+//                    $photo->setCreatedBy($userProfile);
+////                    $em->persist($photo);
+//                }
+//                
+//                
+//                $em->persist($postGallery);
+//                $em->flush(); // save
                 $postGalleryView = $this->createPostGalleryView($postGallery->getId());// prepare gallery view
             }
             

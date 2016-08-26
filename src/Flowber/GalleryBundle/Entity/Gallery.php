@@ -83,6 +83,7 @@ class Gallery
         {
             if ($uploadedFile) {
                 $photo = new Photo();
+                $photo->setCreatedBy($this->getCreatedBy());
                 $photo->setTheFile($uploadedFile);                
                 $this->getPhotos()->add($photo);
                 $photo->addGallery($this);

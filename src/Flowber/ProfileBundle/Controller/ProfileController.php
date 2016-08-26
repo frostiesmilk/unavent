@@ -24,7 +24,8 @@ class ProfileController extends Controller
      * @throws AccessDeniedException
      */
     public function getEditProfileAction($circleId) {
-        $user = $this->getUser();        
+        $user = $this->getUser();
+        $profileCircle = $user->getProfile();
         $error = false; // detect error while processing forms
         
         if (!is_object($user)) {
@@ -37,10 +38,12 @@ class ProfileController extends Controller
         
         //preparing eventual new profile picture
         $profilePicture = new Photo();
+        $profilePicture->setCreatedBy($profileCircle);
         $profilePictureForm = $this->createForm(new ProfilePictureType, $profilePicture);
         
         //preparing new cover picture
         $coverPicture = new Photo();
+        $coverPicture->setCreatedBy($profileCircle);
         $coverPictureForm = $this->createForm(new CoverPictureType, $coverPicture);
      
         $userForm = $this->createForm(new EditUserType, $user);
