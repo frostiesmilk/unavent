@@ -134,6 +134,9 @@ body {
   position: absolute;
   bottom: 0px;
 }
+.galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-frame-actions .gallery-image-frame-actions-delete {
+  cursor: pointer;
+}
 .galleries-list .gallery-thumbnail .gallery-name-frame {
   padding: 1px;
 }
@@ -184,6 +187,21 @@ body {
   background-repeat: no-repeat;
   height: 200px;
   width: 100%;
+  cursor: pointer;
+  display: block;
+  position: relative;
+}
+.gallery-image-list .gallery-image-preview-frame .gallery-image-preview .gallery-image-frame-actions {
+  color: white;
+  background: rgba(0, 0, 0, 0.52) none repeat scroll 0% 0%;
+  width: 100%;
+  left: 0px;
+  text-align: center;
+  height: 19px;
+  position: absolute;
+  bottom: 0px;
+}
+.gallery-image-list .gallery-image-preview-frame .gallery-image-preview .gallery-image-frame-actions .gallery-image-frame-actions-delete {
   cursor: pointer;
 }
 .slide-image {

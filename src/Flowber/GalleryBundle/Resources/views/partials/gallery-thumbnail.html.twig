@@ -1,5 +1,5 @@
 {# FlowberGalleryBundle::partials/gallery-thumbnail.html.twig #}
-<div class="thumbnail gallery-thumbnail">
+<div id="gallery-{{gallery.id}}" class="thumbnail gallery-thumbnail">
     <div class="caption gallery-name-frame" style="color:black">
         <a tabindex="-1" href="{{ path('flowber_circle_gallery', {'circleId' : circle.id, 'galleryId' : gallery.id}) }}" title="voir la galerie {{gallery.title}}">
             <h3 class="gallery-name">{{gallery.title}}</h3>
@@ -12,8 +12,14 @@
             {% else %}
                 <img class="gallery-image-featured" src="{{asset(gallery.photos.0)}}" alt="" onmouseover="this.src='{{asset(gallery.photos.1)}}'" onmouseout="this.src='{{asset(gallery.photos.0)}}'"/>      
             {% endif %}            
-            <span class="gallery-image-frame-actions"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Supprimer l'image"></span></span>
+            
         </a>
+            {% if gallery.canDelete %}
+                <span class="gallery-image-frame-actions" name="deleteGalleryButton" data-toggle="modal" data-target="#modal-delete-gallery">
+                    <span class="glyphicon glyphicon-trash gallery-image-frame-actions-delete" data-toggle="tooltip" data-placement="top" title="Supprimer la galerie" ></span>
+                    <input type="hidden" name="delete-gallery-id" value="{{gallery.id}}"/>  
+                </span>
+            {% endif %}
     </div>
     <div class="caption text-center ">
         <p class="gallery-description">

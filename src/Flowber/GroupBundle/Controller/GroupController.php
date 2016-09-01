@@ -312,9 +312,11 @@ class GroupController extends Controller
         
         if(!is_object($circle)){
             return false;
-        }    
+        }   
         
-        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id));
+        $userProfile = $this->getUser()->getProfile();
+        
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id), $userProfile);
         $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
         //die(var_dump($galleries));
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);

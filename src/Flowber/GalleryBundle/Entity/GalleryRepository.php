@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 use Flowber\CircleBundle\Entity\Circle;
+use Flowber\GalleryBundle\Entity\Gallery;
 
 /**
  * GalleryRepository
@@ -22,9 +23,10 @@ class GalleryRepository extends EntityRepository
      */
     public function getGalleriesIdsFromCircle(Circle $circle){     
         
-        $sql = 'SELECT gallery_id '
-                . 'FROM circle_gallery '
-                . 'WHERE circle_id = :circleId';
+        $sql = 'SELECT cg.gallery_id '
+                . 'FROM circle_gallery cg '
+                . 'WHERE circle_id = :circleId '
+                . 'AND cg.gallery_id IN (SELECT g.id FROM gallery g WHERE g.deleted=0) ';
 
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('gallery_id', 'id');
@@ -40,5 +42,20 @@ class GalleryRepository extends EntityRepository
         }
         
         return $result;
+    }
+    
+    public function setDeleted(Gallery $gallery, $choice){
+        $galleryId = $gallery->getId();
+        
+        $qb = $this->_em->createQueryBuilder();
+        
+        $query = $qb->update('FlowberGalleryBundle:Gallery', 'a')
+            ->set('a.deleted', '?1')
+            ->where('a.id = :id')
+            ->setParameter('id', $galleryId)
+            ->setParameter(1, $choice)
+            ->getQuery();
+        
+        return $query->execute();
     }
 }

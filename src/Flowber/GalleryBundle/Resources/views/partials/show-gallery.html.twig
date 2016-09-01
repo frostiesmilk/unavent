@@ -13,9 +13,13 @@
     </div>
     <div class="row gallery-image-list">            
         {% for photo in gallery.photos %}
-        <div class="col-xs-2 gallery-image-preview-frame">
+        <div class="col-xs-6 col-md-3 gallery-image-preview-frame">
             <div class="gallery-image-preview" style="background-image:url('{{asset(photo.getWebPath())}}');"
                 onclick="afficheGallery(this);" data-toggle="modal" data-target="#myModal">
+                <span class="gallery-image-frame-actions" name="deletePhotoButton" data-toggle="modal" data-target="#modal-delete-photo">
+                    <span class="glyphicon glyphicon-trash gallery-image-frame-actions-delete" data-toggle="tooltip" data-placement="top" title="Supprimer la photo" ></span>
+                    <input type="hidden" name="delete-photo-id" value="{{photo.id}}"/>  
+                </span>
             </div>
         </div>
         {% endfor %}

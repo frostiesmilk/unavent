@@ -4,6 +4,7 @@ namespace Flowber\GalleryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Flowber\CircleBundle\Entity\Circle;
 use Flowber\GalleryBundle\Entity\Photo;
 
 /**
@@ -14,7 +15,7 @@ use Flowber\GalleryBundle\Entity\Photo;
  * @ORM\HasLifecycleCallbacks
  */
 class Gallery
-{
+{    
     /**
      * @var integer
      *
@@ -41,7 +42,7 @@ class Gallery
     /**
      * @var Flowber\GalleryBundle\Entity\Photo
      * 
-     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", mappedBy="galleries", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", mappedBy="galleries", cascade={"persist"}, orphanRemoval=true)
      */
     private $photos;
 
@@ -65,6 +66,14 @@ class Gallery
     private $createdBy;
     
     /**
+     *
+     * @var boolean 
+     * 
+     * @ORM\Column(name="deleted", type="boolean", nullable=false)
+     */
+    private $deleted;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -72,6 +81,7 @@ class Gallery
         $this->photos = new ArrayCollection();
         $this->uploadedFiles = new ArrayCollection();
         $this->creationDate = new \Datetime();
+        $this->deleted = false;
     }
 
     /**
@@ -146,29 +156,6 @@ class Gallery
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set photos
-     *
-     * @param string $photos
-     * @return Gallery
-     */
-    public function setPhotos($photos)
-    {
-        $this->photos = $photos;
-
-        return $this;
-    }
-
-    /**
-     * Get photos
-     *
-     * @return string 
-     */
-    public function getPhotos()
-    {
-        return $this->photos;
     }
 
     /**
@@ -253,5 +240,48 @@ class Gallery
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+    
+    /**
+     * Can the Circle delete this Gallery
+     * 
+     * @param Circle $circle
+     * @return boolean
+     */
+    public function canDelete(Circle $circle){
+        return $circle == $this->getCreatedBy();
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     * @return Gallery
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean 
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
     }
 }

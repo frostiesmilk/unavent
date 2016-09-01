@@ -11,6 +11,7 @@ namespace Flowber\GalleryBundle\Manager;
 use Doctrine\ORM\EntityManager;
 
 use Flowber\FrontOfficeBundle\Entity\BaseManager;
+use Flowber\CircleBundle\Entity\Circle;
 use Flowber\GalleryBundle\Entity\Gallery;
 
 /**
@@ -31,7 +32,7 @@ class GalleryManager extends BaseManager {
      * @param Circle $circleId
      * @return array of photos webpaths
      */
-    public function getGalleries($circleId){
+    public function getGalleries($circleId, Circle $requesterCircle){
         $galleries = $this->getGalleryRepository()->getGalleriesIdsFromCircle($circleId);
         $photos = [];
         $count = 0;
@@ -49,6 +50,7 @@ class GalleryManager extends BaseManager {
             $photos[$count]['creationDate'] = 'Le '.$gal->getCreationDate()->format('d/m/Y').' à '. $gal->getCreationDate()->format('H:i:s');
             $photos[$count]['photos'] = $this->getTwoPhotoWebPathFromGallery($this->getGalleryRepository()->find($gallery));
             $photos[$count]['createdById'] = $gal->getCreatedBy()->getId();
+            $photos[$count]['canDelete'] = $gal->canDelete($requesterCircle);
             $count++;
         }
         
@@ -101,6 +103,10 @@ class GalleryManager extends BaseManager {
         $webPaths[] = 'non';
         return $webPaths;        
     }   
+    
+    public function setDeleted(Gallery $gallery, $choice){
+        $this->getGalleryRepository()->setDeleted($gallery, $choice);
+    }
     
     public function getGalleryRepository()
     {

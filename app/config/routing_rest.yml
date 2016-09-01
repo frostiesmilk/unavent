@@ -18,6 +18,10 @@ rest_private_message :
 rest_circle : 
   type : rest
   resource: "@FlowberCircleBundle/Resources/config/routing_rest.yml"
+
+rest_gallery : 
+  type : rest
+  resource: "@FlowberGalleryBundle/Resources/config/routing_rest.yml"
   
 rest_profile : 
   type : rest

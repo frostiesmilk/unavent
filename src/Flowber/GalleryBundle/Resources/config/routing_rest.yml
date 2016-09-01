@@ -1,0 +1,7 @@
+#src/Flowber/GalleryBundle/Resources/config/routing_rest.yml
+gallery : 
+    type: rest
+    resource:     "FlowberGalleryBundle:GalleryRest"
+    name_prefix:  api_
+    options:
+        expose: true

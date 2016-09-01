@@ -5,6 +5,7 @@ namespace Flowber\GalleryBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile as UploadedFile;
+use Flowber\CircleBundle\Entity\Circle;
 
 /**
  * Photo
@@ -95,12 +96,21 @@ class Photo
     private $galleries;
     
     /**
+     *
+     * @var boolean 
+     * 
+     * @ORM\Column(name="deleted", type="boolean", nullable=false)
+     */
+    private $deleted;
+    
+    /**
      * @param UploadedFile $uploadedFile
      */
     public function __construct()
     {
         $this->galleries = new ArrayCollection();
         $this->creationDate = new \Datetime();
+        $this->deleted = false;
     }
     
     /**
@@ -451,5 +461,38 @@ class Photo
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+    
+    /**
+     * Can the Circle delete this Gallery
+     * 
+     * @param Circle $circle
+     * @return boolean
+     */
+    public function canDelete(Circle $circle){
+        return $circle == $this->getCreatedBy();
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     * @return Photo
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean 
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
     }
 }
