@@ -10,19 +10,19 @@ function afficheGallery(myDiv) {
     var src=myDiv.src;
 //    document.getElementById("imageSlide").src=src.split('"')[1];
     document.getElementById("imageSlide").src=src;//('"')[1];
-    var parent= myDiv.parentNode;
+    var parent= myDiv.parentNode.parentNode.parentNode;
         
     document.getElementById("nextPic").onclick = function() {
         if(parent.nextElementSibling == null){
-            nextImage(parent.parentNode.firstElementChild);
+            nextImage(parent.parentNode.firstElementChild.firstElementChild.firstElementChild);
         }	
-        nextImage(parent.nextElementSibling);
+        nextImage(parent.nextElementSibling.firstElementChild.firstElementChild);
     };
 
     document.getElementById("previousPic").onclick = function() {
         if(parent.previousElementSibling == null){
-            previousImage(parent.parentNode.lastElementChild);
+            previousImage(parent.parentNode.lastElementChild.firstElementChild.firstElementChild);
         }	
-        previousImage(parent.previousElementSibling);
+        previousImage(parent.previousElementSibling.firstElementChild.firstElementChild);
     };   
 }

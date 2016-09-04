@@ -39,19 +39,22 @@ class GalleryManager extends BaseManager {
         foreach ($galleries as $gallery){
             $gal = $this->getGalleryRepository()->find($gallery);
             
-            if (strlen ( $gal->getTitle() ) >=26 ){
-                $photos[$count]['title'] = substr($gal->getTitle(), 0, 25).' ...';
-            } else {
-                $photos[$count]['title'] = $gal->getTitle();
-            }  
-            $photos[$count]['id'] = $gallery;
-            $photos[$count]['description'] = $gal->getDescription();
-            //$photos[$count]['createdBy'] = $gal->getCreatedBy();
-            $photos[$count]['creationDate'] = 'Le '.$gal->getCreationDate()->format('d/m/Y').' à '. $gal->getCreationDate()->format('H:i:s');
-            $photos[$count]['photos'] = $this->getTwoPhotoWebPathFromGallery($this->getGalleryRepository()->find($gallery));
-            $photos[$count]['createdById'] = $gal->getCreatedBy()->getId();
-            $photos[$count]['canDelete'] = $gal->canDelete($requesterCircle);
-            $count++;
+            // prevent error if gallery has no photo
+            if(count($gal->getPhotos())>0){
+                if (strlen ( $gal->getTitle() ) >=26 ){
+                    $photos[$count]['title'] = substr($gal->getTitle(), 0, 25).' ...';
+                } else {
+                    $photos[$count]['title'] = $gal->getTitle();
+                }  
+                $photos[$count]['id'] = $gallery;
+                $photos[$count]['description'] = $gal->getDescription();
+                //$photos[$count]['createdBy'] = $gal->getCreatedBy();
+                $photos[$count]['creationDate'] = 'Le '.$gal->getCreationDate()->format('d/m/Y').' à '. $gal->getCreationDate()->format('H:i:s');
+                $photos[$count]['photos'] = $this->getTwoPhotoWebPathFromGallery($this->getGalleryRepository()->find($gallery));
+                $photos[$count]['createdById'] = $gal->getCreatedBy()->getId();
+                $photos[$count]['canDelete'] = $gal->canDelete($requesterCircle);
+                $count++;
+            }
         }
         
         return $photos;        
@@ -101,7 +104,7 @@ class GalleryManager extends BaseManager {
             }
         }
         $webPaths[] = 'non';
-        return $webPaths;        
+        return $webPaths;     
     }   
     
     public function setDeleted(Gallery $gallery, $choice){

@@ -39,9 +39,11 @@ function submitDeleteGallery(){
     });
 }
 
-function formDeletePhoto(){
-    $("body").on("click","span[name='trigger-delete-photo-form']", function(e) {
+function formDeletePhoto(){console.log("hsdfola");
+    $("body").on("click","span[name=trigger-delete-photo-form]", function(e) {
         e.preventDefault();
+        console.log("hola");
+        console.log($(this).parent().find("form[name=delete-photo-form]").html());
         
         $(this).parent().find("form[name=delete-photo-form]").attr("style", "input: inline-block;");
         
@@ -81,6 +83,6 @@ function submitDeletePhoto(){
 $(function() {
     modalDeleteGallery();
     submitDeleteGallery();
-    formDeletePhoto();
+    formDeletePhoto();console.log("hsdfsdfola");
     submitDeletePhoto();
 });
