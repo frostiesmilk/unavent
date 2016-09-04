@@ -50,4 +50,39 @@ class GalleryRestController extends Controller
         
         return "Error: Delete Gallery";
     }
+    
+    public function deletePhotoAction($photoId){
+        $photo = $this->getDoctrine()->getRepository('FlowberGalleryBundle:Photo')->find($photoId);
+        
+        // preparing response
+        $view = new ResponseView();
+
+        if(!is_object($photo)){
+            $repsData = array("message" => "Photo not found");
+            $view->setData($repsData)->setStatusCode(400); // error
+            return $view;
+        }
+
+        $currentUserProfile = $this->getUser()->getProfile();
+        if($currentUserProfile == $photo->getCreatedBy()){ // checking if allowed to delete post (by author)
+
+            $this->container->get("flowber_gallery.photo")->setDeleted($photo, true);
+            
+            
+            try{
+
+                
+            } catch (Exception $ex) {
+                $repsData = array("message" => "flush error");
+                $view->setData($repsData)->setStatusCode(400); // error
+                return $view;
+            }
+            
+            $repsData = array("message" => "Success: Delete Photo");
+                $view->setData($repsData)->setStatusCode(200); // Success
+                return $view;
+        }
+        
+        return "Error: Delete Photo";
+    }
 }

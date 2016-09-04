@@ -179,19 +179,22 @@ body {
   padding-bottom: 20px;
 }
 .gallery-image-list .gallery-image-preview-frame {
-  padding: 5px;
-}
-.gallery-image-list .gallery-image-preview-frame .gallery-image-preview {
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 200px;
-  width: 100%;
-  cursor: pointer;
   display: block;
   position: relative;
 }
-.gallery-image-list .gallery-image-preview-frame .gallery-image-preview .gallery-image-frame-actions {
+.gallery-image-list .gallery-image-preview-frame .gallery-image-preview {
+  /*            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 200px;
+            width: 100%;
+            cursor: pointer;
+            display: block;
+            position: relative;*/
+  width: 100%;
+  height: 200px;
+}
+.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions {
   color: white;
   background: rgba(0, 0, 0, 0.52) none repeat scroll 0% 0%;
   width: 100%;
@@ -201,8 +204,14 @@ body {
   position: absolute;
   bottom: 0px;
 }
-.gallery-image-list .gallery-image-preview-frame .gallery-image-preview .gallery-image-frame-actions .gallery-image-frame-actions-delete {
+.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions .gallery-image-frame-actions-delete {
   cursor: pointer;
+}
+.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions form {
+  /*display: inline-block;*/
+}
+.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions form .delete-photo-form-confirm {
+  color: white;
 }
 .slide-image {
   image-orientation: from-image;

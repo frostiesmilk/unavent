@@ -4,6 +4,8 @@ namespace Flowber\GalleryBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+use Flowber\GalleryBundle\Entity\Photo;
+
 /**
  * PhotoRepository
  *
@@ -12,4 +14,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class PhotoRepository extends EntityRepository
 {
+    public function setDeleted(Photo $photo, $choice){
+        $photoId = $photo->getId();
+        
+        $qb = $this->_em->createQueryBuilder();
+        
+        $query = $qb->update('FlowberGalleryBundle:Photo', 'a')
+            ->set('a.deleted', '?1')
+            ->where('a.id = :id')
+            ->setParameter('id', $photoId)
+            ->setParameter(1, $choice)
+            ->getQuery();
+        
+        return $query->execute();
+    }
 }

@@ -6,8 +6,10 @@ function previousImage(parent){
     afficheGallery(parent.firstElementChild);
 }
 function afficheGallery(myDiv) {
-    var src=myDiv.style.backgroundImage; 
-    document.getElementById("imageSlide").src=src.split('"')[1];
+//    var src=myDiv.style.backgroundImage; 
+    var src=myDiv.src;
+//    document.getElementById("imageSlide").src=src.split('"')[1];
+    document.getElementById("imageSlide").src=src;//('"')[1];
     var parent= myDiv.parentNode;
         
     document.getElementById("nextPic").onclick = function() {

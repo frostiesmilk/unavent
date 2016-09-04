@@ -13,14 +13,23 @@
     </div>
     <div class="row gallery-image-list">            
         {% for photo in gallery.photos %}
-        <div class="col-xs-6 col-md-3 gallery-image-preview-frame">
-            <div class="gallery-image-preview" style="background-image:url('{{asset(photo.getWebPath())}}');"
+        <div class="col-xs-6 col-md-3 ">
+            <!--<div class="gallery-image-preview" style="background-image:url('{{asset(photo.getWebPath())}}');"
                 onclick="afficheGallery(this);" data-toggle="modal" data-target="#myModal">
+                
+            </div>-->
+            <div class="thumbnail"  >
+            <div class="gallery-image-preview-frame"  >
+                <img onclick="afficheGallery(this);" data-toggle="modal" data-target="#myModal" class="gallery-image-preview" src="{{asset(photo.getWebPath())}}" alt=""/>
                 <span class="gallery-image-frame-actions" name="deletePhotoButton" data-toggle="modal" data-target="#modal-delete-photo">
-                    <span class="glyphicon glyphicon-trash gallery-image-frame-actions-delete" data-toggle="tooltip" data-placement="top" title="Supprimer la photo" ></span>
-                    <input type="hidden" name="delete-photo-id" value="{{photo.id}}"/>  
+                    <span name="trigger-delete-photo-form" class="glyphicon glyphicon-trash gallery-image-frame-actions-delete" data-toggle="tooltip" data-placement="top" title="Supprimer la photo" ></span>
+                    <form hidden="hidden" name="delete-photo-form"><a type="submit" class="delete-photo-form-confirm">Supprimer</a><span name="cancel-delete-photo-form"> | Annuler</span>
+                        <input type="hidden" name="delete-photo-id" value="{{photo.id}}"/> 
+                    </form>                     
                 </span>
             </div>
+            </div>
+                
         </div>
         {% endfor %}
     </div>
@@ -49,4 +58,4 @@
 </div>
 
 
-<script src="{{ asset('assets/js/GalleryBundle/gallery.js') }}"></script>
+
