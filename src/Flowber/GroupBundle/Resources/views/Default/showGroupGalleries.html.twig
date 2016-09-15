@@ -30,6 +30,10 @@
         <span class="group-page-title">Galeries</span>
     </div>
     {% include 'FlowberGalleryBundle::partials/list-galleries.html.twig' %}
+    <!-- Galleries modals -->
+    {% include 'FlowberGalleryBundle::partials/modalAddGallery.html.twig' %}
+    {% include 'FlowberGalleryBundle::partials/modalDeleteGallery.html.twig' %}
+    <!-- End Galleries modals --> 
    
     <!-- footer -->                  
     {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
@@ -40,4 +44,5 @@
     {{parent()}}
     {# Put specific JS below #}
     <script src="{{asset('assets/js/GalleryBundle/genericGallery.js')}}"></script>
+    <script src="{{asset('assets/js/GalleryBundle/gallery.js')}}"></script>
 {% endblock %}

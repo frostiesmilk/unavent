@@ -32,15 +32,15 @@ class GalleryManager extends BaseManager {
      * @param Circle $circleId
      * @return array of photos webpaths
      */
-    public function getGalleries($circleId, Circle $requesterCircle){
-        $galleries = $this->getGalleryRepository()->getGalleriesIdsFromCircle($circleId);
+    public function getGalleries($galleriesCircle, Circle $requesterCircle){
+        $galleries = $this->getGalleryRepository()->getGalleriesIdsFromCircle($galleriesCircle);
         $photos = [];
         $count = 0;
         foreach ($galleries as $gallery){
             $gal = $this->getGalleryRepository()->find($gallery);
             
-            // prevent error if gallery has no photo
-            if(count($gal->getPhotos())>0){
+            // prevent error if gallery has no photo OR not deleted
+            if(count($gal->getPhotos())>0 || !$gal->isDelete()){
                 if (strlen ( $gal->getTitle() ) >=26 ){
                     $photos[$count]['title'] = substr($gal->getTitle(), 0, 25).' ...';
                 } else {

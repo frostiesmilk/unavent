@@ -42,7 +42,7 @@ class Gallery
     /**
      * @var Flowber\GalleryBundle\Entity\Photo
      * 
-     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", mappedBy="galleries", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Flowber\GalleryBundle\Entity\Photo", mappedBy="galleries", cascade={"persist"}, orphanRemoval=true)
      */
     private $photos;
 
@@ -72,6 +72,13 @@ class Gallery
      * @ORM\Column(name="deleted", type="boolean", nullable=false)
      */
     private $deleted;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleteDate", type="datetime", nullable=true)
+     */
+    private $deleteDate;
     
     /**
      * Constructor
@@ -260,5 +267,28 @@ class Gallery
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     * @return Gallery
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean 
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
     }
 }

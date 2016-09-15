@@ -1,5 +1,8 @@
 <div class="container galleries-list" >
     <div class="row">
+        <div class="col-md-3 col-xs-12 text-center">
+            <button class="btn btn-default" data-toggle="modal" data-target="#addGalleryModal"><span class="glyphicon glyphicon-picture"></span> Ajouter une galerie</button>
+        </div>
         {% for gallery in galleries %}
             <div class="col-md-3 col-xs-6">
                 {% include 'FlowberGalleryBundle::partials/gallery-thumbnail.html.twig' %}
@@ -8,7 +11,7 @@
     </div>
 </div>
     
-{% include 'FlowberGalleryBundle::partials/modalDeleteGallery.html.twig' %}    
+  
     
 <!--<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg">
@@ -28,6 +31,3 @@
         </div>
     </div>
 </div>-->
-
-
-<script src="{{ asset('assets/js/GalleryBundle/gallery.js') }}"></script>

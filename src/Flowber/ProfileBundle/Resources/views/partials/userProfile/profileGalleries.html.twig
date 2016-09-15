@@ -1,5 +1,4 @@
 {# empty Twig template #}
-{% form_theme newGalleryForm 'bootstrap_3_layout.html.twig' %}
 
 <div id="photos" class="user-profile-gallery background-dark-blue user-profile">
     <div class="container">
@@ -25,37 +24,7 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="addGalleryModal" tabindex="-1" role="dialog" aria-labelledby="addGalleryModalLabel">
-    <div class="modal-dialog" role="document">
-        {{form_start(newGalleryForm)}}
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="addGalleryModalLabel">Créer une nouvelle galerie</h4>
-            </div>
-            <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Titre de la galerie</label>
-                    {{form_widget(newGalleryForm.title, {'value': "Galerie du "~'now'|date('d/m/Y')})}}
-                    {#{form_widget(newGalleryForm.title)}#}
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    {{form_widget(newGalleryForm.description)}}
-                </div>
-                <div class="form-group">
-                    <label>Sélectionner les photos</label>
-                    {{form_widget(newGalleryForm.uploadedFiles)}}
-                </div>
-            </div>
-            <div class="modal-footer">
-                {{form_rest(newGalleryForm)}}
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <button type="submit" class="btn btn-primary btn-red">Valider</button>
-            </div>
-        </div>
-        {{form_end(newGalleryForm)}}
-    </div>
-</div>
+<!-- Galleries modals -->
+{% include 'FlowberGalleryBundle::partials/modalAddGallery.html.twig' %}
+{% include 'FlowberGalleryBundle::partials/modalDeleteGallery.html.twig' %}
+<!-- End Galleries modals -->

@@ -39,50 +39,47 @@ function submitDeleteGallery(){
     });
 }
 
-function formDeletePhoto(){console.log("hsdfola");
+function formDeletePhoto(){
+    // open options
     $("body").on("click","span[name=trigger-delete-photo-form]", function(e) {
+        e.preventDefault();        
+        $(this).parent().find("form[name=delete-photo-form]").attr("style", "display: inline-block;");
+    });
+    
+    // cancel delete options
+    $("body").on("click",".cancel-delete-photo-form", function(e) {
         e.preventDefault();
-        console.log("hola");
-        console.log($(this).parent().find("form[name=delete-photo-form]").html());
-        
-        $(this).parent().find("form[name=delete-photo-form]").attr("style", "input: inline-block;");
-        
-//        var galleryId = $( this ).find("input[name=delete-gallery-id]").val() ;
-//
-//        $("#delete-gallery-form").attr('action', Routing.generate('api_delete_gallery', {galleryId: galleryId}));
-//        $("#delete-gallery-id").val(galleryId);
+        $(this).parent().attr("style", "display: none;");
     });
 }
 
 function submitDeletePhoto(){
     // Lorsque je soumets le formulaire
-    $('#delete-gallery-form').on('submit', function(e) {
+    $("form[name='delete-photo-form']").on('submit', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
  
         var $this = $(this); // L'objet jQuery du formulaire
-        var galleryId = $this.find("#delete-gallery-id").val();
-
+        var photoId = $this.find("input[name='delete-photo-id']").val();
+        
         $.ajax({
             url: $this.attr('action'),
             type: $this.attr('method'),
             data: $this.serialize(),
             //dataType: 'json', // JSON
             error: function(json){
-                alert("Error gallery delete. Please contact the site administrator.");
+                alert("Error photo delete. Please contact the site administrator.");
             }
         }).done(function(data, textStatus, jqXHR){
             console.log(data);
         });
         
-        var elem = document.getElementById('gallery-'+galleryId);
-        elem.parentNode.removeChild(elem); // delete post from view
-        $('#modal-delete-gallery').modal("hide");// close modal
+        document.getElementById('photo-'+photoId).remove(); // delete photo from view
     });
 }
 
 $(function() {
     modalDeleteGallery();
     submitDeleteGallery();
-    formDeletePhoto();console.log("hsdfsdfola");
+    formDeletePhoto();
     submitDeletePhoto();
 });

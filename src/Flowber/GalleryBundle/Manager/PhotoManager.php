@@ -26,10 +26,9 @@ class PhotoManager extends BaseManager {
     {
         $this->em = $em;
     }    
-
         
     public function setDeleted(Photo $photo, $choice){
-        $this->getGalleryRepository()->setDeleted($photo, $choice);
+        $this->getPhotoRepository()->setDeleted($photo, $choice);
     }
     
     public function getPhotoRepository()

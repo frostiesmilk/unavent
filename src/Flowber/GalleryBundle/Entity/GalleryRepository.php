@@ -49,10 +49,15 @@ class GalleryRepository extends EntityRepository
         
         $qb = $this->_em->createQueryBuilder();
         
+        $datetime = new \Datetime();
+        $now = $datetime->format("Y-m-d H:i:s");
+        
         $query = $qb->update('FlowberGalleryBundle:Gallery', 'a')
             ->set('a.deleted', '?1')
+            ->set('a.deleteDate', ':now')
             ->where('a.id = :id')
             ->setParameter('id', $galleryId)
+            ->setParameter('now', $now)
             ->setParameter(1, $choice)
             ->getQuery();
         

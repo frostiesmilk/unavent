@@ -307,28 +307,119 @@ class GroupController extends Controller
 
     public function getGroupGalleriesAction($id)
     {
-        $circleRepository = $this->getDoctrine()->getRepository('FlowberCircleBundle:Circle');
+        $user=$this->getUser();  
+                
+        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
         $circle = $circleRepository->find($id);
+
+//        BUG IF 2 LINES BELOW ARE PLACED HERE. WHYYYYYYYYYYYYYYYY
+//        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id), $user->getProfile());
+//        $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
         
-        if(!is_object($circle)){
-            return false;
-        }   
         
-        $userProfile = $this->getUser()->getProfile();
+        // preparing new Gallery
+        $newGroupGallery = new Gallery();
+        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
         
-        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id), $userProfile);
-        $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
-        //die(var_dump($galleries));
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST'){
+            $newGalleryForm->bind($request);
+            
+            if($newGalleryForm->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                
+                $newGroupGallery->setCreatedBy($user->getProfile());
+                
+//                if(empty($newGroupGallery->getTitle())){
+//                    $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
+//                }
+                $circle->addGallery($newGroupGallery);
+                
+                $em->persist($circle);
+                
+                try{
+                    $em->flush();  
+                    return $this->redirect($this->generateUrl(
+                        'flowber_groups_gallery',
+                        array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
+                    ));
+                } catch (Exception $ex) {
+
+                }                              
+            }
+        }
+        
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id), $user->getProfile());
+        $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
         
-         return $this->render('FlowberGroupBundle:Default:showGroupGalleries.html.twig', 
+        
+        return $this->render('FlowberGroupBundle:Default:showGroupGalleries.html.twig', 
                 array('circle'  => $this->container->get('flowber_group.group')->getGroupInfos($id),
                 'messageForm'   => $privateMessageForm->createView(),
+                'newGalleryForm' => $newGalleryForm->createView(),
                 'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),   
                 'galleries'     => $galleries,
                 'galleriesId'     => $galleriesId
                  ));
     }
+//    public function getGroupGalleriesAction($id)
+//    {
+//        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
+//        $circle = $circleRepository->find($id);
+//        
+//        if(!is_object($circle)){
+//            return false;
+//        }   
+//        
+//        $user = $this->getUser();
+//        
+//        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id), $user->getProfile());
+//        $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
+//        //die(var_dump($galleries));
+//        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+//            
+//        // preparing new Gallery
+//        $newGroupGallery = new Gallery();
+//        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
+//        
+//        $request = $this->get('request');
+//        if ($request->getMethod() == 'POST'){
+//            $newGalleryForm->bind($request);
+//            
+//            if($newGalleryForm->isValid()){
+//                $em = $this->getDoctrine()->getManager();
+//                
+//                $newGroupGallery->setCreatedBy($user->getProfile());
+//                
+////                if(empty($newGroupGallery->getTitle())){
+////                    $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
+////                }
+//                $circle->addGallery($newGroupGallery);
+//                
+//                $em->persist($circle);
+//                
+//                try{
+//                    $em->flush();  
+//                    return $this->redirect($this->generateUrl(
+//                        'flowber_groups_gallery',
+//                        array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
+//                    ));
+//                } catch (Exception $ex) {
+//
+//                }                              
+//            }
+//        }
+//        
+//        return $this->render('FlowberGroupBundle:Default:showGroupGalleries.html.twig', 
+//                array('circle'  => $this->container->get('flowber_group.group')->getGroupInfos($id),
+//                'messageForm'   => $privateMessageForm->createView(),
+//                'newGalleryForm' => $newGalleryForm->createView(),
+//                'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),   
+//                'galleries'     => $galleries,
+//                'galleriesId'     => $galleriesId
+//                 ));
+//    }
     
     public function getGroupGalleryAction($circleId, $galleryId)
     {       

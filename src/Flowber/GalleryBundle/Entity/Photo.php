@@ -104,6 +104,13 @@ class Photo
     private $deleted;
     
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleteDate", type="datetime", nullable=true)
+     */
+    private $deleteDate;
+    
+    /**
      * @param UploadedFile $uploadedFile
      */
     public function __construct()
@@ -494,5 +501,38 @@ class Photo
     public function isDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean 
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Set deleteDate
+     *
+     * @param \DateTime $deleteDate
+     * @return Photo
+     */
+    public function setDeleteDate($deleteDate)
+    {
+        $this->deleteDate = $deleteDate;
+
+        return $this;
+    }
+
+    /**
+     * Get deleteDate
+     *
+     * @return \DateTime 
+     */
+    public function getDeleteDate()
+    {
+        return $this->deleteDate;
     }
 }

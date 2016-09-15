@@ -4,6 +4,8 @@ namespace Flowber\GalleryBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+
 use Exception;
 use FOS\RestBundle\View\View as ResponseView;
 
@@ -51,7 +53,8 @@ class GalleryRestController extends Controller
         return "Error: Delete Gallery";
     }
     
-    public function deletePhotoAction($photoId){
+    public function deletePhotoAction(Request $request){
+        $photoId = $request->get("delete-photo-id");
         $photo = $this->getDoctrine()->getRepository('FlowberGalleryBundle:Photo')->find($photoId);
         
         // preparing response
@@ -67,7 +70,6 @@ class GalleryRestController extends Controller
         if($currentUserProfile == $photo->getCreatedBy()){ // checking if allowed to delete post (by author)
 
             $this->container->get("flowber_gallery.photo")->setDeleted($photo, true);
-            
             
             try{
 

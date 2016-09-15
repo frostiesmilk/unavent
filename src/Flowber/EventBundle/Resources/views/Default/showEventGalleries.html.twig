@@ -30,6 +30,10 @@
     <div class="event-page-title-row text-center">
         <span class="event-page-title">Galeries</span>
     </div>
+    <!-- Galleries modals -->
+    {% include 'FlowberGalleryBundle::partials/modalAddGallery.html.twig' %}
+    {% include 'FlowberGalleryBundle::partials/modalDeleteGallery.html.twig' %}
+    <!-- End Galleries modals --> 
     
     <!-- Galleries list -->
     {% include 'FlowberGalleryBundle::partials/list-galleries.html.twig' %}
@@ -41,5 +45,6 @@
 
 {% block javascripts %}
     {{parent()}}
-
+    <script src="{{asset('assets/js/GalleryBundle/genericGallery.js')}}"></script>
+    <script src="{{asset('assets/js/GalleryBundle/gallery.js')}}"></script>
 {% endblock %}

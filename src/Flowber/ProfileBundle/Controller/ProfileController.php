@@ -112,21 +112,20 @@ class ProfileController extends Controller
     {
         // retrieve profile
         $circle = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle')->find($circleId);
-        
+        //die(var_dump($circle));
         // for private messages
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
-        
-        // Retrieving galleries here = BUG! WHYYYYYYYYYYYYYYYYY?????
         
         // for adding new gallery in profile
         $newGroupGallery = new Gallery();
         $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
         
-        // post request
+        // new Gallery request
         $newGalleryForm->handleRequest($request);        
         if($newGalleryForm->isValid()){
             $em = $this->getDoctrine()->getManager();
             $circle->addGallery($newGroupGallery);
+            $newGroupGallery->setCreatedBy($this->getUser()->getProfile());
             $em->persist($circle);
             
             try{
@@ -141,7 +140,7 @@ class ProfileController extends Controller
         }
         
         // Retrieve profile galleries
-        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($circle);
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($circle, $this->getUser()->getProfile());
         
         return $this->render('FlowberProfileBundle:Default:profile.html.twig', 
                 array(

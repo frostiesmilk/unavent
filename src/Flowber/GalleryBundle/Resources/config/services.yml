@@ -2,3 +2,6 @@ services:
     flowber_gallery.gallery:
         class: Flowber\GalleryBundle\Manager\GalleryManager
         arguments: [@doctrine.orm.entity_manager] 
+    flowber_gallery.photo:
+        class: Flowber\GalleryBundle\Manager\PhotoManager
+        arguments: [@doctrine.orm.entity_manager] 

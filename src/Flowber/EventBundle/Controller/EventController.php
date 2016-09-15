@@ -127,13 +127,51 @@ class EventController extends Controller
     
     public function getEventGalleriesAction($id)
     {
-        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+        $user = $this->getUser();
         
-        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id));
+        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
+        $circle = $circleRepository->find($id);
+        
+        // preparing new Gallery
+        $newGroupGallery = new Gallery();
+        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
+        
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST'){
+            $newGalleryForm->bind($request);
+            
+            if($newGalleryForm->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                
+                $newGroupGallery->setCreatedBy($user->getProfile());
+                
+//                if(empty($newGroupGallery->getTitle())){
+//                    $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
+//                }
+                $circle->addGallery($newGroupGallery);
+                
+                $em->persist($circle);
+                
+                try{
+                    $em->flush();  
+                    return $this->redirect($this->generateUrl(
+                        'flowber_event_gallery',
+                        array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
+                    ));
+                } catch (Exception $ex) {
+
+                }                              
+            }
+        }
+        
+        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+               
+        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id), $user->getProfile());
         $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
         
         return $this->render('FlowberEventBundle:Default:showEventGalleries.html.twig', 
                 array( 
+                    'newGalleryForm' => $newGalleryForm->createView(),
                     'messageForm' => $privateMessageForm->createView(),
                     'circle' => $this->container->get('flowber_circle.circle')->getCoverInfos($id),
                     'navbar' => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),

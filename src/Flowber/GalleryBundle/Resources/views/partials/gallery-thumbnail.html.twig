@@ -8,9 +8,9 @@
     <div class="gallery-image-frame">
         <a tabindex="-1" href="{{ path('flowber_circle_gallery', {'circleId' : circle.id, 'galleryId' : gallery.id}) }}" title="voir la galerie {{gallery.title}}">
             {% if gallery.photos.1 == 'non'%}
-                <img class="gallery-image-featured" src="{{asset(gallery.photos.0)}}" alt=""/>
+                <img class="gallery-image-featured" src="{{asset(gallery.photos.0 | imagine_filter('generic_thumb'))}}" alt=""/>
             {% else %}
-                <img class="gallery-image-featured" src="{{asset(gallery.photos.0)}}" alt="" onmouseover="this.src='{{asset(gallery.photos.1)}}'" onmouseout="this.src='{{asset(gallery.photos.0)}}'"/>      
+                <img class="gallery-image-featured" src="{{asset(gallery.photos.0 | imagine_filter('generic_thumb'))}}" alt="" onmouseover="this.src='{{asset(gallery.photos.1 | imagine_filter('generic_thumb'))}}'" onmouseout="this.src='{{asset(gallery.photos.0 | imagine_filter('generic_thumb'))}}'"/>      
             {% endif %}            
             
         </a>

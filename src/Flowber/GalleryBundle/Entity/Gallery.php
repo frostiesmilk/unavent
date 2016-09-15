@@ -74,6 +74,13 @@ class Gallery
     private $deleted;
     
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleteDate", type="datetime", nullable=true)
+     */
+    private $deleteDate;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -283,5 +290,38 @@ class Gallery
     public function isDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean 
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Set deleteDate
+     *
+     * @param \DateTime $deleteDate
+     * @return Gallery
+     */
+    public function setDeleteDate($deleteDate)
+    {
+        $this->deleteDate = $deleteDate;
+
+        return $this;
+    }
+
+    /**
+     * Get deleteDate
+     *
+     * @return \DateTime 
+     */
+    public function getDeleteDate()
+    {
+        return $this->deleteDate;
     }
 }

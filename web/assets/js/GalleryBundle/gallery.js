@@ -7,7 +7,7 @@ function previousImage(parent){
 }
 function afficheGallery(myDiv) {
 //    var src=myDiv.style.backgroundImage; 
-    var src=myDiv.src;
+    var src = myDiv.src;
 //    document.getElementById("imageSlide").src=src.split('"')[1];
     document.getElementById("imageSlide").src=src;//('"')[1];
     var parent= myDiv.parentNode.parentNode.parentNode;

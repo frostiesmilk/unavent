@@ -154,7 +154,7 @@ liip_imagine:
 #            quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [250, 250], mode: inset }                
+                thumbnail: { size: [400, 400], mode: inset }                
 #                relative_resize: { widen: 150 }
 #                thumbnail: { mode: inset }
         fix_rotate:

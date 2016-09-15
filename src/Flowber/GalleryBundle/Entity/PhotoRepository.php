@@ -19,10 +19,15 @@ class PhotoRepository extends EntityRepository
         
         $qb = $this->_em->createQueryBuilder();
         
+        $datetime = new \Datetime();
+        $now = $datetime->format("Y-m-d H:i:s");
+        
         $query = $qb->update('FlowberGalleryBundle:Photo', 'a')
             ->set('a.deleted', '?1')
+            ->set('a.deleteDate', ':now')
             ->where('a.id = :id')
             ->setParameter('id', $photoId)
+            ->setParameter('now', $now)
             ->setParameter(1, $choice)
             ->getQuery();
         
