@@ -11,7 +11,10 @@
         <h4>Ajouté le {{gallery.creationDate|date("d/m/y H:i")}}</h4>
         <h3>{{gallery.description}}</h3>
     </div>
-    <div class="row gallery-image-list">            
+    <div class="row gallery-image-list">
+        <div class="col-xs-6 col-md-3 text-center">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addPhotoModal"><i class="fa fa-upload" aria-hidden="true"></i> Ajouter des photos</button>
+        </div>
         {% for photo in gallery.photos %}
             {% if photo.isDeleted() == false %}
             <div id="photo-{{photo.id}}" class="col-xs-6 col-md-3">
@@ -62,5 +65,7 @@
     </div>
 </div>
 
+{% if galleryCanDelete %}
+{% include 'FlowberGalleryBundle::partials/modalAddPhoto.html.twig' %}
 
-
+{% endif %}

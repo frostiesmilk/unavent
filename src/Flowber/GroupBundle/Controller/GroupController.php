@@ -23,6 +23,8 @@ use Flowber\GalleryBundle\Entity\Gallery;
 use Flowber\GalleryBundle\Form\GalleryType;
 use Flowber\CircleBundle\Entity\Subscribers;
 
+use Flowber\GalleryBundle\Form\PhotoMultipleType;
+
 class GroupController extends Controller
 {
     public function getGroupAction($circleId)
@@ -363,74 +365,58 @@ class GroupController extends Controller
                 'galleriesId'     => $galleriesId
                  ));
     }
-//    public function getGroupGalleriesAction($id)
-//    {
-//        $circleRepository = $this->getDoctrine()->getManager()->getRepository('FlowberCircleBundle:Circle');
-//        $circle = $circleRepository->find($id);
-//        
-//        if(!is_object($circle)){
-//            return false;
-//        }   
-//        
-//        $user = $this->getUser();
-//        
-//        $galleries = $this->container->get("flowber_gallery.gallery")->getGalleries($this->container->get("flowber_circle.circle")->getCircle($id), $user->getProfile());
-//        $galleriesId = $this->container->get("flowber_gallery.gallery")->getGalleriesId($this->container->get("flowber_circle.circle")->getCircle($id));
-//        //die(var_dump($galleries));
-//        $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
-//            
-//        // preparing new Gallery
-//        $newGroupGallery = new Gallery();
-//        $newGalleryForm = $this->createForm(new GalleryType(), $newGroupGallery);
-//        
-//        $request = $this->get('request');
-//        if ($request->getMethod() == 'POST'){
-//            $newGalleryForm->bind($request);
-//            
-//            if($newGalleryForm->isValid()){
-//                $em = $this->getDoctrine()->getManager();
-//                
-//                $newGroupGallery->setCreatedBy($user->getProfile());
-//                
-////                if(empty($newGroupGallery->getTitle())){
-////                    $newGroupGallery->setTitle("Galerie du ".$newGroupGallery->getCreationDate()->format('Y-m-d H:i'));
-////                }
-//                $circle->addGallery($newGroupGallery);
-//                
-//                $em->persist($circle);
-//                
-//                try{
-//                    $em->flush();  
-//                    return $this->redirect($this->generateUrl(
-//                        'flowber_groups_gallery',
-//                        array('circleId' => $circle->getId(), 'galleryId' =>$newGroupGallery->getId())
-//                    ));
-//                } catch (Exception $ex) {
-//
-//                }                              
-//            }
-//        }
-//        
-//        return $this->render('FlowberGroupBundle:Default:showGroupGalleries.html.twig', 
-//                array('circle'  => $this->container->get('flowber_group.group')->getGroupInfos($id),
-//                'messageForm'   => $privateMessageForm->createView(),
-//                'newGalleryForm' => $newGalleryForm->createView(),
-//                'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),   
-//                'galleries'     => $galleries,
-//                'galleriesId'     => $galleriesId
-//                 ));
-//    }
     
     public function getGroupGalleryAction($circleId, $galleryId)
     {       
+        $user = $this->getUser();
+        $userProfile = $user->getProfile();
+        
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         $gallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
+        
+        $newPhotosForm = $this->createFormBuilder()
+                ->add('files','file',array(
+                    "attr" => array(
+                        "accept" => "image/*",
+                        "multiple" => "multiple",
+                    )
+                ))
+                ->getForm();
+        $newPhotosFormView = $newPhotosForm->createView();
+        //$newPhotosFormView->getChild('files')->set('full_name', 'form[files][]');
+        $request = $this->getRequest();
+        if($request->getMethod() == "POST") {
+            $em = $this->getDoctrine()->getManager();
+            $newPhotosForm->handleRequest($request);
+
+            $data = $newPhotosForm->getData();
+            $files = $data["files"];
+            
+            //die(var_dump($files));
+            // do stuff with your files
+            foreach($files AS $file){ die("up");
+                $newPhoto = new Photo();
+                $newPhoto->addGallery($gallery);
+                $newPhoto->getCreatedBy($userProfile);
+                $newPhoto->setTheFile($file);
+                
+                $em->persist($newPhoto);
+                $em->flush();                
+            }
+            return $this->redirect($this->generateUrl(
+                        'flowber_groups_gallery',
+                        array('circleId' => $circleId, 'galleryId' =>$galleryId)
+                    ));
+        }
+
         
         return $this->render('FlowberGroupBundle:Default:showGroupGallery.html.twig',
                 array('circle'  => $this->container->get('flowber_group.group')->getGroupInfos($circleId),
                 'messageForm'   => $privateMessageForm->createView(),
                 'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
-                'gallery'       => $gallery));
+                'gallery'       => $gallery,
+                'newPhotosForm' => $newPhotosFormView,
+                'galleryCanDelete' => $gallery->canDelete($this->getUser()->getProfile())));
     }
 
     public function getAllGroupsAction($id)

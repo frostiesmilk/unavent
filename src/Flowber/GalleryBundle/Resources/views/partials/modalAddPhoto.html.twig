@@ -1,0 +1,26 @@
+{# FlowberGalleryBundle::partials/modalAddPhoto.html.twig #}
+{% form_theme newPhotosForm 'bootstrap_3_layout.html.twig' %}
+
+<div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="addPhotoModalLabel">
+    <div class="modal-dialog" role="document">
+        {{form_start(newPhotosForm)}}
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addGalleryModalLabel">Ajouter des photos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Sélectionner les photos</label>
+                    {{form_widget(newPhotosForm.files)}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                {{form_rest(newPhotosForm)}}
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary btn-red">Valider</button>
+            </div>
+        </div>
+        {{form_end(newPhotosForm)}}
+    </div>
+</div>

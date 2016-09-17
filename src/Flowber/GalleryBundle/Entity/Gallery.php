@@ -110,6 +110,22 @@ class Gallery
     }
     
     /**
+     * 
+     * @return booleans
+     */
+    public function hasPhoto(){
+        $photos = $this->getPhotos();
+        
+        foreach($photos AS $photo){
+            if(!$photo->isDelete()){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
      * Get id
      *
      * @return integer 

@@ -95,15 +95,24 @@ class GalleryManager extends BaseManager {
     public function getTwoPhotoWebPathFromGallery(Gallery $gallery){
         $webPaths = [];
         
-        $count = 0;
+        $i = 0;
         foreach($gallery->getPhotos() AS $photo){
-            $count++;
-            $webPaths[] = $photo->getWebPath();
-            if ($count == 2){
-                return $webPaths;   
-            }
+            if(!$photo->isDeleted()){
+                $i++;
+                $webPaths[] = $photo->getWebPath();
+                if ($i == 2){
+                    return $webPaths;   
+                }
+            }            
         }
-        $webPaths[] = 'non';
+        
+        if($i<1){
+            $webPaths[$i] = 'assets/images/ProfileBundle/Default/profilePictureDefault.png';
+            $webPaths[++$i] = 'non';
+        }else{
+            $webPaths[] = "non";
+        }
+        
         return $webPaths;     
     }   
     
