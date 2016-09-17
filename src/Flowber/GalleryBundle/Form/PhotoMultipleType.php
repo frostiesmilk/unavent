@@ -15,9 +15,11 @@ class PhotoMultipleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', 'file', array(
-                                    'data_class'    => null,
-                                    'multiple'      => true
+            ->add('files','file',array(
+                    "multiple" => "multiple",
+                    "attr" => array(
+                        "accept" => "image/*",                        
+                    ),
                 ));
     }
     
@@ -26,9 +28,9 @@ class PhotoMultipleType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Flowber\GalleryBundle\Entity\Photo'
-        ));
+//        $resolver->setDefaults(array(
+//            'data_class' => 'Flowber\GalleryBundle\Entity\Photo'
+//        ));
     }
 
     /**

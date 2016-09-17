@@ -157,6 +157,22 @@ class ProfileController extends Controller
     
     public function getProfileGalleryAction($circleId, $galleryId){
         //$privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
+        $user = $this->getUser();
+        
+        $newPhotosForm = $this->createFormBuilder()
+                ->add('files','file',array(
+                    "multiple" => "multiple",
+                    "attr" => array(
+                        "accept" => "image/*",                        
+                    ),
+                ))
+                ->add('galleryId', 'hidden')
+                ->add('circleId', 'hidden')
+                ->getForm();
+        
+        $newPhotosForm->get("circleId")->setData($circleId);
+        $newPhotosForm->get("galleryId")->setData($galleryId);
+        
         $gallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
         
         return $this->render('FlowberProfileBundle:Default:profileGallery.html.twig',
@@ -164,7 +180,9 @@ class ProfileController extends Controller
                 'circle'  => $this->container->get('flowber_profile.profile')->getProfileInfos($circleId),
                 //'messageForm'   => $privateMessageForm->createView(),
                 'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
-                'gallery'       => $gallery
+                'gallery'       => $gallery,
+                'newPhotosForm' => $newPhotosForm->createView(),
+                'galleryCanDelete' => $gallery->canDelete($user->getProfile()),
             )
         );
     }

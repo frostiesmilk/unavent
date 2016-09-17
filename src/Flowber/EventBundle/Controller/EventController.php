@@ -183,6 +183,21 @@ class EventController extends Controller
     
     public function getEventGalleryAction($circleId, $galleryId)
     {       
+        $user = $this->getUser();
+        $newPhotosForm = $this->createFormBuilder()
+                ->add('files','file',array(
+                    "multiple" => "multiple",
+                    "attr" => array(
+                        "accept" => "image/*",                        
+                    ),
+                ))
+                ->add('galleryId', 'hidden')
+                ->add('circleId', 'hidden')
+                ->getForm();
+        
+        $newPhotosForm->get("circleId")->setData($circleId);
+        $newPhotosForm->get("galleryId")->setData($galleryId);
+        
         $privateMessageForm = $this->createForm(new PrivateMessageType, new PrivateMessage);
         $gallery = $this->getDoctrine()->getManager()->getRepository('FlowberGalleryBundle:Gallery')->find($galleryId);
         
@@ -190,7 +205,10 @@ class EventController extends Controller
                 array('circle'  => $this->container->get('flowber_event.event')->getEventInfos($circleId),
                 'messageForm'   => $privateMessageForm->createView(),
                 'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
-                'gallery'       => $gallery));
+                'gallery'       => $gallery,
+                'newPhotosForm' => $newPhotosForm->createView(),
+                'galleryCanDelete' => $gallery->canDelete($user->getProfile()),
+                    ));
     }
     
     public function getCreateEventAction()

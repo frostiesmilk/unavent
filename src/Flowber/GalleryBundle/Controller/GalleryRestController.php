@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Exception;
 use FOS\RestBundle\View\View as ResponseView;
 
+use Flowber\GalleryBundle\Form\PhotoMultipleType;
+use Flowber\GalleryBundle\Entity\Photo;
 
 class GalleryRestController extends Controller
 {
@@ -32,12 +34,13 @@ class GalleryRestController extends Controller
         $currentUserProfile = $this->getUser()->getProfile();
         if($currentUserProfile == $gallery->getCreatedBy()){ // checking if allowed to delete post (by author)
             $em = $this->getDoctrine()->getManager();
-//            $gallery->setDeleted(true);
-            $this->container->get("flowber_gallery.gallery")->setDeleted($gallery, true);
-//            $em->persist($gallery);
-//            $em->flush();
+            $gallery->setDeleted(true);
+//            $this->container->get("flowber_gallery.gallery")->setDeleted($gallery, true);
+            $em->persist($gallery);
+
             try{
 //                $em->remove($gallery);
+                $em->flush();
                 
             } catch (Exception $ex) {
                 $repsData = array("message" => "flush error");
@@ -86,5 +89,49 @@ class GalleryRestController extends Controller
         }
         
         return "Error: Delete Photo";
+    }
+    
+    public function postPhotosAction(){
+        $user = $this->getUser();
+        $userProfile = $user->getProfile();
+        
+        $newPhotosForm = $this->createFormBuilder()
+                ->add('files','file',array(
+                    "multiple" => "multiple",
+                    "attr" => array(
+                        "accept" => "image/*",                        
+                    ),
+                ))
+                ->add('galleryId', 'hidden')
+                ->add('circleId', 'hidden')
+                ->getForm();
+        
+        $request = $this->getRequest();
+        if($request->getMethod() == "POST") {
+            $em = $this->getDoctrine()->getManager();
+            $newPhotosForm->handleRequest($request);
+
+            $data = $newPhotosForm->getData();
+            $files = $data["files"];
+            $circleId = $data["circleId"];
+            $galleryId = $data["galleryId"];
+            $gallery = $this->getDoctrine()->getManager()->getRepository("FlowberGalleryBundle:Gallery")->find($galleryId);
+            
+//            die(var_dump($files));
+            // do stuff with your files
+            foreach($files AS $file){
+                $newPhoto = new Photo();
+                $newPhoto->addGallery($gallery);
+                $newPhoto->getCreatedBy($userProfile);
+                $newPhoto->setTheFile($file);
+                
+                $em->persist($newPhoto);
+                $em->flush();                
+            }
+            return $this->redirect($this->generateUrl(
+                        'flowber_circle_gallery',
+                        array('circleId' => $circleId, 'galleryId' =>$galleryId)
+                    ));
+        }
     }
 }

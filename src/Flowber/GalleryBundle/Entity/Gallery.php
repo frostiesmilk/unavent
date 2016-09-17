@@ -96,6 +96,9 @@ class Gallery
     */
     public function upload()
     {
+        if(count($this->uploadedFiles)<1){
+            return false;
+        }
         foreach($this->uploadedFiles as $uploadedFile)
         {
             if ($uploadedFile) {
