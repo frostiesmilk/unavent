@@ -9,17 +9,19 @@
         </div>
     </div>
 
-    <div class="container user-profile-gallery-container galleries-list">
+    <div class="container user-profile-gallery-container galleries">
         <div class="row">
             <div class="col-md-3 col-xs-12 text-center">
-                <button class="btn btn-default" data-toggle="modal" data-target="#addGalleryModal"><span class="glyphicon glyphicon-picture"></span> Ajouter une galerie</button>
+                <button class="btn btn-default btn-block" data-toggle="modal" data-target="#addGalleryModal"><span class="glyphicon glyphicon-picture"></span> Ajouter une galerie</button>
             </div>
             <!-- Galleries list -->
-            {% for gallery in galleries %}
-            <div class="col-md-3 col-xs-12">
-            {% include 'FlowberGalleryBundle::partials/gallery-thumbnail.html.twig' %}
-            </div>
-            {% endfor %}
+            <ul class="galleries-list">
+                {% for gallery in galleries %}
+                <li id="gallery-{{gallery.id}}" class="col-md-3 col-xs-12">
+                {% include 'FlowberGalleryBundle::partials/gallery-thumbnail.html.twig' %}
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>

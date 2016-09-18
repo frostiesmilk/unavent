@@ -11,35 +11,38 @@
         <h4>Ajouté le {{gallery.creationDate|date("d/m/y H:i")}}</h4>
         <h3>{{gallery.description}}</h3>
     </div>
-    <div class="row gallery-image-list">
+    <div class="row gallery-image">
         <div class="col-xs-6 col-md-3 text-center">
             <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addPhotoModal"><i class="fa fa-upload" aria-hidden="true"></i> Ajouter des photos</button>
         </div>
+        <ul class="gallery-image-list">
         {% for photo in gallery.photos %}
             {% if photo.isDeleted() == false %}
-            <div id="photo-{{photo.id}}" class="col-xs-6 col-md-3">
+            <li id="photo-{{photo.id}}" class="col-xs-6 col-md-3">
                 <!--<div class="gallery-image-preview" style="background-image:url('{{asset(photo.getWebPath())}}');"
                     onclick="afficheGallery(this);" data-toggle="modal" data-target="#myModal">
 
                 </div>-->
                 <div class="thumbnail">
-                <div class="gallery-image-preview-frame"  >
-                    <img onclick="afficheGallery(this);" data-toggle="modal" data-target="#myModal" class="gallery-image-preview" src="{{asset(photo.getWebPath() | imagine_filter('generic_thumb'))}}" alt=""/>
-                    <span class="gallery-image-frame-actions" name="deletePhotoButton" data-toggle="modal" data-target="#modal-delete-photo">
-                        <form style="display: none;" name="delete-photo-form" action="{{path('api_delete_photo')}}" method="POST">
-                            <span class="cancel-delete-photo-form">Annuler |</span>
-                            <button type="submit" class="btn-link delete-photo-form-confirm">Supprimer</button>
-                            <input type="hidden" name="delete-photo-id" value="{{photo.id}}"/> 
-                            <input name="_method" value="DELETE" type="hidden">
-                        </form>       
-                        <span name="trigger-delete-photo-form" class="glyphicon glyphicon-trash gallery-image-frame-actions-delete" data-toggle="tooltip" data-placement="top" title="Supprimer la photo" ></span>
-                    </span>
-                </div>
+                    <div class="gallery-image-preview-frame"  >
+                        <img onclick="afficheGallery(this);" data-toggle="modal" data-target="#myModal" class="gallery-image-preview" src="{{asset(photo.getWebPath() | imagine_filter('generic_thumb'))}}" alt=""/>
+                        <img hidden="hidden" name="photo-large" src="{{asset(photo.getWebPath() | imagine_filter('large_photo'))}}" alt=""/>
+                        <span class="gallery-image-frame-actions" name="deletePhotoButton" data-toggle="modal" data-target="#modal-delete-photo">
+                            <form style="display: none;" name="delete-photo-form" action="{{path('api_delete_photo')}}" method="POST">
+                                <span class="cancel-delete-photo-form">Annuler |</span>
+                                <button type="submit" class="btn-link delete-photo-form-confirm">Supprimer</button>
+                                <input type="hidden" name="delete-photo-id" value="{{photo.id}}"/> 
+                                <input name="_method" value="DELETE" type="hidden">
+                            </form>       
+                            <span name="trigger-delete-photo-form" class="glyphicon glyphicon-trash gallery-image-frame-actions-delete" data-toggle="tooltip" data-placement="top" title="Supprimer la photo" ></span>
+                        </span>
+                    </div>
                 </div>
 
-            </div>
+            </li>
             {% endif %}
         {% endfor %}
+        </ul>
     </div>
     <div class="row">
         <a href="{{path('flowber_circle_galleries', {'id':circle.id, 'anchor':anchor})}}" class="btn btn-default">Retour aux galeries</a>

@@ -105,26 +105,30 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.galleries-list .gallery-thumbnail {
+.galleries .galleries-list {
+  list-style: none;
+  padding: inherit;
+}
+.galleries .galleries-list .gallery-thumbnail {
   border: none;
   padding: 10px 0px 10px 0px;
   background: none;
   margin-bottom: initial;
 }
-.galleries-list .gallery-thumbnail .gallery-image-frame {
+.galleries .galleries-list .gallery-thumbnail .gallery-image-frame {
   display: block;
   position: relative;
 }
-.galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-featured {
+.galleries .galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-featured {
   width: 100%;
   height: 140px;
   object-fit: cover;
   box-shadow: #000 0em 0em 0em;
 }
-.galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-featured:hover {
+.galleries .galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-featured:hover {
   opacity: 0.6;
 }
-.galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-frame-actions {
+.galleries .galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-frame-actions {
   color: white;
   background: rgba(0, 0, 0, 0.52) none repeat scroll 0% 0%;
   width: 100%;
@@ -134,16 +138,16 @@ body {
   position: absolute;
   bottom: 0px;
 }
-.galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-frame-actions .gallery-image-frame-actions-delete {
+.galleries .galleries-list .gallery-thumbnail .gallery-image-frame .gallery-image-frame-actions .gallery-image-frame-actions-delete {
   cursor: pointer;
 }
-.galleries-list .gallery-thumbnail .gallery-name-frame {
+.galleries .galleries-list .gallery-thumbnail .gallery-name-frame {
   padding: 1px;
 }
-.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-name-link {
+.galleries .galleries-list .gallery-thumbnail .gallery-name-frame .gallery-name-link {
   display: inline-block;
 }
-.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-name {
+.galleries .galleries-list .gallery-thumbnail .gallery-name-frame .gallery-name {
   margin: 0px;
   text-transform: uppercase;
   text-overflow: ellipsis;
@@ -152,43 +156,47 @@ body {
   font-weight: bold;
   text-align: justify;
 }
-.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role {
+.galleries .galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role {
   float: right;
 }
-.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role .gallery-role-allowed {
+.galleries .galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role .gallery-role-allowed {
   color: black;
 }
-.galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role .gallery-role-private {
+.galleries .galleries-list .gallery-thumbnail .gallery-name-frame .gallery-role .gallery-role-private {
   color: #E74C3C;
 }
-.galleries-list .gallery-thumbnail .gallery-description {
+.galleries .galleries-list .gallery-thumbnail .gallery-description {
   font-size: 11px;
   color: #888;
 }
-.galleries-list .gallery-thumbnail .gallery-join-button {
+.galleries .galleries-list .gallery-thumbnail .gallery-join-button {
   background-color: #E74C3C;
   border: none;
   padding: 4px 0px;
   width: 100%;
 }
-.galleries-list .gallery-thumbnail .gallery-join-button:hover {
+.galleries .galleries-list .gallery-thumbnail .gallery-join-button:hover {
   font-weight: bold;
   color: #E1EBF5;
 }
-.gallery-image-list {
+.gallery-image {
   padding-bottom: 20px;
 }
-.gallery-image-list .gallery-image-preview-frame {
+.gallery-image .gallery-image-list {
+  list-style: none;
+  padding: inherit;
+}
+.gallery-image .gallery-image-list .gallery-image-preview-frame {
   display: block;
   position: relative;
 }
-.gallery-image-list .gallery-image-preview-frame .gallery-image-preview {
+.gallery-image .gallery-image-list .gallery-image-preview-frame .gallery-image-preview {
   width: 100%;
   height: 200px;
   cursor: pointer;
   object-fit: cover;
 }
-.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions {
+.gallery-image .gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions {
   color: white;
   background: rgba(0, 0, 0, 0.52) none repeat scroll 0% 0%;
   width: 100%;
@@ -198,14 +206,14 @@ body {
   position: absolute;
   bottom: 0px;
 }
-.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions .gallery-image-frame-actions-delete {
+.gallery-image .gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions .gallery-image-frame-actions-delete {
   cursor: pointer;
 }
-.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions form .delete-photo-form-confirm {
+.gallery-image .gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions form .delete-photo-form-confirm {
   color: white;
   margin: -2px;
 }
-.gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions form .cancel-delete-photo-form {
+.gallery-image .gallery-image-list .gallery-image-preview-frame .gallery-image-frame-actions form .cancel-delete-photo-form {
   cursor: pointer;
 }
 .slide-image {

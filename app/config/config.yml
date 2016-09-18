@@ -160,3 +160,9 @@ liip_imagine:
         fix_rotate:
             filters:
                 auto_rotate: ~
+                
+        large_photo:
+            quality: 90
+            filters:
+                auto_rotate: ~
+                downscale: { max: [1980, 1280] }

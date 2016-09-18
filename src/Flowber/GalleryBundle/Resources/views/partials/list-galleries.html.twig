@@ -1,13 +1,15 @@
-<div class="container galleries-list" >
+<div class="container galleries" >
     <div class="row">
         <div class="col-md-3 col-xs-12 text-center">
             <button class="btn btn-default" data-toggle="modal" data-target="#addGalleryModal"><span class="glyphicon glyphicon-picture"></span> Ajouter une galerie</button>
         </div>
+        <ul class="galleries-list">            
         {% for gallery in galleries %}
-            <div class="col-md-3 col-xs-6">
+            <li id="gallery-{{gallery.id}}" class="col-md-3 col-xs-6">
                 {% include 'FlowberGalleryBundle::partials/gallery-thumbnail.html.twig' %}
-            </div>
+            </li>
         {% endfor %}
+        </ul>
     </div>
 </div>
     

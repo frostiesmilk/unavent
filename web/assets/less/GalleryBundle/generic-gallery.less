@@ -15,23 +15,102 @@ and open the template in the editor.
     padding-bottom: 20px;
 }
 
-.galleries-list{
-    .gallery-thumbnail{
-        border : none;
-        padding: 10px 0px 10px 0px;
-        background: none;
-        margin-bottom: initial;
-        .gallery-image-frame{
+.galleries{
+    .galleries-list{
+        list-style: none;
+        padding: inherit;
+        .gallery-thumbnail{
+            border : none;
+            padding: 10px 0px 10px 0px;
+            background: none;
+            margin-bottom: initial;
+            .gallery-image-frame{
+                display: block;
+                position: relative;
+                .gallery-image-featured{
+                    width: 100%;
+                    height: 140px;
+                    object-fit: cover;
+                    box-shadow: #000 0em 0em 0em;
+                }
+                .gallery-image-featured:hover{
+                    opacity: 0.6;
+                }
+                .gallery-image-frame-actions{
+                    color: white;
+                    background: rgba(0, 0, 0, 0.52) none repeat scroll 0% 0%;
+                    width: 100%;
+                    left: 0px;
+                    text-align: center;
+                    height: 19px;
+                    position: absolute;
+                    bottom: 0px;
+                    .gallery-image-frame-actions-delete{
+                        cursor: pointer;
+                    }
+                }
+            }
+
+
+            .gallery-name-frame{
+                padding: 1px;
+                .gallery-name-link{
+                    display: inline-block;
+                }
+                .gallery-name{
+                    margin: 0px;
+                    text-transform: uppercase;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-align: justify;
+                }
+                .gallery-role{
+                    float: right;
+                    .gallery-role-allowed{
+                        color: black;
+                    }
+                    .gallery-role-private{
+                        color: @red;
+                    }
+                }
+            }
+
+            .gallery-description{
+                font-size: 11px;
+                color: #888;
+            }    
+
+            .gallery-join-button{
+                background-color: @red;
+                border: none;
+                padding: 4px 0px;
+                width: 100%
+            }
+            .gallery-join-button:hover{
+                font-weight: bold;
+                color: @light-blue;
+            }
+        }
+    }
+}
+
+.gallery-image{
+    padding-bottom: 20px;
+    .gallery-image-list{
+        list-style: none;
+        padding: inherit;
+    
+        .gallery-image-preview-frame{
+
             display: block;
             position: relative;
-            .gallery-image-featured{
+            .gallery-image-preview{
                 width: 100%;
-                height: 140px;
+                height: 200px;
+                cursor: pointer;
                 object-fit: cover;
-                box-shadow: #000 0em 0em 0em;
-            }
-            .gallery-image-featured:hover{
-                opacity: 0.6;
             }
             .gallery-image-frame-actions{
                 color: white;
@@ -45,88 +124,18 @@ and open the template in the editor.
                 .gallery-image-frame-actions-delete{
                     cursor: pointer;
                 }
-            }
-        }
-        
 
-        .gallery-name-frame{
-            padding: 1px;
-            .gallery-name-link{
-                display: inline-block;
-            }
-            .gallery-name{
-                margin: 0px;
-                text-transform: uppercase;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                font-size: 14px;
-                font-weight: bold;
-                text-align: justify;
-            }
-            .gallery-role{
-                float: right;
-                .gallery-role-allowed{
-                    color: black;
+                form{
+                    .delete-photo-form-confirm{
+                        color: white;
+                        margin: -2px;
+                    }
+                    .cancel-delete-photo-form{
+                        cursor: pointer;
+                    }
                 }
-                .gallery-role-private{
-                    color: @red;
-                }
+
             }
-        }
-
-        .gallery-description{
-            font-size: 11px;
-            color: #888;
-        }    
-
-        .gallery-join-button{
-            background-color: @red;
-            border: none;
-            padding: 4px 0px;
-            width: 100%
-        }
-        .gallery-join-button:hover{
-            font-weight: bold;
-            color: @light-blue;
-        }
-    }
-}
-
-.gallery-image-list{
-    padding-bottom: 20px;
-    .gallery-image-preview-frame{
-            
-        display: block;
-        position: relative;
-        .gallery-image-preview{
-            width: 100%;
-            height: 200px;
-            cursor: pointer;
-            object-fit: cover;
-        }
-        .gallery-image-frame-actions{
-            color: white;
-            background: rgba(0, 0, 0, 0.52) none repeat scroll 0% 0%;
-            width: 100%;
-            left: 0px;
-            text-align: center;
-            height: 19px;
-            position: absolute;
-            bottom: 0px;
-            .gallery-image-frame-actions-delete{
-                cursor: pointer;
-            }
-
-            form{
-                .delete-photo-form-confirm{
-                    color: white;
-                    margin: -2px;
-                }
-                .cancel-delete-photo-form{
-                    cursor: pointer;
-                }
-            }
-
         }
     }
 }

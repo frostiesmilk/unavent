@@ -122,7 +122,7 @@ class GalleryRestController extends Controller
             foreach($files AS $file){
                 $newPhoto = new Photo();
                 $newPhoto->addGallery($gallery);
-                $newPhoto->getCreatedBy($userProfile);
+                $newPhoto->setCreatedBy($userProfile);
                 $newPhoto->setTheFile($file);
                 
                 $em->persist($newPhoto);
