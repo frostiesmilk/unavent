@@ -317,7 +317,7 @@ class EventController extends Controller
         
         $error = FALSE;
         $request = $this->get('request');
-            
+        
         // if form has been submitted
         if ($request->getMethod() == 'POST') { 
             $eventForm->handleRequest($request);
