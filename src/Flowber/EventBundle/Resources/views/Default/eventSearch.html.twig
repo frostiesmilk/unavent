@@ -116,7 +116,9 @@
                 <h2>Toutes les dernières sorties</h2>
             {% endif %}
             {% for event in events %}
-                   {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
+                <div class="col-lg-3">
+                {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}
+                </div>
             {%endfor%}
         </div>
     </div>

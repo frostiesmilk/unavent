@@ -8,7 +8,7 @@
                     <div class="user-profile-introduction-text-block">
                         <h3 class="name">{{ circle.title }} </h3>
                         <p class="user-job">{{ circle.job }}</p>
-                        <p> {{ circle.birthdate}} (23 ans)<br/>
+                        <p> {{ circle.birthdate}} ({{circle.age}} ans)<br/>
                             {{ circle.city }} 
                             {% if circle.zipcode|number_format(0, '', '') != 0 %} {# no display if 0 #}
                                 {{ circle.zipcode|number_format(0, '', '') }} 
@@ -16,7 +16,11 @@
                         </p>
                     </div>
                     <div class="user-profile-description">
+                        {% if circle.description == "" and circle.role == "creator" %}
+                        <a href="{{ path('api_get_circle_edit', {'circleId': circle.id}) }}" class="btn btn-default">Ajoutez une description à votre profil!</a>
+                        {% else %}
                         <p> {{ circle.description }} </p>
+                        {% endif %}
                     </div>
                 </div>
                     
@@ -45,6 +49,8 @@
                             {% endfor %}
 
                         </table>
+                    {% elseif circle.role == "creator" %}
+                    <a href="{{ path('api_get_circle_edit', {'circleId': circle.id}) }}" class="btn btn-default">Dites ce que vous aimez faire dans la vie!</a>
                     {% endif %}
                 </div>
             </div>

@@ -11,9 +11,11 @@
 
     <div class="container user-profile-gallery-container galleries">
         <div class="row">
+            {% if circle.role == "creator" %}
             <div class="col-md-3 col-xs-12 text-center">
                 <button class="btn btn-default btn-block" data-toggle="modal" data-target="#addGalleryModal"><span class="glyphicon glyphicon-picture"></span> Ajouter une galerie</button>
             </div>
+            {% endif %}
             <!-- Galleries list -->
             <ul class="galleries-list">
                 {% for gallery in galleries %}

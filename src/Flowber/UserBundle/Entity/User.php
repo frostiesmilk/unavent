@@ -111,6 +111,12 @@ class User extends BaseUser
         )));
     }
     
+    public function getAge(){
+        $today = new \DateTime("now");
+        $year = $today->diff($this->getBirthdate())->format('%y');
+        return $year;
+    }
+    
     /**
      * Get id
      *

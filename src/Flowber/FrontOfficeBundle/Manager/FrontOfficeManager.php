@@ -25,10 +25,10 @@ class FrontOfficeManager extends BaseManager {
         $this->eventManager = $eventManager;
         $this->groupManager = $groupManager;
         $this->pmManager = $pmManager;
-        $this->context = $securityContext;    
+        $this->context = $securityContext;
     }
 
-    public function getCurrentUserId(){      
+    public function getCurrentUserId(){   
         return $this->context->getToken()->getUser()->getProfile()->getId();
     }
     
@@ -39,9 +39,9 @@ class FrontOfficeManager extends BaseManager {
         $navbar['requestNumber'] = $this->circleManager->getCountRequestInfos($this->getCurrentUserId());
         $navbar['messageNumber'] = $this->pmManager->getNumberMessageNotRead($this->getCurrentUserId());
         $navbar['notificationNumber'] = $this->circleManager->getCountNotification($this->getCurrentUserId());
-        $navbar['group'] = $groupsNav; 
+        $navbar['group'] = $groupsNav;
         
         return $navbar;
     }
-   
+
 }

@@ -5,6 +5,11 @@
 
      <div class="container user-profile-events-container">
          <div class="row">
+            {% if circle.role == "creator" %}
+            <div class="col-lg-3 col-xs-6">
+                <a class="btn btn-default btn-block" href="{{ path('flowber_create_event_homepage')}}">Créer un groupe</a>
+            </div>
+            {% endif %}
              {% for event in events %}
                  <div class="col-md-3 col-sm-6 col-xs-12">
                  {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     

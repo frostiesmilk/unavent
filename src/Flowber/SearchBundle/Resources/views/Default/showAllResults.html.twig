@@ -30,7 +30,9 @@
                 <div class="row">
                     <div class="event-thumbnail-display-container">
                     {% for event in events %}
-                       {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}     
+                        <div class="col-lg-3">
+                        {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}
+                        </div>
                     {%endfor%}
                     </div>
                 </div>
@@ -38,7 +40,9 @@
                 <div class="row">
                     <div class="group-thumbnail-display-container">
                     {% for group in groups %}
-                       {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}     
+                        <div class="col-lg-3">
+                        {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}
+                        </div>
                     {%endfor%}
                     </div>
                 </div>
@@ -46,7 +50,9 @@
                 <div class="row">
                     <div class="generic-profile-list">
                     {% for friend in friends %}
-                       {% include 'FlowberProfileBundle::partials/oneProfileResume.html.twig' %}     
+                        <div class="col-lg-3">
+                        {% include 'FlowberProfileBundle::partials/oneProfileResume.html.twig' %}
+                        </div>
                     {%endfor%}
                     </div>
                 </div>

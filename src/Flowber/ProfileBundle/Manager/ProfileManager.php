@@ -61,6 +61,7 @@ class ProfileManager extends BaseManager {
         $profileInfos['creationDate'] = 'le ' . $profile->getCreationDate()->format('d/m/Y') . ' à ' . $profile->getCreationDate()->format('H:i:s');
         $profileInfos['idCreatedBy'] = $profile->getCreatedBy()->getId();
         $profileInfos['birthdate'] = $user->getBirthdate()->format('d/m/Y');
+        $profileInfos['age'] = $user->getAge();
         $profileInfos['sex'] = $user->getSex();
         $profileInfos['id'] = $profile->getId();
         

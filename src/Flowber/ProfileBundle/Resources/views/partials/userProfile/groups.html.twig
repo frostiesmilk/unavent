@@ -9,8 +9,13 @@
 
     <div class="container user-profile-groups-container">
         <div class="row">
+            {% if circle.role == "creator" %}
+            <div class="col-lg-3 col-xs-6">
+                <a class="btn btn-default btn-block" href="{{ path('flowber_group_create')}}">Créer un groupe</a>
+            </div>
+            {% endif %}
             {% for group in groups %}
-                <div class="col-md-3 col-xs-6">
+                <div class="col-lg-3 col-xs-6">
                 {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}
                 </div>
             {%endfor%}

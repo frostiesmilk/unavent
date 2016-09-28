@@ -21,12 +21,13 @@ class PrivateMessageController extends Controller
             $count++;
         }
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+//        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
+//        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
+//        $navbar['event'] = $eventsNav;
+//        $navbar['group'] = $groupsNav; 
+//        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
+//        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
         
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
             "messages"=>$messagesInfos,
@@ -48,12 +49,7 @@ class PrivateMessageController extends Controller
             $count++;
         } 
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
         
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
             "messages"=>$messagesInfos,
@@ -80,12 +76,7 @@ class PrivateMessageController extends Controller
             $count++;
         }  
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
         
         return $this->render('FlowberPrivateMessageBundle:Default:allPrivateMessage.html.twig', array(
             "messages"=>$messagesInfos,
@@ -144,12 +135,7 @@ class PrivateMessageController extends Controller
 
         $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
         
         return $this->render('FlowberPrivateMessageBundle:oneMessage:oneMessageSent.html.twig', array(
             "message"=>$messageInfo,
@@ -167,12 +153,7 @@ class PrivateMessageController extends Controller
         $messageInfo['receiverMessageId']=null;
         $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());            
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
         
         return $this->render('FlowberPrivateMessageBundle:oneMessage:oneMessageSentDeleted.html.twig', array(
             "message"=>$messageInfo,
@@ -197,13 +178,8 @@ class PrivateMessageController extends Controller
             $em->flush();
         }
         
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
-
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
+        
         $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());            
         $privateMessage = new PrivateMessage;
         $privateMessage->setSubject("RE : ".$messageInfo['subject']);
@@ -233,13 +209,8 @@ class PrivateMessageController extends Controller
             $em->flush();
         }
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
-    
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
+        
         $number = $this->container->get('flowber_privateMessage.privateMessage')->getMessagesNumber($user->getProfile()->getId());            
         
         return $this->render('FlowberPrivateMessageBundle:oneMessage:oneMessageReceivedDeleted.html.twig', array(
@@ -266,12 +237,7 @@ class PrivateMessageController extends Controller
         $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
         $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
         
         return $this->render('FlowberPrivateMessageBundle:Default:oneMessageSend.html.twig', array(
             "message"=>$message,
@@ -294,12 +260,7 @@ class PrivateMessageController extends Controller
         $numberDeletedMessages = $pmReposit->getDeletedMessagesNumber($user);
         $numberSendMessages = $pmReposit->getSentMessagesNumber($user);
 
-        $eventsNav = $this->container->get("flowber_event.event")->getEventsNavbar($user->getProfile()->getId());
-        $groupsNav = $this->container->get("flowber_group.group")->getGroupsNavbar($user->getProfile()->getId());
-        $navbar['event'] = $eventsNav;
-        $navbar['group'] = $groupsNav; 
-        $navbar['requestNumber'] = $this->container->get('flowber_circle.circle')->getCountRequestInfos($user->getProfile()->getId());
-        $navbar['messageNumber'] = $this->container->get('flowber_privateMessage.privateMessage')->getNumberMessageNotRead($user->getProfile()->getId());
+        $navbar = $this->container->get("flowber_front_office.front_office")->getCurrentUserNavbarInfos();
         
         return $this->render('FlowberPrivateMessageBundle:Default:oneMessageDeleted.html.twig', array(
             "message"=>$message,
