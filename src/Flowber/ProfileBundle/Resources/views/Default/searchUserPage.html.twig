@@ -1,0 +1,69 @@
+{# Flowber/ProfileBundle/Resources/views/Default/searchUserPage.html.twig #}
+{% extends '::base_frontoffice.html.twig' %}
+{% form_theme searchForm 'bootstrap_3_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('assets/css/ProfileBundle/generic-profile.css') }}"/>
+{% endblock %}
+
+{% block smallMenu %}
+    {{parent()}}
+    <!-- BEGIN small screen menu -->
+    <!-- END small screen menu -->
+{% endblock %}
+
+{% block body %}
+
+    <!-- Main menu -->
+    {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
+       
+    <!-- Cover -->
+    <div class="jumbotron create-event-cover" style="background-image: url({{asset('assets/images/UserBundle/signIn/cover-streetsheeps.jpg')}})">    
+        <div class="container" >
+            <div class="row text-center">       
+                <h1 class="create-event-cover-title ">Rechercher des amis !</h1>
+                {{form_start(searchForm)}}
+                    <div class="col-lg-6 col-lg-offset-3 col-sm-12">
+                        <div class="input-group">
+                        {{form_widget(searchForm.keywords, {'attr': {'class': 'form-control', 'placeholder':'Recherche par prénom ou nom'}})}}
+                            <!--<input type="text" class="form-control" placeholder="Recherche par prénom ou nom">-->
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default btn-red">Rechercher !</button>
+                        </span>
+                        </div>
+                    </div>                    
+                {{form_rest(searchForm)}}
+                {{form_end(searchForm)}}
+            </div>
+        </div>
+    </div>    
+        
+    <div class="container">
+        <div class="row">
+            {% if searchMode %}
+                <h2>Résultats de la recherche ({{friends|length}})</h2>
+                <div class="generic-profile-list">
+                    {% for friend in friends %}
+                        <div class=" col-lg-4 col-sm-6 col-xs-12">
+                            {% include 'FlowberProfileBundle::partials/oneProfileResume.html.twig' %}
+                        </div>
+                    {%endfor%}
+                </div>
+            {% else %}
+                <h2></h2>
+            {% endif %}
+            
+        </div>
+    </div>
+        
+    <!-- footer -->                  
+    {% include 'FlowberFrontOfficeBundle::partials/common/footer.html.twig' %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {# Put specific JS below #}    
+    
+{% endblock %}

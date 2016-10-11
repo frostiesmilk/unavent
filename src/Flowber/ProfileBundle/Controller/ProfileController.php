@@ -190,4 +190,46 @@ class ProfileController extends Controller
     public function getCurrentUserProfileAction(){
         return $this->getUserProfileAction($this->getUser()->getId());
     }
+    
+    public function getSearchUserPageAction(Request $request){
+        $user = $this->getUser();
+        
+        $navbar = $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos();
+        
+        $searchData = array();
+        $searchForm = $this->createFormBuilder($searchData)
+                                ->setMethod('POST')
+                                ->add('keywords', 'text', array('required' => true))
+                                ->getForm();
+        
+        $searchForm->handleRequest($request);
+        $foundID = null;
+        $searchMode = false;
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $searchMode = true;
+            $profileRepository = $this->getDoctrine()->getRepository('FlowberProfileBundle:Profile');
+                  
+            $searchData = $searchForm->getData();
+            $selectProfiles = $profileRepository->getProfilesByTitleSearch($searchData['keywords'], $user->getProfile());
+            
+        }
+        
+        $friends = array();
+        if($searchMode){ // if search mode
+            $friends = $this->container->get('flowber_profile.profile')->getFriendsFromList($selectProfiles, $user->getProfile()->getId());
+        }else{
+            //$events = $this->container->get('flowber_event.event')->getAllEvents();
+            
+        }
+        
+        return $this->render('FlowberProfileBundle:Default:searchUserPage.html.twig',
+            array(
+                //'messageForm'   => $privateMessageForm->createView(),
+                'searchMode'    => $searchMode,
+                'navbar'        => $navbar,
+                'friends'       => $friends,
+                'searchForm'    => $searchForm->createView(),
+            )
+        );
+    }
 }

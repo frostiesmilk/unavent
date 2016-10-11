@@ -36,7 +36,7 @@ class CircleController extends Controller
      * $id is Circle's ID
      * @param type $id
      */
-function getCircleGalleriesAction($id, $anchor = NULL){
+    function getCircleGalleriesAction($id, $anchor = NULL){
         $circleClassName = $this->container->get("flowber_circle.circle")->getClass($id);
         
         if(!empty($anchor)){

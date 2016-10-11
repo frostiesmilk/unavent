@@ -1,6 +1,12 @@
+flowber_user_search:
+    path: /search
+    defaults: { _controller: FlowberProfileBundle:Profile:getSearchUserPage }
+
 flowber_profile_homepage:
     path:     /{circleId}
     defaults: { _controller: FlowberProfileBundle:Profile:getUserProfile }
+    requirements:
+        circleId: \d+
 
 flowber_profile_edit:
     path:     /{circleId}/edit
