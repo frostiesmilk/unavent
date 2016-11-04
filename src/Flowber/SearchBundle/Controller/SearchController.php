@@ -30,7 +30,7 @@ class SearchController extends Controller
         $resultEvents = $this->container->get("flowber_event.event")->getEventsFromList($selectedEvents, $user->getProfile()->getId());
         
         // search groups
-        $selectedGroups = $this->getDoctrine()->getRepository("FlowberGroupBundle:Groups")->getGroupsByTitleSearch($keywords, $user->getProfile());
+        $selectedGroups = $this->getDoctrine()->getRepository("FlowberGroupBundle:Groups")->getGroupsSearch($user->getProfile(), $keywords);
         $resultGroups = $this->container->get("flowber_group.group")->getGroupsInArray($selectedGroups, $user->getProfile()->getId());
         
         // search people

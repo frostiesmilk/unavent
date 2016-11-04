@@ -20,7 +20,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="content-navbar-main">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('api_get_circle', {'circleId': app.user.profile.id}) }}"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> {{app.user.profile.title}} <span class="sr-only">(current)</span></a></li>
+                <li><a href="{{ path('api_get_circle', {'circleId': app.user.profile.id}) }}"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> {{app.user.profile.title}} <span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-hover="dropdown" data-delay="500" data-close-others="true">
                         <span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Groupes
@@ -116,23 +116,24 @@
 <div class="navmenu navmenu-default navmenu-fixed-left navmenu-main offcanvas-sm hidden-lg hidden-md">
     <a class="navmenu-brand" href="#">FlowBer</a>
     <ul class="nav navmenu-nav">
-        <li class="active"><a href="{{ path('wybe_front_office_profile') }}"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Choix</a></li>
+        <li class="active"><a href="{{ path('api_get_circle', {'circleId': app.user.profile.id}) }}"><span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span> Profil <span class="sr-only">(current)</span></a></li>
         <li>
             <ul class="nav navmenu-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-list menu-icon" aria-hidden="true"></span> Groupes <b class="caret"></b></a>
                     <ul class="dropdown-menu navmenu-nav">
-                        <li><a tabindex="-1" href="{{ path('wybe_front_office_groups', {'groupNameSlug': 'group1'}) }}">Groupe 1</a></li>
-                        <li><a tabindex="-1" href="{{ path('wybe_front_office_create_group') }}">Créer un groupe</a></li>
+                        <li class="dropdown-header">Vos groupes</li>
+                        {% if navbar.group is defined %}
+                            {% for group in navbar.group %}                              
+                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': group.id}) }}">{{group.title}}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                        
                         <li class="divider"></li>
-                        <li><a tabindex="-1" href="{{ path('wybe_front_office_look_for_group') }}">Chercher un groupe</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a tabindex="-1" href="{{ path('flowber_group_create') }}">Créer un groupe</a></li>
+                        <li><a tabindex="-1" href="{{ path('flowber_group_research') }}">Chercher un groupe!</a></li>
+                        <li><a tabindex="-1" href="{{ path('flowber_all_group', {'id': app.user.profile.id}) }}">Voir tous mes groupes </a></li>
+
                     </ul>
                 </li>
             </ul>            
@@ -140,16 +141,17 @@
         <li>
             <ul class="nav navmenu-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-apple menu-icon" aria-hidden="true"></span><span class="badge">4</span> Sorties <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-apple menu-icon" aria-hidden="true"></span><!--<span class="badge">4</span>-->Sorties <b class="caret"></b></a>
                     <ul class="dropdown-menu navmenu-nav">
-                        <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': '1'}) }}">Evenement 1</a></li>
-                        <li><a tabindex="-1" href="{{ path('flowber_create_event_homepage') }}">Créer un evenement</a></li>
+                        {% if navbar.group is defined %}
+                            {% for event in navbar.event %}                              
+                                <li><a tabindex="-1" href="{{ path('api_get_circle', {'circleId': event.id}) }}">{{event.title}}</a></li>
+                            {% endfor %}
+                        {% endif %}
                         <li class="divider"></li>
-                        <li><a tabindex="-1" href="{{ path('wybe_front_office_look_for_event') }}">Chercher un evenement</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a tabindex="-1" href="{{ path('flowber_create_event_homepage') }}">Créer une sortie</a></li>
+                        <li><a tabindex="-1" href="{{ path('flowber_event_search') }}">Chercher une sortie</a></li>
+                        <li><a tabindex="-1" href="{{ path('flowber_all_event_homepage', {'id': app.user.profile.id}) }}">Voir toutes mes sorties </a></li>
                     </ul>
                 </li>
             </ul>            

@@ -3,7 +3,7 @@
 
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/group.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/GroupBundle/generic-group.css') }}"/>
 {% endblock %}
 
 {% block smallMenu %}
@@ -15,8 +15,6 @@
 {% block body %}
     <!-- navbar top -->
     {% include 'FlowberFrontOfficeBundle::partials/common/main-connected-navbar.html.twig' %}
-    <!-- Second menu -->
-    {% include 'FlowberProfileBundle::partials/userProfile/profileNavbar.html.twig' %} 
     
    <div class="user-profile-groups user-profile">
 
@@ -31,7 +29,9 @@
         <div class="container user-profile-groups-container" style="padding-bottom : 50px">
             <div class="row">
                 {% for group in groups %}
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                     {% include 'FlowberGroupBundle::partials/oneGroupResume.html.twig' %}
+                    </div>
                 {%endfor%}
             </div>  
         </div>  

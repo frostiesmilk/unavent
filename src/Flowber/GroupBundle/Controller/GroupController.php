@@ -5,6 +5,8 @@ namespace Flowber\GroupBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Doctrine\ORM\EntityRepository;
+
 use Flowber\GalleryBundle\Form\ProfilePictureType;
 use Flowber\GalleryBundle\Form\CoverPictureType;
 use Flowber\GalleryBundle\Entity\Photo;
@@ -411,24 +413,56 @@ class GroupController extends Controller
     {
         $user = $this->getUser();     
         
-        $keywordsRaw = $request->query->get('keywords');        
-        $keywords = trim($keywordsRaw);
+        $searchData = array();
+        $searchForm = $this->createFormBuilder($searchData)
+                                ->setMethod('POST')
+                                ->add('keywords', 'text', array('required' => false))                                
+                                ->add('categories', 'entity', array(
+                                            'required' => false,
+                                            'class'    => 'FlowberFrontOfficeBundle:Category',
+                                            'property' => 'title',
+                                            'multiple' => true,
+                                            'query_builder' => function(EntityRepository $er) {
+                                                return $er->createQueryBuilder('u')
+                                                    ->orderBy('u.title', 'ASC');
+                                            },
+                                        )
+                                    )
+                                ->getForm();
         $searchMode = false;
+        $searchForm->handleRequest($request);
         
-        if(!empty($keywords)){ // if search
-            // search groups
-            $searchMode = true;
-            $selectedGroups = $this->getDoctrine()->getRepository("FlowberGroupBundle:Groups")->getGroupsByTitleSearch($keywords, $user->getProfile());
-            $groups = $this->container->get("flowber_group.group")->getGroupsInArray($selectedGroups, $user->getProfile()->getId());
-        }else{ // no search, we display all groups
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $searchData = $searchForm->getData();
+            $keywordsRaw = $searchData['keywords'];        
+            $keywords = trim($keywordsRaw);
+            $categories = $searchData['categories'];
+            
+            if(!empty($keywords) || count($categories)>0){ // if search
+                // search groups
+                
+                $searchMode = true;
+                if(count($categories)<1){
+                    $categories = null;
+                }
+                $selectedGroups = $this->getDoctrine()->getRepository("FlowberGroupBundle:Groups")->getGroupsSearch($user->getProfile(), $keywords, $categories);
+                
+                $groups = $this->container->get("flowber_group.group")->getGroupsInArray($selectedGroups, $user->getProfile()->getId());
+            }else{ // no search, we display all groups
+                $groups = $this->container->get('flowber_group.group')->getAllGroups();
+            }
+        }else{
             $groups = $this->container->get('flowber_group.group')->getAllGroups();
         }
+                                            
+        
         
         return $this->render('FlowberGroupBundle:Default:groupSearch.html.twig', 
             array(
                 'searchMode'    => $searchMode,
                 'navbar'        => $this->container->get('flowber_front_office.front_office')->getCurrentUserNavbarInfos(),                    
                 'groups'        => $groups,
+                'searchForm'    => $searchForm->createView(),
         ));
     }
     

@@ -198,12 +198,11 @@ class ProfileController extends Controller
         
         $searchData = array();
         $searchForm = $this->createFormBuilder($searchData)
-                                ->setMethod('POST')
+                                ->setMethod('GET')
                                 ->add('keywords', 'text', array('required' => true))
                                 ->getForm();
         
         $searchForm->handleRequest($request);
-        $foundID = null;
         $searchMode = false;
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             $searchMode = true;

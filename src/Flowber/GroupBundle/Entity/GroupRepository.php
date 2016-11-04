@@ -126,44 +126,43 @@ class GroupRepository extends EntityRepository
      * @param type $currentCircle
      * @return array of groups IDs
      */
-    public function getGroupsByTitleSearch($string, $currentCircle){
+    public function getGroupsSearch($currentCircle, $keyword = null, $pCategories = null){
         
-        $groups = [];
-       
-        $query = $this->_em->createQuery(''
-                . 'SELECT g.id as id '
-                . 'FROM FlowberGroupBundle:Groups g, FlowberCircleBundle:Subscribers sub '
-                . 'WHERE sub.circle = g '
-                . 'AND  sub.subscriber = :currentCircle '
-                . 'AND g.title LIKE :string ')
-        ->setParameter('currentCircle', $currentCircle)
-        ->setParameter('string', "%".$string."%");
+        $sql = "SELECT DISTINCT groups.id as group_id
+                    FROM circle, groups, groups_category, subscribers
+                    WHERE (circle.privacy = 'public'
+                    OR (
+                    groups.id = circle.id
+                    AND subscribers.circle_id = groups.id
+                    AND subscribers.subscriber_id = :pSubscriberId ) )
+                    ";
         
-        $subscribedGroups = $query->getResult();
-        
-        foreach($subscribedGroups AS $group){
-            $groups[] = $group;
+        if($keyword!=null){
+            $sql.= "AND circle.title LIKE :pKeyword ";
         }
         
-        //////////
-        
-        $query = $this->_em->createQuery(''
-                . 'SELECT g.id as id ' 
-                . 'FROM FlowberGroupBundle:Groups g '
-                . 'WHERE g.privacy = :privacy '
-                . 'AND g.title LIKE :string ')
-        ->setParameter('privacy', "public")
-        ->setParameter('string', "%".$string."%");
-        
-        $publicGroups = $query->getResult();
-        
-        foreach($publicGroups AS $group){
-            if(!in_array($group, $groups)){
-                $groups[] = $group;
+        if($pCategories != null){
+            $sql.= "AND groups_category.groups_id = groups.id AND (";
+            
+            foreach($pCategories AS $pCategory){
+                $sql.= " groups_category.category_id = ".$pCategory->getId();
             }
+            
+            $sql.= ")";
         }
         
-        return $groups;
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('group_id', 'id');
+
+        $nativeQuery = $this->getEntityManager()->createNativeQuery($sql, $rsm)
+                ->setParameter('pSubscriberId', $currentCircle->getId());
+        
+        if($keyword!=null){
+            $nativeQuery->setParameter('pKeyword', "%".$keyword."%");
+        }
+
+//        die(var_dump($nativeQuery->getResult()));
+        return $nativeQuery->getResult();
     }
     
     /**

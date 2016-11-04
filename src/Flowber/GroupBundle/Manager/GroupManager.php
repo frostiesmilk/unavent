@@ -150,7 +150,7 @@ class GroupManager extends BaseManager {
         return $groups;
     }
 
-        public function getEvents($circleId)
+    public function getEvents($circleId)
     {
         $groups = $this->getGroupRepository()->getEventsId($circleId);
 
