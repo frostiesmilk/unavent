@@ -116,8 +116,9 @@
                 <h2>Toutes les dernières sorties</h2>
             {% endif %}
             {% for event in events %}
-                <div class="col-lg-3">
-                {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}
+                <div class="col-lg-12 lazyload">
+                    <!--
+                {% include 'FlowberEventBundle::partials/oneEventResume.html.twig' %}-->
                 </div>
             {%endfor%}
         </div>
@@ -130,6 +131,17 @@
 
 {% block javascripts %}
     {{parent()}}
-    {# Put specific JS below #}    
+    {# Put specific JS below #}  
     
+    <script src="{{asset('assets/js/jquery.lazyload-any.min.js')}}"></script>
+    
+    <script type="text/javascript">
+        function load(img)
+        {
+          img.fadeOut(0, function() {
+            img.fadeIn(1000);
+          });
+        }
+        $('.lazyload').lazyload({load: load});    
+    </script>
 {% endblock %}

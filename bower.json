@@ -21,7 +21,8 @@
     "jasny-bootstrap": "~3.1.3",
     "jquery": "~2.1.4",
     "moment": "~2.10.6",
-    "SpinKit": "spinkit#~1.2.5"
+    "SpinKit": "spinkit#~1.2.5",
+    "jquery-lazyload-any": "^0.3.0"
   },
   "resolutions": {
     "font-awesome": "~4.5.0"

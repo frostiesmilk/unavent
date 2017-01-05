@@ -14,6 +14,7 @@ module.exports = function (grunt) {
                     'js/angular.js': 'angular/angular.js',
                     'js/moment-with-locales.min.js': 'moment/min/moment-with-locales.min.js',
                     'js/bootstrap-datetimepicker.min.js': 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+                    'js/jquery.lazyload-any.min.js': 'jquery-lazyload-any/build/jquery.lazyload-any.min.js',
                 }
             },
             stylesheets: {
